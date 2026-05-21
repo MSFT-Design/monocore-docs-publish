@@ -4009,7 +4009,7 @@
     <p class="masthead-summary">The system separates <strong>what a surface is</strong> (semantic role) from <strong>where it appears</strong> (environment level), so the same token tells a designer the purpose while automatically adjusting tonal value based on context.</p>
     <div class="meta-row">
       <span class="meta-chip">Monocore Semantic</span>
-      <span class="meta-chip">17 surface roles</span>
+      <span class="meta-chip">18 surface roles</span>
       <span class="meta-chip">4 modes</span>
       <span class="meta-detail">Collection: <code>Monocore Semantic</code></span>
       <span class="meta-detail">Updated May 2026</span>
@@ -4049,14 +4049,15 @@
         <h3>Axis 1 — Semantic Surface Roles</h3>
         <p>A semantic role describes the purpose of a surface and stays stable across all environments and themes.</p>
 
-        <p style="margin-top: var(--sp-3); font-weight:600; color: var(--c-text); font-size: 13px;">12 canonical surface roles</p>
+        <p style="margin-top: var(--sp-3); font-weight:600; color: var(--c-text); font-size: 13px;">13 canonical surface roles</p>
         <div class="table-wrap">
           <table>
             <thead>
               <tr><th>Role</th><th>Purpose</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>Surface/Canvas</code></td><td>Root canvas plane</td></tr>
+              <tr><td><code>Surface/Canvas</code></td><td>Root canvas plane &mdash; adapts to its container</td></tr>
+              <tr><td><code>Surface/Primary</code></td><td>High-contrast contained surface that always holds the extreme value (pure white in light, pure black in dark) regardless of elevation</td></tr>
               <tr><td><code>Surface/Subtle</code></td><td>Transparent subtle grouping and interaction overlays</td></tr>
               <tr><td><code>Surface/SubtleHover</code></td><td>Hovered subtle regions</td></tr>
               <tr><td><code>Surface/SubtleSelected</code></td><td>Selected subtle regions (peers with SubtleHover)</td></tr>
@@ -4074,7 +4075,7 @@
         </div>
 
         <p style="margin-top: var(--sp-4); font-weight:600; color: var(--c-text); font-size: 13px;">3 canonical stroke roles</p>
-        <p style="margin-top: var(--sp-1); margin-bottom: var(--sp-3);">The stroke layer is now a clean 3-token ladder, each with a distinct job and a real perceptual gap &mdash; so adjacent layers don't blend into each other, and designers don't have to keep nudging lightness values for every new UI combination.</p>
+        <p style="margin-top: var(--sp-1); margin-bottom: var(--sp-3);">The stroke layer is now a clean 3-token ladder, each with a distinct job and a real perceptual gap.</p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -4220,6 +4221,13 @@
             <tbody>
               <tr>
                 <td class="token-name">Surface/Canvas</td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
+              </tr>
+              <tr>
+                <td class="token-name">Surface/Primary</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
@@ -4374,7 +4382,7 @@
             <span class="layer-tag">Layer 2 — Semantic</span>
             <h4>Monocore Semantic collection · 4 modes</h4>
             <p>Purpose-named tokens that alias primitives differently per mode. This is the layer designers and components bind to. Every semantic token holds a <code>VARIABLE_ALIAS</code> reference to a primitive, switching across the L1/L2 × Light/Dark matrix automatically.</p>
-            <span class="count">18 variables</span>
+            <span class="count">19 variables</span>
           </div>
         </div>
 
@@ -4395,6 +4403,10 @@
 
         <div class="callout callout-rule">
           <strong>Semantic stability.</strong> A semantic role's meaning never changes. <code>Surface/Base</code> always means "standard contained surface" &mdash; only its tonal value shifts between L1 and L2.
+        </div>
+
+        <div class="callout callout-info">
+          <strong>Primary means "always extreme," not "always lighter."</strong> Unlike <code>Surface/Canvas</code>, which adapts to its container, <code>Surface/Primary</code> always holds the extreme value (pure white in light, pure black in dark) regardless of elevation. On a Base or Raised container it reads as lifted (lighter in dark mode). But inside a dark Overlay (<code>Grey/10</code>), a Primary card goes to <code>Grey/0</code> &mdash; darker than its container, an intentional inversion. Use it for cards and contained regions that must maintain maximum contrast against their surround rather than blending into the elevation hierarchy.
         </div>
 
         <div class="callout callout-constraint">
@@ -4508,7 +4520,7 @@
 
   <!-- ── Footer ──────────────────────────────────────── -->
   <footer class="docs-footer">
-    Monocore Semantic Surface System &middot; Collection: <code>Monocore Semantic</code> &middot; 18 semantic variables · 4 modes · May 2026
+    Monocore Semantic Surface System &middot; Collection: <code>Monocore Semantic</code> &middot; 19 semantic variables · 4 modes · May 2026
   </footer>
 
 </div>
