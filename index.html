@@ -227,9 +227,8 @@
       background: rgba(91, 95, 199, 0.04);
     }
     .tier-tab.active {
-      color: var(--c-accent);
-      border-bottom-color: var(--c-accent);
-      background: var(--c-surface);
+      color: var(--c-text);
+      font-weight: 800;
     }
 
     /* ── Tier Content ──────────────────────────────── */
@@ -4235,10 +4234,10 @@
               </tr>
               <tr>
                 <td class="token-name">Surface/Subtle</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.02);"></span>Black α2%</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.02);"></span>Black α2%</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.04);"></span>White α4%</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.04);"></span>White α4%</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0);"></span>Transparent</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0);"></span>Transparent</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0);"></span>Transparent</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0);"></span>Transparent</span></td>
               </tr>
               <tr>
                 <td class="token-name">Surface/SubtleHover</td>
@@ -4369,13 +4368,14 @@
           <div class="layer-card layer-1">
             <span class="layer-tag">Layer 1 — Primitives</span>
             <h4>Monocore Primitives collection · single mode</h4>
-            <p>Raw values with no theme awareness. 28 variables.</p>
+            <p>Raw values with no theme awareness. 29 variables.</p>
             <ul style="margin: var(--sp-2) 0 0 var(--sp-5); font-size: 13px; color: var(--c-text-secondary); line-height: 1.7;">
               <li><code>Colors/Neutral/Grey/0</code> through <code>Colors/Neutral/Grey/100</code> &mdash; 22 stops, irregular intervals based on semantic needs</li>
               <li><code>Colors/Alpha/Black/{2, 4, 40, 60}</code></li>
               <li><code>Colors/Alpha/White/{4, 8}</code></li>
+              <li><code>Colors/Alpha/Transparent</code> &mdash; rgba(0, 0, 0, 0)</li>
             </ul>
-            <span class="count">28 variables</span>
+            <span class="count">29 variables</span>
           </div>
 
           <div class="layer-card layer-2">
@@ -4387,7 +4387,7 @@
         </div>
 
         <div class="flow-diagram" style="margin-top: var(--sp-4);">
-          <span class="node node-green">Primitives (28)</span>
+          <span class="node node-green">Primitives (29)</span>
           <span class="arrow">↓ VARIABLE_ALIAS</span>
           <span class="node node-accent">Semantic (18 × 4 modes)</span>
           <span class="arrow">↓ Mode on parent frame</span>
