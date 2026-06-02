@@ -6,42 +6,140 @@
   <title>Monocore Documentation</title>
   <style>
 
-    /* ── Top Nav ──────────────────────────────────── */
+    /* ── Left Side Nav (Apple HIG-style) ────────────── */
     .site-nav {
-      position: sticky; top: 0; z-index: 100;
-      background: #1a1d21; color: #fff;
-      border-bottom: 1px solid #2a2d31;
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 264px;
+      background: #fbfbfd;
+      border-right: 1px solid #e2e5e9;
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
     .site-nav-inner {
-      max-width: 1360px; margin: 0 auto;
-      padding: 0 24px;
-      display: flex; align-items: center; gap: 24px;
-      height: 52px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 18px 0 0;
     }
     .site-nav .brand {
-      font-size: 13px; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: #a8acff;
-      margin-right: 8px;
+      padding: 0 20px 16px;
+      font-size: 12.5px; font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #1a1d21;
+      border-bottom: 1px solid #eef0f2;
+      margin-bottom: 12px;
     }
     .site-nav .nav-links {
-      display: flex; gap: 4px; flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+      flex: 1;
+    }
+    .site-nav .nav-section { display: flex; flex-direction: column; }
+    .site-nav .nav-section + .nav-section { margin-top: 18px; }
+    .site-nav .nav-section-label {
+      padding: 4px 14px 6px;
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #8b929a;
     }
     .site-nav a {
-      display: inline-flex; align-items: center;
+      display: flex;
+      align-items: center;
       padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 13px; font-weight: 500;
-      color: #cdd1d9; text-decoration: none;
-      transition: all 0.15s ease;
+      border-radius: 6px;
+      font-size: 13.5px; font-weight: 400;
+      color: #1a1d21;
+      text-decoration: none;
+      line-height: 1.4;
+      transition: background 0.12s ease, color 0.12s ease;
     }
-    .site-nav a:hover { color: #fff; background: #2a2d31; }
+    .site-nav a + a { margin-top: 1px; }
+    .site-nav a:hover {
+      background: rgba(0, 0, 0, 0.045);
+      color: #1a1d21;
+    }
     .site-nav a.active {
-      color: #fff;
-      background: #5b5fc7;
+      background: #eef0ff;
+      color: #5b5fc7;
+      font-weight: 600;
     }
     .site-nav .build {
-      font-size: 11px; color: #6c7280; font-family: "SF Mono", monospace;
+      padding: 14px 20px 18px;
+      margin-top: auto;
+      font-size: 11px;
+      color: #8b929a;
+      font-family: "SF Mono", "Cascadia Code", monospace;
+      border-top: 1px solid #eef0f2;
+      letter-spacing: 0.2px;
     }
+
+    /* Mobile hamburger + backdrop */
+    .site-nav-toggle {
+      display: none;
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 110;
+      width: 38px; height: 38px;
+      background: #fff;
+      border: 1px solid #e2e5e9;
+      border-radius: 8px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .site-nav-toggle .bars {
+      position: relative;
+      display: block;
+      width: 16px; height: 2px;
+      background: #1a1d21;
+      border-radius: 2px;
+    }
+    .site-nav-toggle .bars::before,
+    .site-nav-toggle .bars::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 16px; height: 2px;
+      background: #1a1d21;
+      border-radius: 2px;
+    }
+    .site-nav-toggle .bars::before { top: -5px; }
+    .site-nav-toggle .bars::after  { top:  5px; }
+    .site-nav-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.32);
+      z-index: 95;
+    }
+
+    /* Offset body so page content sits to the right of the fixed sidebar */
+    body { padding-left: 264px; }
+
+    @media (max-width: 900px) {
+      body { padding-left: 0; }
+      .site-nav {
+        transform: translateX(-100%);
+        transition: transform 0.22s ease;
+        box-shadow: 4px 0 24px rgba(0,0,0,0.18);
+      }
+      .site-nav.open { transform: translateX(0); }
+      .site-nav-toggle { display: inline-flex; }
+      .site-nav-backdrop.show { display: block; }
+      /* Make room for the hamburger inside page headers */
+      .docs-header { padding-top: 56px; }
+    }
+
     .page { display: none; }
     .page.active { display: block; }
 
@@ -1550,21 +1648,38 @@
 </head>
 <body>
 
-<header class="site-nav">
+<button class="site-nav-toggle" type="button" aria-label="Toggle navigation" aria-controls="site-nav" aria-expanded="false">
+  <span class="bars" aria-hidden="true"></span>
+</button>
+<aside class="site-nav" id="site-nav">
   <div class="site-nav-inner">
     <div class="brand">Monocore Docs</div>
-    <div class="nav-links">
-      <a href="#cold-start" data-link="cold-start" class="active">Cold Start Pipeline</a>
-      <a href="#card-spec" data-link="card-spec">Card — Component Spec</a>
-      <a href="#card-design" data-link="card-design">Card — Design Spec</a>
-      <a href="#surface-system" data-link="surface-system">Semantic Surface System</a>
-      <a href="#nested-elements" data-link="nested-elements">Nested Elements</a>
-      <a href="#spec-completeness" data-link="spec-completeness">Spec Completeness</a>
-      <a href="#source-libraries" data-link="source-libraries">Source Libraries</a>
-    </div>
-    <span class="build">v2.1.0 · April 2026</span>
+    <nav class="nav-links" aria-label="Primary">
+      <div class="nav-section">
+        <div class="nav-section-label">Getting Started</div>
+        <a href="#cold-start" data-link="cold-start" class="active">Cold Start Pipeline</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Card Component</div>
+        <a href="#card-spec" data-link="card-spec">Component Spec</a>
+        <a href="#card-design" data-link="card-design">Design Spec</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Semantic Surface System</div>
+        <a href="#surface-system" data-link="surface-system">Overview</a>
+        <a href="#teams-migration" data-link="teams-migration">Teams Migration</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Reference</div>
+        <a href="#nested-elements" data-link="nested-elements">Nested Elements</a>
+        <a href="#spec-completeness" data-link="spec-completeness">Spec Completeness</a>
+        <a href="#source-libraries" data-link="source-libraries">Source Libraries</a>
+      </div>
+    </nav>
+    <div class="build">v2.1.0 · April 2026</div>
   </div>
-</header>
+</aside>
+<div class="site-nav-backdrop" aria-hidden="true"></div>
 <div class="page active" id="page-cold-start" data-page="cold-start">
 
 <div class="docs-shell">
@@ -5888,17 +6003,43 @@ function switchTier(btn, tier) {
 (function(){
   const pages = document.querySelectorAll('.page');
   const links = document.querySelectorAll('.site-nav a[data-link]');
+  const nav = document.querySelector('.site-nav');
+  const toggle = document.querySelector('.site-nav-toggle');
+  const backdrop = document.querySelector('.site-nav-backdrop');
+
   function show(name) {
     pages.forEach(p => p.classList.toggle('active', p.dataset.page === name));
-    links.forEach(a => a.classList.toggle('active', a.dataset.link === name));
+    links.forEach(a => {
+      const activeWhen = a.dataset.activeWhen ? a.dataset.activeWhen.split(/\s+/) : [a.dataset.link];
+      a.classList.toggle('active', activeWhen.includes(name));
+    });
     if (window.scrollY > 80) window.scrollTo({top: 0, behavior: 'instant'});
   }
+  function closeNav() {
+    if (!nav) return;
+    nav.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('show');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  }
+  function openNav() {
+    if (!nav) return;
+    nav.classList.add('open');
+    if (backdrop) backdrop.classList.add('show');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  }
+
   links.forEach(a => a.addEventListener('click', e => {
     e.preventDefault();
     const name = a.dataset.link;
     history.replaceState(null, '', '#' + name);
     show(name);
+    closeNav();
   }));
+  if (toggle) toggle.addEventListener('click', () => {
+    if (nav && nav.classList.contains('open')) closeNav(); else openNav();
+  });
+  if (backdrop) backdrop.addEventListener('click', closeNav);
+
   const initial = (location.hash || '#cold-start').replace('#','').split('/')[0];
   if (document.querySelector('.page[data-page="'+initial+'"]')) show(initial);
 })();
