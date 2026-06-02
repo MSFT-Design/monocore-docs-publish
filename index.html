@@ -4528,6 +4528,843 @@
 
 </div>
 
+<div class="page" id="page-teams-migration" data-page="teams-migration">
+
+<style>
+  /* ── Teams Migration page scoped styles ── */
+  .tm-legend {
+    display: flex; flex-wrap: wrap; gap: var(--sp-2);
+    margin: var(--sp-3) 0 var(--sp-2);
+  }
+  .tm-legend-item {
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    background: var(--c-surface-raised);
+    border: 1px solid var(--c-border);
+    border-radius: 100px;
+    padding: 4px 12px 4px 8px;
+    font-size: 12px; color: var(--c-text-secondary);
+  }
+  .tm-legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* status pill colors map to legend dot colors */
+  .tm-dot-1to1       { background: #2e7d32; }
+  .tm-dot-corrected  { background: #e65100; }
+  .tm-dot-new        { background: #1565c0; }
+  .tm-dot-stays      { background: #7b1fa2; }
+
+  .tm-status {
+    display: inline-block;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.2px;
+    padding: 2px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .tm-status-1to1       { background: var(--c-green-soft);  color: var(--c-green); }
+  .tm-status-corrected  { background: var(--c-orange-soft); color: var(--c-orange); }
+  .tm-status-new        { background: var(--c-blue-soft);   color: var(--c-blue); }
+  .tm-status-stays      { background: var(--c-purple-soft); color: var(--c-purple); }
+
+  .tm-mig-wrap {
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    margin: var(--sp-4) 0;
+    background: var(--c-surface);
+  }
+  .tm-mig-scroll { overflow-x: auto; }
+  .tm-mig-table {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .tm-mig-table thead th {
+    background: var(--c-surface-raised);
+    color: var(--c-text-muted);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--c-border);
+    white-space: nowrap;
+  }
+  .tm-mig-table tbody td {
+    padding: 12px;
+    border-bottom: 1px solid var(--c-border-subtle);
+    vertical-align: middle;
+  }
+  .tm-mig-table tbody tr:last-child td { border-bottom: none; }
+  .tm-mig-table tbody tr:hover td { background: rgba(91, 95, 199, 0.03); }
+
+  .tm-mig-table .col-old,
+  .tm-mig-table .col-new { width: 220px; }
+  .tm-mig-table .col-tone { width: 88px; }
+  .tm-mig-table .col-arrow {
+    width: 32px; text-align: center;
+    color: var(--c-text-muted);
+    font-size: 15px;
+  }
+  .tm-mig-table .col-match { width: 110px; }
+  .tm-mig-table .col-purpose {
+    color: var(--c-text-secondary);
+    line-height: 1.5;
+    min-width: 320px;
+  }
+
+  .tm-token {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--c-text);
+    word-break: break-word;
+  }
+  .tm-token.tm-token-empty {
+    color: var(--c-text-muted);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .tm-token .tm-deprecated {
+    color: var(--c-text-muted);
+    font-weight: 400;
+  }
+
+  .tm-swatch-row {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11.5px;
+    color: var(--c-text-secondary);
+  }
+  .tm-swatch {
+    display: inline-block;
+    width: 22px; height: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.18);
+    background-clip: padding-box;
+    flex-shrink: 0;
+  }
+  .tm-empty {
+    color: var(--c-text-muted);
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 12px;
+  }
+
+  /* corrected row gets a subtle left accent so it stands out */
+  .tm-mig-table tr.tm-row-corrected td:first-child { box-shadow: inset 3px 0 0 var(--c-orange); }
+  .tm-mig-table tr.tm-row-new td:first-child       { box-shadow: inset 3px 0 0 var(--c-blue); }
+  .tm-mig-table tr.tm-row-stays td:first-child     { box-shadow: inset 3px 0 0 var(--c-purple); }
+
+  @media (max-width: 720px) {
+    .tm-mig-table { min-width: 880px; }
+  }
+
+  /* ── Execution report data tables ───────────────── */
+  .tm-data-wrap {
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    margin: var(--sp-3) 0 var(--sp-4);
+    background: var(--c-surface);
+  }
+  .tm-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .tm-data-table thead th {
+    background: var(--c-surface-raised);
+    color: var(--c-text-muted);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--c-border);
+  }
+  .tm-data-table tbody td {
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--c-border-subtle);
+    vertical-align: top;
+    line-height: 1.5;
+    color: var(--c-text);
+  }
+  .tm-data-table tbody tr:last-child td { border-bottom: none; }
+  .tm-data-table tbody tr:hover td { background: rgba(91, 95, 199, 0.03); }
+  .tm-data-table .tm-num {
+    font-variant-numeric: tabular-nums;
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 12.5px;
+    white-space: nowrap;
+    text-align: right;
+    color: var(--c-text);
+  }
+  .tm-data-table .tm-num-strong { font-weight: 700; }
+  .tm-data-table .tm-num-em { color: var(--c-text-muted); font-style: italic; font-family: inherit; font-size: 12px; text-align: left; }
+  .tm-data-table .tm-col-num { width: 110px; text-align: right; }
+  .tm-data-table .tm-col-narrow { width: 130px; white-space: nowrap; }
+  .tm-data-table .tm-col-wide { min-width: 260px; }
+  .tm-data-table .tm-mono { font-family: "SF Mono", "Cascadia Code", monospace; font-size: 12.5px; word-break: break-word; }
+  .tm-data-table .tm-method { font-weight: 600; color: var(--c-text); min-width: 200px; }
+  .tm-data-table .tm-total-row td {
+    background: var(--c-surface-raised);
+    font-weight: 700;
+    color: var(--c-text);
+    border-top: 1px solid var(--c-border);
+  }
+  .tm-data-table code { font-size: 11.5px; }
+  .tm-data-table em { color: var(--c-text-muted); }
+
+  /* condition cells for Section D mini-table */
+  .tm-data-table .tm-cond { font-family: "SF Mono", "Cascadia Code", monospace; font-size: 12px; color: var(--c-text); }
+</style>
+
+<div class="docs-shell">
+
+  <!-- ── Masthead ────────────────────────────────────── -->
+  <header class="docs-header">
+    <div class="eyebrow">Migration Guide &middot; Execution Report</div>
+    <h1>Teams Migration &mdash; Surface &amp; Stroke</h1>
+    <p class="subtitle">Mappings derived by <strong>purpose</strong>, not name similarity. The upper sections describe the original mapping logic; the lower sections document the variable-collection merge and file-wide rebind sweep that has since executed across <strong>Teams 2 iOS (CAP)</strong>. Swatches show L1 values.</p>
+    <div class="meta">
+      <span>17 mapping rules &middot; 2,770 bindings rebound</span>
+      <span>0 failures &middot; 23 deferred</span>
+      <span>Source: Teams 2 Mobile Variables (CAP)</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+
+    <!-- ── Main Content ───────────────────────────────── -->
+    <main class="docs-main">
+
+      <!-- 1. METHODOLOGY -->
+      <section class="spec-section" id="methodology">
+        <span class="section-eyebrow eyebrow-design">Approach</span>
+        <h2>Methodology <a href="#methodology" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The migration is driven by what each token <em>does</em>, not what it's called. A token that looks like it should map by name is only mapped that way when the underlying purpose also lines up. When the name suggests one target but the role belongs elsewhere, the mapping is flagged as <strong>corrected</strong>.</p>
+
+        <div class="callout callout-info">
+          <strong>Backward-compatible by default.</strong> All previously named tokens remain available under the <code>[Deprecated]</code> prefix. No surfaces or strokes have been re-bound yet &mdash; the new tokens are introduced alongside the old ones so teams can migrate at their own pace.
+        </div>
+      </section>
+
+      <!-- 2. LEGEND -->
+      <section class="spec-section" id="legend">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Status Legend <a href="#legend" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each row in the mapping table below carries one of four status markers, indicating how confident the migration is and whether the new target is finalized.</p>
+        <div class="tm-legend">
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-1to1"></span>clean 1:1 (purpose match)</span>
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-corrected"></span>corrected (was a name-match)</span>
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-new"></span>new token</span>
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-stays"></span>stays (future State/*)</span>
+        </div>
+      </section>
+
+      <!-- 3. MAPPING TABLE -->
+      <section class="spec-section" id="mappings">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Token Mappings <a href="#mappings" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Light (L) and Dark (D) swatches show the canonical L1 value for each token. The arrow indicates the migration target; the match column tells you whether to trust the mapping at a glance.</p>
+
+        <div class="tm-mig-wrap">
+          <div class="tm-mig-scroll">
+            <table class="tm-mig-table">
+              <thead>
+                <tr>
+                  <th class="col-old">Old token</th>
+                  <th class="col-tone">L</th>
+                  <th class="col-tone">D</th>
+                  <th class="col-arrow">→</th>
+                  <th class="col-new">New token</th>
+                  <th class="col-tone">L</th>
+                  <th class="col-tone">D</th>
+                  <th class="col-match">Match</th>
+                  <th class="col-purpose">Purpose / Usage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- clean 1:1 mappings ─────────────────────────── -->
+                <tr>
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Primary</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Canvas</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
+                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
+                  <td class="col-purpose">Root canvas plane / app body</td>
+                </tr>
+                <tr>
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Tertiary</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#141414;"></span>#141414</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Overlay</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#191919;"></span>#191919</span></td>
+                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
+                  <td class="col-purpose">Modal surfaces: sheets, popovers, modals (all block interaction)</td>
+                </tr>
+                <tr>
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Raised Fill</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F1F1F1;"></span>#F1F1F1</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Raised</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#EAEAEA;"></span>#EAEAEA</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
+                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
+                  <td class="col-purpose">Elevated emphasized surface via color</td>
+                </tr>
+
+                <!-- corrected ───────────────────────────────────── -->
+                <tr class="tm-row-corrected">
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Subtle Fill</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F8F8F8;"></span>#F8F8F8</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Base</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F5F5F5;"></span>#F5F5F5</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#191919;"></span>#191919</span></td>
+                  <td><span class="tm-status tm-status-corrected">corrected</span></td>
+                  <td class="col-purpose">Lightly-colored contained background &rarr; standard contained surface (was wrongly &rarr; Subtle)</td>
+                </tr>
+                <tr class="tm-row-corrected">
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Subtle Base</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F8F8F8;"></span>#F8F8F8</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#141414;"></span>#141414</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Base</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F5F5F5;"></span>#F5F5F5</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#191919;"></span>#191919</span></td>
+                  <td><span class="tm-status tm-status-corrected">corrected</span></td>
+                  <td class="col-purpose">Same as Subtle Fill; consolidates into Base (was wrongly &rarr; Subtle)</td>
+                </tr>
+
+                <!-- clean 1:1 continued ─────────────────────────── -->
+                <tr>
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Secondary</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Subtle</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:rgba(0,0,0,0.01);"></span>#000000 1%</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:rgba(255,255,255,0.03);"></span>#FFFFFF 3%</span></td>
+                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
+                  <td class="col-purpose">Transparent / matches-behind &rarr; subtle alpha overlay (lists, grouping)</td>
+                </tr>
+                <tr>
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Selected</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F1F1F1;"></span>#F1F1F1</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/SubtleSelected</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F0F0F0;"></span>#F0F0F0</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#242424;"></span>#242424</span></td>
+                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
+                  <td class="col-purpose">Selected state on subtle regions</td>
+                </tr>
+                <tr>
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Quaternary</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#ACACAC;"></span>#ACACAC</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#404040;"></span>#404040</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Quaternary</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
+                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
+                  <td class="col-purpose">Bottom tab bar (platform-targetable for OS materials)</td>
+                </tr>
+                <tr>
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Dominant</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Dominant</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
+                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
+                  <td class="col-purpose">Header chrome / large title (platform-targetable, iOS 26)</td>
+                </tr>
+                <tr>
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Divider</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Stroke/Default</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E0E0E0;"></span>#E0E0E0</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#3D3D3D;"></span>#3D3D3D</span></td>
+                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
+                  <td class="col-purpose">Separator line &rarr; everyday separation stroke</td>
+                </tr>
+
+                <!-- corrected (stroke) ──────────────────────────── -->
+                <tr class="tm-row-corrected">
+                  <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Border Dominant</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#303030;"></span>#303030</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E1E1E1;"></span>#E1E1E1</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Stroke/Default</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E0E0E0;"></span>#E0E0E0</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#3D3D3D;"></span>#3D3D3D</span></td>
+                  <td><span class="tm-status tm-status-corrected">corrected</span></td>
+                  <td class="col-purpose">Standard border &rarr; everyday stroke (was wrongly &rarr; Stroke/Elevated)</td>
+                </tr>
+
+                <!-- new tokens ──────────────────────────────────── -->
+                <tr class="tm-row-new">
+                  <td><span class="tm-token tm-token-empty">(no old equivalent)</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Surface/Primary</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
+                  <td><span class="tm-status tm-status-new">new</span></td>
+                  <td class="col-purpose">High-contrast card &mdash; holds white/black even when raised or on Overlay</td>
+                </tr>
+                <tr class="tm-row-new">
+                  <td><span class="tm-token tm-token-empty">(no old equivalent)</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Stroke/Accessible</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#616161;"></span>#616161</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#ADADAD;"></span>#ADADAD</span></td>
+                  <td><span class="tm-status tm-status-new">new</span></td>
+                  <td class="col-purpose">High-contrast outline for inputs and focus rings (Grey 38/68)</td>
+                </tr>
+                <tr class="tm-row-new">
+                  <td><span class="tm-token tm-token-empty">(no old equivalent)</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token">Stroke/Elevated</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#D1D1D1;"></span>#D1D1D1</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#4D4D4D;"></span>#4D4D4D</span></td>
+                  <td><span class="tm-status tm-status-new">new</span></td>
+                  <td class="col-purpose">Edge for floating/overlay surfaces &mdash; popovers, menus, sheets</td>
+                </tr>
+
+                <!-- stays (future State/*) ──────────────────────── -->
+                <tr class="tm-row-stays">
+                  <td><span class="tm-token">Surface/Danger</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F9D9D9;"></span>#F9D9D9</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#250909;"></span>#250909</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-status tm-status-stays">stays</span></td>
+                  <td class="col-purpose">Error/destructive surface &mdash; future <code>State/Critical</code></td>
+                </tr>
+                <tr class="tm-row-stays">
+                  <td><span class="tm-token">Surface/Accent</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#5B5FC7;"></span>#5B5FC7</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#7F85F5;"></span>#7F85F5</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-status tm-status-stays">stays</span></td>
+                  <td class="col-purpose">Branded emphasis &mdash; future <code>State/Accent</code> (5 variants in Brand collection)</td>
+                </tr>
+                <tr class="tm-row-stays">
+                  <td><span class="tm-token">Surface/Dissabled</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F1F1F1;"></span>#F1F1F1</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
+                  <td class="col-arrow">→</td>
+                  <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-empty">&mdash;</span></td>
+                  <td><span class="tm-status tm-status-stays">stays</span></td>
+                  <td class="col-purpose">Disabled surface &mdash; future <code>State/Disabled</code> (typo in source name)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. KEY DECISIONS -->
+      <section class="spec-section" id="key-decisions">
+        <span class="section-eyebrow eyebrow-design">Notes</span>
+        <h2>Key Decisions <a href="#key-decisions" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two mappings were corrected from name-similarity to purpose. The stroke layer was rebuilt as a three-token ladder so adjacent layers don't blend and designers don't have to keep nudging values for every new UI combination.</p>
+
+        <h3>Corrections</h3>
+        <ul style="margin: var(--sp-2) 0 var(--sp-4) var(--sp-5); color: var(--c-text-secondary); line-height: 1.7;">
+          <li><strong>Subtle Fill / Subtle Base &rarr; Base</strong> (not Subtle). The old "Subtle" labels described a contained surface, not an alpha overlay &mdash; the purpose belongs to <code>Surface/Base</code>.</li>
+          <li><strong>Border Dominant &rarr; Stroke/Default</strong> (not Stroke/Elevated). It's the standard separation stroke, not the edge of a floating surface.</li>
+          <li><strong>Tertiary &rarr; Overlay</strong>: a clean mapping. Sheets, popovers, and modals are all modal/blocking surfaces and share the same role.</li>
+          <li><strong>Floating</strong> (notifications, toasts) had no old equivalent &mdash; the role is new.</li>
+        </ul>
+
+        <h3>Stroke ladder</h3>
+        <div class="callout callout-info" style="margin-top: var(--sp-2);">
+          <strong>Three tokens, three jobs, real perceptual gaps.</strong> <code>Stroke/Default</code> (88/24) is the quiet always-on separator. <code>Stroke/Elevated</code> (82/30) handles floating and overlay surface edges. <code>Stroke/Accessible</code> (38/68) is the high-contrast outline for inputs and focus rings.
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- POST-EXECUTION REPORT                            -->
+      <!-- ═══════════════════════════════════════════════ -->
+
+      <!-- 5. EXECUTION SUMMARY -->
+      <section class="spec-section" id="execution-summary">
+        <span class="section-eyebrow eyebrow-design">Post-execution</span>
+        <h2>Execution Summary <a href="#execution-summary" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">What was actually executed: a consolidation of the <strong>Monocore Semantic</strong> and <strong>iOS System</strong> collections into a single <strong>Color</strong> collection in the <code>Teams 2 Mobile Variables (CAP)</code> library, followed by a file-wide rebind sweep across <strong>Teams 2 iOS (CAP)</strong> that repointed consumer bindings to the merged CAP-aligned tokens.</p>
+
+        <h3>Files involved</h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th>File</th><th>Role</th><th class="tm-col-narrow">File key</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-method">Teams 2 Mobile Variables (CAP)</td><td>Source-of-truth library &mdash; where the merge happened</td><td class="tm-mono">FuEZCHmjZMYpCpPpdkNmJj</td></tr>
+              <tr><td class="tm-method">Teams 2 iOS (CAP)</td><td>Consumer file &mdash; where the rebind ran</td><td class="tm-mono">alxBFZw33jyKUiuLXQ9oth</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Variable collection merge</h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Metric</th><th>Before</th><th>After</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Collections involved</td>
+                <td><span class="tm-num">3</span> <span class="tm-num-em">Color, Monocore Semantic, iOS System</span></td>
+                <td><span class="tm-num">1</span> <span class="tm-num-em">Color</span></td>
+              </tr>
+              <tr>
+                <td>Variables in target Color collection</td>
+                <td><span class="tm-num">112</span></td>
+                <td><span class="tm-num">230</span> <span class="tm-num-em">112 + 20 MS + 98 iOS</span></td>
+              </tr>
+              <tr>
+                <td>Modes in target Color collection</td>
+                <td><span class="tm-num">3</span> <span class="tm-num-em">Light, Dark, Glass</span></td>
+                <td><span class="tm-num">9</span> <span class="tm-num-em">L1/L2 &times; Light/Dark &times; IC + Glass WIP</span></td>
+              </tr>
+              <tr>
+                <td>New mode-values populated</td>
+                <td><span class="tm-num">&mdash;</span></td>
+                <td><span class="tm-num tm-num-strong">1,734</span> <span class="tm-num-em">672 existing &times; 6 new + 1,062 MS+iOS &times; 9</span></td>
+              </tr>
+              <tr>
+                <td>Errors during merge</td>
+                <td><span class="tm-num">&mdash;</span></td>
+                <td><span class="tm-num">0</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>File-wide audit (Teams 2 iOS CAP)</h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th>Metric</th><th class="tm-col-num">Count</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Pages walked</td><td class="tm-num">60</td></tr>
+              <tr><td>Component sets audited</td><td class="tm-num">251</td></tr>
+              <tr><td>Nodes traversed within component sets <em>(excluding instances)</em></td><td class="tm-num">15,643</td></tr>
+              <tr><td>Nodes traversed in full-file deep walk <em>(mode-pin audit)</em></td><td class="tm-num">174,943</td></tr>
+              <tr><td>Variable bindings checked <em>(fills + strokes + effects)</em></td><td class="tm-num">4,770</td></tr>
+              <tr><td>Explicit mode-pin references checked</td><td class="tm-num">920</td></tr>
+              <tr><td>Distinct broken variable names identified</td><td class="tm-num">100</td></tr>
+              <tr><td>Distinct non-CAP source collections identified</td><td class="tm-num">15</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Rebind results</h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Phase</th><th class="tm-col-num">Rebound</th><th class="tm-col-num">Failures</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>First sweep <em>(MS/iOS Semantic ID-rewrite)</em></td><td class="tm-num">989</td><td class="tm-num">0</td><td>Path B variable recreation in CAP Color</td></tr>
+              <tr><td>Non-component-set sweep <em>(frames, sections)</em></td><td class="tm-num">7</td><td class="tm-num">0</td><td>Same scope, residual locations</td></tr>
+              <tr><td>Corrected sweep <em>(non-CAP library bindings)</em></td><td class="tm-num">1,774</td><td class="tm-num">0</td><td>1,170 + 568 + 36 across 3 chunks</td></tr>
+              <tr class="tm-total-row"><td>Total bindings rebound</td><td class="tm-num tm-num-strong">2,770</td><td class="tm-num tm-num-strong">0</td><td>Across both methodologies</td></tr>
+              <tr><td>Deferred to manual-fix report</td><td class="tm-num">23</td><td class="tm-num">&mdash;</td><td>14 distinct variables; report file generated</td></tr>
+              <tr><td>Stays as-is <em>(future State/*)</em></td><td class="tm-num">3</td><td class="tm-num">&mdash;</td><td><code>Surface/Danger</code></td></tr>
+              <tr><td>Already CAP-resolved <em>(skipped)</em></td><td class="tm-num">2,970</td><td class="tm-num">&mdash;</td><td>Bindings already pointing at CAP</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 6. METHODS -->
+      <section class="spec-section" id="execution-methods">
+        <span class="section-eyebrow eyebrow-impl">Methods</span>
+        <h2>Audit &amp; Rebind Methods <a href="#execution-methods" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two audit methodologies were tried. The first &mdash; checking each binding's collection <em>name</em> &mdash; missed bindings pointing at other non-CAP libraries with collections also named <code>Color</code>. The corrected methodology &mdash; checking each binding's collection <em>library key</em> against the CAP-subscribed key set &mdash; caught all 1,840 mis-bound bindings across 100 names in 15 collections, and was used as the canonical broken-binding test.</p>
+
+        <div class="callout callout-rule"><strong>Why library-key, not collection-name.</strong> Multiple non-CAP libraries publish collections literally named <code>Color</code>. A name comparison cannot distinguish CAP <code>Color</code> from a third-party <code>Color</code>; only the library key can. The collection-name check reported 0 broken initially, then 1,181 after a methodology fix, and still missed the remaining 659 caught by the corrected sweep.</div>
+
+        <h3>Audit methods</h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Method</th><th>Purpose</th><th>Outcome</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-method">Collection-name check <em>(flawed first attempt)</em></td><td>Resolve a binding's variable&rarr;collection, compare name against <code>Monocore Semantic</code>, <code>iOS System</code>, missing</td><td>Missed bindings pointing at other non-CAP libraries with a collection also named <code>Color</code>. <strong>Unreliable</strong>.</td></tr>
+              <tr><td class="tm-method">Library-key check <em>(corrected)</em></td><td>Resolve the binding's collection&rarr;library key, compare against the set of subscribed CAP library keys</td><td>Caught all 1,840 mis-bound bindings across 100 names in 15 collections. <strong>Canonical test</strong>.</td></tr>
+              <tr><td class="tm-method"><code>getVariableByIdAsync()</code></td><td>Resolve a bound variable from its ID to read its name &amp; collection</td><td>Standard read API used in every audit walk</td></tr>
+              <tr><td class="tm-method"><code>getVariableCollectionByIdAsync()</code></td><td>Resolve the variable's owning collection to get its name and library key</td><td>Determines CAP vs non-CAP membership</td></tr>
+              <tr><td class="tm-method"><code>teamLibrary.getAvailableLibraryVariableCollectionsAsync()</code></td><td>Enumerate all libraries the consumer file is subscribed to</td><td>Provided the canonical CAP library-key set</td></tr>
+              <tr><td class="tm-method"><code>teamLibrary.getVariablesInLibraryCollectionAsync()</code></td><td>Read every variable name and key from a published CAP library collection</td><td>Built the <code>name &rarr; CAP-import-key</code> map for rebind targeting</td></tr>
+              <tr><td class="tm-method">Coverage cross-reference</td><td>For each broken name, check whether a same-named twin exists in CAP and whether the migration guide explicitly maps it</td><td>Classified each name: guide-mapped, name-matched, conflict (guide overrides name), stays, or unmapped</td></tr>
+              <tr><td class="tm-method">Explicit-mode-pin audit</td><td>Deep walk: for every node, inspect <code>explicitVariableModes</code> for references to deleted collections (MS, iOS System)</td><td>0 broken pins found across 920 explicit-mode references on 174,943 nodes</td></tr>
+              <tr><td class="tm-method">Chunked processing</td><td>Split 251 component sets into chunks of ~100 to bound execution time per call</td><td>Avoided timeouts; consistent across audit and rebind passes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Rebind methods</h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Method</th><th>Purpose</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-method"><code>importVariableByKeyAsync(key)</code></td><td>Pre-import each needed CAP target variable to get a local <code>Variable</code> handle</td><td>51 unique CAP targets imported up-front in one pre-flight pass</td></tr>
+              <tr><td class="tm-method"><code>setBoundVariableForPaint(paint, 'color', variable)</code></td><td>Rewrite a fill or stroke paint's color binding to point at the new variable</td><td>Returns a new paint object; arrays reassigned via <code>node.fills = newPaints</code></td></tr>
+              <tr><td class="tm-method"><code>setBoundVariableForEffect(effect, 'color', variable)</code></td><td>Rewrite a drop-shadow / glow effect's color binding</td><td>Same pattern as paints; effects array reassigned</td></tr>
+              <tr><td class="tm-method">Conditional dispatch by node type</td><td>For tokens like <code>.../Accent/Rest</code> and <code>.../Danger/Rest</code>, choose <code>Text/*</code> if the node is <code>TEXT</code>, otherwise <code>Icon/*</code></td><td>Applied per-binding at rebind time</td></tr>
+              <tr><td class="tm-method">Deferral allowlist</td><td>Per-name allowlist of items that should never be silently rebound (user-deferred, no CAP equivalent, or CAP doesn't publish)</td><td>23 bindings captured in the manual-fix report instead of rebound</td></tr>
+              <tr><td class="tm-method">Variable creation + delete <em>(Path B)</em></td><td>For the MS / iOS System merge: <code>createVariable</code> in target, copy values across modes, <code>remove()</code> originals</td><td>Necessary because the Plugin API does not support moving variables between collections. Trade-off: variable IDs change, consumer bindings break, full rebind required.</td></tr>
+              <tr><td class="tm-method">Snapshot-then-mutate</td><td>Read all metadata into plain objects <em>before</em> any writes, then create twins from snapshots</td><td>Avoided stale-reference errors after partial mutations</td></tr>
+              <tr><td class="tm-method">Verify-and-iterate</td><td>After each chunk, re-walk the file using the library-key check to confirm 0 broken remain</td><td>Final verification: 4,770 bindings &rarr; 0 broken (excluding the 23 deferred)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 7. EXPANDED MAPPINGS (B–H) -->
+      <section class="spec-section" id="expanded-mappings">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Expanded Mapping Set <a href="#expanded-mappings" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The <a href="#mappings">Token Mappings</a> section above is the original Migration Guide (Section A in the report). The tables below capture the additional mapping categories that emerged from the audit: confirmed unmapped, mechanical iOS-system mappings, node-type-aware conditionals, name-variants, name-matched 1:1s, items left in place, and items deferred to the manual-fix report.</p>
+
+        <h3>B &mdash; Confirmed unmapped <em>(decided during rebind planning)</em></h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Old token</th><th>New token</th><th class="tm-col-num">Bindings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-mono">Surface/Secondary Selected</td><td class="tm-mono">Surface/SubtleSelected</td><td class="tm-num">33</td></tr>
+              <tr><td class="tm-mono">Surface/HoverItem</td><td class="tm-mono">Surface/SubtleHover</td><td class="tm-num">24</td></tr>
+              <tr><td class="tm-mono">Surface/RaisedFill</td><td class="tm-mono">Surface/Raised</td><td class="tm-num">3</td></tr>
+              <tr><td class="tm-mono">Neutral/Stroke/Transparent/Rest</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">91</td></tr>
+              <tr><td class="tm-mono">Neutral/Stroke/on Brand/1/Rest</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">39</td></tr>
+              <tr><td class="tm-mono">Neutral/Stroke/1/Rest</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">2</td></tr>
+              <tr><td class="tm-mono">Neutral/Background/1/Rest</td><td class="tm-mono">Surface/Raised</td><td class="tm-num">9</td></tr>
+              <tr><td class="tm-mono">Neutral/Background/2/Rest</td><td class="tm-mono">Surface/Raised</td><td class="tm-num">5</td></tr>
+              <tr><td class="tm-mono">Neutral/Background/1/Hover</td><td class="tm-mono">Surface/Raised</td><td class="tm-num">3</td></tr>
+              <tr><td class="tm-mono">Neutral/Foreground/3/Rest</td><td class="tm-mono">Text/Primary</td><td class="tm-num">3</td></tr>
+              <tr><td class="tm-mono">Subcomponent Fill</td><td class="tm-mono">Surface/Subtle</td><td class="tm-num">35</td></tr>
+              <tr><td class="tm-mono">Component Fill</td><td class="tm-mono">Surface/Subtle</td><td class="tm-num">6</td></tr>
+              <tr><td class="tm-mono">Subcomponent Stroke</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">31</td></tr>
+              <tr><td class="tm-mono">Component Stroke</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">11</td></tr>
+              <tr><td class="tm-mono">Text/Text-secondary</td><td class="tm-mono">Text/Secondary</td><td class="tm-num">12</td></tr>
+              <tr><td class="tm-mono">Text/altSecondary</td><td class="tm-mono">Text/Secondary</td><td class="tm-num">9</td></tr>
+              <tr><td class="tm-mono">Text/OnAccent</td><td class="tm-mono">Text/On Accent</td><td class="tm-num">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>C &mdash; iOS System mechanical <em>(level-based mapping into CAP iOS semantic tokens)</em></h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Old token</th><th>New token</th><th class="tm-col-num">Bindings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-mono">Control/iOS System/Background/1/Rest</td><td class="tm-mono">Backgrounds/Primary</td><td class="tm-num">9</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Background/2/Rest</td><td class="tm-mono">Backgrounds/Secondary</td><td class="tm-num">10</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Background/4/Rest</td><td class="tm-mono">Backgrounds/Tertiary</td><td class="tm-num">26</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Foreground/1/Rest</td><td class="tm-mono">Labels/Primary</td><td class="tm-num">20</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Foreground/2/Rest</td><td class="tm-mono">Labels/Secondary</td><td class="tm-num">2</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Foreground/4/Rest</td><td class="tm-mono">Labels/Tertiary</td><td class="tm-num">14</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Foreground/5/Rest</td><td class="tm-mono">Labels/Quaternary</td><td class="tm-num">16</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Foreground/Sublabel/Rest</td><td class="tm-mono">Labels/Secondary</td><td class="tm-num">2</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Foreground/Neutral/Rest</td><td class="tm-mono">Labels/Primary</td><td class="tm-num">4</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Background/KB/1/Rest</td><td class="tm-mono">Miscellaneous/Keyboards/Keys</td><td class="tm-num">12</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Background/KB/2/Rest</td><td class="tm-mono">Miscellaneous/Keyboards/Glyphs - Primary</td><td class="tm-num">2</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Background/icontray/Rest</td><td class="tm-mono">Miscellaneous/Tab Bar Selection</td><td class="tm-num">2</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Background/Accent/Rest</td><td class="tm-mono">Surface/Accent</td><td class="tm-num">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>D &mdash; Conditional <em>(node-type aware: text vs glyph)</em></h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Old token</th><th>If TEXT node</th><th>If glyph / icon node</th><th class="tm-col-num">Bindings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-mono">Control/iOS System/Foreground/Accent/Rest</td><td class="tm-cond">Text/Interactive</td><td class="tm-cond">Icon/Interactive</td><td class="tm-num">2</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Foreground/Danger/Rest</td><td class="tm-cond">Text/Danger</td><td class="tm-cond">Icon/Danger</td><td class="tm-num">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>E &mdash; Other previewed <em>(space/punctuation variants &amp; renames)</em></h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Old token</th><th>New token</th><th class="tm-col-num">Bindings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-mono">Color/Surface/divider</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">5</td></tr>
+              <tr><td class="tm-mono">Brand/AccentPrimary</td><td class="tm-mono">Brand/Accent Primary</td><td class="tm-num">3</td></tr>
+              <tr><td class="tm-mono">Brand/AccentDominant</td><td class="tm-mono">Brand/Accent Dominant</td><td class="tm-num">3</td></tr>
+              <tr><td class="tm-mono">Brand/AccentSecondary</td><td class="tm-mono">Brand/Accent Secondary</td><td class="tm-num">3</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>F &mdash; Name-matched 1:1 <em>(no rename)</em></h3>
+        <p>1,128 bindings across 38 names were rebound 1:1 to identically-named CAP tokens. Major examples shown; full list in the audit log.</p>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Token <em>(unchanged)</em></th><th class="tm-col-num">Bindings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-mono">Text/Secondary</td><td class="tm-num">268</td></tr>
+              <tr><td class="tm-mono">Text/Interactive</td><td class="tm-num">131</td></tr>
+              <tr><td class="tm-mono">Text/Primary</td><td class="tm-num">114</td></tr>
+              <tr><td class="tm-mono">Text/Danger</td><td class="tm-num">101</td></tr>
+              <tr><td class="tm-mono">Text/Dominant</td><td class="tm-num">92</td></tr>
+              <tr><td class="tm-mono">Surface/Border</td><td class="tm-num">76</td></tr>
+              <tr><td class="tm-mono">Labels - Vibrant/Primary</td><td class="tm-num">46</td></tr>
+              <tr><td class="tm-mono">Icon/Interactive</td><td class="tm-num">46</td></tr>
+              <tr><td class="tm-mono">Miscellaneous/Keyboards/Glyphs - Primary</td><td class="tm-num">43</td></tr>
+              <tr><td class="tm-mono">Labels - Vibrant/Secondary</td><td class="tm-num">28</td></tr>
+              <tr><td class="tm-mono">Labels/Primary</td><td class="tm-num">26</td></tr>
+              <tr><td class="tm-mono">Labels/Secondary</td><td class="tm-num">24</td></tr>
+              <tr><td class="tm-mono">Accents/Blue</td><td class="tm-num">20</td></tr>
+              <tr><td><em>&hellip; 25 more 1:1 names</em></td><td class="tm-num">&hellip;</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>G &mdash; Stays as-is <em>(no rebind, awaiting future State/*)</em></h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Token</th><th>Future target</th><th class="tm-col-num">Bindings</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-mono">Surface/Danger</td><td class="tm-mono">State/Critical</td><td class="tm-num">3</td></tr>
+              <tr><td class="tm-mono">Surface/Accent</td><td class="tm-mono">State/Accent</td><td class="tm-num">0 <em>(target only)</em></td></tr>
+              <tr><td class="tm-mono">Surface/Dissabled <em>(sic)</em></td><td class="tm-mono">State/Disabled</td><td class="tm-num">0</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>H &mdash; Deferred to manual-fix report <em>(no confident CAP target)</em></h3>
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Token</th><th class="tm-col-narrow">Source library</th><th class="tm-col-num">Bindings</th><th>Reason</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="tm-mono">Avatar/Inside stroke</td><td>Avatar color</td><td class="tm-num">2</td><td>User-deferred</td></tr>
+              <tr><td class="tm-mono">Avatar/Background</td><td>Avatar color</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Avatar/Foreground</td><td>Avatar color</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Color/Brand light/Tint 40</td><td>Global</td><td class="tm-num">2</td><td>User-deferred</td></tr>
+              <tr><td class="tm-mono">Color/Transparent/blackOverlayLight</td><td>Global</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Colors/Neutral/Grey/18</td><td>Global</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Background/Context/Context-bg</td><td>Color</td><td class="tm-num">2</td><td>User-deferred</td></tr>
+              <tr><td class="tm-mono">Control/iOS System/Background/Searchbar/Rest</td><td>Color</td><td class="tm-num">1</td><td>User-deferred</td></tr>
+              <tr><td class="tm-mono">Global colors/Brand light/Shade 10</td><td>Global</td><td class="tm-num">6</td><td>CAP Global does not publicly publish this name</td></tr>
+              <tr><td class="tm-mono">alphaNeutrals/blackOverlayLight</td><td>Primitive Styles</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Systems/iOS/Notifications/Background call</td><td>Color Styles</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Systems/iOS/Notifications/Foreground call 2</td><td>Color Styles</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Systems/iOS/Notifications/Button dismiss</td><td>Color Styles</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Systems/iOS/Notifications/Button primary</td><td>Color Styles</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr><td class="tm-mono">Light theme/TMS [Brand colors]/Tint10 [Teams 350]</td><td>Color Styles</td><td class="tm-num">1</td><td>No clear CAP target</td></tr>
+              <tr class="tm-total-row"><td>Total</td><td>&mdash;</td><td class="tm-num tm-num-strong">23</td><td>14 distinct variables</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 8. VERIFICATION -->
+      <section class="spec-section" id="verification">
+        <span class="section-eyebrow eyebrow-design">Verification</span>
+        <h2>Verification <a href="#verification" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Final post-rebind audit using the canonical library-key methodology, run after every chunk and once more at the end against the full file.</p>
+
+        <div class="tm-data-wrap">
+          <table class="tm-data-table">
+            <thead>
+              <tr><th class="tm-col-wide">Check</th><th>Result</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Final broken bindings after rebind <em>(library-key methodology, component sets)</em></td><td><span class="tm-num">0</span> <span class="tm-num-em">excluding 23 intentionally deferred</span></td></tr>
+              <tr><td>Non-component-set broken bindings <em>(frames, sections)</em></td><td><span class="tm-num">0</span></td></tr>
+              <tr><td>Broken explicit-mode pins <em>(920 pins audited)</em></td><td><span class="tm-num">0</span></td></tr>
+              <tr><td>Failures during rebind</td><td><span class="tm-num">0</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3);"><strong>Net result.</strong> 4,770 bindings audited, 2,770 actively rebound, 0 failures. The 23 deferred bindings are captured in a separate manual-fix report covering 14 distinct variables &mdash; these were intentionally not silently rewritten because no confident CAP target exists.</div>
+      </section>
+
+    </main>
+
+    <!-- ── Sidebar / TOC ──────────────────────────────── -->
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">Migration guide</div>
+        <a href="#methodology">Methodology</a>
+        <a href="#legend">Status Legend</a>
+        <a href="#mappings">Token Mappings</a>
+        <a href="#key-decisions">Key Decisions</a>
+        <div class="toc-label" style="margin-top: var(--sp-3);">Execution report</div>
+        <a href="#execution-summary">Execution Summary</a>
+        <a href="#execution-methods">Audit &amp; Rebind Methods</a>
+        <a href="#expanded-mappings">Expanded Mapping Set</a>
+        <a href="#verification">Verification</a>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────── -->
+  <footer class="docs-footer">
+    Teams Migration &middot; Source: Teams 2 Mobile Variables (CAP) &middot; 17 mapping rules &middot; 2,770 bindings rebound &middot; May 2026
+  </footer>
+
+</div>
+
+</div>
+
 <div class="page" id="page-spec-completeness" data-page="spec-completeness">
   <div class="docs-shell">
     <header class="docs-header">
