@@ -4582,7 +4582,47 @@
         </div>
       </section>
 
-      <!-- 7. BEHAVIORAL RULES -->
+      <!-- 7. SHAPE & SPACING -->
+      <section class="spec-section" id="shape-spacing">
+        <span class="section-eyebrow eyebrow-design">Foundations</span>
+        <h2>Shape &amp; Spacing <a href="#shape-spacing" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two parallel scales govern how surfaces meet the eye: the radius applied to their corners, and the space between them. Both follow the same naming philosophy as the surface system &mdash; group by meaning, name by role, so the value behind a token can change in one place.</p>
+
+        <h3>Corner radius</h3>
+        <p>A radius of <code>16</code> covers most components. When components appear together, a shared radius makes them read as a family rather than a collection. Choose a wider radius only for the largest containers, and a smaller one only when a nested element needs to read as a step inside its parent.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Radius</th><th>Use it for</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td><code>24</code></td><td>The largest cards &mdash; for example, Post feed cards.</td><td>The wider curve lets a dominant surface read distinctly from the components nested inside it.</td></tr>
+              <tr><td><code>16</code> &middot; default</td><td>Most components.</td><td>A shared radius binds adjacent components into a coherent group.</td></tr>
+              <tr><td><code>12</code></td><td>Nested items inside a default-radius parent.</td><td>One step inside <code>16</code>. Reads as contained without competing.</td></tr>
+              <tr><td><code>8</code></td><td>Smaller nested components, or compact controls where <code>12</code> still feels too soft.</td><td>Tightens the curve when content is dense.</td></tr>
+              <tr><td><code>4</code></td><td>The smallest details &mdash; tags, indicators, inline tokens.</td><td>The minimum that still reads as intentionally rounded rather than square.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Vertical spacing</h3>
+        <p>Grouped components sit <code>12</code> apart by default. The default corner radius needs room to breathe &mdash; <code>12</code> keeps adjacent surfaces from visually colliding at their curves. Step down to <code>8</code> when a tighter rhythm reads better. For vertically stacked text, use <code>0</code> or <code>2</code>.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Spacing</th><th>Use it for</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td><code>12</code> &middot; default</td><td>Grouped components stacked vertically.</td><td>Accommodates the <code>16</code> radius &mdash; adjacent corners don't collide.</td></tr>
+              <tr><td><code>8</code></td><td>Groups that call for a tighter rhythm.</td><td>The next step down when <code>12</code> leaves too much air.</td></tr>
+              <tr><td><code>2</code></td><td>Vertically stacked text where the lines still need to separate visually.</td><td>A hairline gap &mdash; reads as paired but distinct.</td></tr>
+              <tr><td><code>0</code></td><td>Vertically stacked text that reads as a single unit &mdash; for example, an avatar &amp; name group.</td><td>No gap; the lines belong together.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-rule" style="margin-top: var(--sp-4);">
+          <strong>Group by meaning, scope by update target.</strong> Names organize tokens by the role they serve, and by the bundle that needs to change together. A radius token isn't called <code>16</code> &mdash; it carries the name of the role it represents, so refining the standard component radius across the system happens in one place.
+        </div>
+      </section>
+
+      <!-- 8. BEHAVIORAL RULES -->
       <section class="spec-section" id="rules">
         <span class="section-eyebrow eyebrow-design">Rules</span>
         <h2>Behavioral Rules <a href="#rules" class="anchor-link" aria-label="Link to this section">#</a></h2>
@@ -4700,6 +4740,7 @@
         <a href="#modes">The Four Modes</a>
         <a href="#tokens">Full Token Table</a>
         <a href="#layers">Layered Architecture</a>
+        <a href="#shape-spacing">Shape &amp; Spacing</a>
         <a href="#rules">Behavioral Rules</a>
         <a href="#workflow">Designer Workflow</a>
         <a href="#excluded">Intentionally Excluded</a>
