@@ -4124,7 +4124,7 @@
     <p class="masthead-summary">The system separates <strong>what a surface is</strong> (semantic role) from <strong>where it appears</strong> (environment level), so the same token tells a designer the purpose while automatically adjusting tonal value based on context.</p>
     <div class="meta-row">
       <span class="meta-chip">Monocore Semantic</span>
-      <span class="meta-chip">25 surface roles</span>
+      <span class="meta-chip">24 surface roles</span>
       <span class="meta-chip">4 modes</span>
       <span class="meta-detail">Collection: <code>Monocore Semantic</code></span>
       <span class="meta-detail">Updated May 2026</span>
@@ -4164,7 +4164,7 @@
         <h3>Axis 1 — Semantic Surface Roles</h3>
         <p>A semantic role describes the purpose of a surface and stays stable across all environments and themes.</p>
 
-        <p style="margin-top: var(--sp-3); font-weight:600; color: var(--c-text); font-size: 13px;">14 canonical surface roles</p>
+        <p style="margin-top: var(--sp-3); font-weight:600; color: var(--c-text); font-size: 13px;">13 canonical surface roles</p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -4179,7 +4179,6 @@
               <tr><td><code>Surface/Base</code></td><td>Standard contained surfaces (use cautiously where it overlaps with RaisedSecondary)</td></tr>
               <tr><td><code>Surface/RaisedSecondary</code></td><td>First (lightest) level of raised contrast &mdash; grouped content containers, subtle elevation</td></tr>
               <tr><td><code>Surface/RaisedPrimary</code></td><td>Standard raised contained surface &mdash; cards, panels, sheets at default elevation</td></tr>
-              <tr><td><code>Surface/RaisedDominant</code></td><td>Strongest raised &mdash; small components on top of RaisedPrimary that need to maintain luminance contrast (chips, badges, small overlays)</td></tr>
               <tr><td><code>Surface/Floating</code></td><td>Floating temporary UI surfaces (menus, popovers, reaction pickers)</td></tr>
               <tr><td><code>Surface/Overlay</code></td><td>Blocking modal and sheet surfaces</td></tr>
               <tr><td><code>Surface/Sunken</code></td><td>Inset or embedded regions</td></tr>
@@ -4214,17 +4213,17 @@
               </tr>
               <tr>
                 <td><code>Stroke/Container</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e0e0e0;"></span>Grey/88</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#383838;"></span>Grey/22</span></td>
-                <td>Subtle container border on lighter surfaces</td>
-                <td>Card edges on Canvas, Base, RaisedSecondary, RaisedPrimary</td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#c2c2c2;"></span>Grey/76</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d4d4d;"></span>Grey/30</span></td>
+                <td>Balanced container border, readable on any common surface</td>
+                <td>Card edges on Canvas, Base, Sunken, RaisedSecondary, RaisedPrimary</td>
               </tr>
               <tr>
                 <td><code>Stroke/ContainerRaised</code></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#bdbdbd;"></span>Grey/74</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#616161;"></span>Grey/38</span></td>
                 <td>Stronger container border for darker raised surfaces</td>
-                <td>Borders on RaisedDominant — chips, badges, reaction pills, small overlays</td>
+                <td>Borders on chips, badges, reaction pills, small components against any dark raised surface</td>
               </tr>
               <tr>
                 <td><code>Stroke/Accessible</code></td>
@@ -4238,11 +4237,11 @@
         </div>
 
         <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Container vs Divider:</strong> in many modes <code>Stroke/Container</code> resolves to the same Grey primitive as <code>Stroke/Divider</code>. They remain semantically distinct &mdash; Divider is the separator <em>inside</em> a container (rows, sections), Container is the border <em>around</em> the container. The token names document intent even when the rendered values match.
+          <strong>Container vs Divider:</strong> Container reads distinctly darker than Divider in light mode (Grey/76 vs Grey/88) and slightly lighter in dark (Grey/30 vs Grey/24) &mdash; restores a visible Container > Divider hierarchy in both themes. Semantically: Divider is the separator <em>inside</em> a container (rows, sections), Container is the border <em>around</em> the container.
         </div>
 
         <p style="margin-top: var(--sp-4); font-weight:600; color: var(--c-text); font-size: 13px;">4 container roles</p>
-        <p style="margin-top: var(--sp-1); margin-bottom: var(--sp-3);">Paired tokens for grouped-list patterns &mdash; each <em>Base</em> is the page underneath, each <em>Container</em> is the card on top. Mirrors iOS <code>systemGroupedBackground</code> / <code>secondarySystemGroupedBackground</code> with room for sheet-translucency mapping in the Secondary pair.</p>
+        <p style="margin-top: var(--sp-1); margin-bottom: var(--sp-3);">Paired tokens for grouped-list patterns. The <strong>Primary</strong> pair is the subtle/recessed treatment &mdash; in light mode the Container reads slightly darker than its Base (card sinks into the page), in dark mode the Container reads slightly lighter (card lifts off the page). The <strong>Secondary</strong> pair is the iOS <code>systemGroupedBackground</code> / <code>secondarySystemGroupedBackground</code> contrast pattern &mdash; a tinted page with a clearly lifted white card on top.</p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -4251,34 +4250,34 @@
             <tbody>
               <tr>
                 <td><code>Surface/Containers/Primary/Base</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
-                <td>Page behind a grouped list. iOS <code>systemGroupedBackground</code> equivalent.</td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
+                <td>Page behind the subtle/recessed container pattern. White in light mode, soft dark grey in dark mode.</td>
               </tr>
               <tr>
                 <td><code>Surface/Containers/Primary/Container</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td>Card on top of Primary/Base. iOS <code>secondarySystemGroupedBackground</code> equivalent. Always lighter than its base.</td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
+                <td>Card on top of Primary/Base. In light mode reads as slightly recessed (Grey/94 on Grey/100); in dark mode reads as slightly lifted (Grey/20 on Grey/10). Subtle hierarchy.</td>
               </tr>
               <tr>
                 <td><code>Surface/Containers/Secondary/Base</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td>Page for the subtler grouped pattern &mdash; sheets, modals, lower-prominence groupings.</td>
+                <td>Tinted page for the iOS-style grouped list. Light tint of Grey/94 in light mode, soft dark Grey/10 in dark mode.</td>
               </tr>
               <tr>
                 <td><code>Surface/Containers/Secondary/Container</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#0f0f0f;"></span>Grey/6</span></td>
-                <td>Recessed container &mdash; <strong>darker</strong> than its base in dark mode. Reserves the slot for a future iOS translucency material (<code>UIVisualEffectView</code>) remap.</td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#2e2e2e;"></span>Grey/18</span></td>
+                <td>Lifted card on top of Secondary/Base. White in light mode (the iOS <code>secondarySystemGroupedBackground</code> equivalent), Grey/18 in dark mode (one step lifted off Base Grey/10).</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Secondary's dark-mode inversion is intentional:</strong> in the Primary pair, the container is always lighter than its base. In the Secondary pair, the container goes <em>darker</em> than its base in dark mode &mdash; matching the sheet-translucency / blur-recession effect on iOS. The static grey is the fallback; a runtime override can swap to a real translucency material later without breaking the static rendering.
+          <strong>When to reach for which pair:</strong> use the <strong>Primary</strong> pair for sheets, floating panels, and contexts where the card should read as a subtle inset or quiet step on the page (Container is darker than Base in light, lifted in dark). Use the <strong>Secondary</strong> pair for Settings-style screens, profile detail views, and other iOS-faithful grouped layouts where the tinted page reads as recessed beneath a clearly elevated white card.
         </div>
 
         <p style="margin-top: var(--sp-4); font-weight:600; color: var(--c-text); font-size: 13px;">2 platform-chrome roles</p>
@@ -4409,10 +4408,10 @@
               </tr>
               <tr>
                 <td class="token-name">Surface/Subtle</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.02);"></span>Black α2%</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.02);"></span>Black α2%</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.04);"></span>White α4%</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.04);"></span>White α4%</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0);"></span>Transparent</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0);"></span>Transparent</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0);"></span>Transparent</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0);"></span>Transparent</span></td>
               </tr>
               <tr>
                 <td class="token-name">Surface/SubtleHover</td>
@@ -4437,23 +4436,16 @@
               </tr>
               <tr class="diff-row">
                 <td class="token-name">Surface/RaisedSecondary</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
               </tr>
               <tr class="diff-row">
                 <td class="token-name">Surface/RaisedPrimary</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ebebeb;"></span>Grey/92</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e0e0e0;"></span>Grey/88</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
-              </tr>
-              <tr class="diff-row">
-                <td class="token-name">Surface/RaisedDominant</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e0e0e0;"></span>Grey/88</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#d1d1d1;"></span>Grey/82</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#3d3d3d;"></span>Grey/24</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#3d3d3d;"></span>Grey/24</span></td>
               </tr>
               <tr class="diff-row">
@@ -4509,8 +4501,8 @@
                 <td class="token-name">Surface/Quaternary</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
               </tr>
               <tr class="diff-row">
                 <td class="token-name">Stroke/Divider</td>
@@ -4528,9 +4520,9 @@
               </tr>
               <tr class="diff-row">
                 <td class="token-name">Stroke/Container</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e0e0e0;"></span>Grey/88</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#d1d1d1;"></span>Grey/82</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#383838;"></span>Grey/22</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#c2c2c2;"></span>Grey/76</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#c2c2c2;"></span>Grey/76</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d4d4d;"></span>Grey/30</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d4d4d;"></span>Grey/30</span></td>
               </tr>
               <tr class="diff-row">
@@ -4577,7 +4569,7 @@
             <span class="layer-tag">Layer 2 — Semantic</span>
             <h4>Monocore Semantic collection · 4 modes</h4>
             <p>Purpose-named tokens that alias primitives differently per mode. This is the layer designers and components bind to. Every semantic token holds a <code>VARIABLE_ALIAS</code> reference to a primitive, switching across the L1/L2 × Light/Dark matrix automatically.</p>
-            <span class="count">25 variables</span>
+            <span class="count">24 variables</span>
           </div>
         </div>
 
@@ -4621,7 +4613,7 @@
         </div>
 
         <div class="callout callout-rule">
-          <strong>7 of 19 tokens differ between L1 and L2.</strong> The rest are identical across environment levels. The L1/L2 distinction matters most for: <code>Base</code>, <code>RaisedSecondary</code>, <code>RaisedPrimary</code>, <code>RaisedDominant</code>, <code>Floating</code>, <code>Sunken</code>, <code>Interactive</code>.
+          <strong>6 of 18 tokens differ between L1 and L2.</strong> The rest are identical across environment levels. The L1/L2 distinction matters most for: <code>Base</code>, <code>RaisedSecondary</code>, <code>RaisedPrimary</code>, <code>Floating</code>, <code>Sunken</code>, <code>Interactive</code>.
         </div>
       </section>
 
