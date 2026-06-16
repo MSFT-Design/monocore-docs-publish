@@ -4594,18 +4594,24 @@
         <p class="section-intro">Two parallel scales govern how surfaces meet the eye: the radius applied to their corners, and the space between them. Both follow the same naming philosophy as the surface system &mdash; group by meaning, name by role, so the value behind a token can change in one place.</p>
 
         <h3>Corner radius</h3>
-        <p>A radius of <code>16</code> covers most components. When components appear together, a shared radius makes them read as a family rather than a collection. Choose a wider radius only for the largest containers, and a smaller one only when a nested element needs to read as a step inside its parent.</p>
+        <p>Seven named tokens cover every component in the system. <code>prominent</code> (16) is the most-used radius &mdash; it covers most components. When components appear together, a shared radius makes them read as a family rather than a collection. Choose a wider radius only for the largest containers, and a smaller one only when a nested element needs to read as a step inside its parent.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Radius</th><th>Use it for</th><th>Why</th></tr></thead>
+            <thead><tr><th>Token</th><th>Value</th><th>Use it for</th><th>Why</th></tr></thead>
             <tbody>
-              <tr><td><code>24</code></td><td>The largest cards &mdash; for example, Post feed cards.</td><td>The wider curve lets a dominant surface read distinctly from the components nested inside it.</td></tr>
-              <tr><td><code>16</code> &middot; default</td><td>Most components.</td><td>A shared radius binds adjacent components into a coherent group.</td></tr>
-              <tr><td><code>12</code></td><td>Nested items inside a default-radius parent.</td><td>One step inside <code>16</code>. Reads as contained without competing.</td></tr>
-              <tr><td><code>8</code></td><td>Smaller nested components, or compact controls where <code>12</code> still feels too soft.</td><td>Tightens the curve when content is dense.</td></tr>
-              <tr><td><code>4</code></td><td>The smallest details &mdash; tags, indicators, inline tokens.</td><td>The minimum that still reads as intentionally rounded rather than square.</td></tr>
+              <tr><td><code>rounded</code></td><td>9999</td><td>Pills and full circles &mdash; avatars, badges, action chips, reaction pills.</td><td>Maximum curve. Resolves to a half-pill at runtime once one axis caps the other.</td></tr>
+              <tr><td><code>dominant</code></td><td>24</td><td>The largest cards &mdash; Post feed cards, hero cards, feature surfaces.</td><td>The wider curve lets a dominant surface read distinctly from the components nested inside it.</td></tr>
+              <tr><td><code>prominent</code> &middot; Baseline</td><td>16</td><td>Most components &mdash; cards, panels, sheets, chiclets, grouped containers, the bulk of the system.</td><td>A shared radius binds adjacent components into a coherent group.</td></tr>
+              <tr><td><code>strong</code></td><td>12</td><td>Nested items inside a <code>prominent</code>-radius parent.</td><td>One step inside <code>16</code>. Reads as contained without competing with the parent.</td></tr>
+              <tr><td><code>default</code></td><td>8</td><td>Smaller nested components, or compact controls where <code>strong</code> still feels too soft.</td><td>Tightens the curve when content is dense.</td></tr>
+              <tr><td><code>minimal</code></td><td>4</td><td>The smallest details.</td><td>The minimum that still reads as intentionally rounded rather than square.</td></tr>
+              <tr><td><code>None</code></td><td>0</td><td>Squared corners &mdash; structural dividers, full-bleed separators, content that should not read as rounded at all.</td><td>No softening; explicit absence of curve.</td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Naming note:</strong> the token named <code>default</code> resolves to <code>8</code>, not the most-used radius. <code>prominent</code> (16) is the most-used. The names describe the curve's <em>character</em> on the intensity ladder &mdash; not which value is the most-applied default. Reach for the role that matches your component's intent, not the token whose name says "default."
         </div>
 
         <h3>Vertical spacing</h3>
