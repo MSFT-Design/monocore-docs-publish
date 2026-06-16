@@ -1668,6 +1668,7 @@
       <div class="nav-section">
         <div class="nav-section-label">Semantic Surface System</div>
         <a href="#surface-system" data-link="surface-system">Overview</a>
+        <a href="#scaling-rules" data-link="scaling-rules">Scaling Rules</a>
         <a href="#teams-migration" data-link="teams-migration">Teams Migration</a>
       </div>
       <div class="nav-section">
@@ -5599,6 +5600,169 @@
 
 </div>
 
+</div>
+
+<div class="page" id="page-scaling-rules" data-page="scaling-rules">
+<div class="docs-shell">
+
+  <!-- ── Masthead ────────────────────────────────────── -->
+  <header class="docs-header">
+    <div class="eyebrow">Semantic Surface System</div>
+    <h1>Scaling Rules</h1>
+    <p class="subtitle">A two-part framework for Dynamic Type. First, classify each component into a <strong>scale tier</strong> that sets how much its text is allowed to grow (<code>Scale0</code>, <code>Scale1</code>, <code>ScaleMax</code>). Then, at the upper bound of that tier, use <strong>reflow tokens</strong> to decide what happens to elements that still won't fit &mdash; extending vertically (<code>extend0</code>&ndash;<code>extendFit</code>) or stacking columns (<code>virticalStack</code>).</p>
+    <div class="meta">
+      <span>3 scale tiers</span>
+      <span>5 reflow tokens</span>
+      <span>iOS &amp; Android</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <!-- 1. Why -->
+      <section class="spec-section" id="why-scaling">
+        <span class="section-eyebrow eyebrow-design">Concept</span>
+        <h2>Why a scaling framework <a href="#why-scaling" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Dynamic Type lets users push text to extreme sizes for accessibility. Without intervention, every text element scales freely &mdash; and components collapse: timestamps collide with labels, tab labels wrap to three lines, search placeholders shove their icons off-screen. The framework gives designers two levers &mdash; a per-component <strong>scale tier</strong> and per-element <strong>reflow tokens</strong> &mdash; so a chat row can stay legible at max zoom without breaking the rest of the screen.</p>
+        <div class="callout callout-info">
+          <strong>Tune at the cap, not at every step.</strong> Designers configure behavior at one point &mdash; the upper bound of the component's scale tier. The framework interpolates every intermediate Dynamic Type size between the default layout and the configured max-zoom layout.
+        </div>
+      </section>
+
+      <!-- 2. Scale tiers -->
+      <section class="spec-section" id="scale-tiers">
+        <span class="section-eyebrow eyebrow-design">Foundations</span>
+        <h2>Scale tiers <a href="#scale-tiers" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each component belongs to one of three tiers based on how much its text is allowed to grow. The tier sets the ceiling; the reflow tokens decide what happens at that ceiling.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Tier</th><th>Maximum scale</th><th>Use it for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Scale0</code></td><td>1&times; &middot; no scale</td><td>Components whose text content is always the same and lives in the same location. Tab bars, fixed labels in chrome that the user reads at a glance, content anchored to a UI region rather than to body text.</td></tr>
+              <tr><td><code>Scale1</code></td><td>1.3&times; &middot; capped scaling</td><td>Components whose text lives in the same location and doesn't change often. Headers, search placeholders, badges, token fields, message-compose chrome &mdash; text that's allowed to grow somewhat while the surrounding container stays usable.</td></tr>
+              <tr><td><code>ScaleMax</code></td><td>Unrestricted</td><td>Components whose text is the user's content &mdash; chat list items, message bodies, anything the user reads attentively. Scale continues to the full Dynamic Type ceiling; reflow tokens take over from there.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-rule">
+          <strong>Pick the tier from the role, not the size.</strong> The question is "what does this text do?" &mdash; chrome (<code>Scale0</code>), navigation or container labels (<code>Scale1</code>), user content (<code>ScaleMax</code>) &mdash; not "how big do I want it to be."
+        </div>
+      </section>
+
+      <!-- 3. Reflow — multiple lines -->
+      <section class="spec-section" id="extend-tokens">
+        <span class="section-eyebrow eyebrow-design">Reflow</span>
+        <h2>Reflow tokens &mdash; extending lines <a href="#extend-tokens" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">At the upper bound of <code>Scale1</code> and <code>ScaleMax</code> &mdash; the max zoom level where comprehension is already constrained &mdash; four <code>extend</code> tokens control how many additional lines a text element is allowed to wrap to before truncating. Assign the token per text element; the cell as a whole inherits the most permissive value of its children.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Token</th><th>Value</th><th>Behavior</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>extend0</code></td><td>Plus 0</td><td>No lines added. The text truncates at its original line count.</td></tr>
+              <tr><td><code>extend1</code></td><td>Plus 1</td><td>Add one more line before truncating.</td></tr>
+              <tr><td><code>extend2</code></td><td>Plus 2</td><td>Add two more lines before truncating.</td></tr>
+              <tr><td><code>extendFit</code></td><td>Unbound</td><td>Never truncate. Let all text reflow into as many lines as it needs.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-rule">
+          <strong>Pick the smallest extend that preserves the message.</strong> A timestamp doesn't need <code>extendFit</code>; a primary message label might. Defaulting every element to <code>extendFit</code> defeats the framework &mdash; every cell takes unbounded vertical space and pushes the next cell off-screen.
+        </div>
+      </section>
+
+      <!-- 4. Reflow — vertical stack -->
+      <section class="spec-section" id="vertical-stack">
+        <span class="section-eyebrow eyebrow-design">Reflow</span>
+        <h2>Reflow tokens &mdash; stacking columns <a href="#vertical-stack" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">When the extend tokens still aren't enough &mdash; typically because the leading column has grown so wide it begins to clip the trailing column &mdash; the trailing column reflows beneath the leading column instead of competing with it for horizontal space.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Token</th><th>Behavior</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>virticalStack</code> <em>(sic &mdash; token name as published)</em></td><td>When the leading column begins to clip the trailing column, reflow the trailing column under the leading column.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>This gives each cell two degrees of freedom at max zoom: vertical expansion within the original row (the <code>extend</code> tokens), and column-stacking once horizontal space is exhausted (<code>virticalStack</code>). Together they let a chat row with a long message and a long timestamp degrade gracefully instead of overlapping.</p>
+
+        <div class="callout callout-info">
+          <strong>The order of fallback.</strong> The extend tokens are tried first &mdash; they preserve the two-column layout. <code>virticalStack</code> is the second step, only reached when the trailing column still can't fit. Two cascading fallbacks, applied in sequence by the framework.
+        </div>
+      </section>
+
+      <!-- 5. Workflow -->
+      <section class="spec-section" id="scaling-workflow">
+        <span class="section-eyebrow eyebrow-design">Workflow</span>
+        <h2>Applying the framework <a href="#scaling-workflow" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two decisions per component &mdash; the tier and the per-element reflow tokens. Everything in between is interpolated.</p>
+        <ol class="step-list">
+          <li><strong>Pick the tier</strong> for the component as a whole. Is it chrome (<code>Scale0</code>), navigation/container (<code>Scale1</code>), or user content (<code>ScaleMax</code>)?</li>
+          <li><strong>For <code>Scale1</code> and <code>ScaleMax</code></strong>, assign an <code>extend</code> token to each text element based on how much of it must remain readable at the cap.</li>
+          <li><strong>Assign <code>virticalStack</code></strong> to the trailing column if it still clips after the extends are applied.</li>
+          <li><strong>The framework handles the rest.</strong> Intermediate sizes interpolate between the default layout and the cap layout you've configured. No per-step authoring required.</li>
+        </ol>
+      </section>
+
+      <!-- 6. Applies to -->
+      <section class="spec-section" id="applies-to">
+        <span class="section-eyebrow eyebrow-impl">Scope</span>
+        <h2>Applies to <a href="#applies-to" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The framework is applied across the mobile component library &mdash; identical rules on iOS and Android.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Component</th><th>Tier</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Tab bar</td><td><code>Scale0</code></td><td>Anchored chrome &mdash; labels never scale.</td></tr>
+              <tr><td>Headers</td><td><code>Scale1</code></td><td>Title + subtitle pair stays inside the title region as text grows.</td></tr>
+              <tr><td>Search component</td><td><code>Scale1</code></td><td>Input field with placeholder; cap keeps the icon and field visible.</td></tr>
+              <tr><td>Input fields &middot; Token fields</td><td><code>Scale1</code></td><td>Form chrome &mdash; stays usable at cap.</td></tr>
+              <tr><td>Badges</td><td><code>Scale1</code></td><td>Including mention badges and counted labels.</td></tr>
+              <tr><td>Message compose</td><td><code>Scale1</code></td><td>The compose chrome (icons + placeholder) stays anchored; the typed message body, when present, follows <code>ScaleMax</code>.</td></tr>
+              <tr><td>Chat list item</td><td><code>ScaleMax</code></td><td>Canonical surface for the <code>extend</code> tokens &mdash; label, sublabel, and trailing date each carry their own extend value.</td></tr>
+              <tr><td>Threads list item</td><td><code>ScaleMax</code></td><td>Uses <code>extend</code> for the message body and <code>virticalStack</code> for the reply-count column when it clips.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Sidebar / TOC ──────────────────────────────── -->
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#why-scaling">Why a scaling framework</a>
+        <a href="#scale-tiers">Scale tiers</a>
+        <a href="#extend-tokens">Reflow &mdash; extending lines</a>
+        <a href="#vertical-stack">Reflow &mdash; stacking columns</a>
+        <a href="#scaling-workflow">Applying the framework</a>
+        <a href="#applies-to">Applies to</a>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────── -->
+  <footer class="docs-footer">
+    Scaling Rules &middot; Semantic Surface System &middot; 3 tiers &middot; 5 reflow tokens &middot; June 2026
+  </footer>
+
+</div>
 </div>
 
 <div class="page" id="page-spec-completeness" data-page="spec-completeness">
