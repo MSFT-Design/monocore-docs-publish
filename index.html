@@ -1668,6 +1668,8 @@
       <div class="nav-section">
         <div class="nav-section-label">Semantic Surface System</div>
         <a href="#surface-system" data-link="surface-system">Overview</a>
+        <a href="#text-icon" data-link="text-icon">Text &amp; Icon</a>
+        <a href="#theming" data-link="theming">Theming</a>
         <a href="#scaling-rules" data-link="scaling-rules">Scaling Rules</a>
         <a href="#teams-migration" data-link="teams-migration">Teams Migration</a>
       </div>
@@ -5606,6 +5608,345 @@
 
 </div>
 
+</div>
+
+<!-- ═══════════ PAGE: Text & Icon ═══════════ -->
+<div class="page" id="page-text-icon" data-page="text-icon">
+<div class="docs-shell">
+
+  <!-- ── Masthead ────────────────────────────────────── -->
+  <header class="docs-header">
+    <div class="eyebrow">Semantic Surface System</div>
+    <h1>Text &amp; Icon</h1>
+    <p class="subtitle">The Text/* and Icon/* roles carry forward from the prior color system. They were not remapped by the Monocore migration &mdash; the names stay, the values were ported to Fluent 2 / Grey primitives where appropriate, and the branded / status / mention-style roles still alias the same Brand and Danger sources they always did.</p>
+    <div class="meta">
+      <span>17 text roles</span>
+      <span>14 icon roles</span>
+      <span>Carried forward</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <!-- 1. Why -->
+      <section class="spec-section" id="text-icon-overview">
+        <span class="section-eyebrow eyebrow-design">Scope</span>
+        <h2>What's on this page <a href="#text-icon-overview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">
+          The Surface migration repointed every neutral grey to the Fluent 2 ramp and reorganized the canonical surface roles. The Text and Icon layers were treated as carried-forward &mdash; the role names and consumer bindings did not change, only the underlying primitives. This page documents the resulting tables so the active values are explicit.
+        </p>
+        <div class="callout callout-info">
+          <strong>Naming carries forward; values were ported.</strong> Where a Text or Icon role aliased a neutral grey (e.g. <code>Text/Primary</code>, <code>Icon/Disabled</code>), the alias now points at the corresponding <code>Fluent 2/Grey/N</code> primitive. Where the role aliased a brand or danger color, the binding is unchanged.
+        </div>
+      </section>
+
+      <!-- 2. Text / neutral -->
+      <section class="spec-section" id="text-neutral">
+        <span class="section-eyebrow eyebrow-impl">Text roles &middot; neutral</span>
+        <h2>Text &mdash; neutral roles <a href="#text-neutral" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Greyscale text roles. All alias <code>Fluent 2/Grey/N</code> primitives.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Light L1 &middot; L2</th><th>Dark L1 &middot; L2</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>Text/Dominant</code></td><td>Grey/0 &middot; Grey/0</td><td>Grey/100 &middot; Grey/100</td><td>Pure black on light, pure white on dark. Maximum-contrast body text.</td></tr>
+              <tr><td><code>Text/Primary</code></td><td>Grey/14 &middot; Grey/14</td><td>Grey/88 &middot; Grey/88</td><td>Standard body text. Near-extreme grey on both themes.</td></tr>
+              <tr><td><code>Text/Secondary</code></td><td>Grey/42 &middot; Grey/24</td><td>Grey/56 &middot; Grey/68</td><td>Supporting copy. Steps stronger in L2 light, lighter in L2 dark.</td></tr>
+              <tr><td><code>Text/Hint</code></td><td>Grey/42 &middot; Grey/24</td><td>Grey/56 &middot; Grey/68</td><td>Placeholder text, hint copy. Same values as Secondary.</td></tr>
+              <tr><td><code>Text/Alt Secondary</code></td><td>Grey/14 &middot; Grey/14</td><td>Grey/56 &middot; Grey/68</td><td>High-contrast alternative for emphasis on subtle surfaces.</td></tr>
+              <tr><td><code>Text/Disabled</code></td><td>Grey/68 &middot; Grey/68</td><td>Grey/24 &middot; Grey/42</td><td>Disabled state. Reduced contrast indicates non-interactive.</td></tr>
+              <tr><td><code>Text/Highlighted Foreground</code></td><td>Grey/14 &middot; Grey/14</td><td>Grey/88 &middot; Grey/88</td><td>Text laid over a highlighted background (e.g. selection). Same values as Primary.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. Text / over-fill -->
+      <section class="spec-section" id="text-over-fill">
+        <span class="section-eyebrow eyebrow-impl">Text roles &middot; over-fill</span>
+        <h2>Text &mdash; over-fill roles <a href="#text-over-fill" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Text that sits on top of a non-neutral surface &mdash; brand, accent, or another colored fill. These resolve to white/black to guarantee contrast against the colored fill underneath.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Light</th><th>Dark</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>Text/On Global</code></td><td>Grey/100</td><td>Grey/100</td><td>Text over <em>any</em> brand or status fill in both themes. Always white.</td></tr>
+              <tr><td><code>Text/On Accent</code></td><td>Grey/100</td><td>Grey/0</td><td>Text on a primary accent fill. Inverts with theme so contrast is preserved.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 4. Text / branded -->
+      <section class="spec-section" id="text-branded">
+        <span class="section-eyebrow eyebrow-impl">Text roles &middot; branded</span>
+        <h2>Text &mdash; branded roles <a href="#text-branded" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Text colored by the active brand theme. All alias <code>Global colors/Brand light/Primary</code> in light and <code>Brand dark/Primary</code> in dark, except <code>Highlighted Background</code> which uses brand tints.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Light</th><th>Dark</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>Text/Interactive</code></td><td>Brand light/Primary</td><td>Brand dark/Primary</td><td>Inline interactive text &mdash; tappable labels that aren't links.</td></tr>
+              <tr><td><code>Text/Link</code></td><td>Brand light/Primary</td><td>Brand dark/Primary</td><td>Hyperlink color.</td></tr>
+              <tr><td><code>Text/Assistive</code></td><td>Brand light/Primary</td><td>Brand dark/Primary</td><td>System assistive copy (e.g. helper text under inputs).</td></tr>
+              <tr><td><code>Text/Carret</code></td><td>Brand light/Primary</td><td>Brand dark/Primary</td><td>Text-input caret color.</td></tr>
+              <tr><td><code>Text/Highlighted Background</code></td><td>Brand light/Tint 40</td><td>Brand dark/Tint 20</td><td>Background wash behind highlighted/selected text.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. Text / status -->
+      <section class="spec-section" id="text-status">
+        <span class="section-eyebrow eyebrow-impl">Text roles &middot; status</span>
+        <h2>Text &mdash; status roles <a href="#text-status" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Text colored by feedback meaning. <code>Danger</code> aliases the Danger palette; <code>Success</code> and <code>Warning</code> currently carry hardcoded hex values pending a future <code>State/*</code> layer.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Light</th><th>Dark</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>Text/Danger</code></td><td>Danger light/Primary</td><td>Danger dark/Primary</td><td>Destructive or error text.</td></tr>
+              <tr><td><code>Text/Success</code></td><td><code>#0F7A0B</code></td><td><code>#0EB244</code></td><td>Positive confirmation text.</td></tr>
+              <tr><td><code>Text/Warning</code></td><td><code>#835C00</code></td><td><code>#FFB900</code></td><td>Caution or pending state text.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-info" style="margin-top: var(--sp-3);">
+          <strong>Status colors are pending a State/* layer.</strong> The hardcoded hex values for Success and Warning will be replaced with semantic aliases once the State token system lands.
+        </div>
+      </section>
+
+      <!-- 6. Icon / neutral -->
+      <section class="spec-section" id="icon-neutral">
+        <span class="section-eyebrow eyebrow-impl">Icon roles &middot; neutral</span>
+        <h2>Icon &mdash; neutral roles <a href="#icon-neutral" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Greyscale icon roles. Mirrors the Text neutral roles with slightly different stepping on Secondary / Hint (icons can sit a step softer than text without losing legibility).</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Light L1 &middot; L2</th><th>Dark L1 &middot; L2</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>Icon/Dominant</code></td><td>Grey/0 &middot; Grey/0</td><td>Grey/100 &middot; Grey/100</td><td>Pure black/white. Maximum-contrast icons.</td></tr>
+              <tr><td><code>Icon/Primary</code></td><td>Grey/14 &middot; Grey/14</td><td>Grey/88 &middot; Grey/88</td><td>Standard icon color. Same primitive as Text/Primary.</td></tr>
+              <tr><td><code>Icon/Secondary</code></td><td>Grey/56 &middot; Grey/42</td><td>Grey/42 &middot; Grey/56</td><td>Supporting icons. Inverts the L1/L2 step pattern relative to Text/Secondary.</td></tr>
+              <tr><td><code>Icon/Hint</code></td><td>Grey/56 &middot; Grey/42</td><td>Grey/42 &middot; Grey/56</td><td>Placeholder or hint icons. Same values as Icon/Secondary.</td></tr>
+              <tr><td><code>Icon/Alt Secondary</code></td><td>Grey/14 &middot; Grey/14</td><td>Grey/56 &middot; Grey/68</td><td>High-contrast alternative.</td></tr>
+              <tr><td><code>Icon/Disabled</code></td><td>Grey/68 &middot; Grey/56</td><td>Grey/24 &middot; Grey/42</td><td>Disabled icons.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 7. Icon / over-fill, branded, status, special -->
+      <section class="spec-section" id="icon-over-and-status">
+        <span class="section-eyebrow eyebrow-impl">Icon roles &middot; remaining</span>
+        <h2>Icon &mdash; over-fill, branded, status, and special <a href="#icon-over-and-status" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Icons over branded fills, branded icons, status icons, and the two special-purpose mention/saved icons. Hardcoded hex values are pending the <code>State/*</code> layer for status and a future brand-palette unification for Mention / Saved.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Light</th><th>Dark</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>Icon/On Global</code></td><td>Grey/100</td><td>Grey/100</td><td>Icons over any brand or status fill. Always white.</td></tr>
+              <tr><td><code>Icon/On Accent</code></td><td>Grey/100</td><td>Grey/0</td><td>Icons over a primary accent fill. Inverts with theme.</td></tr>
+              <tr><td><code>Icon/Interactive</code></td><td>Brand light/Primary</td><td>Brand dark/Primary</td><td>Inline interactive icons.</td></tr>
+              <tr><td><code>Icon/Danger</code></td><td>Danger light/Primary</td><td>Danger dark/Primary</td><td>Destructive or error icons.</td></tr>
+              <tr><td><code>Icon/Success</code></td><td><code>#0F7A0B</code></td><td><code>#0EB244</code></td><td>Positive confirmation icons.</td></tr>
+              <tr><td><code>Icon/Warning</code></td><td><code>#835C00</code></td><td><code>#FFB900</code></td><td>Caution icons.</td></tr>
+              <tr><td><code>Icon/Mention</code></td><td><code>#CC4A31</code></td><td><code>#CC4A31</code></td><td>@-mention indicator. Single hex across both themes.</td></tr>
+              <tr><td><code>Icon/Saved</code></td><td><code>#B24782</code></td><td><code>#CF6098</code></td><td>Saved / bookmarked indicator.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 8. Behavioral -->
+      <section class="spec-section" id="text-icon-rules">
+        <span class="section-eyebrow eyebrow-design">Behavior</span>
+        <h2>Behavioral notes <a href="#text-icon-rules" class="anchor-link" aria-label="Link to this section">#</a></h2>
+
+        <div class="callout callout-rule">
+          <strong>Text and Icon are paired by purpose, not by value.</strong> <code>Text/Primary</code> and <code>Icon/Primary</code> describe the same role (standard foreground at standard emphasis) but pick slightly different greys per mode. Use the Text token on text and the Icon token on icons &mdash; do not cross-bind them.
+        </div>
+
+        <div class="callout callout-info">
+          <strong>The Secondary stepping is intentionally asymmetric.</strong> <code>Text/Secondary</code> steps stronger between L1 and L2 light (Grey/42 &rarr; Grey/24) than <code>Icon/Secondary</code> does (Grey/56 &rarr; Grey/42). Icons survive at lower contrast than running text; the system reflects this directly in the token values.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>The hardcoded status hex values are temporary.</strong> <code>Text/Success</code>, <code>Text/Warning</code>, <code>Icon/Success</code>, and <code>Icon/Warning</code> carry baked-in hex pairs pending the <code>State/*</code> token layer. <code>Icon/Mention</code> and <code>Icon/Saved</code> follow the same pattern. When State lands these will become aliases.
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Sidebar / TOC ──────────────────────────────── -->
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#text-icon-overview">What's on this page</a>
+        <a href="#text-neutral">Text &mdash; neutral</a>
+        <a href="#text-over-fill">Text &mdash; over-fill</a>
+        <a href="#text-branded">Text &mdash; branded</a>
+        <a href="#text-status">Text &mdash; status</a>
+        <a href="#icon-neutral">Icon &mdash; neutral</a>
+        <a href="#icon-over-and-status">Icon &mdash; remaining</a>
+        <a href="#text-icon-rules">Behavioral notes</a>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────── -->
+  <footer class="docs-footer">
+    Text &amp; Icon &middot; carried forward from the legacy Color collection &middot; 17 text roles &middot; 14 icon roles
+  </footer>
+
+</div>
+</div>
+
+<!-- ═══════════ PAGE: Theming ═══════════ -->
+<div class="page" id="page-theming" data-page="theming">
+<div class="docs-shell">
+
+  <!-- ── Masthead ────────────────────────────────────── -->
+  <header class="docs-header">
+    <div class="eyebrow">Semantic Surface System</div>
+    <h1>Theming</h1>
+    <p class="subtitle">Theming lets a product swap its brand color set without touching any component. The five <code>Brand/Accent *</code> tokens are the semantic layer products bind to; the values resolve from the active brand palette in <code>Global colors/Brand light</code> and <code>Brand dark</code>, which themselves are owned by the Brand collection and can be repointed per product.</p>
+    <div class="meta">
+      <span>5 accent roles</span>
+      <span>9 modes</span>
+      <span>Brand-swappable</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <!-- 1. Concept -->
+      <section class="spec-section" id="theming-concept">
+        <span class="section-eyebrow eyebrow-design">Concept</span>
+        <h2>How theming works <a href="#theming-concept" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">
+          The Accent ladder describes the role of a branded surface or fill &mdash; "most prominent," "standard," "subtle," and so on &mdash; without committing to a specific color. The active brand palette (set by the product) supplies the underlying hex values. Switch the palette and every Accent consumer follows; rename the role and you've made a single coordinated update across every consuming component.
+        </p>
+
+        <div class="callout callout-info">
+          <strong>Semantic ladder, palette-driven values.</strong> Components bind to <code>Brand/Accent Primary</code>, not to <code>Brand light/Primary</code>. The active palette decides what "Primary" resolves to. A Teams build can swap the palette without recompiling components.
+        </div>
+      </section>
+
+      <!-- 2. The 5 tokens -->
+      <section class="spec-section" id="accent-tokens">
+        <span class="section-eyebrow eyebrow-impl">Reference</span>
+        <h2>The Accent ladder <a href="#accent-tokens" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Five tiers from most prominent to barely-there. Each row shows the brand-palette tint/shade that the token aliases in each theme. Light-mode rows show <code>Brand light/*</code>; dark-mode rows show <code>Brand dark/*</code>.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Light L1 / L2</th><th>Dark L1 / L2</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><code>Brand/Accent Dominant</code></td>
+                <td>Brand light/Shade 10</td>
+                <td>Brand dark/Shade 30</td>
+                <td>Most emphasized branded surface. The darkest shade in light mode, the lightest in dark.</td>
+              </tr>
+              <tr>
+                <td><code>Brand/Accent Primary</code></td>
+                <td>Brand light/Primary</td>
+                <td>Brand dark/Primary</td>
+                <td>Canonical brand color. Logo fills, primary buttons, key brand surfaces.</td>
+              </tr>
+              <tr>
+                <td><code>Brand/Accent Secondary</code></td>
+                <td>Brand light/Tint 30</td>
+                <td>Brand dark/Tint 30</td>
+                <td>Supporting branded surface. One step subtler than Primary.</td>
+              </tr>
+              <tr>
+                <td><code>Brand/Accent Tertiary</code></td>
+                <td>Brand light/Tint 50</td>
+                <td>Brand dark/Tint 40</td>
+                <td>Ambient branded wash. Page tints, subtle brand presence.</td>
+              </tr>
+              <tr>
+                <td><code>Brand/Accent Quaternary</code></td>
+                <td>Brand light/Tint 50</td>
+                <td>Brand dark/Tint 40</td>
+                <td>Barely-there branded wash. Currently shares values with Tertiary &mdash; a distinct primitive can be introduced later without renaming consumers.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top: var(--sp-3);">
+          <strong>Quaternary and Tertiary currently resolve to the same primitive.</strong> The brand palette tops out at <code>Tint 50</code> (light) and <code>Tint 40</code> (dark). Quaternary exists to give designers a slot for the very lightest branded wash; until a distinct primitive is added it inherits Tertiary's values. The semantic name lets consumers bind today and pick up the divergent value automatically when it lands.
+        </div>
+      </section>
+
+      <!-- 3. Behavior across modes -->
+      <section class="spec-section" id="accent-modes">
+        <span class="section-eyebrow eyebrow-design">Behavior</span>
+        <h2>Across modes <a href="#accent-modes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Accent tokens are mode-aware in the same sense as the Surface ladder. L1 and L2 resolve to the same value (the brand palette is environment-independent); the L1 IC and L2 IC modes mirror their non-IC counterparts; the Glass (WIP) mode currently inherits the light-mode value. Light/dark inversion is handled by the brand palette itself: <code>Brand light/*</code> and <code>Brand dark/*</code> are distinct primitives, each tuned for legibility in its own theme.</p>
+
+        <div class="callout callout-rule">
+          <strong>Don't bind directly to brand primitives.</strong> Components reach for <code>Brand/Accent Primary</code>, not <code>Brand light/Primary</code>. Direct binding to the palette bypasses the semantic layer and breaks the swap-the-palette story.
+        </div>
+      </section>
+
+      <!-- 4. Swapping themes -->
+      <section class="spec-section" id="swapping-themes">
+        <span class="section-eyebrow eyebrow-design">Workflow</span>
+        <h2>Swapping the active palette <a href="#swapping-themes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">A product can ship multiple brand palettes (e.g. Teams default, partner co-brand, seasonal palette) and swap the active one at runtime. The Accent tokens never change; the palette they alias to does.</p>
+        <ol class="step-list">
+          <li><strong>Define palettes in the Brand collection.</strong> Each palette is a complete set of <code>Brand light/*</code> and <code>Brand dark/*</code> primitives.</li>
+          <li><strong>Bind components to <code>Brand/Accent *</code>.</strong> Components never reference the palette directly.</li>
+          <li><strong>At runtime, point the Accent tokens at the chosen palette.</strong> Every consumer updates without recompiling.</li>
+          <li><strong>Add new palettes by extending the Brand collection.</strong> The Accent ladder doesn't change shape.</li>
+        </ol>
+      </section>
+
+      <!-- 5. Related -->
+      <section class="spec-section" id="accent-related">
+        <span class="section-eyebrow eyebrow-impl">Related</span>
+        <h2>Related Brand tokens <a href="#accent-related" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>The Accent ladder is the canonical theming surface, but two related tokens carry over from the prior system:</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Light / Dark</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>Brand/Accent Global</code></td><td>Brand light/Shade 10 &middot; Brand dark/Tint 20</td><td>Cross-theme brand stamp &mdash; used in places that need a consistent brand color regardless of L1/L2. Pre-dates the Dominant tier; consider migrating consumers to <code>Brand/Accent Dominant</code>.</td></tr>
+              <tr><td><code>Surface/Accent</code></td><td>Brand light/Primary &middot; Brand dark/Primary</td><td>Branded <em>surface</em> fill &mdash; the surface itself, not text/icons over it. Pair with <code>Text/On Accent</code> and <code>Icon/On Accent</code> for legible content.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Sidebar / TOC ──────────────────────────────── -->
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#theming-concept">How theming works</a>
+        <a href="#accent-tokens">The Accent ladder</a>
+        <a href="#accent-modes">Across modes</a>
+        <a href="#swapping-themes">Swapping the palette</a>
+        <a href="#accent-related">Related Brand tokens</a>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────── -->
+  <footer class="docs-footer">
+    Theming &middot; Brand/Accent ladder &middot; 5 tiers &middot; palette-swappable
+  </footer>
+
+</div>
 </div>
 
 <div class="page" id="page-scaling-rules" data-page="scaling-rules">
