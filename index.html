@@ -4176,8 +4176,8 @@
               <tr><td><code>Surface/Subtle</code></td><td>Transparent subtle grouping and interaction overlays</td></tr>
               <tr><td><code>Surface/SubtleHover</code></td><td>Hovered subtle regions</td></tr>
               <tr><td><code>Surface/SubtleSelected</code></td><td>Selected subtle regions (peers with SubtleHover)</td></tr>
-              <tr><td><code>Surface/Base</code></td><td>Standard contained surfaces (use cautiously where it overlaps with RaisedSecondary)</td></tr>
-              <tr><td><code>Surface/RaisedSecondary</code></td><td>First (lightest) level of raised contrast &mdash; grouped content containers, subtle elevation</td></tr>
+              <tr><td><code>Surface/Base</code></td><td>Standard contained <strong>screen</strong> surface. Same value as <code>Surface/RaisedSecondary</code> in every mode &mdash; use Base when this color appears at the screen level alongside other elements sharing the same background that aren't part of a grouped container list.</td></tr>
+              <tr><td><code>Surface/RaisedSecondary</code></td><td>Same value as <code>Surface/Base</code>, reserved for <strong>component</strong> surfaces &mdash; chips, badges, pill-style controls, and other small contained UI.</td></tr>
               <tr><td><code>Surface/RaisedPrimary</code></td><td>Standard raised contained surface &mdash; cards, panels, sheets at default elevation</td></tr>
               <tr><td><code>Surface/Floating</code></td><td>Floating temporary UI surfaces (menus, popovers, reaction pickers)</td></tr>
               <tr><td><code>Surface/Overlay</code></td><td>Blocking modal and sheet surfaces</td></tr>
@@ -4187,6 +4187,10 @@
               <tr><td><code>Surface/Scrim</code></td><td>Background dimming overlays</td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Base and RaisedSecondary share a color, not a role.</strong> Both resolve to the same value in every mode (Grey/94 in light, Grey/20 in dark). The distinction is semantic: <code>Surface/Base</code> names the <em>screen-level</em> surface &mdash; the background a screen presents when its content sits alongside other non-grouped elements on the same fill. <code>Surface/RaisedSecondary</code> names the <em>component-level</em> surface &mdash; chips, badges, and small contained UI. Picking the right token lets either side change independently in the future.
         </div>
 
         <p style="margin-top: var(--sp-4); font-weight:600; color: var(--c-text); font-size: 13px;">5 canonical stroke roles</p>
@@ -4321,14 +4325,14 @@
         <h2>How the Two Axes Combine <a href="#combination" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <p class="section-intro">The semantic role determines which token a designer picks. The environment level determines which tonal value that token resolves to at runtime &mdash; controlled by the mode set on the parent frame.</p>
 
-        <p>A <code>Surface/Base</code> placed inside an L1 frame and a <code>Surface/Base</code> placed inside an L2 frame <strong>both express the same intent</strong> ("standard contained surface"), but they render with slightly different greys so the hierarchy reads correctly to the user.</p>
+        <p>A <code>Surface/Floating</code> placed inside an L1 frame and a <code>Surface/Floating</code> placed inside an L2 frame <strong>both express the same intent</strong> ("floating temporary UI surface"), but they render with slightly different greys so the hierarchy reads correctly against the elevated context.</p>
 
         <div class="callout callout-rule" style="margin-top: var(--sp-4);">
           <strong>The semantic name never changes.</strong> Only the contextual modifier (L1 vs L2) shifts.
         </div>
 
         <div class="flow-diagram" style="margin-top: var(--sp-4);">
-          <span class="node node-accent">Surface/Base</span>
+          <span class="node node-accent">Surface/Floating</span>
           <span class="arrow">+</span>
           <span class="node">Parent frame mode</span>
           <span class="arrow">↓</span>
@@ -4427,14 +4431,14 @@
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
               </tr>
-              <tr class="diff-row">
+              <tr>
                 <td class="token-name">Surface/Base</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
               </tr>
-              <tr class="diff-row">
+              <tr>
                 <td class="token-name">Surface/RaisedSecondary</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
@@ -4629,7 +4633,7 @@
         <p class="section-intro">Five rules govern how the system behaves. Each one closes off a class of mistake the design system has historically made: arbitrary elevation steps, ad-hoc semantics per component, and value drift when context changes.</p>
 
         <div class="callout callout-rule">
-          <strong>Semantic stability.</strong> A semantic role's meaning never changes. <code>Surface/Base</code> always means "standard contained surface" &mdash; only its tonal value shifts between L1 and L2.
+          <strong>Semantic stability.</strong> A semantic role's meaning never changes. <code>Surface/Floating</code> always means "floating temporary UI surface" &mdash; only its tonal value shifts between L1 and L2.
         </div>
 
         <div class="callout callout-info">
@@ -4653,7 +4657,7 @@
         </div>
 
         <div class="callout callout-rule">
-          <strong>6 of 18 tokens differ between L1 and L2.</strong> The rest are identical across environment levels. The L1/L2 distinction matters most for: <code>Base</code>, <code>RaisedSecondary</code>, <code>RaisedPrimary</code>, <code>Floating</code>, <code>Sunken</code>, <code>Interactive</code>.
+          <strong>A handful of tokens differ between L1 and L2.</strong> The rest resolve to the same value across environment levels. The L1/L2 distinction matters most for: <code>Floating</code>, <code>Sunken</code>, <code>Interactive</code>. (<code>Base</code> and <code>RaisedSecondary</code> share a single value across both L1 and L2 &mdash; the environment shift no longer applies to them.)
         </div>
       </section>
 
