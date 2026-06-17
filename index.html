@@ -3976,11 +3976,19 @@
     gap: 0;
     font-size: 11px; line-height: 11px; letter-spacing: 0.06px;
   }
+  /* Interactive Rest: brand-colored foreground on the same surface as Static. */
+  .badge-rest {
+    color: #5b5fc7;
+  }
+  .badge-rest .ic { color: #5b5fc7; opacity: 1; }
+  .badge-rest .ic-after { color: #5b5fc7; opacity: 1; }
   .badge-active {
     background: var(--card-interactive);
     color: #fff;
     border-color: transparent;
   }
+  .badge-active .ic { color: #fff; opacity: 1; }
+  .badge-active .ic-after { color: #fff; opacity: 1; }
   .badge .av {
     width: 16px; height: 16px;
     border-radius: 999px;
@@ -4000,13 +4008,71 @@
   .badge .lbl {
     padding: 0 2px;
   }
+  /* Icon-only: container wraps flush to the icon + padding.
+     Default: 16 icon + 7L/R + 5T/B + 1px stroke = 32x28 (matches Figma).
+     Small:   12 icon + 3L/R + 1T/B + 1px stroke = 20x16 (matches Figma static). */
   .badge-iconly {
-    padding: 4px 8px;
-    gap: 4px;
+    padding: 5px 7px;
+    gap: 0;
   }
   .badge-iconly.badge-sm {
-    padding: 2px 4px;
-    gap: 2px;
+    padding: 1px 3px;
+    gap: 0;
+  }
+
+  /* ── Anatomy: label slot visualization ── */
+  .b-lbl-show {
+    background: rgba(91, 95, 199, 0.16);
+    outline: 1px dashed rgba(91, 95, 199, 0.7);
+    outline-offset: 0;
+    border-radius: 2px;
+  }
+
+  /* ── Typography display per size ── */
+  .b-typo-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-4);
+    margin: var(--sp-4) 0 var(--sp-3);
+  }
+  @media (max-width: 720px) {
+    .b-typo-display { grid-template-columns: 1fr; }
+  }
+  .b-typo-sample {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: var(--sp-5);
+    display: flex; flex-direction: column;
+    gap: var(--sp-3);
+  }
+  .b-typo-tag {
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--c-text-muted);
+  }
+  .b-typo-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    color: var(--c-text);
+  }
+  .b-typo-text-default {
+    font-size: 13px; line-height: 18px; letter-spacing: -0.08px;
+  }
+  .b-typo-text-small {
+    font-size: 11px; line-height: 11px; letter-spacing: 0.06px;
+  }
+  .b-typo-meta {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11px;
+    color: var(--c-text-muted);
+  }
+  .b-typo-row-inbadge {
+    display: flex; align-items: center; gap: var(--sp-3);
+    margin-top: var(--sp-2);
+  }
+  .b-typo-row-inbadge .badge-tag {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 10px; color: var(--c-text-muted);
   }
 
   /* Anatomy diagram for badge */
@@ -4069,11 +4135,11 @@
 
     <div class="canvas" style="margin-top:var(--sp-6); margin-bottom:0;">
       <div class="canvas-row" style="justify-content:center; gap:var(--sp-3); flex-wrap:wrap;">
-        <span class="badge"><span class="av"></span><span class="lbl">Default</span></span>
+        <span class="badge"><span class="av"></span><span class="lbl">Static</span></span>
         <span class="badge badge-sm"><span class="av"></span><span class="lbl">Small</span></span>
-        <span class="badge"><span class="ic">●</span><span class="lbl">With icon</span><span class="ic ic-after">▾</span></span>
-        <span class="badge badge-active"><span class="av"></span><span class="lbl">Active</span></span>
-        <span class="badge badge-iconly"><span class="ic">★</span></span>
+        <span class="badge badge-rest"><span class="ic">●</span><span class="lbl">Tap me</span><span class="ic ic-after">▾</span></span>
+        <span class="badge badge-active"><span class="av"></span><span class="lbl">Active</span><span class="ic ic-after">▾</span></span>
+        <span class="badge badge-iconly badge-rest"><span class="ic">★</span></span>
       </div>
     </div>
   </header>
@@ -4088,12 +4154,15 @@
         <p class="intro">A badge is a single horizontal row inside a pill container. Three optional slots arranged left-to-right: a left image (avatar or icon), a text container holding the label, and a trailing icon used only on Interactive variants.</p>
 
         <div class="b-anatomy">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
             <span class="badge">
               <span class="av" title="1 Left image"></span>
-              <span class="lbl">Label</span>
+              <span class="lbl b-lbl-show">Label</span>
               <span class="ic ic-after">▾</span>
             </span>
+            <div style="font-family:'SF Mono', monospace; font-size:11px; color:var(--c-text-muted); text-align:center;">
+              dashed outline = text container &middot; 2dp L/R padding around label
+            </div>
           </div>
           <div class="diagram-legend" style="flex:1; min-width:240px;">
             <div class="legend-item">
@@ -4107,14 +4176,14 @@
               <div class="legend-marker legend-marker-2">2</div>
               <div class="legend-text">
                 <strong>Text container</strong><br>
-                <span>Single-line label. Carries the editable <code>Label</code> property. Hidden when <code>Icon only=True</code>.</span>
+                <span>The slot holding the label. The label sits inside with <strong>2dp horizontal padding</strong> at Default size (<strong>0dp at Small</strong>) &mdash; this is the dashed-outlined box in the diagram. Carries the editable <code>Label</code> property. Hidden when <code>Icon only=True</code>.</span>
               </div>
             </div>
             <div class="legend-item">
               <div class="legend-marker legend-marker-3">3</div>
               <div class="legend-text">
                 <strong>Trailing icon (Interactive only)</strong><br>
-                <span>Affordance icon for tappable badges — typically a chevron or dismiss glyph. Present on every Interactive variant with text. Hidden when <code>Icon only=True</code>.</span>
+                <span>Affordance icon for tappable badges &mdash; typically a chevron or dismiss glyph. Present on every Interactive variant with text. Hidden when <code>Icon only=True</code>.</span>
               </div>
             </div>
           </div>
@@ -4142,19 +4211,19 @@
         </div>
 
         <h3>Badge type</h3>
-        <p>Controls the affordance set. Static badges are pure labels — read-only tags. Interactive badges add a trailing icon (chevron or dismiss) and a Rest / Active state pair.</p>
+        <p>Controls the affordance set <strong>and the foreground color</strong>. Static badges are pure labels in neutral grey. Interactive badges signal tappability with a brand-colored label and trailing icon (chevron or dismiss); Active swaps the surface to <code>Surface/Accent</code> and flips the foreground to white.</p>
         <div class="canvas">
           <div class="canvas-row">
             <div class="canvas-item">
-              <span class="canvas-item-label">Static</span>
+              <span class="canvas-item-label">Static &middot; neutral</span>
               <span class="badge"><span class="av"></span><span class="lbl">Label</span></span>
             </div>
             <div class="canvas-item">
-              <span class="canvas-item-label">Interactive · Rest</span>
-              <span class="badge"><span class="av"></span><span class="lbl">Label</span><span class="ic ic-after">▾</span></span>
+              <span class="canvas-item-label">Interactive · Rest &middot; brand</span>
+              <span class="badge badge-rest"><span class="av"></span><span class="lbl">Label</span><span class="ic ic-after">▾</span></span>
             </div>
             <div class="canvas-item">
-              <span class="canvas-item-label">Interactive · Active</span>
+              <span class="canvas-item-label">Interactive · Active &middot; on-accent</span>
               <span class="badge badge-active"><span class="av"></span><span class="lbl">Label</span><span class="ic ic-after">▾</span></span>
             </div>
           </div>
@@ -4195,19 +4264,19 @@
         </div>
 
         <h3>Icon only</h3>
-        <p>When <code>True</code>, the text container is hidden and the badge collapses around a single icon. Only available with <code>Left image=Icon</code>.</p>
+        <p>When <code>True</code>, the text container is hidden and the badge collapses around a single icon. Only available with <code>Left image=Icon</code>. The icon follows the same per-state color tokens as the leading icon in text-bearing variants.</p>
         <div class="canvas">
           <div class="canvas-row">
             <div class="canvas-item">
-              <span class="canvas-item-label">Static · Icon only</span>
+              <span class="canvas-item-label">Static &middot; Icon only</span>
               <span class="badge badge-iconly"><span class="ic">★</span></span>
             </div>
             <div class="canvas-item">
-              <span class="canvas-item-label">Interactive · Icon only · Rest</span>
-              <span class="badge badge-iconly"><span class="ic">★</span></span>
+              <span class="canvas-item-label">Interactive &middot; Icon only &middot; Rest</span>
+              <span class="badge badge-iconly badge-rest"><span class="ic">★</span></span>
             </div>
             <div class="canvas-item">
-              <span class="canvas-item-label">Interactive · Icon only · Active</span>
+              <span class="canvas-item-label">Interactive &middot; Icon only &middot; Active</span>
               <span class="badge badge-iconly badge-active"><span class="ic">★</span></span>
             </div>
           </div>
@@ -4226,16 +4295,23 @@
               <tr><th>Property</th><th>Default</th><th>Small</th></tr>
             </thead>
             <tbody>
-              <tr><td>Height</td><td>26&ndash;28dp (auto)</td><td>16dp (auto)</td></tr>
-              <tr><td>Padding · top / bottom</td><td>4dp</td><td>2dp</td></tr>
-              <tr><td>Padding · left / right</td><td>8dp</td><td>4dp</td></tr>
-              <tr><td>Gap · text-bearing variants</td><td>2dp</td><td>0dp</td></tr>
-              <tr><td>Gap · icon-only variants</td><td>4dp</td><td>2dp</td></tr>
-              <tr><td>Corner radius</td><td>999 · pill</td><td>999 · pill</td></tr>
-              <tr><td>Stroke weight</td><td>1dp · inside</td><td>1dp · inside</td></tr>
-              <tr><td>Layout</td><td>Horizontal · counter-axis center</td><td>Horizontal · counter-axis center</td></tr>
+              <tr><td>Height &middot; text-bearing</td><td>26&ndash;28dp (auto)</td><td>16dp (auto)</td></tr>
+              <tr><td>Height &middot; icon-only</td><td>28dp</td><td>16dp</td></tr>
+              <tr><td>Width &middot; icon-only</td><td>32dp</td><td>20dp <em>(static)</em> &middot; 18dp <em>(interactive)</em></td></tr>
+              <tr><td>Padding &middot; text-bearing top / bottom</td><td>4dp</td><td>2dp</td></tr>
+              <tr><td>Padding &middot; text-bearing left / right</td><td>8dp</td><td>4dp</td></tr>
+              <tr><td>Padding &middot; icon-only top / bottom</td><td>5dp</td><td>1dp</td></tr>
+              <tr><td>Padding &middot; icon-only left / right</td><td>7dp</td><td>3dp <em>(static)</em> &middot; 2dp <em>(interactive)</em></td></tr>
+              <tr><td>Gap &middot; text-bearing variants</td><td>2dp</td><td>0dp</td></tr>
+              <tr><td>Corner radius</td><td>999 &middot; pill</td><td>999 &middot; pill</td></tr>
+              <tr><td>Stroke weight</td><td>1dp &middot; inside</td><td>1dp &middot; inside</td></tr>
+              <tr><td>Layout</td><td>Horizontal &middot; counter-axis center</td><td>Horizontal &middot; counter-axis center</td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Icon-only wraps flush.</strong> The icon-only container's width and height are determined by the icon + the icon-only padding values &mdash; not by the text-bearing padding. Default icon-only is <strong>32 &times; 28dp</strong> (16 icon + 7L/R + 5T/B + 1px stroke); Small static icon-only is <strong>20 &times; 16dp</strong> (12 icon + 3L/R + 1T/B + 1px stroke).
         </div>
 
         <h3>Slots</h3>
@@ -4249,7 +4325,8 @@
               <tr><td>Leading icon (Left image=Icon, in text-bearing variants)</td><td>16 &times; 16dp</td><td>10 &times; 10dp</td></tr>
               <tr><td>Leading icon (Icon only variants)</td><td>16 &times; 16dp</td><td>12 &times; 12dp</td></tr>
               <tr><td>Trailing icon (Interactive, text-bearing)</td><td>16 &times; 16dp</td><td>10 &times; 10dp</td></tr>
-              <tr><td>Text container padding (horizontal)</td><td>2dp inside the slot</td><td>0dp inside the slot</td></tr>
+              <tr><td>Text container padding &middot; left / right</td><td>2dp inside the slot</td><td>0dp inside the slot</td></tr>
+              <tr><td>Text container padding &middot; top / bottom</td><td>0dp</td><td>0dp</td></tr>
             </tbody>
           </table>
         </div>
@@ -4264,6 +4341,27 @@
         <h2>Typography <a href="#badge-typography" class="anchor">#</a></h2>
         <p class="intro">Both sizes use SF Pro Text Regular. The Small size shortens line height to the type height and inverts the letter-spacing direction.</p>
 
+        <div class="b-typo-display">
+          <div class="b-typo-sample">
+            <div class="b-typo-tag">Default</div>
+            <div class="b-typo-text b-typo-text-default">Label</div>
+            <div class="b-typo-meta">SF Pro Text &middot; Regular &middot; 13 / 18 &middot; -0.08</div>
+            <div class="b-typo-row-inbadge">
+              <span class="badge-tag">in badge:</span>
+              <span class="badge"><span class="av"></span><span class="lbl">Label</span></span>
+            </div>
+          </div>
+          <div class="b-typo-sample">
+            <div class="b-typo-tag">Small</div>
+            <div class="b-typo-text b-typo-text-small">Label</div>
+            <div class="b-typo-meta">SF Pro Text &middot; Regular &middot; 11 / 11 &middot; +0.06</div>
+            <div class="b-typo-row-inbadge">
+              <span class="badge-tag">in badge:</span>
+              <span class="badge badge-sm"><span class="av"></span><span class="lbl">Label</span></span>
+            </div>
+          </div>
+        </div>
+
         <div class="table-wrap">
           <table>
             <thead>
@@ -4271,10 +4369,10 @@
             </thead>
             <tbody>
               <tr><td>Family</td><td>SF Pro Text</td><td>SF Pro Text</td></tr>
-              <tr><td>Style / weight</td><td>Regular · 400</td><td>Regular · 400</td></tr>
+              <tr><td>Style / weight</td><td>Regular &middot; 400</td><td>Regular &middot; 400</td></tr>
               <tr><td>Font size</td><td>13dp</td><td>11dp</td></tr>
-              <tr><td>Line height</td><td>18dp</td><td>11dp · type height</td></tr>
-              <tr><td>Letter spacing</td><td>-0.08dp · tight</td><td>+0.06dp · loose</td></tr>
+              <tr><td>Line height</td><td>18dp</td><td>11dp &middot; type height</td></tr>
+              <tr><td>Letter spacing</td><td>-0.08dp &middot; tight</td><td>+0.06dp &middot; loose</td></tr>
               <tr><td>iOS text style</td><td>Subheadline-equivalent</td><td>Caption 2-equivalent</td></tr>
             </tbody>
           </table>
@@ -4283,38 +4381,63 @@
         <div class="callout callout-rule" style="margin-top: var(--sp-3); font-size: 12.5px;">
           <strong>Single line, no wrapping.</strong> Badges never wrap. The label truncates with an ellipsis at the badge's right edge before reaching the trailing icon (or the right padding, in Static variants). Avoid labels longer than ~20 characters at Default size or ~14 at Small.
         </div>
+
+        <div class="callout callout-warn" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Active &middot; Body 2 asymmetry.</strong> The Interactive Active variant uses <code>iOS/Body 2</code> (15 / 20 &middot; -0.08) instead of <code>iOS/Body 3</code> when <code>Left image=Icon</code> or <code>None</code> &mdash; growing the badge container to 76&times;28 and 58&times;28 respectively. Active with <code>Left image=Avatar</code> stays on <code>iOS/Body 3</code> (13 / 18) so the avatar isn't pushed off-center. Treat this as the current Figma state &mdash; likely intentional emphasis on the Icon / None variants &mdash; until confirmed otherwise.
+        </div>
       </section>
 
       <!-- ═══ 5. TOKENS ═══ -->
       <section class="ds-section" id="badge-tokens">
         <h2>Color tokens <a href="#badge-tokens" class="anchor">#</a></h2>
-        <p class="intro">Every variant binds to semantic tokens from the Color collection. The Active state is the only treatment that swaps the surface and removes the stroke.</p>
+        <p class="intro">Three distinct states with three distinct token sets. Static and Interactive Rest share the same surface and stroke, but Rest swaps the foreground for the brand <code>Interactive</code> color so tappable badges read as affordances at a glance. Active inverts the surface to <code>Surface/Accent</code> and removes the stroke entirely.</p>
 
         <h3>By state</h3>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>State</th><th>Container fill</th><th>Stroke</th><th>Label color</th></tr>
+              <tr><th>State</th><th>Container fill</th><th>Stroke</th><th>Label</th><th>Leading icon</th><th>Trailing icon</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>Static · N/A<br>Interactive · Rest</td>
-                <td><code>Surface/RaisedPrimary</code></td>
-                <td><code>Stroke/Divider</code> · 1dp inside</td>
-                <td><code>Text/Primary</code></td>
+                <td><strong>Static</strong> &middot; N/A</td>
+                <td><code>Surface/RaisedSecondary</code></td>
+                <td><code>Stroke/Container</code> &middot; 1dp inside</td>
+                <td><code>Text/Secondary</code></td>
+                <td><code>Icon/Secondary</code></td>
+                <td>&mdash; <em>(no trailing icon)</em></td>
               </tr>
               <tr>
-                <td>Interactive · Active</td>
+                <td><strong>Interactive</strong> &middot; Rest</td>
+                <td><code>Surface/RaisedSecondary</code></td>
+                <td><code>Stroke/Container</code> &middot; 1dp inside</td>
+                <td><code>Text/Interactive</code></td>
+                <td><code>Icon/Interactive</code></td>
+                <td><code>Icon/Interactive</code></td>
+              </tr>
+              <tr>
+                <td><strong>Interactive</strong> &middot; Active</td>
                 <td><code>Surface/Accent</code></td>
                 <td>None &mdash; stroke removed</td>
                 <td><code>Text/On Accent</code></td>
+                <td><code>Icon/On Accent</code></td>
+                <td><code>Icon/On Accent</code></td>
               </tr>
             </tbody>
           </table>
         </div>
 
+        <div class="callout callout-rule" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Foreground color is the affordance.</strong> Static and Interactive Rest share container surface and stroke &mdash; the distinguishing signal is the label / icon color. Static is neutral <code>Secondary</code>; Rest is brand <code>Interactive</code>. The trailing chevron is the second affordance signal, but the color shift is the primary one.
+        </div>
+
         <h3>Leading and trailing icons</h3>
-        <p>Icons inherit the label color via <code>Icon/Primary</code> on Static / Rest, and <code>Icon/On Accent</code> on Active. Avatars carry their own image content and are unaffected by state.</p>
+        <p>Icon roles follow the state's foreground token, not the Text token. The pairing is per-state:</p>
+        <ul style="margin: var(--sp-2) 0 0 var(--sp-5); font-size: 13px; line-height: 1.7; color: var(--c-text-secondary);">
+          <li><strong>Static</strong> &mdash; leading icon (when <code>Left image=Icon</code>) and icon-only icon bind to <code>Icon/Secondary</code>. Avatars carry their own image content and are unaffected by state.</li>
+          <li><strong>Interactive Rest</strong> &mdash; every icon (leading, trailing, icon-only) binds to <code>Icon/Interactive</code>.</li>
+          <li><strong>Interactive Active</strong> &mdash; every icon binds to <code>Icon/On Accent</code>.</li>
+        </ul>
       </section>
 
       <!-- ═══ 6. BEHAVIOR ═══ -->
@@ -4326,7 +4449,7 @@
         </div>
 
         <div class="callout callout-rule">
-          <strong>Interactive vs Static is about the affordance, not the styling.</strong> A Static badge with the same visual at rest as an Interactive Rest badge is still semantically a label &mdash; no tap target, no chevron. Use Interactive only when the badge opens a menu, filters a list, or otherwise responds to taps.
+          <strong>Interactive vs Static signals tappability through color and a chevron.</strong> The two share the same surface (<code>RaisedSecondary</code>) and stroke (<code>Container</code>) but diverge on foreground: Static is <code>Text/Secondary</code> (neutral grey), Rest is <code>Text/Interactive</code> (brand). Interactive also adds a trailing chevron. Use Interactive only when the badge opens a menu, filters a list, or otherwise responds to taps &mdash; the brand color is a tap-target promise.
         </div>
 
         <div class="callout callout-warn">
@@ -4341,33 +4464,33 @@
       <!-- ═══ 7. VARIANT MATRIX ═══ -->
       <section class="ds-section" id="badge-matrix">
         <h2>Variant matrix <a href="#badge-matrix" class="anchor">#</a></h2>
-        <p class="intro">All 20 published variants. Width is auto; only height is fixed by the Size axis.</p>
+        <p class="intro">All 20 published variants with their resolved color tokens and typography. Width is auto; height is fixed by Size (and by the Body 2 anomaly on Active &middot; Icon / None).</p>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Badge type</th><th>State</th><th>Size</th><th>Left image</th><th>Icon only</th><th>Surface</th><th>Stroke</th></tr>
+              <tr><th>Badge type</th><th>State</th><th>Size</th><th>Left image</th><th>Icon only</th><th>Surface</th><th>Stroke</th><th>Label / icon</th><th>Type</th></tr>
             </thead>
             <tbody>
-              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Avatar</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Icon</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Icon</td><td>True</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Default</td><td>None</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Avatar</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Icon</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Icon</td><td>True</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Small</td><td>None</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Avatar</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Icon</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Icon</td><td>True</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>None</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Avatar</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td></tr>
-              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Icon</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td></tr>
-              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Icon</td><td>True</td><td><code>Accent</code></td><td>&mdash;</td></tr>
-              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>None</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Avatar</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Icon</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Icon</td><td>True</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>None</td><td>False</td><td><code>RaisedPrimary</code></td><td><code>Divider</code></td></tr>
+              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Avatar</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code></td><td>Body 3</td></tr>
+              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Icon</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code> &middot; <code>Icon/Secondary</code></td><td>Body 3</td></tr>
+              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Icon</td><td>True</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Icon/Secondary</code></td><td>&mdash;</td></tr>
+              <tr><td>Static</td><td>N/A</td><td>Default</td><td>None</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code></td><td>Body 3</td></tr>
+              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Avatar</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code></td><td>Caption 2</td></tr>
+              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Icon</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code> &middot; <code>Icon/Secondary</code></td><td>Caption 2</td></tr>
+              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Icon</td><td>True</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Icon/Secondary</code></td><td>&mdash;</td></tr>
+              <tr><td>Static</td><td>N/A</td><td>Small</td><td>None</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code></td><td>Caption 2</td></tr>
+              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Avatar</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code></td><td>Body 3</td></tr>
+              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Icon</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code> &middot; <code>Icon/Interactive</code></td><td>Body 3</td></tr>
+              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Icon</td><td>True</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Icon/Interactive</code></td><td>&mdash;</td></tr>
+              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>None</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code></td><td>Body 3</td></tr>
+              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Avatar</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td><td><code>Text/On Accent</code></td><td>Body 3</td></tr>
+              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Icon</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td><td><code>Text/On Accent</code> &middot; <code>Icon/On Accent</code></td><td>Body 2 <em>(anomaly)</em></td></tr>
+              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Icon</td><td>True</td><td><code>Accent</code></td><td>&mdash;</td><td><code>Icon/On Accent</code></td><td>&mdash;</td></tr>
+              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>None</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td><td><code>Text/On Accent</code></td><td>Body 2 <em>(anomaly)</em></td></tr>
+              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Avatar</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code></td><td>Caption 2</td></tr>
+              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Icon</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code> &middot; <code>Icon/Interactive</code></td><td>Caption 2</td></tr>
+              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Icon</td><td>True</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Icon/Interactive</code></td><td>&mdash;</td></tr>
+              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>None</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code></td><td>Caption 2</td></tr>
             </tbody>
           </table>
         </div>
