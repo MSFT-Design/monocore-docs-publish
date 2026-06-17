@@ -5200,6 +5200,42 @@
           </table>
         </div>
 
+        <h3>Spacing ramp</h3>
+        <p>The full direction-agnostic ramp. Eight t-shirt sizes from <code>none</code> to <code>xxxlarge</code>, each step sitting on a multiple of <code>4</code> from <code>4</code> to <code>32</code> with <code>0</code> as the anchor. Use the same token whether you're spacing items vertically in a list or horizontally in a row.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Value</th><th>Use it for</th></tr></thead>
+            <tbody>
+              <tr><td><code>Size/none</code></td><td>0</td><td>Stacked elements that read as a single unit &mdash; avatar &amp; name, title &amp; subtitle with no breathing room.</td></tr>
+              <tr><td><code>Size/xsmall</code></td><td>4</td><td>The tightest meaningful gap. Inline labels and their adjacent icons.</td></tr>
+              <tr><td><code>Size/small</code></td><td>8</td><td>Groups that call for a tighter rhythm than the default. Compact rows, dense controls.</td></tr>
+              <tr><td><code>Size/medium</code></td><td>12</td><td>Default for grouped components stacked vertically. Accommodates the <code>prominent</code> (16) corner radius &mdash; adjacent corners don't collide.</td></tr>
+              <tr><td><code>Size/large</code></td><td>16</td><td>One step looser than the default. Section breaks within a larger group.</td></tr>
+              <tr><td><code>Size/xlarge</code></td><td>20</td><td>Stronger separation between content blocks.</td></tr>
+              <tr><td><code>Size/xxlarge</code></td><td>24</td><td>Hierarchy-level separation &mdash; between distinct content regions on a screen.</td></tr>
+              <tr><td><code>Size/xxxlarge</code></td><td>32</td><td>The widest standard gap. Top-of-screen padding, page-level section dividers.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Nudge</h3>
+        <p>A separate four-step ramp for fine alignment &mdash; the tiny offsets needed to optically center icons or align content with ghost buttons that have forced container padding. These sit on the off-beat between the main spacing values (2, 6, 10), giving designers a controlled set of micro-adjustments without inventing one-off numbers.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Value</th><th>Use it for</th></tr></thead>
+            <tbody>
+              <tr><td><code>Size/Nudge/none</code></td><td>0</td><td>The baseline &mdash; no adjustment.</td></tr>
+              <tr><td><code>Size/Nudge/small</code></td><td>2</td><td>The smallest visual nudge. Hairline alignment between icons and adjacent labels.</td></tr>
+              <tr><td><code>Size/Nudge/medium</code></td><td>6</td><td>Mid-range optical alignment &mdash; counteracting the forced padding inside an icon or ghost-button container.</td></tr>
+              <tr><td><code>Size/Nudge/large</code></td><td>10</td><td>The largest nudge. Used where a component's internal padding pushes content noticeably off-grid.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Spacing vs Nudge.</strong> Use <code>Size/*</code> for gaps between elements &mdash; this is most spacing. Use <code>Size/Nudge/*</code> for optical adjustments inside or against a component that has forced padding (an icon, a ghost button) where the standard ramp would over- or under-correct. If you're nudging anything that isn't an icon or ghost-padded container, you probably want a Spacing token instead.
+        </div>
+
         <div class="callout callout-rule" style="margin-top: var(--sp-4);">
           <strong>Group by meaning, scope by update target.</strong> Names organize tokens by the role they serve, and by the bundle that needs to change together. A radius token isn't called <code>16</code> &mdash; it carries the name of the role it represents, so refining the standard component radius across the system happens in one place.
         </div>
