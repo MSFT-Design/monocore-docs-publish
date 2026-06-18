@@ -1657,8 +1657,22 @@
     <div class="brand">Monocore Docs</div>
     <nav class="nav-links" aria-label="Primary">
       <div class="nav-section">
-        <div class="nav-section-label">Getting Started</div>
+        <div class="nav-section-label">Pipeline</div>
         <a href="#cold-start" data-link="cold-start" class="active">Cold Start Pipeline</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Semantic Surface System</div>
+        <a href="#surface-system" data-link="surface-system">Overview</a>
+        <a href="#text-icon" data-link="text-icon">Text &amp; Icon</a>
+        <a href="#theming" data-link="theming">Theming</a>
+        <a href="#l1l2-shifts" data-link="l1l2-shifts">Elevation</a>
+        <a href="#scaling-rules" data-link="scaling-rules">Scaling Rules</a>
+        <a href="#teams-migration" data-link="teams-migration">Teams Migration</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-label">Accessibility</div>
+        <a href="#a11y-text-icon" data-link="a11y-text-icon">Text &amp; Icon</a>
+        <a href="#a11y-stroke" data-link="a11y-stroke">Stroke</a>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Card Component</div>
@@ -1668,20 +1682,6 @@
       <div class="nav-section">
         <div class="nav-section-label">Badge Component</div>
         <a href="#badge-spec" data-link="badge-spec">Spec</a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-section-label">Semantic Surface System</div>
-        <a href="#surface-system" data-link="surface-system">Overview</a>
-        <a href="#text-icon" data-link="text-icon">Text &amp; Icon</a>
-        <a href="#theming" data-link="theming">Theming</a>
-        <a href="#l1l2-shifts" data-link="l1l2-shifts">L1 &harr; L2 Shifts</a>
-        <a href="#scaling-rules" data-link="scaling-rules">Scaling Rules</a>
-        <a href="#teams-migration" data-link="teams-migration">Teams Migration</a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-section-label">Accessibility</div>
-        <a href="#a11y-text-icon" data-link="a11y-text-icon">Text &amp; Icon</a>
-        <a href="#a11y-stroke" data-link="a11y-stroke">Stroke</a>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Reference</div>
@@ -4898,7 +4898,7 @@
         </div>
 
         <div class="callout callout-rule" style="margin-top: var(--sp-3);">
-          <strong>Overlay content must be set to L2.</strong> When a frame sits inside a <code>Surface/Overlay</code> &mdash; modal sheets, drawer content, the body of an alert &mdash; its mode must be set to Dark L2 (or Light L2). Overlay in dark mode resolves to the same value as Canvas L2 (<code>#1a1a1a</code>); leaving the modal content on Dark L1 causes nested surfaces to lose contrast against the Overlay, and <code>Surface/Containers/Primary/Base</code> becomes mathematically invisible (1.00:1 ratio). See the <a href="#l1l2-shifts" data-link="l1l2-shifts" style="font-weight: 500;">L1 &harr; L2 Shifts page</a> for the full diagram and the math.
+          <strong>Overlay content must be set to L2.</strong> When a frame sits inside a <code>Surface/Overlay</code> &mdash; modal sheets, drawer content, the body of an alert &mdash; its mode must be set to Dark L2 (or Light L2). Overlay in dark mode resolves to the same value as Canvas L2 (<code>#1a1a1a</code>); leaving the modal content on Dark L1 causes nested surfaces to lose contrast against the Overlay, and <code>Surface/Containers/Primary/Base</code> becomes mathematically invisible (1.00:1 ratio). See the <a href="#l1l2-shifts" data-link="l1l2-shifts" style="font-weight: 500;">Elevation page</a> for the full diagram and the math.
         </div>
       </section>
 
@@ -7837,8 +7837,8 @@
 
   <header class="docs-header">
     <div class="eyebrow">Surface System</div>
-    <h1>Mode-aware tokens &mdash; L1 &harr; L2 shifts</h1>
-    <p class="subtitle">Most semantic tokens resolve to the same value across L1 and L2 within a theme. This page lists the exceptions &mdash; the roles whose values change between L1 and L2 to preserve luminosity or maintain contrast as the canvas environment shifts.</p>
+    <h1>Elevation</h1>
+    <p class="subtitle">L1 and L2 are the two elevation tiers of the surface system &mdash; L1 is the root canvas, L2 is the elevated canvas (sheets, drawers, modals). Most semantic tokens resolve to the same value across both tiers within a theme. This page lists the exceptions &mdash; the roles whose values change between L1 and L2 to preserve luminosity or maintain contrast as the canvas environment shifts.</p>
     <div class="meta">
       <span>19 roles shift</span>
       <span>38 roles total</span>
@@ -8677,7 +8677,7 @@
 
   </div>
   <footer class="docs-footer">
-    Monocore &middot; Surface System &middot; L1 &harr; L2 shifts &middot; June 2026
+    Monocore &middot; Surface System &middot; Elevation &middot; June 2026
   </footer>
 
 </div>
