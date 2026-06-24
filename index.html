@@ -694,6 +694,12 @@
       color: var(--c-accent);
       border-left-color: var(--c-accent);
     }
+    .docs-toc a.active {
+      color: var(--c-accent);
+      border-left: 3px solid var(--c-accent);
+      padding-left: 11px;
+      font-weight: 600;
+    }
 
     /* ── Main Content ──────────────────────────────────── */
     .docs-main {
@@ -1260,6 +1266,12 @@
     .docs-toc a:hover {
       color: var(--c-accent);
       border-left-color: var(--c-accent);
+    }
+    .docs-toc a.active {
+      color: var(--c-accent);
+      border-left: 3px solid var(--c-accent);
+      padding-left: 11px;
+      font-weight: 600;
     }
 
     /* ── Sections ──────────────────────────────────────── */
@@ -5254,6 +5266,35 @@
           <strong>Spacing vs Nudge.</strong> Use <code>Size/*</code> for gaps between elements &mdash; this is most spacing. Use <code>Size/Nudge/*</code> for optical adjustments inside or against a component that has forced padding (an icon, a ghost button) where the standard ramp would over- or under-correct. If you're nudging anything that isn't an icon or ghost-padded container, you probably want a Spacing token instead.
         </div>
 
+        <h3>Combined &mdash; nudge + regular</h3>
+        <p>Figma's variable binding doesn't allow two variables added together in a single property, so when a designer needs a padding value that's <em>conceptually</em> a regular ramp step plus a nudge (e.g. an icon's internal 2dp nudge plus an 8dp gap to the next element), there's no way to express that as the sum of two bindings &mdash; it has to be one token. The combined ramp pre-computes the ten useful sums of nudge × regular and names each one with the formula so engineers and designers can both read the intent off the token.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Sum</th><th>Reads as</th></tr></thead>
+            <tbody>
+              <tr><td><code>Size/Combined/2ng + 4rg</code></td><td><code>6dp</code></td><td>Hairline nudge + xsmall gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 8rg</code></td><td><code>10dp</code></td><td>Hairline nudge + small gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 12rg</code></td><td><code>14dp</code></td><td>Hairline nudge + default medium gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 16rg</code></td><td><code>18dp</code></td><td>Hairline nudge + large gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 20rg</code></td><td><code>22dp</code></td><td>Hairline nudge + xlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 24rg</code></td><td><code>26dp</code></td><td>Hairline nudge + xxlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/6ng + 24rg</code></td><td><code>30dp</code></td><td>Mid-range nudge + xxlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 32rg</code></td><td><code>34dp</code></td><td>Hairline nudge + xxxlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/6ng + 32rg</code></td><td><code>38dp</code></td><td>Mid-range nudge + xxxlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/10ng + 32rg</code></td><td><code>42dp</code></td><td>Largest nudge + xxxlarge gap.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Naming convention.</strong> <code>{N}ng</code> is the nudge value in dp (<code>2ng</code>, <code>6ng</code>, <code>10ng</code> from the Nudge ramp). <code>{M}rg</code> is the regular ramp value in dp (<code>4rg</code> through <code>32rg</code> from the Spacing ramp). The token's resolved value is the sum, aliased to the corresponding <code>Size/{sum}dp</code> primitive.
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Deduplication rule &mdash; bigger rg wins.</strong> Several sums can be reached by more than one formula (e.g. <code>10dp</code> could be <code>2ng + 8rg</code> or <code>6ng + 4rg</code>). The published token at each sum uses the formula with the largest regular value, since that reads more naturally as "a real spacing step with a small nudge correction" than as "a tiny base step with heavy nudging." So <code>10dp</code> ships as <code>2ng + 8rg</code>, <code>14dp</code> as <code>2ng + 12rg</code>, and so on &mdash; one token per sum, no formula ambiguity.
+        </div>
+
         <div class="callout callout-rule" style="margin-top: var(--sp-4);">
           <strong>Group by meaning, scope by update target.</strong> Names organize tokens by the role they serve, and by the bundle that needs to change together. A radius token isn't called <code>16</code> &mdash; it carries the name of the role it represents, so refining the standard component radius across the system happens in one place.
         </div>
@@ -8728,6 +8769,8 @@ function switchTier(btn, tier) {
     history.replaceState(null, '', '#' + name);
     show(name);
     closeNav();
+    // After page switch, refresh scroll-spy on the new page
+    setTimeout(updateActiveSection, 50);
   }));
   if (toggle) toggle.addEventListener('click', () => {
     if (nav && nav.classList.contains('open')) closeNav(); else openNav();
@@ -8736,6 +8779,74 @@ function switchTier(btn, tier) {
 
   const initial = (location.hash || '#cold-start').replace('#','').split('/')[0];
   if (document.querySelector('.page[data-page="'+initial+'"]')) show(initial);
+
+  // ── Scroll-spy: highlight the current section in the right-side TOC ──
+  // The active state visual (brand-blue left border + bold text) is already styled
+  // on .docs-sidebar a.active and .docs-toc a.active. This wires the spy that adds
+  // the class as the user scrolls.
+  function updateActiveSection() {
+    const activePage = document.querySelector('.page.active');
+    if (!activePage) return;
+    const tocLinks = activePage.querySelectorAll('.docs-toc a[href^="#"]');
+    if (!tocLinks.length) return;
+
+    const HEADER_OFFSET = 120; // px from top before a section is considered "current"
+    let currentId = null;
+    const ordered = [];
+    tocLinks.forEach(link => {
+      const id = link.getAttribute('href').slice(1);
+      const section = document.getElementById(id);
+      if (section) ordered.push({ id, section, link });
+    });
+
+    // Find the last section whose top edge has scrolled above the header offset
+    for (const { id, section } of ordered) {
+      const top = section.getBoundingClientRect().top;
+      if (top <= HEADER_OFFSET) currentId = id;
+      else break;
+    }
+    // If we haven't scrolled past the first section yet, fall back to it
+    if (!currentId && ordered.length) currentId = ordered[0].id;
+    // If we've scrolled all the way to the bottom of the page, force the last one
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 4 && ordered.length) {
+      currentId = ordered[ordered.length - 1].id;
+    }
+
+    tocLinks.forEach(link => {
+      const linkId = link.getAttribute('href').slice(1);
+      link.classList.toggle('active', linkId === currentId);
+    });
+  }
+
+  // Allow TOC link clicks to immediately mark themselves active on click
+  document.addEventListener('click', e => {
+    const a = e.target.closest('.docs-toc a[href^="#"]');
+    if (!a) return;
+    const activePage = a.closest('.page');
+    if (activePage) {
+      activePage.querySelectorAll('.docs-toc a').forEach(l => l.classList.remove('active'));
+    }
+    a.classList.add('active');
+  });
+
+  let scrollRaf = null;
+  window.addEventListener('scroll', () => {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => {
+      updateActiveSection();
+      scrollRaf = null;
+    });
+  }, { passive: true });
+  window.addEventListener('resize', () => {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => {
+      updateActiveSection();
+      scrollRaf = null;
+    });
+  });
+
+  // Initial run after layout settles
+  setTimeout(updateActiveSection, 0);
 })();
 
 </script>
