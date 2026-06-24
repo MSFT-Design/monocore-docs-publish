@@ -1675,6 +1675,7 @@
       <div class="nav-section">
         <div class="nav-section-label">Semantic Surface System</div>
         <a href="#surface-system" data-link="surface-system">Overview</a>
+        <a href="#spacing" data-link="spacing">Spacing</a>
         <a href="#text-icon" data-link="text-icon">Text &amp; Icon</a>
         <a href="#theming" data-link="theming">Theming</a>
         <a href="#l1l2-shifts" data-link="l1l2-shifts">Elevation</a>
@@ -3765,8 +3766,8 @@
       </section>
 
       <!-- ═══ 5. LAYOUT & SPACING ═══ -->
-      <section class="ds-section" id="spacing">
-        <h2>Layout &amp; Spacing <a href="#spacing" class="anchor">#</a></h2>
+      <section class="ds-section" id="card-layout-spacing">
+        <h2>Layout &amp; Spacing <a href="#card-layout-spacing" class="anchor">#</a></h2>
         <p class="intro">All spacing values follow the Teams UI token system. Density only affects the outer card padding.</p>
 
         <div class="spacing-diagram">
@@ -3955,7 +3956,7 @@
         <a href="#variants">Variants</a>
         <a href="#composition">Composition</a>
         <a href="#properties">Properties</a>
-        <a href="#spacing">Layout &amp; Spacing</a>
+        <a href="#card-layout-spacing">Layout &amp; Spacing</a>
         <a href="#typography">Typography</a>
         <a href="#usage">Usage Examples</a>
         <a href="#implementation">Implementation</a>
@@ -5258,14 +5259,12 @@
         </div>
       </section>
 
-      <!-- 7. SHAPE & SPACING -->
-      <section class="spec-section" id="shape-spacing">
+      <!-- 7. SHAPE -->
+      <section class="spec-section" id="shape">
         <span class="section-eyebrow eyebrow-design">Foundations</span>
-        <h2>Shape &amp; Spacing <a href="#shape-spacing" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Two parallel scales govern how surfaces meet the eye: the radius applied to their corners, and the space between them. Both follow the same naming philosophy as the surface system &mdash; group by meaning, name by role, so the value behind a token can change in one place.</p>
+        <h2>Shape <a href="#shape" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Seven named radius tokens describe the curve's character on an intensity ladder. <code>prominent</code> (16) is the most-used radius &mdash; it covers most components. When components appear together, a shared radius makes them read as a family rather than a collection. Choose a wider radius only for the largest containers, and a smaller one only when a nested element needs to read as a step inside its parent.</p>
 
-        <h3>Corner radius</h3>
-        <p>Seven named tokens cover every component in the system. <code>prominent</code> (16) is the most-used radius &mdash; it covers most components. When components appear together, a shared radius makes them read as a family rather than a collection. Choose a wider radius only for the largest containers, and a smaller one only when a nested element needs to read as a step inside its parent.</p>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Token</th><th>Value</th><th>Use it for</th><th>Why</th></tr></thead>
@@ -5285,88 +5284,11 @@
           <strong>Naming note:</strong> the token named <code>default</code> resolves to <code>8</code>, not the most-used radius. <code>prominent</code> (16) is the most-used. The names describe the curve's <em>character</em> on the intensity ladder &mdash; not which value is the most-applied default. Reach for the role that matches your component's intent, not the token whose name says "default."
         </div>
 
-        <h3>Vertical spacing</h3>
-        <p>Grouped components sit <code>12</code> apart by default. The default corner radius needs room to breathe &mdash; <code>12</code> keeps adjacent surfaces from visually colliding at their curves. Step down to <code>8</code> when a tighter rhythm reads better. For vertically stacked text, use <code>0</code> or <code>2</code>.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Spacing</th><th>Use it for</th><th>Why</th></tr></thead>
-            <tbody>
-              <tr><td><code>12</code> &middot; default</td><td>Grouped components stacked vertically.</td><td>Accommodates the <code>16</code> radius &mdash; adjacent corners don't collide.</td></tr>
-              <tr><td><code>8</code></td><td>Groups that call for a tighter rhythm.</td><td>The next step down when <code>12</code> leaves too much air.</td></tr>
-              <tr><td><code>2</code></td><td>Vertically stacked text where the lines still need to separate visually.</td><td>A hairline gap &mdash; reads as paired but distinct.</td></tr>
-              <tr><td><code>0</code></td><td>Vertically stacked text that reads as a single unit &mdash; for example, an avatar &amp; name group.</td><td>No gap; the lines belong together.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Spacing ramp</h3>
-        <p>The full direction-agnostic ramp. Eight t-shirt sizes from <code>none</code> to <code>xxxlarge</code>, each step sitting on a multiple of <code>4</code> from <code>4</code> to <code>32</code> with <code>0</code> as the anchor. Use the same token whether you're spacing items vertically in a list or horizontally in a row.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Token</th><th>Value</th><th>Use it for</th></tr></thead>
-            <tbody>
-              <tr><td><code>Size/none</code></td><td>0</td><td>Stacked elements that read as a single unit &mdash; avatar &amp; name, title &amp; subtitle with no breathing room.</td></tr>
-              <tr><td><code>Size/xsmall</code></td><td>4</td><td>The tightest meaningful gap. Inline labels and their adjacent icons.</td></tr>
-              <tr><td><code>Size/small</code></td><td>8</td><td>Groups that call for a tighter rhythm than the default. Compact rows, dense controls.</td></tr>
-              <tr><td><code>Size/medium</code></td><td>12</td><td>Default for grouped components stacked vertically. Accommodates the <code>prominent</code> (16) corner radius &mdash; adjacent corners don't collide.</td></tr>
-              <tr><td><code>Size/large</code></td><td>16</td><td>One step looser than the default. Section breaks within a larger group.</td></tr>
-              <tr><td><code>Size/xlarge</code></td><td>20</td><td>Stronger separation between content blocks.</td></tr>
-              <tr><td><code>Size/xxlarge</code></td><td>24</td><td>Hierarchy-level separation &mdash; between distinct content regions on a screen.</td></tr>
-              <tr><td><code>Size/xxxlarge</code></td><td>32</td><td>The widest standard gap. Top-of-screen padding, page-level section dividers.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Nudge</h3>
-        <p>A separate four-step ramp for fine alignment &mdash; the tiny offsets needed to optically center icons or align content with ghost buttons that have forced container padding. These sit on the off-beat between the main spacing values (2, 6, 10), giving designers a controlled set of micro-adjustments without inventing one-off numbers.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Token</th><th>Value</th><th>Use it for</th></tr></thead>
-            <tbody>
-              <tr><td><code>Size/Nudge/none</code></td><td>0</td><td>The baseline &mdash; no adjustment.</td></tr>
-              <tr><td><code>Size/Nudge/small</code></td><td>2</td><td>The smallest visual nudge. Hairline alignment between icons and adjacent labels.</td></tr>
-              <tr><td><code>Size/Nudge/medium</code></td><td>6</td><td>Mid-range optical alignment &mdash; counteracting the forced padding inside an icon or ghost-button container.</td></tr>
-              <tr><td><code>Size/Nudge/large</code></td><td>10</td><td>The largest nudge. Used where a component's internal padding pushes content noticeably off-grid.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Spacing vs Nudge.</strong> Use <code>Size/*</code> for gaps between elements &mdash; this is most spacing. Use <code>Size/Nudge/*</code> for optical adjustments inside or against a component that has forced padding (an icon, a ghost button) where the standard ramp would over- or under-correct. If you're nudging anything that isn't an icon or ghost-padded container, you probably want a Spacing token instead.
-        </div>
-
-        <h3>Combined &mdash; nudge + regular</h3>
-        <p>Figma's variable binding doesn't allow two variables added together in a single property, so when a designer needs a padding value that's <em>conceptually</em> a regular ramp step plus a nudge (e.g. an icon's internal 2dp nudge plus an 8dp gap to the next element), there's no way to express that as the sum of two bindings &mdash; it has to be one token. The combined ramp pre-computes the ten useful sums of nudge × regular and names each one with the formula so engineers and designers can both read the intent off the token.</p>
-
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Token</th><th>Sum</th><th>Reads as</th></tr></thead>
-            <tbody>
-              <tr><td><code>Size/Combined/2ng + 4rg</code></td><td><code>6dp</code></td><td>Hairline nudge + xsmall gap.</td></tr>
-              <tr><td><code>Size/Combined/2ng + 8rg</code></td><td><code>10dp</code></td><td>Hairline nudge + small gap.</td></tr>
-              <tr><td><code>Size/Combined/2ng + 12rg</code></td><td><code>14dp</code></td><td>Hairline nudge + default medium gap.</td></tr>
-              <tr><td><code>Size/Combined/2ng + 16rg</code></td><td><code>18dp</code></td><td>Hairline nudge + large gap.</td></tr>
-              <tr><td><code>Size/Combined/2ng + 20rg</code></td><td><code>22dp</code></td><td>Hairline nudge + xlarge gap.</td></tr>
-              <tr><td><code>Size/Combined/2ng + 24rg</code></td><td><code>26dp</code></td><td>Hairline nudge + xxlarge gap.</td></tr>
-              <tr><td><code>Size/Combined/6ng + 24rg</code></td><td><code>30dp</code></td><td>Mid-range nudge + xxlarge gap.</td></tr>
-              <tr><td><code>Size/Combined/2ng + 32rg</code></td><td><code>34dp</code></td><td>Hairline nudge + xxxlarge gap.</td></tr>
-              <tr><td><code>Size/Combined/6ng + 32rg</code></td><td><code>38dp</code></td><td>Mid-range nudge + xxxlarge gap.</td></tr>
-              <tr><td><code>Size/Combined/10ng + 32rg</code></td><td><code>42dp</code></td><td>Largest nudge + xxxlarge gap.</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Naming convention.</strong> <code>{N}ng</code> is the nudge value in dp (<code>2ng</code>, <code>6ng</code>, <code>10ng</code> from the Nudge ramp). <code>{M}rg</code> is the regular ramp value in dp (<code>4rg</code> through <code>32rg</code> from the Spacing ramp). The token's resolved value is the sum, aliased to the corresponding <code>Size/{sum}dp</code> primitive.
-        </div>
-
-        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Deduplication rule &mdash; bigger rg wins.</strong> Several sums can be reached by more than one formula (e.g. <code>10dp</code> could be <code>2ng + 8rg</code> or <code>6ng + 4rg</code>). The published token at each sum uses the formula with the largest regular value, since that reads more naturally as "a real spacing step with a small nudge correction" than as "a tiny base step with heavy nudging." So <code>10dp</code> ships as <code>2ng + 8rg</code>, <code>14dp</code> as <code>2ng + 12rg</code>, and so on &mdash; one token per sum, no formula ambiguity.
-        </div>
-
         <div class="callout callout-rule" style="margin-top: var(--sp-4);">
           <strong>Group by meaning, scope by update target.</strong> Names organize tokens by the role they serve, and by the bundle that needs to change together. A radius token isn't called <code>16</code> &mdash; it carries the name of the role it represents, so refining the standard component radius across the system happens in one place.
         </div>
+
+        <p style="margin-top: var(--sp-4); font-size: 13px;">Spacing tokens (Size, Nudge, and the Combined nudge + regular ramp) live on their own page. See <a href="#spacing" data-link="spacing">Spacing</a>.</p>
       </section>
 
       <!-- 8. BEHAVIORAL RULES -->
@@ -5560,7 +5482,7 @@
         <a href="#modes">The Four Modes</a>
         <a href="#tokens">Full Token Table</a>
         <a href="#layers">Layered Architecture</a>
-        <a href="#shape-spacing">Shape &amp; Spacing</a>
+        <a href="#shape">Shape</a>
         <a href="#rules">Behavioral Rules</a>
         <a href="#workflow">Designer Workflow</a>
         <a href="#excluded">Intentionally Excluded</a>
@@ -5579,6 +5501,150 @@
 </div>
 
 
+</div>
+
+<!-- ═══════════ PAGE: Spacing ═══════════ -->
+<div class="page" id="page-spacing" data-page="spacing">
+<div class="docs-shell">
+
+  <!-- ── Masthead ────────────────────────────────────── -->
+  <header class="docs-header">
+    <div class="eyebrow">Semantic Surface System</div>
+    <h1>Spacing</h1>
+    <p class="subtitle">A direction-agnostic ramp for gaps between elements, a separate ramp for optical nudges against forced-padding containers, and a combined ramp that pre-computes the useful sums of the two &mdash; so Figma bindings stay one variable per property even when the intent is "regular step plus a nudge."</p>
+    <div class="meta">
+      <span>8 Size tokens</span>
+      <span>4 Nudge tokens</span>
+      <span>10 Combined tokens</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <!-- 1. Why -->
+      <section class="spec-section" id="spacing-why">
+        <span class="section-eyebrow eyebrow-design">Concept</span>
+        <h2>Why three ramps <a href="#spacing-why" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Most spacing decisions are about <em>gaps</em> &mdash; how far one element sits from the next. That's the Size ramp. But two other situations come up often enough to deserve their own scales: micro-adjustments to optically align content against a container that has forced padding (Nudge), and the case where Figma's one-variable-per-property limit forces a designer to pre-compute the sum of a Size and a Nudge as a single named token (Combined).</p>
+        <div class="callout callout-info">
+          <strong>Spacing vs Nudge.</strong> Use <code>Size/*</code> for gaps between elements &mdash; this is most spacing. Use <code>Size/Nudge/*</code> for optical adjustments inside or against a component that has forced padding (an icon, a ghost button) where the standard ramp would over- or under-correct. If you're nudging anything that isn't an icon or ghost-padded container, you probably want a Spacing token instead.
+        </div>
+      </section>
+
+      <!-- 2. Spacing ramp -->
+      <section class="spec-section" id="spacing-ramp">
+        <span class="section-eyebrow eyebrow-design">Foundations</span>
+        <h2>Spacing ramp <a href="#spacing-ramp" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The full direction-agnostic ramp. Eight t-shirt sizes from <code>none</code> to <code>xxxlarge</code>, each step sitting on a multiple of <code>4</code> from <code>4</code> to <code>32</code> with <code>0</code> as the anchor. Use the same token whether you're spacing items vertically in a list or horizontally in a row.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Value</th><th>Use it for</th></tr></thead>
+            <tbody>
+              <tr><td><code>Size/none</code></td><td>0</td><td>Stacked elements that read as a single unit &mdash; avatar &amp; name, title &amp; subtitle with no breathing room.</td></tr>
+              <tr><td><code>Size/xsmall</code></td><td>4</td><td>The tightest meaningful gap. Inline labels and their adjacent icons.</td></tr>
+              <tr><td><code>Size/small</code></td><td>8</td><td>Groups that call for a tighter rhythm than the default. Compact rows, dense controls.</td></tr>
+              <tr><td><code>Size/medium</code></td><td>12</td><td>Default for grouped components stacked vertically. Accommodates the <code>prominent</code> (16) corner radius &mdash; adjacent corners don't collide.</td></tr>
+              <tr><td><code>Size/large</code></td><td>16</td><td>One step looser than the default. Section breaks within a larger group.</td></tr>
+              <tr><td><code>Size/xlarge</code></td><td>20</td><td>Stronger separation between content blocks.</td></tr>
+              <tr><td><code>Size/xxlarge</code></td><td>24</td><td>Hierarchy-level separation &mdash; between distinct content regions on a screen.</td></tr>
+              <tr><td><code>Size/xxxlarge</code></td><td>32</td><td>The widest standard gap. Top-of-screen padding, page-level section dividers.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. Vertical spacing guidance -->
+      <section class="spec-section" id="spacing-vertical">
+        <span class="section-eyebrow eyebrow-design">Practice</span>
+        <h2>Vertical spacing &mdash; in practice <a href="#spacing-vertical" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Grouped components sit <code>12</code> apart by default. The default corner radius needs room to breathe &mdash; <code>12</code> keeps adjacent surfaces from visually colliding at their curves. Step down to <code>8</code> when a tighter rhythm reads better. For vertically stacked text, use <code>0</code> or <code>2</code>.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Spacing</th><th>Use it for</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td><code>12</code> &middot; default</td><td>Grouped components stacked vertically.</td><td>Accommodates the <code>16</code> radius &mdash; adjacent corners don't collide.</td></tr>
+              <tr><td><code>8</code></td><td>Groups that call for a tighter rhythm.</td><td>The next step down when <code>12</code> leaves too much air.</td></tr>
+              <tr><td><code>2</code></td><td>Vertically stacked text where the lines still need to separate visually.</td><td>A hairline gap &mdash; reads as paired but distinct.</td></tr>
+              <tr><td><code>0</code></td><td>Vertically stacked text that reads as a single unit &mdash; for example, an avatar &amp; name group.</td><td>No gap; the lines belong together.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 4. Nudge ramp -->
+      <section class="spec-section" id="spacing-nudge">
+        <span class="section-eyebrow eyebrow-design">Foundations</span>
+        <h2>Nudge <a href="#spacing-nudge" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">A separate four-step ramp for fine alignment &mdash; the tiny offsets needed to optically center icons or align content with ghost buttons that have forced container padding. These sit on the off-beat between the main spacing values (2, 6, 10), giving designers a controlled set of micro-adjustments without inventing one-off numbers.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Value</th><th>Use it for</th></tr></thead>
+            <tbody>
+              <tr><td><code>Size/Nudge/none</code></td><td>0</td><td>The baseline &mdash; no adjustment.</td></tr>
+              <tr><td><code>Size/Nudge/small</code></td><td>2</td><td>The smallest visual nudge. Hairline alignment between icons and adjacent labels.</td></tr>
+              <tr><td><code>Size/Nudge/medium</code></td><td>6</td><td>Mid-range optical alignment &mdash; counteracting the forced padding inside an icon or ghost-button container.</td></tr>
+              <tr><td><code>Size/Nudge/large</code></td><td>10</td><td>The largest nudge. Used where a component's internal padding pushes content noticeably off-grid.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. Combined ramp -->
+      <section class="spec-section" id="spacing-combined">
+        <span class="section-eyebrow eyebrow-impl">Reference</span>
+        <h2>Combined &mdash; nudge + regular <a href="#spacing-combined" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Figma's variable binding doesn't allow two variables added together in a single property, so when a designer needs a padding value that's <em>conceptually</em> a regular ramp step plus a nudge (e.g. an icon's internal 2dp nudge plus an 8dp gap to the next element), there's no way to express that as the sum of two bindings &mdash; it has to be one token. The combined ramp pre-computes the ten useful sums of nudge × regular and names each one with the formula so engineers and designers can both read the intent off the token.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Token</th><th>Sum</th><th>Reads as</th></tr></thead>
+            <tbody>
+              <tr><td><code>Size/Combined/2ng + 4rg</code></td><td><code>6dp</code></td><td>Hairline nudge + xsmall gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 8rg</code></td><td><code>10dp</code></td><td>Hairline nudge + small gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 12rg</code></td><td><code>14dp</code></td><td>Hairline nudge + default medium gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 16rg</code></td><td><code>18dp</code></td><td>Hairline nudge + large gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 20rg</code></td><td><code>22dp</code></td><td>Hairline nudge + xlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 24rg</code></td><td><code>26dp</code></td><td>Hairline nudge + xxlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/6ng + 24rg</code></td><td><code>30dp</code></td><td>Mid-range nudge + xxlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/2ng + 32rg</code></td><td><code>34dp</code></td><td>Hairline nudge + xxxlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/6ng + 32rg</code></td><td><code>38dp</code></td><td>Mid-range nudge + xxxlarge gap.</td></tr>
+              <tr><td><code>Size/Combined/10ng + 32rg</code></td><td><code>42dp</code></td><td>Largest nudge + xxxlarge gap.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Naming convention.</strong> <code>{N}ng</code> is the nudge value in dp (<code>2ng</code>, <code>6ng</code>, <code>10ng</code> from the Nudge ramp). <code>{M}rg</code> is the regular ramp value in dp (<code>4rg</code> through <code>32rg</code> from the Spacing ramp). The token's resolved value is the sum, aliased to the corresponding <code>Size/{sum}dp</code> primitive.
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
+          <strong>Deduplication rule &mdash; bigger rg wins.</strong> Several sums can be reached by more than one formula (e.g. <code>10dp</code> could be <code>2ng + 8rg</code> or <code>6ng + 4rg</code>). The published token at each sum uses the formula with the largest regular value, since that reads more naturally as "a real spacing step with a small nudge correction" than as "a tiny base step with heavy nudging." So <code>10dp</code> ships as <code>2ng + 8rg</code>, <code>14dp</code> as <code>2ng + 12rg</code>, and so on &mdash; one token per sum, no formula ambiguity.
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Sidebar / TOC ──────────────────────────────── -->
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#spacing-why">Why three ramps</a>
+        <a href="#spacing-ramp">Spacing ramp</a>
+        <a href="#spacing-vertical">Vertical spacing</a>
+        <a href="#spacing-nudge">Nudge</a>
+        <a href="#spacing-combined">Combined</a>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────── -->
+  <footer class="docs-footer">
+    Spacing &middot; Semantic Surface System &middot; 8 Size &middot; 4 Nudge &middot; 10 Combined
+  </footer>
+
+</div>
 </div>
 
 <div class="page" id="page-teams-migration" data-page="teams-migration">
