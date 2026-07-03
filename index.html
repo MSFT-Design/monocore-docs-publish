@@ -1681,6 +1681,7 @@
         <a href="#l1l2-shifts" data-link="l1l2-shifts">Elevation</a>
         <a href="#scaling-rules" data-link="scaling-rules">Scaling Rules</a>
         <a href="#teams-migration" data-link="teams-migration">Teams Migration</a>
+        <a href="#token-audit" data-link="token-audit">Windows mapping</a>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Accessibility</div>
@@ -8878,6 +8879,184 @@
 </div>
 </div>
 
+<div class="page" id="page-token-audit" data-page="token-audit">
+<style>
+  #page-token-audit .audit-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: var(--sp-3) 0 var(--sp-4);
+  }
+  #page-token-audit .audit-stat {
+    background: var(--c-surface, #fff);
+    border: 1px solid var(--c-border, #e0e0e0);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  #page-token-audit .audit-stat .num {
+    font-size: 22px; font-weight: 600; color: #1a1a1a;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  #page-token-audit .audit-stat .lbl {
+    font-size: 11px; color: var(--c-text-muted, #6b6b6b);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+  #page-token-audit .audit-stat.ok .num { color: #0e5d22; }
+  #page-token-audit .audit-stat.warn .num { color: #6b4f00; }
+  #page-token-audit .audit-stat.fail .num { color: #8b1414; }
+  #page-token-audit .audit-buckets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+    margin: var(--sp-2) 0 var(--sp-4);
+  }
+  #page-token-audit .audit-bucket {
+    background: #fafafa;
+    border: 1px solid #ececec;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12.5px;
+  }
+  #page-token-audit .audit-bucket .b-name {
+    font-weight: 600; color: #1a1a1a;
+    text-transform: capitalize;
+  }
+  #page-token-audit .audit-bucket .b-count {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    color: #6b6b6b; font-size: 11px;
+  }
+  #page-token-audit .audit-embed {
+    position: relative;
+    margin: var(--sp-3) 0 var(--sp-4);
+    border: 1px solid var(--c-border, #e0e0e0);
+    border-radius: 12px;
+    overflow: hidden;
+    height: 78vh;
+    min-height: 640px;
+    background: #fdfdfd;
+  }
+  #page-token-audit .audit-embed iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  #page-token-audit .audit-embed-toolbar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 8px 14px;
+    background: #f7f7f7;
+    border-bottom: 1px solid var(--c-border, #e0e0e0);
+    font-size: 12px; color: #4a4a4a;
+  }
+  #page-token-audit .audit-embed-toolbar a {
+    margin-left: auto;
+    color: #4f52b2; text-decoration: none;
+    font-weight: 500; font-size: 11.5px;
+  }
+  #page-token-audit .audit-embed-toolbar a:hover { text-decoration: underline; }
+</style>
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Migration</div>
+    <h1>Windows mapping</h1>
+    <p class="subtitle">277 tokens compared across Windows Fluent, Android Fluent, and the CXD-Variables Figma library. Each row maps the intent of a token (background, text, border, brand, status) to its concrete value in each platform, flags whether the light and dark values match, and notes whether the token exists in the shared Figma variable library. Use it to plan the Monocore migration &mdash; the tokens that pass on all three platforms are safe to consume as-is; the ones that don't are the migration backlog.</p>
+    <div class="meta">
+      <span>277 tokens</span>
+      <span>12 intent buckets</span>
+      <span>Cross-platform</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="audit-overview">
+        <span class="section-eyebrow eyebrow-impl">Method</span>
+        <h2>What's in this audit <a href="#audit-overview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each row is a single design intent (e.g. "background/surface", "text/primary", "border/interactive") paired with the token that expresses it in each platform. The <code>values_match</code> column reports whether the light and dark values are numerically identical across Windows and Android. The <code>in_figma_variables</code> column reports whether that intent is already represented in the CXD-Variables library. The audit doesn't attempt to unify tokens on its own &mdash; it produces the delta list that migration work is planned against.</p>
+
+        <h3 style="margin-top: var(--sp-3); font-size: 14px;">At a glance</h3>
+        <div class="audit-stats">
+          <div class="audit-stat"><div class="num">277</div><div class="lbl">Total tokens</div></div>
+          <div class="audit-stat ok"><div class="num">6</div><div class="lbl">Values match (Y)</div></div>
+          <div class="audit-stat fail"><div class="num">19</div><div class="lbl">Values differ (N)</div></div>
+          <div class="audit-stat warn"><div class="num">4</div><div class="lbl">Partial match</div></div>
+        </div>
+        <p style="font-size: 12.5px; color: #6b6b6b; margin-top: -8px;">The remaining 248 rows are either "&mdash;" (only exists in one platform, so there's nothing to compare) or blank. The high dash count reflects that most tokens in Windows and Android don't have a one-to-one twin on the other platform &mdash; the migration work is largely about deciding whether to bridge them.</p>
+
+        <h3 style="margin-top: var(--sp-3); font-size: 14px;">Breakdown by intent bucket</h3>
+        <div class="audit-buckets">
+          <div class="audit-bucket"><div class="b-name">Status &middot; generic</div><div class="b-count">90 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Background</div><div class="b-count">35 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Brand</div><div class="b-count">31 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Text</div><div class="b-count">27 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Border</div><div class="b-count">22 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Status</div><div class="b-count">17 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Component</div><div class="b-count">15 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Icon</div><div class="b-count">14 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Overlay</div><div class="b-count">10 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Interactive</div><div class="b-count">7 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">Presence</div><div class="b-count">6 tokens</div></div>
+          <div class="audit-bucket"><div class="b-name">AI</div><div class="b-count">3 tokens</div></div>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>How to read <code>values_match</code>.</strong> <code>Y</code> means the Windows and Android hex values are identical in both light and dark. <code>N</code> means they differ &mdash; a real cross-platform drift that migration needs to resolve. <code>Partial</code> means they match in one theme but not the other. <code>&mdash;</code> means the intent only has a token on one of the two platforms, so there's nothing to compare.
+        </div>
+        <div class="callout callout-info" style="margin-top: var(--sp-3);">
+          <strong>How to read <code>in_figma_variables</code>.</strong> The current audit uses <code>Unknown</code> as a default for rows that haven't been reconciled with CXD-Variables yet. Reconciling this column is the next planned pass &mdash; the tool's data model already supports the values <code>Yes</code>, <code>No</code>, and specific figma variable names, so it can be filled in as each intent gets mapped.
+        </div>
+      </section>
+
+      <section class="spec-section" id="audit-tool">
+        <span class="section-eyebrow eyebrow-design">Interactive audit</span>
+        <h2>Full audit &mdash; searchable <a href="#audit-tool" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The full 277-row audit is embedded below. Use the sidebar to filter by collection, the search box to jump to a specific token, and the columns to sort by any field. The tool is a self-contained page hosted at <code>token-audit.html</code>; opening it in a new tab gives you the full viewport if the embed feels cramped.</p>
+
+        <div class="audit-embed">
+          <div class="audit-embed-toolbar">
+            <span>Loaded from <code>token-audit.html</code> &middot; 277 rows &middot; searchable &amp; filterable</span>
+            <a href="token-audit.html" target="_blank" rel="noopener">Open in a new tab &nearr;</a>
+          </div>
+          <iframe src="token-audit.html" title="Cross-platform token audit &mdash; 277 rows"></iframe>
+        </div>
+
+        <div class="callout callout-rule">
+          <strong>The audit is a working document.</strong> Rows will change as tokens get consolidated in Figma, hardcoded uses get counted, and refresh actions get scheduled. Treat the embed as a live view &mdash; a stale audit page in the docs is worse than a fresh one on demand.
+        </div>
+      </section>
+
+      <section class="spec-section" id="audit-next">
+        <span class="section-eyebrow eyebrow-impl">Next steps</span>
+        <h2>Migration priorities <a href="#audit-next" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The audit isn't a plan on its own &mdash; it's the raw material for one. Three planning axes fall out of the data:</p>
+        <ol style="margin-top: var(--sp-2); padding-left: var(--sp-3); font-size: 13.5px; line-height: 1.7;">
+          <li><strong>Resolve the 19 hard mismatches first.</strong> The <code>N</code> rows are tokens where the same design intent resolves to different hex values on Windows and Android. Each one is either a bug (should be unified) or an intentional platform divergence (should be documented as such). Both outcomes require a decision.</li>
+          <li><strong>Fill in the <code>in_figma_variables</code> column.</strong> The 214 <code>Unknown</code> rows can be reconciled against CXD-Variables by intent. Once complete, the audit becomes a bridge table &mdash; every intent has either a Figma variable name or an explicit "not migrated yet" flag.</li>
+          <li><strong>Enumerate hardcoded uses.</strong> The <code>hardcoded_uses</code> column is currently <code>0</code> across the board. Populating it with actual occurrence counts (from a codebase scan) turns the audit into a prioritization tool &mdash; the intents with the most hardcoded uses become the highest-impact migration wins.</li>
+        </ol>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#audit-overview">What's in this audit</a>
+        <a href="#audit-tool">Full audit &mdash; searchable</a>
+        <a href="#audit-next">Migration priorities</a>
+      </nav>
+    </aside>
+
+  </div>
+  <footer class="docs-footer">
+    Monocore &middot; Windows mapping &middot; June 2026
+  </footer>
+
+</div>
+</div>
 <script>
 
 function switchTier(btn, tier) {

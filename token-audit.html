@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Token Audit</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --mono:'SF Mono','Cascadia Code','Consolas',monospace;
+  --bg:#ffffff;
+  --bg-sub:#f7f7f7;
+  --bg-hover:#f0f0f0;
+  --border:#e0e0e0;
+  --border-s:#ebebeb;
+  --text:#1a1a1a;
+  --text-m:#6b6b6b;
+  --text-s:#9e9e9e;
+  --accent:#1bc47d;
+  --accent-h:#17a86b;
+  --accent-text:#fff;
+  --sel-bg:#e6f9f1;
+  --sel-border:#1bc47d;
+  --col-name:240px;
+  --col-win:220px;
+  --col-and:220px;
+  --col-hc:160px;
+  --sb-w:200px;
+  --topbar:40px;
+  --row-h:36px;
+}
+
+body{font-family:var(--font);font-size:12px;color:var(--text);background:var(--bg);height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* ── TOP BAR ─────────────────────────────────────────────── */
+#topbar{
+  height:var(--topbar);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 12px;gap:8px;
+  flex-shrink:0;background:var(--bg);z-index:200;
+}
+#topbar-title{font-size:12px;font-weight:600;color:var(--text-m);white-space:nowrap}
+.sp{flex:1}
+#search-wrap{position:relative;display:flex;align-items:center}
+#search-wrap svg{position:absolute;left:8px;color:var(--text-s);pointer-events:none}
+#search{
+  width:180px;height:26px;border:1px solid var(--border);border-radius:5px;
+  padding:0 8px 0 28px;font-size:11px;font-family:var(--font);
+  outline:none;background:var(--bg-sub);color:var(--text);
+}
+#search:focus{border-color:#aaa;background:var(--bg)}
+.tbtn{
+  height:26px;padding:0 10px;border-radius:5px;font-size:11px;font-family:var(--font);
+  font-weight:500;cursor:pointer;border:1px solid var(--border);
+  white-space:nowrap;display:inline-flex;align-items:center;gap:4px;
+  background:var(--bg);color:var(--text-m);transition:background .1s;
+}
+.tbtn:hover{background:var(--bg-hover);color:var(--text)}
+.tbtn.primary{background:#1bc47d;color:#fff;border-color:#1bc47d}
+.tbtn.primary:hover{background:#17a86b;border-color:#17a86b}
+
+/* ── LAYOUT ──────────────────────────────────────────────── */
+#layout{flex:1;display:flex;overflow:hidden}
+
+/* ── SIDEBAR ─────────────────────────────────────────────── */
+#sidebar{
+  width:var(--sb-w);min-width:var(--sb-w);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  background:var(--bg);overflow:hidden;
+  transition:width .18s,min-width .18s;
+}
+#sidebar.collapsed{width:0;min-width:0;border-right:none}
+#sb-scroll{flex:1;overflow-y:auto;overflow-x:hidden}
+
+/* Collections section */
+.sb-section-head{
+  padding:10px 12px 4px;
+  font-size:10px;font-weight:600;color:var(--text-s);
+  text-transform:uppercase;letter-spacing:.06em;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.sb-collection{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:5px 12px;cursor:pointer;border-radius:0;
+  font-size:12px;color:var(--text);
+  border-left:2px solid transparent;
+  transition:background .1s;user-select:none;
+}
+.sb-collection:hover{background:var(--bg-sub)}
+.sb-collection.active{
+  background:var(--sel-bg);border-left-color:var(--sel-border);
+  color:var(--text);font-weight:500;
+}
+.sb-collection-count{font-size:11px;color:var(--text-s)}
+.sb-collection.active .sb-collection-count{color:var(--accent)}
+
+/* Groups section */
+.sb-divider{height:1px;background:var(--border);margin:6px 0}
+
+.sb-group-head{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 12px;cursor:pointer;
+  font-size:12px;color:var(--text-m);font-weight:500;
+  transition:background .1s;user-select:none;
+  border-left:2px solid transparent;
+}
+.sb-group-head:hover{background:var(--bg-sub);color:var(--text)}
+.sb-group-head.active{
+  background:var(--sel-bg);border-left-color:var(--sel-border);
+  color:var(--text);font-weight:600;
+}
+.sb-group-head .cnt{margin-left:auto;font-size:11px;color:var(--text-s);font-weight:400}
+.sb-group-head.active .cnt{color:var(--accent)}
+
+/* Future folder items */
+.sb-future-head{
+  padding:10px 12px 4px;
+  font-size:10px;font-weight:600;color:var(--text-s);
+  text-transform:uppercase;letter-spacing:.06em;margin-top:4px;
+}
+.sb-future-item{
+  display:flex;align-items:center;gap:7px;
+  padding:5px 12px;opacity:.4;cursor:default;user-select:none;
+}
+.sb-future-label{font-size:12px;color:var(--text-m)}
+.sb-future-badge{
+  font-size:9px;background:var(--border);color:var(--text-s);
+  padding:1px 5px;border-radius:4px;text-transform:uppercase;letter-spacing:.04em;margin-left:auto;
+}
+
+/* ── MAIN AREA ────────────────────────────────────────────── */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+
+/* Column header bar */
+#col-header{
+  height:32px;border-bottom:1px solid var(--border);
+  display:flex;align-items:stretch;flex-shrink:0;
+  background:var(--bg);position:sticky;top:0;z-index:50;
+}
+.ch{
+  display:flex;align-items:center;padding:0 12px;
+  font-size:11px;font-weight:600;color:var(--text-s);
+  text-transform:uppercase;letter-spacing:.04em;
+  border-right:1px solid var(--border-s);flex-shrink:0;
+}
+.ch-name{width:var(--col-name);flex-shrink:0}
+.ch-win{width:var(--col-win);flex-shrink:0}
+.ch-and{width:var(--col-and);flex-shrink:0}
+.ch-hc{width:var(--col-hc);flex-shrink:0}
+.ch-notes{flex:1;min-width:0;border-right:none}
+
+/* Table scroll area */
+#tw{flex:1;overflow:auto}
+
+/* Group headers (e.g. "Neutral / Background / 1") */
+.group-row{
+  display:flex;align-items:center;
+  height:28px;padding:0 12px;
+  background:var(--bg-sub);
+  border-bottom:1px solid var(--border-s);
+  cursor:pointer;user-select:none;
+}
+.group-row:hover{background:var(--bg-hover)}
+.group-arrow{font-size:9px;color:var(--text-s);margin-right:6px;transition:transform .15s;flex-shrink:0}
+.group-row.collapsed .group-arrow{transform:rotate(-90deg)}
+.group-path{font-size:11px;color:var(--text-m)}
+.group-path em{color:var(--text);font-style:normal;font-weight:500}
+.group-count{margin-left:8px;font-size:10px;color:var(--text-s)}
+
+/* Token row */
+.token-row{
+  display:flex;align-items:stretch;
+  min-height:var(--row-h);
+  border-bottom:1px solid var(--border-s);
+  transition:background .08s;
+}
+.token-row:hover{background:var(--bg-sub)}
+.token-row:hover .del-btn{opacity:1}
+.token-row.editing-row{background:#fafaff}
+
+/* Name cell */
+.cell-name{
+  width:var(--col-name);flex-shrink:0;
+  display:flex;align-items:center;gap:8px;
+  padding:0 12px;border-right:1px solid var(--border-s);
+  align-self:stretch;
+}
+.cell-act{align-self:stretch;display:flex;align-items:center;justify-content:center}
+.state-label{font-size:12px;color:var(--text)}
+.plt-pills{display:flex;gap:3px;margin-left:auto;align-items:center}
+
+/* Platform picker hover */
+.plt-opt:hover{background:var(--bg-sub)}
+
+/* Settings dropdown */
+#settings-wrap{position:relative}
+#settings-drop{
+  position:absolute;top:calc(100% + 4px);right:0;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:7px;box-shadow:0 4px 16px rgba(0,0,0,.1);
+  padding:6px 0;min-width:190px;z-index:300;display:none;
+}
+#settings-drop.open{display:block}
+.sd-head{
+  padding:4px 12px 2px;font-size:10px;font-weight:600;
+  color:var(--text-s);text-transform:uppercase;letter-spacing:.06em;
+}
+.sd-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 12px;font-size:12px;color:var(--text);gap:12px;
+  cursor:default;user-select:none;
+}
+.sd-item:hover{background:var(--bg-sub)}
+/* toggle switch */
+.toggle{position:relative;width:28px;height:16px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-track{
+  position:absolute;inset:0;border-radius:8px;
+  background:#d1d5db;transition:background .15s;cursor:pointer;
+}
+.toggle input:checked + .toggle-track{background:var(--accent)}
+.toggle-thumb{
+  position:absolute;top:2px;left:2px;
+  width:12px;height:12px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);
+  transition:transform .15s;pointer-events:none;
+}
+.toggle input:checked ~ .toggle-thumb{transform:translateX(12px)}
+.plt{font-size:9px;font-weight:700;text-transform:uppercase;padding:1px 5px;border-radius:3px;letter-spacing:.02em;cursor:pointer;transition:opacity .1s}
+.plt:hover{opacity:.65}
+.plt-w{background:#dbeafe;color:#1e40af}
+.plt-a{background:#dcfce7;color:#166534}
+.plt-b{background:#f3e8ff;color:#6b21a8}
+/* "+Win"/"+And" add-platform affordance */
+.plt-add{
+  font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;
+  padding:1px 5px;border-radius:3px;cursor:pointer;
+  border:1px dashed var(--border-s);color:var(--text-s);
+  background:transparent;display:none;line-height:inherit;
+}
+.token-row:hover .plt-add{display:inline-block}
+.plt-add:hover{border-color:#6366f1;color:#6366f1;background:#f5f3ff}
+
+/* Colour cells */
+.cell-win,.cell-and,.cell-hc{
+  width:var(--col-win);flex-shrink:0;
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  padding:6px 12px;border-right:1px solid var(--border-s);
+  cursor:pointer;
+}
+.cell-and{width:var(--col-and)}
+.cell-hc{width:var(--col-hc)}
+.cell-win:hover,.cell-and:hover,.cell-hc:hover{background:#f5f5ff!important}
+.clr-row{display:flex;align-items:center;gap:8px}
+.swatch{
+  width:14px;height:14px;border-radius:2px;flex-shrink:0;
+  border:1px solid rgba(0,0,0,.08);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect width='4' height='4' fill='%23d0d0d0'/%3E%3Crect x='4' y='4' width='4' height='4' fill='%23d0d0d0'/%3E%3C/svg%3E");
+  background-size:8px;position:relative;overflow:hidden;
+}
+.sf{position:absolute;inset:0}
+.clr-txt{font-family:var(--mono);font-size:11px;color:var(--text-m)}
+.token-name-line{
+  font-family:var(--mono);font-size:10px;color:var(--text-s);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  max-width:100%;padding-left:1px;
+}
+.empty-val{font-size:11px;color:var(--text-s)}
+
+/* Notes cell */
+.cell-notes{
+  flex:1;min-width:0;padding:0 12px;
+  display:flex;align-items:center;height:100%;cursor:text;
+  border-right:none;
+}
+.notes-text{
+  font-size:11px;color:var(--text-m);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+/* Action cell */
+.cell-act{
+  width:32px;flex-shrink:0;display:flex;align-items:center;
+  justify-content:center;height:100%;
+}
+.del-btn{
+  width:20px;height:20px;border-radius:3px;border:none;
+  background:transparent;cursor:pointer;color:var(--text-s);
+  font-size:14px;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .1s,background .1s;
+}
+.del-btn:hover{background:#fee2e2;color:#991b1b}
+
+/* INLINE EDITING */
+.cell-edit-input{
+  width:100%;border:none;outline:none;
+  font-size:11px;font-family:var(--mono);
+  background:transparent;color:var(--text);
+  padding:0;
+}
+.cell-editing{
+  outline:1.5px solid #6366f1;outline-offset:-1px;
+  background:#f5f3ff!important;
+  border-radius:2px;
+}
+
+/* Drag and drop */
+.token-row[draggable]{cursor:grab}
+.token-row[draggable]:active{cursor:grabbing}
+.token-row.drag-over-above{box-shadow:inset 0 2px 0 0 #6366f1}
+.token-row.drag-over-below{box-shadow:inset 0 -2px 0 0 #6366f1}
+.token-row.dragging{opacity:.35}
+
+/* Intent editing (name cell) */
+.intent-input{
+  width:100%;border:none;outline:none;
+  font-size:12px;font-family:var(--mono);
+  background:transparent;color:var(--text);
+}
+
+/* Add row */
+.add-row{
+  display:flex;align-items:center;padding:6px 12px;
+  cursor:pointer;color:var(--text-s);font-size:11px;
+  border-bottom:1px solid var(--border-s);
+  gap:5px;transition:all .1s;
+}
+.add-row:hover{background:var(--bg-sub);color:#6366f1}
+
+/* Match badge (compact, in name cell) */
+.mb{
+  font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;
+  cursor:pointer;user-select:none;flex-shrink:0;
+}
+.mb-y{background:#d1fae5;color:#065f46}
+.mb-n{background:#fee2e2;color:#991b1b}
+.mb-p{background:#fef3c7;color:#92400e}
+.mb-d,.mb-u{background:#f3f4f6;color:#6b7280}
+
+/* Status bar */
+#statusbar{
+  height:24px;border-top:1px solid var(--border);
+  display:flex;align-items:center;padding:0 12px;gap:14px;
+  flex-shrink:0;background:var(--bg);
+}
+.stat{font-size:11px;color:var(--text-s);display:flex;align-items:center;gap:4px}
+.stat-dot{width:7px;height:7px;border-radius:50%}
+
+/* Token name tooltip on hover */
+.token-name-tip{font-size:10px;color:var(--text-s);font-family:var(--mono)}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div id="topbar">
+  <button class="tbtn" id="sb-toggle" style="width:26px;padding:0;justify-content:center;font-size:15px" title="Toggle sidebar">&#9776;</button>
+  <span id="topbar-title">Variables</span>
+  <span id="save-ind" style="font-size:11px;color:var(--accent);opacity:0;transition:opacity .4s;margin-left:4px">Saved</span>
+  <div class="sp"></div>
+  <div id="search-wrap">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="5" cy="5" r="3.5" stroke="currentColor" stroke-width="1.2"/><path d="M8 8l2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    <input id="search" type="search" placeholder="Search">
+  </div>
+  <div id="add-token-wrap" style="position:relative">
+    <button class="tbtn" id="add-token-btn">+ Add token</button>
+    <div id="add-token-drop" style="display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--bg);border:1px solid var(--border);border-radius:7px;box-shadow:0 4px 16px rgba(0,0,0,.1);padding:6px 0;min-width:150px;z-index:300">
+      <div style="padding:4px 12px 2px;font-size:10px;font-weight:600;color:var(--text-s);text-transform:uppercase;letter-spacing:.06em">Platform</div>
+      <div class="plt-opt" data-plt="both"  style="display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;font-size:12px;color:var(--text)"><span class="plt plt-b">Both</span> Windows + Android</div>
+      <div class="plt-opt" data-plt="win"   style="display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;font-size:12px;color:var(--text)"><span class="plt plt-w">Win</span> Windows only</div>
+      <div class="plt-opt" data-plt="and"   style="display:flex;align-items:center;gap:8px;padding:7px 12px;cursor:pointer;font-size:12px;color:var(--text)"><span class="plt plt-a">And</span> Android only</div>
+    </div>
+  </div>
+  <div id="settings-wrap">
+    <button class="tbtn" id="settings-btn" title="Settings">⚙ Settings</button>
+    <div id="settings-drop">
+      <div class="sd-head">Data</div>
+      <div class="sd-item" style="cursor:pointer" id="sd-reset">
+        <span>Reset to original data</span>
+        <span style="font-size:11px;color:var(--text-s)">↺</span>
+      </div>
+      <div style="height:1px;background:var(--border);margin:4px 0"></div>
+      <div class="sd-head">Display</div>
+      <div class="sd-item">
+        <span>Windows badge</span>
+        <label class="toggle">
+          <input type="checkbox" id="tog-win" checked>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+      </div>
+      <div class="sd-item">
+        <span>Android badge</span>
+        <label class="toggle">
+          <input type="checkbox" id="tog-and" checked>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+      </div>
+    </div>
+  </div>
+  <button class="tbtn" id="import-btn">↑ Import</button>
+  <input type="file" id="import-file" accept=".csv" style="display:none">
+  <button class="tbtn" id="save-html-btn">↓ Save as HTML</button>
+  <button class="tbtn primary" id="export-btn">↓ Export CSV</button>
+</div>
+
+<!-- LAYOUT -->
+<div id="layout">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div id="sb-scroll">
+      <div class="sb-section-head">Collections</div>
+      <div id="sb-collections"></div>
+      <div class="sb-divider"></div>
+      <div class="sb-section-head" style="display:flex;align-items:center">
+        Groups
+        <svg style="margin-left:auto;color:var(--text-s)" width="12" height="12" viewBox="0 0 12 12" fill="none"><line x1="2" y1="3" x2="10" y2="3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="2" y1="6" x2="10" y2="6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><line x1="2" y1="9" x2="7" y2="9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div id="sb-groups"></div>
+
+      <!-- Future placeholders -->
+      <div class="sb-divider" style="margin-top:8px"></div>
+      <div class="sb-future-head">Coming soon</div>
+      <div id="sb-future"></div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main">
+    <!-- Column headers -->
+    <div id="col-header">
+      <div class="ch ch-name">Name</div>
+      <div class="ch ch-win">Windows</div>
+      <div class="ch ch-and">Android</div>
+      <div class="ch ch-hc">HC</div>
+      <div class="ch ch-notes">Notes</div>
+    </div>
+    <div id="tw"></div>
+
+    <!-- Status bar -->
+    <div id="statusbar">
+      <span class="stat"><span class="stat-dot" style="background:#d1fae5;border:1px solid #065f46"></span><span id="s-y">0</span></span>
+      <span class="stat"><span class="stat-dot" style="background:#fef3c7;border:1px solid #92400e"></span><span id="s-p">0</span></span>
+      <span class="stat"><span class="stat-dot" style="background:#fee2e2;border:1px solid #991b1b"></span><span id="s-n">0</span></span>
+      <span class="stat"><span class="stat-dot" style="background:#f3f4f6;border:1px solid #6b7280"></span><span id="s-d">0</span></span>
+      <div class="sp"></div>
+      <span class="stat" id="s-visible"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+const RAW = [{"intent": "background/surface", "windows_token_name": "Neutral.Background.1.Rest", "android_token_name": "Surface.Primary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#292929", "android_value_dark": "#000000", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows mid-dark grey; Android pure black. Different dark mode philosophies.", "windows_value_hc": "#000000"}, {"intent": "background/surface-selected", "windows_token_name": "Neutral.Background.1.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#383838", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. No Android match.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-raised", "windows_token_name": "Neutral.Background.2.Rest", "android_token_name": "Surface.Raised Fill", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#242424", "android_value_dark": "#292929", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows Background.2 slightly elevated; Android Surface.Raised Fill explicit. Values differ.", "windows_value_hc": "#000000"}, {"intent": "background/surface-raised-hover", "windows_token_name": "Neutral.Background.2.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#383838", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Android has no hover state tokens.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-raised-pressed", "windows_token_name": "Neutral.Background.2.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#1A1A1A", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Android has no pressed state tokens.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-raised-selected", "windows_token_name": "Neutral.Background.2.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#333333", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-inset", "windows_token_name": "Neutral.Background.3.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#1F1F1F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Third elevation level; no Android equivalent.", "windows_value_hc": "#000000"}, {"intent": "background/surface-inset-hover", "windows_token_name": "Neutral.Background.3.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#333333", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-inset-pressed", "windows_token_name": "Neutral.Background.3.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#141414", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-inset-selected", "windows_token_name": "Neutral.Background.3.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#2E2E2E", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-deep", "windows_token_name": "Neutral.Background.4.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#141414", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Fourth elevation level.", "windows_value_hc": "#000000"}, {"intent": "background/surface-deepest", "windows_token_name": "Neutral.Background.5.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#0A0A0A", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Fifth elevation level.", "windows_value_hc": "#000000"}, {"intent": "background/surface-layer-6", "windows_token_name": "Neutral.Background.6.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#333333", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Sixth elevation level.", "windows_value_hc": "#000000"}, {"intent": "background/surface-inverted", "windows_token_name": "Neutral.Background.Inverted.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Inverted (light) surface in dark mode.", "windows_value_hc": "#000000"}, {"intent": "background/surface-static", "windows_token_name": "Neutral.Background.Static.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#3D3D3D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Static background that doesn't adapt to theme.", "windows_value_hc": "#000000"}, {"intent": "background/stencil-1", "windows_token_name": "Neutral.Background.Stencil.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#575757", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Used for skeleton/loading placeholder fills.", "windows_value_hc": "#FFFFFF"}, {"intent": "background/stencil-2", "windows_token_name": "Neutral.Background.Stencil.2.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#333333", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Secondary skeleton fill.", "windows_value_hc": "#FFFFFF"}, {"intent": "background/shell-canvas", "windows_token_name": "Teams custom.Shell.Background.Canvas", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#1F1F1F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. App shell canvas background.", "windows_value_hc": "#202020"}, {"intent": "background/surface-subtle-rest", "windows_token_name": "Neutral.Background.Subtle.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#000000", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Transparent/ghost background for low-emphasis containers.", "windows_value_hc": "#FFFFFF"}, {"intent": "background/surface-subtle-hover", "windows_token_name": "Neutral.Background.Subtle.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#383838", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-subtle-pressed", "windows_token_name": "Neutral.Background.Subtle.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#2E2E2E", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-subtle-selected", "windows_token_name": "Neutral.Background.Subtle.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#333333", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "background/overlay-scrollbar", "windows_token_name": "Neutral.Background.Overlay.Scrollbar.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Scrollbar track overlay colour.", "windows_value_hc": "#FFFFFF"}, {"intent": "background/overlay", "windows_token_name": "Neutral.Background.Overlay.Rest", "android_token_name": "Transparent.Black Overlay dark", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#000000", "android_value_dark": "#000000", "values_match": "Y", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both #000000. Opacity handled separately via alpha.", "windows_value_hc": "#000000"}, {"intent": "background/surface-dominant", "windows_token_name": "", "android_token_name": "Surface.Dominant", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-secondary", "windows_token_name": "", "android_token_name": "Surface.Secondary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-tertiary", "windows_token_name": "", "android_token_name": "Surface.Tertiary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23141414", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-quaternary", "windows_token_name": "", "android_token_name": "Surface.Quaternary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23404040", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-alt-raised", "windows_token_name": "", "android_token_name": "Surface.Alt Raised fill", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23212121", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-subtle", "windows_token_name": "", "android_token_name": "Surface.Subtle Fill", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23292929", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-alt", "windows_token_name": "", "android_token_name": "Surface.Alt Fill", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23292929", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-subtle-base", "windows_token_name": "", "android_token_name": "Surface.Subtle Base", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23141414", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-accent", "windows_token_name": "", "android_token_name": "Surface.Accent", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%237F85F5", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "background/surface-hover", "windows_token_name": "Neutral.Background.1.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#3D3D3D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Used for hoverable surface areas (e.g. cards in pointer contexts).", "windows_value_hc": "#1AEBFF"}, {"intent": "background/surface-pressed", "windows_token_name": "Neutral.Background.1.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#1F1F1F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "text/primary", "windows_token_name": "Neutral.Foreground.1.Rest", "android_token_name": "Text.Primary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "#E1E1E1", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows pure white; Android near-white. Different primary text values.", "windows_value_hc": "#FFFFFF"}, {"intent": "text/dominant", "windows_token_name": "", "android_token_name": "Text.Dominant", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23FFFFFF", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "text/secondary", "windows_token_name": "Neutral.Foreground.2.Rest", "android_token_name": "Text.Secondary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D6D6D6", "android_value_dark": "#919191", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows secondary text much lighter than Android.", "windows_value_hc": "#FFFFFF"}, {"intent": "text/secondary-hover", "windows_token_name": "Neutral.Foreground.2.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#000000"}, {"intent": "text/secondary-pressed", "windows_token_name": "Neutral.Foreground.2.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#000000"}, {"intent": "text/secondary-selected", "windows_token_name": "Neutral.Foreground.2.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#000000"}, {"intent": "text/secondary-brand-hover", "windows_token_name": "Neutral.Foreground.2.Brand.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Secondary text shifts to brand colour on hover in some contexts.", "windows_value_hc": "#000000"}, {"intent": "text/secondary-brand-pressed", "windows_token_name": "Neutral.Foreground.2.Brand.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7579EB", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#000000"}, {"intent": "text/secondary-brand-selected", "windows_token_name": "Neutral.Foreground.2.Brand.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#000000"}, {"intent": "text/quaternary", "windows_token_name": "Neutral.Foreground.4.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#999999", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Fourth level of text hierarchy.", "windows_value_hc": "#FFFFFF"}, {"intent": "text/hint", "windows_token_name": "", "android_token_name": "Text.Hint", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23919191", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "text/disabled", "windows_token_name": "Neutral.Foreground.Disabled.Rest", "android_token_name": "Text.Disabled", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#5C5C5C", "android_value_dark": "#404040", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows #5C5C5C; Android #404040 (darker).", "windows_value_hc": "#3FF23F"}, {"intent": "text/on-brand", "windows_token_name": "Neutral.Foreground.On Brand.Rest", "android_token_name": "Text.On Global", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "#FFFFFF", "values_match": "Y", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Exact match. Android uses \"On Global\" terminology.", "windows_value_hc": "#000000"}, {"intent": "text/on-accent", "windows_token_name": "Neutral.Foreground.Inverted.1.Rest", "android_token_name": "Text.On Accent", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#242424", "android_value_dark": "#000000", "values_match": "Partial", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both dark for contrast on accent fills. Windows #242424 vs Android #000000.", "windows_value_hc": "#000000"}, {"intent": "text/static", "windows_token_name": "Neutral.Foreground.Static.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#242424", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Colour that does not adapt to theme switching.", "windows_value_hc": "#000000"}, {"intent": "text/static-inverted", "windows_token_name": "Neutral.Foreground.Static.Inverted.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#FFFFFF"}, {"intent": "text/link-inverted", "windows_token_name": "Neutral.Foreground.Inverted.Link.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Link text on dark/brand backgrounds.", "windows_value_hc": "#FFFF00"}, {"intent": "text/link", "windows_token_name": "Brand.Foreground.Link.Rest", "android_token_name": "Text.Link", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "#7F85F5", "values_match": "Y", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Exact match.", "windows_value_hc": "#FFFF00"}, {"intent": "text/link-hover", "windows_token_name": "Brand.Foreground.Link.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9299F7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Android has no hover state tokens.", "windows_value_hc": "#FFFF00"}, {"intent": "text/link-pressed", "windows_token_name": "Brand.Foreground.Link.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7579EB", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#FFFF00"}, {"intent": "text/link-selected", "windows_token_name": "Brand.Foreground.Link.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#FFFF00"}, {"intent": "text/interactive", "windows_token_name": "", "android_token_name": "Text.Interactive", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%237F85F5", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "text/assistive", "windows_token_name": "", "android_token_name": "Text.Assistive", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%237F85F5", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "text/alt-secondary", "windows_token_name": "", "android_token_name": "Text.Alt Secondary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23919191", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "text/highlight-background", "windows_token_name": "", "android_token_name": "Text.Highlighted Background", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%233D3E78", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "text/highlight-foreground", "windows_token_name": "", "android_token_name": "Text.Highlighted Foreground", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23E1E1E1", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "text/caret", "windows_token_name": "", "android_token_name": "Text.Carret", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%237F85F5", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/default", "windows_token_name": "Neutral.Foreground.2.Rest", "android_token_name": "Icon.Primary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D6D6D6", "android_value_dark": "#E1E1E1", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows has no dedicated icon token; Foreground.2 is closest. Android has explicit Icon.Primary.", "windows_value_hc": "#FFFFFF"}, {"intent": "icon/dominant", "windows_token_name": "", "android_token_name": "Icon.Dominant", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23FFFFFF", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/subtle", "windows_token_name": "Neutral.Foreground.3.Rest", "android_token_name": "Icon.Secondary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#ADADAD", "android_value_dark": "#6E6E6E", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Semantically aligned but values diverge significantly. Android is much darker.", "windows_value_hc": "#FFFFFF"}, {"intent": "icon/hint", "windows_token_name": "", "android_token_name": "Icon.Hint", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%236E6E6E", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/disabled", "windows_token_name": "", "android_token_name": "Icon.Disabled", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23404040", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/on-brand", "windows_token_name": "Neutral.Foreground.On Brand.Rest", "android_token_name": "Icon.On Global", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "#FFFFFF", "values_match": "Y", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Exact match. Android has dedicated icon-level token.", "windows_value_hc": "#000000"}, {"intent": "icon/on-accent", "windows_token_name": "", "android_token_name": "Icon.On Accent", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/interactive", "windows_token_name": "", "android_token_name": "Icon.Interactive", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%237F85F5", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/success", "windows_token_name": "", "android_token_name": "Icon.Success", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%230EB244", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/warning", "windows_token_name": "", "android_token_name": "Icon.Warning", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23FFB900", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/danger", "windows_token_name": "", "android_token_name": "Icon.Danger", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23DC5E62", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/alt-secondary", "windows_token_name": "", "android_token_name": "Icon.Alt Secondary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23919191", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/saved", "windows_token_name": "", "android_token_name": "Icon.Saved", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23CF6098", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "icon/mention", "windows_token_name": "", "android_token_name": "Icon.Mention", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23CC4A31", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "border/focus-inner", "windows_token_name": "Neutral.Stroke.Focus.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#000000", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Inner ring of two-ring focus indicator. Pairs with border/focus (outer white ring).", "windows_value_hc": "#FFFFFF"}, {"intent": "border/default", "windows_token_name": "Neutral.Stroke.1.Rest", "android_token_name": "Surface.Border", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#666666", "android_value_dark": "#292929", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows mid-grey border vs Android near-black border. Also Android Divider.Primary = #292929.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/default-hover", "windows_token_name": "Neutral.Stroke.1.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#757575", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "border/default-pressed", "windows_token_name": "Neutral.Stroke.1.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#6B6B6B", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "border/default-selected", "windows_token_name": "Neutral.Stroke.1.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#707070", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "border/subtle", "windows_token_name": "Neutral.Stroke.2.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#525252", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Second stroke level; slightly lighter than default.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/subtlest", "windows_token_name": "Neutral.Stroke.3.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#3D3D3D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Third stroke level; near-invisible divider.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/strong", "windows_token_name": "Neutral.Stroke.Accessible.Rest", "android_token_name": "Surface.Border Dominant", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#ADADAD", "android_value_dark": "#E1E1E1", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows accessible stroke; Android dominant border. Values differ.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/strong-hover", "windows_token_name": "Neutral.Stroke.Accessible.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#BDBDBD", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "border/strong-pressed", "windows_token_name": "Neutral.Stroke.Accessible.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#B3B3B3", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "border/strong-selected", "windows_token_name": "Neutral.Stroke.Accessible.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Note: shifts to brand purple on selection — semantically distinct.", "windows_value_hc": "#1AEBFF"}, {"intent": "border/disabled", "windows_token_name": "Neutral.Stroke.Disabled.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#424242", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#3FF23F"}, {"intent": "border/focus", "windows_token_name": "Neutral.Stroke.Focus.2.Rest", "android_token_name": "Surface.Border Dominant", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "#E1E1E1", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows outer focus ring. No dedicated Android focus token; Surface.Border Dominant is closest.", "windows_value_hc": "#1AEBFF"}, {"intent": "border/on-brand", "windows_token_name": "Neutral.Stroke.on Brand.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#292929", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Border used on brand-coloured surfaces.", "windows_value_hc": "#000000"}, {"intent": "border/on-brand-strong", "windows_token_name": "Neutral.Stroke.on Brand.2.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/divider", "windows_token_name": "", "android_token_name": "Divider.Primary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23292929", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "border/error", "windows_token_name": "Status.Danger.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#C50F1F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. No dedicated Android error border token.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/error-accessible", "windows_token_name": "Status.Danger.Stroke.2.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DC626D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Accessible (lighter) error stroke for use on dark backgrounds.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/success", "windows_token_name": "Status.Success.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#107C10", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/success-accessible", "windows_token_name": "Status.Success.Stroke.2.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9FD89F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Accessible (lighter) success stroke.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/severe", "windows_token_name": "Status.Severe.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DA3B01", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Severe status border.", "windows_value_hc": "#FFFFFF"}, {"intent": "border/warning", "windows_token_name": "Status.Warning.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FDE300", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/primary", "windows_token_name": "Brand.Background.1.Rest", "android_token_name": "Brand.Accent Primary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4F52B2", "android_value_dark": "#7F85F5", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows darker brand fill (CTA background); Android lighter accent colour. Different semantic roles.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/primary-hover", "windows_token_name": "Brand.Background.1.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#5B5FC7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Android has no hover state tokens.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/primary-pressed", "windows_token_name": "Brand.Background.1.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#383966", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/secondary", "windows_token_name": "Brand.Background.2.Rest", "android_token_name": "Brand.Accent Tertiary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#2F2F4A", "android_value_dark": "#2F2F4A", "values_match": "Y", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Exact match.", "windows_value_hc": "#000000"}, {"intent": "brand/secondary-hover", "windows_token_name": "Brand.Background.2.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#383966", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#000000"}, {"intent": "brand/secondary-pressed", "windows_token_name": "Brand.Background.2.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#2B2B40", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#000000"}, {"intent": "brand/compound-fill", "windows_token_name": "Brand.Background.Compound.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Lighter brand fill used for compound/split buttons.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/compound-fill-hover", "windows_token_name": "Brand.Background.Compound.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9299F7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/compound-fill-pressed", "windows_token_name": "Brand.Background.Compound.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7579EB", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/fill-inverted", "windows_token_name": "Brand.Background.Inverted.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFFFFF", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. White brand fill for use on dark brand surfaces.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/fill-inverted-hover", "windows_token_name": "Brand.Background.Inverted.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#E8EBFA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/fill-inverted-pressed", "windows_token_name": "Brand.Background.Inverted.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#C5CBFA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/fill-inverted-selected", "windows_token_name": "Brand.Background.Inverted.Selected", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DCDFFA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/fill-static", "windows_token_name": "Brand.Background.Static.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#5B5FC7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Brand fill that doesn't adapt to theme.", "windows_value_hc": "#000000"}, {"intent": "brand/foreground", "windows_token_name": "Brand.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Brand-coloured foreground/text.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/foreground-2", "windows_token_name": "Brand.Foreground.2.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9299F7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Lighter brand foreground variant.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/foreground-2-hover", "windows_token_name": "Brand.Foreground.2.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#B6BCFA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/foreground-2-pressed", "windows_token_name": "Brand.Foreground.2.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#E8EBFA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/foreground-inverted", "windows_token_name": "Brand.Foreground.Inverted.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#5B5FC7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Brand foreground for inverted (light) surfaces.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/foreground-on-light", "windows_token_name": "Brand.Foreground.On Light.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4F52B2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Darker brand colour for use on light surfaces — relevant for light mode.", "windows_value_hc": "#000000"}, {"intent": "brand/foreground-compound", "windows_token_name": "Brand.Foreground.Compound.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/foreground-compound-hover", "windows_token_name": "Brand.Foreground.Compound.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9299F7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/foreground-compound-pressed", "windows_token_name": "Brand.Foreground.Compound.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7579EB", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/stroke", "windows_token_name": "Brand.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Brand-coloured border/stroke.", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/stroke-2", "windows_token_name": "Brand.Stroke.2.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#3D3E78", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Darker brand stroke (used for selected states).", "windows_value_hc": "#FFFFFF"}, {"intent": "brand/stroke-2-hover", "windows_token_name": "Brand.Stroke.2.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7579EB", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/stroke-2-pressed", "windows_token_name": "Brand.Stroke.2.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4F52B2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/stroke-compound", "windows_token_name": "Brand.Stroke.Compound.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#7F85F5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "brand/accent-dominant", "windows_token_name": "", "android_token_name": "Brand.Accent Dominant", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23C5CBFA", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "brand/accent-secondary", "windows_token_name": "", "android_token_name": "Brand.Accent Secondary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23333357", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "brand/accent-global", "windows_token_name": "", "android_token_name": "Brand.Accent Global", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%233D3E78", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "status/severe", "windows_token_name": "Status.Severe.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#E9835E", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Severe status foreground (orange-red; between warning and error). Entirely absent from Android.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/severe-subtle", "windows_token_name": "Status.Severe.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#411200", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Subtle severe background.", "windows_value_hc": "#000000"}, {"intent": "status/severe-fill", "windows_token_name": "Status.Severe.Background.3.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DA3B01", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Saturated severe fill for badges/chips.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/success", "windows_token_name": "Status.Success.Foreground.1.Rest", "android_token_name": "Text.Success", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#54B054", "android_value_dark": "#0EB244", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both green but different shades. Android Icon.Success also = #0EB244.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/success-subtle", "windows_token_name": "Status.Success.Background.1.Rest", "android_token_name": "Surface.Success", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#052505", "android_value_dark": "#0D2E0D", "values_match": "Partial", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both very dark green subtle backgrounds; close but not identical.", "windows_value_hc": "#000000"}, {"intent": "status/success-fill", "windows_token_name": "Status.Success.Background.3.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#107C10", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Saturated success fill for badges/chips.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/success-muted", "windows_token_name": "Status.Success.Foreground.3.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9FD89F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Muted/accessible success foreground.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/warning", "windows_token_name": "Status.Warning.Foreground.1.Rest", "android_token_name": "Text.Warning", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FEEE66", "android_value_dark": "#FFB900", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows yellow-green #FEEE66; Android amber #FFB900. Different hues.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/warning-subtle", "windows_token_name": "Status.Warning.Background.1.Rest", "android_token_name": "Surface.Warning", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4C4400", "android_value_dark": "#4D3A0C", "values_match": "Partial", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both dark amber backgrounds; close but different hue.", "windows_value_hc": "#000000"}, {"intent": "status/warning-fill", "windows_token_name": "Status.Warning.Background.3.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FDE300", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Saturated warning fill for badges/chips.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/warning-muted", "windows_token_name": "Status.Warning.Foreground.2.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FEF7B2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Very light muted warning foreground.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/error", "windows_token_name": "Status.Danger.Foreground.1.Rest", "android_token_name": "Text.Danger", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DC626D", "android_value_dark": "#DC5E62", "values_match": "Partial", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Very close: Windows #DC626D vs Android #DC5E62. Minor difference.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/error-subtle", "windows_token_name": "Status.Danger.Background.1.Rest", "android_token_name": "Surface.Danger", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#3B0509", "android_value_dark": "#250909", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both dark red backgrounds. Windows #3B0509; Android #250909.", "windows_value_hc": "#000000"}, {"intent": "status/error-fill", "windows_token_name": "Status.Danger.Background.3.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#C50F1F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Saturated error fill for badges/chips.", "windows_value_hc": "#FFFFFF"}, {"intent": "status/error-subtle-alt", "windows_token_name": "", "android_token_name": "Surface.Subtle Danger", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23250909", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "status/info", "windows_token_name": "", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Missing from both platforms. Closest candidates (brand not info): Brand.Foreground.1.Rest #7F85F5 (Windows) / Brand.Accent Primary #7F85F5 (Android).", "windows_value_hc": ""}, {"intent": "status/info-subtle", "windows_token_name": "", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Missing from both platforms. Closest: Brand.Background.2.Rest #2F2F4A (Windows) / Brand.Accent Tertiary #2F2F4A (Android).", "windows_value_hc": ""}, {"intent": "presence/available", "windows_token_name": "Status.Available.Foreground.3.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#13A10E", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Android uses Presence.Online with a different hex.", "windows_value_hc": "#FFFFFF"}, {"intent": "presence/online", "windows_token_name": "", "android_token_name": "Presence.Online", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%2392C353", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "presence/away", "windows_token_name": "Status.Away.Background.3.Rest", "android_token_name": "Presence.Away", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#EAA300", "android_value_dark": "#F8D22A", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both amber/yellow but different values. Windows #EAA300 vs Android #F8D22A.", "windows_value_hc": "#FFFFFF"}, {"intent": "presence/dnd", "windows_token_name": "", "android_token_name": "Presence.DND", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23D74553", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "presence/oof", "windows_token_name": "Status.Oof.Foreground.3.Rest", "android_token_name": "Presence.OOF", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D161C4", "android_value_dark": "#E959D9", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both purple/pink but different values. Windows #D161C4 vs Android #E959D9.", "windows_value_hc": "#FFFFFF"}, {"intent": "presence/invisible", "windows_token_name": "", "android_token_name": "Presence.Invisible", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23979593", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "interactive/fill-default", "windows_token_name": "Brand.Background.1.Rest", "android_token_name": "Brand.Accent Primary", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4F52B2", "android_value_dark": "#7F85F5", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows darker brand fill; Android lighter accent. Different values and approaches.", "windows_value_hc": "#FFFFFF"}, {"intent": "interactive/fill-hover", "windows_token_name": "Brand.Background.1.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#5B5FC7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Android has no hover state tokens.", "windows_value_hc": "#1AEBFF"}, {"intent": "interactive/fill-pressed", "windows_token_name": "Brand.Background.1.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#383966", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "interactive/fill-selected", "windows_token_name": "Brand.Background.1.Selected", "android_token_name": "Surface.Selected", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#444791", "android_value_dark": "#292929", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows brand-purple selected; Android neutral grey selected.", "windows_value_hc": "#1AEBFF"}, {"intent": "interactive/fill-disabled", "windows_token_name": "Neutral.Background.Disabled.Rest", "android_token_name": "Surface.Dissabled", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#141414", "android_value_dark": "#292929", "values_match": "N", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Android token has a typo (\"Dissabled\"); resolves to Surface.Raised Fill = #292929. Flag typo to Android team.", "windows_value_hc": "#000000"}, {"intent": "interactive/neutral-fill-hover", "windows_token_name": "Neutral.Background.1.Hover", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#3D3D3D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Ghost/subtle button hover; list row hover.", "windows_value_hc": "#1AEBFF"}, {"intent": "interactive/neutral-fill-pressed", "windows_token_name": "Neutral.Background.1.Pressed", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#1F1F1F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": "#1AEBFF"}, {"intent": "overlay/scrim", "windows_token_name": "Neutral.Background.Overlay.Rest", "android_token_name": "Transparent.Black Overlay dark", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#000000 @90%", "android_value_dark": "#000000 @90%", "values_match": "Y", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Both #000000 at 90% alpha.", "windows_value_hc": "#000000"}, {"intent": "overlay/black-75", "windows_token_name": "", "android_token_name": "Transparent.Black Overlay 1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000 @75%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "overlay/black-50", "windows_token_name": "", "android_token_name": "Transparent.Black Overlay medium 1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000 @50%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "overlay/black-30", "windows_token_name": "", "android_token_name": "Transparent.Black Overlay light 1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000 @30%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "overlay/black-10", "windows_token_name": "", "android_token_name": "Transparent.Black Overlay Ultra light 1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000 @10%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "overlay/black-6", "windows_token_name": "", "android_token_name": "Transparent.Black Overlay Super light 1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000 @6%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "overlay/white-50", "windows_token_name": "", "android_token_name": "Transparent.White Overlay light 1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23FFFFFF @50%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "overlay/white-20", "windows_token_name": "", "android_token_name": "Transparent.White Overlay Ultra light 1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23FFFFFF @20%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "overlay/clear", "windows_token_name": "", "android_token_name": "Transparent.Clear", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23000000 @0%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "overlay/white", "windows_token_name": "", "android_token_name": "Transparent.White", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23FFFFFF @0%", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "ai/liveness-cyan", "windows_token_name": "", "android_token_name": "AI colors.Liveness Cyan", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%2358D3DB", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "ai/liveness-purple", "windows_token_name": "", "android_token_name": "AI colors.Liveness Purple", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%237F85F5", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "ai/liveness-pink", "windows_token_name": "", "android_token_name": "AI colors.Liveness Pink", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23CF87DA", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/toggle-surface", "windows_token_name": "", "android_token_name": "Component tokens.Toggle.Surface", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%236C6C73", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/live-meeting-bg", "windows_token_name": "", "android_token_name": "Component tokens.Chiclet.Live Meeting Background", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%239299F7", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/call-record-bars", "windows_token_name": "", "android_token_name": "Component tokens.Calling-Messaging.Record Bars", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%233D3E78", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/call-active-speaker", "windows_token_name": "", "android_token_name": "Component tokens.Calling-Messaging.Active Speaker", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23C5CBFA", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/call-record-bg", "windows_token_name": "", "android_token_name": "Component tokens.Calling-Messaging.Record Bg", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%235B5FC7", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/call-end-button", "windows_token_name": "", "android_token_name": "Component tokens.Calling-Messaging.End Call btn", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%238D2337", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/notification-bg", "windows_token_name": "", "android_token_name": "Component tokens.Notification.Notification bg dominant alt1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%233D3E78", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/notification-icon-fg", "windows_token_name": "", "android_token_name": "Component tokens.Notification.Notification-fg-icon", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%239299F7", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/tooltip-bg", "windows_token_name": "", "android_token_name": "Component tokens.Tooltip.Tooltip-bg", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%237F85F5", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/skeleton-shimmer-base", "windows_token_name": "", "android_token_name": "Component tokens.Skeleton.Shimmer 1", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%233D3D3D", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/skeleton-shimmer-highlight", "windows_token_name": "", "android_token_name": "Component tokens.Skeleton.Shimmer 2", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23616161", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/cmd-bar-active-bg", "windows_token_name": "", "android_token_name": "Component tokens.Contextual command bar.Background Active", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%239299F7", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/page-control-disabled", "windows_token_name": "", "android_token_name": "Component tokens.Page Control.Dissabled", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%236E6E6E", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/call-drop-button", "windows_token_name": "", "android_token_name": "MCM.DropCall", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%23932F2F", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "component/call-active-speaker-mcm", "windows_token_name": "", "android_token_name": "MCM.ActiveSpeaker", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "", "android_value_dark": "%239EA2FF", "values_match": "", "in_figma_variables": "—", "figma_value_light": "Unknown", "figma_value_dark": "", "figma_matches_code": "", "hardcoded_uses": "Unknown", "refresh_action": "0", "notes": "", "windows_value_hc": ""}, {"intent": "status-generic/dark-red-fill", "windows_token_name": "Status.Generic.Dark red.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#590815", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only. Category colour family — used for tagging / calendar events / contact cards.", "windows_value_hc": ""}, {"intent": "status-generic/dark-red-text", "windows_token_name": "Status.Generic.Dark red.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D69CA5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/dark-red-border", "windows_token_name": "Status.Generic.Dark red.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#962F3F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/cranberry-fill", "windows_token_name": "Status.Generic.Cranberry.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#6E0811", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/cranberry-text", "windows_token_name": "Status.Generic.Cranberry.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#EEACB2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/cranberry-border", "windows_token_name": "Status.Generic.Cranberry.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DC626D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/red-fill", "windows_token_name": "Status.Generic.Red.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#751D1F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/red-text", "windows_token_name": "Status.Generic.Red.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#EEACB2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/red-border", "windows_token_name": "Status.Generic.Red.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#E37D80", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/pumpkin-fill", "windows_token_name": "Status.Generic.Pumpkin.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#712D09", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/pumpkin-text", "windows_token_name": "Status.Generic.Pumpkin.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#EFC4AD", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/pumpkin-border", "windows_token_name": "Status.Generic.Pumpkin.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DF8E64", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/peach-fill", "windows_token_name": "Status.Generic.Peach.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#8F4E00", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/peach-text", "windows_token_name": "Status.Generic.Peach.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFDDB3", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/peach-border", "windows_token_name": "Status.Generic.Peach.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#FFBA66", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/marigold-fill", "windows_token_name": "Status.Generic.Marigold.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#835B00", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/marigold-text", "windows_token_name": "Status.Generic.Marigold.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#F9E2AE", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/marigold-border", "windows_token_name": "Status.Generic.Marigold.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#F2C661", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/gold-fill", "windows_token_name": "Status.Generic.Gold.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#6C5700", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/gold-text", "windows_token_name": "Status.Generic.Gold.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#ECDFA5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/gold-border", "windows_token_name": "Status.Generic.Gold.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DAC157", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/brass-fill", "windows_token_name": "Status.Generic.Brass.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#553E06", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/brass-text", "windows_token_name": "Status.Generic.Brass.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#E0CEA2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/brass-border", "windows_token_name": "Status.Generic.Brass.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#C1A256", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/brown-fill", "windows_token_name": "Status.Generic.Brown.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#50301A", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/brown-text", "windows_token_name": "Status.Generic.Brown.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#DDC3B0", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/brown-border", "windows_token_name": "Status.Generic.Brown.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#BB8F6F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/forest-fill", "windows_token_name": "Status.Generic.Forest.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#294903", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/forest-text", "windows_token_name": "Status.Generic.Forest.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#BDD99B", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/forest-border", "windows_token_name": "Status.Generic.Forest.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#85B44C", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/seafoam-fill", "windows_token_name": "Status.Generic.Seafoam.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#00723B", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/seafoam-text", "windows_token_name": "Status.Generic.Seafoam.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#A8F0CD", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/seafoam-border", "windows_token_name": "Status.Generic.Seafoam.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#5AE0A0", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/dark-green-fill", "windows_token_name": "Status.Generic.Dark green.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#063B06", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/dark-green-text", "windows_token_name": "Status.Generic.Dark green.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9AD29A", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/dark-green-border", "windows_token_name": "Status.Generic.Dark green.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4DA64D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/light-teal-fill", "windows_token_name": "Status.Generic.Light teal.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#00666D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/light-teal-text", "windows_token_name": "Status.Generic.Light teal.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#A6E9ED", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/light-teal-border", "windows_token_name": "Status.Generic.Light teal.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#58D3DB", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/teal-fill", "windows_token_name": "Status.Generic.Teal.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#02494C", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/teal-text", "windows_token_name": "Status.Generic.Teal.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9BD9DB", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/teal-border", "windows_token_name": "Status.Generic.Teal.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4CB4B7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/steel-fill", "windows_token_name": "Status.Generic.Steel.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#00333F", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/steel-text", "windows_token_name": "Status.Generic.Steel.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#94C8D4", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/steel-border", "windows_token_name": "Status.Generic.Steel.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4496A9", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/blue-fill", "windows_token_name": "Status.Generic.Blue.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#004377", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/blue-text", "windows_token_name": "Status.Generic.Blue.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#A9D3F2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/blue-border", "windows_token_name": "Status.Generic.Blue.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#5CAAE5", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/royal-blue-fill", "windows_token_name": "Status.Generic.Royal blue.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#002C4E", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/royal-blue-text", "windows_token_name": "Status.Generic.Royal blue.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9ABFDC", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/royal-blue-border", "windows_token_name": "Status.Generic.Royal blue.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4A89BA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/cornflower-fill", "windows_token_name": "Status.Generic.Cornflower.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#2C3C85", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/cornflower-text", "windows_token_name": "Status.Generic.Cornflower.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#C8D1FA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/cornflower-border", "windows_token_name": "Status.Generic.Cornflower.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#93A4F4", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/navy-fill", "windows_token_name": "Status.Generic.Navy.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#001665", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/navy-text", "windows_token_name": "Status.Generic.Navy.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#A3B2E8", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/navy-border", "windows_token_name": "Status.Generic.Navy.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#546FD2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/lavender-fill", "windows_token_name": "Status.Generic.Lavender.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#3F3682", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/lavender-text", "windows_token_name": "Status.Generic.Lavender.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D2CCF8", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/lavender-border", "windows_token_name": "Status.Generic.Lavender.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#A79CF1", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/purple-fill", "windows_token_name": "Status.Generic.Purple.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#341A51", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/purple-text", "windows_token_name": "Status.Generic.Purple.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#C6B1DE", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/purple-border", "windows_token_name": "Status.Generic.Purple.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9470BD", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/grape-fill", "windows_token_name": "Status.Generic.Grape.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#4C0D55", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/grape-text", "windows_token_name": "Status.Generic.Grape.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D9A7E0", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/grape-border", "windows_token_name": "Status.Generic.Grape.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#B55FC1", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/lilac-fill", "windows_token_name": "Status.Generic.Lilac.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#63276D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/lilac-text", "windows_token_name": "Status.Generic.Lilac.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#E6BFED", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/lilac-border", "windows_token_name": "Status.Generic.Lilac.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#CF87DA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/pink-fill", "windows_token_name": "Status.Generic.Pink.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#80215D", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/pink-text", "windows_token_name": "Status.Generic.Pink.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#F7C0E3", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/pink-border", "windows_token_name": "Status.Generic.Pink.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#EF85C8", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/magenta-fill", "windows_token_name": "Status.Generic.Magenta.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#6B0043", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/magenta-text", "windows_token_name": "Status.Generic.Magenta.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#ECA5D1", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/magenta-border", "windows_token_name": "Status.Generic.Magenta.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D957A8", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/plum-fill", "windows_token_name": "Status.Generic.Plum.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#5A003B", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/plum-text", "windows_token_name": "Status.Generic.Plum.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D696C0", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/plum-border", "windows_token_name": "Status.Generic.Plum.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D957A8", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/beige-fill", "windows_token_name": "Status.Generic.Beige.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#444241", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/beige-text", "windows_token_name": "Status.Generic.Beige.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#D7D4D4", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/beige-border", "windows_token_name": "Status.Generic.Beige.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#AFABAA", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/mink-fill", "windows_token_name": "Status.Generic.Mink.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#343231", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/mink-text", "windows_token_name": "Status.Generic.Mink.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#CECCCB", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/mink-border", "windows_token_name": "Status.Generic.Mink.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#9E9B99", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/platinum-fill", "windows_token_name": "Status.Generic.Platinum.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#3B4447", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/platinum-text", "windows_token_name": "Status.Generic.Platinum.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#CDD6D8", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/platinum-border", "windows_token_name": "Status.Generic.Platinum.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#A0ADB2", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/anchor-fill", "windows_token_name": "Status.Generic.Anchor.Background.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#202427", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/anchor-text", "windows_token_name": "Status.Generic.Anchor.Foreground.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#BCC3C7", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}, {"intent": "status-generic/anchor-border", "windows_token_name": "Status.Generic.Anchor.Stroke.1.Rest", "android_token_name": "", "windows_value_light": "", "android_value_light": "", "windows_value_dark": "#808A90", "android_value_dark": "", "values_match": "—", "in_figma_variables": "Unknown", "figma_value_light": "", "figma_value_dark": "", "figma_matches_code": "Unknown", "hardcoded_uses": "0", "refresh_action": "", "notes": "Windows only.", "windows_value_hc": ""}];
+const STORAGE_KEY = 'token-audit-v1';
+function loadData(){
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved){ const parsed=JSON.parse(saved); if(Array.isArray(parsed)&&parsed.length) return parsed; }
+  } catch(e){}
+  return RAW.map((r,i)=>({...r,_id:i}));
+}
+let DATA = loadData();
+let nextId = DATA.reduce((m,r)=>Math.max(m,(r._id||0)+1),DATA.length);
+let dragSrcId = null;
+
+let saveTimer = null;
+function saveData(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(DATA)); }catch(e){}
+    const ind = document.getElementById('save-ind');
+    if(ind){ ind.textContent='Saved'; ind.style.opacity='1'; setTimeout(()=>ind.style.opacity='0',1200); }
+  }, 400);
+}
+let showWinBadge = true;
+let showAndBadge = true;
+
+// ── SIDEBAR STATE ──────────────────────────────────────────
+const COLLECTIONS = [
+  {id:'colour',   label:'Color',   icon:null},
+];
+const FUTURE_FOLDERS = [
+  {label:'Typography'}, {label:'Spacing'},
+  {label:'Border Radius'}, {label:'Shadow'}, {label:'Motion'},
+];
+// Groups = categories derived from data
+let activeCollection = 'colour';
+let activeGroup = null; // null = All
+
+// ── DATA HELPERS ───────────────────────────────────────────
+function getCategory(intent){ return (intent||'').split('/')[0]||'other'; }
+
+function getPlatform(row){
+  const hw=row.windows_token_name||'', ha=row.android_token_name||'';
+  const vw=row.windows_value_dark||row.windows_value_light||'';
+  const va=row.android_value_dark||row.android_value_light||'';
+  if((hw||vw)&&(ha||va)) return 'both';
+  if(hw||vw) return 'win';
+  if(ha||va) return 'and';
+  return 'both';
+}
+
+function parseColour(val){
+  if(!val||!val.trim()) return null;
+  let s=val.replace(/%23/g,'#').trim();
+  const am=s.match(/^(#[0-9A-Fa-f]{6})\s*@\s*(\d+(?:\.\d+)?)%$/);
+  if(am) return {hex:am[1],alpha:parseFloat(am[2])/100,label:s};
+  const hm=s.match(/^#[0-9A-Fa-f]{6}$/i);
+  if(hm) return {hex:s,alpha:1,label:s};
+  return null;
+}
+
+function swatchEl(val){
+  const div=document.createElement('div');
+  div.className='swatch';
+  const sf=document.createElement('div');
+  sf.className='sf';
+  const c=parseColour(val);
+  if(c){
+    const {hex,alpha}=c;
+    const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    sf.style.background=alpha<1?`rgba(${r},${g},${b},${alpha})`:hex;
+  } else {
+    sf.style.background='#e5e7eb';
+  }
+  div.appendChild(sf);
+  return div;
+}
+
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function escCSV(v){ const s=String(v==null?'':v); if(s.includes(',')||s.includes('"')||s.includes('\n')) return '"'+s.replace(/"/g,'""')+'"'; return s; }
+
+// ── GROUPING ───────────────────────────────────────────────
+// Groups tokens by stripping trailing state suffix
+// e.g. background/surface-hover → base: background/surface, state: hover
+const STATE_SUFFIXES = ['-hover','-pressed','-selected','-rest'];
+
+function getBaseAndState(intent){
+  for(const sfx of STATE_SUFFIXES){
+    if(intent.endsWith(sfx)){
+      return {base: intent.slice(0,intent.length-sfx.length), state: sfx.slice(1)};
+    }
+  }
+  // Check for trailing number e.g. overlay/black-75
+  return {base: intent, state: 'rest'};
+}
+
+// Build display groups: [{key, label, rows}]
+function buildGroups(rows){
+  const groups = [], groupMap = {};
+  rows.forEach(row=>{
+    const {base} = getBaseAndState(row.intent||'');
+    if(!groupMap[base]){ groupMap[base]=[]; groups.push(base); }
+    groupMap[base].push(row);
+  });
+  return groups.map(base=>({ key:base, rows:groupMap[base] }));
+}
+
+// ── FILTER ────────────────────────────────────────────────
+let searchVal='';
+let collapsedGroups = new Set();
+
+function filterRows(){
+  const q=searchVal.toLowerCase();
+  return DATA.filter(row=>{
+    if(activeGroup && getCategory(row.intent)!==activeGroup) return false;
+    if(q){ const blob=Object.values(row).join(' ').toLowerCase(); if(!blob.includes(q)) return false; }
+    return true;
+  });
+}
+
+// ── SIDEBAR RENDER ─────────────────────────────────────────
+const CAT_ICONS = {
+  background:'▭',text:'Aa',icon:'◉',border:'□',brand:'◆',
+  status:'◑','status-generic':'◈',presence:'●',interactive:'↗',
+  overlay:'◻',ai:'✦',component:'⬡',
+};
+
+function buildSidebar(){
+  // Collections
+  const colEl = document.getElementById('sb-collections');
+  colEl.innerHTML = '';
+  COLLECTIONS.forEach(col=>{
+    const total = col.id==='colour'?DATA.length:0;
+    const el=document.createElement('div');
+    el.className='sb-collection'+(activeCollection===col.id&&!activeGroup?' active':'');
+    el.innerHTML=`${col.label}<span class="sb-collection-count">${total}</span>`;
+    el.addEventListener('click',()=>{ activeCollection=col.id; activeGroup=null; buildSidebar(); renderTable(); });
+    colEl.appendChild(el);
+  });
+
+  // Groups
+  const grpEl = document.getElementById('sb-groups');
+  grpEl.innerHTML = '';
+  const counts = {};
+  DATA.forEach(r=>{ const c=getCategory(r.intent); counts[c]=(counts[c]||0)+1; });
+  const cats = [...new Set(DATA.map(r=>getCategory(r.intent)))];
+
+  // All
+  const allEl=document.createElement('div');
+  allEl.className='sb-group-head'+(activeGroup===null?' active':'');
+  allEl.innerHTML=`All<span class="cnt">${DATA.length}</span>`;
+  allEl.addEventListener('click',()=>{ activeGroup=null; buildSidebar(); renderTable(); });
+  grpEl.appendChild(allEl);
+
+  cats.forEach(cat=>{
+    const el=document.createElement('div');
+    el.className='sb-group-head'+(activeGroup===cat?' active':'');
+    el.innerHTML=`${cat}<span class="cnt">${counts[cat]||0}</span>`;
+    el.style.paddingLeft='20px';
+    el.addEventListener('click',()=>{ activeGroup=cat; buildSidebar(); renderTable(); });
+    grpEl.appendChild(el);
+  });
+
+  // Future
+  const futEl=document.getElementById('sb-future');
+  futEl.innerHTML='';
+  FUTURE_FOLDERS.forEach(f=>{
+    const el=document.createElement('div');
+    el.className='sb-future-item';
+    el.innerHTML=`<span class="sb-future-label">${f.label}</span><span class="sb-future-badge">soon</span>`;
+    futEl.appendChild(el);
+  });
+}
+
+// ── TABLE RENDER ───────────────────────────────────────────
+function renderTable(){
+  const tw = document.getElementById('tw');
+  tw.innerHTML='';
+  const visible = filterRows();
+  const groups = buildGroups(visible);
+
+  groups.forEach(({key, rows})=>{
+    const isCollapsed = collapsedGroups.has(key);
+
+    // Only show group header row if group has >1 token OR it has a meaningful base name
+    const showHeader = rows.length > 1 || rows[0].intent !== key;
+
+    if(showHeader){
+      const groupDiv = document.createElement('div');
+      groupDiv.className='group-row'+(isCollapsed?' collapsed':'');
+      groupDiv.dataset.gkey = key;
+
+      // Format path: category / rest
+      const parts = key.split('/');
+      let pathHtml='';
+      if(parts.length>=2){
+        pathHtml = parts.slice(0,-1).map(p=>esc(p)).join(' <span style="color:var(--text-s)">/</span> ')
+          + ' <span style="color:var(--text-s)">/</span> <em>'+esc(parts[parts.length-1])+'</em>';
+      } else {
+        pathHtml = `<em>${esc(key)}</em>`;
+      }
+
+      groupDiv.innerHTML=`<span class="group-arrow">▾</span><span class="group-path">${pathHtml}</span><span class="group-count">${rows.length}</span>`;
+      groupDiv.addEventListener('click',()=>{
+        if(collapsedGroups.has(key)) collapsedGroups.delete(key);
+        else collapsedGroups.add(key);
+        renderTable();
+      });
+      tw.appendChild(groupDiv);
+    }
+
+    if(!isCollapsed){
+      rows.forEach(row=>tw.appendChild(makeTokenRow(row, rows.length>1)));
+    }
+  });
+
+
+  updateStats(visible);
+}
+
+function makeTokenRow(row, inGroup){
+  const div=document.createElement('div');
+  div.className='token-row';
+  div.dataset.id=row._id;
+  div.draggable=true;
+
+  div.addEventListener('dragstart',e=>{
+    dragSrcId=row._id;
+    div.classList.add('dragging');
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',row._id);
+  });
+  div.addEventListener('dragend',()=>{
+    div.classList.remove('dragging');
+    document.querySelectorAll('.drag-over-above,.drag-over-below').forEach(el=>{el.classList.remove('drag-over-above','drag-over-below');});
+  });
+  div.addEventListener('dragover',e=>{
+    if(dragSrcId===row._id) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect='move';
+    const rect=div.getBoundingClientRect();
+    const mid=rect.top+rect.height/2;
+    document.querySelectorAll('.drag-over-above,.drag-over-below').forEach(el=>{el.classList.remove('drag-over-above','drag-over-below');});
+    div.classList.add(e.clientY<mid?'drag-over-above':'drag-over-below');
+  });
+  div.addEventListener('dragleave',()=>{
+    div.classList.remove('drag-over-above','drag-over-below');
+  });
+  div.addEventListener('drop',e=>{
+    e.preventDefault();
+    div.classList.remove('drag-over-above','drag-over-below');
+    if(dragSrcId===row._id) return;
+    const rect=div.getBoundingClientRect();
+    const insertBefore=e.clientY<rect.top+rect.height/2;
+    const srcIdx=DATA.findIndex(r=>r._id===dragSrcId);
+    const tgtIdx=DATA.findIndex(r=>r._id===row._id);
+    if(srcIdx===-1||tgtIdx===-1) return;
+    const [moved]=DATA.splice(srcIdx,1);
+    const newTgt=DATA.findIndex(r=>r._id===row._id);
+    DATA.splice(insertBefore?newTgt:newTgt+1,0,moved);
+    saveData(); renderTable();
+  });
+
+  // ── Name cell ──
+  const nameCell=document.createElement('div');
+  nameCell.className='cell-name';
+
+  const stateLabel=document.createElement('span');
+  stateLabel.className='state-label';
+  if(inGroup){
+    // Show just the state part
+    const {state}=getBaseAndState(row.intent||'');
+    stateLabel.textContent=state;
+    stateLabel.style.color='var(--text-m)';
+    stateLabel.title=row.intent||'';
+  } else {
+    // Show full intent as mono
+    stateLabel.style.fontFamily='var(--mono)';
+    stateLabel.style.fontSize='11px';
+    stateLabel.textContent=row.intent||'';
+  }
+  nameCell.appendChild(stateLabel);
+
+  // Match badge
+  const mb=document.createElement('span');
+  const mv=row.values_match||'—';
+  mb.className='mb '+(mv==='Y'?'mb-y':mv==='N'?'mb-n':mv==='Partial'?'mb-p':'mb-d');
+  mb.textContent=mv==='Partial'?'~':mv||'—';
+  mb.title='Click to cycle';
+  mb.addEventListener('click',e=>{e.stopPropagation();cycleMatch(mb,row);});
+  nameCell.appendChild(mb);
+
+  // Platform pills — interactive
+  const pills=document.createElement('div');
+  pills.className='plt-pills';
+
+  function rebuildPills(){
+    pills.innerHTML='';
+    const hasWin=!!(row.windows_token_name||row.windows_value_dark||row.windows_value_hc);
+    const hasAnd=!!(row.android_token_name||row.android_value_dark);
+
+    if(showWinBadge&&hasWin){
+      const s=document.createElement('span');
+      s.className='plt plt-w';s.textContent='Win';
+      s.title='Click to remove Windows platform';
+      s.addEventListener('click',e=>{
+        e.stopPropagation();
+        if(!confirm('Remove Windows platform from this token? This clears all Windows values.')) return;
+        row.windows_token_name='';row.windows_value_dark='';row.windows_value_hc='';row.windows_value_light='';
+        saveData(); renderTable();
+      });
+      pills.appendChild(s);
+    }
+    if(showAndBadge&&hasAnd){
+      const s=document.createElement('span');
+      s.className='plt plt-a';s.textContent='And';
+      s.title='Click to remove Android platform';
+      s.addEventListener('click',e=>{
+        e.stopPropagation();
+        if(!confirm('Remove Android platform from this token? This clears all Android values.')) return;
+        row.android_token_name='';row.android_value_dark='';row.android_value_light='';
+        saveData(); renderTable();
+      });
+      pills.appendChild(s);
+    }
+    if(!hasWin){
+      const a=document.createElement('span');
+      a.className='plt-add';a.textContent='+Win';a.title='Add Windows platform';
+      a.addEventListener('click',e=>{ e.stopPropagation(); row.windows_token_name=' '; renderTable(); });
+      pills.appendChild(a);
+    }
+    if(!hasAnd){
+      const a=document.createElement('span');
+      a.className='plt-add';a.textContent='+And';a.title='Add Android platform';
+      a.addEventListener('click',e=>{ e.stopPropagation(); row.android_token_name=' '; renderTable(); });
+      pills.appendChild(a);
+    }
+  }
+  rebuildPills();
+  nameCell.appendChild(pills);
+
+  nameCell.addEventListener('dblclick',()=>editNameCell(nameCell,row));
+  div.appendChild(nameCell);
+
+  // ── Windows cell ──
+  const darkCell=makeColourCell(row,'windows_value_dark');
+  div.appendChild(darkCell);
+
+  // ── Android cell ──
+  const andCell=makeColourCell(row,'android_value_dark');
+  div.appendChild(andCell);
+
+  // ── HC cell ──
+  const hcCell=makeColourCell(row,'windows_value_hc');
+  div.appendChild(hcCell);
+
+  // ── Notes cell ──
+  const notesCell=document.createElement('div');
+  notesCell.className='cell-notes';
+  const nt=document.createElement('span');
+  nt.className='notes-text';
+  nt.textContent=row.notes||'';
+  nt.title=row.notes||'';
+  notesCell.appendChild(nt);
+  notesCell.addEventListener('click',()=>editNotesCell(notesCell,row));
+  div.appendChild(notesCell);
+
+  // ── Action cell ──
+  const actCell=document.createElement('div');
+  actCell.className='cell-act';
+  const delBtn=document.createElement('button');
+  delBtn.className='del-btn';
+  delBtn.textContent='×';
+  delBtn.title='Delete';
+  delBtn.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(confirm(`Delete "${row.intent}"?`)){
+      DATA=DATA.filter(r=>r._id!==row._id);
+      saveData(); buildSidebar(); renderTable();
+    }
+  });
+  actCell.appendChild(delBtn);
+  div.appendChild(actCell);
+
+  return div;
+}
+
+function makeColourCell(row, key){
+  const cell=document.createElement('div');
+  cell.className=key==='windows_value_hc'?'cell-hc':key==='android_value_dark'?'cell-and':'cell-win';
+
+  // Map value key -> token name key
+  const tokenNameKey = key==='windows_value_dark'?'windows_token_name':key==='android_value_dark'?'android_token_name':null;
+
+  function renderContent(){
+    cell.innerHTML='';
+    const val=row[key]||'';
+    const decoded=val.replace(/%23/g,'#');
+    const tokenName=tokenNameKey?row[tokenNameKey]||'':'';
+
+    if(decoded||tokenName){
+      // Colour row (swatch + hex)
+      const clrRow=document.createElement('div');
+      clrRow.className='clr-row';
+      if(decoded){
+        clrRow.appendChild(swatchEl(val));
+        const txt=document.createElement('span');
+        txt.className='clr-txt';
+        txt.textContent=parseColour(val)?parseColour(val).label:decoded;
+        clrRow.appendChild(txt);
+      } else {
+        const em=document.createElement('span');
+        em.className='empty-val';em.textContent='—';
+        clrRow.appendChild(em);
+      }
+      cell.appendChild(clrRow);
+      // Token name row
+      if(tokenNameKey){
+        const tnLine=document.createElement('div');
+        tnLine.className='token-name-line';
+        tnLine.textContent=tokenName||'—';
+        tnLine.title=tokenName||'';
+        cell.appendChild(tnLine);
+      }
+    } else {
+      const em=document.createElement('span');
+      em.className='empty-val';em.textContent='—';
+      cell.appendChild(em);
+    }
+  }
+  renderContent();
+
+  cell.addEventListener('click',()=>{
+    if(cell.classList.contains('cell-editing')) return;
+    cell.classList.add('cell-editing');
+    const parentRow=cell.closest('.token-row');
+    if(parentRow) parentRow.draggable=false;
+    const prevVal=(row[key]||'').replace(/%23/g,'#');
+    const prevToken=tokenNameKey?row[tokenNameKey]||'':'';
+    cell.innerHTML='';
+
+    // Hex value input
+    const inpVal=document.createElement('input');
+    inpVal.className='cell-edit-input';
+    inpVal.value=prevVal;
+    inpVal.placeholder='#000000';
+    cell.appendChild(inpVal);
+
+    // Token name input (only for win/and columns)
+    let inpToken=null;
+    if(tokenNameKey){
+      inpToken=document.createElement('input');
+      inpToken.className='cell-edit-input';
+      inpToken.style.cssText='font-size:10px;color:var(--text-s);margin-top:2px';
+      inpToken.value=prevToken;
+      inpToken.placeholder='Token name…';
+      cell.appendChild(inpToken);
+    }
+
+    inpVal.focus(); inpVal.select();
+
+    const save=()=>{
+      row[key]=inpVal.value.trim();
+      if(tokenNameKey&&inpToken) row[tokenNameKey]=inpToken.value.trim();
+      saveData(); cell.classList.remove('cell-editing');
+      const parentRow=cell.closest('.token-row');
+      if(parentRow) parentRow.draggable=true;
+      renderContent();
+    };
+    // Save on blur from either input (slight delay so clicking the second input doesn't trigger save)
+    let blurTimer;
+    const onBlur=()=>{ blurTimer=setTimeout(save,120); };
+    const onFocus=()=>{ clearTimeout(blurTimer); };
+    inpVal.addEventListener('blur',onBlur); inpVal.addEventListener('focus',onFocus);
+    if(inpToken){ inpToken.addEventListener('blur',onBlur); inpToken.addEventListener('focus',onFocus); }
+
+    [inpVal,inpToken].filter(Boolean).forEach(inp=>{
+      inp.addEventListener('keydown',e=>{
+        if(e.key==='Enter') inp.blur();
+        if(e.key==='Escape'){
+          clearTimeout(blurTimer);
+          row[key]=prevVal;
+          if(tokenNameKey) row[tokenNameKey]=prevToken;
+          cell.classList.remove('cell-editing'); renderContent();
+        }
+      });
+    });
+  });
+  return cell;
+}
+
+function editNameCell(cell, row){
+  if(cell.classList.contains('cell-editing')) return;
+  cell.classList.add('cell-editing');
+  const prev=row.intent||'';
+  cell.innerHTML='';
+  const inp=document.createElement('input');
+  inp.className='intent-input';
+  inp.style.fontFamily='var(--mono)';inp.style.fontSize='11px';
+  inp.value=prev;
+  cell.appendChild(inp);
+  inp.focus();inp.select();
+  const save=()=>{
+    row.intent=inp.value.trim()||prev;
+    cell.classList.remove('cell-editing');
+    saveData(); buildSidebar(); renderTable();
+  };
+  inp.addEventListener('blur',save);
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter') inp.blur(); if(e.key==='Escape'){row.intent=prev;cell.classList.remove('cell-editing');renderTable();} });
+}
+
+function editNotesCell(cell, row){
+  if(cell.classList.contains('cell-editing')) return;
+  cell.classList.add('cell-editing');
+  const prev=row.notes||'';
+  cell.innerHTML='';
+  const inp=document.createElement('input');
+  inp.style.cssText='width:100%;border:none;outline:none;font-size:11px;font-family:var(--font);background:transparent;color:var(--text)';
+  inp.value=prev;
+  cell.appendChild(inp);
+  inp.focus();inp.select();
+  const save=()=>{ row.notes=inp.value; saveData(); cell.classList.remove('cell-editing'); const nt=document.createElement('span');nt.className='notes-text';nt.textContent=row.notes;nt.title=row.notes;cell.innerHTML='';cell.appendChild(nt);cell.addEventListener('click',()=>editNotesCell(cell,row)); };
+  inp.addEventListener('blur',save);
+  inp.addEventListener('keydown',e=>{ if(e.key==='Enter') inp.blur(); if(e.key==='Escape'){row.notes=prev;cell.classList.remove('cell-editing');const nt=document.createElement('span');nt.className='notes-text';nt.textContent=prev;nt.title=prev;cell.innerHTML='';cell.appendChild(nt);cell.addEventListener('click',()=>editNotesCell(cell,row));} });
+}
+
+// ── MATCH CYCLE ────────────────────────────────────────────
+const MATCH_CYCLE=['Y','Partial','N','—','Unknown'];
+function cycleMatch(mb,row){
+  const cur=row.values_match||'—';
+  row.values_match=MATCH_CYCLE[(MATCH_CYCLE.indexOf(cur)+1)%MATCH_CYCLE.length];
+  const mv=row.values_match;
+  mb.className='mb '+(mv==='Y'?'mb-y':mv==='N'?'mb-n':mv==='Partial'?'mb-p':'mb-d');
+  mb.textContent=mv==='Partial'?'~':mv||'—';
+  saveData(); updateStats(filterRows());
+}
+
+// ── ADD ROW ────────────────────────────────────────────────
+function addRow(platform='both'){
+  const cat=activeGroup||'background';
+  const row={
+    _id:nextId++, intent:cat+'/new-token',
+    windows_token_name: platform==='and'?'':' ',
+    android_token_name: platform==='win'?'':' ',
+    windows_value_light:'', android_value_light:'',
+    windows_value_dark:'', android_value_dark:'',
+    windows_value_hc:'',
+    values_match:'—', in_figma_variables:'Unknown',
+    figma_value_light:'', figma_value_dark:'',
+    figma_matches_code:'Unknown', hardcoded_uses:'0',
+    refresh_action:'', notes:''
+  };
+  // Blank out fields not applicable to the chosen platform
+  if(platform==='and'){ row.windows_token_name=''; row.windows_value_dark=''; row.windows_value_hc=''; }
+  if(platform==='win'){ row.android_token_name=''; row.android_value_dark=''; }
+  DATA.push(row);
+  saveData(); buildSidebar(); renderTable();
+  setTimeout(()=>{
+    const rowEl=document.querySelector(`[data-id="${row._id}"]`);
+    if(!rowEl) return;
+    rowEl.scrollIntoView({block:'center',behavior:'smooth'});
+    const nameEl=rowEl.querySelector('.cell-name');
+    if(nameEl) setTimeout(()=>{
+      editNameCell(nameEl,row);
+      // After intent is committed, focus notes
+      const origBlur=nameEl.querySelector('input');
+      if(origBlur) origBlur.addEventListener('blur',()=>{
+        setTimeout(()=>{
+          const notesEl=rowEl.querySelector('.cell-notes');
+          if(notesEl) editNotesCell(notesEl,row);
+        },80);
+      },{once:true});
+    },200);
+  },60);
+}
+
+// ── STATS ──────────────────────────────────────────────────
+function updateStats(vis){
+  if(!vis) vis=filterRows();
+  const counts={Y:0,N:0,Partial:0,'—':0,Unknown:0};
+  vis.forEach(r=>{counts[r.values_match]=(counts[r.values_match]||0)+1;});
+  document.getElementById('s-y').textContent=counts['Y']+' match';
+  document.getElementById('s-p').textContent=counts['Partial']+' partial';
+  document.getElementById('s-n').textContent=counts['N']+' mismatch';
+  document.getElementById('s-d').textContent=(counts['—']||0)+' one platform';
+  document.getElementById('s-visible').textContent=vis.length===DATA.length
+    ?`${DATA.length} tokens`:`${vis.length} / ${DATA.length} tokens`;
+}
+
+// ── EXPORT ─────────────────────────────────────────────────
+function exportCSV(){
+  const headers=['intent','windows_token_name','android_token_name',
+    'windows_value_light','android_value_light',
+    'windows_value_dark','android_value_dark',
+    'windows_value_hc','values_match','in_figma_variables',
+    'figma_value_light','figma_value_dark','figma_matches_code',
+    'hardcoded_uses','refresh_action','notes'];
+  const lines=[headers.join(',')];
+  // Export in the same grouped order as the table renders (not raw DATA order)
+  const groups=buildGroups(DATA);
+  groups.forEach(({rows})=>rows.forEach(row=>lines.push(headers.map(k=>escCSV(row[k]||'')).join(','))));
+  const blob=new Blob([lines.join('\n')],{type:'text/csv'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='colour-token-audit.csv';
+  a.click();
+}
+
+// ── SAVE AS HTML ───────────────────────────────────────────
+function saveAsHTML(){
+  // Serialize current DATA without internal _id fields
+  const clean=DATA.map(r=>{const c={...r};delete c._id;return c;});
+  const rawJSON=JSON.stringify(clean,null,0);
+  // Use outerHTML — works on file:// without any fetch/CORS issues.
+  // The browser preserves script text verbatim, so we can swap RAW inline.
+  let src='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  src=src.replace(/const RAW\s*=\s*\[[\s\S]*?\];/,`const RAW = ${rawJSON};`);
+  // Also clear localStorage key so the downloaded file starts fresh from the baked-in data
+  src=src.replace(/const STORAGE_KEY\s*=\s*'[^']*'/,"const STORAGE_KEY = 'token-audit-v1'");
+  const blob=new Blob([src],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='colour-token-audit.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── IMPORT ─────────────────────────────────────────────────
+function importCSV(file){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const parsed=parseCSVFile(e.target.result);
+    if(!parsed.length) return alert('No data found.');
+    if(!confirm(`Replace all ${DATA.length} rows with ${parsed.length} rows?`)) return;
+    DATA=parsed.map((r,i)=>({...r,_id:i}));
+    nextId=DATA.length; activeGroup=null;
+    saveData(); buildSidebar(); renderTable();
+  };
+  reader.readAsText(file);
+}
+function parseCSVFile(text){
+  const lines=text.split('\n');if(!lines.length) return [];
+  const headers=parseCSVRow(lines[0]);const rows=[];
+  for(let i=1;i<lines.length;i++){const line=lines[i].trim();if(!line) continue;const vals=parseCSVRow(line);const obj={};headers.forEach((h,j)=>{if(h)obj[h]=vals[j]||'';});rows.push(obj);}
+  return rows;
+}
+function parseCSVRow(line){
+  const result=[];let cur='',inQ=false;
+  for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'&&inQ&&line[i+1]==='"'){cur+='"';i++;}else if(ch==='"'){inQ=!inQ;}else if(ch===','&&!inQ){result.push(cur);cur='';}else cur+=ch;}
+  result.push(cur);return result;
+}
+
+// ── INIT ───────────────────────────────────────────────────
+document.getElementById('search').addEventListener('input',e=>{ searchVal=e.target.value; renderTable(); });
+const addTokenBtn=document.getElementById('add-token-btn');
+const addTokenDrop=document.getElementById('add-token-drop');
+addTokenBtn.addEventListener('click',e=>{ e.stopPropagation(); addTokenDrop.style.display=addTokenDrop.style.display==='block'?'none':'block'; });
+document.addEventListener('click',()=>{ addTokenDrop.style.display='none'; });
+addTokenDrop.addEventListener('click',e=>e.stopPropagation());
+document.querySelectorAll('.plt-opt').forEach(opt=>{
+  opt.addEventListener('click',()=>{ addTokenDrop.style.display='none'; addRow(opt.dataset.plt); });
+});
+
+// Settings dropdown
+const settingsBtn=document.getElementById('settings-btn');
+const settingsDrop=document.getElementById('settings-drop');
+settingsBtn.addEventListener('click',e=>{ e.stopPropagation(); settingsDrop.classList.toggle('open'); });
+document.addEventListener('click',()=>settingsDrop.classList.remove('open'));
+settingsDrop.addEventListener('click',e=>e.stopPropagation());
+document.getElementById('tog-win').addEventListener('change',e=>{ showWinBadge=e.target.checked; renderTable(); });
+document.getElementById('tog-and').addEventListener('change',e=>{ showAndBadge=e.target.checked; renderTable(); });
+document.getElementById('sd-reset').addEventListener('click',()=>{
+  if(!confirm('Reset all data to the original embedded data? All your edits will be lost.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  DATA=RAW.map((r,i)=>({...r,_id:i}));
+  nextId=DATA.length; activeGroup=null;
+  settingsDrop.classList.remove('open');
+  buildSidebar(); renderTable();
+});
+document.getElementById('export-btn').addEventListener('click',exportCSV);
+document.getElementById('save-html-btn').addEventListener('click',saveAsHTML);
+document.getElementById('import-btn').addEventListener('click',()=>document.getElementById('import-file').click());
+document.getElementById('import-file').addEventListener('change',e=>{ if(e.target.files[0]) importCSV(e.target.files[0]); e.target.value=''; });
+document.getElementById('sb-toggle').addEventListener('click',()=>{
+  document.getElementById('sidebar').classList.toggle('collapsed');
+});
+
+buildSidebar();
+renderTable();
+</script>
+</body>
+</html>
