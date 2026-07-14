@@ -5702,6 +5702,7 @@
   /* status pill colors map to legend dot colors */
   .tm-dot-deprecation { background: #c62828; }
   .tm-dot-migration   { background: #1565c0; }
+  .tm-dot-stays       { background: #7b1fa2; }
 
   .tm-status {
     display: inline-block;
@@ -5711,16 +5712,9 @@
     border-radius: 100px;
     white-space: nowrap;
   }
-  .tm-status-deprecation { background: var(--c-red-soft);  color: var(--c-red); }
-  .tm-status-migration   { background: var(--c-blue-soft); color: var(--c-blue); }
-
-  /* stack two pills in the Match cell */
-  .tm-status-stack {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
+  .tm-status-deprecation { background: var(--c-red-soft);    color: var(--c-red); }
+  .tm-status-migration   { background: var(--c-blue-soft);   color: var(--c-blue); }
+  .tm-status-stays       { background: var(--c-purple-soft); color: var(--c-purple); }
 
   .tm-mig-wrap {
     border: 1px solid var(--c-border);
@@ -5812,6 +5806,7 @@
   .tm-mig-table tr.tm-row-migration td:first-child   { box-shadow: inset 3px 0 0 var(--c-blue); }
   .tm-mig-table tr.tm-row-deprecation td:first-child { box-shadow: inset 3px 0 0 var(--c-red); }
   .tm-mig-table tr.tm-row-fixed td:first-child       { box-shadow: inset 3px 0 0 var(--c-orange); }
+  .tm-mig-table tr.tm-row-stays td:first-child       { box-shadow: inset 3px 0 0 var(--c-purple); }
 
   @media (max-width: 720px) {
     .tm-mig-table { min-width: 880px; }
@@ -5884,7 +5879,7 @@
   <header class="docs-header">
     <div class="eyebrow">Migration Guide &middot; Execution Report</div>
     <h1>Teams Migration &mdash; Surface &amp; Stroke</h1>
-    <p class="subtitle">Mappings derived by <strong>purpose</strong>, not name similarity, and re-verified against the <a href="#page-surface-system">CXD canonical semantic</a>. Every row carries two independent pills: <strong>Deprecation</strong> (the old token is retiring &mdash; do not use in new components) and <strong>Migration</strong> (a CXD target exists &mdash; adopt it in new components). A row may show both, one, or neither. Swatches show L1 values.</p>
+    <p class="subtitle">Mappings derived by <strong>purpose</strong>, not name similarity, and re-verified against the <a href="#page-surface-system">CXD canonical semantic</a>. Each row carries one pill: <strong>Migration</strong> (a CXD target exists &mdash; adopt it in new components; the old token, if any, is implicitly deprecated by the rename), <strong>Deprecation</strong> (retiring with no CXD target), or <strong>Stays</strong> (remains in use pending future <code>State/*</code> tokens). Swatches show L1 values.</p>
     <div class="meta">
       <span>17 mapping rules &middot; 2,770 bindings rebound</span>
       <span>0 failures &middot; 23 deferred</span>
@@ -5913,10 +5908,11 @@
       <section class="spec-section" id="legend">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Status Legend <a href="#legend" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The Match column carries two independent pills. They are additive: a row can show both (an old token being retired that already has a CXD replacement), one, or neither (informational rows). A row with only <em>Deprecation</em> means &ldquo;stop using this &mdash; no CXD-canonical target exists yet.&rdquo; A row with only <em>Migration</em> means &ldquo;adopt this &mdash; no legacy binding to remove.&rdquo;</p>
+        <p class="section-intro">The Match column carries exactly one pill per row. Migration implies deprecation of the old token &mdash; no separate Deprecation pill is shown when a CXD replacement already exists. Deprecation is reserved for tokens that are retiring without a canonical replacement.</p>
         <div class="tm-legend">
-          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-deprecation"></span><strong>Deprecation</strong> &mdash; old token does not map 1:1; do not use in new components</span>
-          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-migration"></span><strong>Migration</strong> &mdash; a CXD canonical target exists; adopt it in new components</span>
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-migration"></span><strong>Migration</strong> &mdash; a CXD canonical target exists; adopt it in new components (old token, if any, is implicitly deprecated)</span>
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-deprecation"></span><strong>Deprecation</strong> &mdash; retiring with no CXD-canonical target; stop using in new components</span>
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-stays"></span><strong>Stays</strong> &mdash; token remains in use pending future <code>State/*</code> tokens; keep using it</span>
         </div>
       </section>
 
@@ -5924,7 +5920,7 @@
       <section class="spec-section" id="mappings">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Token Mappings <a href="#mappings" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Light (L) and Dark (D) swatches show the canonical L1 value for each token. The arrow indicates the CXD-canonical migration target; the Match column carries the Deprecation and Migration pills so you can see at a glance which side of a row applies to a new component and which side applies to legacy cleanup.</p>
+        <p class="section-intro">Light (L) and Dark (D) swatches show the canonical L1 value for each token. The arrow indicates the CXD-canonical migration target; the Match column tells you at a glance whether to adopt the new token (Migration), let the current token stand (Stays), or stop using it entirely (Deprecation).</p>
 
         <div class="tm-mig-wrap">
           <div class="tm-mig-scroll">
@@ -5952,7 +5948,7 @@
                   <td><span class="tm-token">Surface/Canvas</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Root canvas plane / app body. Rename only &mdash; values identical.</td>
                 </tr>
                 <tr class="tm-row-migration">
@@ -5963,7 +5959,7 @@
                   <td><span class="tm-token">Surface/Overlay</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#1A1A1A;"></span>#1A1A1A</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Modal surfaces: sheets, popovers, modals (all block interaction).</td>
                 </tr>
                 <tr class="tm-row-fixed">
@@ -5974,7 +5970,7 @@
                   <td><span class="tm-token">Surface/RaisedPrimary</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E0E0E0;"></span>#E0E0E0</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#3D3D3D;"></span>#3D3D3D</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Elevated emphasized surface via color &rarr; standard raised surface for cards, panels, sheets at default elevation. <strong>CXD fix:</strong> was <code>Surface/Raised</code>, which is not a CXD token; correct target is <code>Surface/RaisedPrimary</code>.</td>
                 </tr>
                 <tr class="tm-row-migration">
@@ -5985,7 +5981,7 @@
                   <td><span class="tm-token">Surface/RaisedBase</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F0F0F0;"></span>#F0F0F0</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#333333;"></span>#333333</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Lightly-colored contained background &rarr; standard screen-level surface. Purpose corrected from name-match (was &rarr; <code>Surface/Subtle</code>).</td>
                 </tr>
                 <tr class="tm-row-migration">
@@ -5996,7 +5992,7 @@
                   <td><span class="tm-token">Surface/RaisedBase</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F0F0F0;"></span>#F0F0F0</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#333333;"></span>#333333</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Same as Subtle Fill; consolidates into <code>RaisedBase</code>. Purpose corrected from name-match (was &rarr; <code>Surface/Subtle</code>).</td>
                 </tr>
                 <tr class="tm-row-migration">
@@ -6007,7 +6003,7 @@
                   <td><span class="tm-token">Surface/Subtle</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:rgba(0,0,0,0.01);"></span>#000000 1%</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:rgba(255,255,255,0.03);"></span>#FFFFFF 3%</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Transparent / matches-behind &rarr; subtle alpha overlay for lists and grouping.</td>
                 </tr>
                 <tr class="tm-row-migration">
@@ -6018,7 +6014,7 @@
                   <td><span class="tm-token">Surface/SubtleSelected</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F0F0F0;"></span>#F0F0F0</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#242424;"></span>#242424</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Selected state on subtle regions.</td>
                 </tr>
                 <tr class="tm-row-migration">
@@ -6029,7 +6025,7 @@
                   <td><span class="tm-token">Surface/Quaternary</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#1A1A1A;"></span>#1A1A1A</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Bottom tab bar (platform-targetable for OS materials).</td>
                 </tr>
                 <tr class="tm-row-migration">
@@ -6040,7 +6036,7 @@
                   <td><span class="tm-token">Surface/Dominant</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Header chrome / large title (platform-targetable, iOS 26).</td>
                 </tr>
                 <tr class="tm-row-fixed">
@@ -6051,7 +6047,7 @@
                   <td><span class="tm-token">Stroke/Divider</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E0E0E0;"></span>#E0E0E0</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#3D3D3D;"></span>#3D3D3D</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Separator line &rarr; quiet always-on separation stroke. <strong>CXD fix:</strong> was <code>Stroke/Default</code>, which is not a CXD token; correct target is <code>Stroke/Divider</code>.</td>
                 </tr>
                 <tr class="tm-row-fixed">
@@ -6062,7 +6058,7 @@
                   <td><span class="tm-token">Stroke/Container (outer)</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#C2C2C2;"></span>#C2C2C2</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#4D4D4D;"></span>#4D4D4D</span></td>
-                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
                   <td class="col-purpose">Standard component/container border &rarr; card and grouped-region edges. <strong>CXD fix:</strong> was <code>Stroke/Default</code>; correct target for card edges is <code>Stroke/Container (outer)</code> (row-separator use should instead go to <code>Stroke/Divider</code>).</td>
                 </tr>
 
@@ -6101,8 +6097,8 @@
                   <td class="col-purpose">Alpha edge for floating/overlay surfaces &mdash; popovers, menus, sheets.</td>
                 </tr>
 
-                <!-- Deprecation-only: no CXD-canonical target yet ─── -->
-                <tr class="tm-row-deprecation">
+                <!-- Stays: token remains in use pending future State/* ─── -->
+                <tr class="tm-row-stays">
                   <td><span class="tm-token">Surface/Danger</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F9D9D9;"></span>#F9D9D9</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#250909;"></span>#250909</span></td>
@@ -6110,10 +6106,10 @@
                   <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
-                  <td><span class="tm-status tm-status-deprecation">Deprecation</span></td>
-                  <td class="col-purpose">Error/destructive surface &mdash; future <code>State/Critical</code>. Do not adopt in new components; a CXD-canonical target will land in the State/* layer.</td>
+                  <td><span class="tm-status tm-status-stays">Stays</span></td>
+                  <td class="col-purpose">Error/destructive surface &mdash; remains in use as <code>Surface/Danger</code>. Will move to <code>State/Critical</code> when the State/* layer lands; keep using the current token until then.</td>
                 </tr>
-                <tr class="tm-row-deprecation">
+                <tr class="tm-row-stays">
                   <td><span class="tm-token">Surface/Accent</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#654CF5;"></span>#654CF5</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#8A80FF;"></span>#8A80FF</span></td>
@@ -6121,10 +6117,10 @@
                   <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
-                  <td><span class="tm-status tm-status-deprecation">Deprecation</span></td>
-                  <td class="col-purpose">Branded emphasis &mdash; future <code>State/Accent</code> (5 variants in Brand collection). The current <code>Surface/Accent</code> stays live in CXD but is scheduled for restructure; new components should pair with <code>Text/On Accent</code> and <code>Icon/On Accent</code>.</td>
+                  <td><span class="tm-status tm-status-stays">Stays</span></td>
+                  <td class="col-purpose">Branded emphasis &mdash; remains in use as <code>Surface/Accent</code>, paired with <code>Text/On Accent</code> and <code>Icon/On Accent</code>. Will move to <code>State/Accent</code> (5 variants in Brand collection) when the State/* layer lands.</td>
                 </tr>
-                <tr class="tm-row-deprecation">
+                <tr class="tm-row-stays">
                   <td><span class="tm-token">Surface/Dissabled</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F1F1F1;"></span>#F1F1F1</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
@@ -6132,8 +6128,8 @@
                   <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
-                  <td><span class="tm-status tm-status-deprecation">Deprecation</span></td>
-                  <td class="col-purpose">Disabled surface &mdash; future <code>State/Disabled</code> (typo in source name).</td>
+                  <td><span class="tm-status tm-status-stays">Stays</span></td>
+                  <td class="col-purpose">Disabled surface &mdash; remains in use (typo in source name preserved for binding stability). Will move to <code>State/Disabled</code> when the State/* layer lands.</td>
                 </tr>
               </tbody>
             </table>
