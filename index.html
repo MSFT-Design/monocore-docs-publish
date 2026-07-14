@@ -5700,10 +5700,8 @@
   }
 
   /* status pill colors map to legend dot colors */
-  .tm-dot-1to1       { background: #2e7d32; }
-  .tm-dot-corrected  { background: #e65100; }
-  .tm-dot-new        { background: #1565c0; }
-  .tm-dot-stays      { background: #7b1fa2; }
+  .tm-dot-deprecation { background: #c62828; }
+  .tm-dot-migration   { background: #1565c0; }
 
   .tm-status {
     display: inline-block;
@@ -5713,10 +5711,16 @@
     border-radius: 100px;
     white-space: nowrap;
   }
-  .tm-status-1to1       { background: var(--c-green-soft);  color: var(--c-green); }
-  .tm-status-corrected  { background: var(--c-orange-soft); color: var(--c-orange); }
-  .tm-status-new        { background: var(--c-blue-soft);   color: var(--c-blue); }
-  .tm-status-stays      { background: var(--c-purple-soft); color: var(--c-purple); }
+  .tm-status-deprecation { background: var(--c-red-soft);  color: var(--c-red); }
+  .tm-status-migration   { background: var(--c-blue-soft); color: var(--c-blue); }
+
+  /* stack two pills in the Match cell */
+  .tm-status-stack {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 
   .tm-mig-wrap {
     border: 1px solid var(--c-border);
@@ -5760,7 +5764,7 @@
     color: var(--c-text-muted);
     font-size: 15px;
   }
-  .tm-mig-table .col-match { width: 110px; }
+  .tm-mig-table .col-match { width: 132px; }
   .tm-mig-table .col-purpose {
     color: var(--c-text-secondary);
     line-height: 1.5;
@@ -5804,10 +5808,10 @@
     font-size: 12px;
   }
 
-  /* corrected row gets a subtle left accent so it stands out */
-  .tm-mig-table tr.tm-row-corrected td:first-child { box-shadow: inset 3px 0 0 var(--c-orange); }
-  .tm-mig-table tr.tm-row-new td:first-child       { box-shadow: inset 3px 0 0 var(--c-blue); }
-  .tm-mig-table tr.tm-row-stays td:first-child     { box-shadow: inset 3px 0 0 var(--c-purple); }
+  /* left accent by row purpose */
+  .tm-mig-table tr.tm-row-migration td:first-child   { box-shadow: inset 3px 0 0 var(--c-blue); }
+  .tm-mig-table tr.tm-row-deprecation td:first-child { box-shadow: inset 3px 0 0 var(--c-red); }
+  .tm-mig-table tr.tm-row-fixed td:first-child       { box-shadow: inset 3px 0 0 var(--c-orange); }
 
   @media (max-width: 720px) {
     .tm-mig-table { min-width: 880px; }
@@ -5880,10 +5884,11 @@
   <header class="docs-header">
     <div class="eyebrow">Migration Guide &middot; Execution Report</div>
     <h1>Teams Migration &mdash; Surface &amp; Stroke</h1>
-    <p class="subtitle">Mappings derived by <strong>purpose</strong>, not name similarity. The upper sections describe the original mapping logic; the lower sections document the variable-collection merge and file-wide rebind sweep that has since executed across <strong>Teams 2 iOS (CAP)</strong>. Swatches show L1 values.</p>
+    <p class="subtitle">Mappings derived by <strong>purpose</strong>, not name similarity, and re-verified against the <a href="#page-surface-system">CXD canonical semantic</a>. Every row carries two independent pills: <strong>Deprecation</strong> (the old token is retiring &mdash; do not use in new components) and <strong>Migration</strong> (a CXD target exists &mdash; adopt it in new components). A row may show both, one, or neither. Swatches show L1 values.</p>
     <div class="meta">
       <span>17 mapping rules &middot; 2,770 bindings rebound</span>
       <span>0 failures &middot; 23 deferred</span>
+      <span>3 targets repointed to CXD canonical</span>
       <span>Source: Teams 2 Mobile Variables (CAP)</span>
     </div>
   </header>
@@ -5897,7 +5902,7 @@
       <section class="spec-section" id="methodology">
         <span class="section-eyebrow eyebrow-design">Approach</span>
         <h2>Methodology <a href="#methodology" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The migration is driven by what each token <em>does</em>, not what it's called. A token that looks like it should map by name is only mapped that way when the underlying purpose also lines up. When the name suggests one target but the role belongs elsewhere, the mapping is flagged as <strong>corrected</strong>.</p>
+        <p class="section-intro">The migration is driven by what each token <em>does</em>, not what it's called. Every mapping target has been reconciled against the <strong>CXD canonical semantic</strong> published on the <a href="#page-surface-system">Semantic Surface System</a> page &mdash; three targets that were previously written against pre-CXD placeholders (<code>Surface/Raised</code>, <code>Stroke/Default</code>) have been repointed to their real CXD names.</p>
 
         <div class="callout callout-info">
           <strong>Backward-compatible by default.</strong> All previously named tokens remain available under the <code>[Deprecated]</code> prefix. No surfaces or strokes have been re-bound yet &mdash; the new tokens are introduced alongside the old ones so teams can migrate at their own pace.
@@ -5908,12 +5913,10 @@
       <section class="spec-section" id="legend">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Status Legend <a href="#legend" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Each row in the mapping table below carries one of four status markers, indicating how confident the migration is and whether the new target is finalized.</p>
+        <p class="section-intro">The Match column carries two independent pills. They are additive: a row can show both (an old token being retired that already has a CXD replacement), one, or neither (informational rows). A row with only <em>Deprecation</em> means &ldquo;stop using this &mdash; no CXD-canonical target exists yet.&rdquo; A row with only <em>Migration</em> means &ldquo;adopt this &mdash; no legacy binding to remove.&rdquo;</p>
         <div class="tm-legend">
-          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-1to1"></span>clean 1:1 (purpose match)</span>
-          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-corrected"></span>corrected (was a name-match)</span>
-          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-new"></span>new token</span>
-          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-stays"></span>stays (future State/*)</span>
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-deprecation"></span><strong>Deprecation</strong> &mdash; old token does not map 1:1; do not use in new components</span>
+          <span class="tm-legend-item"><span class="tm-legend-dot tm-dot-migration"></span><strong>Migration</strong> &mdash; a CXD canonical target exists; adopt it in new components</span>
         </div>
       </section>
 
@@ -5921,7 +5924,7 @@
       <section class="spec-section" id="mappings">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Token Mappings <a href="#mappings" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Light (L) and Dark (D) swatches show the canonical L1 value for each token. The arrow indicates the migration target; the match column tells you whether to trust the mapping at a glance.</p>
+        <p class="section-intro">Light (L) and Dark (D) swatches show the canonical L1 value for each token. The arrow indicates the CXD-canonical migration target; the Match column carries the Deprecation and Migration pills so you can see at a glance which side of a row applies to a new component and which side applies to legacy cleanup.</p>
 
         <div class="tm-mig-wrap">
           <div class="tm-mig-scroll">
@@ -5940,8 +5943,8 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- clean 1:1 mappings ─────────────────────────── -->
-                <tr>
+                <!-- Old ↔ CXD canonical mappings ────────────────── -->
+                <tr class="tm-row-migration">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Primary</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
@@ -5949,58 +5952,54 @@
                   <td><span class="tm-token">Surface/Canvas</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
-                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
-                  <td class="col-purpose">Root canvas plane / app body</td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Root canvas plane / app body. Rename only &mdash; values identical.</td>
                 </tr>
-                <tr>
+                <tr class="tm-row-migration">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Tertiary</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#141414;"></span>#141414</span></td>
                   <td class="col-arrow">→</td>
                   <td><span class="tm-token">Surface/Overlay</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#191919;"></span>#191919</span></td>
-                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
-                  <td class="col-purpose">Modal surfaces: sheets, popovers, modals (all block interaction)</td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#1A1A1A;"></span>#1A1A1A</span></td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Modal surfaces: sheets, popovers, modals (all block interaction).</td>
                 </tr>
-                <tr>
+                <tr class="tm-row-fixed">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Raised Fill</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F1F1F1;"></span>#F1F1F1</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
                   <td class="col-arrow">→</td>
-                  <td><span class="tm-token">Surface/Raised</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#EAEAEA;"></span>#EAEAEA</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
-                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
-                  <td class="col-purpose">Elevated emphasized surface via color</td>
+                  <td><span class="tm-token">Surface/RaisedPrimary</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E0E0E0;"></span>#E0E0E0</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#3D3D3D;"></span>#3D3D3D</span></td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Elevated emphasized surface via color &rarr; standard raised surface for cards, panels, sheets at default elevation. <strong>CXD fix:</strong> was <code>Surface/Raised</code>, which is not a CXD token; correct target is <code>Surface/RaisedPrimary</code>.</td>
                 </tr>
-
-                <!-- corrected ───────────────────────────────────── -->
-                <tr class="tm-row-corrected">
+                <tr class="tm-row-migration">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Subtle Fill</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F8F8F8;"></span>#F8F8F8</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
                   <td class="col-arrow">→</td>
                   <td><span class="tm-token">Surface/RaisedBase</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F5F5F5;"></span>#F5F5F5</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#191919;"></span>#191919</span></td>
-                  <td><span class="tm-status tm-status-corrected">corrected</span></td>
-                  <td class="col-purpose">Lightly-colored contained background &rarr; standard contained surface (was wrongly &rarr; Subtle)</td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F0F0F0;"></span>#F0F0F0</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#333333;"></span>#333333</span></td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Lightly-colored contained background &rarr; standard screen-level surface. Purpose corrected from name-match (was &rarr; <code>Surface/Subtle</code>).</td>
                 </tr>
-                <tr class="tm-row-corrected">
+                <tr class="tm-row-migration">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Subtle Base</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F8F8F8;"></span>#F8F8F8</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#141414;"></span>#141414</span></td>
                   <td class="col-arrow">→</td>
                   <td><span class="tm-token">Surface/RaisedBase</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F5F5F5;"></span>#F5F5F5</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#191919;"></span>#191919</span></td>
-                  <td><span class="tm-status tm-status-corrected">corrected</span></td>
-                  <td class="col-purpose">Same as Subtle Fill; consolidates into Base (was wrongly &rarr; Subtle)</td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F0F0F0;"></span>#F0F0F0</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#333333;"></span>#333333</span></td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Same as Subtle Fill; consolidates into <code>RaisedBase</code>. Purpose corrected from name-match (was &rarr; <code>Surface/Subtle</code>).</td>
                 </tr>
-
-                <!-- clean 1:1 continued ─────────────────────────── -->
-                <tr>
+                <tr class="tm-row-migration">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Secondary</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
@@ -6008,10 +6007,10 @@
                   <td><span class="tm-token">Surface/Subtle</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:rgba(0,0,0,0.01);"></span>#000000 1%</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:rgba(255,255,255,0.03);"></span>#FFFFFF 3%</span></td>
-                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
-                  <td class="col-purpose">Transparent / matches-behind &rarr; subtle alpha overlay (lists, grouping)</td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Transparent / matches-behind &rarr; subtle alpha overlay for lists and grouping.</td>
                 </tr>
-                <tr>
+                <tr class="tm-row-migration">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Selected</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F1F1F1;"></span>#F1F1F1</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
@@ -6019,21 +6018,21 @@
                   <td><span class="tm-token">Surface/SubtleSelected</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F0F0F0;"></span>#F0F0F0</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#242424;"></span>#242424</span></td>
-                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
-                  <td class="col-purpose">Selected state on subtle regions</td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Selected state on subtle regions.</td>
                 </tr>
-                <tr>
+                <tr class="tm-row-migration">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Quaternary</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#ACACAC;"></span>#ACACAC</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#404040;"></span>#404040</span></td>
                   <td class="col-arrow">→</td>
                   <td><span class="tm-token">Surface/Quaternary</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
-                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
-                  <td class="col-purpose">Bottom tab bar (platform-targetable for OS materials)</td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#1A1A1A;"></span>#1A1A1A</span></td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Bottom tab bar (platform-targetable for OS materials).</td>
                 </tr>
-                <tr>
+                <tr class="tm-row-migration">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Dominant</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
@@ -6041,36 +6040,34 @@
                   <td><span class="tm-token">Surface/Dominant</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
-                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
-                  <td class="col-purpose">Header chrome / large title (platform-targetable, iOS 26)</td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Header chrome / large title (platform-targetable, iOS 26).</td>
                 </tr>
-                <tr>
+                <tr class="tm-row-fixed">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Divider</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td class="col-arrow">→</td>
-                  <td><span class="tm-token">Stroke/Default</span></td>
+                  <td><span class="tm-token">Stroke/Divider</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E0E0E0;"></span>#E0E0E0</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#3D3D3D;"></span>#3D3D3D</span></td>
-                  <td><span class="tm-status tm-status-1to1">1:1</span></td>
-                  <td class="col-purpose">Separator line &rarr; everyday separation stroke</td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Separator line &rarr; quiet always-on separation stroke. <strong>CXD fix:</strong> was <code>Stroke/Default</code>, which is not a CXD token; correct target is <code>Stroke/Divider</code>.</td>
                 </tr>
-
-                <!-- corrected (stroke) ──────────────────────────── -->
-                <tr class="tm-row-corrected">
+                <tr class="tm-row-fixed">
                   <td><span class="tm-token"><span class="tm-deprecated">Surface/[Deprecated]</span> Border Dominant</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#303030;"></span>#303030</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E1E1E1;"></span>#E1E1E1</span></td>
                   <td class="col-arrow">→</td>
-                  <td><span class="tm-token">Stroke/Default</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E0E0E0;"></span>#E0E0E0</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#3D3D3D;"></span>#3D3D3D</span></td>
-                  <td><span class="tm-status tm-status-corrected">corrected</span></td>
-                  <td class="col-purpose">Standard border &rarr; everyday stroke (was wrongly &rarr; Stroke/Elevated (outside))</td>
+                  <td><span class="tm-token">Stroke/Container (outer)</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#C2C2C2;"></span>#C2C2C2</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#4D4D4D;"></span>#4D4D4D</span></td>
+                  <td><span class="tm-status-stack"><span class="tm-status tm-status-deprecation">Deprecation</span><span class="tm-status tm-status-migration">Migration</span></span></td>
+                  <td class="col-purpose">Standard component/container border &rarr; card and grouped-region edges. <strong>CXD fix:</strong> was <code>Stroke/Default</code>; correct target for card edges is <code>Stroke/Container (outer)</code> (row-separator use should instead go to <code>Stroke/Divider</code>).</td>
                 </tr>
 
-                <!-- new tokens ──────────────────────────────────── -->
-                <tr class="tm-row-new">
+                <!-- Migration-only: new CXD tokens with no legacy analog ─── -->
+                <tr class="tm-row-migration">
                   <td><span class="tm-token tm-token-empty">(no old equivalent)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
@@ -6078,10 +6075,10 @@
                   <td><span class="tm-token">Surface/Primary</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#FFFFFF;"></span>#FFFFFF</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#000000;"></span>#000000</span></td>
-                  <td><span class="tm-status tm-status-new">new</span></td>
-                  <td class="col-purpose">High-contrast card &mdash; holds white/black even when raised or on Overlay</td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
+                  <td class="col-purpose">High-contrast card &mdash; holds white/black even when raised or on Overlay.</td>
                 </tr>
-                <tr class="tm-row-new">
+                <tr class="tm-row-migration">
                   <td><span class="tm-token tm-token-empty">(no old equivalent)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
@@ -6089,23 +6086,23 @@
                   <td><span class="tm-token">Stroke/Accessible</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#616161;"></span>#616161</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#ADADAD;"></span>#ADADAD</span></td>
-                  <td><span class="tm-status tm-status-new">new</span></td>
-                  <td class="col-purpose">High-contrast outline for inputs and focus rings (Grey 38/68)</td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
+                  <td class="col-purpose">High-contrast outline for inputs and focus rings (Grey 38/68).</td>
                 </tr>
-                <tr class="tm-row-new">
+                <tr class="tm-row-migration">
                   <td><span class="tm-token tm-token-empty">(no old equivalent)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td class="col-arrow">→</td>
                   <td><span class="tm-token">Stroke/Elevated (outside)</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#D1D1D1;"></span>#D1D1D1</span></td>
-                  <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#4D4D4D;"></span>#4D4D4D</span></td>
-                  <td><span class="tm-status tm-status-new">new</span></td>
-                  <td class="col-purpose">Edge for floating/overlay surfaces &mdash; popovers, menus, sheets</td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch checker" style="background:rgba(0,0,0,0.05);"></span>Black &alpha;5%</span></td>
+                  <td><span class="tm-swatch-row"><span class="tm-swatch checker" style="background:rgba(255,255,255,0.24);"></span>White &alpha;24%</span></td>
+                  <td><span class="tm-status tm-status-migration">Migration</span></td>
+                  <td class="col-purpose">Alpha edge for floating/overlay surfaces &mdash; popovers, menus, sheets.</td>
                 </tr>
 
-                <!-- stays (future State/*) ──────────────────────── -->
-                <tr class="tm-row-stays">
+                <!-- Deprecation-only: no CXD-canonical target yet ─── -->
+                <tr class="tm-row-deprecation">
                   <td><span class="tm-token">Surface/Danger</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F9D9D9;"></span>#F9D9D9</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#250909;"></span>#250909</span></td>
@@ -6113,10 +6110,10 @@
                   <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
-                  <td><span class="tm-status tm-status-stays">stays</span></td>
-                  <td class="col-purpose">Error/destructive surface &mdash; future <code>State/Critical</code></td>
+                  <td><span class="tm-status tm-status-deprecation">Deprecation</span></td>
+                  <td class="col-purpose">Error/destructive surface &mdash; future <code>State/Critical</code>. Do not adopt in new components; a CXD-canonical target will land in the State/* layer.</td>
                 </tr>
-                <tr class="tm-row-stays">
+                <tr class="tm-row-deprecation">
                   <td><span class="tm-token">Surface/Accent</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#654CF5;"></span>#654CF5</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#8A80FF;"></span>#8A80FF</span></td>
@@ -6124,10 +6121,10 @@
                   <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
-                  <td><span class="tm-status tm-status-stays">stays</span></td>
-                  <td class="col-purpose">Branded emphasis &mdash; future <code>State/Accent</code> (5 variants in Brand collection)</td>
+                  <td><span class="tm-status tm-status-deprecation">Deprecation</span></td>
+                  <td class="col-purpose">Branded emphasis &mdash; future <code>State/Accent</code> (5 variants in Brand collection). The current <code>Surface/Accent</code> stays live in CXD but is scheduled for restructure; new components should pair with <code>Text/On Accent</code> and <code>Icon/On Accent</code>.</td>
                 </tr>
-                <tr class="tm-row-stays">
+                <tr class="tm-row-deprecation">
                   <td><span class="tm-token">Surface/Dissabled</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#F1F1F1;"></span>#F1F1F1</span></td>
                   <td><span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></td>
@@ -6135,8 +6132,8 @@
                   <td><span class="tm-token tm-token-empty">(awaiting State/*)</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
                   <td><span class="tm-empty">&mdash;</span></td>
-                  <td><span class="tm-status tm-status-stays">stays</span></td>
-                  <td class="col-purpose">Disabled surface &mdash; future <code>State/Disabled</code> (typo in source name)</td>
+                  <td><span class="tm-status tm-status-deprecation">Deprecation</span></td>
+                  <td class="col-purpose">Disabled surface &mdash; future <code>State/Disabled</code> (typo in source name).</td>
                 </tr>
               </tbody>
             </table>
@@ -6152,15 +6149,17 @@
 
         <h3>Corrections</h3>
         <ul style="margin: var(--sp-2) 0 var(--sp-4) var(--sp-5); color: var(--c-text-secondary); line-height: 1.7;">
-          <li><strong>Subtle Fill / Subtle Base &rarr; Base</strong> (not Subtle). The old "Subtle" labels described a contained surface, not an alpha overlay &mdash; the purpose belongs to <code>Surface/RaisedBase</code>.</li>
-          <li><strong>Border Dominant &rarr; Stroke/Default</strong> (not Stroke/Elevated (outside)). It's the standard separation stroke, not the edge of a floating surface.</li>
-          <li><strong>Tertiary &rarr; Overlay</strong>: a clean mapping. Sheets, popovers, and modals are all modal/blocking surfaces and share the same role.</li>
+          <li><strong>Subtle Fill / Subtle Base &rarr; RaisedBase</strong> (not Subtle). The old &ldquo;Subtle&rdquo; labels described a contained surface, not an alpha overlay &mdash; the purpose belongs to <code>Surface/RaisedBase</code>.</li>
+          <li><strong>Raised Fill &rarr; RaisedPrimary</strong>. Originally written against <code>Surface/Raised</code>, which is not a CXD-canonical token. The CXD ladder splits Raised into <code>RaisedBase</code>, <code>RaisedPrimary</code>, <code>RaisedSecondary</code>, and <code>RaisedTertiary</code>; the &ldquo;elevated card&rdquo; role belongs to <code>RaisedPrimary</code>.</li>
+          <li><strong>Divider &rarr; Stroke/Divider</strong>. Originally written against <code>Stroke/Default</code>, which is not a CXD-canonical token; the quiet always-on separator role is now published as <code>Stroke/Divider</code>. Values (<code>#E0E0E0</code>/<code>#3D3D3D</code>) are unchanged.</li>
+          <li><strong>Border Dominant &rarr; Stroke/Container (outer)</strong>. Formerly mapped to <code>Stroke/Default</code>; the &ldquo;standard component border&rdquo; role is served by <code>Stroke/Container (outer)</code> in CXD (row-separators use <code>Stroke/Divider</code> instead).</li>
+          <li><strong>Tertiary &rarr; Overlay</strong>: a clean rename. Sheets, popovers, and modals are all modal/blocking surfaces and share the same role.</li>
           <li><strong>Floating</strong> (notifications, toasts) had no old equivalent &mdash; the role is new.</li>
         </ul>
 
         <h3>Stroke ladder</h3>
         <div class="callout callout-info" style="margin-top: var(--sp-2);">
-          <strong>Three tokens, three jobs, real perceptual gaps.</strong> <code>Stroke/Default</code> (88/24) is the quiet always-on separator. <code>Stroke/Elevated (outside)</code> (82/30) handles floating and overlay surface edges. <code>Stroke/Accessible</code> (38/68) is the high-contrast outline for inputs and focus rings.
+          <strong>CXD publishes six stroke tokens; three carry the Teams-migration load.</strong> <code>Stroke/Divider</code> (88/24) is the quiet always-on separator. <code>Stroke/Container (outer)</code> (76/30) is the standard card edge. <code>Stroke/Elevated (outside)</code> (α5/α24) handles floating and overlay surface edges. <code>Stroke/Accessible</code> (38/68) is the high-contrast outline for inputs and focus rings. <code>Stroke/ContainerRaised</code> and <code>Stroke/onMedia (outer)</code> cover the remaining specialty edges.
         </div>
       </section>
 
@@ -6324,18 +6323,18 @@
             <tbody>
               <tr><td class="tm-mono">Surface/Secondary Selected</td><td class="tm-mono">Surface/SubtleSelected</td><td class="tm-num">33</td></tr>
               <tr><td class="tm-mono">Surface/HoverItem</td><td class="tm-mono">Surface/SubtleHover</td><td class="tm-num">24</td></tr>
-              <tr><td class="tm-mono">Surface/RaisedFill</td><td class="tm-mono">Surface/Raised</td><td class="tm-num">3</td></tr>
-              <tr><td class="tm-mono">Neutral/Stroke/Transparent/Rest</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">91</td></tr>
-              <tr><td class="tm-mono">Neutral/Stroke/on Brand/1/Rest</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">39</td></tr>
-              <tr><td class="tm-mono">Neutral/Stroke/1/Rest</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">2</td></tr>
-              <tr><td class="tm-mono">Neutral/Background/1/Rest</td><td class="tm-mono">Surface/Raised</td><td class="tm-num">9</td></tr>
-              <tr><td class="tm-mono">Neutral/Background/2/Rest</td><td class="tm-mono">Surface/Raised</td><td class="tm-num">5</td></tr>
-              <tr><td class="tm-mono">Neutral/Background/1/Hover</td><td class="tm-mono">Surface/Raised</td><td class="tm-num">3</td></tr>
+              <tr><td class="tm-mono">Surface/RaisedFill</td><td class="tm-mono">Surface/RaisedPrimary</td><td class="tm-num">3</td></tr>
+              <tr><td class="tm-mono">Neutral/Stroke/Transparent/Rest</td><td class="tm-mono">Stroke/Divider</td><td class="tm-num">91</td></tr>
+              <tr><td class="tm-mono">Neutral/Stroke/on Brand/1/Rest</td><td class="tm-mono">Stroke/Divider</td><td class="tm-num">39</td></tr>
+              <tr><td class="tm-mono">Neutral/Stroke/1/Rest</td><td class="tm-mono">Stroke/Divider</td><td class="tm-num">2</td></tr>
+              <tr><td class="tm-mono">Neutral/Background/1/Rest</td><td class="tm-mono">Surface/RaisedPrimary</td><td class="tm-num">9</td></tr>
+              <tr><td class="tm-mono">Neutral/Background/2/Rest</td><td class="tm-mono">Surface/RaisedPrimary</td><td class="tm-num">5</td></tr>
+              <tr><td class="tm-mono">Neutral/Background/1/Hover</td><td class="tm-mono">Surface/RaisedPrimary</td><td class="tm-num">3</td></tr>
               <tr><td class="tm-mono">Neutral/Foreground/3/Rest</td><td class="tm-mono">Text/Primary</td><td class="tm-num">3</td></tr>
               <tr><td class="tm-mono">Subcomponent Fill</td><td class="tm-mono">Surface/Subtle</td><td class="tm-num">35</td></tr>
               <tr><td class="tm-mono">Component Fill</td><td class="tm-mono">Surface/Subtle</td><td class="tm-num">6</td></tr>
-              <tr><td class="tm-mono">Subcomponent Stroke</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">31</td></tr>
-              <tr><td class="tm-mono">Component Stroke</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">11</td></tr>
+              <tr><td class="tm-mono">Subcomponent Stroke</td><td class="tm-mono">Stroke/Container (outer)</td><td class="tm-num">31</td></tr>
+              <tr><td class="tm-mono">Component Stroke</td><td class="tm-mono">Stroke/Container (outer)</td><td class="tm-num">11</td></tr>
               <tr><td class="tm-mono">Text/Text-secondary</td><td class="tm-mono">Text/Secondary</td><td class="tm-num">12</td></tr>
               <tr><td class="tm-mono">Text/altSecondary</td><td class="tm-mono">Text/Secondary</td><td class="tm-num">9</td></tr>
               <tr><td class="tm-mono">Text/OnAccent</td><td class="tm-mono">Text/On Accent</td><td class="tm-num">1</td></tr>
@@ -6387,7 +6386,7 @@
               <tr><th class="tm-col-wide">Old token</th><th>New token</th><th class="tm-col-num">Bindings</th></tr>
             </thead>
             <tbody>
-              <tr><td class="tm-mono">Color/Surface/divider</td><td class="tm-mono">Stroke/Default</td><td class="tm-num">5</td></tr>
+              <tr><td class="tm-mono">Color/Surface/divider</td><td class="tm-mono">Stroke/Divider</td><td class="tm-num">5</td></tr>
               <tr><td class="tm-mono">Brand/AccentPrimary</td><td class="tm-mono">Brand/Accent Primary</td><td class="tm-num">3</td></tr>
               <tr><td class="tm-mono">Brand/AccentDominant</td><td class="tm-mono">Brand/Accent Dominant</td><td class="tm-num">3</td></tr>
               <tr><td class="tm-mono">Brand/AccentSecondary</td><td class="tm-mono">Brand/Accent Secondary</td><td class="tm-num">3</td></tr>
