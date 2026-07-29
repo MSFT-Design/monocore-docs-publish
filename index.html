@@ -2004,6 +2004,10 @@
         <a href="#badge-spec" data-link="badge-spec">Spec</a>
       </div>
       <div class="nav-section">
+        <div class="nav-section-label">Messaging</div>
+        <a href="#messaging" data-link="messaging">Spec</a>
+      </div>
+      <div class="nav-section">
         <div class="nav-section-label">Reference</div>
         <a href="#cold-start" data-link="cold-start">Cold Start Pipeline</a>
         <a href="#nested-elements" data-link="nested-elements">Nested Elements</a>
@@ -4608,6 +4612,305 @@
 
   <footer class="docs-footer">
     Badge &middot; Component Specification &middot; Figma: CXD-iOS (<code>alxBFZw33jyKUiuLXQ9oth</code>) &middot; Node <code>83392:62610</code>
+  </footer>
+
+</div>
+</div>
+
+<div class="page" id="page-messaging" data-page="messaging">
+
+<style>
+  .ms-family-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-4); margin: var(--sp-4) 0; }
+  @media (max-width: 720px) { .ms-family-cards { grid-template-columns: 1fr; } }
+  .ms-family {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+  }
+  .ms-family h4 { font-size: 15px; font-weight: 700; color: var(--mc-text-primary); margin: 0 0 4px; }
+  .ms-family .ms-context { font-size: 12.5px; color: var(--grey-56); margin-bottom: var(--sp-3); }
+  .ms-family dl { margin: 0; }
+  .ms-family dt { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--mc-brand-primary); margin-top: var(--sp-3); }
+  .ms-family dt:first-of-type { margin-top: 0; }
+  .ms-family dd { margin: 2px 0 0; font-size: 13px; color: var(--mc-text-secondary); line-height: 1.5; }
+</style>
+
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Messaging</div>
+    <h1>Messaging &mdash; Spec</h1>
+    <p class="subtitle">Two message families &mdash; <strong>Chat Message</strong> and <strong>Post</strong> &mdash; each spanning a compact L1 (feed/list) context and a full L2 (thread/detail) context. Values below are the confirmed convergence points from the Teams &harr; Viva Engage alignment work; open items live on the Architecture tab.</p>
+    <div class="meta">
+      <span>2 families</span>
+      <span>L1 + L2 contexts</span>
+      <span>Teams &harr; Engage aligned</span>
+      <span>Figma: CXD-iOS</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="msg-families">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Two Message Families <a href="#msg-families" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Everything under Messaging is one of two shapes. Both share the same underlying anatomy &mdash; avatar, header, body, reactions, reply/thread summary &mdash; but wrap it in different chrome depending on where the message lives.</p>
+
+        <div class="ms-family-cards">
+          <div class="ms-family">
+            <h4>Chat Message</h4>
+            <div class="ms-context">1:1 and group DM &middot; Teams</div>
+            <dl>
+              <dt>L1</dt>
+              <dd>Thread list preview &mdash; sender name, snippet, timestamp.</dd>
+              <dt>L2</dt>
+              <dd>Open conversation &mdash; bubble chrome, grouped consecutive messages, swipe actions.</dd>
+            </dl>
+          </div>
+          <div class="ms-family">
+            <h4>Post</h4>
+            <div class="ms-context">Channel &amp; community feed &middot; Teams + Viva Engage</div>
+            <dl>
+              <dt>L1</dt>
+              <dd>Feed card &mdash; subject, body preview, reactions row.</dd>
+              <dt>L2</dt>
+              <dd>Thread detail &mdash; full post, reply list, media gallery, compose bar.</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="msg-chat-variants">
+        <span class="section-eyebrow eyebrow-design">Chat Message</span>
+        <h2>Chat Message &mdash; Variant Catalog <a href="#msg-chat-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Named examples pulled from the Chat Message reference sheet. Every row is a distinct configuration of the same base component &mdash; not a separate component.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Example</th><th>What it shows</th></tr></thead>
+            <tbody>
+              <tr><td>Me / Other</td><td>Sender-side bubble styling: own messages right-aligned and accent-filled, received messages left-aligned and neutral.</td></tr>
+              <tr><td>Reactions + Reply summary</td><td>Emoji reaction row combined with a single aggregated &ldquo;N replies &middot; last reply {time}&rdquo; summary line.</td></tr>
+              <tr><td>Title message</td><td>Bold title-style opening line (e.g. an announcement), paired with a long-running reply thread.</td></tr>
+              <tr><td>Edit in place / Forwarded</td><td>An empty, focused text field replacing the body during editing, next to a message carrying a &ldquo;Forwarded&rdquo; label.</td></tr>
+              <tr><td>Sending / Failed to send</td><td>Transient delivery states: an in-flight &ldquo;Sending&hellip;&rdquo; indicator and a blocked &ldquo;Failed to send&rdquo; error state with a retry affordance.</td></tr>
+              <tr><td>Image / Meeting invite</td><td>Media-attachment variants: an inline image grid and a structured meeting-invite card.</td></tr>
+              <tr><td>Swipe right (reply) / Swipe left (delete)</td><td>Swipe-to-reveal action affordances on either edge of the bubble.</td></tr>
+              <tr><td>Merged messages / Merged + unread badge</td><td>Consecutive messages from the same sender collapsed into one grouped block, with an optional unread-count badge.</td></tr>
+              <tr><td>Merged + quoted reply / Merged + edited</td><td>A quoted-reply chiclet inside a grouped block, and a grouped block carrying an &ldquo;edited&rdquo; label.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="msg-post-variants">
+        <span class="section-eyebrow eyebrow-design">Post</span>
+        <h2>Post &mdash; Variant Catalog <a href="#msg-post-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Post spans two Figma feature-spec files from the Teams Engage Alignment work: an L1 feed context and an L2 thread-detail context. Rows below are drawn from both.</p>
+
+        <h3>L1 &mdash; Feed</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Example</th><th>What it shows</th></tr></thead>
+            <tbody>
+              <tr><td>Reactions only</td><td>Base post with body preview and reaction row, no reply activity yet.</td></tr>
+              <tr><td>Reactions + Reply summary</td><td>Reaction row plus an aggregated reply-count summary shown as its own row directly beneath.</td></tr>
+              <tr><td>Title post + long thread</td><td>Bold subject line with a heavily-replied thread (e.g. &ldquo;27 replies &middot; last reply 9:12 AM&rdquo;).</td></tr>
+              <tr><td>Poll / engagement prompt</td><td>Question-style post formatted to invite a direct reply rather than a reaction.</td></tr>
+              <tr><td>Sending / Edited / Failed</td><td>Same transient and edited-state pattern as Chat Message, applied to the Post shell.</td></tr>
+              <tr><td>Image attachment</td><td>Inline image within the post body.</td></tr>
+              <tr><td>Meeting invite</td><td>Structured meeting card embedded in the post body.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>L2 &mdash; Thread detail</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Example</th><th>What it shows</th></tr></thead>
+            <tbody>
+              <tr><td>Full post + reply list</td><td>Complete post header, body, media, and reaction row, followed by the full chronological reply list.</td></tr>
+              <tr><td>Media gallery</td><td>Multi-image attachment rendered as a grid within the open thread.</td></tr>
+              <tr><td>Swipe actions</td><td>Swipe-to-reveal options on individual replies within the thread.</td></tr>
+              <tr><td>Compose bar</td><td>Persistent reply composer pinned to the bottom of the thread view.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="msg-tokens">
+        <span class="section-eyebrow eyebrow-design">Confirmed</span>
+        <h2>Full Token Table <a href="#msg-tokens" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Values Teams and Viva Engage have already converged on. Everything here applies to both Chat Message and Post.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Value</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>Parent avatar</td><td><code>36px</code></td><td>Aligned across Teams and Engage.</td></tr>
+              <tr><td>Reply avatar</td><td><code>24px</code></td><td>Aligned &mdash; creates a clear visual hierarchy between a message and its replies.</td></tr>
+              <tr><td>Reactions before overflow</td><td><code>3</code></td><td>Additional reaction types collapse into an overflow count rather than expanding the row.</td></tr>
+              <tr><td>Body spacing</td><td><code>8dp</code> / <code>12dp</code></td><td>Two-value scale, not one fixed number &mdash; matches Monocore's combined nudge+regular spacing tokens (see Spacing).</td></tr>
+              <tr><td>Content density</td><td>Aligned</td><td>Overall information density matches between the two surfaces.</td></tr>
+              <tr><td>Indentation</td><td>Aligned</td><td>Cardless layout with an accent-colored left indentation bar marking each top-level post &mdash; kept even though it complicates telling separate posts apart at a glance (open item, see Architecture).</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#msg-families">Two Message Families</a>
+        <a href="#msg-chat-variants">Chat Message &mdash; Variant Catalog</a>
+        <a href="#msg-post-variants">Post &mdash; Variant Catalog</a>
+        <a href="#msg-tokens">Full Token Table</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Messaging &middot; Spec view &middot; Source: CXD-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> &middot; nodes <code>106958:179965</code>, <code>107152:24634</code>, <code>106968:24005</code> &middot; July 2026
+  </footer>
+
+</div>
+</div>
+
+<div class="page" id="page-messaging-guidance" data-page="messaging-guidance">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Messaging</div>
+    <h1>Guidance</h1>
+    <p class="subtitle">Interaction rules that keep Chat Message and Post behaving the same way regardless of which surface renders them.</p>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="mg-behaviors">
+        <span class="section-eyebrow eyebrow-design">Behavior</span>
+        <h2>Core Interaction Rules <a href="#mg-behaviors" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Behavior</th><th>Rule</th></tr></thead>
+            <tbody>
+              <tr><td>See more</td><td>Expands the message inline, in place, without navigating away or opening a separate view. Appears once body copy passes 4 lines. No separate &ldquo;read more&rdquo; screen.</td></tr>
+              <tr><td>Reactions overflow</td><td>Show up to 3 reaction types inline, with a person's name attached to the first one; collapse anything beyond that into a single overflow count rather than wrapping the row.</td></tr>
+              <tr><td>Reply summary</td><td>Surface reply count and reactions as one consolidated row directly under the message, not as two separate fragments competing for space.</td></tr>
+              <tr><td>Thread entry</td><td>Don't add a standalone &ldquo;Reply in thread&rdquo; compose row at the end of a thread. Entry into the thread happens through the same row that already holds the emoji and message actions.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="mg-alignment">
+        <span class="section-eyebrow eyebrow-design">Cross-platform</span>
+        <h2>Teams &harr; Engage Alignment <a href="#mg-alignment" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Recommendations already adopted from the alignment review. Use these when a value needs to be picked for either surface.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Area</th><th>Recommendation</th></tr></thead>
+            <tbody>
+              <tr><td>Avatar sizing</td><td>Align parent avatars at 36px and reply avatars at 24px across both surfaces &mdash; don't inherit either product's legacy sizing independently.</td></tr>
+              <tr><td>Body spacing</td><td>Use the two-value 8dp / 12dp scale rather than picking a single number per surface.</td></tr>
+              <tr><td>Typography</td><td>Reduce the number of distinct type styles a Post can use &mdash; a simpler hierarchy reads faster than more visual variation.</td></tr>
+              <tr><td>Content density</td><td>Match overall information density between Teams and Engage; don't let one surface feel noticeably denser than the other.</td></tr>
+              <tr><td>Indentation</td><td>Keep a cardless, indentation-based layout on both surfaces rather than reintroducing card borders per post.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-rule"><strong>When Teams and Engage disagree and there's no recorded alignment decision, don't guess.</strong> Check the Architecture tab's open-questions table first &mdash; several of these are intentionally still pending.</div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#mg-behaviors">Core Interaction Rules</a>
+        <a href="#mg-alignment">Teams &harr; Engage Alignment</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Messaging &middot; Guidance view &middot; July 2026
+  </footer>
+
+</div>
+</div>
+
+<div class="page" id="page-messaging-architecture" data-page="messaging-architecture">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Messaging</div>
+    <h1>Architecture</h1>
+    <p class="subtitle">Why Chat Message and Post are documented as one system, and which platform differences are deliberate versus still being decided.</p>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="ma-model">
+        <span class="section-eyebrow eyebrow-design">Model</span>
+        <h2>Shared Model, Divergent Shell <a href="#ma-model" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Chat Message and Post are two presentations of the same underlying primitives &mdash; Avatar, Header (name + timestamp), Body, Reactions, Reply/Thread summary. What differs is the shell each primitive set sits inside: Chat Message wraps them in a bubble (own-message accent fill, received-message neutral fill, tail-less grouped blocks for consecutive sends); Post wraps them in a cardless, indentation-based row designed for a scrolling feed.</p>
+        <p>Building both off one shared model is what let the Teams &harr; Engage alignment work converge dozens of small values &mdash; avatar size, spacing, reaction count &mdash; without having to reconcile two unrelated components.</p>
+        <div class="callout callout-info">This shared-model approach is why the alignment review could treat &ldquo;avatar sizing&rdquo; and &ldquo;reactions&rdquo; as single line items even though they show up in two visually different components &mdash; the primitives are the same, only the shell changes.</div>
+      </section>
+
+      <section class="spec-section" id="ma-open">
+        <span class="section-eyebrow eyebrow-design">Open</span>
+        <h2>Open Questions &mdash; Pending Confirmation <a href="#ma-open" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Recorded directly from the design team's alignment notes. Don't treat these as resolved &mdash; build against the Spec/Guidance values on the other tabs, but flag any of these three if new information changes them.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Area</th><th>Teams</th><th>Engage</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Reply presentation</td><td>Message bubbles for replies</td><td>Flat, borderless message presentation</td><td>May not need to converge &mdash; Teams keeping bubbles is an acceptable permanent divergence.</td></tr>
+              <tr><td>Sending state</td><td>Blank loading state followed by a toast confirmation</td><td>Existing (pre-alignment) sending experience</td><td>Pending &mdash; decide whether Engage adopts Teams' toast pattern or the two stay different.</td></tr>
+              <tr><td>Unread indicators</td><td>Uses &ldquo;Me&rdquo;-message-style bar indicators to communicate unread state</td><td>Standard unread indicators</td><td>Pending &mdash; evaluate whether Engage can adopt the Teams indicator pattern.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="ma-sources">
+        <span class="section-eyebrow eyebrow-design">Traceability</span>
+        <h2>Source Material <a href="#ma-sources" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Node</th><th>Title</th><th>Contains</th></tr></thead>
+            <tbody>
+              <tr><td><code>106958:179965</code></td><td>Threaded Chat and Channel Messages</td><td>Full Chat Message variant catalog (13 paired examples).</td></tr>
+              <tr><td><code>107152:24634</code></td><td>Teams Engage Alignment &mdash; Variants</td><td>L1 feed and L2 thread-detail Post examples for Teams vs Engage.</td></tr>
+              <tr><td><code>106968:24005</code></td><td>Posts &mdash; Messaging</td><td>Written behavior rules and the Teams/Engage comparison grid.</td></tr>
+              <tr><td><code>107160:27559</code></td><td>Teams Engage Alignment &mdash; Spacing, Typography</td><td>Annotated redline/anatomy callouts (pixel-level, not yet transcribed into this doc).</td></tr>
+              <tr><td><code>107167:35614</code></td><td>Notes (alignment notepad)</td><td>Design team's alignment/divergence decision log &mdash; source for the open-questions table above.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size: 12.5px; color: var(--grey-56);">The redline node (<code>107160:27559</code>) carries dozens of individual dimension callouts not yet pulled into a spacing table here &mdash; treat the Full Token Table on the Spec tab as the confirmed subset until that pass is done.</p>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#ma-model">Shared Model, Divergent Shell</a>
+        <a href="#ma-open">Open Questions</a>
+        <a href="#ma-sources">Source Material</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Messaging &middot; Architecture view &middot; July 2026
   </footer>
 
 </div>
