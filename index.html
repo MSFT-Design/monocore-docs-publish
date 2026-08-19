@@ -671,6 +671,7 @@
       --text-secondary: #6e6e6e;
       --text-interactive: #654cf5;
       --button-stroke-outline: #aba8ff;
+      --brand-accent-dominant: #43349c;   /* Brand/Accent Dominant — Call Out surface */
       --radius-card: 12px;
       --radius-inner: 4px;
       --radius-button: 5px;
@@ -9617,23 +9618,541 @@
 </div>
 
 <div class="page" id="page-callout" data-page="callout">
+<style>
+  /* ── Call Out Lab ── */
+  .colab { display: grid; grid-template-columns: 300px 1fr; gap: var(--sp-6); align-items: start; }
+  @media (max-width: 860px) { .colab { grid-template-columns: 1fr; } }
+  .colab-controls {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    position: sticky; top: var(--sp-5);
+  }
+  .colab-stage {
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-6);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 420px;
+    transition: background 240ms ease;
+  }
+  .colab-stage.dark { background: var(--grey-10); border-color: var(--grey-24); }
+  .colab-note { font-size: 12px; color: var(--grey-56); margin-top: var(--sp-3); text-align: center; }
+  .colab-note code {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11.5px; background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border); border-radius: var(--radius-minimal); padding: 1px 6px;
+  }
+
+  /* Anchor + positioning field */
+  .co-field { position: relative; width: 100%; max-width: 460px; height: 340px; }
+  .co-anchor {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 40px; height: 40px; border-radius: var(--radius-default);
+    background: var(--mc-surface-floating);
+    border: 1px dashed var(--mc-stroke-container);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.4px;
+    color: var(--grey-56); text-transform: uppercase;
+  }
+  .colab-stage.dark .co-anchor { background: var(--grey-16); border-color: var(--grey-38); color: var(--grey-56); }
+
+  /* ── Call Out — component set 83507-103793 ── */
+  .fco { position: absolute; display: flex; filter: drop-shadow(0 0 2px rgba(0,0,0,0.12)) drop-shadow(0 8px 16px rgba(0,0,0,0.14)); }
+  .fco-container {
+    background: var(--brand-accent-dominant);
+    border-radius: var(--radius-default);
+    padding: 8px;
+    min-width: 80px; max-width: 248px; min-height: 56px;
+    display: flex; flex-direction: column; gap: 8px;
+    align-items: flex-start; justify-content: center;
+    overflow: hidden;
+  }
+  .fco-text {
+    font-size: 15px; line-height: 20px; font-weight: 500; letter-spacing: -0.08px;
+    color: var(--grey-100); width: 100%; word-break: break-word;
+  }
+  .fco-tip { flex-shrink: 0; color: var(--brand-accent-dominant); }
+  .fco-tip svg { display: block; }
+  .fco-tip.horizontal svg { width: 62px; height: 7px; }
+  .fco-tip.vertical svg { width: 7px; height: 14px; }
+
+  /* Tip at the BOTTOM → the call out sits above the anchor */
+  .fco.tip-bottom { flex-direction: column; bottom: calc(50% + 20px + 6px); }
+  .fco.tip-bottom.align-left   { left: calc(50% - 20px); align-items: flex-start; }
+  .fco.tip-bottom.align-center { left: 50%; transform: translateX(-50%); align-items: center; }
+  .fco.tip-bottom.align-right  { right: calc(50% - 20px); align-items: flex-end; }
+  /* Tip at the TOP → the call out sits below the anchor */
+  .fco.tip-top { flex-direction: column; top: calc(50% + 20px + 6px); }
+  .fco.tip-top .fco-tip { transform: scaleY(-1); }
+  .fco.tip-top.align-left   { left: calc(50% - 20px); align-items: flex-start; }
+  .fco.tip-top.align-center { left: 50%; transform: translateX(-50%); align-items: center; }
+  .fco.tip-top.align-right  { right: calc(50% - 20px); align-items: flex-end; }
+  /* Tip on the LEFT → the call out sits to the right of the anchor */
+  .fco.tip-left { flex-direction: row; align-items: center; left: calc(50% + 20px + 6px); top: 50%; transform: translateY(-50%); }
+  .fco.tip-left .fco-tip { transform: rotate(0deg); }
+  /* Tip on the RIGHT → the call out sits to the left of the anchor */
+  .fco.tip-right { flex-direction: row; align-items: center; right: calc(50% + 20px + 6px); top: 50%; transform: translateY(-50%); }
+  .fco.tip-right .fco-tip { transform: scaleX(-1); }
+
+  .fco.show-bounds .fco-container { outline: 1.5px dashed var(--grey-100); outline-offset: -1.5px; }
+
+  /* Usage stage */
+  .co-usecase-stage {
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    margin: var(--sp-4) calc(-1 * var(--sp-5)) 0;
+    transition: background 240ms ease;
+  }
+  .co-usecase-stage.dark { background: var(--grey-10); }
+  .co-usecase-stage.dark .uc-label, .co-usecase-stage.dark .uc-config { color: var(--grey-56); }
+  .co-uc-frame {
+    position: relative; height: 190px;
+    background: var(--mc-surface-floating);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-prominent);
+    overflow: hidden;
+  }
+  .co-usecase-stage.dark .co-uc-frame { background: var(--grey-16); border-color: var(--grey-24); }
+  .co-uc-frame .fco { filter: drop-shadow(0 6px 12px rgba(0,0,0,0.18)); }
+
+  .co-axis-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-2); margin: var(--sp-4) 0; }
+  .co-axis-cell {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-default);
+    padding: var(--sp-3);
+    text-align: center;
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11px; color: var(--mc-text-secondary);
+  }
+  .co-axis-cell.empty { background: transparent; border-style: dashed; color: var(--grey-56); }
+</style>
+
 <div class="docs-shell">
+
   <header class="docs-header">
-    <div class="eyebrow">Components</div>
-    <h1>Call Out (Tooltip)</h1>
-    <p class="subtitle">Anchored tooltip and callout surfaces for contextual hints.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+    <div class="eyebrow">Call Out Component</div>
+    <h1>Call Out (Tooltip) &mdash; Spec</h1>
+    <p class="subtitle">A single dark surface that hugs its content up to 248dp, with one variant axis: where the tip points. Eight tip locations cover every anchor relationship; nothing else about the component varies.</p>
+    <div class="meta">
+      <span>8 variants</span>
+      <span>1 axis</span>
+      <span>Max width 248dp</span>
+      <span>Figma: Monocore-iOS &middot; node <code>83507-103793</code></span>
+    </div>
   </header>
+
   <div class="docs-layout">
     <main class="docs-main">
-      <section class="spec-section">
-        <span class="section-eyebrow eyebrow-design">Status</span>
-        <h2>Documentation coming soon</h2>
-        <p class="section-intro">The Call Out (Tooltip) component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+
+      <!-- 1. INTERACTIVE -->
+      <section class="spec-section" id="co-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Call Out <a href="#co-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The dashed square is the anchor, not part of the component. Tip location names the edge the tip sits on &mdash; so <code>Bottom left</code> puts the tip on the call out's bottom edge, which means the call out floats <em>above</em> what it points at.</p>
+
+        <div class="colab">
+          <div class="colab-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Tip location</div>
+              <div class="btnlab-pills" data-axis="tip">
+                <button class="btnlab-pill on" data-val="bottom-left">Bottom left</button>
+                <button class="btnlab-pill" data-val="bottom-center">Bottom center</button>
+                <button class="btnlab-pill" data-val="bottom-right">Bottom right</button>
+                <button class="btnlab-pill" data-val="top-left">Top left</button>
+                <button class="btnlab-pill" data-val="top-center">Top center</button>
+                <button class="btnlab-pill" data-val="top-right">Top right</button>
+                <button class="btnlab-pill" data-val="left-center">Left center</button>
+                <button class="btnlab-pill" data-val="right-center">Right center</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content length</div>
+              <div class="btnlab-pills" data-axis="len">
+                <button class="btnlab-pill" data-val="short">Short</button>
+                <button class="btnlab-pill on" data-val="long">At max width</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="cl2-bounds"> <strong>Outline container</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="cl2-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="colab-stage" id="colab-stage">
+              <div class="co-field">
+                <div class="co-anchor">Anchor</div>
+                <div class="fco tip-bottom align-left" id="fco">
+                  <div class="fco-container"><div class="fco-text" id="fco-text">This tooltip hugs contents. The maximum allowed width is 248.</div></div>
+                  <span class="fco-tip horizontal" id="fco-tip"><svg viewBox="0 0 62 7" fill="currentColor" aria-hidden="true"><path d="M0 0h62L35.5 6.2a6 6 0 0 1-9 0L0 0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <p class="colab-note" id="colab-note"></p>
+          </div>
+        </div>
       </section>
+
+      <!-- 2. VARIANT AXIS -->
+      <section class="spec-section" id="co-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axis <a href="#co-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One property, <code>Tip location</code>, with eight values. Laid out by where the call out ends up relative to its anchor:</p>
+
+        <div class="co-axis-grid">
+          <div class="co-axis-cell">Bottom left</div>
+          <div class="co-axis-cell">Bottom center</div>
+          <div class="co-axis-cell">Bottom right</div>
+          <div class="co-axis-cell">Right center</div>
+          <div class="co-axis-cell empty">anchor</div>
+          <div class="co-axis-cell">Left center</div>
+          <div class="co-axis-cell">Top left</div>
+          <div class="co-axis-cell">Top center</div>
+          <div class="co-axis-cell">Top right</div>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>The grid is inverted on purpose.</strong> <code>Bottom left</code> sits in the top-left cell because the name describes the tip's edge, not the call out's position. A tip on the bottom edge means the body is above the anchor. Read the axis as &ldquo;which edge does the tail come out of&rdquo; and the eight names stop being confusing.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>There are no vertical corner variants.</strong> Left and Right only publish <code>center</code> &mdash; there is no &ldquo;Left top&rdquo; or &ldquo;Right bottom&rdquo;. A side-anchored call out on a tall element must centre against it or switch to a top/bottom tip.
+        </div>
+      </section>
+
+      <!-- 3. LAYOUT -->
+      <section class="spec-section" id="co-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#co-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Container padding</td><td>8dp, all sides</td><td>Size/Small</td></tr>
+              <tr><td>Corner radius</td><td>8dp</td><td>Radius/Default</td></tr>
+              <tr><td>Internal gap</td><td>8dp</td><td>Global.Size.80</td></tr>
+              <tr><td>Min width</td><td>80dp</td><td>&mdash;</td></tr>
+              <tr><td>Max width</td><td>248dp &mdash; the body hugs its text below this</td><td>&mdash;</td></tr>
+              <tr><td>Min height</td><td>56dp <em>(44dp on Top left &mdash; see debt)</em></td><td>&mdash;</td></tr>
+              <tr><td>Tip &mdash; top / bottom</td><td>62 &times; 7dp</td><td>&mdash;</td></tr>
+              <tr><td>Tip &mdash; left / right</td><td>7 &times; 14dp</td><td>&mdash;</td></tr>
+              <tr><td>Elevation</td><td>Two-layer drop shadow</td><td>Shadows/Light/Shadow 16</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-rule">
+          <strong>The component does not position itself.</strong> Tip location changes which edge the tail is on and how the body aligns to it &mdash; nothing more. Anchoring, collision detection and flipping near screen edges all belong to the host. Choosing the right variant <em>is</em> the flip logic.
+        </div>
+      </section>
+
+      <!-- 4. TYPOGRAPHY & COLOUR -->
+      <section class="spec-section" id="co-style">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography &amp; Colour <a href="#co-style" class="anchor-link" aria-label="Link to this section">#</a></h2>
+
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-preview"><span style="font-size:15px; font-weight:500; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Tooltip body</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Subhead 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Colour:</strong> Text/On Accent</span></div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Container fill</td><td>Brand/Accent Dominant</td><td><span class="btn-swatch" style="background:#43349c;"></span>#43349c</td></tr>
+              <tr><td>Tip fill</td><td>Brand/Accent Dominant</td><td><span class="btn-swatch" style="background:#43349c;"></span>#43349c</td></tr>
+              <tr><td>Body text</td><td>Text/On Accent</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>Accent Dominant, not Accent Primary.</strong> The call out uses the darkest brand step (#43349c) rather than the button fill (#654cf5). White body text clears contrast comfortably on the darker step &mdash; it would be marginal on the lighter one, which is why the two are not interchangeable here.
+        </div>
+      </section>
+
+      <!-- 5. USAGE -->
+      <section class="spec-section" id="co-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#co-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="co-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Which variant to reach for, by where the anchor sits on screen.</p>
+
+        <div class="co-usecase-stage" id="co-uc-stage">
+        <div class="usecase-grid">
+
+          <div class="usecase-item">
+            <span class="uc-label">Anchor near the top edge</span>
+            <div class="co-uc-frame">
+              <div class="co-anchor" style="top:34px; left:60px; transform:none;">Btn</div>
+              <div class="fco tip-top align-left" style="top:82px; left:60px;">
+                <span class="fco-tip horizontal" style="transform:scaleY(-1);"><svg viewBox="0 0 62 7" fill="currentColor"><path d="M0 0h62L35.5 6.2a6 6 0 0 1-9 0L0 0Z"/></svg></span>
+                <div class="fco-container"><div class="fco-text">Pin this chat to keep it at the top.</div></div>
+              </div>
+            </div>
+            <span class="uc-config">Top left &middot; body drops below the anchor</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Anchor near the bottom edge</span>
+            <div class="co-uc-frame">
+              <div class="fco tip-bottom align-center" style="bottom:70px; left:50%; transform:translateX(-50%);">
+                <div class="fco-container"><div class="fco-text">Tap and hold to react.</div></div>
+                <span class="fco-tip horizontal"><svg viewBox="0 0 62 7" fill="currentColor"><path d="M0 0h62L35.5 6.2a6 6 0 0 1-9 0L0 0Z"/></svg></span>
+              </div>
+              <div class="co-anchor" style="bottom:22px; left:50%; transform:translateX(-50%); top:auto;">Btn</div>
+            </div>
+            <span class="uc-config">Bottom center &middot; body rises above the anchor</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Anchor in a leading rail</span>
+            <div class="co-uc-frame">
+              <div class="co-anchor" style="top:50%; left:24px; transform:translateY(-50%);">Nav</div>
+              <div class="fco tip-left" style="top:50%; left:76px; transform:translateY(-50%);">
+                <span class="fco-tip vertical"><svg viewBox="0 0 7 14" fill="currentColor"><path d="M7 0v14L1 8.4a2 2 0 0 1 0-2.8L7 0Z"/></svg></span>
+                <div class="fco-container"><div class="fco-text">Your saved items live here.</div></div>
+              </div>
+            </div>
+            <span class="uc-config">Left center &middot; the only side option is centred</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Anchor in a trailing action bar</span>
+            <div class="co-uc-frame">
+              <div class="fco tip-right" style="top:50%; right:76px; transform:translateY(-50%);">
+                <div class="fco-container"><div class="fco-text">Start a recording from here.</div></div>
+                <span class="fco-tip vertical" style="transform:scaleX(-1);"><svg viewBox="0 0 7 14" fill="currentColor"><path d="M7 0v14L1 8.4a2 2 0 0 1 0-2.8L7 0Z"/></svg></span>
+              </div>
+              <div class="co-anchor" style="top:50%; right:24px; left:auto; transform:translateY(-50%);">Rec</div>
+            </div>
+            <span class="uc-config">Right center &middot; body sits to the left of the anchor</span>
+          </div>
+
+        </div>
+        </div>
+      </section>
+
+      <!-- 6. A11Y -->
+      <section class="spec-section" id="co-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#co-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Never put an action in a call out.</strong> The component has no interactive slot and no dismiss control &mdash; anything essential inside it is unreachable by keyboard or switch control. It is for hints, not decisions.</li>
+          <li><strong>Announce it when it appears.</strong> A call out that fades in unannounced is invisible to a screen reader user. Tie it to its anchor and announce it politely on show.</li>
+          <li><strong>Don't rely on hover or a timeout.</strong> On touch there is no hover, and an auto-dismissing hint punishes anyone reading slowly. Give the user a way to dismiss it and don't gate anything behind having read it.</li>
+          <li><strong>248dp is a hard ceiling.</strong> Long strings wrap rather than widen, and at large accessibility text sizes a two-line hint becomes five. Keep the copy short enough to survive that.</li>
+        </ul>
+      </section>
+
     </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#co-playground">Build a Call Out</a>
+        <a href="#co-variants">Variant Axis</a>
+        <a href="#co-layout">Layout &amp; Spacing</a>
+        <a href="#co-style">Typography &amp; Colour</a>
+        <a href="#co-usage">Usage Examples</a>
+        <a href="#co-a11y">Accessibility</a>
+      </nav>
+    </aside>
   </div>
-  <footer class="docs-footer">Call Out (Tooltip) &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+
+  <footer class="docs-footer">
+    Call Out (Tooltip) &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83507-103793</code> &middot; August 2026
+  </footer>
+
+</div>
+
+<script>
+// ── Call Out Lab ──
+(() => {
+  const co = document.getElementById('fco');
+  if (!co) return;
+  const state = { tip: 'bottom-left', len: 'long' };
+  const stage = document.getElementById('colab-stage');
+  const note = document.getElementById('colab-note');
+  const text = document.getElementById('fco-text');
+  const tip = document.getElementById('fco-tip');
+  const cb = id => document.getElementById(id).checked;
+
+  const H_TIP = '<svg viewBox="0 0 62 7" fill="currentColor" aria-hidden="true"><path d="M0 0h62L35.5 6.2a6 6 0 0 1-9 0L0 0Z"/></svg>';
+  const V_TIP = '<svg viewBox="0 0 7 14" fill="currentColor" aria-hidden="true"><path d="M7 0v14L1 8.4a2 2 0 0 1 0-2.8L7 0Z"/></svg>';
+  const COPY = {
+    short: 'Pin this chat.',
+    long: 'This tooltip hugs contents. The maximum allowed width is 248.'
+  };
+  const LABEL = {
+    'bottom-left':'Bottom left', 'bottom-center':'Bottom center', 'bottom-right':'Bottom right',
+    'top-left':'Top left', 'top-center':'Top center', 'top-right':'Top right',
+    'left-center':'Left center', 'right-center':'Right center'
+  };
+
+  function render() {
+    const [side, align] = state.tip.split('-');
+    const vertical = (side === 'left' || side === 'right');
+
+    co.className = 'fco tip-' + side + (vertical ? '' : ' align-' + align) + (cb('cl2-bounds') ? ' show-bounds' : '');
+    tip.className = 'fco-tip ' + (vertical ? 'vertical' : 'horizontal');
+    tip.innerHTML = vertical ? V_TIP : H_TIP;
+
+    // DOM order carries the tip: body-then-tip for bottom/right, tip-then-body for top/left
+    const container = co.querySelector('.fco-container');
+    const tipFirst = (side === 'top' || side === 'left');
+    if (tipFirst && co.firstElementChild !== tip) co.insertBefore(tip, container);
+    if (!tipFirst && co.firstElementChild !== container) co.insertBefore(container, tip);
+
+    text.textContent = COPY[state.len];
+    stage.classList.toggle('dark', cb('cl2-dark'));
+
+    const minH = state.tip === 'top-left' ? '44dp' : '56dp';
+    note.innerHTML = '<code>Call Out</code> &middot; Tip location = ' + LABEL[state.tip]
+      + ' &middot; tip ' + (vertical ? '7&times;14' : '62&times;7')
+      + ' &middot; min-height ' + minH
+      + ' &middot; node <code>83507-103793</code>';
+  }
+
+  document.querySelectorAll('#page-callout .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-callout .colab-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('co-uc-theme-toggle');
+  const stage = document.getElementById('co-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
+</div>
+
+<div class="page" id="page-callout-architecture" data-page="callout-architecture">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Call Out Component</div>
+    <h1>Architecture</h1>
+    <p class="subtitle">Why an eight-value axis is the right shape for a tooltip, what the component deliberately refuses to own, and where the published set drifts.</p>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="coa-model">
+        <span class="section-eyebrow eyebrow-design">Model</span>
+        <h2>The Configuration Model <a href="#coa-model" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One axis, eight values, and a hard boundary around what the component will not do.</p>
+        <p><strong>Tip location</strong> is the only property. It sets two things at once: which edge the tail emerges from, and how the body aligns against that tail. Those two are inseparable &mdash; a tip on the bottom-left edge only makes sense with the body's left edge aligned to it &mdash; which is why they are one variant rather than two axes that could be combined into nonsense.</p>
+        <p>What the component does <em>not</em> own is placement. It has no anchor reference, no offset property and no collision behaviour. It is a shape that points in a direction; deciding which direction, and where on screen to put it, is the host's job. That is a deliberate split: anchoring depends on scroll position, safe areas and keyboard state, none of which a Figma variant can model.</p>
+        <div class="callout callout-rule">
+          <strong>Choosing the variant is the flip logic.</strong> When a call out would run off the top of the screen, the host doesn't ask the component to adapt &mdash; it swaps <code>Bottom center</code> for <code>Top center</code>. The eight variants exist precisely so that flipping is a variant change and never a layout hack.
+        </div>
+      </section>
+
+      <section class="spec-section" id="coa-anatomy">
+        <span class="section-eyebrow eyebrow-design">Structure</span>
+        <h2>Figma Anatomy <a href="#coa-anatomy" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two children in a single flex line. Their <em>order</em> is what encodes the tip's edge &mdash; there is no positioning trick underneath.</p>
+
+        <details class="anat-acc" open>
+          <summary>Call Out<span class="anat-acc-meta">83507-103793 &middot; 8 variants</span></summary>
+          <div class="anat-tree">Call Out  (Tip location &middot; drop shadow: Shadows/Light/Shadow 16)
+├─ Container  (fill Brand/Accent Dominant &middot; radius 8 &middot; padding 8 &middot; gap 8
+│              min 80&times;56 &middot; max-width 248 &middot; clips content)
+│  └─ <span class="txt-tag">[text] Body</span>  <span class="opt">— iOS/Subhead 2, Text/On Accent, wraps at 248</span>
+└─ Tip  (62&times;7 for top/bottom &middot; 7&times;14 for left/right)
+
+Order per variant
+  Bottom *   Container → Tip          <span class="opt">— tail below the body</span>
+  Top *      Tip → Container          <span class="opt">— tail above, mirrored vertically</span>
+  Left *     Tip → Container          <span class="opt">— tail leading</span>
+  Right *    Container → Tip          <span class="opt">— tail trailing, mirrored horizontally</span></div>
+        </details>
+
+        <div class="callout callout-info">
+          <strong>The tip is an asset, not a drawn shape.</strong> Both tip geometries ship as flat SVGs with the fill baked in rather than as vector layers bound to Brand/Accent Dominant. Re-theming the container will not re-theme the tail &mdash; in code, draw the tip from the same token as the container so the two can never drift apart.
+        </div>
+      </section>
+
+      <section class="spec-section" id="coa-content">
+        <span class="section-eyebrow eyebrow-design">Content</span>
+        <h2>One Slot, and Why <a href="#coa-content" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The Container has a bound text property and nothing else &mdash; no icon slot, no action slot, no close button.</p>
+        <p>That is a scope decision, not an oversight. A tooltip with a button becomes a coach mark, which needs focus management, a dismissal contract and a way to be re-summoned. Adding an action slot here would let any surface create an unreachable control inside a transient popup. The 8dp internal gap hints that a second child was once anticipated; today it never has one.</p>
+        <div class="callout callout-constraint">
+          <strong>If you need an action, you need a different component.</strong> Do not slot a Button into a Call Out instance. Raise the need for a coach-mark component instead &mdash; the accessibility contract is genuinely different.
+        </div>
+      </section>
+
+      <section class="spec-section" id="coa-debt">
+        <span class="section-eyebrow eyebrow-impl">Known issues</span>
+        <h2>Published Debt <a href="#coa-debt" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Issue</th><th>Where</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td>Min height is 44dp instead of 56dp</td><td><code>Top left</code> only</td><td>One variant sits 12dp shorter than its seven siblings with the same copy</td></tr>
+              <tr><td>Tip is a baked SVG asset with a hard-coded fill</td><td>All 8 variants</td><td>Container and tail can drift apart under re-theming; dark theme is not expressible</td></tr>
+              <tr><td>Tip width is a fixed 62dp</td><td>Top / bottom variants</td><td>On an 80dp-wide call out the tail spans three quarters of the edge and reads as a chevron, not a point</td></tr>
+              <tr><td>No <code>Left top</code> / <code>Right bottom</code> corner variants</td><td>Side tips</td><td>Side-anchored call outs on tall elements have no correct alignment</td></tr>
+              <tr><td>Internal gap of 8dp with only one child</td><td>Container</td><td>Harmless today; signals an intended second slot that was never published</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>The 44dp outlier is the cheap fix.</strong> It is a single value on a single variant and almost certainly unintentional &mdash; worth correcting at the source before any implementation encodes two different minimum heights.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#coa-model">Configuration Model</a>
+        <a href="#coa-anatomy">Figma Anatomy</a>
+        <a href="#coa-content">One Slot, and Why</a>
+        <a href="#coa-debt">Published Debt</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Call Out (Tooltip) &middot; Architecture view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> &middot; August 2026
+  </footer>
+
 </div>
 </div>
 
