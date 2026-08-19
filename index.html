@@ -2108,9 +2108,10 @@
           </h3>
           <div class="nav-acc-kids" id="nav-acc-panel-filter" role="region"
                aria-labelledby="nav-acc-label-filter" hidden>
-            <a href="#tile-grid" data-link="tile-grid">Tile grid</a>
+            <a href="#filter-vertical" data-link="filter-vertical">Vertical</a>
           </div>
         </div>
+        <a href="#tile-grid" data-link="tile-grid">Tile grid</a>
         <a href="#badge-spec" data-link="badge-spec">Badge</a>
       </div>
       <div class="nav-section">
@@ -11792,122 +11793,449 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 
 <div class="page" id="page-filter" data-page="filter">
+<style>
+  /* ── Filter buttons — 72552-289748 (horizontal) & 105935-54688 (vertical) ── */
+  .ffl-scope {
+    --fl-accent:      var(--text-interactive);        /* Brand/Accent Primary */
+    --fl-accent-2:    var(--button-stroke-outline);   /* Brand/Accent Secondary */
+    --fl-accent-3:    var(--brand-accent-tertiary);   /* Brand/Accent Tertiary */
+    --fl-interactive: var(--mc-text-interactive);     /* Text/Interactive */
+    --fl-danger-surf: #f9d9d9;                        /* Surface/Danger */
+    --fl-danger-str:  #d92c2c;                        /* Stroke/Danger */
+    --fl-danger-txt:  #c01515;                        /* Text/Danger */
+  }
+  .ffl {
+    display: inline-flex; flex-direction: column; align-items: center;
+    padding: 6px 16px; border-radius: var(--radius-rounded);
+    border: 0; overflow: hidden; font-family: inherit; cursor: pointer;
+    background: transparent;
+  }
+  .ffl .c { display: flex; align-items: center; gap: 4px; }
+  .ffl .l { font-size: 15px; line-height: 20px; letter-spacing: -0.24px; white-space: nowrap; }
+  .ffl.on  .l { font-weight: 600; }   /* iOS/Button 1 selected */
+  .ffl.off .l { font-weight: 500; }   /* iOS/Button 1 */
+
+  .ffl.pri.on           { background: var(--fl-accent); }
+  .ffl.pri.on .l        { color: var(--grey-100); }
+  .ffl.pri.off          { background: var(--mc-surface-raised-tertiary); }
+  .ffl.pri.off .l       { color: var(--mc-text-primary); }
+  .ffl.sec.on           { background: var(--fl-accent-3); border: 1px solid var(--fl-accent-2); }
+  .ffl.sec.on .l        { color: var(--fl-interactive); }
+  .ffl.sec.off          { background: var(--mc-surface-raised-tertiary); }
+  .ffl.sec.off .l       { color: var(--mc-text-primary); }
+  .ffl.dng.on           { background: var(--fl-danger-surf); border: 1px solid var(--fl-danger-str); }
+  .ffl.dng.on .l        { color: var(--fl-danger-txt); }
+  .ffl.dng.off          { background: transparent; border: 1px solid var(--fl-danger-str); }
+  .ffl.dng.off .l       { color: var(--fl-danger-txt); }
+  .ffl.st-pressed  { opacity: 0.6; }
+  .ffl.st-disabled { opacity: 0.3; cursor: default; }
+  .ffl.st-disabled-flat { opacity: 1; background: var(--grey-94); border: 0; cursor: default; }
+  .ffl.st-disabled-flat .l { color: var(--mc-text-disabled); }
+
+  /* Vertical */
+  .fflv {
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+    width: 61px; height: 51px;
+    padding: 8px 16px; border-radius: var(--radius-prominent);   /* 16, not a pill */
+    border: 0; overflow: hidden; font-family: inherit; cursor: pointer; background: transparent;
+  }
+  .fflv .ic { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; padding: 2px; }
+  .fflv .ic svg { width: 20px; height: 20px; }
+  .fflv .l { font-size: 11px; line-height: 11px; letter-spacing: 0.06px; font-weight: 400; white-space: nowrap; }
+  .fflv.pri.on      { background: var(--fl-accent); color: var(--grey-100); }
+  .fflv.pri.off     { background: var(--mc-surface-group-primary-container); color: var(--mc-text-primary); }
+  .fflv.sec.on      { background: var(--fl-accent-3); border: 1px solid var(--fl-accent-2); color: var(--fl-interactive); }
+  .fflv.sec.off     { background: transparent; border: 1px solid var(--grey-88); color: var(--mc-text-primary); }
+  .fflv.st-pressed .c { opacity: 0.6; }
+  .fflv.st-disabled { opacity: 0.3; cursor: default; }
+  .fflv.st-disabled-flat { opacity: 1; background: var(--grey-94); color: var(--mc-text-disabled); cursor: default; }
+  .fflv .c { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+
+  .ffl-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; align-items: center; }
+</style>
+
 <div class="docs-shell">
   <header class="docs-header">
     <div class="eyebrow">Components</div>
     <h1>Filter</h1>
-    <p class="subtitle">Three published sets that together make up filtering in Monocore iOS: a horizontal filter button, a vertical one, and the segmented pill bar they sit in. Thirty-two variants across the family, and two typos baked into the published names.</p>
-    <div class="meta"><span>18 + 12 + 2 variants</span><span>3 sets</span><span>Figma: Monocore-iOS &middot; node <code>72552-289748</code></span></div>
+    <p class="subtitle">The horizontal filter pill &mdash; the scrolling row of toggles that sits above a search result or a chat list. Three semantics, three states, and an Active axis that is genuinely orthogonal to all of them. The <a href="#filter-vertical" data-link="filter-vertical">vertical form</a> is documented separately.</p>
+    <div class="meta"><span>18 variants</span><span>3 axes</span><span>32dp tall</span><span>Figma: Monocore-iOS &middot; node <code>72552-289748</code></span></div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
 
-      <section class="spec-section" id="flt-family">
-        <span class="section-eyebrow eyebrow-design">Family</span>
-        <h2>The Three Sets <a href="#flt-family" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">All three live on the same Figma page and share the Semantic / State / Active vocabulary &mdash; but not the same values.</p>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Set</th><th>Node</th><th>Axes</th><th>Variants</th><th>Size</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Horizontal filter btn</strong></td><td><code>72552-289748</code></td><td>Semantic &times; State &times; Active</td><td>18</td><td>71&ndash;72 &times; 32dp</td></tr>
-              <tr><td><strong>Vertical filter btn</strong></td><td><code>105935-54688</code></td><td>Semantic &times; State &times; Active</td><td>12</td><td>61 &times; 51dp</td></tr>
-              <tr><td><strong>Pill bar Segmented control</strong></td><td><code>83478-37018</code></td><td>Semantic</td><td>2</td><td>402 &times; 44dp</td></tr>
-            </tbody>
-          </table>
+      <section class="spec-section" id="flt-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Semantic &times; Active <a href="#flt-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Active is the filter's own state &mdash; applied or not. It changes the fill, the label colour <em>and</em> the font weight.</p>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell"><span class="ffl-row"><span class="ffl pri on"><span class="c"><span class="l">Label</span></span></span> <span class="ffl sec on"><span class="c"><span class="l">Label</span></span></span> <span class="ffl dng on"><span class="c"><span class="l">Label</span></span></span></span><span class="bf-cap">Active = True &middot; Primary, Secondary, Danger</span></div>
+        </div>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell"><span class="ffl-row"><span class="ffl pri off"><span class="c"><span class="l">Label</span></span></span> <span class="ffl sec off"><span class="c"><span class="l">Label</span></span></span> <span class="ffl dng off"><span class="c"><span class="l">Label</span></span></span></span><span class="bf-cap">Active = False &middot; Primary, Secondary, Danger</span></div>
+        </div>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell"><span class="ffl-row"><span class="ffl pri on st-pressed"><span class="c"><span class="l">Label</span></span></span> <span class="ffl pri on st-disabled"><span class="c"><span class="l">Label</span></span></span> <span class="ffl pri off st-disabled-flat"><span class="c"><span class="l">Label</span></span></span></span><span class="bf-cap">Primary &middot; Pressed (60%), Active Dissabled (30%), Inactive Dissabled</span></div>
         </div>
       </section>
 
       <section class="spec-section" id="flt-variants">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Variant Axes <a href="#flt-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three axes, fully published: 3 &times; 3 &times; 2 = 18 variants, no exclusions.</p>
         <div class="btn-axis-cards">
-          <div class="btn-axis"><h4>Semantic</h4><div class="vals"><span class="val">Primary</span><span class="val">Secondary</span><span class="val">Danger</span></div></div>
-          <div class="btn-axis"><h4>State</h4><div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Dissabled</span></div></div>
-          <div class="btn-axis"><h4>Active</h4><div class="vals"><span class="val">True</span><span class="val">False</span></div></div>
+          <div class="btn-axis"><h4>Semantic &mdash; 3 values</h4><div class="vals"><span class="val">Primary</span><span class="val">Secondary</span><span class="val">Danger</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Dissabled</span></div></div>
+          <div class="btn-axis"><h4>Active &mdash; 2 values</h4><div class="vals"><span class="val">True</span><span class="val">False</span></div></div>
         </div>
-        <p>Horizontal publishes all three Semantic values &mdash; 3 &times; 3 &times; 2 = 18. Vertical publishes only Primary and Secondary &mdash; 2 &times; 3 &times; 2 = 12. The Pill bar has a Semantic axis alone, with Primary and Secondary.</p>
-
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Pill label</td><td>Text</td><td><code>Label</code></td><td>Single line, never wraps</td></tr>
+              <tr><td>Label</td><td>Boolean</td><td>On</td><td>Off yields an icon-only pill &mdash; needs an accessible name</td></tr>
+              <tr><td>Icon-left</td><td>Boolean + swap</td><td>Off</td><td>16&times;16 box / 12&times;12 glyph</td></tr>
+              <tr><td>Icon-right</td><td>Boolean + swap</td><td>Off</td><td>Same box size &mdash; typically a chevron for a menu filter</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Active and State are different questions.</strong> Active says whether the filter is applied; State says what the finger is doing. Both are published, both are orthogonal, and conflating them is the most likely implementation error in this component &mdash; an applied filter that is not being touched is <code>Active = True, State = Rest</code>.
+        </div>
         <div class="callout callout-constraint">
-          <strong>&ldquo;Dissabled&rdquo; is published with two S's.</strong> It appears on all thirty variants of both filter buttons. Every other component in the library uses <code>Disabled</code> &mdash; and the Circular button uses <code>Disable</code>. Three spellings of one state across one library is a code-generation problem, not a cosmetic one.
-        </div>
-
-        <div class="callout callout-warn">
-          <strong>The horizontal set's frame is named &ldquo;Horizontal filer btn&rdquo;.</strong> Missing a T. It is the frame rather than the component set, so it will not break instance swapping &mdash; but it does make the component hard to find by search.
-        </div>
-
-        <div class="callout callout-warn">
-          <strong>Vertical has no Danger.</strong> Horizontal publishes a Danger semantic; vertical does not. A destructive filter can be expressed in one orientation and not the other, with no published guidance on what to do in the vertical case.
+          <strong>&ldquo;Dissabled&rdquo; is published with two S's, on all 18 variants.</strong> The component set itself is named <code>Horizontal filer btn</code> &mdash; missing a T. Both are set-level names, so both reach anything that matches components or variant values by string.
         </div>
       </section>
 
       <section class="spec-section" id="flt-layout">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Layout &amp; Spacing <a href="#flt-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Both filter buttons are fixed-height; the horizontal one shifts width by a pixel depending on Active, which is worth knowing before you lay out a row of them.</p>
+        <p class="section-intro">Fixed height, hugging width &mdash; with one wrinkle: the published width differs by 1dp between Active values.</p>
         <div class="table-wrap wide">
           <table>
-            <thead><tr><th>Set</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Notes</th></tr></thead>
+            <thead><tr><th>Active</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Icon box</th></tr></thead>
             <tbody>
-              <tr><td><strong>Horizontal</strong> &middot; Active = True</td><td>32dp</td><td>32dp</td><td>72dp</td><td>72dp</td><td>Published at 72dp across all Semantic values</td></tr>
-              <tr><td><strong>Horizontal</strong> &middot; Active = False</td><td>32dp</td><td>32dp</td><td>71dp</td><td>71dp</td><td>1dp narrower &mdash; see note</td></tr>
-              <tr><td><strong>Vertical</strong></td><td>51dp</td><td>51dp</td><td>61dp</td><td>61dp</td><td>Constant across every variant</td></tr>
-              <tr><td><strong>Pill bar</strong></td><td>44dp</td><td>44dp</td><td>402dp</td><td>402dp</td><td>Full-width container for the buttons</td></tr>
+              <tr><td><strong>True</strong></td><td>32dp</td><td>32dp</td><td>Hugs label</td><td>Hugs label <em>(72dp published)</em></td><td>6 &times; 16dp</td><td>4dp</td><td>16&times;16</td></tr>
+              <tr><td><strong>False</strong></td><td>32dp</td><td>32dp</td><td>Hugs label</td><td>Hugs label <em>(71dp published)</em></td><td>6 &times; 16dp</td><td>4dp</td><td>16&times;16</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
-
-        <div class="callout callout-warn">
-          <strong>Active costs a pixel.</strong> Every Active = True horizontal variant is 72dp wide and every Active = False variant is 71dp. Toggling a filter therefore reflows the row by 1dp per chip &mdash; invisible on one, visible as a jitter across five.
-        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Padding is Size/Nudge/medium vertical, Size/Large horizontal.</p>
 
         <h3>Corner radius</h3>
-        <p>Neither filter button publishes a Size axis, so there is a single column per set.</p>
+        <p>The horizontal filter publishes no Size axis, so there is a single column. It is a full pill in every one of the 18 variants.</p>
         <div class="table-wrap">
           <table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
-          <tbody>
-            <tr><td>Horizontal filter btn</td><td>Not yet verified &mdash; see note below</td></tr>
-            <tr><td>Vertical filter btn</td><td>Not yet verified &mdash; see note below</td></tr>
-            <tr><td>Pill bar Segmented control</td><td>Not yet verified &mdash; see note below</td></tr>
-          </tbody></table>
+          <tbody><tr><td>Pill</td><td>9999 &mdash; fully rounded</td></tr></tbody></table>
         </div>
-      </section>
 
-      <section class="spec-section" id="flt-pending">
-        <span class="section-eyebrow eyebrow-impl">Status</span>
-        <h2>What Is Not Yet Verified <a href="#flt-pending" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Everything above &mdash; the three sets, their axes, variant counts, node IDs, published sizes and the naming defects &mdash; is read from a fresh Figma pull and is safe to rely on.</p>
-        <p>Not yet pulled: per-variant fills, strokes, padding, gaps, icon sizes, type styles and corner radii. This page deliberately shows those as unverified rather than inferring them from the sizes, because a 32dp chip with three Semantic values and an Active toggle has too many plausible colour schemes to guess between.</p>
-        <div class="callout callout-rule">
-          <strong>Do not implement colour from this page yet.</strong> Use it for the variant model and the naming defects. The Colour and Typography sections will land with the next pull of <code>72552-289748</code>.
-        </div>
-      </section>
-
-      <section class="spec-section" id="flt-notes">
-        <span class="section-eyebrow eyebrow-impl">Notes</span>
-        <h2>When to Use It <a href="#flt-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p>Horizontal filter buttons sit in a scrolling row above a list. The vertical form &mdash; taller than it is wide, at 61 &times; 51 &mdash; stacks a glyph over a label and belongs in a grid rather than a row. The Pill bar is the segmented container that holds a fixed, mutually-exclusive set.</p>
-        <p>For a single removable selection rather than a filter toggle, use <a href="#chip" data-link="chip">Chip</a> &mdash; it is the same size class and is frequently confused with the horizontal filter button.</p>
         <div class="callout callout-warn">
-          <strong>Active is not the same as Pressed.</strong> Active describes whether the filter is applied; State describes what the finger is doing. Both axes are published on both filter buttons, and conflating them is the most likely implementation error in this family.
+          <strong>Active costs a pixel.</strong> The published frames are 72dp when Active and 71dp when not. Toggling one filter in a row of five reflows every pill after it. The 1dp comes from the border: Secondary and Danger draw a 1dp stroke when Active and nothing when not.
         </div>
+        <div class="callout callout-info">
+          <strong>The root is a column with a 10dp gap and one child.</strong> A leftover from an earlier structure &mdash; harmless today, but it will surprise anyone who adds a second child expecting the 4dp Content gap to apply.
+        </div>
+      </section>
+
+      <section class="spec-section" id="flt-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#flt-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">No Size axis, so rows are keyed by the Active value that selects each weight. This is the one place in the library where a bound &ldquo;selected&rdquo; type style is used properly.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Active = True</div>
+            <div class="typo-preview"><span style="font-size:15px; font-weight:600; line-height:20px; letter-spacing:-0.24px; color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1 selected</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 600 Semibold</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.24</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Active = False</div>
+            <div class="typo-preview"><span style="font-size:15px; font-weight:500; line-height:20px; letter-spacing:-0.24px; color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.24</span></div>
+          </div>
+        </div>
+        <div class="callout callout-info">
+          <strong>Weight carries the Active state, not just colour.</strong> Semibold when applied, Medium when not &mdash; so the distinction survives greyscale, high-contrast mode and colour-vision differences. The <a href="#filter-vertical" data-link="filter-vertical">vertical filter</a> does not do this, which is a real gap between the two.
+        </div>
+      </section>
+
+      <section class="spec-section" id="flt-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Semantic &times; State <a href="#flt-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Semantic</th><th>Active</th><th>State</th><th>Fill</th><th>Stroke</th><th>Label</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="6"><strong>Primary</strong></td><td rowspan="3">True</td><td>Rest</td><td>Brand/Accent Primary <span class="btn-swatch" style="background:#654cf5;"></span></td><td>&mdash;</td><td>Text/On Accent</td></tr>
+              <tr><td>Pressed</td><td>Brand/Accent Primary at <strong>60%</strong></td><td>&mdash;</td><td>Text/On Accent</td></tr>
+              <tr><td>Dissabled</td><td>Brand/Accent Primary at <strong>30%</strong></td><td>&mdash;</td><td>Text/On Accent</td></tr>
+              <tr><td rowspan="3">False</td><td>Rest</td><td>Surface/RaisedTertiary <span class="btn-swatch" style="background:#f5f5f5;"></span></td><td>&mdash;</td><td>Text/Primary</td></tr>
+              <tr><td>Pressed</td><td>Surface/SubtleSelected at <strong>60%</strong></td><td>&mdash;</td><td>Text/Primary</td></tr>
+              <tr><td>Dissabled</td><td>Surface/SubtleSelected <span class="btn-swatch" style="background:#f0f0f0;"></span></td><td>&mdash;</td><td>Text/Disabled</td></tr>
+              <tr><td rowspan="6"><strong>Secondary</strong></td><td rowspan="3">True</td><td>Rest</td><td>Brand/Accent Tertiary <span class="btn-swatch" style="background:#ebebff;"></span></td><td>1dp Brand/Accent Secondary</td><td>Text/Interactive</td></tr>
+              <tr><td>Pressed</td><td>Brand/Accent Tertiary at <strong>60%</strong></td><td>1dp Brand/Accent Secondary</td><td>Text/Interactive</td></tr>
+              <tr><td>Dissabled</td><td>Brand/Accent Tertiary at <strong>30%</strong></td><td>1dp Brand/Accent Secondary</td><td>Text/Interactive</td></tr>
+              <tr><td rowspan="3">False</td><td>Rest</td><td>Surface/RaisedTertiary <span class="btn-swatch" style="background:#f5f5f5;"></span></td><td>&mdash;</td><td>Text/Primary</td></tr>
+              <tr><td>Pressed</td><td>Surface/SubtleSelected at <strong>60%</strong></td><td>&mdash;</td><td>Text/Primary</td></tr>
+              <tr><td>Dissabled</td><td>Surface/Dissabled <span class="btn-swatch" style="background:#f1f1f1;"></span></td><td>&mdash;</td><td>Text/Disabled</td></tr>
+              <tr><td rowspan="6"><strong>Danger</strong></td><td rowspan="3">True</td><td>Rest</td><td>Surface/Danger <span class="btn-swatch" style="background:#f9d9d9;"></span></td><td>1dp Stroke/Danger</td><td>Text/Danger</td></tr>
+              <tr><td>Pressed</td><td>Surface/Danger at <strong>60%</strong></td><td>1dp Stroke/Danger</td><td>Text/Danger</td></tr>
+              <tr><td>Dissabled</td><td>Surface/Danger at <strong>30%</strong></td><td>1dp Stroke/Danger</td><td>Text/Danger</td></tr>
+              <tr><td rowspan="3">False</td><td>Rest</td><td>None</td><td>1dp Stroke/Danger <span class="btn-swatch" style="background:#d92c2c;"></span></td><td>Text/Danger</td></tr>
+              <tr><td>Pressed</td><td>Surface/SubtleSelected at <strong>60%</strong></td><td>1dp <strong>Stroke/Container</strong></td><td>Text/Danger</td></tr>
+              <tr><td>Dissabled</td><td>Surface/Dissabled <span class="btn-swatch" style="background:#f1f1f1;"></span></td><td>&mdash;</td><td>Text/Disabled</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>Pressed and Dissabled are opacity, not tokens.</strong> Nine of the eighteen variants express their state by dropping the whole pill to 60% or 30% alpha rather than binding a different surface. That has three consequences: the label fades with the fill so contrast cannot be reasoned about, the result depends on whatever is behind the pill, and dark theme cannot be expressed at all. Opacity is a rendering shortcut standing in for a design decision.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Danger loses its identity on press when inactive.</strong> <code>Danger / Active=False / Rest</code> carries a 1dp Stroke/Danger border; pressing it swaps that border to Stroke/Container and fills with a neutral grey. The one moment the user is actively touching a destructive filter is the moment it stops looking destructive.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Disabled is inconsistent across semantics.</strong> Primary&nbsp;/&nbsp;Inactive&nbsp;/&nbsp;Dissabled uses Surface/SubtleSelected; Secondary and Danger use Surface/Dissabled. Two tokens for one state on one component.
+        </div>
+      </section>
+
+      <section class="spec-section" id="flt-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#flt-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Both published examples put the pills in a horizontally-scrolling row directly under a search field or header.</p>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell">
+            <span class="ffl-row"><span class="ffl pri on"><span class="c"><span class="l">Label</span></span></span> <span class="ffl sec off"><span class="c"><span class="l">People</span></span></span> <span class="ffl sec off"><span class="c"><span class="l">Files</span></span></span> <span class="ffl sec off"><span class="c"><span class="l">Channels</span></span></span></span>
+            <span class="bf-cap">Search &mdash; one applied filter (Primary, Active) beside unapplied Secondary pills</span>
+          </div>
+        </div>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell">
+            <span class="ffl-row"><span class="ffl sec off"><span class="c"><span class="l">Unread</span></span></span> <span class="ffl sec on"><span class="c"><span class="l">Mentions</span></span></span> <span class="ffl dng on"><span class="c"><span class="l">Blocked</span></span></span></span>
+            <span class="bf-cap">Chat &mdash; a Secondary filter applied alongside a Danger filter</span>
+          </div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Filters live in a scrolling row, not a wrap.</strong> Both published examples keep every pill on one line and scroll horizontally. Wrapping to a second line turns a filter bar into a tag cloud and loses the reading order that makes the applied filter findable.
+        </div>
+      </section>
+
+      <section class="spec-section" id="flt-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#flt-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Active must be announced, not just drawn.</strong> The pill is a toggle. Expose its applied state programmatically &mdash; a screen reader user has no access to the fill colour or the Semibold weight.</li>
+          <li><strong>32dp is under a 44dp target.</strong> Filter pills sit in a tight scrolling row, so undersized targets compound. Extend the hit area vertically; do not grow the pill.</li>
+          <li><strong>Do not trust the 30% disabled state for contrast.</strong> Because Dissabled is opacity applied to the whole pill, the label fades with it. Disabled controls are exempt from contrast minimums, but this also means disabled state must never be the only signal that a filter is unavailable.</li>
+          <li><strong>Danger is not conveyed by colour alone anywhere else.</strong> The Danger semantic differs from Secondary only in hue. If a destructive filter matters, pair it with an icon or wording &mdash; red on its own is not sufficient.</li>
+        </ul>
       </section>
 
     </main>
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#flt-family">The Three Sets</a>
+        <a href="#flt-preview">Semantic &times; Active</a>
         <a href="#flt-variants">Variant Axes</a>
         <a href="#flt-layout">Layout &amp; Spacing</a>
-        <a href="#flt-pending">Not Yet Verified</a>
-        <a href="#flt-notes">When to Use It</a>
+        <a href="#flt-typography">Typography</a>
+        <a href="#flt-color">Colour</a>
+        <a href="#flt-usage">Usage Examples</a>
+        <a href="#flt-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
-  <footer class="docs-footer">Filter &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> nodes <code>72552-289748</code>, <code>105935-54688</code>, <code>83478-37018</code> &middot; August 2026</footer>
+  <footer class="docs-footer">Filter &middot; Horizontal &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>72552-289748</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-filter-vertical" data-page="filter-vertical">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow"><a href="#filter" data-link="filter" style="color:inherit;">Filter</a> &middot; Orientation</div>
+    <h1>Vertical filter btn</h1>
+    <p class="subtitle">The stacked form: a 24dp glyph over an 11dp label in a 61 &times; 51 rounded rectangle. Same Semantic / State / Active vocabulary as the <a href="#filter" data-link="filter">horizontal pill</a> &mdash; but a different shape, a different type ramp, and one fewer semantic.</p>
+    <div class="meta"><span>12 variants</span><span>3 axes</span><span>61 &times; 51dp</span><span>Figma: Monocore-iOS &middot; node <code>105935-54688</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="fv-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Semantic &times; Active <a href="#fv-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell"><span class="ffl-row"><span class="fflv pri on"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span> <span class="fflv sec on"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span></span><span class="bf-cap">Active = True &middot; Primary, Secondary</span></div>
+        </div>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell"><span class="ffl-row"><span class="fflv pri off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span></span><span class="bf-cap">Active = False &middot; Primary, Secondary</span></div>
+        </div>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell"><span class="ffl-row"><span class="fflv pri on st-pressed"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span> <span class="fflv pri on st-disabled"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span> <span class="fflv pri off st-disabled-flat"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span></span><span class="bf-cap">Primary &middot; Active Pressed, Active Dissabled (30%), Inactive Dissabled</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="fv-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#fv-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three axes, fully published: 2 &times; 3 &times; 2 = 12 variants.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Semantic &mdash; 2 values</h4><div class="vals"><span class="val">Primary</span><span class="val">Secondary</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Dissabled</span></div></div>
+          <div class="btn-axis"><h4>Active &mdash; 2 values</h4><div class="vals"><span class="val">True</span><span class="val">False</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Pill label</td><td>Text</td><td><code>Label</code></td><td>Single line, never wraps &mdash; and only 61dp of width to do it in</td></tr>
+              <tr><td>Label</td><td>Boolean</td><td>On</td><td>Off leaves a 24dp glyph alone in a 61&times;51 box</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>No Danger semantic.</strong> The horizontal filter publishes Primary, Secondary and Danger; the vertical one stops at Secondary. A destructive filter is expressible in a row and not in a grid, with no published guidance for the vertical case.
+        </div>
+        <div class="callout callout-warn">
+          <strong>No icon booleans.</strong> Horizontal makes both icons optional and off by default; vertical always draws its glyph and offers no swap property on the set. The icon is the component here &mdash; the label is the optional part.
+        </div>
+      </section>
+
+      <section class="spec-section" id="fv-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#fv-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Unlike the horizontal pill, this one is pinned in both dimensions &mdash; 61 &times; 51 in every variant.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Variant</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Icon box</th></tr></thead>
+            <tbody>
+              <tr><td><strong>All 12</strong></td><td>51dp</td><td>51dp</td><td>61dp</td><td>61dp</td><td>8 &times; 16dp</td><td>0dp</td><td>24&times;24</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Padding is Size/Small vertical, Size/Large horizontal.</p>
+
+        <h3>Corner radius</h3>
+        <p>No Size axis, so a single column &mdash; and this is where it visibly parts company with the horizontal pill.</p>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+          <tbody>
+            <tr><td>Vertical filter btn</td><td>16dp <em>Radius/Prominent</em></td></tr>
+            <tr><td><em>Horizontal filter, for comparison</em></td><td><em>9999 &mdash; fully rounded</em></td></tr>
+          </tbody></table>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Icon and label sit at a 0dp gap.</strong> The Content stack sets Size/None between the 24dp glyph and the 11dp label. They do not collide today because both have generous line boxes, but there is no spacing token holding them apart &mdash; any change to either box closes the gap.
+        </div>
+        <div class="callout callout-info">
+          <strong>61dp of width, 16dp of padding.</strong> That leaves 29dp for the label at 11dp type &mdash; roughly five or six characters before it overflows the clipped container. This component is built for one-word filters.
+        </div>
+      </section>
+
+      <section class="spec-section" id="fv-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#fv-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">No Size axis, so the row is keyed by Active &mdash; except that, unlike the horizontal pill, Active does not change anything about the type.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Active = True</div>
+            <div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Active = False</div>
+            <div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span></div>
+          </div>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>Active is colour-only here.</strong> The horizontal filter switches Medium&nbsp;&rarr;&nbsp;Semibold between inactive and active, so its selected state survives greyscale. The vertical filter keeps Caption&nbsp;2 Regular in both, which means the only difference between an applied and an unapplied filter is hue. That fails the same test the horizontal one passes.
+        </div>
+        <div class="callout callout-warn">
+          <strong>11dp on an 11dp line height.</strong> Caption 2 is the smallest type in the system and it is set solid, inside a container with <code>overflow: clip</code>. At large accessibility text sizes the label will be cut off rather than reflowed.
+        </div>
+      </section>
+
+      <section class="spec-section" id="fv-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Semantic &times; State <a href="#fv-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Semantic</th><th>Active</th><th>State</th><th>Fill</th><th>Stroke</th><th>Label</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="6"><strong>Primary</strong></td><td rowspan="3">True</td><td>Rest</td><td>Brand/Accent Primary <span class="btn-swatch" style="background:#654cf5;"></span></td><td>&mdash;</td><td>Text/On Accent</td></tr>
+              <tr><td>Pressed</td><td>Brand/Accent Primary &mdash; <em>content at 60%</em></td><td>&mdash;</td><td>Text/On Accent</td></tr>
+              <tr><td>Dissabled</td><td>Brand/Accent Primary at <strong>30%</strong></td><td>&mdash;</td><td>Text/On Accent</td></tr>
+              <tr><td rowspan="3">False</td><td>Rest</td><td>Surface/Group/Primary/Container <span class="btn-swatch" style="background:#f5f5f5;"></span></td><td>&mdash;</td><td>Text/Primary</td></tr>
+              <tr><td>Pressed</td><td>Surface/SubtleSelected &mdash; <em>content at 60%</em></td><td>&mdash;</td><td>Text/Primary</td></tr>
+              <tr><td>Dissabled</td><td>Surface/SubtleSelected <span class="btn-swatch" style="background:#f0f0f0;"></span></td><td>&mdash;</td><td>Text/Disabled</td></tr>
+              <tr><td rowspan="6"><strong>Secondary</strong></td><td rowspan="3">True</td><td>Rest</td><td>Brand/Accent Tertiary <span class="btn-swatch" style="background:#ebebff;"></span></td><td>1dp Brand/Accent Secondary</td><td>Text/Interactive</td></tr>
+              <tr><td>Pressed</td><td>Brand/Accent Tertiary &mdash; <em>content at 60%</em></td><td>1dp Brand/Accent Secondary</td><td>Text/Interactive</td></tr>
+              <tr><td>Dissabled</td><td>Brand/Accent Tertiary at <strong>30%</strong></td><td>1dp Brand/Accent Secondary</td><td>Brand/Accent Secondary</td></tr>
+              <tr><td rowspan="3">False</td><td>Rest</td><td>None</td><td>1dp Stroke/Container <span class="btn-swatch" style="background:#e6e6e6;"></span></td><td>Text/Primary</td></tr>
+              <tr><td>Pressed</td><td>Surface/SubtleSelected &mdash; <em>content at 60%</em></td><td>1dp Stroke/Container</td><td>Text/Primary</td></tr>
+              <tr><td>Dissabled</td><td>Surface/Dominant <span class="btn-swatch" style="background:#ffffff;"></span></td><td>1dp Stroke/Container</td><td>Text/Disabled</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>Pressed is applied to a different layer than in the horizontal filter.</strong> Here the 60% opacity sits on the inner <code>Content</code> frame, so the fill stays solid and only the glyph and label fade. In the horizontal pill the same 60% sits on the root, fading the fill too. Two components, one state name, two visibly different results.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Inactive Dissabled fills with white.</strong> <code>Secondary / Active=False / Dissabled</code> binds Surface/Dominant &mdash; pure white &mdash; where every other disabled variant uses a grey. On a white canvas the control becomes a bordered outline with no fill distinction at all.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Secondary Active Dissabled changes its label token.</strong> Every other disabled variant uses Text/Disabled; this one uses Brand/Accent Secondary and then drops the whole control to 30%. The result is a washed-out lavender label rather than the system's disabled grey.
+        </div>
+      </section>
+
+      <section class="spec-section" id="fv-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#fv-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The published examples put the vertical filter in a chat header &mdash; a row of icon-over-label toggles above a message list.</p>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell">
+            <span class="ffl-row"><span class="fflv pri on"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Unread</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chats</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Teams</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Files</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Apps</span></span></span></span>
+            <span class="bf-cap">Chat header &mdash; one applied filter beside four unapplied</span>
+          </div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Vertical is for a grid, horizontal is for a row.</strong> At 61 &times; 51 the vertical button is nearly square and reads as a tile; five of them fill a phone width. If your filters have labels longer than one short word, or you need more than about five, the <a href="#filter" data-link="filter">horizontal pill</a> is the right component.
+        </div>
+      </section>
+
+      <section class="spec-section" id="fv-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#fv-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Active is conveyed by colour alone.</strong> Unlike the horizontal filter, there is no weight change between applied and unapplied. Until that is fixed at the source, the applied state must be exposed programmatically and should carry a non-colour cue in product.</li>
+          <li><strong>51dp tall, 61dp wide &mdash; the one filter that clears 44dp.</strong> Both dimensions pass, which makes this the better choice where mis-taps are costly.</li>
+          <li><strong>The label clips rather than wraps.</strong> <code>overflow: clip</code> plus a solid 11dp line height means large text settings truncate silently. Treat the label as decorative reinforcement and put the real name in the accessible name.</li>
+          <li><strong>The glyph is the only content in an icon-only instance.</strong> Turning Label off leaves nothing announceable &mdash; supply an accessible name explicitly.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#fv-preview">Semantic &times; Active</a>
+        <a href="#fv-variants">Variant Axes</a>
+        <a href="#fv-layout">Layout &amp; Spacing</a>
+        <a href="#fv-typography">Typography</a>
+        <a href="#fv-color">Colour</a>
+        <a href="#fv-usage">Usage Examples</a>
+        <a href="#fv-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Filter &middot; Vertical &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>105935-54688</code> &middot; August 2026</footer>
 </div>
 </div>
 
@@ -13739,7 +14067,7 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 <div class="page" id="page-tile-grid" data-page="tile-grid">
 <div class="docs-shell">
   <header class="docs-header">
-    <div class="eyebrow"><a href="#filter" data-link="filter" style="color:inherit;">Filter</a> &middot; Family</div>
+    <div class="eyebrow">Components</div>
     <h1>Tile grid</h1>
     <p class="subtitle">The square-ish action tiles used in calling menus and reaction sheets, plus the row that divides the available width between them. A grid, not a list &mdash; every tile in a row is the same width, and that width is computed, not authored.</p>
     <div class="meta"><span>12 + 2 variants</span><span>3 axes</span><span>60 / 100dp tall</span><span>Figma: Monocore-iOS &middot; node <code>84003-42205</code></span></div>
