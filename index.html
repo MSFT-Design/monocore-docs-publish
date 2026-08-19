@@ -9800,15 +9800,15 @@ Icon only = True
 
   /* Tip at the BOTTOM → the call out sits above the anchor */
   .fco.tip-bottom { flex-direction: column; bottom: calc(50% + 20px + 6px); }
-  .fco.tip-bottom.align-left   { left: calc(50% - 20px); align-items: flex-start; }
+  .fco.tip-bottom.align-left   { left: calc(50% - 31px); align-items: flex-start; }
   .fco.tip-bottom.align-center { left: 50%; transform: translateX(-50%); align-items: center; }
-  .fco.tip-bottom.align-right  { right: calc(50% - 20px); align-items: flex-end; }
+  .fco.tip-bottom.align-right  { right: calc(50% - 31px); align-items: flex-end; }
   /* Tip at the TOP → the call out sits below the anchor */
   .fco.tip-top { flex-direction: column; top: calc(50% + 20px + 6px); }
   .fco.tip-top .fco-tip { transform: scaleY(-1); }
-  .fco.tip-top.align-left   { left: calc(50% - 20px); align-items: flex-start; }
+  .fco.tip-top.align-left   { left: calc(50% - 31px); align-items: flex-start; }
   .fco.tip-top.align-center { left: 50%; transform: translateX(-50%); align-items: center; }
-  .fco.tip-top.align-right  { right: calc(50% - 20px); align-items: flex-end; }
+  .fco.tip-top.align-right  { right: calc(50% - 31px); align-items: flex-end; }
   /* Tip on the LEFT → the call out sits to the right of the anchor */
   .fco.tip-left { flex-direction: row; align-items: center; left: calc(50% + 20px + 6px); top: 50%; transform: translateY(-50%); }
   .fco.tip-left .fco-tip { transform: rotate(0deg); }
@@ -9908,7 +9908,7 @@ Icon only = True
                 <div class="co-anchor">Anchor</div>
                 <div class="fco tip-bottom align-left" id="fco">
                   <div class="fco-container"><div class="fco-text" id="fco-text">This tooltip hugs contents. The maximum allowed width is 248.</div></div>
-                  <span class="fco-tip horizontal" id="fco-tip"><svg viewBox="0 0 62 7" fill="currentColor" aria-hidden="true"><path d="M0 0h62L35.5 6.2a6 6 0 0 1-9 0L0 0Z"/></svg></span>
+                  <span class="fco-tip horizontal" id="fco-tip"><svg viewBox="0 0 62 7" fill="currentColor" aria-hidden="true"><path d="M24 0 29.2 6.1a2.6 2.6 0 0 0 3.6 0L38 0Z"/></svg></span>
                 </div>
               </div>
             </div>
@@ -10042,7 +10042,7 @@ Icon only = True
             <div class="co-uc-frame">
               <div class="co-anchor" style="top:34px; left:60px; transform:none;">Btn</div>
               <div class="fco tip-top align-left" style="top:82px; left:60px;">
-                <span class="fco-tip horizontal" style="transform:scaleY(-1);"><svg viewBox="0 0 62 7" fill="currentColor"><path d="M0 0h62L35.5 6.2a6 6 0 0 1-9 0L0 0Z"/></svg></span>
+                <span class="fco-tip horizontal" style="transform:scaleY(-1);"><svg viewBox="0 0 62 7" fill="currentColor"><path d="M24 0 29.2 6.1a2.6 2.6 0 0 0 3.6 0L38 0Z"/></svg></span>
                 <div class="fco-container"><div class="fco-text">Pin this chat to keep it at the top.</div></div>
               </div>
             </div>
@@ -10054,7 +10054,7 @@ Icon only = True
             <div class="co-uc-frame">
               <div class="fco tip-bottom align-center" style="bottom:70px; left:50%; transform:translateX(-50%);">
                 <div class="fco-container"><div class="fco-text">Tap and hold to react.</div></div>
-                <span class="fco-tip horizontal"><svg viewBox="0 0 62 7" fill="currentColor"><path d="M0 0h62L35.5 6.2a6 6 0 0 1-9 0L0 0Z"/></svg></span>
+                <span class="fco-tip horizontal"><svg viewBox="0 0 62 7" fill="currentColor"><path d="M24 0 29.2 6.1a2.6 2.6 0 0 0 3.6 0L38 0Z"/></svg></span>
               </div>
               <div class="co-anchor" style="bottom:22px; left:50%; transform:translateX(-50%); top:auto;">Btn</div>
             </div>
@@ -10135,7 +10135,7 @@ Icon only = True
   const tip = document.getElementById('fco-tip');
   const cb = id => document.getElementById(id).checked;
 
-  const H_TIP = '<svg viewBox="0 0 62 7" fill="currentColor" aria-hidden="true"><path d="M0 0h62L35.5 6.2a6 6 0 0 1-9 0L0 0Z"/></svg>';
+  const H_TIP = '<svg viewBox="0 0 62 7" fill="currentColor" aria-hidden="true"><path d="M24 0 29.2 6.1a2.6 2.6 0 0 0 3.6 0L38 0Z"/></svg>';
   const V_TIP = '<svg viewBox="0 0 7 14" fill="currentColor" aria-hidden="true"><path d="M7 0v14L1 8.4a2 2 0 0 1 0-2.8L7 0Z"/></svg>';
   const COPY = {
     short: 'Pin this chat.',
@@ -10268,7 +10268,7 @@ Order per variant
             <tbody>
               <tr><td>Min height is 44dp instead of 56dp</td><td><code>Top left</code> only</td><td>One variant sits 12dp shorter than its seven siblings with the same copy</td></tr>
               <tr><td>Tip is a baked SVG asset with a hard-coded fill</td><td>All 8 variants</td><td>Container and tail can drift apart under re-theming; dark theme is not expressible</td></tr>
-              <tr><td>Tip width is a fixed 62dp</td><td>Top / bottom variants</td><td>On an 80dp-wide call out the tail spans three quarters of the edge and reads as a chevron, not a point</td></tr>
+              <tr><td>The tip asset is a 62dp frame holding a ~14dp tail</td><td>Top / bottom variants</td><td>The tail is centred in mostly-transparent padding, so its offset from the body edge is locked at ~31dp however wide the call out is &mdash; a corner-anchored tip is not expressible</td></tr>
               <tr><td>No <code>Left top</code> / <code>Right bottom</code> corner variants</td><td>Side tips</td><td>Side-anchored call outs on tall elements have no correct alignment</td></tr>
               <tr><td>Internal gap of 8dp with only one child</td><td>Container</td><td>Harmless today; signals an intended second slot that was never published</td></tr>
             </tbody>
