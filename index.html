@@ -441,6 +441,22 @@
       border: 1px solid var(--c-border);
       border-radius: var(--r-md);
     }
+    /* Wide reference tables: let the table exceed the column and scroll,
+       instead of squeezing every cell to fit. */
+    .table-wrap.wide table { width: auto; min-width: 100%; }
+    .table-wrap.wide th, .table-wrap.wide td { white-space: nowrap; }
+    .table-wrap.wide { scrollbar-width: thin; }
+    .table-scroll-hint {
+      font-size: 11.5px; color: var(--grey-56);
+      margin-top: calc(-1 * var(--sp-2));
+    }
+    /* Typography rows are keyed by component size */
+    .typo-size {
+      flex: 0 0 92px;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.7px;
+      color: var(--grey-56);
+    }
     table {
       width: 100%; border-collapse: collapse;
       font-size: 13px; line-height: 1.5;
@@ -9233,61 +9249,46 @@
         </div>
       </section>
 
-      <!-- 3. PROPERTIES & SLOTS -->
-      <section class="spec-section" id="btn-slots">
-        <span class="section-eyebrow eyebrow-design">Slots</span>
-        <h2>Properties &amp; Slots <a href="#btn-slots" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Beyond the three variant axes, each instance exposes four instance properties. Icon slots are swap targets; the label is a bound text property.</p>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Slot <em>(left icon)</em></td><td>Instance swap</td><td>On</td><td>20&times;20 box / 16&times;16 glyph at Large&nbsp;&amp;&nbsp;Medium; 16&times;16 box / 12&times;12 glyph at Small</td></tr>
-              <tr><td>Label</td><td>Text</td><td><code>Button</code></td><td>Truncates with ellipsis; single line, never wraps</td></tr>
-              <tr><td>Show label</td><td>Boolean</td><td>On</td><td>Off yields an icon-only button &mdash; pair with an accessible name</td></tr>
-              <tr><td>Right icon</td><td>Boolean + swap</td><td>Off</td><td>Trailing affordance (chevron, caret) &mdash; hidden by default in every variant</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-rule">
-          <strong>The label owns the width.</strong> The Button has no fixed width at any size &mdash; it hugs its content, and horizontal padding is the only lever. If you need a fixed or edge-to-edge footprint, that is what <code>Button Full-width</code> is for; do not stretch the standard Button.
-        </div>
-      </section>
-
       <!-- 4. LAYOUT & SPACING -->
       <section class="spec-section" id="btn-layout">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Layout &amp; Spacing <a href="#btn-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Every value below is read from the published Content row of each size. Vertical padding is always 0 &mdash; height is set explicitly and the row centres its children.</p>
+        <p class="section-intro">Every value below is read from the published Content row of each size. Height is fixed rather than bounded &mdash; minimum and maximum are the same number &mdash; and vertical padding is always 0, so the row centres its children. Width is unbounded on the standard Button: it hugs its label at every size.</p>
 
-        <div class="table-wrap">
+        <div class="table-wrap wide">
           <table>
             <thead>
-              <tr><th>Size</th><th>Height</th><th>Padding X</th><th>Gap</th><th>Icon box</th><th>Glyph</th><th>Type style</th></tr>
+              <tr><th>Size</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding X</th><th>Gap</th><th>Icon box</th></tr>
             </thead>
             <tbody>
-              <tr><td><strong>Large</strong></td><td>52dp</td><td>16dp <em>Size/Large</em></td><td>8dp <em>Size/Small</em></td><td>20&times;20</td><td>16&times;16</td><td>iOS/Button 1</td></tr>
-              <tr><td><strong>Medium</strong></td><td>40dp</td><td>10dp <em>Size/10dp</em></td><td>8dp <em>Size/Small</em></td><td>20&times;20</td><td>16&times;16</td><td>iOS/Button 1</td></tr>
-              <tr><td><strong>Small</strong></td><td>28dp</td><td>8&ndash;10dp <em>see note</em></td><td>4dp <em>Size/4dp</em></td><td>16&times;16</td><td>12&times;12</td><td>iOS/Button 2</td></tr>
+              <tr><td><strong>Large</strong></td><td>52dp</td><td>52dp</td><td>Hugs content</td><td>Hugs content</td><td>16dp <em>Size/Large</em></td><td>8dp <em>Size/Small</em></td><td>20&times;20</td></tr>
+              <tr><td><strong>Medium</strong></td><td>40dp</td><td>40dp</td><td>Hugs content</td><td>Hugs content</td><td>10dp <em>Size/10dp</em></td><td>8dp <em>Size/Small</em></td><td>20&times;20</td></tr>
+              <tr><td><strong>Small</strong></td><td>28dp</td><td>28dp</td><td>Hugs content</td><td>Hugs content</td><td>8&ndash;10dp <em>see note</em></td><td>4dp <em>Size/4dp</em></td><td>16&times;16</td></tr>
+              <tr><td><strong>Full-width</strong> <em>(separate set)</em></td><td>52dp</td><td>52dp</td><td>Fills container</td><td>393dp published &middot; 340dp landscape &amp; tablet</td><td>20dp <em>Size/XLarge</em></td><td>8dp <em>Size/Small</em></td><td>20&times;20</td></tr>
             </tbody>
           </table>
         </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
 
         <h3>Corner radius</h3>
-        <div class="table-wrap">
+        <p>Three published sizes, so three columns. Only Subtle varies across them.</p>
+        <div class="table-wrap wide">
           <table>
-            <thead><tr><th>Style</th><th>Rest</th><th>Pressed</th><th>Disabled</th></tr></thead>
+            <thead><tr><th>Style</th><th>State</th><th>Small</th><th>Medium</th><th>Large</th></tr></thead>
             <tbody>
-              <tr><td>Accent</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
-              <tr><td>Outline accent</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
-              <tr><td>Subtle</td><td>24 <em>Radius/Dominant</em></td><td>8 L&middot;M / 4 S</td><td>8 L&middot;M / 4 S</td></tr>
+              <tr><td rowspan="3"><strong>Accent</strong></td><td>Rest</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
+              <tr><td>Pressed</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
+              <tr><td>Disabled</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
+              <tr><td rowspan="3"><strong>Outline accent</strong></td><td>Rest</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
+              <tr><td>Pressed</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
+              <tr><td>Disabled</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
+              <tr><td rowspan="3"><strong>Subtle</strong></td><td>Rest</td><td>24 <em>Dominant</em></td><td>24 <em>Dominant</em></td><td>24 <em>Dominant</em></td></tr>
+              <tr><td>Pressed</td><td>4 <em>Minimal</em></td><td>8 <em>Default</em></td><td>8 <em>Default</em></td></tr>
+              <tr><td>Disabled</td><td>4 <em>Minimal</em></td><td>8 <em>Default</em></td><td>8 <em>Default</em></td></tr>
             </tbody>
           </table>
         </div>
+        <p class="table-scroll-hint">Button Full-width publishes no Size axis; its radius is Pill (200) in every Style and State.</p>
 
         <div class="callout callout-warn">
           <strong>Two published inconsistencies, verbatim from the set.</strong> (1) Small horizontal padding is not uniform: <code>Accent&nbsp;/&nbsp;Rest</code> is 10&thinsp;/&thinsp;10, <code>Outline&nbsp;accent&nbsp;/&nbsp;Rest</code> is 8&thinsp;/&thinsp;10, and every other Small variant is 8&thinsp;/&thinsp;8. (2) Subtle changes radius between Rest (24) and Pressed&thinsp;/&thinsp;Disabled (8, or 4 at Small) &mdash; invisible today because Subtle has no fill in any state, but it will surface the moment a pressed background is added. Treat both as defects to raise, not rules to port.
@@ -9298,16 +9299,28 @@
       <section class="spec-section" id="btn-typography">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Typography <a href="#btn-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Two type styles cover all three sizes. Both are Weight/Medium (500) on Font Family/Text.</p>
+        <p class="section-intro">One row per published size. Two type styles cover all four &mdash; both Weight/Medium (500) on Font Family/Text.</p>
 
         <div class="typo-sample">
           <div class="typo-row">
+            <div class="typo-size">Large</div>
             <div class="typo-preview"><span style="font-size:15px; font-weight:500; line-height:20px; letter-spacing:-0.24px; color:var(--c-text);">Button</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.24</span><span><strong>Used by:</strong> Large, Medium, Full-width</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.24</span></div>
           </div>
           <div class="typo-row">
+            <div class="typo-size">Medium</div>
+            <div class="typo-preview"><span style="font-size:15px; font-weight:500; line-height:20px; letter-spacing:-0.24px; color:var(--c-text);">Button</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.24</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Small</div>
             <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Button</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Used by:</strong> Small</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Tracking:</strong> &minus;0.08</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Full-width</div>
+            <div class="typo-preview"><span style="font-size:15px; font-weight:500; line-height:20px; letter-spacing:-0.24px; color:var(--c-text);">Button</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.24</span></div>
           </div>
         </div>
       </section>
@@ -9452,7 +9465,6 @@
         <div class="toc-label">On this page</div>
         <a href="#btn-playground">Build a Button</a>
         <a href="#btn-variants">Variant Axes</a>
-        <a href="#btn-slots">Properties &amp; Slots</a>
         <a href="#btn-layout">Layout &amp; Spacing</a>
         <a href="#btn-typography">Typography</a>
         <a href="#btn-color">Colour by Style &times; State</a>
@@ -9621,6 +9633,26 @@
    ├─ <span class="slot-tag">[slot] Slot</span>  (20&times;20 box, 16&times;16 glyph) <span class="opt">— optional, on by default</span>
    └─ <span class="txt-tag">[text] Label</span>  <span class="opt">— iOS/Button 1</span></div>
         </details>
+
+        <h3>Properties &amp; Slots</h3>
+        <p>Beyond the three variant axes, each instance exposes four instance properties. Icon slots are swap targets; the label is a bound text property.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead>
+              <tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Slot <em>(left icon)</em></td><td>Instance swap</td><td>On</td><td>20&times;20 box / 16&times;16 glyph at Large &amp; Medium; 16&times;16 box / 12&times;12 glyph at Small</td></tr>
+              <tr><td>Label</td><td>Text</td><td><code>Button</code></td><td>Truncates with ellipsis; single line, never wraps</td></tr>
+              <tr><td>Show label</td><td>Boolean</td><td>On</td><td>Off yields an icon-only button &mdash; pair with an accessible name</td></tr>
+              <tr><td>Right icon</td><td>Boolean + swap</td><td>Off</td><td>Trailing affordance (chevron, caret) &mdash; hidden by default in every variant</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-rule">
+          <strong>The label owns the width.</strong> The Button has no fixed width at any size &mdash; it hugs its content, and horizontal padding is the only lever. If you need a fixed or edge-to-edge footprint, that is what <code>Button Full-width</code> is for; do not stretch the standard Button.
+        </div>
 
         <div class="callout callout-info">
           <strong>One row, three children, no wrappers.</strong> Unlike the Card, the Button has no nested containers &mdash; the variant does all the work and <code>Content</code> is a single auto-layout row. That is why the whole set fits in 27 variants: there is no internal structure for a variant to reconfigure.
@@ -9886,20 +9918,35 @@
       <section class="spec-section" id="co-layout">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Layout &amp; Spacing <a href="#co-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One row per published variant. The body is genuinely bounded in both directions &mdash; it hugs its text between 80 and 248dp &mdash; which is why the min/max columns carry real values here rather than &ldquo;hugs content&rdquo;.</p>
 
+        <div class="table-wrap wide">
+          <table>
+            <thead>
+              <tr><th>Tip location</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Tip size</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Bottom left</strong></td><td>56dp</td><td>Hugs content</td><td>80dp</td><td>248dp</td><td>8dp</td><td>8dp</td><td>62 &times; 7dp</td></tr>
+              <tr><td><strong>Bottom center</strong></td><td>56dp</td><td>Hugs content</td><td>80dp</td><td>248dp</td><td>8dp</td><td>8dp</td><td>62 &times; 7dp</td></tr>
+              <tr><td><strong>Bottom right</strong></td><td>56dp</td><td>Hugs content</td><td>80dp</td><td>248dp</td><td>8dp</td><td>8dp</td><td>62 &times; 7dp</td></tr>
+              <tr><td><strong>Top left</strong></td><td>44dp <em>&#9888; outlier</em></td><td>Hugs content</td><td>80dp</td><td>248dp</td><td>8dp</td><td>8dp</td><td>62 &times; 7dp</td></tr>
+              <tr><td><strong>Top center</strong></td><td>56dp</td><td>Hugs content</td><td>80dp</td><td>248dp</td><td>8dp</td><td>8dp</td><td>62 &times; 7dp</td></tr>
+              <tr><td><strong>Top right</strong></td><td>56dp</td><td>Hugs content</td><td>80dp</td><td>248dp</td><td>8dp</td><td>8dp</td><td>62 &times; 7dp</td></tr>
+              <tr><td><strong>Left center</strong></td><td>56dp</td><td>Hugs content</td><td>80dp</td><td>248dp</td><td>8dp</td><td>8dp</td><td>7 &times; 14dp</td></tr>
+              <tr><td><strong>Right center</strong></td><td>56dp</td><td>Hugs content</td><td>80dp</td><td>248dp</td><td>8dp</td><td>8dp</td><td>7 &times; 14dp</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Elevation is <code>Shadows/Light/Shadow 16</code> on every variant.</p>
+
+        <h3>Corner radius</h3>
+        <p>Call Out publishes no Size axis, so there is a single column &mdash; the radius is identical in all eight variants.</p>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
             <tbody>
-              <tr><td>Container padding</td><td>8dp, all sides</td><td>Size/Small</td></tr>
-              <tr><td>Corner radius</td><td>8dp</td><td>Radius/Default</td></tr>
-              <tr><td>Internal gap</td><td>8dp</td><td>Global.Size.80</td></tr>
-              <tr><td>Min width</td><td>80dp</td><td>&mdash;</td></tr>
-              <tr><td>Max width</td><td>248dp &mdash; the body hugs its text below this</td><td>&mdash;</td></tr>
-              <tr><td>Min height</td><td>56dp <em>(44dp on Top left &mdash; see debt)</em></td><td>&mdash;</td></tr>
-              <tr><td>Tip &mdash; top / bottom</td><td>62 &times; 7dp</td><td>&mdash;</td></tr>
-              <tr><td>Tip &mdash; left / right</td><td>7 &times; 14dp</td><td>&mdash;</td></tr>
-              <tr><td>Elevation</td><td>Two-layer drop shadow</td><td>Shadows/Light/Shadow 16</td></tr>
+              <tr><td>Container</td><td>8dp <em>Radius/Default</em></td></tr>
+              <tr><td>Tip</td><td>Not applicable &mdash; a flat triangular asset with no radius</td></tr>
             </tbody>
           </table>
         </div>
@@ -9912,21 +9959,29 @@
       <!-- 4. TYPOGRAPHY & COLOUR -->
       <section class="spec-section" id="co-style">
         <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Typography &amp; Colour <a href="#co-style" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <h2>Typography <a href="#co-style" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Call Out publishes no Size axis, so there is one row, named for the variant group that uses it &mdash; which is all of them.</p>
 
         <div class="typo-sample">
           <div class="typo-row">
+            <div class="typo-size">All 8 variants</div>
             <div class="typo-preview"><span style="font-size:15px; font-weight:500; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Tooltip body</span></div>
             <div class="typo-meta"><span><strong>Token:</strong> iOS/Subhead 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Colour:</strong> Text/On Accent</span></div>
           </div>
         </div>
+      </section>
+
+      <section class="spec-section" id="co-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#co-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">There is no Style axis either &mdash; the surface is the same dark brand step in every variant.</p>
 
         <div class="table-wrap">
           <table>
             <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td>Container fill</td><td>Brand/Accent Dominant</td><td><span class="btn-swatch" style="background:#43349c;"></span>#43349c</td></tr>
-              <tr><td>Tip fill</td><td>Brand/Accent Dominant</td><td><span class="btn-swatch" style="background:#43349c;"></span>#43349c</td></tr>
+              <tr><td>Tip fill</td><td>Brand/Accent Dominant <em>(baked into the asset)</em></td><td><span class="btn-swatch" style="background:#43349c;"></span>#43349c</td></tr>
               <tr><td>Body text</td><td>Text/On Accent</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
             </tbody>
           </table>
@@ -10024,7 +10079,8 @@
         <a href="#co-playground">Build a Call Out</a>
         <a href="#co-variants">Variant Axis</a>
         <a href="#co-layout">Layout &amp; Spacing</a>
-        <a href="#co-style">Typography &amp; Colour</a>
+        <a href="#co-style">Typography</a>
+        <a href="#co-color">Colour</a>
         <a href="#co-usage">Usage Examples</a>
         <a href="#co-a11y">Accessibility</a>
       </nav>
@@ -10475,28 +10531,30 @@ Order per variant
       <section class="spec-section" id="ch-layout">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Layout &amp; Spacing <a href="#ch-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Shared shell, per-layout padding. Every variant is a 265dp-wide card with a 16dp radius, capped at 487dp and floored at 70dp.</p>
+        <p class="section-intro">Shared shell, per-layout padding. Width is bounded at both ends &mdash; the card is published at 265dp but will hug between 70 and 487dp. Height is unbounded: it grows with its content.</p>
 
-        <div class="table-wrap">
+        <div class="table-wrap wide">
           <table>
-            <thead><tr><th>Layout</th><th>Direction</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
+            <thead>
+              <tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr>
+            </thead>
             <tbody>
-              <tr><td>Base</td><td>Column</td><td>8 &times; 12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
-              <tr><td>Base + actions</td><td>Column</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
-              <tr><td>Reply</td><td>Row</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
-              <tr><td>Forward</td><td>Row</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
-              <tr><td>File Chiclet</td><td>Column</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
-              <tr><td>File Chiclet <em>(Image)</em></td><td>Column</td><td>0 &mdash; media is flush; inner row is 12dp</td><td>8dp</td><td>Stroke/onMedia</td></tr>
-              <tr><td>Video</td><td>Column</td><td>0 &mdash; media fills the card</td><td>0</td><td>Stroke/onMedia</td></tr>
+              <tr><td><strong>Base</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>8 &times; 12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+              <tr><td><strong>Base + actions</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+              <tr><td><strong>Reply</strong></td><td>Row</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
+              <tr><td><strong>Forward</strong></td><td>Row</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
+              <tr><td><strong>File Chiclet</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+              <tr><td><strong>File Chiclet</strong> <em>(Image)</em></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>0 &mdash; media flush, inner row 12dp</td><td>8dp</td><td>Stroke/onMedia</td></tr>
+              <tr><td><strong>Video</strong></td><td>Column</td><td>160dp</td><td>160dp</td><td>265dp</td><td>265dp</td><td>0 &mdash; media fills the card</td><td>0</td><td>Stroke/onMedia</td></tr>
             </tbody>
           </table>
         </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp for every layout.</p>
 
-        <div class="table-wrap">
+        <div class="table-wrap wide">
           <table>
             <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
             <tbody>
-              <tr><td>Corner radius</td><td>16dp</td><td>Radius/Prominent &mdash; constant across all seven</td></tr>
               <tr><td>Leading icon slot</td><td>16&times;16dp</td><td>Base and Base + actions</td></tr>
               <tr><td>Leading file icon</td><td>24&times;24dp</td><td>File Chiclet &mdash; a filetype icon, not a generic glyph</td></tr>
               <tr><td>Trailing slot</td><td>24&times;24dp</td><td>Base and Base + actions</td></tr>
@@ -10509,35 +10567,91 @@ Order per variant
             </tbody>
           </table>
         </div>
+
+        <h3>Corner radius</h3>
+        <p>Chiclet publishes no Size axis, so there is a single column &mdash; and unlike the padding, the radius never changes.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Card shell &mdash; all 7 layouts</td><td>16dp <em>Radius/Prominent</em></td></tr>
+              <tr><td>Quote bar</td><td>4dp <em>Radius/Minimal</em></td></tr>
+              <tr><td>Media thumbnail</td><td>4dp <em>Radius/Minimal</em></td></tr>
+              <tr><td>Overlay btn</td><td>999 &mdash; fully rounded</td></tr>
+              <tr><td>Chiclet Footer buttons</td><td>Pill (200) &mdash; inherited from Button</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- 4. TYPOGRAPHY -->
       <section class="spec-section" id="ch-typography">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Typography <a href="#ch-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Four type styles across seven variants &mdash; more than the component needs, and the source of its one real inconsistency.</p>
+        <p class="section-intro">Chiclet publishes no Size axis, so each row is named for the layout that uses the style. Four ramps across seven variants &mdash; more than the component needs, and the source of its one real inconsistency.</p>
 
         <div class="typo-sample">
           <div class="typo-row">
+            <div class="typo-size">Base &middot; Reply &middot; Forward &mdash; header</div>
             <div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Charlotte D. 9:00 AM</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span><span><strong>Used by:</strong> attribution header</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span></div>
           </div>
           <div class="typo-row">
+            <div class="typo-size">Base &middot; Reply &middot; Forward &mdash; body</div>
             <div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Message body</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Used by:</strong> body, filename</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span></div>
           </div>
           <div class="typo-row">
-            <div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text-secondary);">36 MB</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Height:</strong> 16dp</span><span><strong>Used by:</strong> file metadata</span></div>
+            <div class="typo-size">File Chiclet <em>(Image = False)</em></div>
+            <div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Accessibility.pptx</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 20dp</span></div>
           </div>
           <div class="typo-row">
+            <div class="typo-size">File Chiclet <em>(Image = True)</em></div>
             <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Accessibility 101.pptx</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500</span><span><strong>Used by:</strong> filename &mdash; <em>Image variant only</em></span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">File Chiclet &mdash; metadata</div>
+            <div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text-secondary);">36 MB</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Height:</strong> 16dp</span><span><strong>Colour:</strong> Text/Secondary</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Video</div>
+            <div class="typo-preview"><span style="font-size:13px; color:var(--c-text-muted); font-style:italic;">No text published</span></div>
+            <div class="typo-meta"><span>The Video layout has no title, body or attribution &mdash; any caption beside a video is the host's.</span></div>
           </div>
         </div>
 
         <div class="callout callout-warn">
-          <strong>The filename changes type style between the two File variants.</strong> <code>File Chiclet / Image=False</code> sets the filename in Body 2 (15dp, Regular); <code>File Chiclet / Image=True</code> sets the same string in Button 2 (13dp, Medium). Same content, same component, two ramps &mdash; put the two side by side and the shift is obvious.
+          <strong>The filename changes type style between the two File variants.</strong> <code>Image=False</code> sets it in Body 2 (15dp, Regular); <code>Image=True</code> sets the same string in Button 2 (13dp, Medium). Same content, same component, two ramps &mdash; the two rows above are the evidence.
+        </div>
+      </section>
+
+      <section class="spec-section" id="ch-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#ch-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Chiclet has no Style axis &mdash; colour varies only between the media and non-media layouts.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Applies to</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Card fill</td><td>All 7 layouts</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Border</td><td>Base, Base + actions, Reply, Forward, File</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Border</td><td>File <em>(Image)</em>, Video</td><td>Stroke/onMedia</td><td>rgba(0,0,0,0.07)</td></tr>
+              <tr><td>Header / attribution</td><td>Base, Reply, Forward</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Body</td><td>Base, Base + actions</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+              <tr><td>Body</td><td>Reply, Forward</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Quote bar</td><td>Reply, Forward</td><td>Icon/Disabled</td><td><span class="btn-swatch" style="background:#adadad;"></span>#adadad</td></tr>
+              <tr><td>Media plate</td><td>File <em>(Image)</em></td><td>Brand/Accent Tertiary</td><td><span class="btn-swatch" style="background:#ebebff;"></span>#ebebff</td></tr>
+              <tr><td>Overlay btn scrim</td><td>File <em>(Image)</em>, Video</td><td>Surface/BtntAlphaPrimary</td><td><span class="btn-swatch" style="background:#292929;"></span>#292929 at 78%</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>Reply and Forward set their body in Text/Secondary.</strong> Every other layout uses Text/Primary. That is deliberate &mdash; a quoted or forwarded message is a reference to someone else's content, and dropping it a step in the text ramp is what keeps it from competing with the message it sits inside.
         </div>
       </section>
 
@@ -10614,6 +10728,7 @@ Order per variant
         <a href="#ch-variants">Variant Matrix</a>
         <a href="#ch-layout">Layout &amp; Spacing</a>
         <a href="#ch-typography">Typography</a>
+        <a href="#ch-color">Colour</a>
         <a href="#ch-family">The Rest of the Family</a>
         <a href="#ch-usage">Usage Examples</a>
         <a href="#ch-a11y">Accessibility</a>
@@ -11255,52 +11370,92 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
       <section class="spec-section" id="div-layout">
         <span class="section-eyebrow eyebrow-design">Reference</span>
         <h2>Layout &amp; Spacing <a href="#div-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The Divider is a zero-height box with the rule drawn on its top edge, so it contributes no height to the layout it sits in &mdash; surrounding spacing is entirely the host's responsibility.</p>
+        <p class="section-intro">The Divider is a zero-height box with the rule drawn on its top edge, so minimum and maximum height are both 0 and it contributes nothing to the layout it sits in. Width is unbounded &mdash; it fills whatever container it is dropped into, minus the variant's inset.</p>
 
-        <div class="table-wrap">
+        <div class="table-wrap wide">
           <table>
-            <thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead>
+            <thead>
+              <tr><th>Padding variant</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding start</th><th>Padding end</th><th>Rule weight</th></tr>
+            </thead>
             <tbody>
-              <tr><td>Rule weight</td><td>0.5dp</td><td>&mdash; <em>drawn as a stroke, not a filled box</em></td></tr>
-              <tr><td>Rule colour</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td><td>Stroke/Divider <em>(Grey/88)</em></td></tr>
-              <tr><td>Box height</td><td>0dp</td><td>&mdash;</td></tr>
-              <tr><td>Width</td><td>Fills its container <em>(402dp as published)</em></td><td>&mdash;</td></tr>
-              <tr><td>Vertical padding</td><td>0dp &mdash; never set by the component</td><td>&mdash;</td></tr>
+              <tr><td><strong>None</strong></td><td>0dp</td><td>0dp</td><td>Fills container</td><td>Fills container</td><td>&mdash;</td><td>&mdash;</td><td>0.5dp</td></tr>
+              <tr><td><strong>12-leading</strong></td><td>0dp</td><td>0dp</td><td>Fills container</td><td>Fills container</td><td>12dp</td><td>&mdash;</td><td>0.5dp</td></tr>
+              <tr><td><strong>16-leading</strong></td><td>0dp</td><td>0dp</td><td>Fills container</td><td>Fills container</td><td>16dp</td><td>&mdash;</td><td>0.5dp</td></tr>
+              <tr><td><strong>12-trailing</strong></td><td>0dp</td><td>0dp</td><td>Fills container</td><td>Fills container</td><td>&mdash;</td><td>12dp</td><td>0.5dp</td></tr>
+              <tr><td><strong>16-trailing</strong></td><td>0dp</td><td>0dp</td><td>Fills container</td><td>Fills container</td><td>&mdash;</td><td>16dp</td><td>0.5dp</td></tr>
             </tbody>
           </table>
         </div>
-
-        <h3>What Padding actually does</h3>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Variant</th><th>Applied as</th><th>Effect</th></tr></thead>
-            <tbody>
-              <tr><td><code>None</code></td><td>&mdash;</td><td>Rule spans the full container width</td></tr>
-              <tr><td><code>12-leading</code></td><td>padding-left 12dp</td><td>Rule starts 12dp in from the leading edge</td></tr>
-              <tr><td><code>16-leading</code></td><td>padding-left 16dp</td><td>Rule starts 16dp in &mdash; aligns to a 16dp list inset</td></tr>
-              <tr><td><code>12-trailing</code></td><td>padding-right 12dp</td><td>Rule stops 12dp short of the trailing edge</td></tr>
-              <tr><td><code>16-trailing</code></td><td>padding-right 16dp</td><td>Rule stops 16dp short</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 402dp, but that is the artboard, not a constraint.</p>
 
         <div class="callout callout-info">
           <strong>Inset on one side only.</strong> There is no variant that insets both ends. A symmetrically inset rule is the host's job &mdash; give the container the padding and use <code>None</code>.
         </div>
 
         <h3>Section Divider</h3>
-        <div class="table-wrap">
+        <div class="table-wrap wide">
           <table>
-            <thead><tr><th>Property</th><th>Horizontal</th><th>Vertical</th></tr></thead>
+            <thead>
+              <tr><th>Orientation</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Gap</th><th>Rule weight</th></tr>
+            </thead>
             <tbody>
-              <tr><td>Overall size</td><td>375 &times; 28dp</td><td>82 &times; 205dp</td></tr>
-              <tr><td>Gap</td><td>8dp</td><td>8dp</td></tr>
-              <tr><td>Rule weight</td><td>0.5dp <em>(reuses Divider)</em></td><td>1dp <em>(a rotated line, not Divider)</em></td></tr>
-              <tr><td>Centre &mdash; Button</td><td colspan="2">Button &middot; Accent &middot; Small &middot; Rest &mdash; 28dp tall, 10dp horizontal padding</td></tr>
-              <tr><td>Centre &mdash; Icon</td><td colspan="2">12 &times; 12dp, Text/Secondary</td></tr>
-              <tr><td>Centre &mdash; Text</td><td colspan="2">iOS/Caption 1 &mdash; 12/16dp, Regular, Text/Secondary</td></tr>
+              <tr><td><strong>Horizontal</strong></td><td>28dp</td><td>28dp</td><td>Fills container <em>(375dp published)</em></td><td>Fills container</td><td>8dp</td><td>0.5dp <em>reuses Divider</em></td></tr>
+              <tr><td><strong>Vertical</strong></td><td>205dp</td><td>205dp</td><td>82dp</td><td>82dp</td><td>8dp</td><td>1dp <em>rotated Line</em></td></tr>
             </tbody>
           </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Neither Divider nor Section Divider publishes a Size axis, so there is a single column. The rule itself has no corners; the only radius in the family belongs to the optional centre button.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Divider &mdash; rule</td><td>Not applicable &mdash; a 0dp-height stroke has no corners</td></tr>
+              <tr><td>Section Divider &mdash; centre Button</td><td>Pill (200) &mdash; inherited from Button &middot; Accent &middot; Small</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="div-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#div-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The Divider carries no text. The only type in the family is the optional centre label on Section Divider, so there is one row, named for the variant that owns it.</p>
+
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Section&nbsp;Divider &middot; Text</div>
+            <div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text-secondary);">Some text</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 16dp</span><span><strong>Colour:</strong> Text/Secondary</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Section&nbsp;Divider &middot; Button</div>
+            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Button</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Tracking:</strong> &minus;0.08</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="div-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#div-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One colour does all the work. There is no Style axis, so no variant changes it.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Divider &mdash; rule</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0 <em>(Grey/88)</em></td></tr>
+              <tr><td>Section Divider &mdash; rules</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Section Divider &mdash; centre text</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Section Divider &mdash; centre button</td><td>Brand/Accent Primary</td><td><span class="btn-swatch" style="background:#654cf5;"></span>#654cf5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>Stroke/Divider is Grey/88.</strong> It maps one-to-one onto the docs token <code>--mc-stroke-divider</code>, which is why every rule on this site is already the right colour without a component-specific override.
         </div>
       </section>
 
@@ -11399,6 +11554,8 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#div-playground">Build a Divider</a>
         <a href="#div-variants">Variant Axes</a>
         <a href="#div-layout">Layout &amp; Spacing</a>
+        <a href="#div-typography">Typography</a>
+        <a href="#div-color">Colour</a>
         <a href="#div-usage">Usage Examples</a>
         <a href="#div-a11y">Accessibility</a>
       </nav>
