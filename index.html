@@ -2111,6 +2111,24 @@
             <a href="#filter-vertical" data-link="filter-vertical">Vertical</a>
           </div>
         </div>
+        <div class="nav-acc">
+          <h3 class="nav-acc-header">
+            <a href="#generic-list" data-link="generic-list" id="nav-acc-label-list">List</a>
+            <button type="button" class="nav-acc-toggle" aria-expanded="false"
+                    aria-controls="nav-acc-panel-list" aria-label="List subpages"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+          </h3>
+          <div class="nav-acc-kids" id="nav-acc-panel-list" role="region"
+               aria-labelledby="nav-acc-label-list" hidden>
+            <a href="#timed-list" data-link="timed-list">Timed list</a>
+            <a href="#accordion-list" data-link="accordion-list">Accordion list</a>
+            <a href="#nested-accordion" data-link="nested-accordion">Nested Accordion</a>
+            <a href="#section-header-centered" data-link="section-header-centered">Section header &mdash; Centered</a>
+            <a href="#section-header-left" data-link="section-header-left">Section header &mdash; Left</a>
+            <a href="#carousel" data-link="carousel">Carousel</a>
+            <a href="#grouped-list" data-link="grouped-list">Grouped list</a>
+          </div>
+        </div>
+        <a href="#slider" data-link="slider">Slider</a>
         <a href="#tile-grid" data-link="tile-grid">Tile grid</a>
         <a href="#badge-spec" data-link="badge-spec">Badge</a>
       </div>
@@ -11105,23 +11123,249 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 
 <div class="page" id="page-content-card" data-page="content-card">
+<style>
+  /* ── Content Card — component set 84287-28413 (verified August 2026) ── */
+  .fcc {
+    display: flex; flex-direction: column; justify-content: center; gap: 12px;
+    width: 357px; max-width: 100%;
+    padding: 12px;                       /* Size/Medium */
+    border-radius: var(--radius-prominent);
+    background: var(--mc-surface-floating);
+    border: 1px solid #e6e6e6;           /* Stroke/Container */
+    overflow: hidden; font-family: inherit;
+  }
+  .fcc.st-primary { box-shadow: 0 8px 16px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12); }
+  .fcc.st-secondary { box-shadow: none; }
+  .fcc.st-tertiary { box-shadow: none; border-width: 0.5px; }
+  .fcc-row { display: flex; align-items: center; gap: 12px; min-height: 48px; width: 100%; }
+  .fcc-media {
+    width: 64px; height: 64px; flex-shrink: 0;
+    border-radius: var(--radius-strong); overflow: hidden;
+    background: linear-gradient(135deg, #dcdbff, #8a80ff);
+  }
+  .fcc-av { width: 44px; height: 44px; flex-shrink: 0; border-radius: 999px;
+    background: linear-gradient(135deg, #ffd9a8, #ff9d5c); }
+  .fcc-center { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; justify-content: center; }
+  .fcc-title { font-size: 17px; line-height: 22px; letter-spacing: -0.41px; font-weight: 400;
+    color: var(--mc-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fcc.st-secondary .fcc-title, .fcc.st-tertiary .fcc-title { font-size: 15px; line-height: 20px; letter-spacing: -0.08px; }
+  .fcc-caption { font-size: 12px; line-height: 16px; color: var(--grey-38);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fcc-right { width: 24px; height: 24px; flex-shrink: 0; display: inline-flex;
+    align-items: center; justify-content: center; color: var(--grey-38); }
+  .fcc-right svg { width: 100%; height: 100%; }
+</style>
+
 <div class="docs-shell">
+
   <header class="docs-header">
     <div class="eyebrow">Components</div>
-    <h1>Content Card</h1>
-    <p class="subtitle">Media-forward card variant with preview region and metadata block.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+    <h1>Content Card &mdash; Spec</h1>
+    <p class="subtitle">The row-shaped card that represents a piece of content &mdash; a file, a link, a person &mdash; inside messages, empty states and sheets. Three styles that differ only in elevation and stroke weight, with media, avatar, header, footer and right-accessory booleans layered on one shell.</p>
+    <div class="meta">
+      <span>9 variants</span>
+      <span>3 axes</span>
+      <span>Radius 16</span>
+      <span>Figma: Monocore-iOS &middot; node <code>84287-28413</code></span>
+    </div>
   </header>
+
   <div class="docs-layout">
     <main class="docs-main">
-      <section class="spec-section">
-        <span class="section-eyebrow eyebrow-design">Status</span>
-        <h2>Documentation coming soon</h2>
-        <p class="section-intro">The Content Card component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+
+      <section class="spec-section" id="cc-preview">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Content Card <a href="#cc-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Primary floats on Shadow 16; Secondary sits flat behind a 1dp stroke; Tertiary thins the stroke to 0.5dp. The interior is the same row in all three.</p>
+        <div class="bf-stage">
+          <div class="bf-cell">
+            <div class="fcc st-primary"><div class="fcc-row"><div class="fcc-media"></div><div class="fcc-center"><span class="fcc-title">Text</span><span class="fcc-caption">Caption</span></div></div></div>
+            <span class="bf-cap">Primary &middot; Image = True &middot; 88dp published</span>
+          </div>
+          <div class="bf-cell">
+            <div class="fcc st-primary"><div class="fcc-row"><div class="fcc-av"></div><div class="fcc-center"><span class="fcc-title">Text</span><span class="fcc-caption">Caption</span></div></div></div>
+            <span class="bf-cap">Primary &middot; Avatar = True &middot; 88dp</span>
+          </div>
+        </div>
+        <div class="bf-stage">
+          <div class="bf-cell">
+            <div class="fcc st-secondary"><div class="fcc-row" style="min-height:48px;"><div class="fcc-media" style="width:44px;height:44px;"></div><div class="fcc-center"><span class="fcc-title">Title</span><span class="fcc-caption">Subtitle</span></div><span class="fcc-right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+            <span class="bf-cap">Secondary &middot; Image = True &middot; 72dp &middot; right accessory on</span>
+          </div>
+          <div class="bf-cell">
+            <div class="fcc st-tertiary"><div class="fcc-row" style="min-height:48px;"><div class="fcc-center"><span class="fcc-title">Title</span><span class="fcc-caption">Subtitle</span></div></div></div>
+            <span class="bf-cap">Tertiary &middot; Image = False &middot; 0.5dp stroke</span>
+          </div>
+        </div>
       </section>
+
+      <section class="spec-section" id="cc-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#cc-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three axes, sparsely published &mdash; nine of the twelve combinations, and the gaps are not the same per style.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Style &mdash; 3 values</h4><div class="vals"><span class="val">Primary</span><span class="val">Secondary</span><span class="val">Tertiary</span></div></div>
+          <div class="btn-axis"><h4>Image &mdash; 2 values</h4><div class="vals"><span class="val">True</span><span class="val">False</span></div></div>
+          <div class="btn-axis"><h4>Avatar &mdash; 2 values</h4><div class="vals"><span class="val">True</span><span class="val">False</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Style</th><th>Image=T &middot; Avatar=F</th><th>Image=T &middot; Avatar=T</th><th>Image=F &middot; Avatar=T</th><th>Image=F &middot; Avatar=F</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Primary</strong></td><td>Published &middot; 88dp</td><td>&mdash;</td><td>Published &middot; 88dp</td><td>Published &middot; 72dp</td></tr>
+              <tr><td><strong>Secondary</strong></td><td>Published &middot; 72dp</td><td>Published &middot; 72dp</td><td>&mdash;</td><td>Published &middot; 72dp</td></tr>
+              <tr><td><strong>Tertiary</strong></td><td>Published &middot; 72dp</td><td>Published &middot; 72dp</td><td>&mdash;</td><td>Published &middot; 72dp</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>The published grid differs per style.</strong> Primary pairs its avatar with <code>Image = False</code>; Secondary and Tertiary pair theirs with <code>Image = True</code>. The same idea &mdash; a card with an avatar &mdash; is reached through different variant coordinates depending on the style you start from, which will trip anyone switching styles on an instance.
+        </div>
+
+        <h3>Instance properties</h3>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Image 64px</td><td>Instance swap</td><td>Placeholder</td><td>The leading media; 64dp on Primary, 44dp on Secondary and Tertiary</td></tr>
+              <tr><td>Header2</td><td>Slot + boolean</td><td>Off</td><td>A header row above the container</td></tr>
+              <tr><td>Caption</td><td>Boolean</td><td>On</td><td>With sub-booleans C-Text (on), C-Icon (off), C-Avatar Stack (off)</td></tr>
+              <tr><td>Right / Right accessories</td><td>Slot + boolean</td><td>On</td><td>24&times;24 trailing slot &mdash; chevron by default</td></tr>
+              <tr><td>L-Icon / L-Checkbox / Radio</td><td>Booleans</td><td>Icon on, others off</td><td>Leading selection affordances</td></tr>
+              <tr><td>Footer / Footer2</td><td>Slot + boolean</td><td>Off</td><td>A 32dp action row below the container</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="cc-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#cc-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One shell for all nine variants: 12dp padding, 12dp gap, a 48dp minimum content row. Height hugs; width fills the container.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Style</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Media</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Primary</strong> <em>(Image)</em></td><td>88dp <em>row 64 + padding</em></td><td>Hugs content</td><td>Fills container</td><td>Fills container <em>(357dp published)</em></td><td>12dp <em>Size/Medium</em></td><td>12dp</td><td>64&times;64</td></tr>
+              <tr><td><strong>Primary</strong> <em>(no image)</em></td><td>72dp <em>row min 48</em></td><td>Hugs content</td><td>Fills container</td><td>Fills container</td><td>12dp</td><td>12dp</td><td>&mdash;</td></tr>
+              <tr><td><strong>Secondary</strong></td><td>72dp</td><td>Hugs content</td><td>Fills container</td><td>Fills container</td><td>12dp</td><td>12dp</td><td>44&times;44</td></tr>
+              <tr><td><strong>Tertiary</strong></td><td>72dp</td><td>Hugs content</td><td>Fills container</td><td>Fills container</td><td>12dp</td><td>12dp</td><td>44&times;44</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. The title/caption stack uses a 4dp gap (Size/Gap/Vertical/XSmall).</p>
+
+        <h3>Corner radius</h3>
+        <p>Content Card publishes no Size axis, so there is a single column &mdash; but the media carries two competing values.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em> &mdash; all three styles</td></tr>
+              <tr><td>Media wrapper (&ldquo;Left&rdquo;)</td><td>12dp <em>Radius/Strong</em> &mdash; clips its child</td></tr>
+              <tr><td>Image 64px</td><td>16dp <em>Radius/Prominent</em> &mdash; clipped to 12 by its wrapper</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>The media declares one radius and renders another.</strong> The Left wrapper clips at Radius/Strong (12) while the image inside declares Radius/Prominent (16). The 12 wins because the wrapper clips &mdash; so the image's own radius is dead, and re-theming either token alone will desynchronise them.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cc-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#cc-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">No Size axis, so rows are keyed by the Style that carries each ramp &mdash; and the title changes ramp between styles.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Primary &middot; title</div>
+            <div class="typo-preview"><span style="font-size:17px; font-weight:400; line-height:22px; letter-spacing:-0.41px; color:var(--c-text);">Text</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 1</span><span><strong>Size:</strong> 17dp</span><span><strong>Height:</strong> 22dp</span><span><strong>Tracking:</strong> &minus;0.41</span><span><strong>Colour:</strong> Text/Primary</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Secondary &amp; Tertiary &middot; title</div>
+            <div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Title</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Colour:</strong> Text/Primary</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">All &middot; caption</div>
+            <div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text-secondary);">Caption</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Height:</strong> 16dp</span><span><strong>Colour:</strong> Text/Secondary</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="cc-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Style <a href="#cc-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Style</th><th>Fill</th><th>Stroke</th><th>Elevation</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Primary</strong> <em>(Image)</em></td><td>Surface/Floating <span class="btn-swatch" style="background:#ffffff;"></span></td><td>1dp Stroke/Container <span class="btn-swatch" style="background:#e6e6e6;"></span></td><td>Shadows/Light/Shadow 16</td></tr>
+              <tr><td><strong>Primary</strong> <em>(no image)</em></td><td>Surface/Primary <span class="btn-swatch" style="background:#ffffff;"></span></td><td>1dp Stroke/Container</td><td>Shadows/Light/Shadow 16</td></tr>
+              <tr><td><strong>Secondary</strong></td><td>Surface/Primary</td><td>1dp Stroke/Container</td><td>None</td></tr>
+              <tr><td><strong>Tertiary</strong></td><td>Surface/Primary</td><td>0.5dp Stroke/Container</td><td>None</td></tr>
+              <tr><td>Footer link text</td><td colspan="3">Text/Assistive <span class="btn-swatch" style="background:#4c39b8;"></span> #4c39b8</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-info">
+          <strong>The style ladder is elevation, not hue.</strong> All three fills resolve to white in the light theme; what changes is the shadow and the stroke weight. Primary floats (chat bubbles, hero cards), Secondary sits flat in lists, Tertiary is the near-invisible container for dense stacks. Two styles also bind different surface tokens for the same white &mdash; Floating vs Primary &mdash; so they will diverge correctly in dark theme.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cc-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#cc-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Content Card is a <em>reference to one thing</em> with at most one action zone.</p>
+        <div class="usecase-grid">
+          <div class="usecase-item"><span class="uc-label">Link preview in a message</span>
+            <div class="fcc st-primary" style="width:100%;"><div class="fcc-row"><div class="fcc-media"></div><div class="fcc-center"><span class="fcc-title">Quarterly review deck</span><span class="fcc-caption">contoso.sharepoint.com</span></div></div></div>
+            <span class="uc-config">Primary &middot; Image = True &mdash; floats on Shadow 16 inside the bubble</span></div>
+          <div class="usecase-item"><span class="uc-label">Suggested contact</span>
+            <div class="fcc st-primary" style="width:100%;"><div class="fcc-row"><div class="fcc-av"></div><div class="fcc-center"><span class="fcc-title">Priya Raman</span><span class="fcc-caption">Design &middot; Available</span></div></div></div>
+            <span class="uc-config">Primary &middot; Avatar = True</span></div>
+          <div class="usecase-item"><span class="uc-label">File row in an empty state</span>
+            <div class="fcc st-secondary" style="width:100%;"><div class="fcc-row" style="min-height:48px;"><div class="fcc-media" style="width:44px;height:44px;"></div><div class="fcc-center"><span class="fcc-title" style="font-size:15px;line-height:20px;">Getting started.pdf</span><span class="fcc-caption">2 MB</span></div><span class="fcc-right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+            <span class="uc-config">Secondary &middot; right accessory on &mdash; flat, for lists</span></div>
+          <div class="usecase-item"><span class="uc-label">Dense stack row</span>
+            <div class="fcc st-tertiary" style="width:100%;"><div class="fcc-row" style="min-height:48px;"><div class="fcc-center"><span class="fcc-title" style="font-size:15px;line-height:20px;">Meeting notes</span><span class="fcc-caption">Edited yesterday</span></div></div></div>
+            <span class="uc-config">Tertiary &middot; 0.5dp stroke &mdash; the near-invisible container</span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>If it needs more than one region, it is a Card.</strong> Multiple content areas, dividers or a button group belong to the <a href="#card-spec" data-link="card-spec">Card</a>; a quoted or forwarded message is a <a href="#chiclet" data-link="chiclet">Chiclet</a>.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cc-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#cc-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The card is one target; the right accessory is another.</strong> A chevron that navigates and a card that opens must be separately named, or announced as one combined action &mdash; never two unlabeled taps.</li>
+          <li><strong>Both selection affordances can be on at once.</strong> L-Checkbox and Radio are independent booleans on the same leading slot; only one should ever be enabled, chosen by the list's selection model.</li>
+          <li><strong>Titles truncate on one line.</strong> The ellipsis is visual only &mdash; keep the full title in the accessible name.</li>
+          <li><strong>Media is decorative by default.</strong> A 64dp thumbnail rarely adds information the title lacks; expose it as decorative unless it is the content (a photo message).</li>
+        </ul>
+      </section>
+
     </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#cc-preview">Build a Content Card</a>
+        <a href="#cc-variants">Variant Axes</a>
+        <a href="#cc-layout">Layout &amp; Spacing</a>
+        <a href="#cc-typography">Typography</a>
+        <a href="#cc-color">Colour</a>
+        <a href="#cc-usage">Usage Examples</a>
+        <a href="#cc-a11y">Accessibility</a>
+      </nav>
+    </aside>
   </div>
-  <footer class="docs-footer">Content Card &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+
+  <footer class="docs-footer">Content Card &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>84287-28413</code> &middot; August 2026</footer>
 </div>
 </div>
 
@@ -11784,24 +12028,293 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 
 <div class="page" id="page-empty-list" data-page="empty-list">
+<style>
+  /* ── Empty state/Default — 106886-26560 (verified August 2026) ── */
+  .fel-lab { display: grid; grid-template-columns: 300px 1fr; gap: var(--sp-6); align-items: start; }
+  @media (max-width: 860px) { .fel-lab { grid-template-columns: 1fr; } }
+  .fel-stage {
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fel {
+    width: 320px; min-height: 420px;
+    background: var(--mc-surface-canvas);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    display: flex; flex-direction: column;
+    font-family: inherit; overflow: hidden;
+  }
+  .fel-main { flex: 1 0 0; display: flex; flex-direction: column; gap: 16px;
+    align-items: center; justify-content: center; padding: 24px; text-align: center; }
+  .fel-media { width: 64px; height: 64px; border-radius: 999px;
+    background: linear-gradient(135deg, #dcdbff, #8a80ff);
+    display: flex; align-items: center; justify-content: center; color: #fff; }
+  .fel-media svg { width: 32px; height: 32px; }
+  .fel-title { font-size: 26px; line-height: 31px; letter-spacing: 0.33px; font-weight: 700;
+    color: var(--mc-text-primary); }
+  .fel-desc { font-size: 17px; line-height: 22px; letter-spacing: -0.41px;
+    color: var(--mc-text-primary); }
+  .fel-desc .lnk { color: var(--mc-text-interactive); }
+  .fel-link { font-size: 17px; line-height: 22px; letter-spacing: -0.41px;
+    color: var(--mc-text-interactive); }
+  .fel-footer { display: flex; flex-direction: column; gap: 8px; padding: 16px; width: 100%; }
+  .fel-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 14px 20px; border: 0; border-radius: 200px;
+    font-size: 15px; line-height: 20px; letter-spacing: -0.24px; font-weight: 500;
+    font-family: inherit; cursor: pointer;
+  }
+  .fel-btn.b1 { background: var(--text-interactive); color: var(--grey-100); }
+  .fel-btn.b2 { background: #e6e6e6; color: var(--mc-text-primary); }
+  .fel-btn.b3 { background: transparent; color: var(--mc-text-interactive); border-radius: 8px; }
+</style>
+
 <div class="docs-shell">
+
   <header class="docs-header">
     <div class="eyebrow">Components</div>
-    <h1>Empty List View</h1>
-    <p class="subtitle">Empty-state pattern for list surfaces.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+    <h1>Empty List View &mdash; Spec</h1>
+    <p class="subtitle">The full-canvas state a list shows when there is nothing in it: media, a display-weight title, styled body copy, and a footer that stacks up to three full-width actions. One variant &mdash; everything else is booleans and slots.</p>
+    <div class="meta">
+      <span>1 variant</span>
+      <span>10 booleans &middot; 4 slots</span>
+      <span>402 &times; 635 published</span>
+      <span>Figma: Monocore-iOS &middot; node <code>106886-26560</code></span>
+    </div>
   </header>
+
   <div class="docs-layout">
     <main class="docs-main">
-      <section class="spec-section">
-        <span class="section-eyebrow eyebrow-design">Status</span>
-        <h2>Documentation coming soon</h2>
-        <p class="section-intro">The Empty List View component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+
+      <section class="spec-section" id="el-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build an Empty State <a href="#el-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">There is no variant axis to pick &mdash; the whole configuration surface is booleans. Toggle them to see what each reveals.</p>
+
+        <div class="fel-lab">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" id="el-title" checked> Title block</label>
+              <label class="btnlab-check"><input type="checkbox" id="el-link"> Body link</label>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Footer</div>
+              <label class="btnlab-check"><input type="checkbox" id="el-footer" checked> Footer</label>
+              <label class="btnlab-check"><input type="checkbox" id="el-b1" checked> Primary button</label>
+              <label class="btnlab-check"><input type="checkbox" id="el-b2"> Secondary button</label>
+              <label class="btnlab-check"><input type="checkbox" id="el-b3"> Tertiary button</label>
+            </div>
+          </div>
+          <div>
+            <div class="fel-stage">
+              <div class="fel">
+                <div class="fel-main">
+                  <div class="fel-media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+                  <div class="fel-title" id="fel-title">Title 1</div>
+                  <div class="fel-desc">Content in this container can apply <span class="lnk">text styling</span> and emphasis when applicable.</div>
+                  <div class="fel-link" id="fel-link" style="display:none;">Community guidelines</div>
+                </div>
+                <div class="fel-footer" id="fel-footer">
+                  <button class="fel-btn b1" id="fel-b1" type="button">Button</button>
+                  <button class="fel-btn b2" id="fel-b2" type="button" style="display:none;">Button</button>
+                  <button class="fel-btn b3" id="fel-b3" type="button" style="display:none;">Button</button>
+                </div>
+              </div>
+            </div>
+            <p class="bdg-note" id="fel-note"></p>
+          </div>
+        </div>
       </section>
+
+      <section class="spec-section" id="el-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#el-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The set publishes exactly one variant, <code>Empty state/Default</code>. Configuration is entirely booleans and slots.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Media</td><td>Slot</td><td>Checkmark Progress illustration</td><td>64&times;64dp swap target</td></tr>
+              <tr><td>Title block / Title text</td><td>Booleans</td><td>On</td><td>iOS/Title 1 display type</td></tr>
+              <tr><td>&#8226;&nbsp;&nbsp;&nbsp;&#8627;Custom title</td><td>Slot + boolean</td><td>Off</td><td>A 31dp-tall replacement title row</td></tr>
+              <tr><td>Description</td><td>Text</td><td>Styled sample copy</td><td>Supports bold / link / italic spans inline</td></tr>
+              <tr><td>&#8627;Body slot</td><td>Slot + boolean</td><td>Off</td><td>60dp-tall free region under the description</td></tr>
+              <tr><td>Body link</td><td>Boolean</td><td>Off</td><td>A standalone Text/Interactive line</td></tr>
+              <tr><td>Footer</td><td>Boolean</td><td>On</td><td>16dp padding, 8dp gap</td></tr>
+              <tr><td>Primary / Secondary / Tertiary Btn</td><td>Booleans</td><td>Primary on</td><td>Three stacked Button Full-widths</td></tr>
+              <tr><td>&#8627;Footer Slot</td><td>Slot + boolean</td><td>Off</td><td>52dp-tall free region below the buttons</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Nothing constrains the footer.</strong> All three buttons and the footer slot are independent booleans; four stacked full-width actions are expressible. An empty state exists to recommend <em>one</em> next step &mdash; if three are on, none is a recommendation.
+        </div>
+      </section>
+
+      <section class="spec-section" id="el-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#el-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The component fills its screen: published at 402 &times; 635, but the main content centres in whatever remains after the footer, so height is really &ldquo;fills container&rdquo;.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Region</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Root</strong></td><td>Fills container <em>(635dp published)</em></td><td>Fills container</td><td>Fills container <em>(402dp published)</em></td><td>Fills container</td><td>&mdash;</td><td>0</td></tr>
+              <tr><td><strong>Main content</strong></td><td>Fills remainder, centred</td><td>Fills remainder</td><td>Fills root</td><td>Fills root</td><td>0 &times; 24dp</td><td>16dp</td></tr>
+              <tr><td><strong>Title block</strong></td><td>Hugs content</td><td>Hugs content</td><td>339.117dp <em>&#9888; fixed</em></td><td>339.117dp <em>&#9888; fixed</em></td><td>&mdash;</td><td>8dp</td></tr>
+              <tr><td><strong>Footer</strong></td><td>Hugs content</td><td>Hugs content</td><td>Fills root</td><td>Fills root</td><td>16dp <em>Size/Large</em></td><td>8dp</td></tr>
+              <tr><td><strong>Footer buttons</strong></td><td>52dp</td><td>52dp</td><td>Fills footer</td><td>Fills footer</td><td>14 &times; 20dp</td><td>8dp</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Media is a 64&times;64 slot.</p>
+
+        <h3>Corner radius</h3>
+        <p>No Size axis, so a single column &mdash; and one button breaks the family.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Root</td><td>None &mdash; it is the canvas</td></tr>
+              <tr><td>Primary &amp; Secondary buttons</td><td>Pill (200) &mdash; inherited from Button Full-width</td></tr>
+              <tr><td>Tertiary button</td><td>8dp <em>&#9888; a rounded rectangle among pills</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>The title is a fixed 339.117dp wide.</strong> A fractional, hard-coded width on centred display type &mdash; it will not reflow with the container, and at 402dp published width the 24dp side padding already disagrees with it (402 &minus; 48 = 354, not 339). Long titles will wrap inside an arbitrary box rather than the content column.
+        </div>
+      </section>
+
+      <section class="spec-section" id="el-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#el-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">No Size axis, so rows are keyed by the region that carries each style. This is the only component in the set that reaches for the Display family.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Title</div>
+            <div class="typo-preview"><span style="font-size:26px; font-weight:700; line-height:31px; letter-spacing:0.33px; color:var(--c-text);">Title 1</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Title 1</span><span><strong>Family:</strong> SF Pro Display</span><span><strong>Size:</strong> 26dp</span><span><strong>Weight:</strong> 700 Bold</span><span><strong>Height:</strong> 31dp</span><span><strong>Tracking:</strong> +0.33</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Description</div>
+            <div class="typo-preview"><span style="font-size:17px; font-weight:400; line-height:22px; letter-spacing:-0.41px; color:var(--c-text);">Body copy</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 1</span><span><strong>Size:</strong> 17dp</span><span><strong>Height:</strong> 22dp</span><span><strong>Tracking:</strong> &minus;0.41</span><span>Supports bold, link and italic spans</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Body link</div>
+            <div class="typo-preview"><span style="font-size:17px; font-weight:400; line-height:22px; letter-spacing:-0.41px; color:var(--mc-text-interactive);">Community guidelines</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 1</span><span><strong>Colour:</strong> Text/Interactive</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Footer buttons</div>
+            <div class="typo-preview"><span style="font-size:15px; font-weight:500; line-height:20px; letter-spacing:-0.24px; color:var(--c-text);">Button</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span></div>
+          </div>
+        </div>
+        <div class="callout callout-warn">
+          <strong>The description binds a deprecated token and hard-codes its spans.</strong> The text layer's base colour is <code>[DEPRECATED] Text/text.secondary</code> (#6e6e6e), and the bold/link/italic sample overrides it span-by-span with raw #242424 and #4c39b8 rather than Text/Primary and Text/Interactive. None of the three colours in the description will follow a token change.
+        </div>
+      </section>
+
+      <section class="spec-section" id="el-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#el-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Canvas</td><td>Surface/Canvas</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Title</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+              <tr><td>Description base</td><td>[DEPRECATED] Text/text.secondary</td><td><span class="btn-swatch" style="background:#6e6e6e;"></span>#6e6e6e</td></tr>
+              <tr><td>Body link</td><td>Text/Interactive</td><td><span class="btn-swatch" style="background:#4c39b8;"></span>#4c39b8</td></tr>
+              <tr><td>Primary button</td><td>Brand/Accent Primary &middot; Text/On Accent</td><td><span class="btn-swatch" style="background:#654cf5;"></span>#654cf5</td></tr>
+              <tr><td>Secondary button</td><td>Surface/RaisedSecondary &middot; Text/Primary</td><td><span class="btn-swatch" style="background:#e6e6e6;"></span>#e6e6e6</td></tr>
+              <tr><td>Tertiary button</td><td>None &middot; Text/Interactive</td><td>transparent</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>The secondary button declares a stroke it never draws.</strong> It binds <code>component-tokens/button/button-stroke-outline</code> (#aba8ff) at border-width 0 &mdash; the same declared-but-invisible outline as Button&nbsp;&middot;&nbsp;Outline&nbsp;accent. The footer's own Secondary is also a different recipe from the published Button Full-width Outline accent variant (grey fill here, outline there).
+        </div>
+      </section>
+
+      <section class="spec-section" id="el-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#el-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The published examples place the component in three hosts, and its footer behaves differently in each.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Host</th><th>Published as</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Full screen</td><td>Screen Template &rarr; Canvas slot, 402&times;794 above the tab bar</td><td>Footer sits above the Bottom sticky control</td></tr>
+              <tr><td>Full-screen sheet</td><td>Sheet &rarr; Content Slot, 402&times;718 under the drawer toolbar</td><td>Title centres in the reduced height automatically</td></tr>
+              <tr><td>Half sheet with keyboard</td><td>Sheet at 480dp with the keyboard raised</td><td>Main content compresses to 326dp &mdash; media, title and body still fit; the footer is the first thing to collide</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-rule">
+          <strong>The component owns the message, the host owns the height.</strong> Because Main content centres in the remainder, the empty state survives any host taller than roughly 400dp. Below that &mdash; a half sheet with a keyboard &mdash; drop the footer booleans rather than letting the buttons push the title off-canvas.
+        </div>
+      </section>
+
+      <section class="spec-section" id="el-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#el-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The illustration is decorative.</strong> The Media slot's default artwork carries no information the title does not; expose it as decorative so it is not announced.</li>
+          <li><strong>Reading order is the layout order.</strong> Title, description, link, then actions &mdash; keep the DOM/accessibility order matching the visual stack, especially when the custom title slot replaces the text title.</li>
+          <li><strong>The deprecated description colour is the contrast risk.</strong> #6e6e6e on white is 4.9:1 &mdash; passing, but with no headroom, and it is not a live token so a theme change will not correct it.</li>
+          <li><strong>One primary action.</strong> Three stacked full-width buttons force a screen-reader user through three equally-weighted choices on a screen whose entire message is &ldquo;there is nothing here yet&rdquo;. Prefer one, at most two.</li>
+        </ul>
+      </section>
+
     </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#el-playground">Build an Empty State</a>
+        <a href="#el-variants">Variant Axes</a>
+        <a href="#el-layout">Layout &amp; Spacing</a>
+        <a href="#el-typography">Typography</a>
+        <a href="#el-color">Colour</a>
+        <a href="#el-usage">Usage Examples</a>
+        <a href="#el-a11y">Accessibility</a>
+      </nav>
+    </aside>
   </div>
-  <footer class="docs-footer">Empty List View &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+
+  <footer class="docs-footer">Empty List View &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> nodes <code>106886-26560</code>, <code>106947-224790</code> &amp; <code>108266-171243</code> &middot; August 2026</footer>
 </div>
+
+<script>
+// ── Empty state lab ──
+(() => {
+  const note = document.getElementById('fel-note');
+  if (!note) return;
+  const cb = id => document.getElementById(id).checked;
+  function render() {
+    document.getElementById('fel-title').style.display = cb('el-title') ? '' : 'none';
+    document.getElementById('fel-link').style.display = cb('el-link') ? '' : 'none';
+    const footer = cb('el-footer');
+    document.getElementById('fel-footer').style.display = footer ? '' : 'none';
+    document.getElementById('fel-b1').style.display = footer && cb('el-b1') ? '' : 'none';
+    document.getElementById('fel-b2').style.display = footer && cb('el-b2') ? '' : 'none';
+    document.getElementById('fel-b3').style.display = footer && cb('el-b3') ? '' : 'none';
+    const n = footer ? ['el-b1','el-b2','el-b3'].filter(cb).length : 0;
+    note.innerHTML = '<code>Empty state/Default</code> &middot; node <code>106886-26560</code>' +
+      (n > 1 ? ' &middot; <strong style="color:var(--c-orange);">' + n + ' stacked actions &mdash; prefer one</strong>' : '');
+  }
+  document.querySelectorAll('#page-empty-list .bdg-controls input').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+})();
+</script>
 </div>
 
 <div class="page" id="page-filter" data-page="filter">
@@ -14228,6 +14741,1567 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
   <footer class="docs-footer">Tile grid &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> nodes <code>84003-42205</code> &amp; <code>105137-157147</code> &middot; August 2026</footer>
 </div>
 </div>
+
+<style>
+  /* ── List family + Slider previews (verified August 2026) ── */
+  .flr {
+    display: flex; align-items: center;
+    width: 100%; max-width: 393px; min-height: 48px;
+    border-radius: var(--radius-prominent);
+    background: transparent; overflow: hidden;
+    font-family: inherit; position: relative;
+  }
+  .flr.state-hover { background: #fafafa; }
+  .flr.state-selected { background: #f0f0f0; }
+  .flr-pad { display: flex; align-items: center; padding-left: 16px; position: relative; }
+  .flr-dot { position: absolute; left: 2px; top: 50%; transform: translateY(-50%);
+    width: 8px; height: 8px; border-radius: 999px; background: var(--text-interactive); display: none; }
+  .flr.layout-unread .flr-dot { display: block; }
+  .flr-av { width: 40px; height: 40px; border-radius: 999px; flex-shrink: 0;
+    background: linear-gradient(135deg, #ffd9a8, #ff9d5c); }
+  .flr-copy { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: 4px;
+    justify-content: center; padding-left: 16px; }
+  .flr-first { display: flex; align-items: center; padding-right: 12px; gap: 8px; }
+  .flr-label { flex: 1 0 0; min-width: 0; font-size: 17px; line-height: 22px; letter-spacing: -0.41px;
+    color: var(--mc-text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .flr.layout-unread .flr-label { font-weight: 700; letter-spacing: -0.41px; }
+  .flr-time { font-size: 15px; line-height: 20px; color: var(--grey-38); flex-shrink: 0; }
+  .flr-sub { font-size: 15px; line-height: 20px; letter-spacing: -0.08px; color: var(--grey-38);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .flr-meta { font-size: 13px; line-height: 18px; letter-spacing: -0.08px; color: var(--grey-38);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .flr-trail { display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 0 16px 0 8px; align-self: stretch; flex-shrink: 0; color: var(--grey-38); }
+  .flr-trail svg { width: 20px; height: 20px; }
+  .flr-chev { position: absolute; left: 2px; top: 50%; transform: translateY(-50%);
+    width: 12px; height: 12px; display: flex; align-items: center; justify-content: center;
+    color: var(--grey-38); transition: transform 140ms ease; }
+  .flr-chev svg { width: 8px; height: 5px; }
+  .flr.layout-collapsed .flr-chev { transform: translateY(-50%) rotate(-90deg); }
+  .flr-divider { position: absolute; bottom: 0; left: 16px; right: 12px; height: 0;
+    border-top: 0.5px solid var(--mc-stroke-divider); display: none; }
+  .flr.show-divider .flr-divider { display: block; }
+  .flr.py16 { padding-top: 16px; padding-bottom: 16px; }
+  .flr.py12 .flr-body-wrap { padding-top: 12px; padding-bottom: 12px; }
+  .flr.inset-72 { padding-left: 56px; }
+  .flr.inset-56 { padding-left: 40px; }
+  .flr.size-small .flr-av { width: 28px; height: 28px; }
+  .flr.size-small .flr-label { font-size: 15px; line-height: 20px; }
+  .flr.size-small { min-height: 40px; }
+
+  /* Section headers */
+  .fsh { display: flex; flex-direction: column; justify-content: center;
+    width: 100%; max-width: 402px; padding-top: 12px;
+    border-radius: var(--radius-prominent); background: transparent;
+    font-family: inherit; position: relative; }
+  .fsh.state-hover { background: #fafafa; }
+  .fsh.state-selected { background: #f0f0f0; }
+  .fsh-row { display: flex; align-items: center; width: 100%; }
+  .fsh-left { flex: 1 0 0; min-width: 0; display: flex; align-items: center;
+    padding: 12px 0 12px 16px; position: relative; }
+  .fsh-title { font-size: 15px; line-height: 20px; letter-spacing: -0.24px; font-weight: 700;
+    color: var(--mc-text-primary); }
+  .fsh.title-subtle .fsh-title { color: var(--grey-38); }
+  .fsh.size-large .fsh-title { font-size: 22px; line-height: 26px; letter-spacing: 0.35px; font-weight: 600; }
+  .fsh.center .fsh-left { justify-content: center; padding-right: 16px; }
+  .fsh-chev { position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 24px; display: flex; align-items: center; justify-content: center; color: var(--grey-38); }
+  .fsh-chev svg { width: 8px; height: 5px; }
+  .fsh-acc { display: flex; align-items: center; gap: 8px; padding: 0 12px; flex-shrink: 0; }
+  .fsh-seeall { font-size: 15px; line-height: 20px; letter-spacing: -0.24px; font-weight: 500;
+    color: var(--mc-text-interactive); white-space: nowrap; }
+  .fsh-divider { height: 0; border-top: 0.5px solid var(--mc-stroke-divider);
+    margin-right: 12px; display: none; }
+  .fsh.show-divider .fsh-divider { display: block; }
+
+  /* Carousel item */
+  .fcar { display: flex; flex-direction: column; align-items: center; gap: 8px;
+    width: 84px; padding: 8px 0; border-radius: var(--radius-strong); font-family: inherit; }
+  .fcar.state-hover { background: #fafafa; }
+  .fcar.state-selected { background: #f0f0f0; }
+  .fcar-av { width: 52px; height: 52px; border-radius: 999px;
+    background: linear-gradient(135deg, #dcdbff, #8a80ff); }
+  .fcar-label { font-size: 11px; line-height: 16px; letter-spacing: 0.06px;
+    color: var(--mc-text-primary); text-align: center; width: 84px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fcar-row { display: flex; }
+
+  /* Grouped list */
+  .fgl { width: 100%; max-width: 402px; padding: 0 16px; font-family: inherit; }
+  .fgl-group { background: var(--mc-surface-group-primary-container);
+    border-radius: var(--radius-prominent); overflow: hidden; }
+  .fgl .flr { max-width: none; border-radius: var(--radius-prominent); }
+
+  /* Slider */
+  .fsl { display: flex; align-items: center; width: 345px; max-width: 100%;
+    border-radius: var(--radius-default); position: relative; isolation: isolate; }
+  .fsl-filled { display: flex; align-items: center; width: 44%; z-index: 2; }
+  .fsl.segmented .fsl-filled { gap: 2px; padding-right: 2px; }
+  .fsl-empty { display: flex; align-items: center; flex: 1 0 0; min-width: 0; z-index: 1; }
+  .fsl.segmented .fsl-empty { gap: 2px; }
+  .fsl i { display: block; height: 4px; flex: 1 0 0; min-width: 1px; }
+  .fsl-filled i { background: var(--grey-0); }
+  .fsl-empty i { background: #949494; }
+  .fsl.segmented i { border-radius: var(--radius-default); }
+  .fsl.continuous .fsl-filled i:first-child { border-radius: 8px 0 0 8px; }
+  .fsl.continuous .fsl-empty i:last-child { border-radius: 0 8px 8px 0; }
+  .fsl-thumb { position: relative; width: 2px; height: 4px; flex-shrink: 0; display: none; }
+  .fsl.show-thumb .fsl-thumb { display: block; }
+  .fsl-thumb::after { content: ''; position: absolute; left: calc(50% + 3px); top: 50%;
+    transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 999px;
+    background: var(--grey-100);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12); }
+
+  .mini-lab { display: grid; grid-template-columns: 300px 1fr; gap: var(--sp-6); align-items: start; }
+  @media (max-width: 860px) { .mini-lab { grid-template-columns: 1fr; } }
+  .mini-lab .lab-stage {
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-8) var(--sp-5);
+    display: flex; align-items: center; justify-content: center; min-height: 240px;
+  }
+  .lab-note { font-size: 12px; color: var(--grey-56); margin-top: var(--sp-3); text-align: center; }
+  .lab-note code { font-family: "SF Mono","Cascadia Code",monospace; font-size: 11.5px;
+    background: var(--mc-surface-raised-tertiary); border: 1px solid var(--c-border);
+    border-radius: var(--radius-minimal); padding: 1px 6px; }
+</style>
+
+<div class="page" id="page-generic-list" data-page="generic-list">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">List Family</div>
+    <h1>Generic List &mdash; Spec</h1>
+    <p class="subtitle">The base list row every other list component derives from: leading media, a three-line copy stack, a trailing accessory and an inset divider. Two layouts, three states, two sizes.</p>
+    <div class="meta"><span>12 variants</span><span>3 axes</span><span>min 48dp</span><span>Figma: Monocore-iOS &middot; node <code>105373-168374</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="gl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Generic List <a href="#gl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="generic-list">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Layout</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="read">Read</button>
+                <button class="btnlab-pill" data-val="unread">Unread</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=sub]" checked> Sublabel</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=meta]" checked> Metadata</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=trail]" checked> Trailing media</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".flr-divider"> Bottom divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="flr lab-target layout-read state-rest py16"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Generic List</code> &middot; the lab renders Size = Default; Small is published but re-verify its geometry before implementing.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="gl-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#gl-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three axes, fully published: 2 &times; 3 &times; 2 = 12 variants.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Layout &mdash; 2 values</h4><div class="vals"><span class="val">Read</span><span class="val">Unread</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Hover</span><span class="val">Selected</span></div></div>
+          <div class="btn-axis"><h4>Size &mdash; 2 values</h4><div class="vals"><span class="val">Default</span><span class="val">Small</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>&#8627;Leading media slot</td><td>Slot + boolean</td><td>On &middot; empty 40dp</td><td>Avatar, icon or thumbnail</td></tr>
+              <tr><td>Body content / Sublabel / Metadata</td><td>Booleans</td><td>On</td><td>Independently removable lines</td></tr>
+              <tr><td>&#8627;Trailing media slot</td><td>Slot + boolean</td><td>On &middot; 24dp placeholder</td><td>Chevron, toggle or value</td></tr>
+              <tr><td>Bottom divider</td><td>Boolean</td><td>Off</td><td>Inset 16dp leading, absolute at &minus;16dp</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Hover is a published state on an iOS library.</strong> Touch has no hover; every list component in this family publishes one anyway. Either the set is shared with a pointer platform or the axis is aspirational &mdash; implementers on iOS should map Hover to nothing.
+        </div>
+      </section>
+
+      <section class="spec-section" id="gl-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#gl-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Height hugs a 48dp minimum; width fills the container (393dp published).</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Size</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Copy gap</th><th>Media</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Default</strong></td><td>48dp</td><td>Hugs content</td><td>Fills container</td><td>Fills container <em>(393 published)</em></td><td>16 &times; 0dp <em>Size/Large vertical</em></td><td>4dp</td><td>40&times;40 slot</td></tr>
+              <tr><td><strong>Small</strong></td><td>48dp</td><td>Hugs content</td><td>Fills container</td><td>Fills container</td><td colspan="3"><em>Published; geometry not yet pulled &mdash; verify before implementing</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <p>Two published sizes, so two columns.</p>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>Default</th><th>Small</th></tr></thead>
+          <tbody><tr><td>Row container</td><td>16dp <em>Radius/Prominent</em></td><td>16dp <em>Radius/Prominent</em></td></tr></tbody></table></div>
+        <div class="callout callout-warn">
+          <strong>Vertical padding is 16dp on top of a 48dp minimum.</strong> A one-line row is therefore 54dp, not 48 &mdash; the minimum only binds when padding is removed. And the Body Content block carries a fixed 273dp width instead of filling, so long sublabels truncate against an arbitrary box rather than the row edge.
+        </div>
+        <div class="callout callout-warn">
+          <strong>The divider hangs outside the row.</strong> Bottom divider is absolutely positioned 16dp <em>below</em> the row's bounds, so it paints into the next sibling's space &mdash; turn it on in a stack with no gap and it lands on the neighbour.
+        </div>
+      </section>
+
+      <section class="spec-section" id="gl-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#gl-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Rows keyed by the line that carries each style; Layout = Unread swaps the label to the bold Callout ramp.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Label &middot; Read</div>
+            <div class="typo-preview"><span style="font-size:17px;font-weight:400;line-height:22px;letter-spacing:-0.41px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 1</span><span><strong>Size:</strong> 17dp</span><span><strong>Height:</strong> 22dp</span><span><strong>Tracking:</strong> &minus;0.41</span></div></div>
+          <div class="typo-row"><div class="typo-size">Label &middot; Unread</div>
+            <div class="typo-preview"><span style="font-size:17px;font-weight:700;line-height:22px;letter-spacing:-0.41px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Callout 1</span><span><strong>Size:</strong> 17dp</span><span><strong>Weight:</strong> 700 Bold</span><span><strong>Height:</strong> 22dp</span></div></div>
+          <div class="typo-row"><div class="typo-size">Sublabel</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:400;line-height:20px;letter-spacing:-0.08px;color:var(--c-text-secondary);">Sublabel</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+          <div class="typo-row"><div class="typo-size">Metadata</div>
+            <div class="typo-preview"><span style="font-size:13px;font-weight:400;line-height:18px;letter-spacing:-0.08px;color:var(--c-text-secondary);">Metadata</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 3</span><span><strong>Size:</strong> 13dp</span><span><strong>Height:</strong> 18dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="gl-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by State <a href="#gl-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table><thead><tr><th>State</th><th>Token</th><th>Value</th></tr></thead><tbody>
+              <tr><td>Rest</td><td>Surface/Subtle</td><td>transparent</td></tr>
+              <tr><td>Hover</td><td>Surface/SubtleHover</td><td><span class="btn-swatch" style="background:#fafafa;"></span>#fafafa</td></tr>
+              <tr><td>Selected</td><td>Surface/SubtleSelected</td><td><span class="btn-swatch" style="background:#f0f0f0;"></span>#f0f0f0</td></tr>
+              <tr><td>Unread dot</td><td>Brand/Accent Primary</td><td><span class="btn-swatch" style="background:#654cf5;"></span>#654cf5 &middot; 8dp</td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="gl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#gl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The row in its two most common configurations.</p>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="flr lab-target layout-unread state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Design crit notes</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-selected py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Sprint planning</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py16"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Roadmap review</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Generic List is the family template.</strong> Timed list adds a timestamp, Accordion adds a chevron, Nested Accordion adds an inset, Grouped list adds a container. Fix a defect here first &mdash; the siblings inherit it.
+        </div>
+      </section>
+
+      <section class="spec-section" id="gl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#gl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The row is one target; the trailing accessory is another.</strong> Both need separate accessible names, or the accessory folds into the row's single action.</li>
+          <li><strong>Unread must be announced, not just bolded.</strong> The weight change and the 8dp dot are both visual-only; expose unread state programmatically.</li>
+          <li><strong>Selected is colour-only.</strong> Surface/SubtleSelected against white is a 4%% luminance shift &mdash; announce selection, never rely on the tint.</li>
+          <li><strong>Rows meet the 44dp floor only at Default.</strong> Verify the small/compact forms against the host's hit-area extension.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#gl-play">Build a Generic List</a>
+        <a href="#gl-variants">Variant Axes</a>
+        <a href="#gl-layout">Layout &amp; Spacing</a>
+        <a href="#gl-typography">Typography</a>
+        <a href="#gl-color">Colour</a>
+        <a href="#gl-usage">Usage Examples</a>
+        <a href="#gl-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Generic List &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>105373-168374</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-timed-list" data-page="timed-list">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">List Family</div>
+    <h1>Timed list &mdash; Spec</h1>
+    <p class="subtitle">The Generic List row with a trailing timestamp on the first line &mdash; the chat-list and activity-feed item. Published as &ldquo;Activity List-item with Timer&rdquo;.</p>
+    <div class="meta"><span>6 variants</span><span>2 axes</span><span>min 48dp</span><span>Figma: Monocore-iOS &middot; node <code>104714-3536</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="tl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Timed list <a href="#tl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="timed-list">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Layout</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="read">Read</button>
+                <button class="btnlab-pill" data-val="unread">Unread</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=sub]" checked> Sublabel</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=meta]" checked> Metadata</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=trail]" checked> Accessory slot</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".flr-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="flr lab-target layout-unread state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span><span class="flr-time" data-part="time">Today</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Activity List-item with Timer</code> &middot; Layout &times; State &middot; node <code>104714-3536</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="tl-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#tl-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two axes, fully published: 2 &times; 3 = 6 variants. No Size axis &mdash; unlike its Generic List parent.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Layout &mdash; 2 values</h4><div class="vals"><span class="val">Read</span><span class="val">Unread</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Hover</span><span class="val">Selected</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead><tbody>
+            <tr><td>Left Media slot</td><td>Slot</td><td>Avatar &middot; Medium 40dp, cutout on</td><td>The unread dot sits outside it at x=2</td></tr>
+            <tr><td>Timestamp</td><td>Text</td><td><code>Today</code></td><td>Fixed to the first line's trailing edge</td></tr>
+            <tr><td>Body content / Sublabel / Metadata</td><td>Booleans</td><td>On</td><td>Same stack as Generic List</td></tr>
+            <tr><td>Accessory slot</td><td>Slot</td><td>24dp placeholder</td><td>Sits beside the body, not the first line</td></tr>
+            <tr><td>Show divider</td><td>Boolean</td><td>Off</td><td>In-flow, 12dp trailing inset</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Hover is a published state on an iOS library.</strong> Touch has no hover; every list component in this family publishes one anyway. Either the set is shared with a pointer platform or the axis is aspirational &mdash; implementers on iOS should map Hover to nothing.
+        </div>
+      </section>
+
+      <section class="spec-section" id="tl-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#tl-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Variant</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Copy gap</th><th>Media</th></tr></thead>
+            <tbody><tr><td><strong>All 6</strong></td><td>48dp</td><td>Hugs content</td><td>Fills container</td><td>Fills container <em>(393 published)</em></td><td>12 &times; 0dp</td><td>4dp</td><td>40&times;40 avatar</td></tr></tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <p>No Size axis, so a single column.</p>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+          <tbody><tr><td>Row container</td><td>16dp <em>Radius/Prominent</em></td></tr></tbody></table></div>
+        <div class="callout callout-info">
+          <strong>Vertical padding is 12dp here, 16dp on Generic List.</strong> The two rows read as siblings but sit at different rhythms in the same stack; the divider also behaves differently &mdash; in-flow here, overhanging there. One of the two conventions should win.
+        </div>
+      </section>
+
+      <section class="spec-section" id="tl-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#tl-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Label &middot; Unread</div>
+            <div class="typo-preview"><span style="font-size:17px;font-weight:700;line-height:22px;letter-spacing:-0.41px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Callout 1</span><span><strong>Size:</strong> 17dp</span><span><strong>Weight:</strong> 700 Bold</span></div></div>
+          <div class="typo-row"><div class="typo-size">Label &middot; Read</div>
+            <div class="typo-preview"><span style="font-size:17px;font-weight:400;line-height:22px;letter-spacing:-0.41px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 1</span><span><strong>Size:</strong> 17dp</span></div></div>
+          <div class="typo-row"><div class="typo-size">Timestamp</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:400;line-height:20px;letter-spacing:-0.08px;color:var(--c-text-secondary);">Today</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+          <div class="typo-row"><div class="typo-size">Sublabel / Metadata</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:400;line-height:20px;color:var(--c-text-secondary);">Sublabel</span></div>
+            <div class="typo-meta"><span><strong>Tokens:</strong> iOS/Body 2 &middot; iOS/Body 3</span><span>15dp / 13dp, Text/Secondary</span></div></div>
+        </div>
+        <div class="callout callout-warn">
+          <strong>The body text is hard-coded, not token-bound.</strong> Sublabel and Metadata in this set carry raw font styles (<code>SF Pro Text</code>, &minus;0.078 tracking) rather than the iOS/Body 2 and Body 3 variables their siblings bind. Visually identical today; disconnected from any future ramp change.
+        </div>
+      </section>
+
+      <section class="spec-section" id="tl-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by State <a href="#tl-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table><thead><tr><th>State</th><th>Token</th><th>Value</th></tr></thead><tbody>
+              <tr><td>Rest</td><td>Surface/Subtle</td><td>transparent</td></tr>
+              <tr><td>Hover</td><td>Surface/SubtleHover</td><td><span class="btn-swatch" style="background:#fafafa;"></span>#fafafa</td></tr>
+              <tr><td>Selected</td><td>Surface/SubtleSelected</td><td><span class="btn-swatch" style="background:#f0f0f0;"></span>#f0f0f0</td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="tl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#tl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="flr lab-target layout-unread state-rest py12 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Priya Raman</span><span class="flr-time" data-part="time">9:41</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-unread state-rest py12 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Design crit</span><span class="flr-time" data-part="time">Yesterday</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Marco Silva</span><span class="flr-time" data-part="time">Tuesday</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>The timestamp answers &ldquo;when&rdquo;, the accessory answers &ldquo;what next&rdquo;.</strong> Keep the timestamp relative and short &mdash; it shares the first line with the label and steals truncation space from it.
+        </div>
+      </section>
+
+      <section class="spec-section" id="tl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#tl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The row is one target; the trailing accessory is another.</strong> Both need separate accessible names, or the accessory folds into the row's single action.</li>
+          <li><strong>Unread must be announced, not just bolded.</strong> The weight change and the 8dp dot are both visual-only; expose unread state programmatically.</li>
+          <li><strong>Selected is colour-only.</strong> Surface/SubtleSelected against white is a 4%% luminance shift &mdash; announce selection, never rely on the tint.</li>
+          <li><strong>Rows meet the 44dp floor only at Default.</strong> Verify the small/compact forms against the host's hit-area extension.</li>
+        </ul>
+        <p>Also announce the timestamp as part of the row's name (&ldquo;Priya Raman, 9:41, unread&rdquo;) &mdash; a trailing text node read separately loses its subject.</p>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#tl-play">Build a Timed list</a>
+        <a href="#tl-variants">Variant Axes</a>
+        <a href="#tl-layout">Layout &amp; Spacing</a>
+        <a href="#tl-typography">Typography</a>
+        <a href="#tl-color">Colour</a>
+        <a href="#tl-usage">Usage Examples</a>
+        <a href="#tl-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Timed list &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104714-3536</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-accordion-list" data-page="accordion-list">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">List Family</div>
+    <h1>Accordion list &mdash; Spec</h1>
+    <p class="subtitle">A list row that discloses children: the Generic List anatomy with a 12dp chevron pinned to the leading gutter. Expanded and Collapsed are the Layout axis.</p>
+    <div class="meta"><span>6 variants</span><span>2 axes</span><span>min 48dp</span><span>Figma: Monocore-iOS &middot; node <code>104715-1603</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="al-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build an Accordion list <a href="#al-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="accordion-list">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Layout</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="expanded">Expanded</button>
+                <button class="btnlab-pill" data-val="collapsed">Collapsed</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=sub]" checked> Sublabel</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=meta]" checked> Metadata</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=trail]" checked> Right accessory</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".flr-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="flr lab-target layout-expanded state-rest py12"><div class="flr-pad"><span class="flr-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Accordion</code> &middot; Layout &times; State &middot; node <code>104715-1603</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="al-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#al-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two axes, fully published: 2 &times; 3 = 6 variants.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Layout &mdash; 2 values</h4><div class="vals"><span class="val">Expanded</span><span class="val">Collapsed</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Hover</span><span class="val">Selected</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead><tbody>
+            <tr><td>Leading content / Left Avatar</td><td>Slot + boolean</td><td>Avatar 40dp, cutout on</td><td>The chevron is separate and always drawn</td></tr>
+            <tr><td>Body content / Sublabel / Metadata</td><td>Booleans</td><td>On</td><td></td></tr>
+            <tr><td>Right accessory slot / &#8627;Accessory - 1 icon</td><td>Slot + boolean</td><td>On &middot; 24dp</td><td></td></tr>
+            <tr><td>Show divider</td><td>Boolean</td><td>Off</td><td>In-flow, 12dp trailing inset</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Hover is a published state on an iOS library.</strong> Touch has no hover; every list component in this family publishes one anyway. Either the set is shared with a pointer platform or the axis is aspirational &mdash; implementers on iOS should map Hover to nothing.
+        </div>
+      </section>
+
+      <section class="spec-section" id="al-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#al-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Variant</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Chevron</th><th>Media</th></tr></thead>
+            <tbody><tr><td><strong>All 6</strong></td><td>48dp</td><td>Hugs content</td><td>Fills container</td><td>Fills container <em>(393 published)</em></td><td>12 &times; 0dp</td><td>12&times;12 box, 8&times;4.75 glyph at x=2</td><td>40&times;40 avatar</td></tr></tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <p>No Size axis, so a single column.</p>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+          <tbody><tr><td>Row container</td><td>16dp <em>Radius/Prominent</em></td></tr></tbody></table></div>
+        <div class="callout callout-warn">
+          <strong>The chevron shares the unread dot's gutter.</strong> It sits absolutely at x=2 &mdash; the exact spot the Timed list's unread dot occupies &mdash; so an accordion row can never also show unread, and a 12dp glyph in a 16dp gutter leaves no tap affordance of its own: the whole row must be the toggle.
+        </div>
+      </section>
+
+      <section class="spec-section" id="al-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#al-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Label</div>
+            <div class="typo-preview"><span style="font-size:17px;font-weight:400;line-height:22px;letter-spacing:-0.41px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 1</span><span><strong>Size:</strong> 17dp</span><span><strong>Height:</strong> 22dp</span></div></div>
+          <div class="typo-row"><div class="typo-size">Sublabel / Metadata</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:400;line-height:20px;color:var(--c-text-secondary);">Sublabel</span></div>
+            <div class="typo-meta"><span><strong>Tokens:</strong> iOS/Body 2 &middot; iOS/Body 3</span><span>15dp / 13dp, Text/Secondary</span></div></div>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Every text layer here is hard-coded.</strong> Label, Sublabel and Metadata all carry raw font values rather than the iOS ramp variables &mdash; the same detachment as the Timed list, across the whole component.
+        </div>
+      </section>
+
+      <section class="spec-section" id="al-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by State <a href="#al-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table><thead><tr><th>State</th><th>Token</th><th>Value</th></tr></thead><tbody>
+              <tr><td>Rest</td><td>Surface/Subtle</td><td>transparent</td></tr>
+              <tr><td>Hover</td><td>Surface/SubtleHover</td><td><span class="btn-swatch" style="background:#fafafa;"></span>#fafafa</td></tr>
+              <tr><td>Selected</td><td>Surface/SubtleSelected</td><td><span class="btn-swatch" style="background:#f0f0f0;"></span>#f0f0f0</td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="al-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#al-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="flr lab-target layout-expanded state-rest py12 show-divider"><div class="flr-pad"><span class="flr-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Pinned channels</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-collapsed state-rest py12"><div class="flr-pad"><span class="flr-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Archived</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Layout is state, not structure.</strong> Expanded vs Collapsed only rotates the chevron &mdash; the children it discloses are the host's rows, not part of this component. Pair it with <a href="#nested-accordion" data-link="nested-accordion">Nested Accordion</a> rows for the inset children.
+        </div>
+      </section>
+
+      <section class="spec-section" id="al-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#al-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Expose expanded state.</strong> The chevron rotation is visual-only; the row needs <code>aria-expanded</code> semantics (or the platform equivalent) and its children grouped under it.</li>
+          <li><strong>The whole row is the toggle.</strong> The 12dp chevron is far below any target minimum &mdash; never make it the only tappable region.</li>
+          <li><strong>Do not nest a second action in a toggle row.</strong> The right accessory inside a disclosure row creates two behaviours on one surface; if the accessory acts, give it a separate, named target.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#al-play">Build an Accordion list</a>
+        <a href="#al-variants">Variant Axes</a>
+        <a href="#al-layout">Layout &amp; Spacing</a>
+        <a href="#al-typography">Typography</a>
+        <a href="#al-color">Colour</a>
+        <a href="#al-usage">Usage Examples</a>
+        <a href="#al-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Accordion list &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104715-1603</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-nested-accordion" data-page="nested-accordion">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">List Family</div>
+    <h1>Nested Accordion list &mdash; Spec</h1>
+    <p class="subtitle">The child rows an Accordion discloses: the same list anatomy, inset to sit under the parent&rsquo;s content, with Read/Unread and two inset depths as published axes.</p>
+    <div class="meta"><span>12 variants</span><span>3 axes</span><span>72 / 56dp inset</span><span>Figma: Monocore-iOS &middot; node <code>104725-57501</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="na-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Nested Accordion <a href="#na-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="nested-accordion">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Read</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="read">Read</button>
+                <button class="btnlab-pill" data-val="unread">Unread</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Size (inset)</div>
+              <div class="btnlab-pills" data-axis="inset">
+                <button class="btnlab-pill on" data-val="72">72 inset</button>
+                <button class="btnlab-pill" data-val="56">56 &ndash; inset</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=sub]" checked> Sublabel</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".flr-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="flr lab-target layout-read state-rest py12 inset-72"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Accordion Nested</code> &middot; Read &times; State &times; Size &middot; node <code>104725-57501</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="na-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#na-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three axes, fully published: 2 &times; 3 &times; 2 = 12 variants.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Read &mdash; 2 values</h4><div class="vals"><span class="val">Read</span><span class="val">Unread</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Hover</span><span class="val">Selected</span></div></div>
+          <div class="btn-axis"><h4>Size &mdash; 2 values</h4><div class="vals"><span class="val">72 inset</span><span class="val">56 - inset</span></div></div>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>Three names for one axis across the family.</strong> Generic List and Timed list call it <code>Layout</code>; this set calls it <code>Read</code>; and its two Size values are punctuated differently &mdash; <code>72 inset</code> but <code>56 - inset</code>. All three are string-matching hazards for code generation.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Hover is a published state on an iOS library.</strong> Touch has no hover; every list component in this family publishes one anyway. Either the set is shared with a pointer platform or the axis is aspirational &mdash; implementers on iOS should map Hover to nothing.
+        </div>
+      </section>
+
+      <section class="spec-section" id="na-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#na-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Size</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Leading inset</th><th>Padding</th></tr></thead>
+            <tbody>
+              <tr><td><strong>72 inset</strong></td><td>48dp</td><td>Hugs content</td><td>Fills container</td><td>Fills container</td><td>72dp &mdash; aligns under a 40dp avatar + 16dp gutters</td><td>12 &times; 0dp</td></tr>
+              <tr><td><strong>56 - inset</strong></td><td>48dp</td><td>Hugs content</td><td>Fills container</td><td>Fills container</td><td>56dp &mdash; aligns under a 24dp icon</td><td>12 &times; 0dp</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>72 inset</th><th>56 - inset</th></tr></thead>
+          <tbody><tr><td>Row container</td><td>16dp <em>Radius/Prominent</em></td><td>16dp <em>Radius/Prominent</em></td></tr></tbody></table></div>
+        <div class="callout callout-info">
+          <strong>The inset is the component.</strong> Everything else is inherited from the family row. Pick 72 when the parent row leads with an avatar, 56 when it leads with an icon &mdash; the child's text should align with the parent's text, not its media.
+        </div>
+      </section>
+
+      <section class="spec-section" id="na-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#na-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Label &middot; Read</div>
+            <div class="typo-preview"><span style="font-size:17px;font-weight:400;line-height:22px;letter-spacing:-0.41px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 1</span><span><strong>Size:</strong> 17dp</span></div></div>
+          <div class="typo-row"><div class="typo-size">Label &middot; Unread</div>
+            <div class="typo-preview"><span style="font-size:17px;font-weight:700;line-height:22px;letter-spacing:-0.41px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Callout 1</span><span><strong>Weight:</strong> 700 Bold</span></div></div>
+          <div class="typo-row"><div class="typo-size">Sublabel</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:400;line-height:20px;color:var(--c-text-secondary);">Sublabel</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="na-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by State <a href="#na-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table><thead><tr><th>State</th><th>Token</th><th>Value</th></tr></thead><tbody>
+              <tr><td>Rest</td><td>Surface/Subtle</td><td>transparent</td></tr>
+              <tr><td>Hover</td><td>Surface/SubtleHover</td><td><span class="btn-swatch" style="background:#fafafa;"></span>#fafafa</td></tr>
+              <tr><td>Selected</td><td>Surface/SubtleSelected</td><td><span class="btn-swatch" style="background:#f0f0f0;"></span>#f0f0f0</td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="na-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#na-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="flr lab-target layout-expanded state-rest py12"><div class="flr-pad"><span class="flr-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Design team</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-unread state-rest py12 inset-72"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">crit-feedback</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py12 inset-72"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">show-and-tell</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="na-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#na-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Nesting must be structural, not visual.</strong> The inset communicates hierarchy to sighted users only; expose the parent&ndash;child relationship as a group with a level, or a screen reader hears a flat list.</li>
+          <li><strong>Unread carries the same duty as the flat rows.</strong> Bold + dot is visual-only; announce it.</li>
+          <li><strong>Deep nesting compounds the inset.</strong> At 72dp per level a phone runs out of line length by the second level; the published set stops at one, and so should the product.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#na-play">Build a Nested Accordion</a>
+        <a href="#na-variants">Variant Axes</a>
+        <a href="#na-layout">Layout &amp; Spacing</a>
+        <a href="#na-typography">Typography</a>
+        <a href="#na-color">Colour</a>
+        <a href="#na-usage">Usage Examples</a>
+        <a href="#na-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Nested Accordion list &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104725-57501</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-section-header-centered" data-page="section-header-centered">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">List Family</div>
+    <h1>Section header &mdash; Centered &mdash; Spec</h1>
+    <p class="subtitle">A centred bold title above a list section. Two title emphases and three states; no accessories, no chevron, no size axis &mdash; the deliberately minimal sibling of the left-aligned header.</p>
+    <div class="meta"><span>6 variants</span><span>2 axes</span><span>402dp published</span><span>Figma: Monocore-iOS &middot; node <code>104575-21068</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="shc-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Section header <a href="#shc-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="section-header-centered">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Title</div>
+              <div class="btnlab-pills" data-axis="title">
+                <button class="btnlab-pill on" data-val="primary">Primary</button>
+                <button class="btnlab-pill" data-val="subtle">Subtle</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsh-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fsh center lab-target title-primary state-rest"><div class="fsh-row"><div class="fsh-left"><span class="fsh-title">Title</span></div></div><span class="fsh-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Section Header - Center aligned</code> &middot; node <code>104575-21068</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="shc-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#shc-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two axes, fully published: 2 &times; 3 = 6 variants.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Title &mdash; 2 values</h4><div class="vals"><span class="val">Primary</span><span class="val">Subtle</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Selected</span><span class="val">Hover</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead><tbody>
+            <tr><td>Title</td><td>Text</td><td><code>Title</code></td><td>Single line, centred</td></tr>
+            <tr><td>Show divider</td><td>Boolean</td><td>Off</td><td>Full-width rule below, 12dp trailing inset</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Hover is a published state on an iOS library.</strong> Touch has no hover; every list component in this family publishes one anyway. Either the set is shared with a pointer platform or the axis is aspirational &mdash; implementers on iOS should map Hover to nothing.
+        </div>
+      </section>
+
+      <section class="spec-section" id="shc-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#shc-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Variant</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th></tr></thead>
+            <tbody><tr><td><strong>All 6</strong></td><td>Hugs content <em>(~56dp with padding)</em></td><td>Hugs content</td><td>Fills container</td><td>Fills container <em>(402 published)</em></td><td>12dp top on the root + 16 &times; 12dp on the content</td></tr></tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+          <tbody><tr><td>Header container</td><td>16dp <em>Radius/Prominent</em></td></tr></tbody></table></div>
+        <div class="callout callout-info">
+          <strong>The 12dp top padding is section spacing, baked in.</strong> The header carries its own gap from the content above it, so stacking it under a list adds no extra margin. Remove it and sections collapse together.
+        </div>
+      </section>
+
+      <section class="spec-section" id="shc-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#shc-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Primary</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:700;line-height:20px;letter-spacing:-0.24px;color:var(--c-text);">Title</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Callout 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 700 Bold</span><span><strong>Colour:</strong> Text/Primary</span></div></div>
+          <div class="typo-row"><div class="typo-size">Subtle</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:700;line-height:20px;letter-spacing:-0.24px;color:var(--c-text-secondary);">Title</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Callout 2</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="shc-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by State <a href="#shc-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table><thead><tr><th>State</th><th>Token</th><th>Value</th></tr></thead><tbody>
+              <tr><td>Rest</td><td>Surface/Subtle</td><td>transparent</td></tr>
+              <tr><td>Hover</td><td>Surface/SubtleHover</td><td><span class="btn-swatch" style="background:#fafafa;"></span>#fafafa</td></tr>
+              <tr><td>Selected</td><td>Surface/SubtleSelected</td><td><span class="btn-swatch" style="background:#f0f0f0;"></span>#f0f0f0</td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="shc-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#shc-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="fsh center title-primary state-rest show-divider"><div class="fsh-row"><div class="fsh-left"><span class="fsh-title">Yesterday</span></div></div><span class="fsh-divider"></span></div>
+          <div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Sprint retro</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Roadmap sync</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Centred headers are date breaks, not section controls.</strong> They separate time-ordered content (&ldquo;Yesterday&rdquo;, &ldquo;Last week&rdquo;). Anything that filters, expands or carries a &ldquo;See all&rdquo; belongs to the <a href="#section-header-left" data-link="section-header-left">left-aligned header</a>.
+        </div>
+      </section>
+
+      <section class="spec-section" id="shc-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#shc-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Expose it as a heading.</strong> A section header that is announced as plain text gives a screen-reader user no way to jump between sections.</li>
+          <li><strong>Primary vs Subtle is colour-only.</strong> Same size, same weight &mdash; the emphasis distinction does not survive greyscale and must not carry meaning on its own.</li>
+          <li><strong>If it is not interactive, do not publish states for it.</strong> Hover and Selected imply a tap target; a header that does nothing when tapped should stay at Rest.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#shc-play">Build a Section header</a>
+        <a href="#shc-variants">Variant Axes</a>
+        <a href="#shc-layout">Layout &amp; Spacing</a>
+        <a href="#shc-typography">Typography</a>
+        <a href="#shc-color">Colour</a>
+        <a href="#shc-usage">Usage Examples</a>
+        <a href="#shc-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Section header &mdash; Centered &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104575-21068</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-section-header-left" data-page="section-header-left">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">List Family</div>
+    <h1>Section header &mdash; Left aligned &mdash; Spec</h1>
+    <p class="subtitle">The working section header: title, optional accordion chevron, a custom-header slot that defaults to filter pills, and a trailing &ldquo;See all&rdquo; value. Two title emphases, three states, two sizes.</p>
+    <div class="meta"><span>12 variants</span><span>3 axes</span><span>402dp published</span><span>Figma: Monocore-iOS &middot; node <code>104575-20989</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="shl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Section header <a href="#shl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="section-header-left">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Title</div>
+              <div class="btnlab-pills" data-axis="title">
+                <button class="btnlab-pill on" data-val="primary">Primary</button>
+                <button class="btnlab-pill" data-val="subtle">Subtle</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Size</div>
+              <div class="btnlab-pills" data-axis="size">
+                <button class="btnlab-pill on" data-val="default">Default</button>
+                <button class="btnlab-pill" data-val="large">Large</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsh-chev" checked> Accordion chevron</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsh-seeall" checked> Accessory value</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsh-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fsh lab-target title-primary state-rest size-default"><div class="fsh-row"><div class="fsh-left" style="padding-left:32px;"><span class="fsh-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="fsh-title">Title</span></div><span class="fsh-acc"><span class="fsh-seeall">See all</span></span></div><span class="fsh-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Section Header - Left aligned</code> &middot; node <code>104575-20989</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="shl-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#shl-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three axes, fully published: 2 &times; 3 &times; 2 = 12 variants.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Title &mdash; 2 values</h4><div class="vals"><span class="val">Primary</span><span class="val">Subtle</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Hover</span><span class="val">Selected</span></div></div>
+          <div class="btn-axis"><h4>Size &mdash; 2 values</h4><div class="vals"><span class="val">Default</span><span class="val">Large</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead><tbody>
+            <tr><td>Title header</td><td>Boolean</td><td>On</td><td>The text title</td></tr>
+            <tr><td>Accordion</td><td>Boolean</td><td>On</td><td>16&times;24 chevron pinned to the leading edge</td></tr>
+            <tr><td>Custom header</td><td>Slot + boolean</td><td>Off &middot; defaults to two Horizontal filter pills</td><td>Replaces the title entirely</td></tr>
+            <tr><td>Icon 1 / Icon 2</td><td>Booleans</td><td>Off</td><td>24dp accessories, 8dp gap</td></tr>
+            <tr><td>Sublabel <em>(&ldquo;See all&rdquo;)</em></td><td>Boolean</td><td>On</td><td>A trailing interactive value</td></tr>
+            <tr><td>Show divider</td><td>Boolean</td><td>Off</td><td>12dp trailing inset</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>A boolean named Sublabel that renders &ldquo;See all&rdquo;.</strong> The property name says descriptive text; the content is a trailing action in Text/Interactive. Anyone toggling it from the properties panel will not predict what appears.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Hover is a published state on an iOS library.</strong> Touch has no hover; every list component in this family publishes one anyway. Either the set is shared with a pointer platform or the axis is aspirational &mdash; implementers on iOS should map Hover to nothing.
+        </div>
+      </section>
+
+      <section class="spec-section" id="shl-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#shl-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Size</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Chevron</th><th>Accessories</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Default</strong></td><td>Hugs content</td><td>Hugs content</td><td>Fills container</td><td>Fills container <em>(402 published)</em></td><td>12dp top + 16 &times; 12dp content</td><td>16&times;24 at x=0</td><td>24dp icons + value, px 12</td></tr>
+              <tr><td><strong>Large</strong></td><td>62dp <em>(Rest)</em> / hugs</td><td>Hugs content</td><td>Fills container</td><td>Fills container</td><td>12dp top + 16 &times; 12dp content</td><td>16&times;24</td><td>Same</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>Default</th><th>Large</th></tr></thead>
+          <tbody><tr><td>Header container</td><td>16dp <em>&#9888; literal, not the Prominent token</em></td><td>16dp <em>literal</em></td></tr></tbody></table></div>
+        <div class="callout callout-warn">
+          <strong>Primary &middot; Rest &middot; Large is built differently from its eleven siblings.</strong> It alone uses a fixed 62dp height and a grid layout with percentage offsets where every other variant is an auto-layout row. It renders the same today; it will drift the moment content changes. The root radius is also a literal 16 rather than the Radius/Prominent token the family binds elsewhere.
+        </div>
+      </section>
+
+      <section class="spec-section" id="shl-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#shl-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One row per size &mdash; the Size axis changes the ramp, not just the metrics.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Default</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:700;line-height:20px;letter-spacing:-0.24px;color:var(--c-text);">Title</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Callout 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 700 Bold</span><span><strong>Family:</strong> SF Pro Text</span></div></div>
+          <div class="typo-row"><div class="typo-size">Large</div>
+            <div class="typo-preview"><span style="font-size:22px;font-weight:600;line-height:26px;letter-spacing:0.35px;color:var(--c-text);">Title</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Title 2</span><span><strong>Size:</strong> 22dp</span><span><strong>Weight:</strong> 600 Semibold</span><span><strong>Family:</strong> SF Pro Display</span></div></div>
+          <div class="typo-row"><div class="typo-size">Accessory value</div>
+            <div class="typo-preview"><span style="font-size:15px;font-weight:500;line-height:20px;letter-spacing:-0.24px;color:var(--mc-text-interactive);">See all</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1</span><span><strong>Colour:</strong> Text/Interactive</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="shl-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Title &times; State <a href="#shl-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead><tbody>
+            <tr><td>Title &middot; Primary</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+            <tr><td>Title &middot; Subtle</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Rest</td><td>Surface/Subtle</td><td>transparent</td></tr>
+              <tr><td>Hover</td><td>Surface/SubtleHover</td><td><span class="btn-swatch" style="background:#fafafa;"></span>#fafafa</td></tr>
+              <tr><td>Selected</td><td>Surface/SubtleSelected</td><td><span class="btn-swatch" style="background:#f0f0f0;"></span>#f0f0f0</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-info">
+          <strong>Only Primary &middot; Hover carries a pointer cursor.</strong> Subtle &middot; Hover paints the same #fafafa but declares no interactivity &mdash; a hint that Subtle headers were not meant to be tappable even though the state exists.
+        </div>
+      </section>
+
+      <section class="spec-section" id="shl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#shl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="fsh title-primary state-rest size-default show-divider"><div class="fsh-row"><div class="fsh-left" style="padding-left:32px;"><span class="fsh-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="fsh-title">Pinned</span></div><span class="fsh-acc"><span class="fsh-seeall">See all</span></span></div><span class="fsh-divider"></span></div>
+          <div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Design crit</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Standup notes</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>The custom-header slot swaps the title for controls.</strong> Its published default is two Horizontal filter pills &mdash; the pattern for a section whose header <em>is</em> its filter bar. Do not combine it with the text title; the slot replaces, never accompanies.
+        </div>
+      </section>
+
+      <section class="spec-section" id="shl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#shl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Heading first, control second.</strong> Expose the title as a heading; if the accordion boolean is on, the toggle needs expanded/collapsed semantics on top of it.</li>
+          <li><strong>&ldquo;See all&rdquo; is a separate target.</strong> It sits inside the header row but acts independently &mdash; name it and size its hit area; the 20dp text line is not enough.</li>
+          <li><strong>Large is Display type.</strong> SF Pro Display below 20dp degrades; the 22dp Title 2 is at the safe edge &mdash; do not scale it down for tight layouts, switch to Default instead.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#shl-play">Build a Section header</a>
+        <a href="#shl-variants">Variant Axes</a>
+        <a href="#shl-layout">Layout &amp; Spacing</a>
+        <a href="#shl-typography">Typography</a>
+        <a href="#shl-color">Colour</a>
+        <a href="#shl-usage">Usage Examples</a>
+        <a href="#shl-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Section header &mdash; Left aligned &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104575-20989</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-carousel" data-page="carousel">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">List Family</div>
+    <h1>Carousel &mdash; Spec</h1>
+    <p class="subtitle">A horizontally scrolling strip of persona items &mdash; a 52dp avatar over an 11dp centred label. The item publishes three states; the strip itself is a single-variant wrapper.</p>
+    <div class="meta"><span>3 + 1 variants</span><span>2 axes</span><span>84 &times; 92dp item</span><span>Figma: Monocore-iOS &middot; node <code>104575-20258</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="car-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Carousel item <a href="#car-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="carousel">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fcar lab-target state-rest"><span class="fcar-av"></span><span class="fcar-label">Label</span></div>
+            </div>
+            <p class="lab-note"><code>Carousel / Avatars</code> &middot; Layout = Persona &middot; node <code>104575-20258</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="car-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#car-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The item publishes Layout &times; State with a single Layout value &mdash; effectively one axis.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Layout &mdash; 1 value</h4><div class="vals"><span class="val">Persona</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Selected</span><span class="val">Hover</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Component</th><th>Node</th><th>Axes</th><th>Variants</th></tr></thead><tbody>
+            <tr><td><strong>Carousel / Avatars</strong> <em>(item)</em></td><td><code>104575-20258</code></td><td>Layout &times; State</td><td>3</td></tr>
+            <tr><td><strong>Carousel list</strong> <em>(strip)</em></td><td><code>109099-444098</code></td><td>Property 1</td><td>1</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-info">
+          <strong>A one-value axis is a placeholder.</strong> <code>Layout = Persona</code> exists so future item shapes (files, channels) can join the set without breaking instances &mdash; but until they do, the axis is inert.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Hover is a published state on an iOS library.</strong> Touch has no hover; every list component in this family publishes one anyway. Either the set is shared with a pointer platform or the axis is aspirational &mdash; implementers on iOS should map Hover to nothing.
+        </div>
+      </section>
+
+      <section class="spec-section" id="car-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#car-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Item</strong></td><td>92dp</td><td>92dp</td><td>84dp</td><td>84dp</td><td>Avatar slot 52dp at 16,8; label 84&times;16 at y=68</td></tr>
+              <tr><td><strong>Strip</strong></td><td>Hugs items</td><td>Hugs items</td><td>Fills container</td><td>Scrolls horizontally</td><td>Single published variant</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+          <tbody><tr><td>Item container</td><td>12dp <em>Radius/Strong</em> &mdash; visible only when a state surface paints</td></tr>
+          <tr><td>Avatar</td><td>Fully rounded</td></tr></tbody></table></div>
+      </section>
+
+      <section class="spec-section" id="car-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#car-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Label</div>
+            <div class="typo-preview"><span style="font-size:11px;font-weight:400;line-height:16px;letter-spacing:0.06px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 16dp <em>here</em></span><span><strong>Colour:</strong> Text/Primary</span></div></div>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Caption 2 resolves to two different line heights across the library.</strong> This set resolves 16dp; the Chiclet and the vertical filter resolve 11dp for the same token. One token, two rhythms &mdash; worth reconciling at the variable level. The label layer is also named <code>&#9999;&#65039; Label</code>, emoji included.
+        </div>
+      </section>
+
+      <section class="spec-section" id="car-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by State <a href="#car-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table><thead><tr><th>State</th><th>Token</th><th>Value</th></tr></thead><tbody>
+              <tr><td>Rest</td><td>Surface/Subtle</td><td>transparent</td></tr>
+              <tr><td>Hover</td><td>Surface/SubtleHover</td><td><span class="btn-swatch" style="background:#fafafa;"></span>#fafafa</td></tr>
+              <tr><td>Selected</td><td>Surface/SubtleSelected</td><td><span class="btn-swatch" style="background:#f0f0f0;"></span>#f0f0f0</td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="car-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#car-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage">
+          <div class="fcar-row">
+            <div class="fcar state-selected"><span class="fcar-av"></span><span class="fcar-label">Priya</span></div>
+            <div class="fcar state-rest"><span class="fcar-av"></span><span class="fcar-label">Marco</span></div>
+            <div class="fcar state-rest"><span class="fcar-av"></span><span class="fcar-label">Dana</span></div>
+            <div class="fcar state-rest"><span class="fcar-av"></span><span class="fcar-label">Kat Larsson</span></div>
+          </div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>The carousel is for people, the grid is for actions.</strong> A horizontally scrolling strip suits an unbounded set (contacts, members). A bounded set of equally weighted actions is a <a href="#tile-grid" data-link="tile-grid">Tile grid</a>.
+        </div>
+      </section>
+
+      <section class="spec-section" id="car-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#car-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Horizontal scrolling must be reachable.</strong> Every item needs to be in the accessibility order even when scrolled out of view; announce the strip as a list with a count.</li>
+          <li><strong>Labels truncate at 84dp.</strong> &ldquo;Kat Larsson&rdquo; barely fits at 11dp; the full name belongs in the accessible name, not just the clipped caption.</li>
+          <li><strong>Selection is colour-only</strong> &mdash; the #f0f0f0 tint is the entire selected affordance. Announce it.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#car-play">Build a Carousel item</a>
+        <a href="#car-variants">Variant Axes</a>
+        <a href="#car-layout">Layout &amp; Spacing</a>
+        <a href="#car-typography">Typography</a>
+        <a href="#car-color">Colour</a>
+        <a href="#car-usage">Usage Examples</a>
+        <a href="#car-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Carousel &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104575-20258</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-grouped-list" data-page="grouped-list">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">List Family</div>
+    <h1>Grouped list &mdash; Spec</h1>
+    <p class="subtitle">The iOS inset-group treatment: Generic List rows wrapped in a filled, rounded container with 16dp side margins. Two styles published; the rows inside are real Generic List instances.</p>
+    <div class="meta"><span>2 variants</span><span>1 axis</span><span>402dp published</span><span>Figma: Monocore-iOS &middot; node <code>105366-158698</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="grl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Grouped list <a href="#grl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="grouped-list">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Style</div>
+              <div class="btnlab-pills" data-axis="style">
+                <button class="btnlab-pill on" data-val="primary">Primary</button>
+                <button class="btnlab-pill" data-val="secondary">Secondary</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=third]" checked> 3rd list</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=more]" checked> More list slots</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fgl lab-target style-primary"><div class="fgl-group"><div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><span data-part="third"><div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div></span><span data-part="more"><div class="flr lab-target layout-read state-rest py16"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div></span></div></div>
+            </div>
+            <p class="lab-note"><code>Grouped list</code> &middot; Style axis &middot; node <code>105366-158698</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="grl-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#grl-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One axis: Style, with Primary and Secondary published. The lab renders Primary; Secondary swaps the surface pair and should be re-verified before implementing.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Style &mdash; 2 values</h4><div class="vals"><span class="val">Primary</span><span class="val">Secondary</span></div></div>
+        </div>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead><tbody>
+            <tr><td>3rd list</td><td>Boolean</td><td>On</td><td>Toggles the third fixed row</td></tr>
+            <tr><td>More list slots</td><td>Slot + boolean</td><td>On</td><td>Free region for additional rows</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Row count is two booleans, not a property.</strong> Two rows are fixed, the third is a toggle, and everything beyond goes through one slot &mdash; so &ldquo;a group of five&rdquo; is expressed three different ways. In code, the group should simply accept children.
+        </div>
+      </section>
+
+      <section class="spec-section" id="grl-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#grl-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Wrapper</strong></td><td>Hugs group</td><td>Hugs group</td><td>Fills container</td><td>Fills container <em>(402 published)</em></td><td>0 &times; 16dp side margins</td></tr>
+              <tr><td><strong>Group container</strong></td><td>Hugs rows</td><td>Hugs rows</td><td>Fills wrapper</td><td>Fills wrapper</td><td>0 &mdash; rows carry their own</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>All sizes</th></tr></thead><tbody>
+          <tr><td>Group container</td><td>16dp <em>Radius/Prominent</em> &mdash; clips its rows</td></tr>
+          <tr><td>Rows inside</td><td>16dp inherited from Generic List &mdash; redundant under the clipping group</td></tr>
+        </tbody></table></div>
+        <div class="callout callout-info">
+          <strong>The group supplies the surface; the rows stay transparent.</strong> Surface/Group/Primary/Container (#f5f5f5) is the fill, and row states paint on top of it. The wrapper's own base fill is a transparent white &mdash; a token that exists to switch in dark theme.
+        </div>
+      </section>
+
+      <section class="spec-section" id="grl-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#grl-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The group adds no text of its own; rows keep the Generic List ramp.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Rows</div>
+            <div class="typo-preview"><span style="font-size:17px;font-weight:400;line-height:22px;letter-spacing:-0.41px;color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span>Inherited &mdash; see <a href="#generic-list" data-link="generic-list">Generic List &middot; Typography</a></span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="grl-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Style <a href="#grl-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead><tbody>
+            <tr><td>Wrapper base</td><td>Surface/Group/Primary/Base</td><td>rgba(255,255,255,0)</td></tr>
+            <tr><td>Group container</td><td>Surface/Group/Primary/Container</td><td><span class="btn-swatch" style="background:#f5f5f5;"></span>#f5f5f5</td></tr>
+            <tr><td>Row dividers</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0 &middot; inset 16dp both ends</td></tr>
+            <tr><td>Secondary style</td><td>Surface/Group/Secondary/&#8230;</td><td><em>Published; values not yet pulled &mdash; verify before implementing</em></td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="grl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#grl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage">
+          <div class="fgl"><div class="fgl-group">
+            <div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Notifications</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Appearance</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py16"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Privacy</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+          </div></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Settings screens, not feeds.</strong> The inset group is the iOS settings idiom &mdash; a bounded set of related rows. Unbounded, time-ordered content belongs in a flat <a href="#generic-list" data-link="generic-list">Generic List</a> with section headers.
+        </div>
+      </section>
+
+      <section class="spec-section" id="grl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#grl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The group is a semantic container.</strong> Announce it as a group so row position (&ldquo;2 of 3&rdquo;) is scoped to the section, not the whole screen.</li>
+          <li><strong>#f5f5f5 on white is decoration.</strong> The container fill does not meet any contrast threshold and must not be the only grouping cue &mdash; the heading above the group carries the meaning.</li>
+          <li><strong>Everything row-level applies unchanged</strong> &mdash; see <a href="#generic-list" data-link="generic-list">Generic List &middot; Accessibility</a>.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#grl-play">Build a Grouped list</a>
+        <a href="#grl-variants">Variant Axes</a>
+        <a href="#grl-layout">Layout &amp; Spacing</a>
+        <a href="#grl-typography">Typography</a>
+        <a href="#grl-color">Colour</a>
+        <a href="#grl-usage">Usage Examples</a>
+        <a href="#grl-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Grouped list &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>105366-158698</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-slider" data-page="slider">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Slider &mdash; Spec</h1>
+    <p class="subtitle">The media timeline bar: a 4dp track split into filled and remaining time, published continuous or segmented, with an optional 16dp thumb. Published as &ldquo;Bar&rdquo;.</p>
+    <div class="meta"><span>2 booleans</span><span>4dp track</span><span>345dp published</span><span>Figma: Monocore-iOS &middot; node <code>108584-243041</code></span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="sl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Slider <a href="#sl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="slider">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Track</div>
+              <div class="btnlab-pills" data-axis="track">
+                <button class="btnlab-pill on" data-val="segmented">Segmented</button>
+                <button class="btnlab-pill" data-val="continuous">Continuous</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsl-thumb-wrap" checked> Current indicator</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fsl lab-target track-segmented segmented show-thumb"><span class="fsl-filled"><i></i><i></i><i></i><span class="fsl-thumb-wrap fsl-thumb"></span></span><span class="fsl-empty"><i></i><i></i><i></i></span></div>
+            </div>
+            <p class="lab-note"><code>Bar</code> &middot; Segment + Current indicator booleans &middot; doc node <code>108584-243041</code></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="sl-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#sl-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">No variant axis &mdash; two booleans configure the published component.</p>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead><tbody>
+            <tr><td>Segment</td><td>Boolean</td><td>On</td><td>On: chapter segments with 2dp gaps, each fully rounded. Off: one continuous track with rounded end caps only</td></tr>
+            <tr><td>Current indicator</td><td>Boolean</td><td>On</td><td>The 16dp thumb at the fill boundary</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-info">
+          <strong>Fill progress is structural, not a property.</strong> The published component draws three filled and three empty segments &mdash; roughly 44% &mdash; and progress is changed by resizing the two containers. In code, progress is a value; do not reproduce the fixed thirds.
+        </div>
+      </section>
+
+      <section class="spec-section" id="sl-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#sl-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Form</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Track</th><th>Segment gap</th><th>Thumb</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Segmented</strong></td><td>4dp <em>(16 with thumb)</em></td><td>4dp track</td><td>Fills container</td><td>Fills container <em>(345 published)</em></td><td>4dp</td><td>2dp</td><td>16dp, overhangs the track</td></tr>
+              <tr><td><strong>Continuous</strong></td><td>4dp <em>(16 with thumb)</em></td><td>4dp track</td><td>Fills container</td><td>Fills container</td><td>4dp</td><td>&mdash;</td><td>16dp</td></tr>
+            </tbody>
+          </table>
+        </div>
+<p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <h3>Corner radius</h3>
+        <div class="table-wrap"><table><thead><tr><th>Element</th><th>Segmented</th><th>Continuous</th></tr></thead><tbody>
+          <tr><td>Track pieces</td><td>8dp <em>Radius/Default</em> on every segment</td><td>8dp on the outer end caps only</td></tr>
+          <tr><td>Thumb</td><td colspan="2">Fully rounded (9999)</td></tr>
+        </tbody></table></div>
+        <div class="callout callout-warn">
+          <strong>The thumb lives in a 2dp container and hangs 3dp off-centre.</strong> The 16dp circle is absolutely centred on a 2&times;4dp box with a +3dp horizontal offset &mdash; geometry that works in the published frame but will misalign the moment the fill ratio changes. Centre the thumb on the fill boundary in code.
+        </div>
+      </section>
+
+      <section class="spec-section" id="sl-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#sl-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">All forms</div>
+            <div class="typo-preview"><span style="font-size:13px;color:var(--c-text-muted);font-style:italic;">No text published</span></div>
+            <div class="typo-meta"><span>Timecodes beside a media bar belong to the host (see the live-meeting Chiclet), not to the Bar.</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="sl-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#sl-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table><thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead><tbody>
+            <tr><td>Filled track</td><td>Surface/DominantInvert</td><td><span class="btn-swatch" style="background:#000000;"></span>#000000</td></tr>
+            <tr><td>Empty track</td><td>Surface/RaisedDominant</td><td><span class="btn-swatch" style="background:#949494;"></span>#949494</td></tr>
+            <tr><td>Thumb</td><td>Icon/On-Global</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff + Shadows/Light/Shadow 04</td></tr>
+          </tbody></table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>One empty segment is hard-coded #828282.</strong> The continuous form binds Surface/RaisedDominant (#949494) on two of its three background pieces and a raw #828282 on the third &mdash; an 18-point grey mismatch inside a single track, invisible until you scrub past it.
+        </div>
+      </section>
+
+      <section class="spec-section" id="sl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#sl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; gap:var(--sp-6);">
+          <div class="bf-cell"><div class="fsl segmented show-thumb"><span class="fsl-filled"><i></i><i></i><i></i><span class="fsl-thumb"></span></span><span class="fsl-empty"><i></i><i></i><i></i></span></div><span class="bf-cap">Segmented &middot; chaptered recording</span></div>
+          <div class="bf-cell"><div class="fsl continuous show-thumb"><span class="fsl-filled"><i></i><span class="fsl-thumb"></span></span><span class="fsl-empty"><i></i></span></div><span class="bf-cap">Continuous &middot; simple playback</span></div>
+          <div class="bf-cell"><div class="fsl continuous"><span class="fsl-filled"><i></i></span><span class="fsl-empty"><i></i></span></div><span class="bf-cap">Indicator off &mdash; read-only progress</span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Thumb on means scrubbable; thumb off means read-only.</strong> The Current indicator boolean is the affordance contract &mdash; never show a thumb on a bar the user cannot drag.
+        </div>
+      </section>
+
+      <section class="spec-section" id="sl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#sl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>A 4dp track needs a 44dp gesture zone.</strong> The visible bar is nowhere near a touch target; the host must extend the draggable region far beyond it.</li>
+          <li><strong>Expose it as an adjustable element</strong> with value, minimum and maximum &mdash; a scrub bar that is announced as an image is unusable.</li>
+          <li><strong>Black-on-grey passes; the thumb is the risk.</strong> A white 16dp thumb over the white portion of a card relies entirely on Shadow 04 for visibility &mdash; keep the shadow.</li>
+          <li><strong>Segment boundaries are information.</strong> If chapters matter, announce them (&ldquo;chapter 2 of 3&rdquo;); the 2dp gaps are invisible to a screen reader.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#sl-play">Build a Slider</a>
+        <a href="#sl-variants">Variant Axes</a>
+        <a href="#sl-layout">Layout &amp; Spacing</a>
+        <a href="#sl-typography">Typography</a>
+        <a href="#sl-color">Colour</a>
+        <a href="#sl-usage">Usage Examples</a>
+        <a href="#sl-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Slider &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>108584-243041</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<script>
+// ── Shared mini-lab engine: pills swap axis-classes on .lab-target; checkboxes toggle parts ──
+(() => {
+  document.querySelectorAll('.mini-lab').forEach(labEl => {
+    const target = labEl.querySelector('.lab-target');
+    if (!target) return;
+    labEl.querySelectorAll('.btnlab-pills').forEach(group => {
+      group.addEventListener('click', e => {
+        const pill = e.target.closest('.btnlab-pill');
+        if (!pill) return;
+        group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+        pill.classList.add('on');
+        const axis = group.dataset.axis;
+        [...target.classList].filter(c => c.indexOf(axis + '-') === 0).forEach(c => target.classList.remove(c));
+        target.classList.add(axis + '-' + pill.dataset.val);
+        // convenience aliases used by CSS
+        if (axis === 'inset') { target.classList.remove('inset-72','inset-56'); target.classList.add('inset-' + pill.dataset.val); }
+        if (axis === 'track') { target.classList.remove('segmented','continuous'); target.classList.add(pill.dataset.val); }
+        if (axis === 'size' && labEl.dataset.lab === 'generic-list') { /* lab renders Default only */ }
+      });
+    });
+    labEl.querySelectorAll('input[data-toggle]').forEach(cb => {
+      const apply = () => {
+        const sel = cb.dataset.toggle;
+        const els = sel === '.fsl-thumb-wrap' ? [target] : target.querySelectorAll(sel);
+        if (sel === '.fsl-thumb-wrap') { target.classList.toggle('show-thumb', cb.checked); return; }
+        if (sel === '.flr-divider' || sel === '.fsh-divider') { target.classList.toggle('show-divider', cb.checked); return; }
+        els.forEach(el => { el.style.display = cb.checked ? '' : 'none'; });
+      };
+      cb.addEventListener('change', apply);
+      apply();
+    });
+  });
+})();
+</script>
 
 <div class="page" id="page-view-guidance" data-page="view-guidance">
 <div class="docs-shell">
