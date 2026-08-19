@@ -9701,23 +9701,618 @@
 </div>
 
 <div class="page" id="page-divider" data-page="divider">
+<style>
+  /* ── Divider Lab ── */
+  .divlab { display: grid; grid-template-columns: 300px 1fr; gap: var(--sp-6); align-items: start; }
+  @media (max-width: 860px) { .divlab { grid-template-columns: 1fr; } }
+  .divlab-controls {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    position: sticky; top: var(--sp-5);
+  }
+  .divlab-stage {
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-10) var(--sp-6);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 300px;
+    transition: background 240ms ease;
+  }
+  .divlab-stage.dark { background: var(--grey-10); border-color: var(--grey-24); }
+  .divlab-note { font-size: 12px; color: var(--grey-56); margin-top: var(--sp-3); text-align: center; }
+  .divlab-note code {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11.5px; background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border); border-radius: var(--radius-minimal); padding: 1px 6px;
+  }
+  .divlab-pills.locked .btnlab-pill { opacity: 0.4; pointer-events: none; }
+
+  /* Host frame — stands in for the surface the divider sits inside */
+  .fdiv-host {
+    width: 320px;
+    padding: var(--sp-4) 0;
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .fdiv-host.vertical { width: auto; }
+  .fdiv-host.show-bounds { outline: 1px dashed var(--mc-stroke-container); outline-offset: 0; }
+  .fdiv-host .fdiv-row {
+    font-size: 13px; color: var(--mc-text-secondary);
+    padding: 10px 0; line-height: 1.4;
+  }
+  .divlab-stage.dark .fdiv-host .fdiv-row { color: var(--grey-76); }
+  .divlab-stage.dark .fdiv-host.show-bounds { outline-color: var(--grey-38); }
+
+  /* ── Divider — component set 105360-136054 ── */
+  .fdiv {
+    width: 100%; height: 0;
+    display: flex; flex-direction: column;
+    align-items: flex-start; justify-content: center;
+  }
+  .fdiv > .fdiv-stroke {
+    height: 0; width: 100%;
+    border-top: 0.5px solid var(--mc-stroke-divider);
+  }
+  .divlab-stage.dark .fdiv > .fdiv-stroke,
+  .div-usecase-stage.dark .fdiv > .fdiv-stroke { border-top-color: var(--grey-24); }
+  .fdiv.pad-12-leading  { padding-left: 12px; }
+  .fdiv.pad-16-leading  { padding-left: 16px; }
+  .fdiv.pad-12-trailing { padding-right: 12px; }
+  .fdiv.pad-16-trailing { padding-right: 16px; }
+
+  /* Padding visualiser */
+  .fdiv.show-pad { position: relative; }
+  .fdiv.show-pad::before {
+    content: attr(data-pad);
+    position: absolute; top: -9px;
+    height: 18px;
+    background: var(--c-accent-soft);
+    border-left: 1.5px solid var(--c-accent);
+    border-right: 1.5px solid var(--c-accent);
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.3px;
+    color: var(--c-accent);
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .fdiv.show-pad.pad-12-leading::before  { left: 0; width: 12px; }
+  .fdiv.show-pad.pad-16-leading::before  { left: 0; width: 16px; }
+  .fdiv.show-pad.pad-12-trailing::before { right: 0; width: 12px; }
+  .fdiv.show-pad.pad-16-trailing::before { right: 0; width: 16px; }
+  .fdiv.show-pad.pad-none::before { display: none; }
+
+  /* ── Section Divider — component set 83796-188604 ── */
+  .fsdiv { display: flex; align-items: center; justify-content: center; gap: 8px; width: 375px; max-width: 100%; }
+  .fsdiv.vertical { flex-direction: column; height: 205px; width: auto; }
+  .fsdiv .fdiv { flex: 1 0 0; min-width: 0; }
+  .fsdiv-vline { flex: 1 0 0; width: 0; min-height: 0; border-left: 1px solid var(--mc-stroke-divider); }
+  .divlab-stage.dark .fsdiv-vline { border-left-color: var(--grey-24); }
+  .fsdiv-text {
+    font-size: 12px; line-height: 16px; font-weight: 400;
+    color: var(--mc-text-secondary); white-space: nowrap;
+  }
+  .divlab-stage.dark .fsdiv-text { color: var(--grey-76); }
+  .fsdiv-icon {
+    width: 12px; height: 12px; flex-shrink: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--mc-text-secondary);
+  }
+  .fsdiv-icon svg { width: 100%; height: 100%; }
+  .divlab-stage.dark .fsdiv-icon { color: var(--grey-76); }
+
+  /* Usage examples stage */
+  .div-usecase-stage {
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    margin: var(--sp-4) calc(-1 * var(--sp-5)) 0;
+    transition: background 240ms ease;
+  }
+  .div-usecase-stage.dark { background: var(--grey-10); }
+  .div-usecase-stage.dark .uc-label, .div-usecase-stage.dark .uc-config { color: var(--grey-56); }
+  .div-usecase-stage.dark .div-uc-surface { background: var(--grey-16); border-color: var(--grey-24); }
+  .div-usecase-stage.dark .div-uc-row { color: var(--grey-76); }
+  .div-uc-surface {
+    background: var(--mc-surface-floating);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-prominent);
+    padding: var(--sp-3) 0;
+    overflow: hidden;
+  }
+  .div-uc-row { font-size: 13px; color: var(--mc-text-secondary); padding: 9px var(--sp-4); line-height: 1.4; }
+  .div-uc-row strong { color: var(--mc-text-primary); font-weight: 600; }
+  .div-uc-inset { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+
+  .div-axis-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); margin: var(--sp-4) 0; }
+  @media (max-width: 720px) { .div-axis-cards { grid-template-columns: 1fr; } }
+  .div-axis {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-4);
+  }
+  .div-axis h4 { font-size: 13px; font-weight: 700; color: var(--mc-text-primary); margin-bottom: var(--sp-2); }
+  .div-axis .vals { display: flex; flex-wrap: wrap; gap: 6px; }
+  .div-axis .val {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11px; padding: 3px 8px;
+    background: var(--mc-surface-floating);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-minimal);
+    color: var(--mc-text-secondary);
+  }
+</style>
+
 <div class="docs-shell">
+
   <header class="docs-header">
-    <div class="eyebrow">Components</div>
-    <h1>Divider</h1>
-    <p class="subtitle">Horizontal rule with leading/trailing padding variants.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+    <div class="eyebrow">Divider Component</div>
+    <h1>Divider &mdash; Spec</h1>
+    <p class="subtitle">A hairline rule with one job and one axis. <strong>Divider</strong> publishes five padding insets; <strong>Section Divider</strong> wraps two of them around a centred label, icon or button. Everything below is read from the published component sets.</p>
+    <div class="meta">
+      <span>5 + 2 variants</span>
+      <span>1 axis</span>
+      <span>0.5dp hairline</span>
+      <span>Figma: Monocore-iOS &middot; node <code>105360-136054</code></span>
+    </div>
   </header>
+
   <div class="docs-layout">
     <main class="docs-main">
-      <section class="spec-section">
-        <span class="section-eyebrow eyebrow-design">Status</span>
-        <h2>Documentation coming soon</h2>
-        <p class="section-intro">The Divider component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+
+      <!-- 1. INTERACTIVE -->
+      <section class="spec-section" id="div-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Divider <a href="#div-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The dashed frame is the host surface, not part of the component &mdash; it is there so the padding inset is visible. Switch to Section Divider to see the composed form.</p>
+
+        <div class="fbtn-scope">
+        <div class="divlab">
+          <div class="divlab-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Component</div>
+              <div class="btnlab-pills" data-axis="component">
+                <button class="btnlab-pill on" data-val="divider">Divider</button>
+                <button class="btnlab-pill" data-val="section">Section Divider</button>
+              </div>
+            </div>
+            <div class="btnlab-group" id="divlab-padgroup">
+              <div class="btnlab-group-label">Padding</div>
+              <div class="btnlab-pills" data-axis="pad">
+                <button class="btnlab-pill on" data-val="none">None</button>
+                <button class="btnlab-pill" data-val="12-leading">12-leading</button>
+                <button class="btnlab-pill" data-val="16-leading">16-leading</button>
+                <button class="btnlab-pill" data-val="12-trailing">12-trailing</button>
+                <button class="btnlab-pill" data-val="16-trailing">16-trailing</button>
+              </div>
+            </div>
+            <div class="btnlab-group" id="divlab-orientgroup" style="display:none;">
+              <div class="btnlab-group-label">Orientation</div>
+              <div class="btnlab-pills" data-axis="orient">
+                <button class="btnlab-pill on" data-val="horizontal">Horizontal</button>
+                <button class="btnlab-pill" data-val="vertical">Vertical</button>
+              </div>
+            </div>
+            <div class="btnlab-group" id="divlab-centregroup" style="display:none;">
+              <div class="btnlab-group-label">Centre content</div>
+              <div class="btnlab-pills" data-axis="centre">
+                <button class="btnlab-pill on" data-val="button">Button</button>
+                <button class="btnlab-pill" data-val="icon">Icon</button>
+                <button class="btnlab-pill" data-val="text">Text</button>
+                <button class="btnlab-pill" data-val="none">None</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="dl-bounds" checked> <strong>Show host bounds</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="dl-pad"> <strong>Highlight padding</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="dl-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="divlab-stage" id="divlab-stage">
+              <div class="fdiv-host show-bounds" id="fdiv-host">
+                <div class="fdiv-row">Notifications</div>
+                <div class="fdiv pad-none" id="fdiv" data-pad="">
+                  <div class="fdiv-stroke"></div>
+                </div>
+                <div class="fdiv-row">Sounds &amp; haptics</div>
+              </div>
+              <div class="fsdiv" id="fsdiv" style="display:none;">
+                <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                <button class="fbtn style-accent size-small state-rest" id="fsdiv-btn" type="button">
+                  <span class="fbtn-ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4.5v11M4.5 10h11"/></svg></span>
+                  Button
+                </button>
+                <span class="fsdiv-icon" id="fsdiv-icon" style="display:none;"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 8.2 1.9 4.1a.7.7 0 0 1 1-1L6 6.2l3.1-3.1a.7.7 0 1 1 1 1L6 8.2Z"/></svg></span>
+                <span class="fsdiv-text" id="fsdiv-text" style="display:none;">Some text</span>
+                <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+              </div>
+            </div>
+            <p class="divlab-note" id="divlab-note"></p>
+          </div>
+        </div>
+        </div>
       </section>
+
+      <!-- 2. VARIANT AXES -->
+      <section class="spec-section" id="div-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#div-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Divider has a single property. Section Divider has one variant axis plus three booleans for what sits in the gap.</p>
+
+        <div class="div-axis-cards">
+          <div class="div-axis">
+            <h4>Divider &mdash; Padding, 5 values</h4>
+            <div class="vals"><span class="val">None</span><span class="val">12-leading</span><span class="val">16-leading</span><span class="val">12-trailing</span><span class="val">16-trailing</span></div>
+          </div>
+          <div class="div-axis">
+            <h4>Section Divider &mdash; Orientation, 2 values</h4>
+            <div class="vals"><span class="val">Horizontal</span><span class="val">Vertical</span></div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Component</th><th>Type</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td>Padding</td><td>Divider</td><td>Variant</td><td><code>None</code></td></tr>
+              <tr><td>Orientation</td><td>Section Divider</td><td>Variant</td><td><code>Horizontal</code></td></tr>
+              <tr><td>Button</td><td>Section Divider</td><td>Boolean</td><td>On</td></tr>
+              <tr><td>Icon</td><td>Section Divider</td><td>Boolean</td><td>Off</td></tr>
+              <tr><td>Text</td><td>Section Divider</td><td>Boolean</td><td>Off</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Nothing stops you turning all three booleans on.</strong> Button, Icon and Text are independent flags, not a variant axis, so Section Divider will happily render an icon, a label and a button side by side in the gap. Only one should ever be on.
+        </div>
+      </section>
+
+      <!-- 3. LAYOUT & SPACING -->
+      <section class="spec-section" id="div-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#div-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The Divider is a zero-height box with the rule drawn on its top edge, so it contributes no height to the layout it sits in &mdash; surrounding spacing is entirely the host's responsibility.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Rule weight</td><td>0.5dp</td><td>&mdash; <em>drawn as a stroke, not a filled box</em></td></tr>
+              <tr><td>Rule colour</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td><td>Stroke/Divider <em>(Grey/88)</em></td></tr>
+              <tr><td>Box height</td><td>0dp</td><td>&mdash;</td></tr>
+              <tr><td>Width</td><td>Fills its container <em>(402dp as published)</em></td><td>&mdash;</td></tr>
+              <tr><td>Vertical padding</td><td>0dp &mdash; never set by the component</td><td>&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>What Padding actually does</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Variant</th><th>Applied as</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td><code>None</code></td><td>&mdash;</td><td>Rule spans the full container width</td></tr>
+              <tr><td><code>12-leading</code></td><td>padding-left 12dp</td><td>Rule starts 12dp in from the leading edge</td></tr>
+              <tr><td><code>16-leading</code></td><td>padding-left 16dp</td><td>Rule starts 16dp in &mdash; aligns to a 16dp list inset</td></tr>
+              <tr><td><code>12-trailing</code></td><td>padding-right 12dp</td><td>Rule stops 12dp short of the trailing edge</td></tr>
+              <tr><td><code>16-trailing</code></td><td>padding-right 16dp</td><td>Rule stops 16dp short</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>Inset on one side only.</strong> There is no variant that insets both ends. A symmetrically inset rule is the host's job &mdash; give the container the padding and use <code>None</code>.
+        </div>
+
+        <h3>Section Divider</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Horizontal</th><th>Vertical</th></tr></thead>
+            <tbody>
+              <tr><td>Overall size</td><td>375 &times; 28dp</td><td>82 &times; 205dp</td></tr>
+              <tr><td>Gap</td><td>8dp</td><td>8dp</td></tr>
+              <tr><td>Rule weight</td><td>0.5dp <em>(reuses Divider)</em></td><td>1dp <em>(a rotated line, not Divider)</em></td></tr>
+              <tr><td>Centre &mdash; Button</td><td colspan="2">Button &middot; Accent &middot; Small &middot; Rest &mdash; 28dp tall, 10dp horizontal padding</td></tr>
+              <tr><td>Centre &mdash; Icon</td><td colspan="2">12 &times; 12dp, Text/Secondary</td></tr>
+              <tr><td>Centre &mdash; Text</td><td colspan="2">iOS/Caption 1 &mdash; 12/16dp, Regular, Text/Secondary</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 4. USAGE EXAMPLES -->
+      <section class="spec-section" id="div-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#div-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="div-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Where each padding variant earns its keep.</p>
+
+        <div class="div-usecase-stage fbtn-scope" id="div-uc-stage">
+        <div class="usecase-grid">
+
+          <div class="usecase-item">
+            <span class="uc-label">Full-bleed group</span>
+            <div class="div-uc-surface">
+              <div class="div-uc-row"><strong>General</strong></div>
+              <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+              <div class="div-uc-row">Notifications</div>
+              <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+              <div class="div-uc-row">Sounds &amp; haptics</div>
+            </div>
+            <span class="uc-config">Padding = None &middot; separating peers in one group</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">List with leading avatars</span>
+            <div class="div-uc-surface">
+              <div class="div-uc-row"><strong>Priya Raman</strong> &middot; Sent the deck</div>
+              <div class="fdiv pad-16-leading"><div class="fdiv-stroke"></div></div>
+              <div class="div-uc-row"><strong>Marco Silva</strong> &middot; Added a comment</div>
+              <div class="fdiv pad-16-leading"><div class="fdiv-stroke"></div></div>
+              <div class="div-uc-row"><strong>Dana Cole</strong> &middot; Shared a file</div>
+            </div>
+            <span class="uc-config">Padding = 16-leading &middot; rule starts under the text, not the avatar</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Section break with action</span>
+            <div class="div-uc-surface">
+              <div class="div-uc-row">Yesterday's messages</div>
+              <div class="div-uc-inset">
+                <div class="fsdiv" style="width:100%;">
+                  <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                  <button class="fbtn style-accent size-small state-rest" type="button">Jump to latest</button>
+                  <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                </div>
+              </div>
+              <div class="div-uc-row">Today's messages</div>
+            </div>
+            <span class="uc-config">Section Divider &middot; Horizontal &middot; Button</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Labelled break</span>
+            <div class="div-uc-surface">
+              <div class="div-uc-row">Older items</div>
+              <div class="div-uc-inset">
+                <div class="fsdiv" style="width:100%;">
+                  <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                  <span class="fsdiv-text">Unread</span>
+                  <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                </div>
+              </div>
+              <div class="div-uc-row">New items</div>
+            </div>
+            <span class="uc-config">Section Divider &middot; Text on, Button off</span>
+          </div>
+
+        </div>
+        </div>
+      </section>
+
+      <!-- 5. ACCESSIBILITY -->
+      <section class="spec-section" id="div-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#div-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>A plain Divider is decorative.</strong> It carries no information a screen reader needs; expose it as decorative rather than as a separator with a role, so it does not add noise to a long list.</li>
+          <li><strong>Section Divider is not decorative.</strong> Its centre content &mdash; a label like &ldquo;Unread&rdquo;, or a button &mdash; is real content and must be reachable. Do not hide the whole component.</li>
+          <li><strong>The rule fails text contrast by design.</strong> Stroke/Divider (#e0e0e0) against a white surface is a non-text boundary, which is permitted &mdash; but it means a divider can never be the only cue that two things are different. Grouping, spacing and headings carry the meaning.</li>
+          <li><strong>Do not scale the rule with text size.</strong> At 0.5dp the divider is already at the edge of visibility on low-density displays; it should hold its weight while type grows around it.</li>
+        </ul>
+      </section>
+
     </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#div-playground">Build a Divider</a>
+        <a href="#div-variants">Variant Axes</a>
+        <a href="#div-layout">Layout &amp; Spacing</a>
+        <a href="#div-usage">Usage Examples</a>
+        <a href="#div-a11y">Accessibility</a>
+      </nav>
+    </aside>
   </div>
-  <footer class="docs-footer">Divider &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+
+  <footer class="docs-footer">
+    Divider &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> nodes <code>105360-136054</code> &amp; <code>83796-188604</code> &middot; August 2026
+  </footer>
+
+</div>
+
+<script>
+// ── Divider Lab ──
+(() => {
+  const host = document.getElementById('fdiv-host');
+  if (!host) return;
+  const state = { component: 'divider', pad: 'none', orient: 'horizontal', centre: 'button' };
+  const div = document.getElementById('fdiv');
+  const sec = document.getElementById('fsdiv');
+  const stage = document.getElementById('divlab-stage');
+  const note = document.getElementById('divlab-note');
+  const padGroup = document.getElementById('divlab-padgroup');
+  const orientGroup = document.getElementById('divlab-orientgroup');
+  const centreGroup = document.getElementById('divlab-centregroup');
+  const cb = id => document.getElementById(id).checked;
+  const PAD_LABEL = { 'none':'None', '12-leading':'12-leading', '16-leading':'16-leading', '12-trailing':'12-trailing', '16-trailing':'16-trailing' };
+
+  function render() {
+    const isSection = state.component === 'section';
+    host.style.display = isSection ? 'none' : 'flex';
+    sec.style.display  = isSection ? 'flex' : 'none';
+    padGroup.style.display    = isSection ? 'none' : '';
+    orientGroup.style.display = isSection ? '' : 'none';
+    centreGroup.style.display = isSection ? '' : 'none';
+
+    // Divider
+    div.className = 'fdiv pad-' + state.pad + (cb('dl-pad') ? ' show-pad' : '');
+    div.setAttribute('data-pad', state.pad === 'none' ? '' : state.pad.split('-')[0]);
+    host.classList.toggle('show-bounds', cb('dl-bounds'));
+
+    // Section Divider
+    sec.classList.toggle('vertical', state.orient === 'vertical');
+    const rules = sec.querySelectorAll('.fdiv, .fsdiv-vline');
+    rules.forEach(r => r.remove());
+    const mk = () => {
+      if (state.orient === 'vertical') {
+        const l = document.createElement('div'); l.className = 'fsdiv-vline'; return l;
+      }
+      const d = document.createElement('div'); d.className = 'fdiv pad-none';
+      d.innerHTML = '<div class="fdiv-stroke"></div>'; return d;
+    };
+    sec.insertBefore(mk(), sec.firstChild);
+    sec.appendChild(mk());
+    document.getElementById('fsdiv-btn').style.display  = state.centre === 'button' ? 'inline-flex' : 'none';
+    document.getElementById('fsdiv-icon').style.display = state.centre === 'icon' ? 'inline-flex' : 'none';
+    document.getElementById('fsdiv-text').style.display = state.centre === 'text' ? 'inline' : 'none';
+
+    stage.classList.toggle('dark', cb('dl-dark'));
+
+    note.innerHTML = isSection
+      ? '<code>Section Divider</code> &middot; Orientation = ' + (state.orient === 'vertical' ? 'Vertical' : 'Horizontal')
+        + ' &middot; Centre = ' + (state.centre === 'none' ? 'none' : state.centre.charAt(0).toUpperCase() + state.centre.slice(1))
+        + ' &middot; rule ' + (state.orient === 'vertical' ? '1dp' : '0.5dp')
+        + ' &middot; node <code>83796-188604</code>'
+      : '<code>Divider</code> &middot; Padding = ' + PAD_LABEL[state.pad]
+        + ' &middot; 0.5dp Stroke/Divider &middot; node <code>105360-136054</code>';
+  }
+
+  document.querySelectorAll('#page-divider .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-divider .divlab-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('div-uc-theme-toggle');
+  const stage = document.getElementById('div-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
+</div>
+
+<div class="page" id="page-divider-architecture" data-page="divider-architecture">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Divider Component</div>
+    <h1>Architecture</h1>
+    <p class="subtitle">Why the simplest component in the system still has a variant axis, and why Section Divider is built out of Divider rather than beside it.</p>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="diva-model">
+        <span class="section-eyebrow eyebrow-design">Model</span>
+        <h2>The Configuration Model <a href="#diva-model" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">A rule needs no configuration. An <em>inset</em> rule does &mdash; and that is the entire axis.</p>
+        <p>The Divider publishes one property, <strong>Padding</strong>, with five values. Four of them shift where the rule starts or stops; the fifth is None. Nothing else varies: weight, colour and height are fixed across every variant. That makes Divider the one component in Monocore where the variant axis is purely spatial.</p>
+        <p>The reason the inset lives on the component rather than the host is alignment. In a list with 16dp leading content, the rule has to start where the <em>text</em> starts, not where the row starts &mdash; otherwise it reads as a boundary around the avatar rather than between two rows. Putting that inset in the component means the value travels with the design system instead of being re-derived in every list.</p>
+        <div class="callout callout-rule">
+          <strong>Zero height is the contract.</strong> The Divider box is 0dp tall with the rule drawn on its top edge, so dropping one into an auto-layout stack changes nothing about the stack's rhythm. Every gap you see around a divider belongs to the host. A component that reserved its own vertical space would make list spacing depend on whether a divider happened to be present.
+        </div>
+      </section>
+
+      <section class="spec-section" id="diva-anatomy">
+        <span class="section-eyebrow eyebrow-design">Structure</span>
+        <h2>Figma Anatomy <a href="#diva-anatomy" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Both published components. <span style="color:var(--c-accent); font-weight:600;">Purple</span> entries are slots, <span style="color:#1565c0; font-weight:600;">blue</span> are bound text properties, and items marked <em>optional</em> are boolean-toggled per instance.</p>
+
+        <details class="anat-acc" open>
+          <summary>Divider<span class="anat-acc-meta">105360-136054 &middot; 5 variants</span></summary>
+          <div class="anat-tree">Divider  (Padding &middot; height 0 &middot; fills container width)
+└─ Stroke  (height 0, width 100% &middot; 0.5dp rule on the top edge &middot; Stroke/Divider)</div>
+        </details>
+
+        <details class="anat-acc">
+          <summary>Section Divider<span class="anat-acc-meta">83796-188604 &middot; 2 variants</span></summary>
+          <div class="anat-tree">Section Divider  (Orientation &middot; gap 8 &middot; 375&times;28 horizontal, 82&times;205 vertical)
+├─ Divider  <span class="opt">— leading rule (horizontal) / rotated Line (vertical, 1dp)</span>
+├─ Button  → <span class="slot-tag">[slot] Slot</span> (16&times;16 icon) + <span class="txt-tag">[text] Label</span>  <span class="opt">— optional, ON by default</span>
+├─ Icon  (12&times;12) <span class="opt">— optional, off by default</span>
+├─ <span class="txt-tag">[text] Text</span>  <span class="opt">— optional, off by default &middot; iOS/Caption 1</span>
+└─ Divider  <span class="opt">— trailing rule (horizontal) / rotated Line (vertical, 1dp)</span></div>
+        </details>
+
+        <div class="callout callout-info">
+          <strong>Section Divider consumes Divider, it does not re-draw it.</strong> The horizontal variant nests two real Divider instances, each set to fill the space left over by the centre element. That is why a change to the divider colour propagates to section breaks for free &mdash; and why the vertical variant, which does <em>not</em> use Divider, is the one that drifts.
+        </div>
+      </section>
+
+      <section class="spec-section" id="diva-naming">
+        <span class="section-eyebrow eyebrow-design">Naming</span>
+        <h2>Leading, Trailing, and What They Mean Here <a href="#diva-naming" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The variant names describe the <em>edge that gets the inset</em>, not the edge the rule reaches.</p>
+        <p><code>16-leading</code> applies 16dp of padding on the leading edge, so the rule begins 16dp in and still runs to the far edge. <code>16-trailing</code> does the mirror. Read literally the names are unambiguous, but they are easy to misread as &ldquo;the rule leads by 16&rdquo; &mdash; which would be the opposite. When implementing, map them to a directional inset (<code>padding-inline-start</code> / <code>padding-inline-end</code>) rather than to a physical left/right, so the component keeps working under RTL.</p>
+        <div class="callout callout-warn">
+          <strong>RTL is not handled by the component.</strong> The padding is authored as a physical inset in Figma. In code it must become logical, or every inset divider will point the wrong way in Arabic and Hebrew layouts.
+        </div>
+      </section>
+
+      <section class="spec-section" id="diva-debt">
+        <span class="section-eyebrow eyebrow-impl">Known issues</span>
+        <h2>Published Debt <a href="#diva-debt" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Issue</th><th>Where</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td>Vertical Section Divider draws a 1dp rotated line instead of nesting Divider</td><td>Section Divider &middot; Vertical</td><td>Vertical rules are twice the weight of horizontal ones and will not follow future Divider changes</td></tr>
+              <tr><td>Button, Icon and Text are independent booleans</td><td>Section Divider &middot; both orientations</td><td>All three can be on at once; there is no published constraint to one centre element</td></tr>
+              <tr><td>Button defaults to ON</td><td>Section Divider</td><td>The plain rule-with-a-gap case requires switching a boolean off, making the least-decorated form the most work</td></tr>
+              <tr><td>No symmetric inset variant</td><td>Divider</td><td>Both-ends insets get re-implemented per surface, which is exactly what the axis exists to prevent</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>The vertical weight mismatch is the one to fix first.</strong> It is the only issue here that is visible side by side &mdash; put a horizontal and a vertical section break on the same screen and the difference reads as a bug, not a choice.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#diva-model">Configuration Model</a>
+        <a href="#diva-anatomy">Figma Anatomy</a>
+        <a href="#diva-naming">Leading &amp; Trailing</a>
+        <a href="#diva-debt">Published Debt</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Divider &middot; Architecture view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> &middot; August 2026
+  </footer>
+
 </div>
 </div>
 
