@@ -50,6 +50,12 @@
       text-transform: uppercase;
       color: var(--grey-56);                            /* Muted */
     }
+    .site-nav .nav-acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; }
+    .site-nav .nav-acc summary::-webkit-details-marker { display: none; }
+    .site-nav .nav-acc summary a { flex: 1; }
+    .site-nav .nav-acc summary::after { content: '\25B8'; font-size: 9px; color: var(--grey-56); margin-right: 12px; transition: transform 120ms; }
+    .site-nav .nav-acc[open] summary::after { transform: rotate(90deg); }
+    .site-nav .nav-acc-kids { padding-left: 14px; display: flex; flex-direction: column; }
     .site-nav a {
       display: flex;
       align-items: center;
@@ -1996,12 +2002,25 @@
         <a href="#a11y-stroke" data-link="a11y-stroke">Stroke</a>
       </div>
       <div class="nav-section">
-        <div class="nav-section-label">Card Component</div>
-        <a href="#card-spec" data-link="card-spec">Component Spec</a>
-      </div>
-      <div class="nav-section">
-        <div class="nav-section-label">Badge Component</div>
-        <a href="#badge-spec" data-link="badge-spec">Spec</a>
+        <div class="nav-section-label">Components</div>
+        <details class="nav-acc" open>
+          <summary><a href="#buttons" data-link="buttons">Button</a></summary>
+          <div class="nav-acc-kids">
+            <a href="#fab" data-link="fab">FAB</a>
+            <a href="#split-button" data-link="split-button">Split Button</a>
+            <a href="#pill-button" data-link="pill-button">Pill button</a>
+            <a href="#tile-button" data-link="tile-button">Tile button</a>
+          </div>
+        </details>
+        <a href="#callout" data-link="callout">Call Out (Tooltip)</a>
+        <a href="#card-spec" data-link="card-spec">Card</a>
+        <a href="#chiclet" data-link="chiclet">Chiclet</a>
+        <a href="#compose" data-link="compose">Compose</a>
+        <a href="#content-card" data-link="content-card">Content Card</a>
+        <a href="#divider" data-link="divider">Divider</a>
+        <a href="#empty-list" data-link="empty-list">Empty List View</a>
+        <a href="#filter" data-link="filter">Filter</a>
+        <a href="#badge-spec" data-link="badge-spec">Badge</a>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Messaging</div>
@@ -8831,6 +8850,916 @@
     Roadmap &middot; Monocore &middot; July 2026
   </footer>
 
+</div>
+</div>
+
+<div class="page" id="page-buttons" data-page="buttons">
+<style>
+  /* ── Button Lab (interactive playground) — mirrors the Card "cardlab" pattern ── */
+  .btnlab { display: grid; grid-template-columns: 300px 1fr; gap: var(--sp-6); align-items: start; }
+  @media (max-width: 860px) { .btnlab { grid-template-columns: 1fr; } }
+  .btnlab-controls {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    position: sticky;
+    top: var(--sp-5);
+  }
+  .btnlab-group { margin-bottom: var(--sp-5); }
+  .btnlab-group:last-child { margin-bottom: 0; }
+  .btnlab-group-label {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    color: var(--grey-56);
+    margin-bottom: var(--sp-2);
+  }
+  .btnlab-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .btnlab-pill {
+    appearance: none; border: 1px solid var(--c-border);
+    background: var(--mc-surface-floating);
+    color: var(--mc-text-secondary);
+    font-size: 12.5px; font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--radius-rounded);
+    cursor: pointer;
+    transition: all 120ms ease;
+  }
+  .btnlab-pill:hover { border-color: var(--mc-stroke-container); }
+  .btnlab-pill.on { background: var(--c-accent); color: var(--grey-100); border-color: var(--c-accent); }
+  .btnlab-pills.locked .btnlab-pill { opacity: 0.4; pointer-events: none; }
+  .btnlab-check {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--mc-text-secondary);
+    padding: 4px 0; cursor: pointer; user-select: none;
+  }
+  .btnlab-check input { accent-color: var(--c-accent); width: 15px; height: 15px; }
+  .btnlab-stage {
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-10) var(--sp-5);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 300px;
+    transition: background 240ms ease;
+  }
+  .btnlab-stage.dark { background: var(--grey-10); border-color: var(--grey-24); }
+  .btnlab-note { font-size: 12px; color: var(--grey-56); margin-top: var(--sp-3); text-align: center; }
+  .btnlab-note code {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11.5px; background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border); border-radius: var(--radius-minimal);
+    padding: 1px 6px;
+  }
+
+  /* ── The Button itself — values pulled from Monocore-iOS node 83361-7413 ──
+     Figma token → local alias (the iOS button palette is not in the --mc-* docs ramp;
+     these mirror the existing --text-interactive / --button-stroke-outline preview tokens). */
+  .fbtn-scope {
+    --fb-accent:            var(--text-interactive);        /* Brand/Accent primary + global */
+    --fb-accent-secondary:  var(--button-stroke-outline);   /* Brand/Accent secondary */
+    --fb-on-accent:         var(--grey-100);                /* Text/On-accent */
+    --fb-surface-disabled:  var(--surface-raised-fill);     /* Surface/Disabled */
+    --fb-surface-raised-2:  var(--grey-88);                 /* Surface/Raised secondary */
+    --fb-surface-raised-3:  var(--grey-96);                 /* Surface/Raised tertiary */
+    --fb-surface-raised-b:  var(--grey-94);                 /* Surface/Raised base */
+    --fb-surface-selected:  var(--grey-94);                 /* Surface/Subtle selected */
+    --fb-stroke-raised:     var(--mc-stroke-container-raised); /* Stroke/Container raised */
+    --fb-text-primary:      var(--mc-text-primary);         /* Text/Primary */
+    --fb-text-secondary:    var(--grey-38);                 /* Text/Secondary */
+    --fb-text-disabled:     var(--mc-text-disabled);        /* Text/Disabled */
+    --fb-text-interactive:  var(--mc-text-interactive);     /* Text/Interactive */
+  }
+  .btnlab-stage.dark {
+    --fb-surface-disabled: var(--grey-22);
+    --fb-surface-raised-2: var(--grey-24);
+    --fb-surface-raised-3: var(--grey-20);
+    --fb-surface-raised-b: var(--grey-18);
+    --fb-surface-selected: var(--grey-24);
+    --fb-stroke-raised:    var(--grey-38);
+    --fb-text-primary:     var(--grey-96);
+    --fb-text-secondary:   var(--grey-76);
+    --fb-text-disabled:    var(--grey-56);
+    --fb-text-interactive: var(--button-stroke-outline);
+  }
+
+  .fbtn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: inherit; font-weight: 500;
+    border: 0; background: transparent;
+    cursor: pointer; position: relative;
+    transition: background 140ms ease, color 140ms ease;
+    white-space: nowrap;
+  }
+  /* Size — Content row geometry */
+  .fbtn.size-large  { height: 52px; padding: 0 16px; gap: 8px; font-size: 15px; line-height: 20px; letter-spacing: -0.24px; }
+  .fbtn.size-medium { height: 40px; padding: 0 10px; gap: 8px; font-size: 15px; line-height: 20px; letter-spacing: -0.24px; }
+  .fbtn.size-small  { height: 28px; padding: 0 8px;  gap: 4px; font-size: 13px; line-height: 18px; letter-spacing: -0.08px; }
+  /* Style × State */
+  .fbtn.style-accent { border-radius: var(--radius-rounded); }
+  .fbtn.style-accent.state-rest,
+  .fbtn.style-accent.state-pressed { background: var(--fb-accent); color: var(--fb-on-accent); }
+  .fbtn.style-accent.state-disabled { background: var(--fb-surface-disabled); color: var(--fb-text-disabled); }
+
+  .fbtn.style-outline { border-radius: var(--radius-rounded); }
+  .fbtn.style-outline.state-rest { background: var(--fb-surface-raised-2); color: var(--fb-text-primary); }
+  .fbtn.style-outline.state-pressed { background: var(--fb-surface-selected); color: var(--fb-text-secondary); }
+  .fbtn.style-outline.state-disabled { background: var(--fb-surface-raised-b); color: var(--fb-text-disabled); }
+  /* Small is the only Outline size that actually carries the 0.5px stroke */
+  .fbtn.style-outline.size-small.state-rest { background: var(--fb-surface-raised-3); border: 0.5px solid var(--fb-stroke-raised); }
+  .fbtn.style-outline.size-small.state-pressed { border: 0.5px solid var(--fb-stroke-raised); }
+
+  .fbtn.style-subtle { background: transparent; }
+  .fbtn.style-subtle.state-rest { border-radius: var(--radius-dominant); color: var(--fb-text-interactive); }
+  .fbtn.style-subtle.state-pressed { border-radius: var(--radius-default); color: var(--fb-accent-secondary); }
+  .fbtn.style-subtle.state-disabled { border-radius: var(--radius-default); color: var(--fb-text-disabled); }
+  .fbtn.style-subtle.size-small.state-pressed,
+  .fbtn.style-subtle.size-small.state-disabled { border-radius: var(--radius-minimal); }
+
+  .fbtn.state-disabled { cursor: default; }
+  .fbtn.is-fullwidth { width: 100%; max-width: 393px; height: 52px; padding: 14px 20px; }
+
+  .fbtn-ico {
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0; padding: 2px;
+  }
+  .fbtn.size-large .fbtn-ico, .fbtn.size-medium .fbtn-ico { width: 20px; height: 20px; }
+  .fbtn.size-small .fbtn-ico { width: 16px; height: 16px; }
+  .fbtn-ico svg { width: 100%; height: 100%; display: block; }
+
+  /* Slot highlighting — the icon boxes are 16–20dp, far too small to letter inside,
+     so the outline stays on the box and the name floats above it. */
+  .fbtn.show-slots [data-slot-name] {
+    position: relative;
+    outline: 1.5px dashed var(--c-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-minimal);
+  }
+  .fbtn.show-slots [data-slot-name]::after {
+    content: attr(data-slot-name);
+    position: absolute; bottom: calc(100% + 7px); left: 50%;
+    transform: translateX(-50%);
+    padding: 1px 6px; border-radius: var(--radius-rounded);
+    background: var(--c-accent); color: var(--grey-100);
+    font-size: 9px; font-weight: 700; letter-spacing: 0.4px;
+    line-height: 14px; text-transform: uppercase;
+    white-space: nowrap; pointer-events: none; z-index: 2;
+  }
+
+  /* Full-width preview frame */
+  .fbtn-phone {
+    width: 100%; max-width: 425px;
+    padding: 0 16px;
+    display: flex; justify-content: center;
+  }
+
+  /* ── Size / colour reference tables ── */
+  .btn-axis-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); margin: var(--sp-4) 0; }
+  @media (max-width: 720px) { .btn-axis-cards { grid-template-columns: 1fr; } }
+  .btn-axis {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-4);
+  }
+  .btn-axis h4 { font-size: 13px; font-weight: 700; color: var(--mc-text-primary); margin-bottom: var(--sp-2); }
+  .btn-axis .vals { display: flex; flex-wrap: wrap; gap: 6px; }
+  .btn-axis .val {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11px; padding: 3px 8px;
+    background: var(--mc-surface-floating);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-minimal);
+    color: var(--mc-text-secondary);
+  }
+  .btn-swatch {
+    display: inline-block; width: 12px; height: 12px;
+    border-radius: 3px; border: 1px solid var(--c-border);
+    vertical-align: -1px; margin-right: 6px;
+  }
+  /* Usage examples: dark theme stage (same pattern as the Card page) */
+  .btn-usecase-stage {
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    margin: var(--sp-4) calc(-1 * var(--sp-5)) 0;
+    transition: background 240ms ease;
+  }
+  .btn-usecase-stage.dark { background: var(--grey-10); }
+  .btn-usecase-stage.dark .uc-label,
+  .btn-usecase-stage.dark .uc-config { color: var(--grey-56); }
+  .btn-usecase-stage.dark .btn-uc-surface { background: var(--grey-16); border-color: var(--grey-24); }
+  .btn-uc-surface {
+    background: var(--mc-surface-floating);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-prominent);
+    padding: var(--sp-4);
+    display: flex; flex-direction: column; gap: var(--sp-3);
+  }
+  .btn-uc-copy { font-size: 13px; line-height: 1.5; color: var(--mc-text-secondary); }
+  .btn-uc-copy strong { display: block; font-size: 15px; color: var(--mc-text-primary); font-weight: 600; margin-bottom: 2px; }
+  .btn-usecase-stage.dark .btn-uc-copy { color: var(--grey-76); }
+  .btn-usecase-stage.dark .btn-uc-copy strong { color: var(--grey-96); }
+  .btn-uc-row { display: flex; gap: var(--sp-2); align-items: center; flex-wrap: wrap; }
+  .btn-uc-row.end { justify-content: flex-end; }
+</style>
+
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Button Component</div>
+    <h1>Button &mdash; Spec</h1>
+    <p class="subtitle">Two published components cover every button in Monocore iOS: <strong>Button</strong> (three styles &times; three sizes &times; three states) and <strong>Button Full-width</strong> (the Large-only, edge-to-edge form). Everything on this page is read from the published component sets &mdash; configure one below, then use the tables as the exhaustive reference.</p>
+    <div class="meta">
+      <span>27 + 9 variants</span>
+      <span>3 axes</span>
+      <span>3 slots</span>
+      <span>Figma: Monocore-iOS &middot; node <code>83361-7413</code></span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <!-- 1. INTERACTIVE -->
+      <section class="spec-section" id="btn-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Button <a href="#btn-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Every combination below exists in the published set. Switching on <strong>Full-width</strong> swaps to the separate <code>Button Full-width</code> component, which publishes Style &times; State only &mdash; the Size axis is locked to Large.</p>
+
+        <div class="fbtn-scope">
+        <div class="btnlab">
+          <div class="btnlab-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Style</div>
+              <div class="btnlab-pills" data-axis="style">
+                <button class="btnlab-pill on" data-val="accent">Accent</button>
+                <button class="btnlab-pill" data-val="outline">Outline accent</button>
+                <button class="btnlab-pill" data-val="subtle">Subtle</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Size</div>
+              <div class="btnlab-pills" data-axis="size" id="btnlab-size">
+                <button class="btnlab-pill on" data-val="large">Large</button>
+                <button class="btnlab-pill" data-val="medium">Medium</button>
+                <button class="btnlab-pill" data-val="small">Small</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="pressed">Pressed</button>
+                <button class="btnlab-pill" data-val="disabled">Disabled</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" id="bl-lefticon" checked> Left icon</label>
+              <label class="btnlab-check"><input type="checkbox" id="bl-label" checked> Show label</label>
+              <label class="btnlab-check"><input type="checkbox" id="bl-righticon"> Right icon</label>
+              <label class="btnlab-check"><input type="checkbox" id="bl-fullwidth"> Full-width</label>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="bl-showslots"> <strong>Highlight slots</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="bl-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="btnlab-stage" id="btnlab-stage">
+              <div class="fbtn-phone" id="fbtn-phone">
+                <button class="fbtn style-accent size-large state-rest" id="fbtn" type="button">
+                  <span class="fbtn-ico" id="fbtn-left" data-slot-name="Slot">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4.5v11M4.5 10h11"/></svg>
+                  </span>
+                  <span id="fbtn-label">Button</span>
+                  <span class="fbtn-ico" id="fbtn-right" data-slot-name="Icon" style="display:none;">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 5l5 5-5 5"/></svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <p class="btnlab-note" id="btnlab-note"></p>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- 2. VARIANT AXES -->
+      <section class="spec-section" id="btn-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#btn-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The <code>Button</code> set is fully orthogonal: every Style &times; Size &times; State combination is published, with no exclusions.</p>
+
+        <div class="btn-axis-cards">
+          <div class="btn-axis">
+            <h4>Style &mdash; 3 values</h4>
+            <div class="vals"><span class="val">Accent</span><span class="val">Outline accent</span><span class="val">Subtle</span></div>
+          </div>
+          <div class="btn-axis">
+            <h4>Size &mdash; 3 values</h4>
+            <div class="vals"><span class="val">Large</span><span class="val">Medium</span><span class="val">Small</span></div>
+          </div>
+          <div class="btn-axis">
+            <h4>State &mdash; 3 values</h4>
+            <div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Disabled</span></div>
+          </div>
+        </div>
+
+        <p>3 &times; 3 &times; 3 = <strong>27 variants</strong>, all published. <code>Button Full-width</code> is a separate component set with the same Style and State axes but no Size axis &mdash; <strong>9 variants</strong>, all fixed at the Large 52dp height.</p>
+
+        <div class="callout callout-info">
+          <strong>Hover is not an axis.</strong> The set publishes Rest, Pressed and Disabled only. Touch targets have no hover state on iOS; if you are porting to a pointer platform, hover is a platform addition, not a Monocore variant.
+        </div>
+      </section>
+
+      <!-- 3. PROPERTIES & SLOTS -->
+      <section class="spec-section" id="btn-slots">
+        <span class="section-eyebrow eyebrow-design">Slots</span>
+        <h2>Properties &amp; Slots <a href="#btn-slots" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Beyond the three variant axes, each instance exposes four instance properties. Icon slots are swap targets; the label is a bound text property.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Slot <em>(left icon)</em></td><td>Instance swap</td><td>On</td><td>20&times;20 box / 16&times;16 glyph at Large&nbsp;&amp;&nbsp;Medium; 16&times;16 box / 12&times;12 glyph at Small</td></tr>
+              <tr><td>Label</td><td>Text</td><td><code>Button</code></td><td>Truncates with ellipsis; single line, never wraps</td></tr>
+              <tr><td>Show label</td><td>Boolean</td><td>On</td><td>Off yields an icon-only button &mdash; pair with an accessible name</td></tr>
+              <tr><td>Right icon</td><td>Boolean + swap</td><td>Off</td><td>Trailing affordance (chevron, caret) &mdash; hidden by default in every variant</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-rule">
+          <strong>The label owns the width.</strong> The Button has no fixed width at any size &mdash; it hugs its content, and horizontal padding is the only lever. If you need a fixed or edge-to-edge footprint, that is what <code>Button Full-width</code> is for; do not stretch the standard Button.
+        </div>
+      </section>
+
+      <!-- 4. LAYOUT & SPACING -->
+      <section class="spec-section" id="btn-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#btn-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Every value below is read from the published Content row of each size. Vertical padding is always 0 &mdash; height is set explicitly and the row centres its children.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Size</th><th>Height</th><th>Padding X</th><th>Gap</th><th>Icon box</th><th>Glyph</th><th>Type style</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Large</strong></td><td>52dp</td><td>16dp <em>Size/Large</em></td><td>8dp <em>Size/Small</em></td><td>20&times;20</td><td>16&times;16</td><td>iOS/Button 1</td></tr>
+              <tr><td><strong>Medium</strong></td><td>40dp</td><td>10dp <em>Size/10dp</em></td><td>8dp <em>Size/Small</em></td><td>20&times;20</td><td>16&times;16</td><td>iOS/Button 1</td></tr>
+              <tr><td><strong>Small</strong></td><td>28dp</td><td>8&ndash;10dp <em>see note</em></td><td>4dp <em>Size/4dp</em></td><td>16&times;16</td><td>12&times;12</td><td>iOS/Button 2</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Style</th><th>Rest</th><th>Pressed</th><th>Disabled</th></tr></thead>
+            <tbody>
+              <tr><td>Accent</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
+              <tr><td>Outline accent</td><td>Pill (200)</td><td>Pill (200)</td><td>Pill (200)</td></tr>
+              <tr><td>Subtle</td><td>24 <em>Radius/Dominant</em></td><td>8 L&middot;M / 4 S</td><td>8 L&middot;M / 4 S</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Two published inconsistencies, verbatim from the set.</strong> (1) Small horizontal padding is not uniform: <code>Accent&nbsp;/&nbsp;Rest</code> is 10&thinsp;/&thinsp;10, <code>Outline&nbsp;accent&nbsp;/&nbsp;Rest</code> is 8&thinsp;/&thinsp;10, and every other Small variant is 8&thinsp;/&thinsp;8. (2) Subtle changes radius between Rest (24) and Pressed&thinsp;/&thinsp;Disabled (8, or 4 at Small) &mdash; invisible today because Subtle has no fill in any state, but it will surface the moment a pressed background is added. Treat both as defects to raise, not rules to port.
+        </div>
+      </section>
+
+      <!-- 5. TYPOGRAPHY -->
+      <section class="spec-section" id="btn-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#btn-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two type styles cover all three sizes. Both are Weight/Medium (500) on Font Family/Text.</p>
+
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-preview"><span style="font-size:15px; font-weight:500; line-height:20px; letter-spacing:-0.24px; color:var(--c-text);">Button</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 1</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.24</span><span><strong>Used by:</strong> Large, Medium, Full-width</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Button</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Used by:</strong> Small</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. COLOUR -->
+      <section class="spec-section" id="btn-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Style &times; State <a href="#btn-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Semantic token names as published, with the light-theme value each resolves to.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Style</th><th>State</th><th>Fill</th><th>Stroke</th><th>Label</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="3"><strong>Accent</strong></td><td>Rest</td><td>Brand/Accent primary</td><td>&mdash;</td><td>Text/On-accent</td></tr>
+              <tr><td>Pressed</td><td>Brand/Accent global</td><td>&mdash;</td><td>Text/On-accent</td></tr>
+              <tr><td>Disabled</td><td>Surface/Disabled</td><td>&mdash;</td><td>Text/Disabled</td></tr>
+              <tr><td rowspan="3"><strong>Outline accent</strong></td><td>Rest</td><td>Surface/Raised secondary <em>(Raised tertiary at Small)</em></td><td>&mdash; <em>(0.5 Stroke/Container raised at Small)</em></td><td>Text/Primary</td></tr>
+              <tr><td>Pressed</td><td>Surface/Subtle selected</td><td>&mdash; <em>(0.5 Stroke/Container raised at Small)</em></td><td>Text/Secondary</td></tr>
+              <tr><td>Disabled</td><td>Surface/Raised base</td><td>&mdash;</td><td>Text/Disabled</td></tr>
+              <tr><td rowspan="3"><strong>Subtle</strong></td><td>Rest</td><td>None</td><td>&mdash;</td><td>Text/Interactive</td></tr>
+              <tr><td>Pressed</td><td>None</td><td>&mdash;</td><td>Brand/Accent secondary</td></tr>
+              <tr><td>Disabled</td><td>None</td><td>&mdash;</td><td>Text/Disabled</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>Accent Pressed is currently indistinguishable from Rest.</strong> Rest binds Brand/Accent&nbsp;primary and Pressed binds Brand/Accent&nbsp;global; in the light theme both resolve to the same value, so the pressed state reads as no feedback at all. Outline accent and Subtle both shift their label colour on press, so the gap is specific to Accent.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>&ldquo;Outline accent&rdquo; is only outlined at Small.</strong> At Large and Medium the variant publishes a filled grey surface with its border width set to 0 &mdash; the stroke colour is declared but never drawn. Only the Small Rest and Small Pressed variants carry the 0.5dp Stroke/Container&nbsp;raised. If you are implementing from the name rather than the values, you will get this wrong.
+        </div>
+      </section>
+
+      <!-- 7. USAGE EXAMPLES -->
+      <section class="spec-section" id="btn-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#btn-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="btn-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">How the styles pair up in real surfaces. Flip the toggle to check every example on the dark theme.</p>
+
+        <div class="btn-usecase-stage fbtn-scope" id="btn-uc-stage">
+        <div class="usecase-grid">
+
+          <div class="usecase-item">
+            <span class="uc-label">Primary action, full bleed</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Join meeting</strong>Sprint Planning starts in 2 minutes.</div>
+              <button class="fbtn style-accent size-large state-rest is-fullwidth" type="button">Join now</button>
+            </div>
+            <span class="uc-config">Button Full-width &middot; Accent &middot; Rest</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Paired actions</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Add Polly?</strong>Quick polls, surveys and Q&amp;A for your team.</div>
+              <div class="btn-uc-row end">
+                <button class="fbtn style-subtle size-medium state-rest" type="button">Not now</button>
+                <button class="fbtn style-accent size-medium state-rest" type="button">Add</button>
+              </div>
+            </div>
+            <span class="uc-config">Accent + Subtle &middot; Medium &middot; dismiss on the left</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Neutral action row</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Design review notes</strong>Shared by Priya &middot; 3 files</div>
+              <div class="btn-uc-row">
+                <button class="fbtn style-outline size-medium state-rest" type="button">
+                  <span class="fbtn-ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5V15a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4.5M10 3.5v9m0 0 3-3m-3 3-3-3"/></svg></span>
+                  Download
+                </button>
+                <button class="fbtn style-outline size-medium state-rest" type="button">Share</button>
+              </div>
+            </div>
+            <span class="uc-config">Outline accent &middot; Medium &middot; equal weight</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Inline, low emphasis</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>12 more replies</strong>Last reply 4 minutes ago.</div>
+              <div class="btn-uc-row">
+                <button class="fbtn style-subtle size-small state-rest" type="button">Show thread</button>
+                <button class="fbtn style-subtle size-small state-rest" type="button">Mute</button>
+              </div>
+            </div>
+            <span class="uc-config">Subtle &middot; Small &middot; text-weight actions</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Blocked action</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Recording unavailable</strong>You need organiser permission to start a recording.</div>
+              <button class="fbtn style-accent size-large state-disabled is-fullwidth" type="button" disabled>Start recording</button>
+            </div>
+            <span class="uc-config">Full-width &middot; Accent &middot; Disabled</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Compact chip row</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Suggested replies</strong>Tap to send.</div>
+              <div class="btn-uc-row">
+                <button class="fbtn style-outline size-small state-rest" type="button">Sounds good</button>
+                <button class="fbtn style-outline size-small state-rest" type="button">On my way</button>
+              </div>
+            </div>
+            <span class="uc-config">Outline accent &middot; Small &middot; the only stroked variants</span>
+          </div>
+
+        </div>
+        </div>
+      </section>
+
+      <!-- 8. ACCESSIBILITY -->
+      <section class="spec-section" id="btn-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#btn-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The published component carries a documentation link to the Teams Mobile A11y guidance; the notes below are the parts that bind at spec time.</p>
+        <ul>
+          <li><strong>Target size.</strong> Only Large (52dp) clears a 44dp minimum on its own. Medium (40dp) and Small (28dp) need the host surface to extend the hit area &mdash; the visual box is not the target.</li>
+          <li><strong>Icon-only buttons.</strong> Turning <em>Show label</em> off removes the accessible name with it. Supply one explicitly; never ship an icon-only Button without it.</li>
+          <li><strong>Disabled contrast.</strong> Text/Disabled on Surface/Disabled is deliberately below the text contrast floor, which is permitted for disabled controls &mdash; but it means disabled state must never be the only signal that an action is unavailable.</li>
+          <li><strong>Press feedback.</strong> See the Accent Pressed note above: until that binding is fixed, Accent buttons need a non-colour press affordance.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#btn-playground">Build a Button</a>
+        <a href="#btn-variants">Variant Axes</a>
+        <a href="#btn-slots">Properties &amp; Slots</a>
+        <a href="#btn-layout">Layout &amp; Spacing</a>
+        <a href="#btn-typography">Typography</a>
+        <a href="#btn-color">Colour by Style &times; State</a>
+        <a href="#btn-usage">Usage Examples</a>
+        <a href="#btn-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Button &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> nodes <code>83361-7413</code> &amp; <code>83865-65664</code> &middot; August 2026
+  </footer>
+
+</div>
+
+<script>
+// ── Button Lab ──
+(() => {
+  const btn = document.getElementById('fbtn');
+  if (!btn) return;
+  const state = { style: 'accent', size: 'large', state: 'rest' };
+  const stage = document.getElementById('btnlab-stage');
+  const sizeGroup = document.getElementById('btnlab-size');
+  const note = document.getElementById('btnlab-note');
+  const left = document.getElementById('fbtn-left');
+  const right = document.getElementById('fbtn-right');
+  const label = document.getElementById('fbtn-label');
+
+  const cb = id => document.getElementById(id).checked;
+  const STYLE_NAME = { accent: 'Accent', outline: 'Outline accent', subtle: 'Subtle' };
+  const CAP = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  function render() {
+    const full = cb('bl-fullwidth');
+    const size = full ? 'large' : state.size;
+
+    sizeGroup.classList.toggle('locked', full);
+
+    btn.className = 'fbtn style-' + state.style + ' size-' + size + ' state-' + state.state
+                  + (full ? ' is-fullwidth' : '')
+                  + (cb('bl-showslots') ? ' show-slots' : '');
+
+    left.style.display  = cb('bl-lefticon') ? 'inline-flex' : 'none';
+    right.style.display = cb('bl-righticon') ? 'inline-flex' : 'none';
+    label.style.display = cb('bl-label') ? 'inline' : 'none';
+    btn.disabled = state.state === 'disabled';
+
+    stage.classList.toggle('dark', cb('bl-dark'));
+
+    const component = full ? 'Button Full-width' : 'Button';
+    const nodeId = full ? '83865-65664' : '83361-7413';
+    note.innerHTML = '<code>' + component + '</code> &middot; Style = ' + STYLE_NAME[state.style]
+                   + ' &middot; Size = ' + CAP(size) + (full ? ' <em>(locked)</em>' : '')
+                   + ' &middot; State = ' + CAP(state.state)
+                   + ' &middot; node <code>' + nodeId + '</code>';
+  }
+
+  document.querySelectorAll('#page-buttons .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-buttons .btnlab-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('btn-uc-theme-toggle');
+  const stage = document.getElementById('btn-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
+</div>
+
+<div class="page" id="page-buttons-architecture" data-page="buttons-architecture">
+<style>
+  /* Anatomy accordion — wraps the shared .anat-tree from the Card page */
+  .anat-acc {
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    background: var(--mc-surface-raised-tertiary);
+    overflow: hidden;
+    margin-top: var(--sp-4);
+  }
+  .anat-acc + .anat-acc { margin-top: var(--sp-3); }
+  .anat-acc > summary {
+    list-style: none; cursor: pointer;
+    display: flex; align-items: center; gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4);
+    font-size: 13.5px; font-weight: 600;
+    color: var(--mc-text-primary);
+    user-select: none;
+  }
+  .anat-acc > summary::-webkit-details-marker { display: none; }
+  .anat-acc > summary::before {
+    content: '\25B8';
+    font-size: 10px; color: var(--grey-56);
+    transition: transform 120ms ease;
+  }
+  .anat-acc[open] > summary::before { transform: rotate(90deg); }
+  .anat-acc > summary:hover { background: var(--mc-surface-raised-base); }
+  .anat-acc > summary .anat-acc-meta {
+    margin-left: auto;
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11px; font-weight: 500; color: var(--grey-56);
+  }
+  .anat-acc .anat-tree {
+    border: 0; border-top: 1px solid var(--c-border);
+    border-radius: 0; background: var(--mc-surface-floating);
+  }
+</style>
+
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Button Component</div>
+    <h1>Architecture</h1>
+    <p class="subtitle">Why Monocore ships two button components instead of one, what each axis is actually responsible for, and the exact layer tree behind both.</p>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="btna-model">
+        <span class="section-eyebrow eyebrow-design">Model</span>
+        <h2>The Configuration Model <a href="#btna-model" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The Button separates three concerns, and deliberately refuses to absorb a fourth.</p>
+        <p><strong>Style</strong> is the <em>emphasis</em> axis &mdash; how loudly the action asks to be taken. <strong>Size</strong> is the <em>density</em> axis &mdash; how much room the host surface affords. <strong>State</strong> is the <em>interaction</em> axis &mdash; Rest, Pressed, Disabled. All three are orthogonal, so 3 &times; 3 &times; 3 = 27 variants publish with no exclusions: there is no combination of emphasis, density and interaction that is meaningless.</p>
+        <p>The fourth concern &mdash; <em>width behaviour</em> &mdash; is what <code>Button Full-width</code> exists to hold. It could have been a boolean on the main set, and that is the tempting design; it was split out because full-width buttons only ever occur at Large, and folding them in would have published 27 unreachable Medium and Small full-width variants to gain one property.</p>
+        <div class="callout callout-rule">
+          <strong>Width is a container decision, not a button decision.</strong> The standard Button hugs its label at every size. Anything that needs to fill its container is a different component with different responsive rules &mdash; portrait fills the width inside 16dp padding, landscape and tablet cap at 340dp.
+        </div>
+      </section>
+
+      <section class="spec-section" id="btna-anatomy">
+        <span class="section-eyebrow eyebrow-design">Structure</span>
+        <h2>Figma Anatomy <a href="#btna-anatomy" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The exact layer tree of both published components &mdash; the map for translating Figma structure to code. <span style="color:var(--c-accent); font-weight:600;">Purple</span> entries are slots (swap targets that become SLOT properties at compile time). <span style="color:#1565c0; font-weight:600;">Blue</span> entries are bound text properties. Items marked <em>optional</em> are toggled per instance.</p>
+
+        <details class="anat-acc" open>
+          <summary>Button<span class="anat-acc-meta">83361-7413 &middot; 27 variants</span></summary>
+          <div class="anat-tree">Button  (Style &times; Size &times; State &middot; hugs content &middot; radius: pill, or 24/8/4 for Subtle)
+└─ Content  (row, centred &middot; padding-y 0 &middot; height 52 / 40 / 28)
+   ├─ <span class="slot-tag">[slot] Slot</span>  (20&times;20 box, 16&times;16 glyph &middot; 16&times;16 box, 12&times;12 glyph at Small) <span class="opt">— optional, on by default</span>
+   ├─ <span class="txt-tag">[text] Label</span>  <span class="opt">— optional (Show label) &middot; iOS/Button 1, or iOS/Button 2 at Small</span>
+   └─ <span class="slot-tag">[slot] Icon</span>  (same box sizes as Slot) <span class="opt">— optional, off by default</span></div>
+        </details>
+
+        <details class="anat-acc">
+          <summary>Button Full-width<span class="anat-acc-meta">83865-65664 &middot; 9 variants</span></summary>
+          <div class="anat-tree">Button Full-width  (Style &times; State &middot; 393&times;52 as published &middot; radius pill)
+└─ Content  (row, centred &middot; height 24 &middot; padding 20 &times; 14 &middot; gap 8)
+   ├─ <span class="slot-tag">[slot] Slot</span>  (20&times;20 box, 16&times;16 glyph) <span class="opt">— optional, on by default</span>
+   └─ <span class="txt-tag">[text] Label</span>  <span class="opt">— iOS/Button 1</span></div>
+        </details>
+
+        <div class="callout callout-info">
+          <strong>One row, three children, no wrappers.</strong> Unlike the Card, the Button has no nested containers &mdash; the variant does all the work and <code>Content</code> is a single auto-layout row. That is why the whole set fits in 27 variants: there is no internal structure for a variant to reconfigure.
+        </div>
+      </section>
+
+      <section class="spec-section" id="btna-sizing">
+        <span class="section-eyebrow eyebrow-design">Structure</span>
+        <h2>How Size Is Expressed <a href="#btna-sizing" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Size does not scale the button &mdash; it re-selects four independent values.</p>
+        <p>Height is set explicitly on <code>Content</code> (52&thinsp;/&thinsp;40&thinsp;/&thinsp;28) with vertical padding pinned at 0, so the row centres its children rather than growing from them. Horizontal padding, gap, icon box and type style are each chosen per size and do not interpolate: 16&thinsp;/&thinsp;10&thinsp;/&thinsp;8&ndash;10 padding, 8&thinsp;/&thinsp;8&thinsp;/&thinsp;4 gap, 20&thinsp;/&thinsp;20&thinsp;/&thinsp;16 icon box, Button&nbsp;1&thinsp;/&thinsp;Button&nbsp;1&thinsp;/&thinsp;Button&nbsp;2 type.</p>
+        <p>Note the pattern: <strong>Large and Medium are the same button at two heights</strong> &mdash; identical gap, icon box and type style, differing only in height and horizontal padding. Small is the real break, dropping to a 16dp icon box and the Button&nbsp;2 ramp. If you are implementing a size scale in code, model it as two tiers with a height variable, not three arbitrary sets.</p>
+      </section>
+
+      <section class="spec-section" id="btna-debt">
+        <span class="section-eyebrow eyebrow-impl">Known issues</span>
+        <h2>Published Debt <a href="#btna-debt" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three things in the published set are inconsistent. They are documented here so implementers reproduce them knowingly &mdash; or fix them at the source rather than in each consumer.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Issue</th><th>Where</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td>Accent Pressed binds a different token that resolves to the same colour as Rest</td><td>Accent &middot; all sizes</td><td>No visible press feedback on the highest-emphasis button</td></tr>
+              <tr><td>&ldquo;Outline accent&rdquo; publishes border width 0 at Large and Medium</td><td>Outline accent &middot; L, M</td><td>Filled grey, not outlined; only Small carries the 0.5dp stroke</td></tr>
+              <tr><td>Subtle changes corner radius between Rest (24) and Pressed / Disabled (8, or 4 at Small)</td><td>Subtle &middot; all sizes</td><td>Latent &mdash; invisible while Subtle has no fill, wrong the moment one is added</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>Do not normalise these silently in code.</strong> A consumer that quietly fixes the radius or adds a press tint puts the implementation out of sync with the library, and the next Figma pull will look like a regression. Raise them against the component set.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#btna-model">Configuration Model</a>
+        <a href="#btna-anatomy">Figma Anatomy</a>
+        <a href="#btna-sizing">How Size Is Expressed</a>
+        <a href="#btna-debt">Published Debt</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Button &middot; Architecture view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> &middot; August 2026
+  </footer>
+
+</div>
+</div>
+
+<div class="page" id="page-callout" data-page="callout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Call Out (Tooltip)</h1>
+    <p class="subtitle">Anchored tooltip and callout surfaces for contextual hints.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">The Call Out (Tooltip) component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Call Out (Tooltip) &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet" data-page="chiclet">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Chiclet</h1>
+    <p class="subtitle">Compact content unit for files, links, and quoted replies.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">The Chiclet component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Chiclet &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-compose" data-page="compose">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Compose</h1>
+    <p class="subtitle">Message composer — field, record, and keyboard configurations.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">The Compose component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Compose &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-content-card" data-page="content-card">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Content Card</h1>
+    <p class="subtitle">Media-forward card variant with preview region and metadata block.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">The Content Card component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Content Card &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-divider" data-page="divider">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Divider</h1>
+    <p class="subtitle">Horizontal rule with leading/trailing padding variants.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">The Divider component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Divider &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-empty-list" data-page="empty-list">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Empty List View</h1>
+    <p class="subtitle">Empty-state pattern for list surfaces.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">The Empty List View component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Empty List View &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-filter" data-page="filter">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Filter</h1>
+    <p class="subtitle">Pill button filter rows and filter bar patterns.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">The Filter component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Filter &middot; Placeholder &middot; Source: Monocore iOS library</footer>
 </div>
 </div>
 
