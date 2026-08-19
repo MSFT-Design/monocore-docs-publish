@@ -672,6 +672,7 @@
       --text-interactive: #654cf5;
       --button-stroke-outline: #aba8ff;
       --brand-accent-dominant: #43349c;   /* Brand/Accent Dominant — Call Out surface */
+      --brand-accent-tertiary: #ebebff;   /* Brand/Accent Tertiary — Chiclet media plate */
       --radius-card: 12px;
       --radius-inner: 4px;
       --radius-button: 5px;
@@ -10157,23 +10158,727 @@ Order per variant
 </div>
 
 <div class="page" id="page-chiclet" data-page="chiclet">
+<style>
+  /* ── Chiclet Lab ── */
+  .chlab { display: grid; grid-template-columns: 300px 1fr; gap: var(--sp-6); align-items: start; }
+  @media (max-width: 860px) { .chlab { grid-template-columns: 1fr; } }
+  .chlab-controls {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    position: sticky; top: var(--sp-5);
+  }
+  .chlab-stage {
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-8) var(--sp-5);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 360px;
+    transition: background 240ms ease;
+  }
+  .chlab-stage.dark { background: var(--grey-10); border-color: var(--grey-24); }
+  .chlab-note { font-size: 12px; color: var(--grey-56); margin-top: var(--sp-3); text-align: center; }
+  .chlab-note code {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 11.5px; background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border); border-radius: var(--radius-minimal); padding: 1px 6px;
+  }
+
+  /* ── Chiclet — component set 83310-17383 ── */
+  .fch-scope {
+    --fch-surface:        var(--mc-surface-primary);          /* Surface/Primary */
+    --fch-stroke:         var(--mc-stroke-divider);           /* Stroke/Divider */
+    --fch-stroke-media:   rgba(0,0,0,0.07);                   /* Stroke/onMedia */
+    --fch-text:           var(--mc-text-primary);             /* Text/Primary */
+    --fch-text-2:         var(--grey-38);                     /* Text/Secondary */
+    --fch-quote:          var(--mc-text-disabled);            /* Icon/Disabled */
+    --fch-media:          var(--brand-accent-tertiary);       /* Brand/Accent Tertiary */
+    --fch-overlay:        rgba(41,41,41,0.78);                /* Surface/BtntAlphaPrimary */
+  }
+  .chlab-stage.dark, .ch-usecase-stage.dark {
+    --fch-surface:      var(--grey-16);
+    --fch-stroke:       var(--grey-24);
+    --fch-stroke-media: rgba(255,255,255,0.10);
+    --fch-text:         var(--grey-96);
+    --fch-text-2:       var(--grey-76);
+    --fch-quote:        var(--grey-38);
+    --fch-media:        var(--grey-24);
+  }
+
+  .fch {
+    background: var(--fch-surface);
+    border: 1px solid var(--fch-stroke);
+    border-radius: var(--radius-prominent);   /* 16 */
+    width: 265px; max-width: 487px; min-width: 70px;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    position: relative;
+    font-family: inherit;
+  }
+  .fch.on-media { border-color: var(--fch-stroke-media); }
+  /* Layout padding — read from each published variant */
+  .fch.lay-base            { padding: 8px 12px; gap: 8px; }
+  .fch.lay-base-actions    { padding: 12px; gap: 8px; }
+  .fch.lay-reply,
+  .fch.lay-forward         { padding: 12px 8px; gap: 6px; flex-direction: row; align-items: center; }
+  .fch.lay-file            { padding: 12px; gap: 8px; }
+  .fch.lay-file-image      { padding: 0; gap: 8px; }
+  .fch.lay-video           { padding: 0; gap: 0; width: 265px; }
+
+  .fch-row { display: flex; gap: 8px; align-items: center; width: 100%; }
+  .fch-body { display: flex; flex-direction: column; gap: 2px; flex: 1 0 0; min-width: 0; justify-content: center; }
+  .fch-header { display: flex; align-items: center; gap: 2px; width: 100%; }
+  .fch-cap {
+    font-size: 11px; line-height: 11px; letter-spacing: 0.06px; font-weight: 400;
+    color: var(--fch-text-2);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1 0 0; min-width: 0;
+  }
+  .fch-msg {
+    font-size: 15px; line-height: 20px; letter-spacing: -0.08px; font-weight: 400;
+    color: var(--fch-text); width: 100%;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .fch-msg.secondary { color: var(--fch-text-2); }
+  .fch-filename { font-size: 15px; line-height: 20px; letter-spacing: -0.08px; font-weight: 400; color: var(--fch-text); }
+  .fch-filename.compact { font-size: 13px; line-height: 18px; font-weight: 500; }
+  .fch-meta { font-size: 12px; line-height: 16px; font-weight: 400; color: var(--fch-text-2); }
+
+  .fch-ico {
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--fch-text); padding: 2px;
+  }
+  .fch-ico.s16 { width: 16px; height: 16px; }
+  .fch-ico.s24 { width: 24px; height: 24px; }
+  .fch-ico svg { width: 100%; height: 100%; }
+  .fch-ico.muted { color: var(--fch-text-2); }
+  .fch-trail { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+  .fch-quotebar { width: 4px; align-self: stretch; border-radius: var(--radius-minimal); background: var(--fch-quote); flex-shrink: 0; }
+  .fch-mediathumb { width: 40px; height: 40px; border-radius: var(--radius-minimal); background: var(--fch-media); flex-shrink: 0; }
+
+  .fch-media {
+    width: 100%; background: var(--fch-media);
+    position: relative; display: flex; align-items: center; justify-content: center;
+    color: var(--grey-56); font-size: 11px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase;
+  }
+  .fch-media.file { height: 172px; }
+  .fch-media.video { height: 160px; }
+  .fch-overlay-btn {
+    background: var(--fch-overlay);
+    border-radius: var(--radius-rounded);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--grey-100);
+  }
+  .fch-overlay-btn.sz-default { padding: 6px; }
+  .fch-overlay-btn.sz-large { padding: 10px; }
+  .fch-overlay-btn.sz-default svg { width: 12px; height: 12px; }
+  .fch-overlay-btn.sz-large svg { width: 28px; height: 28px; }
+  .fch-overlay-tr { position: absolute; top: 8px; right: 8px; }
+  .fch-overlay-c { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+  .fch-dismiss { position: absolute; top: 8px; right: 8px; color: var(--fch-text-2); width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; }
+  .fch-dismiss svg { width: 12px; height: 12px; }
+
+  .fch-footer { display: flex; align-items: center; height: 28px; width: 100%; gap: 8px; }
+  .fch-actiongroup { display: flex; gap: 8px; flex: 1 0 0; min-width: 0; overflow: hidden; }
+
+  /* Slot highlighting */
+  .fch.show-slots [data-slot-name] { position: relative; outline: 1.5px dashed var(--c-accent); outline-offset: 2px; border-radius: var(--radius-minimal); }
+  .fch.show-slots [data-slot-name]::after {
+    content: attr(data-slot-name);
+    position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+    padding: 0 5px; border-radius: var(--radius-rounded);
+    background: var(--c-accent); color: var(--grey-100);
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.3px; line-height: 13px;
+    text-transform: uppercase; white-space: nowrap; pointer-events: none; z-index: 3;
+  }
+
+  /* Family cards */
+  .ch-family { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); margin: var(--sp-4) 0; }
+  @media (max-width: 720px) { .ch-family { grid-template-columns: 1fr; } }
+  .ch-fam-card {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-4);
+  }
+  .ch-fam-card h4 { font-size: 13px; font-weight: 700; color: var(--mc-text-primary); margin-bottom: 2px; }
+  .ch-fam-card .node {
+    font-family: "SF Mono", "Cascadia Code", monospace;
+    font-size: 10.5px; color: var(--grey-56); display: block; margin-bottom: var(--sp-2);
+  }
+  .ch-fam-card p { font-size: 12.5px; line-height: 1.5; color: var(--mc-text-secondary); }
+
+  /* Usage stage */
+  .ch-usecase-stage {
+    border-radius: var(--radius-strong);
+    padding: var(--sp-5);
+    margin: var(--sp-4) calc(-1 * var(--sp-5)) 0;
+    transition: background 240ms ease;
+  }
+  .ch-usecase-stage.dark { background: var(--grey-10); }
+  .ch-usecase-stage.dark .uc-label, .ch-usecase-stage.dark .uc-config { color: var(--grey-56); }
+</style>
+
 <div class="docs-shell">
+
   <header class="docs-header">
-    <div class="eyebrow">Components</div>
-    <h1>Chiclet</h1>
-    <p class="subtitle">Compact content unit for files, links, and quoted replies.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+    <div class="eyebrow">Chiclet Component</div>
+    <h1>Chiclet &mdash; Spec</h1>
+    <p class="subtitle">The compact card that represents <em>something else</em> inside a message: a quoted reply, a forwarded message, an attached file, a video, or a live meeting. The main set publishes seven layouts; three more sets and one loose component round out the family.</p>
+    <div class="meta">
+      <span>7 variants</span>
+      <span>2 axes</span>
+      <span>4 sets in the family</span>
+      <span>Figma: Monocore-iOS &middot; node <code>83310-17383</code></span>
+    </div>
   </header>
+
   <div class="docs-layout">
     <main class="docs-main">
-      <section class="spec-section">
-        <span class="section-eyebrow eyebrow-design">Status</span>
-        <h2>Documentation coming soon</h2>
-        <p class="section-intro">The Chiclet component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+
+      <!-- 1. INTERACTIVE -->
+      <section class="spec-section" id="ch-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Chiclet <a href="#ch-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Layout and Image are <em>not</em> a full grid &mdash; only seven of the twelve combinations are published. The preview tells you when you have picked one that does not exist.</p>
+
+        <div class="fch-scope fbtn-scope">
+        <div class="chlab">
+          <div class="chlab-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Layout</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="base-actions">Base + actions</button>
+                <button class="btnlab-pill" data-val="base">Base</button>
+                <button class="btnlab-pill" data-val="reply">Reply</button>
+                <button class="btnlab-pill" data-val="forward">Forward</button>
+                <button class="btnlab-pill" data-val="file">File Chiclet</button>
+                <button class="btnlab-pill" data-val="video">Video</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Image</div>
+              <div class="btnlab-pills" data-axis="image">
+                <button class="btnlab-pill on" data-val="false">False</button>
+                <button class="btnlab-pill" data-val="true">True</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Instance properties</div>
+              <label class="btnlab-check"><input type="checkbox" id="ch-compose"> On compose box <em>(shows Dismiss)</em></label>
+              <label class="btnlab-check"><input type="checkbox" id="ch-mediaslot"> Media slot <em>(Reply / Forward)</em></label>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="ch-showslots"> <strong>Highlight slots</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="ch-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="chlab-stage" id="chlab-stage">
+              <div id="fch-mount"></div>
+            </div>
+            <p class="chlab-note" id="chlab-note"></p>
+          </div>
+        </div>
+        </div>
       </section>
+
+      <!-- 2. VARIANT MATRIX -->
+      <section class="spec-section" id="ch-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Matrix <a href="#ch-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two axes, but a sparse grid. <code>Image</code> only means something for the two layouts that can carry media of their own.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Layout</th><th>Image = False</th><th>Image = True</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Base</strong></td><td>Published</td><td>&mdash;</td></tr>
+              <tr><td><strong>Base + actions</strong></td><td>Published</td><td>&mdash;</td></tr>
+              <tr><td><strong>Reply</strong></td><td>Published</td><td>&mdash;</td></tr>
+              <tr><td><strong>Forward</strong></td><td>Published</td><td>&mdash;</td></tr>
+              <tr><td><strong>File Chiclet</strong></td><td>Published</td><td>Published</td></tr>
+              <tr><td><strong>Video</strong></td><td>&mdash;</td><td>Published</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>7 of a possible 12. The gaps are intentional: a Video chiclet with no image is just an empty box, and Base / Reply / Forward carry their media through a separate <em>Media slot</em> boolean rather than the Image axis.</p>
+
+        <div class="callout callout-constraint">
+          <strong>Two different properties both mean &ldquo;image&rdquo;.</strong> The variant axis <code>Image</code> switches File Chiclet and Video into their media forms. A <em>separate</em> boolean, also surfaced as an image property, reveals the 40&times;40 Media slot on Reply and Forward. They are unrelated, they are both on the same component, and the generated code has to disambiguate them as <code>image</code> and <code>image1</code>. Rename one at the source.
+        </div>
+      </section>
+
+      <!-- 3. LAYOUT -->
+      <section class="spec-section" id="ch-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#ch-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Shared shell, per-layout padding. Every variant is a 265dp-wide card with a 16dp radius, capped at 487dp and floored at 70dp.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Layout</th><th>Direction</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
+            <tbody>
+              <tr><td>Base</td><td>Column</td><td>8 &times; 12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+              <tr><td>Base + actions</td><td>Column</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+              <tr><td>Reply</td><td>Row</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
+              <tr><td>Forward</td><td>Row</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
+              <tr><td>File Chiclet</td><td>Column</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+              <tr><td>File Chiclet <em>(Image)</em></td><td>Column</td><td>0 &mdash; media is flush; inner row is 12dp</td><td>8dp</td><td>Stroke/onMedia</td></tr>
+              <tr><td>Video</td><td>Column</td><td>0 &mdash; media fills the card</td><td>0</td><td>Stroke/onMedia</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Corner radius</td><td>16dp</td><td>Radius/Prominent &mdash; constant across all seven</td></tr>
+              <tr><td>Leading icon slot</td><td>16&times;16dp</td><td>Base and Base + actions</td></tr>
+              <tr><td>Leading file icon</td><td>24&times;24dp</td><td>File Chiclet &mdash; a filetype icon, not a generic glyph</td></tr>
+              <tr><td>Trailing slot</td><td>24&times;24dp</td><td>Base and Base + actions</td></tr>
+              <tr><td>Trailing pair</td><td>2 &times; 24dp, gap 8</td><td>File Chiclet &mdash; recap + overflow</td></tr>
+              <tr><td>Quote bar</td><td>4dp wide, radius 4</td><td>Reply and Forward &mdash; fill Icon/Disabled</td></tr>
+              <tr><td>Media thumbnail</td><td>40&times;40dp, radius 4</td><td>Reply / Forward, behind the Media slot boolean</td></tr>
+              <tr><td>Media &mdash; File</td><td>Full width &times; 171.57dp</td><td>The fractional height is as published</td></tr>
+              <tr><td>Media &mdash; Video</td><td>265 &times; 160dp</td><td>Fixed, with a centred 48dp Overlay btn</td></tr>
+              <tr><td>Text block gap</td><td>2dp</td><td>Size/Nudge/small &mdash; header to body</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 4. TYPOGRAPHY -->
+      <section class="spec-section" id="ch-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#ch-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Four type styles across seven variants &mdash; more than the component needs, and the source of its one real inconsistency.</p>
+
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Charlotte D. 9:00 AM</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span><span><strong>Used by:</strong> attribution header</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Message body</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Used by:</strong> body, filename</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text-secondary);">36 MB</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Height:</strong> 16dp</span><span><strong>Used by:</strong> file metadata</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Accessibility 101.pptx</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500</span><span><strong>Used by:</strong> filename &mdash; <em>Image variant only</em></span></div>
+          </div>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>The filename changes type style between the two File variants.</strong> <code>File Chiclet / Image=False</code> sets the filename in Body 2 (15dp, Regular); <code>File Chiclet / Image=True</code> sets the same string in Button 2 (13dp, Medium). Same content, same component, two ramps &mdash; put the two side by side and the shift is obvious.
+        </div>
+      </section>
+
+      <!-- 5. THE FAMILY -->
+      <section class="spec-section" id="ch-family">
+        <span class="section-eyebrow eyebrow-design">Family</span>
+        <h2>The Rest of the Family <a href="#ch-family" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">&ldquo;Chiclet&rdquo; is four published sets and one loose component, not one thing. Two of the sets share a name.</p>
+
+        <div class="ch-family">
+          <div class="ch-fam-card">
+            <h4>Chiclet &mdash; message</h4>
+            <span class="node">83310-17383 &middot; 7 variants &middot; the subject of this page</span>
+            <p>Layout &times; Image. Everything above documents this set.</p>
+          </div>
+          <div class="ch-fam-card">
+            <h4>Chiclet &mdash; live meeting</h4>
+            <span class="node">106838-39902 &middot; 4 variants</span>
+            <p>Style (Primary, Subtle) &times; Recording (False, True). A 297&times;48 pill with a 24dp radius, fill Brand/Accent Primary when Primary and transparent when Subtle. <strong>Same name, different component.</strong></p>
+          </div>
+          <div class="ch-fam-card">
+            <h4>Chiclet Footer</h4>
+            <span class="node">104574-8225 &middot; 2 variants</span>
+            <p>Pattern (Group, Single). The 28dp action row nested inside <code>Base + actions</code> &mdash; two Small Outline buttons plus an overflow glyph.</p>
+          </div>
+          <div class="ch-fam-card">
+            <h4>Overlay btn</h4>
+            <span class="node">106154-55456 &middot; 4 variants</span>
+            <p>Overlay (True, False) &times; Size (Default 24dp, Large 48dp). The scrim button used for dismiss on file media and play on video.</p>
+          </div>
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>Two published sets are both called &ldquo;Chiclet&rdquo;.</strong> Searching the library returns both with no way to tell them apart from the name alone &mdash; one is the message chiclet, the other the live-meeting bar. There is also a loose component named <code>Chiclet/Live meeting (Dominant)/False</code> sitting outside any set, whose slash-separated name makes Figma display it as if it were a variant of something. Consolidating or renaming these is the highest-value cleanup on this page.
+        </div>
+      </section>
+
+      <!-- 6. USAGE -->
+      <section class="spec-section" id="ch-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#ch-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="ch-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Each layout in the context it was designed for.</p>
+
+        <div class="ch-usecase-stage fch-scope fbtn-scope" id="ch-uc-stage">
+        <div class="usecase-grid" id="ch-uc-grid"></div>
+        </div>
+      </section>
+
+      <!-- 7. A11Y -->
+      <section class="spec-section" id="ch-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#ch-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The card is one target, the icons are others.</strong> Base and File chiclets carry a trailing slot, and File carries two. Nesting interactive glyphs inside an interactive card needs explicit, separate accessible names &mdash; otherwise a screen reader announces one blob with three actions.</li>
+          <li><strong>Attribution is 11dp on 11dp line height.</strong> Caption 2 is the smallest type in the system and it is set solid, with no leading. It will clip at large accessibility text sizes; treat the attribution as content that must reflow, not as a fixed-height row.</li>
+          <li><strong>The quote bar is decorative.</strong> On Reply and Forward it carries no accessible meaning &mdash; the relationship must be in the announced text (&ldquo;replying to Charlotte D.&rdquo;), not in a 4dp grey rule.</li>
+          <li><strong>Overlay buttons sit on arbitrary media.</strong> The scrim (78% opaque #292929) is what makes the glyph legible, not the image behind it. Never drop the scrim to let more of the thumbnail through.</li>
+          <li><strong>Dismiss only appears on the compose box.</strong> When a chiclet is dismissible, the control is 20dp &mdash; well under a 44dp target. The host must extend the hit area.</li>
+        </ul>
+      </section>
+
     </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#ch-playground">Build a Chiclet</a>
+        <a href="#ch-variants">Variant Matrix</a>
+        <a href="#ch-layout">Layout &amp; Spacing</a>
+        <a href="#ch-typography">Typography</a>
+        <a href="#ch-family">The Rest of the Family</a>
+        <a href="#ch-usage">Usage Examples</a>
+        <a href="#ch-a11y">Accessibility</a>
+      </nav>
+    </aside>
   </div>
-  <footer class="docs-footer">Chiclet &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+
+  <footer class="docs-footer">
+    Chiclet &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83310-17383</code> &middot; August 2026
+  </footer>
+
+</div>
+
+<script>
+// ── Chiclet Lab ──
+(() => {
+  const mount = document.getElementById('fch-mount');
+  if (!mount) return;
+  const stage = document.getElementById('chlab-stage');
+  const note = document.getElementById('chlab-note');
+  const state = { layout: 'base-actions', image: 'false' };
+  const cb = id => document.getElementById(id).checked;
+
+  const ICO = {
+    doc:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/></svg>',
+    chev:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+    more:  '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg>',
+    spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h9M4 11h9M4 16h6"/><path d="M17.5 13.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg>',
+    quote: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 4h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 5.6 8H3zm6 0h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 11.6 8H9z"/></svg>',
+    fwd:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l4 4-4 4"/><path d="M13 7H6a3 3 0 0 0-3 3v3"/></svg>',
+    ppt:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h5a2.5 2.5 0 0 1 0 5H8zm0 0v9"/></svg>',
+    x:     '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"/></svg>',
+    play:  '<svg viewBox="0 0 28 28" fill="currentColor"><path d="M9 5.5v17l14-8.5z"/></svg>'
+  };
+  const ico = (glyph, size, cls, slot) =>
+    '<span class="fch-ico s' + size + (cls ? ' ' + cls : '') + '"' + (slot ? ' data-slot-name="' + slot + '"' : '') + '>' + glyph + '</span>';
+
+  const smallBtn = label =>
+    '<button class="fbtn style-outline size-small state-rest" type="button">' + label + '</button>';
+
+  const PUBLISHED = {
+    'base-actions': ['false'], 'base': ['false'], 'reply': ['false'],
+    'forward': ['false'], 'file': ['false', 'true'], 'video': ['true']
+  };
+  const NAME = {
+    'base-actions': 'Base + actions', 'base': 'Base', 'reply': 'Reply',
+    'forward': 'Forward', 'file': 'File Chiclet', 'video': 'Video'
+  };
+  const NODE = {
+    'base-actions|false': '104572-6296', 'base|false': '104574-6585', 'reply|false': '83310-17384',
+    'forward|false': '106931-55076', 'file|false': '104572-6040', 'file|true': '104574-6462',
+    'video|true': '104574-6515'
+  };
+
+  function markup(layout, image, opts) {
+    const o = opts || {};
+    const dismiss = o.compose ? '<span class="fch-dismiss">' + ICO.x + '</span>' : '';
+    const textBlock = (cap, msg, secondary) =>
+      '<div class="fch-body"><div class="fch-header"><span class="fch-cap">' + cap + '</span></div>' +
+      '<div class="fch-msg' + (secondary ? ' secondary' : '') + '">' + msg + '</div></div>';
+
+    if (layout === 'base' || layout === 'base-actions') {
+      const footer = layout === 'base-actions'
+        ? '<div class="fch-footer"><div class="fch-actiongroup">' + smallBtn('Accept') + smallBtn('Decline') + '</div>' + ico(ICO.more, 24, 'muted') + '</div>'
+        : '';
+      return '<div class="fch lay-' + layout + '">' + dismiss +
+        '<div class="fch-row">' + ico(ICO.doc, 16, 'muted', 'Slot') +
+        textBlock('Design review', 'Weekly sync notes') +
+        ico(ICO.chev, 24, 'muted', 'Slot2') + '</div>' + footer + '</div>';
+    }
+    if (layout === 'reply' || layout === 'forward') {
+      const glyph = layout === 'reply' ? ICO.quote : ICO.fwd;
+      const who = layout === 'reply' ? 'Charlotte D. 9:00 AM' : 'Kat L. 2025-03-28, 9:00';
+      const thumb = o.mediaslot ? '<div class="fch-mediathumb" data-slot-name="Media slot"></div>' : '';
+      return '<div class="fch lay-' + layout + '">' + dismiss +
+        '<span class="fch-quotebar"></span>' +
+        '<div class="fch-body"><div class="fch-header">' + ico(glyph, 16, 'muted') +
+        '<span class="fch-cap">' + who + '</span></div>' +
+        '<div class="fch-msg secondary">Hello</div></div>' + thumb + '</div>';
+    }
+    if (layout === 'file' && image === 'false') {
+      return '<div class="fch lay-file">' + dismiss +
+        '<div class="fch-row">' + ico(ICO.ppt, 24, '', 'Slot') +
+        '<div class="fch-body"><span class="fch-filename">Accessibility.pptx</span><span class="fch-meta">36 MB</span></div>' +
+        '<span class="fch-trail" data-slot-name="Slot3">' + ico(ICO.spark, 24, 'muted') + ico(ICO.more, 24, 'muted') + '</span></div></div>';
+    }
+    if (layout === 'file' && image === 'true') {
+      return '<div class="fch lay-file-image on-media">' + dismiss +
+        '<div class="fch-media file">Image<span class="fch-overlay-btn sz-default fch-overlay-tr">' + ICO.x + '</span></div>' +
+        '<div class="fch-row" style="padding:12px;">' + ico(ICO.ppt, 24, '', 'Slot') +
+        '<div class="fch-body"><span class="fch-filename compact">Accessibility 101.pptx</span><span class="fch-meta">36 MB</span></div>' +
+        '<span class="fch-trail" data-slot-name="Slot3">' + ico(ICO.spark, 24, 'muted') + ico(ICO.more, 24, 'muted') + '</span></div></div>';
+    }
+    if (layout === 'video' && image === 'true') {
+      return '<div class="fch lay-video on-media">' + dismiss +
+        '<div class="fch-media video" data-slot-name="Media">Media' +
+        '<span class="fch-overlay-btn sz-large fch-overlay-c">' + ICO.play + '</span></div></div>';
+    }
+    return '';
+  }
+
+  function render() {
+    const ok = (PUBLISHED[state.layout] || []).includes(state.image);
+    const opts = { compose: cb('ch-compose'), mediaslot: cb('ch-mediaslot') };
+    const fallbackImage = PUBLISHED[state.layout][0];
+
+    mount.innerHTML = markup(state.layout, ok ? state.image : fallbackImage, opts);
+    const card = mount.querySelector('.fch');
+    if (card && cb('ch-showslots')) card.classList.add('show-slots');
+    if (card) card.style.opacity = ok ? '1' : '0.35';
+
+    stage.classList.toggle('dark', cb('ch-dark'));
+
+    if (!ok) {
+      note.innerHTML = '<strong style="color:var(--c-red);">' + NAME[state.layout] + ' + Image=' +
+        (state.image === 'true' ? 'True' : 'False') + ' is not published</strong> — showing Image=' +
+        (fallbackImage === 'true' ? 'True' : 'False') + ' instead.';
+    } else {
+      note.innerHTML = '<code>Chiclet</code> &middot; Layout = ' + NAME[state.layout] +
+        ' &middot; Image = ' + (state.image === 'true' ? 'True' : 'False') +
+        ' &middot; node <code>' + NODE[state.layout + '|' + state.image] + '</code>';
+    }
+  }
+
+  document.querySelectorAll('#page-chiclet .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-chiclet .chlab-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+
+  // ── Usage examples, built from the same markup function ──
+  const grid = document.getElementById('ch-uc-grid');
+  if (grid) {
+    const cases = [
+      ['Quoted reply in a thread', 'reply', 'false', {}, 'Reply · quote bar + attribution'],
+      ['Forwarded message', 'forward', 'false', { mediaslot: true }, 'Forward · Media slot on'],
+      ['File attachment', 'file', 'false', {}, 'File Chiclet · Image = False'],
+      ['File with preview', 'file', 'true', {}, 'File Chiclet · Image = True'],
+      ['Invite with actions', 'base-actions', 'false', {}, 'Base + actions · Chiclet Footer'],
+      ['Video attachment', 'video', 'true', {}, 'Video · Image = True']
+    ];
+    grid.innerHTML = cases.map(c =>
+      '<div class="usecase-item"><span class="uc-label">' + c[0] + '</span>' +
+      markup(c[1], c[2], c[3]) +
+      '<span class="uc-config">' + c[4] + '</span></div>'
+    ).join('');
+  }
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('ch-uc-theme-toggle');
+  const stage = document.getElementById('ch-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
+</div>
+
+<div class="page" id="page-chiclet-architecture" data-page="chiclet-architecture">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Chiclet Component</div>
+    <h1>Architecture</h1>
+    <p class="subtitle">One shell, six interiors, and a family that has outgrown its name. What Layout actually switches, why the grid is sparse, and what needs consolidating.</p>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="cha-model">
+        <span class="section-eyebrow eyebrow-design">Model</span>
+        <h2>The Configuration Model <a href="#cha-model" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Chiclet is the one component in this set where the variant axis changes <em>structure</em>, not just style.</p>
+        <p>Button varies colour and size. Divider varies an inset. Chiclet's <strong>Layout</strong> axis swaps the entire interior: Base is an icon-text-chevron row, Reply prepends a quote bar and an attribution glyph, File Chiclet leads with a filetype icon and trails a pair of actions, Video is a media plate with a centred play control and no text at all. Only the shell &mdash; 265dp wide, 16dp radius, Surface/Primary, a one-pixel border &mdash; survives across all seven.</p>
+        <p>That is defensible because the thing a chiclet <em>represents</em> is what changes, and the representation dictates the anatomy. It is also why the axis cannot be decomposed: there is no meaningful &ldquo;Reply + File&rdquo;.</p>
+        <div class="callout callout-rule">
+          <strong>The shell is the contract, not the interior.</strong> Anything consuming a chiclet can rely on the 265dp width, the 16dp radius and the border treatment. Nothing else is stable across layouts &mdash; so never write host code that reaches into a chiclet expecting a particular child.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cha-sparse">
+        <span class="section-eyebrow eyebrow-design">Model</span>
+        <h2>Why the Grid Is Sparse <a href="#cha-sparse" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Six layouts &times; two Image values would be twelve variants. Seven are published, and the five gaps split into two different reasons.</p>
+        <p><strong>Four gaps are meaningless combinations.</strong> Base, Base + actions, Reply and Forward have no media plate to switch on, so <code>Image=True</code> would render identically to False. Publishing them would be four variants of pure noise.</p>
+        <p><strong>One gap is a missing state.</strong> <code>Video / Image=False</code> is absent because a video chiclet with no thumbnail has nothing to show &mdash; but that is exactly the state a real client hits while the thumbnail is still loading or has failed. Today there is no published answer for it.</p>
+        <p>Meanwhile Reply and Forward <em>do</em> carry media, through a separate boolean that reveals a 40&times;40 thumbnail. Two mechanisms for the same idea, on the same component, is the structural problem underneath the naming collision.</p>
+        <div class="callout callout-warn">
+          <strong>Unify the two media mechanisms before adding anything else.</strong> Either the Image axis covers every layout that can show media, or media is always a boolean-revealed slot. Keeping both guarantees the next contributor picks the wrong one.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cha-anatomy">
+        <span class="section-eyebrow eyebrow-design">Structure</span>
+        <h2>Figma Anatomy <a href="#cha-anatomy" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The shell, then each interior. <span style="color:var(--c-accent); font-weight:600;">Purple</span> entries are slots, <span style="color:#1565c0; font-weight:600;">blue</span> are bound text, <em>optional</em> marks boolean-revealed layers.</p>
+
+        <details class="anat-acc" open>
+          <summary>Chiclet &mdash; shell<span class="anat-acc-meta">83310-17383 &middot; 7 variants</span></summary>
+          <div class="anat-tree">Chiclet  (Layout &times; Image &middot; 265 wide &middot; max 487, min 70 &middot; radius 16 &middot; clips)
+├─ fill Surface/Primary
+├─ border 1dp  Stroke/Divider  <span class="opt">— or Stroke/onMedia on the two media layouts</span>
+└─ Dismiss  (20&times;20, 12&times;12 glyph) <span class="opt">— optional, revealed by &ldquo;On compose box&rdquo;</span></div>
+        </details>
+
+        <details class="anat-acc">
+          <summary>Base &middot; Base + actions<span class="anat-acc-meta">104574-6585 &middot; 104572-6296</span></summary>
+          <div class="anat-tree">Content container  (row &middot; gap 8)
+├─ <span class="slot-tag">[slot] Slot</span>  (16&times;16 leading icon)
+├─ Container → Content  (column &middot; gap 2)
+│  ├─ Header → <span class="txt-tag">[text] Title</span>   <span class="opt">— iOS/Caption 2, Text/Secondary</span>
+│  └─ <span class="txt-tag">[text] Body</span>            <span class="opt">— iOS/Body 2, Text/Primary, max 460</span>
+└─ <span class="slot-tag">[slot] Slot2</span>  (24&times;24 trailing)
+
+Chiclet Footer  <span class="opt">— Base + actions only &middot; height 28</span>
+└─ ActionGroup  (gap 8)
+   ├─ PrimaryButton    → Button &middot; Outline accent &middot; Small
+   ├─ SecondaryButton  → Button &middot; Outline accent &middot; Small
+   └─ More Horizontal  (24&times;24)</div>
+        </details>
+
+        <details class="anat-acc">
+          <summary>Reply &middot; Forward<span class="anat-acc-meta">83310-17384 &middot; 106931-55076</span></summary>
+          <div class="anat-tree">Root  (row &middot; gap 6 &middot; padding 12&times;8)
+├─ quote bar  (4 wide, radius 4, fill Icon/Disabled &middot; stretches to content height)
+├─ Content container → Container → Content  (column)
+│  ├─ Header  (row &middot; gap 2)
+│  │  ├─ Text Quote / Arrow Forward  (16&times;16)
+│  │  └─ <span class="txt-tag">[text] Attribution</span>  <span class="opt">— iOS/Caption 2, Text/Secondary</span>
+│  └─ <span class="txt-tag">[text] Message</span>  <span class="opt">— iOS/Body 2, Text/Secondary</span>
+└─ <span class="slot-tag">[slot] Media slot</span>  (40&times;40, radius 4) <span class="opt">— optional boolean</span></div>
+        </details>
+
+        <details class="anat-acc">
+          <summary>File Chiclet &middot; both Image values<span class="anat-acc-meta">104572-6040 &middot; 104574-6462</span></summary>
+          <div class="anat-tree">Image=False  (column &middot; padding 12 &middot; gap 8)
+└─ Content container  (row &middot; gap 8)
+   ├─ <span class="slot-tag">[slot] Slot</span>  (24&times;24 filetype icon — PowerPoint by default)
+   ├─ Container → Content  (column &middot; gap 2)
+   │  ├─ <span class="txt-tag">[text] Filename</span>  <span class="opt">— iOS/Body 2</span>
+   │  └─ <span class="txt-tag">[text] Size</span>      <span class="opt">— iOS/Caption 1, Text/Secondary</span>
+   └─ <span class="slot-tag">[slot] Slot3</span>  (2 &times; 24&times;24, gap 8 — recap + overflow)
+
+Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
+├─ <span class="slot-tag">[slot] Media</span>  (full width &times; 171.57 &middot; fill Brand/Accent Tertiary)
+│  └─ Overlay btn  (Default, 24&times;24, top-right, 8 inset) → Dismiss glyph
+└─ Content row  (padding 12 &middot; gap 8)
+   ├─ <span class="slot-tag">[slot] Slot</span>  (24&times;24)
+   ├─ Container → Content
+   │  ├─ <span class="txt-tag">[text] Filename</span>  <span class="opt">— iOS/Button 2 ⚠ differs from Image=False</span>
+   │  └─ <span class="txt-tag">[text] Size</span>      <span class="opt">— iOS/Caption 1</span>
+   └─ <span class="slot-tag">[slot] Slot3</span>  (2 &times; 24&times;24)</div>
+        </details>
+
+        <details class="anat-acc">
+          <summary>Video<span class="anat-acc-meta">104574-6515</span></summary>
+          <div class="anat-tree">Video  (column &middot; padding 0 &middot; border Stroke/onMedia)
+├─ <span class="slot-tag">[slot] Media</span>  (265&times;160)
+└─ Content container  (absolutely centred)
+   └─ <span class="slot-tag">[slot] Slot</span> → Overlay btn (Large, 48&times;48, padding 10)
+                      └─ Play glyph (28&times;28)</div>
+        </details>
+
+        <div class="callout callout-info">
+          <strong>Video is the only layout with no text.</strong> It publishes no title, body or attribution &mdash; the whole card is a media plate with one control. Any caption you see next to a video in product is the host's, not the chiclet's.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cha-debt">
+        <span class="section-eyebrow eyebrow-impl">Known issues</span>
+        <h2>Published Debt <a href="#cha-debt" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Issue</th><th>Where</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td>Two published sets are both named &ldquo;Chiclet&rdquo;</td><td>83310-17383 and 106838-39902</td><td>Library search cannot distinguish the message chiclet from the live-meeting bar</td></tr>
+              <tr><td>A loose component is slash-named <code>Chiclet/Live meeting (Dominant)/False</code></td><td>84263-9937</td><td>Displays as if it were a variant of a set it does not belong to</td></tr>
+              <tr><td>Two unrelated properties both express &ldquo;image&rdquo;</td><td>Whole set</td><td>Generated code has to name them <code>image</code> and <code>image1</code>; authors pick the wrong one</td></tr>
+              <tr><td>Filename type style changes between File variants</td><td>File Chiclet, Image False vs True</td><td>Body 2 at 15dp becomes Button 2 at 13dp for identical content</td></tr>
+              <tr><td>No <code>Video / Image=False</code></td><td>Video</td><td>No published state for a missing or still-loading thumbnail</td></tr>
+              <tr><td>Media height of 171.568dp</td><td>File Chiclet, Image=True</td><td>A fractional value baked from a ratio; will not survive a redraw cleanly</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>Fix the names before the values.</strong> The duplicate set name and the slash-named orphan are cheap to correct and are actively misleading anyone searching the library. The typography and media-mechanism issues are real but at least discoverable once you are looking at the right component.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#cha-model">Configuration Model</a>
+        <a href="#cha-sparse">Why the Grid Is Sparse</a>
+        <a href="#cha-anatomy">Figma Anatomy</a>
+        <a href="#cha-debt">Published Debt</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Chiclet &middot; Architecture view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> &middot; August 2026
+  </footer>
+
 </div>
 </div>
 
