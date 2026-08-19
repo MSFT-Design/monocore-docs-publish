@@ -2084,6 +2084,12 @@
           </h3>
           <div class="nav-acc-kids" id="nav-acc-panel-chiclet" role="region"
                aria-labelledby="nav-acc-label-chiclet" hidden>
+            <a href="#chiclet-base" data-link="chiclet-base">Base</a>
+            <a href="#chiclet-base-actions" data-link="chiclet-base-actions">Base + actions</a>
+            <a href="#chiclet-reply" data-link="chiclet-reply">Reply</a>
+            <a href="#chiclet-forward" data-link="chiclet-forward">Forward</a>
+            <a href="#chiclet-file" data-link="chiclet-file">File Chiclet</a>
+            <a href="#chiclet-video" data-link="chiclet-video">Video</a>
             <a href="#chiclet-live-meeting" data-link="chiclet-live-meeting">Live meeting</a>
             <a href="#chiclet-footer" data-link="chiclet-footer">Chiclet Footer</a>
             <a href="#overlay-btn" data-link="overlay-btn">Overlay btn</a>
@@ -10510,12 +10516,12 @@ Order per variant
           <table>
             <thead><tr><th>Layout</th><th>Image = False</th><th>Image = True</th></tr></thead>
             <tbody>
-              <tr><td><strong>Base</strong></td><td>Published</td><td>&mdash;</td></tr>
-              <tr><td><strong>Base + actions</strong></td><td>Published</td><td>&mdash;</td></tr>
-              <tr><td><strong>Reply</strong></td><td>Published</td><td>&mdash;</td></tr>
-              <tr><td><strong>Forward</strong></td><td>Published</td><td>&mdash;</td></tr>
-              <tr><td><strong>File Chiclet</strong></td><td>Published</td><td>Published</td></tr>
-              <tr><td><strong>Video</strong></td><td>&mdash;</td><td>Published</td></tr>
+              <tr><td><strong><a href="#chiclet-base" data-link="chiclet-base">Base</a></strong></td><td>Published</td><td>&mdash;</td></tr>
+              <tr><td><strong><a href="#chiclet-base-actions" data-link="chiclet-base-actions">Base + actions</a></strong></td><td>Published</td><td>&mdash;</td></tr>
+              <tr><td><strong><a href="#chiclet-reply" data-link="chiclet-reply">Reply</a></strong></td><td>Published</td><td>&mdash;</td></tr>
+              <tr><td><strong><a href="#chiclet-forward" data-link="chiclet-forward">Forward</a></strong></td><td>Published</td><td>&mdash;</td></tr>
+              <tr><td><strong><a href="#chiclet-file" data-link="chiclet-file">File Chiclet</a></strong></td><td>Published</td><td>Published</td></tr>
+              <tr><td><strong><a href="#chiclet-video" data-link="chiclet-video">Video</a></strong></td><td>&mdash;</td><td>Published</td></tr>
             </tbody>
           </table>
         </div>
@@ -11792,6 +11798,732 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
     </main>
   </div>
   <footer class="docs-footer">Filter &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<style>
+  /* Per-layout Chiclet pages — preview plates */
+  .fchp-stage {
+    display: flex; flex-wrap: wrap; gap: var(--sp-5);
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-8) var(--sp-5);
+    justify-content: center;
+    margin: var(--sp-4) 0;
+  }
+  .fchp-cell { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
+  .fchp-plate { display: flex; align-items: center; justify-content: center; }
+  .fchp-cap { font-size: 12px; color: var(--grey-56); text-align: center; }
+</style>
+
+<div class="page" id="page-chiclet-base" data-page="chiclet-base">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <h1>Base</h1>
+    <p class="subtitle">The plainest Chiclet: a leading icon, two lines of text and a trailing affordance. Everything else in the family is this row with something added.</p>
+    <div class="meta"><span>Layout = Base</span><span>Image = False</span><span>1 variant</span><span>Figma: Monocore-iOS &middot; node <code>104574-6585</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="chiclet-base-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Preview <a href="#chiclet-base-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="fchp-stage fch-scope fbtn-scope">
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-base"><div class="fch-row"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/></svg></span><div class="fch-body"><div class="fch-header"><span class="fch-cap">Design review</span></div><div class="fch-msg">Weekly sync notes</div></div><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></div></div></div><span class="fchp-cap">Layout = Base &middot; Image = False</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#chiclet-base-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Base</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>8 &times; 12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Leading icon slot</td><td>16&times;16dp</td><td>Swap target &mdash; a generic placeholder by default</td></tr>
+              <tr><td>Trailing slot</td><td>24&times;24dp</td><td>Swap target &mdash; chevron, overflow or nothing</td></tr>
+              <tr><td>Text block gap</td><td>2dp</td><td>Size/Nudge/small &mdash; header to body</td></tr>
+              <tr><td>Row gap</td><td>8dp</td><td>Size/Small &mdash; icon to text to trailing slot</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Chiclet publishes no Size axis, so there is a single column.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#chiclet-base-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Header</div><div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Design review</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+          <div class="typo-row"><div class="typo-size">Body</div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Weekly sync notes</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Colour:</strong> Text/Primary</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#chiclet-base-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Border</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Header text</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Body text</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#chiclet-base-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Use Base when the chiclet is a <em>reference</em> the user can open, and there is nothing to decide. The trailing slot carries the affordance &mdash; a chevron for navigation, an overflow glyph for a menu, or nothing at all if the whole card is the target.</p>
+        <div class="callout callout-rule">
+          <strong>If the user has to choose, use <a href="#chiclet-base-actions" data-link="chiclet-base-actions">Base + actions</a>.</strong> Base has no action row, and stacking buttons underneath it by hand defeats the point of publishing the two as separate variants.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#chiclet-base-preview">Preview</a>
+        <a href="#chiclet-base-layout">Layout &amp; Spacing</a>
+        <a href="#chiclet-base-typography">Typography</a>
+        <a href="#chiclet-base-color">Colour</a>
+        <a href="#chiclet-base-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Chiclet &middot; Base &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104574-6585</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-base-actions" data-page="chiclet-base-actions">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <h1>Base + actions</h1>
+    <p class="subtitle">Base with a 28dp action row underneath. This is the set default &mdash; the variant you get when you drop an unconfigured Chiclet onto the canvas.</p>
+    <div class="meta"><span>Layout = Base + actions</span><span>Image = False</span><span>1 variant</span><span>Set default</span><span>Figma: Monocore-iOS &middot; node <code>104572-6296</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="chiclet-base-actions-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Preview <a href="#chiclet-base-actions-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="fchp-stage fch-scope fbtn-scope">
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-base-actions"><div class="fch-row"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/></svg></span><div class="fch-body"><div class="fch-header"><span class="fch-cap">Design review</span></div><div class="fch-msg">Weekly sync notes</div></div><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="fch-footer"><div class="fch-actiongroup"><button class="fbtn style-outline size-small state-rest" type="button">Accept</button><button class="fbtn style-outline size-small state-rest" type="button">Decline</button></div><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg></span></div></div></div><span class="fchp-cap">Layout = Base + actions &middot; Image = False</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-actions-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#chiclet-base-actions-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Base + actions</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Leading icon slot</td><td>16&times;16dp</td><td>Same as Base</td></tr>
+              <tr><td>Trailing slot</td><td>24&times;24dp</td><td>Same as Base</td></tr>
+              <tr><td>Chiclet Footer</td><td>Full width &times; 28dp</td><td>A nested <a href="#chiclet-footer" data-link="chiclet-footer">Chiclet Footer</a> instance, Pattern = Group</td></tr>
+              <tr><td>Footer buttons</td><td>2 &times; 28dp</td><td>Button &middot; Outline accent &middot; Small &mdash; never Accent</td></tr>
+              <tr><td>Overflow glyph</td><td>24&times;24dp</td><td>More Horizontal, trailing edge of the footer</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Chiclet publishes no Size axis, so there is a single column.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
+              <tr><td>Footer buttons</td><td>Pill (200) &mdash; inherited from Button</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-actions-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#chiclet-base-actions-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Header</div><div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Design review</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+          <div class="typo-row"><div class="typo-size">Body</div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Weekly sync notes</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Colour:</strong> Text/Primary</span></div></div>
+          <div class="typo-row"><div class="typo-size">Footer button label</div><div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Accept</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-actions-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#chiclet-base-actions-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Border</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Header text</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Body text</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+              <tr><td>Footer button fill</td><td>Surface/RaisedTertiary</td><td><span class="btn-swatch" style="background:#f5f5f5;"></span>#f5f5f5</td></tr>
+              <tr><td>Footer button stroke</td><td>Stroke/ContainerRaised</td><td><span class="btn-swatch" style="background:#bdbdbd;"></span>#bdbdbd &mdash; 0.5dp</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-actions-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#chiclet-base-actions-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Use this when the chiclet asks for a decision &mdash; accept or decline, add or dismiss. Two actions is the published maximum in Group pattern; a single full-width action is <a href="#chiclet-footer" data-link="chiclet-footer">Chiclet Footer</a>'s Single pattern.</p>
+        <div class="callout callout-info">
+          <strong>Outline accent, never Accent.</strong> The footer sits inside a card inside a message. A filled accent button at that depth competes with the message's own primary action &mdash; if a chiclet action needs to be the loudest thing on screen, the chiclet is the wrong container.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#chiclet-base-actions-preview">Preview</a>
+        <a href="#chiclet-base-actions-layout">Layout &amp; Spacing</a>
+        <a href="#chiclet-base-actions-typography">Typography</a>
+        <a href="#chiclet-base-actions-color">Colour</a>
+        <a href="#chiclet-base-actions-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Chiclet &middot; Base + actions &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104572-6296</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-reply" data-page="chiclet-reply">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <h1>Reply</h1>
+    <p class="subtitle">A quoted message the user is replying to. The quote bar and the attribution line are what distinguish it from Base; the body drops a step in the text ramp.</p>
+    <div class="meta"><span>Layout = Reply</span><span>Image = False</span><span>1 variant</span><span>Figma: Monocore-iOS &middot; node <code>83310-17384</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="chiclet-reply-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Preview <a href="#chiclet-reply-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="fchp-stage fch-scope fbtn-scope">
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-reply"><span class="fch-quotebar"></span><div class="fch-body"><div class="fch-header"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 4h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 5.6 8H3zm6 0h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 11.6 8H9z"/></svg></span><span class="fch-cap">Charlotte D. 9:00 AM</span></div><div class="fch-msg secondary">Hello</div></div></div></div><span class="fchp-cap">Media slot off &mdash; the default</span></div>
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-reply"><span class="fch-quotebar"></span><div class="fch-body"><div class="fch-header"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 4h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 5.6 8H3zm6 0h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 11.6 8H9z"/></svg></span><span class="fch-cap">Charlotte D. 9:00 AM</span></div><div class="fch-msg secondary">Hello</div></div><div class="fch-mediathumb"></div></div></div><span class="fchp-cap">Media slot on &mdash; 40&times;40 thumbnail</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-reply-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#chiclet-reply-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Reply</strong></td><td>Row</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Quote bar</td><td>4dp wide, stretches to content height</td><td>Radius 4 &middot; fill Icon/Disabled &middot; decorative</td></tr>
+              <tr><td>Attribution glyph</td><td>16&times;16dp</td><td>Text Quote &mdash; fixed, not a swap target</td></tr>
+              <tr><td>Media slot</td><td>40&times;40dp, radius 4</td><td>Optional &mdash; revealed by a boolean, not the Image axis</td></tr>
+              <tr><td>Header gap</td><td>2dp</td><td>Size/Nudge/small &mdash; glyph to attribution</td></tr>
+              <tr><td>Row gap</td><td>6dp</td><td>Size/Nudge/medium &mdash; narrower than Base</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Chiclet publishes no Size axis, so there is a single column.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
+              <tr><td>Quote bar</td><td>4dp <em>Radius/Minimal</em></td></tr>
+              <tr><td>Media thumbnail</td><td>4dp <em>Radius/Minimal</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-reply-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#chiclet-reply-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Attribution</div><div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Charlotte D. 9:00 AM</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+          <div class="typo-row"><div class="typo-size">Message</div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text-secondary);">Hello</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-reply-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#chiclet-reply-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Border</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Quote bar</td><td>Icon/Disabled</td><td><span class="btn-swatch" style="background:#adadad;"></span>#adadad</td></tr>
+              <tr><td>Attribution</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Message</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-reply-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#chiclet-reply-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Use Reply above a compose box, or inline in a thread, to show what the user is responding to. The whole card is a reference &mdash; it should navigate to the quoted message, not open a menu.</p>
+        <div class="callout callout-warn">
+          <strong>The quote bar carries no accessible meaning.</strong> A 4dp grey rule is invisible to a screen reader. The relationship has to be in the announced text &mdash; &ldquo;replying to Charlotte D.&rdquo; &mdash; not in the geometry.
+        </div>
+        <div class="callout callout-info">
+          <strong>Body text is Text/Secondary here, not Text/Primary.</strong> That is deliberate: a quoted message is someone else's content, and the step down in the ramp is what stops it competing with the message it sits inside.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#chiclet-reply-preview">Preview</a>
+        <a href="#chiclet-reply-layout">Layout &amp; Spacing</a>
+        <a href="#chiclet-reply-typography">Typography</a>
+        <a href="#chiclet-reply-color">Colour</a>
+        <a href="#chiclet-reply-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Chiclet &middot; Reply &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83310-17384</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-forward" data-page="chiclet-forward">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <h1>Forward</h1>
+    <p class="subtitle">Structurally identical to Reply, with one glyph swapped and a different attribution format. Published as its own variant rather than a boolean on Reply.</p>
+    <div class="meta"><span>Layout = Forward</span><span>Image = False</span><span>1 variant</span><span>Figma: Monocore-iOS &middot; node <code>106931-55076</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="chiclet-forward-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Preview <a href="#chiclet-forward-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="fchp-stage fch-scope fbtn-scope">
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-forward"><span class="fch-quotebar"></span><div class="fch-body"><div class="fch-header"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l4 4-4 4"/><path d="M13 7H6a3 3 0 0 0-3 3v3"/></svg></span><span class="fch-cap">Kat L. 2025-03-28, 9:00</span></div><div class="fch-msg secondary">Hello</div></div></div></div><span class="fchp-cap">Media slot off &mdash; the default</span></div>
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-forward"><span class="fch-quotebar"></span><div class="fch-body"><div class="fch-header"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l4 4-4 4"/><path d="M13 7H6a3 3 0 0 0-3 3v3"/></svg></span><span class="fch-cap">Kat L. 2025-03-28, 9:00</span></div><div class="fch-msg secondary">Hello</div></div><div class="fch-mediathumb"></div></div></div><span class="fchp-cap">Media slot on &mdash; 40&times;40 thumbnail</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-forward-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#chiclet-forward-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Forward</strong></td><td>Row</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Quote bar</td><td>4dp wide, stretches to content height</td><td>Identical to Reply</td></tr>
+              <tr><td>Attribution glyph</td><td>16&times;16dp</td><td>Arrow Forward &mdash; the only difference from Reply</td></tr>
+              <tr><td>Media slot</td><td>40&times;40dp, radius 4</td><td>Optional boolean</td></tr>
+              <tr><td>Row gap</td><td>6dp</td><td>Size/Nudge/medium</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Chiclet publishes no Size axis, so there is a single column.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
+              <tr><td>Quote bar</td><td>4dp <em>Radius/Minimal</em></td></tr>
+              <tr><td>Media thumbnail</td><td>4dp <em>Radius/Minimal</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-forward-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#chiclet-forward-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Attribution</div><div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Kat L. 2025-03-28, 9:00</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+          <div class="typo-row"><div class="typo-size">Message</div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text-secondary);">Hello</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-forward-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#chiclet-forward-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Border</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Quote bar</td><td>Icon/Disabled</td><td><span class="btn-swatch" style="background:#adadad;"></span>#adadad</td></tr>
+              <tr><td>Attribution</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Message</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-forward-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#chiclet-forward-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Use Forward when the chiclet shows a message being passed on rather than replied to. The attribution carries a full date because a forwarded message has usually travelled further in time than a reply.</p>
+        <div class="callout callout-warn">
+          <strong>Reply and Forward differ by one icon.</strong> Every other value &mdash; padding, gap, quote bar, both type styles, both colours &mdash; is identical. Publishing them as two Layout values rather than one variant with an icon swap is a defensible call for discoverability, but it doubles the surface that has to stay in sync.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#chiclet-forward-preview">Preview</a>
+        <a href="#chiclet-forward-layout">Layout &amp; Spacing</a>
+        <a href="#chiclet-forward-typography">Typography</a>
+        <a href="#chiclet-forward-color">Colour</a>
+        <a href="#chiclet-forward-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Chiclet &middot; Forward &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>106931-55076</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-file" data-page="chiclet-file">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <h1>File Chiclet</h1>
+    <p class="subtitle">An attachment. The only layout that publishes both Image values, and the only one where the same content is set in two different type styles depending on which you pick.</p>
+    <div class="meta"><span>Layout = File Chiclet</span><span>Image = False &amp; True</span><span>2 variants</span><span>Figma: Monocore-iOS &middot; node <code>104572-6040 &amp; 104574-6462</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="chiclet-file-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Preview <a href="#chiclet-file-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="fchp-stage fch-scope fbtn-scope">
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-file"><div class="fch-row"><span class="fch-ico s24"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h5a2.5 2.5 0 0 1 0 5H8zm0 0v9"/></svg></span><div class="fch-body"><span class="fch-filename">Accessibility.pptx</span><span class="fch-meta">36 MB</span></div><span class="fch-trail"><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h9M4 11h9M4 16h6"/><path d="M17.5 13.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg></span><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg></span></span></div></div></div><span class="fchp-cap">Image = False &middot; node 104572-6040</span></div>
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-file-image on-media"><div class="fch-media file">Image<span class="fch-overlay-btn sz-default fch-overlay-tr"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"/></svg></span></div><div class="fch-row" style="padding:12px;"><span class="fch-ico s24"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h5a2.5 2.5 0 0 1 0 5H8zm0 0v9"/></svg></span><div class="fch-body"><span class="fch-filename compact">Accessibility 101.pptx</span><span class="fch-meta">36 MB</span></div><span class="fch-trail"><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h9M4 11h9M4 16h6"/><path d="M17.5 13.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg></span><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg></span></span></div></div></div><span class="fchp-cap">Image = True &middot; node 104574-6462</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-file-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#chiclet-file-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
+            <tbody>
+              <tr><td><strong>File Chiclet</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
+              <tr><td><strong>File Chiclet <em>(Image)</em></strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>0 &mdash; media flush, inner row 12dp</td><td>8dp</td><td>Stroke/onMedia</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Leading filetype icon</td><td>24&times;24dp</td><td>A real filetype glyph &mdash; PowerPoint by default, not a generic icon</td></tr>
+              <tr><td>Trailing pair</td><td>2 &times; 24dp, gap 8</td><td>Recap (AI) + overflow, published as one slot</td></tr>
+              <tr><td>Media plate</td><td>Full width &times; 171.568dp</td><td>Image = True only &mdash; the fraction is as published</td></tr>
+              <tr><td>Overlay btn</td><td>24&times;24dp, 8dp inset</td><td>Top-right of the media plate, Dismiss glyph</td></tr>
+              <tr><td>Text block gap</td><td>2dp</td><td>Size/Nudge/small &mdash; filename to size</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Chiclet publishes no Size axis, so there is a single column.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
+              <tr><td>Media plate</td><td>Clipped by the 16dp card radius</td></tr>
+              <tr><td>Overlay btn</td><td>999 &mdash; fully rounded</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-file-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#chiclet-file-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">Filename <em>(Image = False)</em></div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Accessibility.pptx</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 20dp</span></div></div>
+          <div class="typo-row"><div class="typo-size">Filename <em>(Image = True)</em></div><div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Accessibility 101.pptx</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span></div></div>
+          <div class="typo-row"><div class="typo-size">File size</div><div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text-secondary);">36 MB</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Height:</strong> 16dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-file-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#chiclet-file-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Border <em>(Image = False)</em></td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Border <em>(Image = True)</em></td><td>Stroke/onMedia</td><td>rgba(0,0,0,0.07)</td></tr>
+              <tr><td>Filename</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+              <tr><td>File size</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Media plate</td><td>Brand/Accent Tertiary</td><td><span class="btn-swatch" style="background:#ebebff;"></span>#ebebff</td></tr>
+              <tr><td>Overlay btn scrim</td><td>Surface/BtntAlphaPrimary</td><td><span class="btn-swatch" style="background:#292929;"></span>#292929 at 78%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-file-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#chiclet-file-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Use Image = False for documents and anything without a meaningful thumbnail; Image = True when a preview genuinely helps the user identify the file &mdash; a deck, an image, a PDF's first page.</p>
+        <div class="callout callout-constraint">
+          <strong>The filename changes type style between the two variants.</strong> Image = False sets it in Body 2 (15dp Regular); Image = True sets the same string in Button 2 (13dp Medium). The two previews above are the evidence. Same content, same component, two ramps &mdash; raise it against the set rather than normalising it in code.
+        </div>
+        <div class="callout callout-warn">
+          <strong>The dismiss control is 24dp.</strong> It is the smallest control in the Chiclet family and the one that destroys the user's attachment. Extend the hit area or use the Large <a href="#overlay-btn" data-link="overlay-btn">Overlay btn</a>.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#chiclet-file-preview">Preview</a>
+        <a href="#chiclet-file-layout">Layout &amp; Spacing</a>
+        <a href="#chiclet-file-typography">Typography</a>
+        <a href="#chiclet-file-color">Colour</a>
+        <a href="#chiclet-file-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Chiclet &middot; File Chiclet &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104572-6040 &amp; 104574-6462</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-video" data-page="chiclet-video">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <h1>Video</h1>
+    <p class="subtitle">A media plate with one control and no text at all. The only layout that publishes no Image = False counterpart &mdash; which is also its biggest gap.</p>
+    <div class="meta"><span>Layout = Video</span><span>Image = True only</span><span>1 variant</span><span>Figma: Monocore-iOS &middot; node <code>104574-6515</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="chiclet-video-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Preview <a href="#chiclet-video-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="fchp-stage fch-scope fbtn-scope">
+          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-video on-media"><div class="fch-media video">Media<span class="fch-overlay-btn sz-large fch-overlay-c"><svg viewBox="0 0 28 28" fill="currentColor"><path d="M9 5.5v17l14-8.5z"/></svg></span></div></div></div><span class="fchp-cap">Layout = Video &middot; Image = True</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-video-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#chiclet-video-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Video</strong></td><td>Column</td><td>160dp</td><td>160dp</td><td>265dp</td><td>265dp</td><td>0 &mdash; media fills the card</td><td>0</td><td>Stroke/onMedia</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Media plate</td><td>265 &times; 160dp</td><td>Fixed in both dimensions &mdash; the only Chiclet layout that is</td></tr>
+              <tr><td>Overlay btn</td><td>48&times;48dp, centred</td><td>Size = Large, 10dp padding</td></tr>
+              <tr><td>Play glyph</td><td>28&times;28dp</td><td>Inside the Overlay btn slot</td></tr>
+              <tr><td>Text</td><td>None</td><td>No title, body or attribution is published</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Chiclet publishes no Size axis, so there is a single column.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+            <tbody>
+              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
+              <tr><td>Overlay btn</td><td>999 &mdash; fully rounded</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-video-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#chiclet-video-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
+        <div class="typo-sample">
+          <div class="typo-row"><div class="typo-size">&mdash;</div><div class="typo-preview"><span style="font-size:13px; color:var(--c-text-muted); font-style:italic;">No text published</span></div><div class="typo-meta"><span>The Video layout has no title, body or attribution. Any caption beside a video in product belongs to the host, not the chiclet.</span></div></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-video-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#chiclet-video-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Border</td><td>Stroke/onMedia</td><td>rgba(0,0,0,0.07)</td></tr>
+              <tr><td>Overlay btn scrim</td><td>Surface/BtntAlphaPrimary</td><td><span class="btn-swatch" style="background:#292929;"></span>#292929 at 78%</td></tr>
+              <tr><td>Play glyph</td><td>Icon/On Accent</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-video-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#chiclet-video-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Use Video for an inline video attachment where the thumbnail is the content. Tapping the card plays; the Overlay btn is the affordance, not a separate target.</p>
+        <div class="callout callout-constraint">
+          <strong>There is no <code>Video / Image = False</code>.</strong> A video whose thumbnail is still loading, or has failed to load, has no published state. Every client hits that case, so every client invents its own answer &mdash; the gap is worth closing at the source.
+        </div>
+        <div class="callout callout-rule">
+          <strong>The scrim is what makes the glyph legible.</strong> Video thumbnails are arbitrary; a white play triangle on an unknown frame has no guaranteed contrast. The 78% scrim supplies it &mdash; never reduce it to show more of the frame.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#chiclet-video-preview">Preview</a>
+        <a href="#chiclet-video-layout">Layout &amp; Spacing</a>
+        <a href="#chiclet-video-typography">Typography</a>
+        <a href="#chiclet-video-color">Colour</a>
+        <a href="#chiclet-video-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Chiclet &middot; Video &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104574-6515</code> &middot; August 2026</footer>
 </div>
 </div>
 
