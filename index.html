@@ -50,12 +50,51 @@
       text-transform: uppercase;
       color: var(--grey-56);                            /* Muted */
     }
-    .site-nav .nav-acc summary { list-style: none; cursor: pointer; display: flex; align-items: center; }
-    .site-nav .nav-acc summary::-webkit-details-marker { display: none; }
-    .site-nav .nav-acc summary a { flex: 1; }
-    .site-nav .nav-acc summary::after { content: '\25B8'; font-size: 9px; color: var(--grey-56); margin-right: 12px; transition: transform 120ms; }
-    .site-nav .nav-acc[open] summary::after { transform: rotate(90deg); }
+    /* ── Nav accordion — WAI-ARIA APG "Accordion" pattern ─────────────────
+       https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
+       The header row carries two controls, not one: the topic link (which
+       navigates) and a dedicated disclosure button element (which expands). The
+       button owns aria-expanded + aria-controls; the panel is role="region"
+       named by the link. A link cannot live inside a button, so a parent
+       topic that is BOTH a page and an accordion header needs the pair.
+       Chevron is a real inline SVG, not a pseudo-element, so it is always
+       rendered and inherits currentColor. */
+    .site-nav .nav-acc { display: flex; flex-direction: column; }
+    .site-nav .nav-acc + .nav-acc { margin-top: 1px; }
+    .site-nav .nav-acc-header {
+      display: flex; align-items: center; gap: 2px;
+      margin: 0; font-size: inherit; font-weight: inherit; line-height: inherit;
+    }
+    .site-nav .nav-acc-header > a { flex: 1 1 auto; min-width: 0; }
+    .site-nav .nav-acc-toggle {
+      flex: 0 0 auto;
+      width: 28px; height: 28px;            /* ≥ 24dp target — WCAG 2.2 SC 2.5.8 */
+      margin-right: 6px;
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0; border: 0; background: transparent;
+      border-radius: var(--radius-minimal);
+      color: var(--grey-38);                /* 5.9:1 on the nav surface */
+      cursor: pointer;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    .site-nav .nav-acc-toggle:hover {
+      background: var(--mc-surface-raised-base);
+      color: var(--mc-text-primary);
+    }
+    .site-nav .nav-acc-toggle:focus-visible {
+      outline: 2px solid var(--c-accent);
+      outline-offset: 1px;
+    }
+    .site-nav .nav-acc-toggle svg {
+      width: 12px; height: 12px;
+      transition: transform 140ms ease;
+    }
+    .site-nav .nav-acc-toggle[aria-expanded="true"] svg { transform: rotate(90deg); }
+    @media (prefers-reduced-motion: reduce) {
+      .site-nav .nav-acc-toggle svg { transition: none; }
+    }
     .site-nav .nav-acc-kids { padding-left: 14px; display: flex; flex-direction: column; }
+    .site-nav .nav-acc-kids[hidden] { display: none; }
     .site-nav a {
       display: flex;
       align-items: center;
@@ -2005,18 +2044,35 @@
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Components</div>
-        <details class="nav-acc" open>
-          <summary><a href="#buttons" data-link="buttons">Button</a></summary>
-          <div class="nav-acc-kids">
+        <div class="nav-acc">
+          <h3 class="nav-acc-header">
+            <a href="#buttons" data-link="buttons" id="nav-acc-label-buttons">Button</a>
+            <button type="button" class="nav-acc-toggle" aria-expanded="true"
+                    aria-controls="nav-acc-panel-buttons" aria-label="Button subpages"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+          </h3>
+          <div class="nav-acc-kids" id="nav-acc-panel-buttons" role="region"
+               aria-labelledby="nav-acc-label-buttons">
             <a href="#fab" data-link="fab">FAB</a>
             <a href="#split-button" data-link="split-button">Split Button</a>
             <a href="#pill-button" data-link="pill-button">Pill button</a>
             <a href="#tile-button" data-link="tile-button">Tile button</a>
           </div>
-        </details>
+        </div>
         <a href="#callout" data-link="callout">Call Out (Tooltip)</a>
         <a href="#card-spec" data-link="card-spec">Card</a>
-        <a href="#chiclet" data-link="chiclet">Chiclet</a>
+        <div class="nav-acc">
+          <h3 class="nav-acc-header">
+            <a href="#chiclet" data-link="chiclet" id="nav-acc-label-chiclet">Chiclet</a>
+            <button type="button" class="nav-acc-toggle" aria-expanded="false"
+                    aria-controls="nav-acc-panel-chiclet" aria-label="Chiclet subpages"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+          </h3>
+          <div class="nav-acc-kids" id="nav-acc-panel-chiclet" role="region"
+               aria-labelledby="nav-acc-label-chiclet" hidden>
+            <a href="#chiclet-live-meeting" data-link="chiclet-live-meeting">Live meeting</a>
+            <a href="#chiclet-footer" data-link="chiclet-footer">Chiclet Footer</a>
+            <a href="#overlay-btn" data-link="overlay-btn">Overlay btn</a>
+          </div>
+        </div>
         <a href="#compose" data-link="compose">Compose</a>
         <a href="#content-card" data-link="content-card">Content Card</a>
         <a href="#divider" data-link="divider">Divider</a>
@@ -10498,17 +10554,17 @@ Order per variant
             <p>Layout &times; Image. Everything above documents this set.</p>
           </div>
           <div class="ch-fam-card">
-            <h4>Chiclet &mdash; live meeting</h4>
+            <h4><a href="#chiclet-live-meeting" data-link="chiclet-live-meeting" style="color:inherit;">Chiclet &mdash; live meeting &rarr;</a></h4>
             <span class="node">106838-39902 &middot; 4 variants</span>
             <p>Style (Primary, Subtle) &times; Recording (False, True). A 297&times;48 pill with a 24dp radius, fill Brand/Accent Primary when Primary and transparent when Subtle. <strong>Same name, different component.</strong></p>
           </div>
           <div class="ch-fam-card">
-            <h4>Chiclet Footer</h4>
+            <h4><a href="#chiclet-footer" data-link="chiclet-footer" style="color:inherit;">Chiclet Footer &rarr;</a></h4>
             <span class="node">104574-8225 &middot; 2 variants</span>
             <p>Pattern (Group, Single). The 28dp action row nested inside <code>Base + actions</code> &mdash; two Small Outline buttons plus an overflow glyph.</p>
           </div>
           <div class="ch-fam-card">
-            <h4>Overlay btn</h4>
+            <h4><a href="#overlay-btn" data-link="overlay-btn" style="color:inherit;">Overlay btn &rarr;</a></h4>
             <span class="node">106154-55456 &middot; 4 variants</span>
             <p>Overlay (True, False) &times; Size (Default 24dp, Large 48dp). The scrim button used for dismiss on file media and play on video.</p>
           </div>
@@ -11582,6 +11638,461 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 </div>
 
+<div class="page" id="page-chiclet-live-meeting" data-page="chiclet-live-meeting">
+<style>
+  /* Live meeting chiclet — component set 106838-39902 */
+  .flm-stage {
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-8) var(--sp-5);
+    display: flex; flex-direction: column; gap: var(--sp-5);
+    align-items: center;
+  }
+  .flm {
+    width: 297px; max-width: 487px; min-width: 70px;
+    display: flex; align-items: stretch;
+    font-family: inherit;
+  }
+  .flm.style-primary { background: var(--mc-surface-primary); border: 0.5px solid var(--grey-88); border-radius: var(--radius-dominant); overflow: hidden; }
+  .flm.style-primary.rec { background: transparent; border: 0; }
+  .flm.style-subtle { background: transparent; }
+  .flm-container { flex: 1 0 0; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 10px; }
+  .flm.rec .flm-container { background: var(--brand-accent-dominant); }
+  .flm-circle {
+    width: 28px; height: 28px; flex-shrink: 0;
+    border-radius: var(--radius-rounded);
+    background: var(--text-interactive);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--grey-100);
+  }
+  .flm-circle svg { width: 14px; height: 14px; }
+  .flm-content { flex: 1 0 0; min-width: 0; display: flex; align-items: center; gap: 8px; }
+  .flm-progress { flex: 1 0 0; min-width: 0; height: 13px; display: flex; align-items: center; position: relative; }
+  .flm-progress .bar { height: 4px; width: 100%; border-radius: 2px; background: var(--grey-88); }
+  .flm-progress .handle { position: absolute; left: 0; width: 12px; height: 12px; border-radius: var(--radius-rounded); background: var(--text-interactive); }
+  .flm-time { font-size: 12px; line-height: 16px; color: var(--mc-text-primary); white-space: nowrap; }
+  .flm.rec .flm-time { color: var(--grey-100); }
+  .flm-reclabel { font-size: 15px; line-height: 20px; letter-spacing: -0.08px; color: var(--grey-100); width: 72px; flex-shrink: 0; }
+  .flm-audio { display: flex; align-items: center; gap: 2.5px; width: 32px; flex-shrink: 0; }
+  .flm-audio i { display: block; width: 2.5px; border-radius: 2px; background: var(--button-stroke-outline); }
+  .flm-caption { font-size: 12px; color: var(--grey-56); text-align: center; }
+</style>
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Chiclet Family</div>
+    <h1>Chiclet &mdash; Live meeting</h1>
+    <p class="subtitle">The second component published under the name &ldquo;Chiclet&rdquo;: a 297&times;48 bar that sits in a conversation while a call or recording is running. Unrelated to the message Chiclet beyond the name.</p>
+    <div class="meta">
+      <span>4 variants</span>
+      <span>2 axes</span>
+      <span>297 &times; 48dp</span>
+      <span>Figma: Monocore-iOS &middot; node <code>106838-39902</code></span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="lm-preview">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>All Four Variants <a href="#lm-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Style controls the shell; Recording swaps the interior from a playback scrubber to a live level meter and floods the container with Brand/Accent Dominant.</p>
+
+        <div class="flm-stage">
+          <div>
+            <div class="flm style-primary">
+              <div class="flm-container">
+                <span class="flm-circle"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M5 3.5v9l8-4.5z"/></svg></span>
+                <div class="flm-content">
+                  <div class="flm-progress"><span class="bar"></span><span class="handle"></span></div>
+                  <span class="flm-time">01:45</span>
+                </div>
+              </div>
+            </div>
+            <p class="flm-caption">Style = Primary &middot; Recording = False</p>
+          </div>
+          <div>
+            <div class="flm style-primary rec">
+              <div class="flm-container">
+                <span class="flm-circle"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="5"/></svg></span>
+                <div class="flm-content">
+                  <span class="flm-reclabel">Recording</span>
+                  <span class="flm-audio"><i style="height:20px"></i><i style="height:10px"></i><i style="height:5px"></i><i style="height:5px"></i><i style="height:5px"></i><i style="height:10px"></i></span>
+                  <span class="flm-time">01:45</span>
+                </div>
+              </div>
+            </div>
+            <p class="flm-caption">Style = Primary &middot; Recording = True</p>
+          </div>
+          <div>
+            <div class="flm style-subtle">
+              <div class="flm-container">
+                <span class="flm-circle"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M5 3.5v9l8-4.5z"/></svg></span>
+                <div class="flm-content">
+                  <div class="flm-progress"><span class="bar"></span><span class="handle"></span></div>
+                  <span class="flm-time">01:45</span>
+                </div>
+              </div>
+            </div>
+            <p class="flm-caption">Style = Subtle &middot; Recording = False</p>
+          </div>
+          <div>
+            <div class="flm style-subtle rec">
+              <div class="flm-container">
+                <span class="flm-circle"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="5"/></svg></span>
+                <div class="flm-content">
+                  <span class="flm-reclabel">Recording</span>
+                  <span class="flm-audio"><i style="height:20px"></i><i style="height:10px"></i><i style="height:5px"></i><i style="height:5px"></i><i style="height:5px"></i><i style="height:10px"></i></span>
+                  <span class="flm-time">01:45</span>
+                </div>
+              </div>
+            </div>
+            <p class="flm-caption">Style = Subtle &middot; Recording = True &mdash; note the square corners</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="lm-spec">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Values <a href="#lm-spec" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead>
+            <tbody>
+              <tr><td>Size</td><td>297 &times; 48dp <em>(max 487, min 70)</em></td><td>&mdash;</td></tr>
+              <tr><td>Corner radius</td><td>24dp &mdash; <strong>Primary only</strong></td><td>Radius/Dominant</td></tr>
+              <tr><td>Shell fill &mdash; Primary, not recording</td><td>#ffffff + 0.5dp stroke</td><td>Surface/Primary &middot; Stroke/Container</td></tr>
+              <tr><td>Shell fill &mdash; Subtle</td><td>Transparent</td><td>Surface/Subtle</td></tr>
+              <tr><td>Container fill &mdash; recording</td><td><span class="btn-swatch" style="background:#43349c;"></span>#43349c</td><td>Brand/Accent Dominant</td></tr>
+              <tr><td>Container padding</td><td>10dp</td><td>Size/Nudge/large</td></tr>
+              <tr><td>Container gap</td><td>8dp</td><td>Size/Small</td></tr>
+              <tr><td>Circular button</td><td>28&times;28dp, fully rounded, 16dp icon</td><td>Brand/Accent Primary</td></tr>
+              <tr><td>Timecode</td><td>12/16dp Regular</td><td>iOS/Caption 1</td></tr>
+              <tr><td>&ldquo;Recording&rdquo; label</td><td>15/20dp Regular, 72dp wide</td><td>iOS/Body 2 &middot; Text/On Accent</td></tr>
+              <tr><td>Level meter</td><td>6 bars, 2.5dp wide, gap 2.5, radius 2</td><td>Brand/Accent Secondary</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>The Subtle variants have no corner radius and no clipping.</strong> Radius/Dominant and <code>overflow: clip</code> are set only on the two Primary variants. In <code>Subtle / Recording = True</code> that leaves the Accent Dominant container rendering as a hard-edged rectangle where every sibling is a 24dp pill. It is the most visible defect in the Chiclet family.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>The level meter is decorative geometry, not data.</strong> Six fixed-height bars are baked into the component. Anything that animates with real audio has to be built by the host &mdash; do not read the published heights as a default waveform.
+        </div>
+      </section>
+
+      <section class="spec-section" id="lm-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#lm-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The circular button is 28dp.</strong> It is the only control in the component and it is well under a 44dp target &mdash; the host must extend the hit area.</li>
+          <li><strong>Recording state must be announced, not just tinted.</strong> The only difference between running and recording is a fill colour and a waveform. Neither reaches a screen reader; the state needs live-region text.</li>
+          <li><strong>Timecode changes constantly.</strong> Do not put it in an assertive live region &mdash; a per-second announcement makes the rest of the screen unusable.</li>
+        </ul>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#lm-preview">All Four Variants</a>
+        <a href="#lm-spec">Values</a>
+        <a href="#lm-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Chiclet &middot; Live meeting &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>106838-39902</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-footer" data-page="chiclet-footer">
+<style>
+  .fcf-stage {
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-8) var(--sp-5);
+    display: flex; flex-direction: column; gap: var(--sp-6); align-items: center;
+  }
+  .fcf { width: 295px; height: 28px; display: flex; gap: 8px; }
+  .fcf.pattern-group { align-items: center; }
+  .fcf.pattern-single { align-items: flex-start; }
+  .fcf-group { flex: 1 0 0; min-width: 0; display: flex; gap: 8px; overflow: hidden; }
+  .fcf .fbtn { flex-shrink: 0; }
+  .fcf.pattern-single .fbtn { flex: 1 0 0; }
+  .fcf-more { width: 24px; height: 24px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; color: var(--mc-text-primary); }
+  .fcf-more svg { width: 100%; height: 100%; }
+  .fcf-caption { font-size: 12px; color: var(--grey-56); text-align: center; margin-top: var(--sp-2); }
+</style>
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Chiclet Family</div>
+    <h1>Chiclet Footer</h1>
+    <p class="subtitle">The 28dp action row nested inside <code>Chiclet / Layout = Base + actions</code>. Published separately so the action pattern can be reused, and so the message chiclet does not have to publish an action variant per button count.</p>
+    <div class="meta">
+      <span>2 variants</span>
+      <span>1 axis</span>
+      <span>295 &times; 28dp</span>
+      <span>Figma: Monocore-iOS &middot; node <code>104574-8225</code></span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section" id="cf-preview">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Both Patterns <a href="#cf-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Pattern is the only axis. Group pairs two hugging buttons and keeps an overflow glyph on the trailing edge; Single stretches one button across the full width and drops the overflow entirely.</p>
+
+        <div class="fcf-stage fbtn-scope">
+          <div>
+            <div class="fcf pattern-group">
+              <div class="fcf-group">
+                <button class="fbtn style-outline size-small state-rest" type="button">Accept</button>
+                <button class="fbtn style-outline size-small state-rest" type="button">Decline</button>
+              </div>
+              <span class="fcf-more"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg></span>
+            </div>
+            <p class="fcf-caption">Pattern = Group</p>
+          </div>
+          <div>
+            <div class="fcf pattern-single">
+              <button class="fbtn style-outline size-small state-rest" type="button">Join meeting</button>
+            </div>
+            <p class="fcf-caption">Pattern = Single &mdash; button fills the row, no overflow</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="cf-spec">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Values <a href="#cf-spec" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Group</th><th>Single</th></tr></thead>
+            <tbody>
+              <tr><td>Row size</td><td colspan="2">295 &times; 28dp</td></tr>
+              <tr><td>Cross-axis alignment</td><td>Center</td><td>Start</td></tr>
+              <tr><td>Buttons</td><td>Primary + Secondary, hugging</td><td>One, fills the row</td></tr>
+              <tr><td>Gap between buttons</td><td>8dp <em>Size/Small</em></td><td>&mdash;</td></tr>
+              <tr><td>Overflow glyph</td><td>More Horizontal, 24&times;24dp</td><td>Not published</td></tr>
+              <tr><td>Button style</td><td colspan="2">Surface/RaisedTertiary fill, 0.5dp Stroke/ContainerRaised, radius 200 &mdash; the Button set's <em>Outline accent &middot; Small</em></td></tr>
+              <tr><td>Button padding</td><td colspan="2">8dp leading / 10dp trailing, gap 4dp, 16dp icon</td></tr>
+              <tr><td>Label</td><td colspan="2">iOS/Button 2 &mdash; 13/18dp Medium, Text/Primary</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Group centres its children, Single aligns them to the start.</strong> Both rows are 28dp tall and both buttons are 28dp, so the two settings happen to render identically today &mdash; but they will diverge the moment a button grows or the row gains padding. Set both to centre.
+        </div>
+
+        <div class="callout callout-info">
+          <strong>Both patterns use Outline accent, never Accent.</strong> The footer sits inside a chiclet that is already a card inside a message; a filled accent button at that depth competes with the message's own primary action. If a chiclet action needs to be the loudest thing on screen, the chiclet is the wrong container.
+        </div>
+      </section>
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#cf-preview">Both Patterns</a>
+        <a href="#cf-spec">Values</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Chiclet Footer &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104574-8225</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-overlay-btn" data-page="overlay-btn">
+<style>
+  .fob-stage {
+    border-radius: var(--radius-strong);
+    padding: var(--sp-8) var(--sp-5);
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-6);
+    justify-items: center;
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+  }
+  .fob-cell { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
+  .fob-plate {
+    width: 132px; height: 92px; border-radius: var(--radius-default);
+    background: var(--brand-accent-tertiary);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fob {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-rounded);
+  }
+  .fob.overlay-true { background: rgba(41,41,41,0.78); color: var(--grey-100); }
+  .fob.overlay-false { background: var(--mc-surface-primary); border: 1px solid var(--grey-88); color: var(--mc-text-primary); }
+  .fob.sz-default { padding: 6px; }
+  .fob.sz-large { padding: 10px; }
+  .fob.sz-default svg { width: 12px; height: 12px; }
+  .fob.sz-large svg { width: 28px; height: 28px; }
+  .fob-caption { font-size: 12px; color: var(--grey-56); text-align: center; }
+</style>
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Chiclet Family</div>
+    <h1>Overlay btn</h1>
+    <p class="subtitle">The circular control that sits on top of media &mdash; dismiss on a file preview, play on a video. Two sizes, and a second pair for when there is no media to sit on.</p>
+    <div class="meta">
+      <span>4 variants</span>
+      <span>2 axes</span>
+      <span>24 / 48dp</span>
+      <span>Figma: Monocore-iOS &middot; node <code>106154-55456</code></span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section" id="ob-preview">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>All Four Variants <a href="#ob-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Overlay switches the fill between a dark scrim and a plain surface with a border. Size switches padding and glyph, not the geometry of anything else.</p>
+
+        <div class="fob-stage">
+          <div class="fob-cell">
+            <div class="fob-plate"><span class="fob overlay-true sz-default"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"/></svg></span></div>
+            <span class="fob-caption">Overlay = True &middot; Size = Default<br>24&times;24dp</span>
+          </div>
+          <div class="fob-cell">
+            <div class="fob-plate"><span class="fob overlay-true sz-large"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 7l14 14M21 7L7 21"/></svg></span></div>
+            <span class="fob-caption">Overlay = True &middot; Size = Large<br>48&times;48dp</span>
+          </div>
+          <div class="fob-cell">
+            <div class="fob-plate" style="background:var(--mc-surface-raised-base);"><span class="fob overlay-false sz-default"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"/></svg></span></div>
+            <span class="fob-caption">Overlay = False &middot; Size = Default</span>
+          </div>
+          <div class="fob-cell">
+            <div class="fob-plate" style="background:var(--mc-surface-raised-base);"><span class="fob overlay-false sz-large"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 7l14 14M21 7L7 21"/></svg></span></div>
+            <span class="fob-caption">Overlay = False &middot; Size = Large</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="ob-spec">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Values <a href="#ob-spec" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Overlay = True</th><th>Overlay = False</th></tr></thead>
+            <tbody>
+              <tr><td>Fill</td><td><span class="btn-swatch" style="background:#292929;"></span>Surface/BtntAlphaPrimary &mdash; #292929 at 78%</td><td>Surface/Primary &mdash; #ffffff</td></tr>
+              <tr><td>Border</td><td>None</td><td>1dp Stroke/Container &mdash; #e6e6e6</td></tr>
+              <tr><td>Radius</td><td colspan="2">999 &mdash; fully rounded</td></tr>
+              <tr><td>Padding &mdash; Default</td><td colspan="2">6dp, around a 12dp glyph box</td></tr>
+              <tr><td>Padding &mdash; Large</td><td colspan="2">10dp, around a 28dp glyph box</td></tr>
+              <tr><td>Default glyph</td><td colspan="2">Dismiss &mdash; swapped for Play on Video chiclets</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-rule">
+          <strong>The scrim is what makes the glyph legible.</strong> Overlay = True exists because media is arbitrary &mdash; a white glyph on an unknown photograph has no guaranteed contrast, and the 78% scrim is what supplies it. Never reduce that opacity to show more of the image.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Default is 24dp; Large is 48dp.</strong> Only the Large variant clears a 44dp target on its own, and Default is the one used for dismiss on file previews &mdash; the smallest control in the family is the one that destroys the user's attachment. Extend the hit area or use Large.
+        </div>
+      </section>
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#ob-preview">All Four Variants</a>
+        <a href="#ob-spec">Values</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Overlay btn &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>106154-55456</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-fab" data-page="fab">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Button Family</div>
+    <h1>FAB</h1>
+    <p class="subtitle">Floating action button.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page queued</span></div>
+  </header>
+  <div class="docs-layout"><main class="docs-main">
+    <section class="spec-section">
+      <span class="section-eyebrow eyebrow-design">Status</span>
+      <h2>Documentation queued</h2>
+      <p class="section-intro">FAB is shipped in the Monocore iOS library. Its Spec and Architecture pages follow the Button template &mdash; interactive configurator, variant axes, layout and colour tables, assembled examples, anatomy accordion &mdash; and will be written from a fresh pull of the published component set.</p>
+      <p>Until then, the <a href="#buttons" data-link="buttons">Button</a> page documents the shared shell: the size ramp, the type styles, and the colour behaviour that the whole family inherits.</p>
+    </section>
+  </main></div>
+  <footer class="docs-footer">FAB &middot; Queued &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-split-button" data-page="split-button">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Button Family</div>
+    <h1>Split Button</h1>
+    <p class="subtitle">A primary action paired with a menu affordance.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page queued</span></div>
+  </header>
+  <div class="docs-layout"><main class="docs-main">
+    <section class="spec-section">
+      <span class="section-eyebrow eyebrow-design">Status</span>
+      <h2>Documentation queued</h2>
+      <p class="section-intro">Split Button is shipped in the Monocore iOS library. Its Spec and Architecture pages follow the Button template and will be written from a fresh pull of the published component set.</p>
+      <p>See <a href="#buttons" data-link="buttons">Button</a> for the shared size ramp and colour behaviour.</p>
+    </section>
+  </main></div>
+  <footer class="docs-footer">Split Button &middot; Queued &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-pill-button" data-page="pill-button">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Button Family</div>
+    <h1>Pill button</h1>
+    <p class="subtitle">The compact, fully-rounded button used for filters and inline choices.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>12 variants</span><span>Spec page queued</span></div>
+  </header>
+  <div class="docs-layout"><main class="docs-main">
+    <section class="spec-section">
+      <span class="section-eyebrow eyebrow-design">Status</span>
+      <h2>Documentation queued</h2>
+      <p class="section-intro">Pill button is shipped in the Monocore iOS library with 12 published variants (component key <code>b26a29fa5ac1df40d4e44974dbe8301eb076c6e5</code>). Its Spec and Architecture pages follow the Button template and will be written from a fresh pull of the published set &mdash; the variant count above is carried from an earlier session and has not yet been re-verified against Figma.</p>
+      <p>See <a href="#buttons" data-link="buttons">Button</a> for the shared size ramp and colour behaviour.</p>
+    </section>
+  </main></div>
+  <footer class="docs-footer">Pill button &middot; Queued &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-tile-button" data-page="tile-button">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Button Family</div>
+    <h1>Tile button</h1>
+    <p class="subtitle">A stacked icon-over-label button for action grids.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page queued</span></div>
+  </header>
+  <div class="docs-layout"><main class="docs-main">
+    <section class="spec-section">
+      <span class="section-eyebrow eyebrow-design">Status</span>
+      <h2>Documentation queued</h2>
+      <p class="section-intro">Tile button is shipped in the Monocore iOS library. Its Spec and Architecture pages follow the Button template and will be written from a fresh pull of the published component set.</p>
+      <p>See <a href="#buttons" data-link="buttons">Button</a> for the shared size ramp and colour behaviour.</p>
+    </section>
+  </main></div>
+  <footer class="docs-footer">Tile button &middot; Queued &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
 <div class="page" id="page-view-guidance" data-page="view-guidance">
 <div class="docs-shell">
   <div class="empty-state">
@@ -11839,6 +12350,47 @@ function switchTier(btn, tier) {
     }
   }, { passive: true });
   applyState();
+})();
+</script>
+<script>
+// ── Site-nav accordions — WAI-ARIA APG Accordion pattern ──────────────
+// Enter / Space come free with a real button element; Tab order is DOM
+// which is what the APG example specifies. No arrow-key handling: the
+// example lists that as optional, and hijacking arrows inside a nav
+// landmark fights the screen-reader's own reading keys.
+(() => {
+  const accs = document.querySelectorAll('.site-nav .nav-acc');
+  if (!accs.length) return;
+
+  function setExpanded(toggle, expanded) {
+    const panel = document.getElementById(toggle.getAttribute('aria-controls'));
+    toggle.setAttribute('aria-expanded', String(expanded));
+    if (panel) panel.hidden = !expanded;
+  }
+
+  accs.forEach(acc => {
+    const toggle = acc.querySelector('.nav-acc-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', () => {
+      setExpanded(toggle, toggle.getAttribute('aria-expanded') !== 'true');
+    });
+  });
+
+  // Reveal the group that owns the current page, so a child route never
+  // sits inside a collapsed panel.
+  function syncToRoute() {
+    accs.forEach(acc => {
+      const toggle = acc.querySelector('.nav-acc-toggle');
+      const panel = acc.querySelector('.nav-acc-kids');
+      if (!toggle || !panel) return;
+      if (panel.querySelector('a.active') || acc.querySelector('.nav-acc-header a.active')) {
+        setExpanded(toggle, true);
+      }
+    });
+  }
+  document.querySelectorAll('.site-nav a[data-link], .landing-card[data-link]')
+    .forEach(a => a.addEventListener('click', () => setTimeout(syncToRoute, 60)));
+  syncToRoute();
 })();
 </script>
 </body>
