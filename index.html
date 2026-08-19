@@ -3164,563 +3164,575 @@
 
 <!-- ═══════════ PAGE: Badge ═══════════ -->
 <div class="page" id="page-badge-spec" data-page="badge-spec">
-
 <style>
-  /* ── Badge spec page scoped styles ──
-     Ground truth: CXD-iOS node 83392:62610 (July 2026 pull).
-     Fill = Surface/RaisedSecondary #e6e6e6 · stroke same value (invisible at rest)
-     Static label = Text/Secondary #616161 · Rest = Text/Interactive #4c39b8
-     Active = Surface/Accent #654cf5 + Text/On Accent white */
-  .badge {
+  /* ── Badge view — component set 83392-62610 (verified August 2026) ──
+     The iOS surface ramp does not map onto the docs Grey ramp one-for-one,
+     so the published values are aliased here with their token names. */
+  .fbdg-scope {
+    --bd-raised-2:   #e6e6e6;                       /* Surface/RaisedSecondary */
+    --bd-raised-1:   var(--grey-88);                /* Surface/RaisedPrimary  #e0e0e0 */
+    --bd-raised-3:   var(--mc-surface-raised-tertiary); /* Surface/RaisedTertiary #f5f5f5 */
+    --bd-stroke:     #e6e6e6;                       /* Stroke/Container */
+    --bd-accent:     var(--text-interactive);       /* Surface/Accent #654cf5 */
+    --bd-text-2:     var(--grey-38);                /* Text/Secondary */
+    --bd-text-int:   var(--mc-text-interactive);    /* Text/Interactive */
+    --bd-text-on:    var(--grey-100);               /* Text/On Accent */
+  }
+  .fbdg {
     display: inline-flex; align-items: center;
     border-radius: 999px;
-    border: 1px solid #e6e6e6;              /* Stroke/Container (outer) */
-    background: #e6e6e6;                    /* Surface/RaisedSecondary — Grey/90 */
-    padding: 4px 8px;                       /* Size/XSmall · Size/Small */
-    gap: 2px;                               /* Size/Nudge/Small */
-    min-height: 28px;
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-    font-size: 13px; line-height: 18px; letter-spacing: -0.08px;  /* iOS/Body 3 */
-    color: #616161;                         /* Text/Secondary */
+    border: 1px solid var(--bd-stroke);
+    background: var(--bd-raised-2);
+    color: var(--bd-text-2);
+    font-family: inherit;
+    min-height: 28px; padding: 4px 8px; gap: 2px;
+    font-size: 13px; line-height: 18px; letter-spacing: -0.08px; font-weight: 400;
+    white-space: nowrap;
   }
-  .badge-sm {
-    padding: 4px;                           /* Size/XSmall all sides */
-    gap: 0;
-    min-height: 16px; height: 18px;
-    font-size: 11px; line-height: 11px; letter-spacing: 0.06px;   /* iOS/Caption 2 */
-  }
-  /* Interactive Rest: brand-colored foreground on the same surface as Static. */
-  .badge-rest {
-    color: #4c39b8;                         /* Text/Interactive — Teams 60 */
-  }
-  .badge-rest .ic { color: #4c39b8; opacity: 1; }
-  .badge-active {
-    background: #654cf5;                    /* Surface/Accent — Teams 80 */
-    color: #fff;                            /* Text/On Accent */
-    border-color: transparent;
-  }
-  .badge-active .ic { color: #fff; opacity: 1; }
-  .badge .av {
-    width: 16px; height: 16px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #ffc0cb, #ffb347);
-    flex-shrink: 0;
-  }
-  .badge-sm .av { width: 10px; height: 10px; }
-  .badge .ic {
-    width: 16px; height: 16px;
-    display: inline-flex; align-items: center; justify-content: center;
-    color: currentColor; opacity: 0.7;
-    flex-shrink: 0;
-  }
-  .badge-sm .ic { width: 10px; height: 10px; font-size: 8px; }
-  .badge .lbl {
-    padding: 0 2px;
-  }
-  /* Icon-only: container wraps flush to the icon + padding.
-     Default: 16 icon + 8 L/R = 32 x 28 (min-height centers).
-     Small static: 12 icon + 4 L/R = 20 x 18 · interactive: + 3 L/R = 18 x 18. */
-  .badge-iconly {
-    padding: 5px 8px;
-    gap: 0;
-  }
-  .badge-iconly .ic { opacity: 1; }
-  .badge-iconly.badge-sm {
-    padding: 2px 4px;
-    gap: 0;
-  }
-  .badge-iconly.badge-sm .ic { width: 12px; height: 12px; font-size: 9px; }
-
-  /* Badges hug their content — don't stretch to the canvas-item column width
-     (canvas-item is a flex column whose default align-items:stretch was
-     inflating every pill to the width of its caption label). */
-  .canvas-item .badge { align-self: flex-start; width: fit-content; }
-
-  /* ── Anatomy: label slot visualization ── */
-  .b-lbl-show {
-    background: rgba(91, 95, 199, 0.16);
-    outline: 1px dashed rgba(91, 95, 199, 0.7);
-    outline-offset: 0;
-    border-radius: 2px;
-  }
-
-  /* ── Typography display per size ── */
-  .b-typo-display {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--sp-4);
-    margin: var(--sp-4) 0 var(--sp-3);
-  }
-  @media (max-width: 720px) {
-    .b-typo-display { grid-template-columns: 1fr; }
-  }
-  .b-typo-sample {
-    background: var(--c-surface);
-    border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
-    padding: var(--sp-5);
-    display: flex; flex-direction: column;
-    gap: var(--sp-3);
-  }
-  .b-typo-tag {
-    font-size: 10px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    color: var(--c-text-muted);
-  }
-  .b-typo-text {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
-    color: var(--c-text);
-  }
-  .b-typo-text-default {
-    font-size: 13px; line-height: 18px; letter-spacing: -0.08px;
-  }
-  .b-typo-text-small {
+  .fbdg.sz-small {
+    height: 18px; min-height: 16px; padding: 4px; gap: 0;
     font-size: 11px; line-height: 11px; letter-spacing: 0.06px;
+    background: var(--bd-raised-3);
   }
-  .b-typo-meta {
-    font-family: "SF Mono", "Cascadia Code", monospace;
-    font-size: 11px;
-    color: var(--c-text-muted);
+  .fbdg.iconly { gap: 4px; height: 28px; }
+  .fbdg.iconly.sz-small { gap: 2px; height: 18px; }
+  .fbdg.ty-rest { color: var(--bd-text-int); }
+  .fbdg.ty-rest.li-none { background: var(--bd-raised-1); }
+  .fbdg.ty-rest.li-none.sz-small { background: var(--bd-raised-3); }
+  .fbdg.ty-active {
+    background: var(--bd-accent); border-color: transparent; color: var(--bd-text-on);
+    font-size: 15px; line-height: 20px;
   }
-  .b-typo-row-inbadge {
-    display: flex; align-items: center; gap: var(--sp-3);
-    margin-top: var(--sp-2);
+  .fbdg.ty-active.li-avatar { font-size: 13px; line-height: 18px; }
+  .fbdg .av {
+    width: 16px; height: 16px; border-radius: 999px; flex-shrink: 0;
+    background: linear-gradient(135deg, #dcdbff, #8a80ff);
   }
-  .b-typo-row-inbadge .badge-tag {
-    font-family: "SF Mono", "Cascadia Code", monospace;
-    font-size: 10px; color: var(--c-text-muted);
+  .fbdg.sz-small .av { width: 10px; height: 10px; }
+  .fbdg .ic {
+    width: 16px; height: 16px; flex-shrink: 0; padding: 2px;
+    display: inline-flex; align-items: center; justify-content: center;
   }
+  .fbdg.sz-small .ic { width: 10px; height: 10px; padding: 1.667px; }
+  .fbdg .ic svg { width: 100%; height: 100%; }
+  .fbdg .txt { padding: 0 2px; overflow: hidden; text-overflow: ellipsis; }
 
-  /* Anatomy diagram for badge */
-  .b-anatomy {
-    display: flex; align-items: center; gap: 48px;
-    padding: 48px 24px;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--r-md);
-    flex-wrap: wrap;
-  }
-  .b-anat-tag {
-    display: inline-block;
-    font-family: "SF Mono", monospace;
-    font-size: 10px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.4px;
-    padding: 2px 6px; border-radius: 3px;
-    color: #fff;
-  }
-  .b-tag-1 { background: #654cf5; }
-  .b-tag-2 { background: #2e7d32; }
-  .b-tag-3 { background: #d76200; }
-
-  .b-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: var(--sp-4);
-  }
-  .b-cell {
-    background: var(--c-surface);
+  .bdg-stage {
+    background: var(--mc-surface-raised-base);
     border: 1px solid var(--c-border);
-    border-radius: var(--r-md);
-    padding: var(--sp-4) var(--sp-3);
-    text-align: center;
-    display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-8) var(--sp-5);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 220px; transition: background 240ms ease;
   }
-  .b-cell .b-label {
-    font-size: 11px;
-    color: var(--c-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    font-weight: 600;
-  }
+  .bdg-stage.dark { background: var(--grey-10); border-color: var(--grey-24); }
+  .bdg-stage.dark .fbdg { --bd-raised-2: var(--grey-24); --bd-raised-1: var(--grey-24);
+    --bd-raised-3: var(--grey-20); --bd-stroke: var(--grey-38); --bd-text-2: var(--grey-76); }
+  .bdg-note { font-size: 12px; color: var(--grey-56); margin-top: var(--sp-3); text-align: center; }
+  .bdg-note code { font-family: "SF Mono","Cascadia Code",monospace; font-size: 11.5px;
+    background: var(--mc-surface-raised-tertiary); border: 1px solid var(--c-border);
+    border-radius: var(--radius-minimal); padding: 1px 6px; }
+  .bdg-lab { display: grid; grid-template-columns: 300px 1fr; gap: var(--sp-6); align-items: start; }
+  @media (max-width: 860px) { .bdg-lab { grid-template-columns: 1fr; } }
+  .bdg-controls { background: var(--mc-surface-raised-tertiary); border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong); padding: var(--sp-5); position: sticky; top: var(--sp-5); }
+  .bdg-uc-stage { border-radius: var(--radius-strong); padding: var(--sp-5);
+    margin: var(--sp-4) calc(-1 * var(--sp-5)) 0; transition: background 240ms ease; }
+  .bdg-uc-stage.dark { background: var(--grey-10); }
+  .bdg-uc-stage.dark .uc-label, .bdg-uc-stage.dark .uc-config { color: var(--grey-56); }
+  .bdg-uc-stage.dark .fbdg { --bd-raised-2: var(--grey-24); --bd-raised-1: var(--grey-24);
+    --bd-raised-3: var(--grey-20); --bd-stroke: var(--grey-38); --bd-text-2: var(--grey-76); }
 </style>
 
 <div class="docs-shell">
 
-  <!-- ── Header ──────────────────────────────────────── -->
   <header class="docs-header">
-    <div class="header-eyebrow">Component Specification</div>
-    <h1>Badge</h1>
-    <p class="header-desc">A pill-shaped element for labels, tags, and tappable chips. Supports static and interactive treatments, two sizes, and three left-image options. Always pill-shaped (radius 999), always single-line, with a filled accent treatment for the active interactive state. Tappability is signaled through foreground color alone.</p>
-    <div class="chip-row">
-      <span class="chip chip-accent">Teams 2 iOS</span>
-      <span class="chip chip-accent">5 variant axes</span>
-      <span class="chip chip-accent">20 variants</span>
-      <span class="chip chip-muted">Figma: CXD-iOS</span>
-      <span class="chip chip-muted">Node: 83392:62610</span>
-    </div>
-
-    <div class="canvas" style="margin-top:var(--sp-6); margin-bottom:0;">
-      <div class="canvas-row" style="justify-content:center; gap:var(--sp-3); flex-wrap:wrap;">
-        <span class="badge"><span class="av"></span><span class="lbl">Static</span></span>
-        <span class="badge badge-sm"><span class="av"></span><span class="lbl">Small</span></span>
-        <span class="badge badge-rest"><span class="ic">●</span><span class="lbl">Tap me</span></span>
-        <span class="badge badge-active"><span class="ic">○</span><span class="lbl" style="font-size:15px; line-height:20px;">Active</span></span>
-        <span class="badge badge-iconly badge-rest"><span class="ic">★</span></span>
-      </div>
+    <div class="eyebrow">Components</div>
+    <h1>Badge &mdash; Spec</h1>
+    <p class="subtitle">A pill for labels, tags and tappable chips. Static or Interactive, two sizes, three left-image options &mdash; and tappability signalled through foreground colour alone. Twenty variants published from a five-axis set that could express seventy-two.</p>
+    <div class="meta">
+      <span>20 variants</span>
+      <span>5 axes</span>
+      <span>Radius 999</span>
+      <span>Figma: Monocore-iOS &middot; node <code>83392-62610</code></span>
     </div>
   </header>
 
   <div class="docs-layout">
-
     <main class="docs-main">
 
-      <!-- ═══ 1. ANATOMY ═══ -->
-      <section class="ds-section" id="badge-anatomy">
-        <h2>Anatomy <a href="#badge-anatomy" class="anchor">#</a></h2>
-        <p class="intro">A badge is a single horizontal row inside a pill container. Two slots arranged left-to-right: a left image (avatar or icon) and a text container holding the label. There is no trailing icon — tappability is signaled purely through foreground color.</p>
+      <section class="spec-section" id="badge-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Badge <a href="#badge-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Only twenty of the seventy-two expressible combinations are published. The preview tells you when you have picked one that does not exist.</p>
 
-        <div class="b-anatomy">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
-            <span class="badge">
-              <span class="av" title="1 Left image"></span>
-              <span class="lbl b-lbl-show">Label</span>
-            </span>
-            <div style="font-family:'SF Mono', monospace; font-size:11px; color:var(--c-text-muted); text-align:center;">
-              dashed outline = text container &middot; 2dp L/R padding around label
-            </div>
-          </div>
-          <div class="diagram-legend" style="flex:1; min-width:240px;">
-            <div class="legend-item">
-              <div class="legend-marker legend-marker-1">1</div>
-              <div class="legend-text">
-                <strong>Left image (optional)</strong><br>
-                <span>Avatar (16dp rounded image) or icon (16dp box, 12dp glyph). Driven by the <code>Left image</code> variant. Hidden when the variant is <code>None</code> or <code>Icon only=True</code>.</span>
+        <div class="fbdg-scope">
+        <div class="bdg-lab">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Badge type</div>
+              <div class="btnlab-pills" data-axis="type">
+                <button class="btnlab-pill on" data-val="static">Static</button>
+                <button class="btnlab-pill" data-val="interactive">Interactive</button>
               </div>
             </div>
-            <div class="legend-item">
-              <div class="legend-marker legend-marker-2">2</div>
-              <div class="legend-text">
-                <strong>Text container</strong><br>
-                <span>The slot holding the label with <strong>2dp horizontal padding</strong> inside &mdash; the dashed-outlined box in the diagram. Carries the editable <code>Label</code> property. Hidden when <code>Icon only=True</code>.</span>
+            <div class="btnlab-group" id="bdg-stategroup" style="display:none;">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="active">Active</button>
               </div>
             </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Size</div>
+              <div class="btnlab-pills" data-axis="size">
+                <button class="btnlab-pill on" data-val="default">Default</button>
+                <button class="btnlab-pill" data-val="small">Small</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Left image</div>
+              <div class="btnlab-pills" data-axis="left">
+                <button class="btnlab-pill on" data-val="avatar">Avatar</button>
+                <button class="btnlab-pill" data-val="icon">Icon</button>
+                <button class="btnlab-pill" data-val="none">None</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" id="bdg-iconly"> Icon only <em>(requires Left image = Icon)</em></label>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="bdg-dark"> <strong>Dark theme</strong></label>
+            </div>
           </div>
+
+          <div>
+            <div class="bdg-stage" id="bdg-stage"><div id="bdg-mount"></div></div>
+            <p class="bdg-note" id="bdg-note"></p>
+          </div>
+        </div>
         </div>
       </section>
 
-      <!-- ═══ 2. VARIANTS ═══ -->
-      <section class="ds-section" id="badge-variants">
-        <h2>Variants <a href="#badge-variants" class="anchor">#</a></h2>
-        <p class="intro">Five independent axes combine to form 20 published variants. Each axis maps to a Figma component property.</p>
+      <section class="spec-section" id="badge-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#badge-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Five axes, sparsely published. State is not independent &mdash; it is determined by Badge type.</p>
 
-        <div class="table-wrap" style="margin-top: var(--sp-3);">
+        <div class="table-wrap wide">
           <table>
-            <thead>
-              <tr><th>Axis</th><th>Figma property</th><th>Values</th><th>Default</th></tr>
-            </thead>
+            <thead><tr><th>Axis</th><th>Figma property</th><th>Values</th><th>Default</th></tr></thead>
             <tbody>
-              <tr><td><strong>Badge type</strong></td><td><code>Badge type</code></td><td>Static, Interactive</td><td>Static</td></tr>
-              <tr><td><strong>Icon only</strong></td><td><code>Icon only</code></td><td>True, False</td><td>False</td></tr>
-              <tr><td><strong>State</strong></td><td><code>State</code></td><td>N/A (Static), Rest, Active (Interactive)</td><td>N/A</td></tr>
-              <tr><td><strong>Size</strong></td><td><code>Size</code></td><td>Default, Small</td><td>Default</td></tr>
-              <tr><td><strong>Left image</strong></td><td><code>Left image</code></td><td>Avatar, Icon, None</td><td>Avatar</td></tr>
+              <tr><td>Type</td><td><code>Badge type</code></td><td>Static, Interactive</td><td>Static</td></tr>
+              <tr><td>State</td><td><code>State</code></td><td>N/A <em>(Static)</em>, Rest, Active <em>(Interactive)</em></td><td>N/A</td></tr>
+              <tr><td>Size</td><td><code>Size</code></td><td>Default, Small</td><td>Default</td></tr>
+              <tr><td>Left image</td><td><code>Left image</code></td><td>Avatar, Icon, None</td><td>Avatar</td></tr>
+              <tr><td>Icon only</td><td><code>Icon only</code></td><td>True, False</td><td>False</td></tr>
+              <tr><td>Label</td><td><code>Label</code></td><td>Text property</td><td><code>Label</code></td></tr>
             </tbody>
           </table>
         </div>
 
-        <h3>Badge type</h3>
-        <p>Controls <strong>the foreground color</strong>. Static badges are pure labels in neutral grey. Interactive badges signal tappability with a brand-colored label (<code>Text/Interactive</code>); Active swaps the surface to <code>Surface/Accent</code> and flips the foreground to white.</p>
-        <div class="canvas">
-          <div class="canvas-row">
-            <div class="canvas-item">
-              <span class="canvas-item-label">Static &middot; neutral</span>
-              <span class="badge"><span class="av"></span><span class="lbl">Label</span></span>
-            </div>
-            <div class="canvas-item">
-              <span class="canvas-item-label">Interactive · Rest &middot; brand</span>
-              <span class="badge badge-rest"><span class="av"></span><span class="lbl">Label</span></span>
-            </div>
-            <div class="canvas-item">
-              <span class="canvas-item-label">Interactive · Active &middot; on-accent</span>
-              <span class="badge badge-active"><span class="av"></span><span class="lbl">Label</span></span>
-            </div>
-          </div>
-        </div>
-
-        <h3>Size</h3>
-        <p>Two density tiers. Default is 28dp tall for general use; Small is 18dp tall for dense contexts (table rows, inline indicators).</p>
-        <div class="canvas">
-          <div class="canvas-row">
-            <div class="canvas-item">
-              <span class="canvas-item-label">Default · 28dp</span>
-              <span class="badge"><span class="av"></span><span class="lbl">Label</span></span>
-            </div>
-            <div class="canvas-item">
-              <span class="canvas-item-label">Small · 18dp</span>
-              <span class="badge badge-sm"><span class="av"></span><span class="lbl">Label</span></span>
-            </div>
-          </div>
-        </div>
-
-        <h3>Left image</h3>
-        <p>The leading element. Avatar for people/team contexts, Icon for objects/categories, None when the label alone carries the meaning.</p>
-        <div class="canvas">
-          <div class="canvas-row">
-            <div class="canvas-item">
-              <span class="canvas-item-label">Avatar</span>
-              <span class="badge"><span class="av"></span><span class="lbl">Label</span></span>
-            </div>
-            <div class="canvas-item">
-              <span class="canvas-item-label">Icon</span>
-              <span class="badge"><span class="ic">★</span><span class="lbl">Label</span></span>
-            </div>
-            <div class="canvas-item">
-              <span class="canvas-item-label">None</span>
-              <span class="badge"><span class="lbl">Label</span></span>
-            </div>
-          </div>
-        </div>
-
-        <h3>Icon only</h3>
-        <p>When <code>True</code>, the text container is hidden and the badge collapses around a single icon. Only available with <code>Left image=Icon</code>. The icon follows the same per-state color tokens as the leading icon in text-bearing variants.</p>
-        <div class="canvas">
-          <div class="canvas-row">
-            <div class="canvas-item">
-              <span class="canvas-item-label">Static &middot; Icon only</span>
-              <span class="badge badge-iconly"><span class="ic">★</span></span>
-            </div>
-            <div class="canvas-item">
-              <span class="canvas-item-label">Interactive &middot; Icon only &middot; Rest</span>
-              <span class="badge badge-iconly badge-rest"><span class="ic">★</span></span>
-            </div>
-            <div class="canvas-item">
-              <span class="canvas-item-label">Interactive &middot; Icon only &middot; Active</span>
-              <span class="badge badge-iconly badge-active"><span class="ic">★</span></span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══ 3. SPACING ═══ -->
-      <section class="ds-section" id="badge-spacing">
-        <h2>Spacing &amp; geometry <a href="#badge-spacing" class="anchor">#</a></h2>
-        <p class="intro">Padding and item-spacing change by size. Both sizes share the pill corner radius (999) and a 1dp inside stroke.</p>
-
-        <h3>Container</h3>
-        <div class="table-wrap">
+        <h3>What is actually published</h3>
+        <div class="table-wrap wide">
           <table>
-            <thead>
-              <tr><th>Property</th><th>Default</th><th>Small</th></tr>
-            </thead>
+            <thead><tr><th>Type &middot; State</th><th>Size</th><th>Avatar</th><th>Icon</th><th>None</th><th>Icon only</th></tr></thead>
             <tbody>
-              <tr><td>Height &middot; text-bearing</td><td>28dp <em>(min-height)</em></td><td>18dp <em>(min-height 16)</em></td></tr>
-              <tr><td>Height &middot; icon-only</td><td>28dp</td><td>18dp</td></tr>
-              <tr><td>Width &middot; icon-only</td><td>32dp</td><td>20dp <em>(static)</em> &middot; 18dp <em>(interactive)</em></td></tr>
-              <tr><td>Padding &middot; text-bearing top / bottom</td><td>4dp &middot; Size/XSmall</td><td>4dp &middot; Size/XSmall</td></tr>
-              <tr><td>Padding &middot; text-bearing left / right</td><td>8dp &middot; Size/Small</td><td>4dp &middot; Size/XSmall</td></tr>
-              <tr><td>Padding &middot; icon-only left / right</td><td>8dp</td><td>4dp <em>(static)</em> &middot; 3dp <em>(interactive)</em></td></tr>
-              <tr><td>Gap &middot; text-bearing variants</td><td>2dp &middot; Size/Nudge/Small</td><td>0dp &middot; Size/None</td></tr>
-              <tr><td>Corner radius</td><td>999 &middot; pill</td><td>999 &middot; pill</td></tr>
-              <tr><td>Stroke weight</td><td>1dp &middot; inside</td><td>1dp &middot; inside</td></tr>
-              <tr><td>Layout</td><td>Horizontal &middot; counter-axis center</td><td>Horizontal &middot; center both axes</td></tr>
+              <tr><td rowspan="2"><strong>Static &middot; N/A</strong></td><td>Default</td><td>Published</td><td>Published</td><td>Published</td><td>Published</td></tr>
+              <tr><td>Small</td><td>Published</td><td>Published</td><td>Published</td><td>Published</td></tr>
+              <tr><td rowspan="2"><strong>Interactive &middot; Rest</strong></td><td>Default</td><td>Published</td><td>Published</td><td>Published</td><td>Published</td></tr>
+              <tr><td>Small</td><td>Published</td><td>Published</td><td>Published</td><td>Published</td></tr>
+              <tr><td rowspan="2"><strong>Interactive &middot; Active</strong></td><td>Default</td><td>Published</td><td>Published</td><td>Published</td><td>Published</td></tr>
+              <tr><td>Small</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
             </tbody>
           </table>
         </div>
+        <p>Twenty variants. Icon only is only ever published with <code>Left image = Icon</code> &mdash; an icon-only badge with an avatar is not expressible.</p>
 
-        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Icon-only wraps flush.</strong> The icon-only container's width is the icon plus its own padding &mdash; not the text-bearing padding. Default icon-only is <strong>32 &times; 28dp</strong> (16 icon + 8dp L/R, min-height centers vertically); Small static icon-only is <strong>20 &times; 18dp</strong> (12 icon + 4dp L/R); Small interactive is <strong>18 &times; 18dp</strong> (12 icon + 3dp L/R).
+        <div class="callout callout-constraint">
+          <strong>There is no Active at Small.</strong> A Small interactive badge can be tapped but cannot show that it is selected. Any Small filter or toggle built from this component has no published selected state &mdash; the four missing variants are the most consequential gap in the set.
         </div>
-
-        <h3>Slots</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Slot</th><th>Default</th><th>Small</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Avatar (Left image=Avatar)</td><td>16 &times; 16dp round</td><td>10 &times; 10dp round</td></tr>
-              <tr><td>Leading icon (Left image=Icon, in text-bearing variants)</td><td>16dp box &middot; 12dp glyph</td><td>10dp box &middot; 6.7dp glyph</td></tr>
-              <tr><td>Leading icon (Icon only variants)</td><td>16dp box &middot; 12dp glyph</td><td>12dp box &middot; 9dp glyph</td></tr>
-              <tr><td>Text container padding &middot; left / right</td><td>2dp inside the slot</td><td>2dp inside the slot</td></tr>
-              <tr><td>Text container padding &middot; top / bottom</td><td>0dp</td><td>0dp</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Small icon-only is 12dp.</strong> The Static and Interactive icon-only variants at Small size use a <strong>12&times;12dp</strong> icon, while every other Small variant uses 10&times;10dp icons. The icon-only treatment gets the extra pixels to compensate for the loss of the text label.
-        </div>
-      </section>
-
-      <!-- ═══ 4. TYPOGRAPHY ═══ -->
-      <section class="ds-section" id="badge-typography">
-        <h2>Typography <a href="#badge-typography" class="anchor">#</a></h2>
-        <p class="intro">Both sizes use SF Pro Text Regular. The Small size shortens line height to the type height and inverts the letter-spacing direction.</p>
-
-        <div class="b-typo-display">
-          <div class="b-typo-sample">
-            <div class="b-typo-tag">Default</div>
-            <div class="b-typo-text b-typo-text-default">Label</div>
-            <div class="b-typo-meta">SF Pro Text &middot; Regular &middot; 13 / 18 &middot; -0.08</div>
-            <div class="b-typo-row-inbadge">
-              <span class="badge-tag">in badge:</span>
-              <span class="badge"><span class="av"></span><span class="lbl">Label</span></span>
-            </div>
-          </div>
-          <div class="b-typo-sample">
-            <div class="b-typo-tag">Small</div>
-            <div class="b-typo-text b-typo-text-small">Label</div>
-            <div class="b-typo-meta">SF Pro Text &middot; Regular &middot; 11 / 11 &middot; +0.06</div>
-            <div class="b-typo-row-inbadge">
-              <span class="badge-tag">in badge:</span>
-              <span class="badge badge-sm"><span class="av"></span><span class="lbl">Label</span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Property</th><th>Default</th><th>Small</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Family</td><td>SF Pro Text</td><td>SF Pro Text</td></tr>
-              <tr><td>Style / weight</td><td>Regular &middot; 400</td><td>Regular &middot; 400</td></tr>
-              <tr><td>Font size</td><td>13dp</td><td>11dp</td></tr>
-              <tr><td>Line height</td><td>18dp</td><td>11dp &middot; type height</td></tr>
-              <tr><td>Letter spacing</td><td>-0.08dp &middot; tight</td><td>+0.06dp &middot; loose</td></tr>
-              <tr><td>iOS text style</td><td><code>iOS/Body 3</code></td><td><code>iOS/Caption 2</code></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-rule" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Single line, no wrapping.</strong> Badges never wrap. The label truncates with an ellipsis before reaching the right padding. Avoid labels longer than ~20 characters at Default size or ~14 at Small.
-        </div>
-
-        <div class="callout callout-warn" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Active &middot; Body 2 asymmetry.</strong> The Interactive Active variant uses <code>iOS/Body 2</code> (15 / 20 &middot; -0.08) instead of <code>iOS/Body 3</code> when <code>Left image=Icon</code> or <code>None</code> &mdash; growing the badge container to 76&times;28 and 58&times;28 respectively. Active with <code>Left image=Avatar</code> stays on <code>iOS/Body 3</code> (13 / 18) so the avatar isn't pushed off-center. Treat this as the current Figma state &mdash; likely intentional emphasis on the Icon / None variants &mdash; until confirmed otherwise.
-        </div>
-      </section>
-
-      <!-- ═══ 5. TOKENS ═══ -->
-      <section class="ds-section" id="badge-tokens">
-        <h2>Color tokens <a href="#badge-tokens" class="anchor">#</a></h2>
-        <p class="intro">Three distinct states with three distinct token sets. Static and Interactive Rest share the same surface and stroke, but Rest swaps the foreground for the brand <code>Interactive</code> color so tappable badges read as affordances at a glance. Active inverts the surface to <code>Surface/Accent</code> and removes the stroke entirely.</p>
-
-        <h3>By state</h3>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>State</th><th>Container fill</th><th>Stroke</th><th>Label</th><th>Leading icon</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Static</strong> &middot; N/A</td>
-                <td><code>Surface/RaisedSecondary</code> &middot; <code>#E6E6E6</code></td>
-                <td><code>Stroke/Container (outer)</code> &middot; 1dp inside &middot; same value as fill</td>
-                <td><code>Text/Secondary</code> &middot; <code>#616161</code></td>
-                <td><code>Icon/Secondary</code></td>
-              </tr>
-              <tr>
-                <td><strong>Interactive</strong> &middot; Rest</td>
-                <td><code>Surface/RaisedSecondary</code> &middot; <code>#E6E6E6</code></td>
-                <td><code>Stroke/Container (outer)</code> &middot; 1dp inside</td>
-                <td><code>Text/Interactive</code> &middot; <code>#4C39B8</code></td>
-                <td><code>Icon/Interactive</code></td>
-              </tr>
-              <tr>
-                <td><strong>Interactive</strong> &middot; Active</td>
-                <td><code>Surface/Accent</code> &middot; <code>#654CF5</code></td>
-                <td>None &mdash; stroke removed</td>
-                <td><code>Text/On Accent</code> &middot; white</td>
-                <td><code>Icon/On Accent</code></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-rule" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Foreground color is the only affordance.</strong> Static and Interactive Rest share container surface and stroke &mdash; the distinguishing signal is purely the label / icon color. Static is neutral <code>Secondary</code>; Rest is brand <code>Interactive</code>. There is no trailing chevron in the current component set.
-        </div>
-
-        <h3>Leading icons</h3>
-        <p>Icon roles follow the state's foreground token, not the Text token. The pairing is per-state:</p>
-        <ul style="margin: var(--sp-2) 0 0 var(--sp-5); font-size: 13px; line-height: 1.7; color: var(--c-text-secondary);">
-          <li><strong>Static</strong> &mdash; leading icon (when <code>Left image=Icon</code>) and icon-only icon bind to <code>Icon/Secondary</code>. Avatars carry their own image content and are unaffected by state.</li>
-          <li><strong>Interactive Rest</strong> &mdash; every icon (leading, icon-only) binds to <code>Icon/Interactive</code>.</li>
-          <li><strong>Interactive Active</strong> &mdash; every icon binds to <code>Icon/On Accent</code>.</li>
-        </ul>
-      </section>
-
-      <!-- ═══ 6. BEHAVIOR ═══ -->
-      <section class="ds-section" id="badge-behavior">
-        <h2>Behavior <a href="#badge-behavior" class="anchor">#</a></h2>
-
         <div class="callout callout-info">
-          <strong>Pill shape, always.</strong> The 999 corner radius isn't a token alias &mdash; it's literal. The badge intentionally bypasses the Monocore corner-radius ladder so that growth in either axis always produces a half-pill.
+          <strong>State is not orthogonal to Type.</strong> Static publishes only <code>N/A</code>; Interactive publishes Rest and Active. Treat Type and State as one combined axis with three real values &mdash; Static, Rest, Active &mdash; rather than a 2 &times; 3 grid.
+        </div>
+      </section>
+
+      <section class="spec-section" id="badge-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#badge-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Height is bounded rather than fixed at Default and pinned at Small; width always hugs the label.</p>
+
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Size</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Left image</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Default</strong></td><td>28dp</td><td>Hugs content</td><td>Hugs label</td><td>Hugs label</td><td>4 &times; 8dp <em>XSmall &middot; Small</em></td><td>2dp <em>Nudge/Small</em></td><td>Avatar 16 &middot; Icon 16 box / 12 glyph</td></tr>
+              <tr><td><strong>Default</strong> &middot; Icon only</td><td>28dp</td><td>28dp</td><td>Hugs glyph</td><td>Hugs glyph</td><td>4 &times; 8dp</td><td>4dp <em>XSmall</em></td><td>Icon 16 box / 12 glyph</td></tr>
+              <tr><td><strong>Small</strong></td><td>16dp <em>with height 18dp also set</em></td><td>18dp</td><td>Hugs label</td><td>Hugs label</td><td>4dp all sides <em>XSmall</em></td><td>0dp <em>Size/None</em></td><td>Avatar 10 &middot; Icon 10 box / 6.667 glyph</td></tr>
+              <tr><td><strong>Small</strong> &middot; Icon only</td><td>16dp</td><td>18dp</td><td>Hugs glyph</td><td>Hugs glyph</td><td>4dp all sides</td><td>2dp <em>Nudge/Small</em></td><td>Static 12 box / 8 glyph &middot; Interactive 10 box / 6.667 glyph</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. The text container adds 2dp of horizontal padding inside the gap.</p>
+
+        <h3>Corner radius</h3>
+        <p>Two published sizes, so two columns &mdash; and the badge deliberately sits outside the Monocore radius ladder in both.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Element</th><th>Default</th><th>Small</th></tr></thead>
+            <tbody>
+              <tr><td>Pill container</td><td>999 &mdash; literal, not a token</td><td>999 &mdash; literal, not a token</td></tr>
+              <tr><td>Avatar</td><td>10000 &mdash; fully rounded</td><td>10000 &mdash; fully rounded</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="callout callout-rule">
-          <strong>Interactive vs Static signals tappability through color alone.</strong> The two share the same surface (<code>RaisedSecondary</code>) and stroke (<code>Container</code>) but diverge on foreground: Static is <code>Text/Secondary</code> (neutral grey), Rest is <code>Text/Interactive</code> (brand). Use Interactive only when the badge opens a menu, filters a list, or otherwise responds to taps &mdash; the brand color is a tap-target promise.
+          <strong>Pill shape, always.</strong> The 999 radius is not a token alias &mdash; it is a literal, and it is deliberate. The badge bypasses the corner-radius ladder so that growth in either axis always produces a half-pill rather than a rounded rectangle.
         </div>
-
         <div class="callout callout-warn">
-          <strong>Active is interactive-only.</strong> There is no Static Active variant. If you need a "selected" indicator on a Static badge, swap the surface manually or use a separate component &mdash; do not retire the semantic meaning of Active by using it for static decoration.
+          <strong>Small sets both a min-height of 16 and a height of 18.</strong> Two competing declarations on the same axis; the fixed height wins, which makes the minimum dead code. Small also carries fractional glyph values (6.667dp) from scaling a 12dp icon rather than choosing a smaller one.
         </div>
-
-        <div class="callout callout-info">
-          <strong>No trailing icon.</strong> Interactive Rest and Static variants at Default size share identical widths (71dp with Avatar/Icon) &mdash; confirming no trailing affordance glyph exists in the set. If a dismiss or chevron affordance is needed, it must come from context (e.g. a filter row pattern), not from the Badge itself.
+        <div class="callout callout-warn">
+          <strong>Icon-only Small differs between Static and Interactive.</strong> Static publishes a 12dp box with an 8dp glyph; Interactive publishes a 10dp box with a 6.667dp glyph. Same size, same content, two geometries.
         </div>
       </section>
 
-      <!-- ═══ 7. VARIANT MATRIX ═══ -->
-      <section class="ds-section" id="badge-matrix">
-        <h2>Variant matrix <a href="#badge-matrix" class="anchor">#</a></h2>
-        <p class="intro">All 20 published variants with their resolved color tokens and typography. Width is auto; height is fixed by Size (and by the Body 2 anomaly on Active &middot; Icon / None).</p>
-        <div class="table-wrap">
+      <section class="spec-section" id="badge-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#badge-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One row per published size, plus the row that breaks the pattern. All weights are Regular (400) on Font Family/Text.</p>
+
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Default</div>
+            <div class="typo-preview"><span style="font-size:13px; font-weight:400; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 3</span><span><strong>Size:</strong> 13dp</span><span><strong>Height:</strong> 18dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Applies to:</strong> Static &amp; Rest</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Default &middot; Active</div>
+            <div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Applies to:</strong> Icon &amp; None only</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Default &middot; Active &middot; Avatar</div>
+            <div class="typo-preview"><span style="font-size:13px; font-weight:400; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 3</span><span><strong>Size:</strong> 13dp</span><span><strong>Height:</strong> 18dp</span><span><strong>&#9888;</strong> stays at Body 3 where its siblings jump to Body 2</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Small</div>
+            <div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text);">Label</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span></div>
+          </div>
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>Selecting a badge changes its text size.</strong> Interactive Rest sets the label in Body 3 at 13dp; Interactive Active sets it in Body 2 at 15dp. Tapping a badge therefore reflows the row it sits in. Worse, the Avatar variant does not do this &mdash; it stays at Body 3 &mdash; so the behaviour is inconsistent within the same state.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Caption 2 is set solid at Small.</strong> 11dp type on an 11dp line height, inside a container fixed at 18dp. There is no room for a descender to breathe and none for large accessibility text sizes.
+        </div>
+      </section>
+
+      <section class="spec-section" id="badge-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Type &times; Size <a href="#badge-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three surfaces across two sizes, plus the accent fill. Foreground colour is the only thing distinguishing Static from Interactive.</p>
+
+        <div class="table-wrap wide">
           <table>
-            <thead>
-              <tr><th>Badge type</th><th>State</th><th>Size</th><th>Left image</th><th>Icon only</th><th>Surface</th><th>Stroke</th><th>Label / icon</th><th>Type</th></tr>
-            </thead>
+            <thead><tr><th>Type &middot; State</th><th>Size</th><th>Fill</th><th>Stroke</th><th>Label</th></tr></thead>
             <tbody>
-              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Avatar</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code></td><td>Body 3</td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Icon</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code> &middot; <code>Icon/Secondary</code></td><td>Body 3</td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Default</td><td>Icon</td><td>True</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Icon/Secondary</code></td><td>&mdash;</td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Default</td><td>None</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code></td><td>Body 3</td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Avatar</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code></td><td>Caption 2</td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Icon</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code> &middot; <code>Icon/Secondary</code></td><td>Caption 2</td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Small</td><td>Icon</td><td>True</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Icon/Secondary</code></td><td>&mdash;</td></tr>
-              <tr><td>Static</td><td>N/A</td><td>Small</td><td>None</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Secondary</code></td><td>Caption 2</td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Avatar</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code></td><td>Body 3</td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Icon</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code> &middot; <code>Icon/Interactive</code></td><td>Body 3</td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>Icon</td><td>True</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Icon/Interactive</code></td><td>&mdash;</td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Default</td><td>None</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code></td><td>Body 3</td></tr>
-              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Avatar</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td><td><code>Text/On Accent</code></td><td>Body 3</td></tr>
-              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Icon</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td><td><code>Text/On Accent</code> &middot; <code>Icon/On Accent</code></td><td>Body 2 <em>(anomaly)</em></td></tr>
-              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>Icon</td><td>True</td><td><code>Accent</code></td><td>&mdash;</td><td><code>Icon/On Accent</code></td><td>&mdash;</td></tr>
-              <tr><td>Interactive</td><td>Active</td><td>Default</td><td>None</td><td>False</td><td><code>Accent</code></td><td>&mdash;</td><td><code>Text/On Accent</code></td><td>Body 2 <em>(anomaly)</em></td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Avatar</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code></td><td>Caption 2</td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Icon</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code> &middot; <code>Icon/Interactive</code></td><td>Caption 2</td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>Icon</td><td>True</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Icon/Interactive</code></td><td>&mdash;</td></tr>
-              <tr><td>Interactive</td><td>Rest</td><td>Small</td><td>None</td><td>False</td><td><code>RaisedSecondary</code></td><td><code>Container</code></td><td><code>Text/Interactive</code></td><td>Caption 2</td></tr>
+              <tr><td rowspan="2"><strong>Static &middot; N/A</strong></td><td>Default</td><td>Surface/RaisedSecondary <span class="btn-swatch" style="background:#e6e6e6;"></span></td><td>1dp Stroke/Container <span class="btn-swatch" style="background:#e6e6e6;"></span></td><td>Text/Secondary</td></tr>
+              <tr><td>Small</td><td>Surface/RaisedTertiary <span class="btn-swatch" style="background:#f5f5f5;"></span></td><td>1dp Stroke/Container</td><td>Text/Secondary</td></tr>
+              <tr><td rowspan="3"><strong>Interactive &middot; Rest</strong></td><td>Default</td><td>Surface/RaisedSecondary <span class="btn-swatch" style="background:#e6e6e6;"></span></td><td>1dp Stroke/Container</td><td>Text/Interactive</td></tr>
+              <tr><td>Default &middot; <em>Left image = None</em></td><td>Surface/RaisedPrimary <span class="btn-swatch" style="background:#e0e0e0;"></span></td><td>1dp Stroke/Container</td><td>Text/Interactive</td></tr>
+              <tr><td>Small</td><td>Surface/RaisedTertiary <span class="btn-swatch" style="background:#f5f5f5;"></span></td><td>1dp Stroke/Container</td><td>Text/Interactive</td></tr>
+              <tr><td><strong>Interactive &middot; Active</strong></td><td>Default only</td><td>Surface/Accent <span class="btn-swatch" style="background:#654cf5;"></span></td><td>&mdash; <em>border removed</em></td><td>Text/On Accent</td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="callout callout-rule">
+          <strong>Stroke and fill are the same value at rest.</strong> Surface/RaisedSecondary and Stroke/Container both resolve to #e6e6e6, so the border is invisible on a Default badge. It exists to hold the shape when the surface changes &mdash; not to be seen.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Three surfaces for one component.</strong> Default uses RaisedSecondary, Small uses RaisedTertiary, and Interactive&nbsp;Rest with <code>Left image = None</code> uses RaisedPrimary &mdash; one variant out of twenty reaching for a fourth-darkest grey with no evident reason. Two of these three are probably drift.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Active drops the border.</strong> Every other variant carries a 1dp stroke; Active has none. The change is invisible against the accent fill but it makes the Active badge 2dp smaller than its Rest counterpart, which shows in a row of badges where only one is selected.
+        </div>
+      </section>
+
+      <section class="spec-section" id="badge-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#badge-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="bdg-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Where each type earns its keep. Flip the toggle to check every example on the dark theme.</p>
+
+        <div class="bdg-uc-stage fbdg-scope" id="bdg-uc-stage">
+        <div class="usecase-grid" id="bdg-uc-grid"></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="badge-behavior">
+        <span class="section-eyebrow eyebrow-impl">Behaviour</span>
+        <h2>Behaviour <a href="#badge-behavior" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p><strong>Interactive vs Static signals tappability through colour alone.</strong> The two share the same surface and stroke and diverge only on foreground &mdash; Static is Text/Secondary, Rest is Text/Interactive. Use Interactive only when the badge opens a menu, filters a list or otherwise responds to taps; the brand colour is a promise of a tap target.</p>
+        <p><strong>Active is interactive-only.</strong> There is no Static Active variant. If you need a selected indicator on a Static badge, that is a different component &mdash; do not retire the semantic meaning of Active by using it for decoration.</p>
+        <p><strong>No trailing icon.</strong> Interactive Rest and Static at Default share identical widths, which confirms there is no trailing affordance glyph anywhere in the set. A dismiss or chevron has to come from the surrounding pattern, not from the Badge.</p>
+        <div class="callout callout-constraint">
+          <strong>Colour alone is not a sufficient signal.</strong> Because Static and Interactive differ only in label colour, a user who cannot distinguish those two hues has no way to tell a tappable badge from a decorative one. Interactive badges need a non-colour cue &mdash; position, grouping, or an announced role.
+        </div>
+      </section>
+
+      <section class="spec-section" id="badge-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#badge-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Both sizes are under a 44dp target.</strong> Default is 28dp and Small is 18dp. Interactive badges must have their hit area extended by the host; the visual pill is never the target.</li>
+          <li><strong>Icon-only badges carry no accessible name.</strong> Turning Icon only on removes the label and with it everything announceable. Supply a name explicitly on every icon-only instance.</li>
+          <li><strong>Selected state must be announced.</strong> Active is a fill change and a font-size change &mdash; neither reaches a screen reader. Expose the selected state programmatically.</li>
+          <li><strong>Small type is set solid and clipped.</strong> Caption 2 at 11dp on an 11dp line height inside an 18dp box will truncate rather than reflow at large text sizes. Do not put load-bearing information in a Small badge.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#badge-playground">Build a Badge</a>
+        <a href="#badge-variants">Variant Axes</a>
+        <a href="#badge-layout">Layout &amp; Spacing</a>
+        <a href="#badge-typography">Typography</a>
+        <a href="#badge-color">Colour</a>
+        <a href="#badge-usage">Usage Examples</a>
+        <a href="#badge-behavior">Behaviour</a>
+        <a href="#badge-a11y">Accessibility</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Badge &middot; Spec view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83392-62610</code> &middot; August 2026
+  </footer>
+</div>
+
+<script>
+// ── Badge Lab ──
+(() => {
+  const mount = document.getElementById('bdg-mount');
+  if (!mount) return;
+  const stage = document.getElementById('bdg-stage');
+  const note = document.getElementById('bdg-note');
+  const stateGroup = document.getElementById('bdg-stategroup');
+  const state = { type: 'static', state: 'rest', size: 'default', left: 'avatar' };
+  const cb = id => document.getElementById(id).checked;
+
+  const ICO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="5.5"/><path d="M8 5.5v3"/></svg>';
+
+  function markup(o) {
+    const cls = ['fbdg'];
+    if (o.size === 'small') cls.push('sz-small');
+    if (o.type === 'interactive') cls.push(o.state === 'active' ? 'ty-active' : 'ty-rest');
+    if (o.iconly) cls.push('iconly');
+    cls.push('li-' + o.left);
+    let inner = '';
+    if (o.iconly) {
+      inner = '<span class="ic">' + ICO + '</span>';
+    } else {
+      if (o.left === 'avatar') inner += '<span class="av"></span>';
+      if (o.left === 'icon') inner += '<span class="ic">' + ICO + '</span>';
+      inner += '<span class="txt">Label</span>';
+    }
+    return '<span class="' + cls.join(' ') + '">' + inner + '</span>';
+  }
+
+  function published(o) {
+    if (o.iconly && o.left !== 'icon') return false;
+    if (o.type === 'interactive' && o.state === 'active' && o.size === 'small') return false;
+    return true;
+  }
+
+  function render() {
+    const iconly = cb('bdg-iconly');
+    const o = { type: state.type, state: state.state, size: state.size, left: state.left, iconly };
+    stateGroup.style.display = state.type === 'interactive' ? '' : 'none';
+    const ok = published(o);
+    mount.innerHTML = markup(o);
+    const el = mount.querySelector('.fbdg');
+    if (el) el.style.opacity = ok ? '1' : '0.35';
+    stage.classList.toggle('dark', cb('bdg-dark'));
+
+    const stateName = state.type === 'static' ? 'N/A' : (state.state === 'active' ? 'Active' : 'Rest');
+    if (!ok) {
+      note.innerHTML = '<strong style="color:var(--c-red);">Not published</strong> &middot; ' +
+        (iconly && o.left !== 'icon'
+          ? 'Icon only is only published with Left image = Icon.'
+          : 'Active is published at Default only &mdash; there is no Active at Small.');
+    } else {
+      note.innerHTML = '<code>Badge view</code> &middot; Type = ' + (state.type === 'static' ? 'Static' : 'Interactive') +
+        ' &middot; State = ' + stateName +
+        ' &middot; Size = ' + (state.size === 'small' ? 'Small' : 'Default') +
+        ' &middot; Left image = ' + state.left.charAt(0).toUpperCase() + state.left.slice(1) +
+        (iconly ? ' &middot; Icon only' : '');
+    }
+  }
+
+  document.querySelectorAll('#page-badge-spec .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-badge-spec .bdg-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+
+  const grid = document.getElementById('bdg-uc-grid');
+  if (grid) {
+    const cases = [
+      ['Metadata tag', {type:'static', size:'default', left:'avatar'}, 'Static &middot; Default &middot; Avatar'],
+      ['Compact list tag', {type:'static', size:'small', left:'icon'}, 'Static &middot; Small &middot; Icon'],
+      ['Tappable filter', {type:'interactive', state:'rest', size:'default', left:'icon'}, 'Interactive &middot; Rest &middot; Default'],
+      ['Selected filter', {type:'interactive', state:'active', size:'default', left:'icon'}, 'Interactive &middot; Active &middot; Default'],
+      ['Icon-only marker', {type:'static', size:'default', left:'icon', iconly:true}, 'Static &middot; Icon only'],
+      ['Label with no image', {type:'interactive', state:'rest', size:'default', left:'none'}, 'Interactive &middot; Rest &middot; None']
+    ];
+    grid.innerHTML = cases.map(c =>
+      '<div class="usecase-item"><span class="uc-label">' + c[0] + '</span>' +
+      '<div style="padding:var(--sp-3) 0;">' + markup(c[1]) + '</div>' +
+      '<span class="uc-config">' + c[2] + '</span></div>').join('');
+  }
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('bdg-uc-theme-toggle');
+  const stage = document.getElementById('bdg-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
+</div>
+
+<div class="page" id="page-badge-spec-architecture" data-page="badge-spec-architecture">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Badge Component</div>
+    <h1>Architecture</h1>
+    <p class="subtitle">Why a five-axis set publishes twenty variants instead of seventy-two, what the two slots are responsible for, and where the published values drift.</p>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="bda-model">
+        <span class="section-eyebrow eyebrow-design">Model</span>
+        <h2>The Configuration Model <a href="#bda-model" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Five axes are declared; only three of them are genuinely independent.</p>
+        <p><strong>Badge type</strong> and <strong>State</strong> are one axis wearing two names. Static publishes only <code>N/A</code>; Interactive publishes Rest and Active. There is no Static&nbsp;Rest and no Static&nbsp;Active, so the real axis has three values &mdash; Static, Rest, Active &mdash; and splitting it in two is what makes the set look sparser than it is.</p>
+        <p><strong>Icon only</strong> and <strong>Left image</strong> are also coupled: Icon&nbsp;only is published exclusively with <code>Left image = Icon</code>. An icon-only badge showing an avatar is not expressible, which is correct &mdash; an avatar with no label is an Avatar component, not a Badge &mdash; but it means the two properties are not orthogonal either.</p>
+        <p>That leaves <strong>Size</strong> as the only fully independent axis, and even it is incomplete: Active does not publish at Small.</p>
+        <div class="callout callout-rule">
+          <strong>Tappability is carried by foreground colour and nothing else.</strong> Static and Interactive Rest are the same pill with the same surface and the same stroke; only the label colour differs. That is the single most important thing to know about this component, and the reason it cannot be the only signal that something is tappable.
+        </div>
+      </section>
+
+      <section class="spec-section" id="bda-anatomy">
+        <span class="section-eyebrow eyebrow-design">Structure</span>
+        <h2>Figma Anatomy <a href="#bda-anatomy" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">A single horizontal row inside a pill. Two slots, left to right, and no trailing affordance anywhere in the set. <span style="color:var(--c-accent); font-weight:600;">Purple</span> entries are slots, <span style="color:#1565c0; font-weight:600;">blue</span> are bound text properties.</p>
+
+        <details class="anat-acc" open>
+          <summary>Badge view<span class="anat-acc-meta">83392-62610 &middot; 20 variants</span></summary>
+          <div class="anat-tree">Badge view  (Type &times; State &times; Size &times; Left image &times; Icon only &middot; radius 999)
+├─ <span class="slot-tag">[slot] Icon</span>  <span class="opt">— Left image = Avatar or Icon</span>
+│  ├─ Avatar   (16dp Default &middot; 10dp Small &middot; radius 10000)
+│  └─ Icon     (16 box / 12 glyph Default &middot; 10 box / 6.667 glyph Small)
+└─ Text container  (2dp horizontal padding)
+   └─ <span class="txt-tag">[text] Label</span>  <span class="opt">— hidden when Icon only = True</span>
+
+Icon only = True
+└─ <span class="slot-tag">[slot] Placeholder</span>  (16 box / 12 glyph Default
+                        &middot; 12 box / 8 glyph Small Static
+                        &middot; 10 box / 6.667 glyph Small Interactive)</div>
+        </details>
+
+        <h3>Properties &amp; Slots</h3>
+        <p>Two slots and one bound text property. Everything else is a variant.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Icon <em>(left image)</em></td><td>Instance swap</td><td>Avatar</td><td>Avatar 16dp or icon 16 box / 12 glyph at Default; 10dp / 10 box at Small. Hidden when <code>Left image = None</code>.</td></tr>
+              <tr><td>Text container</td><td>Container</td><td>Visible</td><td>Holds the label with 2dp of horizontal padding. Hidden when <code>Icon only = True</code>.</td></tr>
+              <tr><td>Label</td><td>Text</td><td><code>Label</code></td><td>Single line, never wraps; truncates with ellipsis at Default Static.</td></tr>
+              <tr><td><em>Trailing icon</em></td><td>&mdash;</td><td>&mdash;</td><td>Does not exist. Interactive Rest and Static share identical widths at Default, which confirms it.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>No wrappers, no nesting.</strong> Like Button, the Badge is a single auto-layout row with at most two children. The variant does all the work &mdash; which is why twenty variants can cover a five-axis surface without the component itself becoming complicated.
+        </div>
+      </section>
+
+      <section class="spec-section" id="bda-debt">
+        <span class="section-eyebrow eyebrow-impl">Known issues</span>
+        <h2>Published Debt <a href="#bda-debt" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Issue</th><th>Where</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td>No Active state at Small</td><td>Interactive &middot; Small</td><td>A Small badge can be tapped but cannot show that it is selected &mdash; four missing variants</td></tr>
+              <tr><td>Active raises the label from Body 3 to Body 2</td><td>Interactive &middot; Active &middot; Icon and None</td><td>Selecting a badge changes its text size and reflows the row it sits in</td></tr>
+              <tr><td>&hellip; except with an Avatar, which stays at Body 3</td><td>Interactive &middot; Active &middot; Avatar</td><td>The size jump is inconsistent within a single state</td></tr>
+              <tr><td>Three surfaces across the set</td><td>RaisedSecondary, RaisedTertiary, RaisedPrimary</td><td>Small uses a lighter grey than Default, and one Rest variant uses a darker one</td></tr>
+              <tr><td>Active removes the 1dp stroke</td><td>Interactive &middot; Active</td><td>The Active badge is 2dp smaller than its Rest counterpart</td></tr>
+              <tr><td>Small declares both min-height 16 and height 18</td><td>All Small variants</td><td>Competing declarations; the minimum is dead code</td></tr>
+              <tr><td>Icon-only Small geometry differs by Type</td><td>Static 12/8 vs Interactive 10/6.667</td><td>Same size and content, two different glyph boxes</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>The missing Active at Small is the one to fix first.</strong> It is not a cosmetic inconsistency &mdash; it is a state a real interface needs and cannot express. Everything else on this list is drift; this one is a hole.
         </div>
       </section>
 
     </main>
 
-    <!-- ── Sidebar / TOC ──────────────────────────────── -->
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#badge-anatomy">Anatomy</a>
-        <a href="#badge-variants">Variants</a>
-        <a href="#badge-spacing">Spacing &amp; geometry</a>
-        <a href="#badge-typography">Typography</a>
-        <a href="#badge-tokens">Color tokens</a>
-        <a href="#badge-behavior">Behavior</a>
-        <a href="#badge-matrix">Variant matrix</a>
+        <a href="#bda-model">Configuration Model</a>
+        <a href="#bda-anatomy">Figma Anatomy</a>
+        <a href="#bda-debt">Published Debt</a>
       </nav>
     </aside>
-
   </div>
 
   <footer class="docs-footer">
-    Badge &middot; Component Specification &middot; Figma: CXD-iOS (<code>alxBFZw33jyKUiuLXQ9oth</code>) &middot; Node <code>83392:62610</code>
+    Badge &middot; Architecture view &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83392-62610</code> &middot; August 2026
   </footer>
-
 </div>
 </div>
 
