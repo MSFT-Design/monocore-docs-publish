@@ -2070,8 +2070,9 @@
                aria-labelledby="nav-acc-label-buttons">
             <a href="#fab" data-link="fab">FAB</a>
             <a href="#split-button" data-link="split-button">Split Button</a>
-            <a href="#pill-button" data-link="pill-button">Pill button</a>
-            <a href="#tile-button" data-link="tile-button">Tile button</a>
+            <a href="#circular-button" data-link="circular-button">Circular button</a>
+            <a href="#jump-button" data-link="jump-button">Jump button</a>
+            <a href="#chip" data-link="chip">Chip</a>
           </div>
         </div>
         <a href="#callout" data-link="callout">Call Out (Tooltip)</a>
@@ -2099,7 +2100,17 @@
         <a href="#content-card" data-link="content-card">Content Card</a>
         <a href="#divider" data-link="divider">Divider</a>
         <a href="#empty-list" data-link="empty-list">Empty List View</a>
-        <a href="#filter" data-link="filter">Filter</a>
+        <div class="nav-acc">
+          <h3 class="nav-acc-header">
+            <a href="#filter" data-link="filter" id="nav-acc-label-filter">Filter</a>
+            <button type="button" class="nav-acc-toggle" aria-expanded="false"
+                    aria-controls="nav-acc-panel-filter" aria-label="Filter subpages"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 2.5 8 6l-3.5 3.5"/></svg></button>
+          </h3>
+          <div class="nav-acc-kids" id="nav-acc-panel-filter" role="region"
+               aria-labelledby="nav-acc-label-filter" hidden>
+            <a href="#tile-grid" data-link="tile-grid">Tile grid</a>
+          </div>
+        </div>
         <a href="#badge-spec" data-link="badge-spec">Badge</a>
       </div>
       <div class="nav-section">
@@ -11785,19 +11796,118 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
   <header class="docs-header">
     <div class="eyebrow">Components</div>
     <h1>Filter</h1>
-    <p class="subtitle">Pill button filter rows and filter bar patterns.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+    <p class="subtitle">Three published sets that together make up filtering in Monocore iOS: a horizontal filter button, a vertical one, and the segmented pill bar they sit in. Thirty-two variants across the family, and two typos baked into the published names.</p>
+    <div class="meta"><span>18 + 12 + 2 variants</span><span>3 sets</span><span>Figma: Monocore-iOS &middot; node <code>72552-289748</code></span></div>
   </header>
+
   <div class="docs-layout">
     <main class="docs-main">
-      <section class="spec-section">
-        <span class="section-eyebrow eyebrow-design">Status</span>
-        <h2>Documentation coming soon</h2>
-        <p class="section-intro">The Filter component is shipped (🟢) in the Monocore iOS library. Its full Spec / Guidance / Architecture documentation follows the same structure as the Card and Badge pages and is being drafted from the published Figma component set.</p>
+
+      <section class="spec-section" id="flt-family">
+        <span class="section-eyebrow eyebrow-design">Family</span>
+        <h2>The Three Sets <a href="#flt-family" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">All three live on the same Figma page and share the Semantic / State / Active vocabulary &mdash; but not the same values.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Set</th><th>Node</th><th>Axes</th><th>Variants</th><th>Size</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Horizontal filter btn</strong></td><td><code>72552-289748</code></td><td>Semantic &times; State &times; Active</td><td>18</td><td>71&ndash;72 &times; 32dp</td></tr>
+              <tr><td><strong>Vertical filter btn</strong></td><td><code>105935-54688</code></td><td>Semantic &times; State &times; Active</td><td>12</td><td>61 &times; 51dp</td></tr>
+              <tr><td><strong>Pill bar Segmented control</strong></td><td><code>83478-37018</code></td><td>Semantic</td><td>2</td><td>402 &times; 44dp</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
+
+      <section class="spec-section" id="flt-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#flt-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Semantic</h4><div class="vals"><span class="val">Primary</span><span class="val">Secondary</span><span class="val">Danger</span></div></div>
+          <div class="btn-axis"><h4>State</h4><div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Dissabled</span></div></div>
+          <div class="btn-axis"><h4>Active</h4><div class="vals"><span class="val">True</span><span class="val">False</span></div></div>
+        </div>
+        <p>Horizontal publishes all three Semantic values &mdash; 3 &times; 3 &times; 2 = 18. Vertical publishes only Primary and Secondary &mdash; 2 &times; 3 &times; 2 = 12. The Pill bar has a Semantic axis alone, with Primary and Secondary.</p>
+
+        <div class="callout callout-constraint">
+          <strong>&ldquo;Dissabled&rdquo; is published with two S's.</strong> It appears on all thirty variants of both filter buttons. Every other component in the library uses <code>Disabled</code> &mdash; and the Circular button uses <code>Disable</code>. Three spellings of one state across one library is a code-generation problem, not a cosmetic one.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>The horizontal set's frame is named &ldquo;Horizontal filer btn&rdquo;.</strong> Missing a T. It is the frame rather than the component set, so it will not break instance swapping &mdash; but it does make the component hard to find by search.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Vertical has no Danger.</strong> Horizontal publishes a Danger semantic; vertical does not. A destructive filter can be expressed in one orientation and not the other, with no published guidance on what to do in the vertical case.
+        </div>
+      </section>
+
+      <section class="spec-section" id="flt-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#flt-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Both filter buttons are fixed-height; the horizontal one shifts width by a pixel depending on Active, which is worth knowing before you lay out a row of them.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Set</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Horizontal</strong> &middot; Active = True</td><td>32dp</td><td>32dp</td><td>72dp</td><td>72dp</td><td>Published at 72dp across all Semantic values</td></tr>
+              <tr><td><strong>Horizontal</strong> &middot; Active = False</td><td>32dp</td><td>32dp</td><td>71dp</td><td>71dp</td><td>1dp narrower &mdash; see note</td></tr>
+              <tr><td><strong>Vertical</strong></td><td>51dp</td><td>51dp</td><td>61dp</td><td>61dp</td><td>Constant across every variant</td></tr>
+              <tr><td><strong>Pill bar</strong></td><td>44dp</td><td>44dp</td><td>402dp</td><td>402dp</td><td>Full-width container for the buttons</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+
+        <div class="callout callout-warn">
+          <strong>Active costs a pixel.</strong> Every Active = True horizontal variant is 72dp wide and every Active = False variant is 71dp. Toggling a filter therefore reflows the row by 1dp per chip &mdash; invisible on one, visible as a jitter across five.
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Neither filter button publishes a Size axis, so there is a single column per set.</p>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+          <tbody>
+            <tr><td>Horizontal filter btn</td><td>Not yet verified &mdash; see note below</td></tr>
+            <tr><td>Vertical filter btn</td><td>Not yet verified &mdash; see note below</td></tr>
+            <tr><td>Pill bar Segmented control</td><td>Not yet verified &mdash; see note below</td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="spec-section" id="flt-pending">
+        <span class="section-eyebrow eyebrow-impl">Status</span>
+        <h2>What Is Not Yet Verified <a href="#flt-pending" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Everything above &mdash; the three sets, their axes, variant counts, node IDs, published sizes and the naming defects &mdash; is read from a fresh Figma pull and is safe to rely on.</p>
+        <p>Not yet pulled: per-variant fills, strokes, padding, gaps, icon sizes, type styles and corner radii. This page deliberately shows those as unverified rather than inferring them from the sizes, because a 32dp chip with three Semantic values and an Active toggle has too many plausible colour schemes to guess between.</p>
+        <div class="callout callout-rule">
+          <strong>Do not implement colour from this page yet.</strong> Use it for the variant model and the naming defects. The Colour and Typography sections will land with the next pull of <code>72552-289748</code>.
+        </div>
+      </section>
+
+      <section class="spec-section" id="flt-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#flt-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Horizontal filter buttons sit in a scrolling row above a list. The vertical form &mdash; taller than it is wide, at 61 &times; 51 &mdash; stacks a glyph over a label and belongs in a grid rather than a row. The Pill bar is the segmented container that holds a fixed, mutually-exclusive set.</p>
+        <p>For a single removable selection rather than a filter toggle, use <a href="#chip" data-link="chip">Chip</a> &mdash; it is the same size class and is frequently confused with the horizontal filter button.</p>
+        <div class="callout callout-warn">
+          <strong>Active is not the same as Pressed.</strong> Active describes whether the filter is applied; State describes what the finger is doing. Both axes are published on both filter buttons, and conflating them is the most likely implementation error in this family.
+        </div>
+      </section>
+
     </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#flt-family">The Three Sets</a>
+        <a href="#flt-variants">Variant Axes</a>
+        <a href="#flt-layout">Layout &amp; Spacing</a>
+        <a href="#flt-pending">Not Yet Verified</a>
+        <a href="#flt-notes">When to Use It</a>
+      </nav>
+    </aside>
   </div>
-  <footer class="docs-footer">Filter &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+  <footer class="docs-footer">Filter &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> nodes <code>72552-289748</code>, <code>105935-54688</code>, <code>83478-37018</code> &middot; August 2026</footer>
 </div>
 </div>
 
@@ -12902,26 +13012,6 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 </div>
 
-<div class="page" id="page-fab" data-page="fab">
-<div class="docs-shell">
-  <header class="docs-header">
-    <div class="eyebrow">Button Family</div>
-    <h1>FAB</h1>
-    <p class="subtitle">Floating action button.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page queued</span></div>
-  </header>
-  <div class="docs-layout"><main class="docs-main">
-    <section class="spec-section">
-      <span class="section-eyebrow eyebrow-design">Status</span>
-      <h2>Documentation queued</h2>
-      <p class="section-intro">FAB is shipped in the Monocore iOS library. Its Spec and Architecture pages follow the Button template &mdash; interactive configurator, variant axes, layout and colour tables, assembled examples, anatomy accordion &mdash; and will be written from a fresh pull of the published component set.</p>
-      <p>Until then, the <a href="#buttons" data-link="buttons">Button</a> page documents the shared shell: the size ramp, the type styles, and the colour behaviour that the whole family inherits.</p>
-    </section>
-  </main></div>
-  <footer class="docs-footer">FAB &middot; Queued &middot; Source: Monocore iOS library</footer>
-</div>
-</div>
-
 <div class="page" id="page-split-button" data-page="split-button">
 <div class="docs-shell">
   <header class="docs-header">
@@ -12942,43 +13032,860 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 </div>
 
-<div class="page" id="page-pill-button" data-page="pill-button">
+<style>
+  /* ── Button-family & Filter-family preview components ── */
+  .bf-stage {
+    display: flex; flex-wrap: wrap; gap: var(--sp-5);
+    background: var(--mc-surface-raised-base);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-8) var(--sp-5);
+    justify-content: center; align-items: flex-end;
+    margin: var(--sp-4) 0;
+  }
+  .bf-cell { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
+  .bf-cap { font-size: 11.5px; color: var(--grey-56); text-align: center; max-width: 150px; line-height: 1.4; }
+
+  /* FAB — 83363-8131 */
+  .ffab {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 16px; border: 0; border-radius: var(--radius-rounded);
+    background: var(--text-interactive); color: var(--grey-100);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.14), 0 0 2px rgba(0,0,0,0.12);
+    font-family: inherit; cursor: pointer;
+  }
+  .ffab .g { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; padding: 2px; }
+  .ffab .g svg { width: 20px; height: 20px; }
+  .ffab .t { font-size: 17px; line-height: 22px; letter-spacing: -0.41px; white-space: nowrap; }
+  .ffab.pressed { background: var(--brand-accent-dominant); }
+
+  /* Circular button — 83396-233079 */
+  .fcirc {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-rounded); border: 0; position: relative;
+    color: var(--grey-100); cursor: pointer; font-family: inherit;
+  }
+  .fcirc.lg { width: 52px; height: 52px; }
+  .fcirc.sm { width: 28px; height: 28px; }
+  .fcirc.lg svg { width: 20px; height: 20px; }
+  .fcirc.sm svg { width: 12px; height: 12px; }
+  .fcirc.pri-accent   { background: var(--text-interactive); }
+  .fcirc.pri-accent.st-pressed { background: var(--brand-accent-dominant); }
+  .fcirc.pri-dominant { background: var(--grey-0); }
+  .fcirc.pri-dominant.st-pressed { background: #949494; }
+  .fcirc.pri-secondary { background: var(--brand-accent-tertiary); border: 0.5px solid var(--brand-accent-dominant); color: var(--brand-accent-dominant); }
+  .fcirc.pri-secondary.st-pressed { background: var(--button-stroke-outline); border-color: var(--text-interactive); color: var(--grey-100); }
+  .fcirc.pri-tertiary { background: var(--grey-88); border: 0.5px solid var(--mc-stroke-container-raised); color: var(--mc-text-primary); }
+  .fcirc.pri-tertiary.st-pressed { background: var(--grey-94); }
+  .fcirc.st-disable { background: var(--grey-88); border: 0; color: var(--mc-text-disabled); cursor: default; }
+  .fcirc .dot {
+    position: absolute; top: 1px; left: 16px;
+    width: 8px; height: 8px; border-radius: var(--radius-rounded);
+    background: #cc4a31; border: 2px solid var(--grey-100);
+  }
+
+  /* Jump button — 83380-16685 */
+  .fjump {
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+    background: var(--mc-surface-floating);
+    border: 0.5px solid rgba(0,0,0,0.05);
+    border-radius: var(--radius-rounded);
+    padding: 5px 12px 5px 10px;
+    color: var(--mc-text-interactive);
+    font-size: 13px; font-weight: 500; line-height: 18px; letter-spacing: -0.08px;
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.12)) drop-shadow(0 8px 8px rgba(0,0,0,0.14));
+    font-family: inherit; cursor: pointer; white-space: nowrap;
+  }
+  .fjump svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .fjump.lg { width: 141px; height: 46.571px; padding: 5px 7px; border-radius: 40px; }
+
+  /* Chip — 105757-36293 */
+  .fchip {
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: var(--radius-strong); max-width: 250px; min-height: 28px;
+    border: 1px solid var(--grey-88); background: var(--mc-surface-raised-tertiary);
+    font-family: inherit; cursor: pointer;
+  }
+  .fchip .c {
+    display: flex; align-items: center; gap: 8px; min-width: 48px;
+    padding: 6px 12px; overflow: hidden;
+  }
+  .fchip .ic { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; padding: 2px; flex-shrink: 0; }
+  .fchip .ic svg { width: 16px; height: 16px; }
+  .fchip .l { font-size: 13px; font-weight: 500; line-height: 18px; letter-spacing: -0.08px; max-width: 200px; color: var(--mc-text-primary); }
+  .fchip.brand-pressed { background: var(--grey-94); border: 0; }
+  .fchip.brand-pressed .l { color: var(--grey-38); }
+  .fchip.brand-disabled { background: var(--grey-94); border: 0; cursor: default; }
+  .fchip.brand-disabled .l, .fchip.brand-disabled .ic { color: var(--mc-text-disabled); }
+  .fchip.subtle { background: transparent; border: 1px solid var(--grey-88); }
+  .fchip.subtle .c { min-height: 32px; }
+  .fchip.subtle .l { color: var(--mc-text-interactive); }
+  .fchip.subtle-pressed .l { color: var(--button-stroke-outline); }
+  .fchip.subtle-disabled { cursor: default; }
+  .fchip.subtle-disabled .l, .fchip.subtle-disabled .ic { color: var(--mc-text-disabled); }
+
+  /* Tile button — 84003-42205 */
+  .ftile {
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    border-radius: var(--radius-default);
+    background: var(--mc-surface-raised-tertiary);
+    color: var(--mc-text-primary);
+    font-family: inherit; cursor: pointer; border: 0;
+  }
+  .ftile.md { width: 111.67px; height: 60px; }
+  .ftile.lg { width: 120px; height: 100px; }
+  .ftile svg { width: 24px; height: 24px; }
+  .ftile .l { font-size: 12px; line-height: 16px; }
+  .ftile.secondary { background: var(--mc-surface-raised-base); }
+  .ftile.disabled { color: var(--mc-text-disabled); cursor: default; }
+  .ftile.empty { background: transparent; border: 1px dashed var(--mc-stroke-container); color: var(--grey-56); }
+  .ftile-row { display: flex; gap: 4px; }
+</style>
+
+<div class="page" id="page-fab" data-page="fab">
 <div class="docs-shell">
+
   <header class="docs-header">
     <div class="eyebrow">Button Family</div>
-    <h1>Pill button</h1>
-    <p class="subtitle">The compact, fully-rounded button used for filters and inline choices.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>12 variants</span><span>Spec page queued</span></div>
+    <h1>FAB</h1>
+    <p class="subtitle">The floating action button: one circular control, pinned above the content, for the single most important action on a screen. Two states, one boolean, and a shadow that is doing more work than it looks.</p>
+    <div class="meta"><span>2 variants</span><span>1 axis</span><span>56dp collapsed</span><span>Figma: Monocore-iOS &middot; node <code>83363-8131</code></span></div>
   </header>
-  <div class="docs-layout"><main class="docs-main">
-    <section class="spec-section">
-      <span class="section-eyebrow eyebrow-design">Status</span>
-      <h2>Documentation queued</h2>
-      <p class="section-intro">Pill button is shipped in the Monocore iOS library with 12 published variants (component key <code>b26a29fa5ac1df40d4e44974dbe8301eb076c6e5</code>). Its Spec and Architecture pages follow the Button template and will be written from a fresh pull of the published set &mdash; the variant count above is carried from an earlier session and has not yet been re-verified against Figma.</p>
-      <p>See <a href="#buttons" data-link="buttons">Button</a> for the shared size ramp and colour behaviour.</p>
-    </section>
-  </main></div>
-  <footer class="docs-footer">Pill button &middot; Queued &middot; Source: Monocore iOS library</footer>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="fab-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>All Variants <a href="#fab-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage">
+          <div class="bf-cell"><button class="ffab" type="button"><span class="g"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4.5v11M4.5 10h11"/></svg></span></button><span class="bf-cap">Rest &middot; Show text off</span></div>
+          <div class="bf-cell"><button class="ffab" type="button"><span class="g"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4.5v11M4.5 10h11"/></svg></span><span class="t">New chat</span></button><span class="bf-cap">Rest &middot; Show text on</span></div>
+          <div class="bf-cell"><button class="ffab pressed" type="button"><span class="g"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4.5v11M4.5 10h11"/></svg></span></button><span class="bf-cap">Pressed</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="fab-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axis <a href="#fab-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One variant property with two values, plus a boolean that reveals the label.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Values</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><code>Rest</code></td><td>Variant</td><td>Rest, Pressed</td><td>Rest</td></tr>
+              <tr><td>Show text</td><td>Boolean</td><td>&mdash;</td><td>Off</td></tr>
+              <tr><td>Icon</td><td>Instance swap</td><td>&mdash;</td><td>Add glyph</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>The variant property is named <code>Rest</code>, not <code>State</code>.</strong> Its values are Rest and Pressed, so the property name and one of its values are the same word. Every other component in the library calls this axis State. Rename it at the source.
+        </div>
+      </section>
+
+      <section class="spec-section" id="fab-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#fab-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The FAB has no Size axis &mdash; it is 56dp square collapsed, and grows horizontally when the label is shown.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>State</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Icon box</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Rest</strong></td><td>56dp</td><td>56dp</td><td>56dp</td><td>Hugs label</td><td>16dp <em>Size/Large</em></td><td>8dp <em>Size/Small</em></td><td>24&times;24</td></tr>
+              <tr><td><strong>Pressed</strong></td><td>56dp</td><td>56dp</td><td>56dp</td><td>Hugs label</td><td>16dp <em>Size/Large</em></td><td>10dp <em>&#9888; see note</em></td><td>24&times;24</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+
+        <h3>Corner radius</h3>
+        <p>FAB publishes no Size axis, so there is a single column.</p>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+          <tbody><tr><td>Container</td><td>9999 &mdash; fully rounded in both states</td></tr></tbody></table>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Pressed adds a wrapper the Rest state does not have.</strong> Pressed nests its icon and label inside an extra <code>Content</code> frame with a 10dp gap, while Rest lays them out directly at the root with the 8dp Size/Small token. Same visual intent, two different structures and two different gaps.
+        </div>
+      </section>
+
+      <section class="spec-section" id="fab-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#fab-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">No Size axis, so the single row is named for the state that carries the label.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Show text on</div>
+            <div class="typo-preview"><span style="font-size:17px; font-weight:400; line-height:22px; letter-spacing:-0.41px; color:var(--c-text);">New chat</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Body 1</span><span><strong>Size:</strong> 17dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 22dp</span><span><strong>Tracking:</strong> &minus;0.41</span><span><strong>Colour:</strong> Text/On Accent</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="fab-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#fab-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>State</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Container fill</td><td>Rest</td><td>Brand/Accent Primary</td><td><span class="btn-swatch" style="background:#654cf5;"></span>#654cf5</td></tr>
+              <tr><td>Container fill</td><td>Pressed</td><td>Brand/Accent Global</td><td><span class="btn-swatch" style="background:#654cf5;"></span>#654cf5</td></tr>
+              <tr><td>Icon &amp; label</td><td>Both</td><td>Text/On Accent</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Elevation</td><td>Both</td><td>Shadows/Light/Shadow 08</td><td>0&nbsp;4&nbsp;8 at 14% + 0&nbsp;0&nbsp;2 at 12%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>Pressed is invisible &mdash; the same defect as Button &middot; Accent.</strong> Rest binds Brand/Accent&nbsp;Primary and Pressed binds Brand/Accent&nbsp;Global; both resolve to #654cf5. The FAB is the single most important control on its screen and it currently gives no colour feedback on press. See <a href="#buttons" data-link="buttons">Button</a> &mdash; the two share a root cause.
+        </div>
+      </section>
+
+      <section class="spec-section" id="fab-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#fab-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>One FAB per screen, for the action the screen exists to enable &mdash; compose, new chat, new meeting. If two actions compete for it, neither belongs in a FAB.</p>
+        <div class="callout callout-rule">
+          <strong>The shadow is load-bearing.</strong> A FAB floats over arbitrary scrolling content, so Shadows/Light/Shadow&nbsp;08 is what separates it from whatever passes underneath. Flattening it to match a surface makes the control disappear over busy content.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Show text costs you the circle.</strong> With the label on, the FAB becomes a pill whose width depends on the string &mdash; and the string is not truncated. Long or localised labels will run wide; check German and Japanese before shipping an extended FAB.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#fab-preview">All Variants</a>
+        <a href="#fab-variants">Variant Axis</a>
+        <a href="#fab-layout">Layout &amp; Spacing</a>
+        <a href="#fab-typography">Typography</a>
+        <a href="#fab-color">Colour</a>
+        <a href="#fab-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">FAB &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83363-8131</code> &middot; August 2026</footer>
 </div>
 </div>
 
-<div class="page" id="page-tile-button" data-page="tile-button">
+<div class="page" id="page-circular-button" data-page="circular-button">
 <div class="docs-shell">
+
   <header class="docs-header">
     <div class="eyebrow">Button Family</div>
-    <h1>Tile button</h1>
-    <p class="subtitle">A stacked icon-over-label button for action grids.</p>
-    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page queued</span></div>
+    <h1>Circular button</h1>
+    <p class="subtitle">An icon-only control with four priority levels and an optional notification dot. The largest set in the Button family &mdash; 24 variants &mdash; and the one whose published name has a typo in it.</p>
+    <div class="meta"><span>24 variants</span><span>3 axes</span><span>52 / 28dp</span><span>Figma: Monocore-iOS &middot; node <code>83396-233079</code></span></div>
   </header>
-  <div class="docs-layout"><main class="docs-main">
-    <section class="spec-section">
-      <span class="section-eyebrow eyebrow-design">Status</span>
-      <h2>Documentation queued</h2>
-      <p class="section-intro">Tile button is shipped in the Monocore iOS library. Its Spec and Architecture pages follow the Button template and will be written from a fresh pull of the published component set.</p>
-      <p>See <a href="#buttons" data-link="buttons">Button</a> for the shared size ramp and colour behaviour.</p>
-    </section>
-  </main></div>
-  <footer class="docs-footer">Tile button &middot; Queued &middot; Source: Monocore iOS library</footer>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="cb-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Priority &times; Size <a href="#cb-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage">
+          <div class="bf-cell"><button class="fcirc lg pri-accent st-rest" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span class="bf-cap">Accent &middot; Large</span></div>
+          <div class="bf-cell"><button class="fcirc lg pri-dominant st-rest" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span class="bf-cap">Dominant &middot; Large</span></div>
+          <div class="bf-cell"><button class="fcirc lg pri-secondary st-rest" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span class="bf-cap">Secondary &middot; Large</span></div>
+          <div class="bf-cell"><button class="fcirc lg pri-tertiary st-rest" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><span class="bf-cap">Tertiary &middot; Large</span></div>
+          <div class="bf-cell"><button class="fcirc sm pri-accent st-rest" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4.5v11M4.5 10h11"/></svg></button><span class="bf-cap">Accent &middot; Small</span></div>
+          <div class="bf-cell"><button class="fcirc sm pri-secondary st-rest" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4.5v11M4.5 10h11"/></svg></button><span class="bf-cap">Secondary &middot; Small</span></div>
+          <div class="bf-cell"><button class="fcirc sm pri-tertiary st-rest" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4.5v11M4.5 10h11"/></svg></button><span class="bf-cap">Tertiary &middot; Small</span></div>
+          <div class="bf-cell"><button class="fcirc sm pri-accent st-rest" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 4.5v11M4.5 10h11"/></svg><span class="dot"></span></button><span class="bf-cap">Accent &middot; Small &middot; notification dot</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="cb-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#cb-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three orthogonal axes, fully published: 4 &times; 2 &times; 3 = 24 variants, no exclusions.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>Priority &mdash; 4 values</h4><div class="vals"><span class="val">Accent</span><span class="val">Secondary</span><span class="val">Tertiary</span><span class="val">Dominant</span></div></div>
+          <div class="btn-axis"><h4>Size &mdash; 2 values</h4><div class="vals"><span class="val">Large</span><span class="val">Small</span></div></div>
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Disable</span></div></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Notification dot</td><td>Boolean</td><td>Off</td><td>8&times;8dp, top-right, Icon/Mention with a 2dp ring</td></tr>
+              <tr><td>Icon</td><td>Instance swap</td><td>Add glyph</td><td>24&times;24 box / 20 glyph at Large; 16&times;16 box / 12 glyph at Small</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>Two naming defects in one component.</strong> The set is published as <code>Circlular button</code> &mdash; a typo &mdash; and its State axis uses <code>Disable</code> where every other component uses <code>Disabled</code>. Both are trivially fixable and both will break any code generation that matches on names.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cb-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#cb-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The button is a fixed square at both sizes &mdash; no padding, no gap, the icon is absolutely centred.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Size</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Icon box</th><th>Notification dot</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Large</strong></td><td>52dp</td><td>52dp</td><td>52dp</td><td>52dp</td><td>24&times;24</td><td>8&times;8 at 16,&nbsp;1</td></tr>
+              <tr><td><strong>Small</strong></td><td>28dp</td><td>28dp</td><td>28dp</td><td>28dp</td><td>16&times;16</td><td>8&times;8 at 15.5&ndash;16,&nbsp;0.5&ndash;1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+
+        <h3>Corner radius</h3>
+        <p>Two published sizes, so two columns. Neither varies by Priority or State.</p>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>Small</th><th>Large</th></tr></thead>
+          <tbody>
+            <tr><td>Container</td><td>9999 &mdash; fully rounded</td><td>9999 &mdash; fully rounded</td></tr>
+            <tr><td>Notification dot</td><td>999</td><td>999</td></tr>
+          </tbody></table>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>The notification dot is not pinned consistently.</strong> Its offset shifts between 15.5 and 16dp horizontally and 0.5 and 1dp vertically depending on which Priority and State you pick. Half-pixel drift on an 8dp dot is visible when several sit in a row.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cb-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#cb-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The Circular button publishes no text of any kind, at either size.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Large &amp; Small</div>
+            <div class="typo-preview"><span style="font-size:13px; color:var(--c-text-muted); font-style:italic;">No text published</span></div>
+            <div class="typo-meta"><span>Icon-only by design. The accessible name must be supplied by the host &mdash; there is no label slot to fall back on.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="cb-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Priority &times; State <a href="#cb-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Priority</th><th>State</th><th>Fill</th><th>Stroke</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="3"><strong>Accent</strong></td><td>Rest</td><td>Brand/Accent Primary <span class="btn-swatch" style="background:#654cf5;"></span></td><td>&mdash;</td></tr>
+              <tr><td>Pressed</td><td>Brand/Accent Dominant <span class="btn-swatch" style="background:#43349c;"></span></td><td>&mdash;</td></tr>
+              <tr><td>Disable</td><td>Surface/RaisedPrimary <span class="btn-swatch" style="background:#e0e0e0;"></span></td><td>&mdash;</td></tr>
+              <tr><td rowspan="3"><strong>Dominant</strong></td><td>Rest</td><td>Surface/DominantInvert <span class="btn-swatch" style="background:#000000;"></span></td><td>&mdash;</td></tr>
+              <tr><td>Pressed</td><td>Surface/RaisedDominant <span class="btn-swatch" style="background:#949494;"></span></td><td>&mdash;</td></tr>
+              <tr><td>Disable</td><td>Surface/RaisedPrimary <span class="btn-swatch" style="background:#e0e0e0;"></span></td><td>&mdash;</td></tr>
+              <tr><td rowspan="2"><strong>Secondary</strong> <em>(Small)</em></td><td>Rest</td><td>Brand/Accent Tertiary <span class="btn-swatch" style="background:#ebebff;"></span></td><td>0.5dp Brand/Accent Dominant</td></tr>
+              <tr><td>Pressed</td><td>Brand/Accent Secondary <span class="btn-swatch" style="background:#aba8ff;"></span></td><td>0.5dp Brand/Accent Primary</td></tr>
+              <tr><td rowspan="2"><strong>Tertiary</strong> <em>(Small)</em></td><td>Rest</td><td>Surface/RaisedPrimary <span class="btn-swatch" style="background:#e0e0e0;"></span></td><td>0.5dp Stroke/ContainerRaised</td></tr>
+              <tr><td>Pressed</td><td>Surface/SubtleSelected <span class="btn-swatch" style="background:#f0f0f0;"></span></td><td>0.5dp Stroke/ContainerRaised</td></tr>
+              <tr><td><strong>Notification dot</strong></td><td>All</td><td>Icon/Mention <span class="btn-swatch" style="background:#cc4a31;"></span></td><td>2dp Surface/Subtle &mdash; <em>Icon/DominantInvert on Small&nbsp;Accent&nbsp;Rest</em></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>Accent Pressed actually darkens here.</strong> Unlike Button and FAB, the Circular button's Pressed state binds Brand/Accent&nbsp;Dominant &mdash; a genuinely darker step. It is the correct pattern; the other two should follow it.
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>Large Secondary and Tertiary are flattened images.</strong> At Large, the Secondary, Tertiary and every Disable variant render a 52dp raster <code>Shape</code> layer instead of a live fill and stroke. They cannot be re-themed, will not respond to a token change, and will not survive dark mode. Small carries proper fills; Large does not.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>The notification dot ring changes token on one variant.</strong> It is a 2dp Surface/Subtle (transparent) ring everywhere except Small&nbsp;&middot;&nbsp;Accent&nbsp;&middot;&nbsp;Rest, which uses an opaque Icon/DominantInvert white ring. One of the two is wrong.
+        </div>
+      </section>
+
+      <section class="spec-section" id="cb-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#cb-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p><strong>Priority</strong> is an emphasis ladder, not a colour picker: Accent for the primary action in a toolbar, Dominant for maximum contrast on media, Secondary for a selected or brand-tinted state, Tertiary for neutral utility.</p>
+        <div class="callout callout-warn">
+          <strong>Small is 28dp &mdash; well under a 44dp target.</strong> Circular buttons cluster in toolbars, so undersized targets compound: four 28dp controls in a row is four chances to miss. The host must extend the hit area on every Small instance.
+        </div>
+        <div class="callout callout-rule">
+          <strong>Icon-only means the name is your job.</strong> There is no label slot anywhere in this component. Every instance needs an explicit accessible name, and the notification dot needs its meaning announced too &mdash; a red circle is not a message count.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#cb-preview">Priority &times; Size</a>
+        <a href="#cb-variants">Variant Axes</a>
+        <a href="#cb-layout">Layout &amp; Spacing</a>
+        <a href="#cb-typography">Typography</a>
+        <a href="#cb-color">Colour</a>
+        <a href="#cb-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Circular button &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83396-233079</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-jump-button" data-page="jump-button">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Button Family</div>
+    <h1>Jump button</h1>
+    <p class="subtitle">The floating pill that appears over a scrolled list &mdash; &ldquo;new messages&rdquo;, &ldquo;refresh&rdquo; &mdash; and takes the user somewhere in the content they are already looking at. Published with a note that it is a custom component.</p>
+    <div class="meta"><span>2 variants</span><span>1 axis</span><span>Custom component</span><span>Figma: Monocore-iOS &middot; node <code>83380-16685</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="jb-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Both Sizes <a href="#jb-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage">
+          <div class="bf-cell"><button class="fjump" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg> New messages</button><span class="bf-cap">Size = Small &middot; Arrow up</span></div>
+          <div class="bf-cell"><button class="fjump" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5v9M4 8.5l4 4 4-4"/></svg> New messages</button><span class="bf-cap">Size = Small &middot; Arrow down</span></div>
+          <div class="bf-cell"><button class="fjump lg" type="button"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9M4 7.5l4-4 4 4"/></svg> Refresh</button><span class="bf-cap">Size = Large &middot; fixed 141&times;46.57</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="jb-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axis <a href="#jb-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One axis with two values, plus two booleans that only do anything at Small.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Values</th><th>Default</th><th>Applies to</th></tr></thead>
+            <tbody>
+              <tr><td>Size</td><td>Variant</td><td>Small, Large</td><td>Small</td><td>Both</td></tr>
+              <tr><td>Arrow up</td><td>Boolean</td><td>&mdash;</td><td>On</td><td>Small only</td></tr>
+              <tr><td>Arrow down</td><td>Boolean</td><td>&mdash;</td><td>Off</td><td>Small only</td></tr>
+              <tr><td>Icon</td><td>Instance swap</td><td>&mdash;</td><td>Arrow Circle Up</td><td>Both</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Direction is two independent booleans, not one axis.</strong> Arrow up and Arrow down can both be on, or both off, producing a jump button with two arrows or none. A single Direction variant would make the invalid states unrepresentable.
+        </div>
+      </section>
+
+      <section class="spec-section" id="jb-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#jb-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Small hugs its label; Large is pinned to a fixed pixel size, which is the source of most of its problems.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Size</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Icon box</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Small</strong></td><td>28dp</td><td>28dp</td><td>Hugs content</td><td>Hugs content</td><td>5dp &times; 10 lead / 12 trail</td><td>4dp</td><td>16&times;16</td></tr>
+              <tr><td><strong>Large</strong></td><td>46.571dp</td><td>46.571dp</td><td>141dp</td><td>141dp</td><td>5 &times; 7dp</td><td>4dp</td><td>16&times;16</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+
+        <h3>Corner radius</h3>
+        <p>Two published sizes, so two columns &mdash; and they do not agree.</p>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>Small</th><th>Large</th></tr></thead>
+          <tbody><tr><td>Container</td><td>999 &mdash; fully rounded</td><td>40 &mdash; a fixed value</td></tr></tbody></table>
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>Large is fixed at 141 &times; 46.571dp.</strong> A fixed width means the label cannot change length &mdash; not for a longer string, not for translation, not for large text sizes. The fractional height suggests the frame was drawn rather than built from tokens.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Small is a pill; Large is a 40dp rounded rectangle.</strong> At 46.571dp tall a 40dp radius clamps to something very close to a pill, so the two happen to look alike today &mdash; but they are different declarations, and the moment Large's height changes they will diverge visibly.
+        </div>
+      </section>
+
+      <section class="spec-section" id="jb-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#jb-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One row per published size. Both use the same style; only the default string differs.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Small</div>
+            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--mc-text-interactive);">New messages</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Colour:</strong> Text/Interactive</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Large</div>
+            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--mc-text-interactive);">Refresh</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Colour:</strong> Text/Interactive</span></div>
+          </div>
+        </div>
+        <div class="callout callout-info">
+          <strong>Large is bigger without being bolder.</strong> It nearly doubles in height but keeps Button&nbsp;2 at 13dp, so the extra size is all padding. If Large exists to be more prominent, the type is not carrying its share.
+        </div>
+      </section>
+
+      <section class="spec-section" id="jb-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#jb-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Container fill</td><td>Surface/Floating</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Border</td><td>Stroke/Floating</td><td>rgba(0,0,0,0.05) &mdash; 0.5dp</td></tr>
+              <tr><td>Icon &amp; label</td><td>Text/Interactive</td><td><span class="btn-swatch" style="background:#4c39b8;"></span>#4c39b8</td></tr>
+              <tr><td>Elevation</td><td>Shadows/Light/Shadow 16</td><td>0&nbsp;8&nbsp;16 at 14% + 0&nbsp;0&nbsp;2 at 12%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>No Pressed or Disabled state is published.</strong> The set has a Size axis and nothing else &mdash; a jump button that has been tapped looks identical to one that has not. Press feedback has to be invented by the host.
+        </div>
+      </section>
+
+      <section class="spec-section" id="jb-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#jb-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Use it when the user has scrolled away from something they probably want &mdash; unread messages below, newer content above &mdash; and you can take them there in one tap. It is a shortcut, never the only route.</p>
+        <div class="callout callout-rule">
+          <strong>It floats, so it covers content.</strong> Shadows/Light/Shadow&nbsp;16 is the heaviest elevation in the system, which is right for something overlaying a scrolling list. Keep it out of the way of the safe area and never stack two.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Appearing unannounced is the accessibility risk.</strong> A control that fades in over a list is invisible to a screen reader unless its arrival is announced politely, and it must be reachable in the tab order at the point it appears &mdash; not appended after the whole list.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#jb-preview">Both Sizes</a>
+        <a href="#jb-variants">Variant Axis</a>
+        <a href="#jb-layout">Layout &amp; Spacing</a>
+        <a href="#jb-typography">Typography</a>
+        <a href="#jb-color">Colour</a>
+        <a href="#jb-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Jump button &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83380-16685</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-chip" data-page="chip">
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Button Family</div>
+    <h1>Chip</h1>
+    <p class="subtitle">A small, rounded, selectable label with a leading icon. Two styles, three states &mdash; and a pair of style names that describe the opposite of what they do.</p>
+    <div class="meta"><span>6 variants</span><span>2 axes</span><span>Radius 12dp</span><span>Figma: Monocore-iOS &middot; node <code>105757-36293</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="chp-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>All Six Variants <a href="#chp-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage">
+          <div class="bf-cell"><span class="fchip "><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Brand &middot; Rest</span></div>
+          <div class="bf-cell"><span class="fchip brand-pressed"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Brand &middot; Pressed</span></div>
+          <div class="bf-cell"><span class="fchip brand-disabled"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Brand &middot; Disabled</span></div>
+          <div class="bf-cell"><span class="fchip subtle"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Subtle &middot; Rest</span></div>
+          <div class="bf-cell"><span class="fchip subtle subtle-pressed"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Subtle &middot; Pressed</span></div>
+          <div class="bf-cell"><span class="fchip subtle subtle-disabled"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Subtle &middot; Disabled</span></div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chp-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#chp-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two axes, fully published: 2 &times; 3 = 6 variants.</p>
+        <div class="div-axis-cards">
+          <div class="div-axis"><h4>Style &mdash; 2 values</h4><div class="vals"><span class="val">Brand</span><span class="val">Subtle</span></div></div>
+          <div class="div-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Disabled</span></div></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Left icon</td><td>Boolean + swap</td><td>On</td><td>20&times;20 box / 16&times;16 glyph</td></tr>
+              <tr><td>Show label</td><td>Boolean</td><td>On</td><td>Off yields an icon-only chip &mdash; supply an accessible name</td></tr>
+              <tr><td>Right icon</td><td>Boolean + swap</td><td>Off</td><td>Same box size as the left icon</td></tr>
+              <tr><td>Label</td><td>Text</td><td><code>Chip</code></td><td>Capped at 200dp inside a 250dp chip</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>The style names are inverted.</strong> <code>Brand</code> is the grey one &mdash; Surface/RaisedTertiary fill, Text/Primary label, no brand colour anywhere. <code>Subtle</code> is the one that uses Text/Interactive purple. Anyone picking a style by name will pick the wrong one.
+        </div>
+      </section>
+
+      <section class="spec-section" id="chp-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#chp-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The chip has no Size axis, but its minimum height changes between styles &mdash; and not deliberately.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Style</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Icon box</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Brand</strong></td><td>28dp <em>on the root</em></td><td>Hugs content</td><td>48dp</td><td>250dp</td><td>6 &times; 12dp</td><td>8dp</td><td>20&times;20</td></tr>
+              <tr><td><strong>Subtle</strong></td><td>32dp <em>on Content</em></td><td>Hugs content</td><td>48dp</td><td>250dp</td><td>6 &times; 12dp</td><td>8dp</td><td>20&times;20</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Label text is separately capped at 200dp.</p>
+
+        <h3>Corner radius</h3>
+        <p>Chip publishes no Size axis, so there is a single column. It is constant across both styles and all three states.</p>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
+          <tbody><tr><td>Container</td><td>12dp <em>Radius/Strong</em></td></tr></tbody></table>
+        </div>
+
+        <div class="callout callout-constraint">
+          <strong>Minimum height is set on two different layers.</strong> Brand puts <code>min-height: 28</code> on the chip root; Subtle puts <code>min-height: 32</code> on the inner Content frame. Two styles of the same component therefore have different minimum heights, declared in different places &mdash; a 4dp difference that shows immediately when Brand and Subtle chips sit in the same row.
+        </div>
+      </section>
+
+      <section class="spec-section" id="chp-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#chp-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Chip publishes no Size axis, so the rows are named for the style that carries each colour.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Brand &middot; Rest</div>
+            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Chip</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Colour:</strong> Text/Primary</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Subtle &middot; Rest</div>
+            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--mc-text-interactive);">Chip</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Colour:</strong> Text/Interactive</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Both &middot; Disabled</div>
+            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--mc-text-disabled);">Chip</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Colour:</strong> Text/Disabled</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chp-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour by Style &times; State <a href="#chp-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Style</th><th>State</th><th>Fill</th><th>Stroke</th><th>Label</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="3"><strong>Brand</strong></td><td>Rest</td><td>Surface/RaisedTertiary <span class="btn-swatch" style="background:#f5f5f5;"></span></td><td>1dp Stroke/Container</td><td>Text/Primary</td></tr>
+              <tr><td>Pressed</td><td>Surface/SubtleSelected <span class="btn-swatch" style="background:#f0f0f0;"></span></td><td>&mdash; <em>border removed</em></td><td>Text/Secondary</td></tr>
+              <tr><td>Disabled</td><td>Surface/RaisedBase <span class="btn-swatch" style="background:#f0f0f0;"></span></td><td>&mdash; <em>border removed</em></td><td>Text/Disabled</td></tr>
+              <tr><td rowspan="3"><strong>Subtle</strong></td><td>Rest</td><td>None</td><td>1dp Stroke/Container</td><td>Text/Interactive <span class="btn-swatch" style="background:#4c39b8;"></span></td></tr>
+              <tr><td>Pressed</td><td>None</td><td>1dp Stroke/Container</td><td>Brand/Accent Secondary <span class="btn-swatch" style="background:#aba8ff;"></span></td></tr>
+              <tr><td>Disabled</td><td>None</td><td>1dp Stroke/Container</td><td>Text/Disabled</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Brand loses its outline when pressed.</strong> Rest carries a 1dp Stroke/Container border; Pressed and Disabled set it to zero. The chip visibly changes shape on press &mdash; it shrinks by 2dp &mdash; rather than just changing tone. Subtle keeps its border in all three states, which is the behaviour Brand should copy.
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>Brand Pressed and Brand Disabled are the same fill.</strong> Surface/SubtleSelected and Surface/RaisedBase both resolve to #f0f0f0, so a pressed chip and a disabled chip are distinguishable only by their label colour.
+        </div>
+      </section>
+
+      <section class="spec-section" id="chp-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#chp-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Chips are for selectable, removable, or filterable labels &mdash; a chosen recipient, an applied filter, a suggested topic. They are not small buttons; if the thing performs an action rather than representing a selection, use <a href="#buttons" data-link="buttons">Button &middot; Small</a>.</p>
+        <div class="callout callout-rule">
+          <strong>Radius 12, not a pill.</strong> The chip is deliberately a rounded rectangle rather than fully rounded, which is what separates it visually from Button &middot; Small and from Pill button. Do not round it to 999 to &ldquo;match&rdquo; &mdash; the difference is the signal.
+        </div>
+        <div class="callout callout-warn">
+          <strong>The chip is 28&ndash;32dp tall.</strong> Under a 44dp target at both styles, and chips almost always appear in horizontally-scrolling rows where mis-taps are costly. Extend the hit area; do not rely on the visual box.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#chp-preview">All Six Variants</a>
+        <a href="#chp-variants">Variant Axes</a>
+        <a href="#chp-layout">Layout &amp; Spacing</a>
+        <a href="#chp-typography">Typography</a>
+        <a href="#chp-color">Colour</a>
+        <a href="#chp-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">Chip &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>105757-36293</code> &middot; August 2026</footer>
+</div>
+</div>
+
+<div class="page" id="page-tile-grid" data-page="tile-grid">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow"><a href="#filter" data-link="filter" style="color:inherit;">Filter</a> &middot; Family</div>
+    <h1>Tile grid</h1>
+    <p class="subtitle">The square-ish action tiles used in calling menus and reaction sheets, plus the row that divides the available width between them. A grid, not a list &mdash; every tile in a row is the same width, and that width is computed, not authored.</p>
+    <div class="meta"><span>12 + 2 variants</span><span>3 axes</span><span>60 / 100dp tall</span><span>Figma: Monocore-iOS &middot; node <code>84003-42205</code></span></div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="tg-preview">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Tile button <a href="#tg-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three states &times; two variants &times; two sizes. Below, a Tile Btn Row splitting its width three ways &mdash; the arrangement these tiles are actually published for.</p>
+        <div class="bf-stage">
+          <div class="bf-cell"><span class="ftile md"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="l">Mute</span></span><span class="bf-cap">Rest &middot; Primary &middot; Medium</span></div>
+          <div class="bf-cell"><span class="ftile md secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="l">Mute</span></span><span class="bf-cap">Rest &middot; Secondary &middot; Medium</span></div>
+          <div class="bf-cell"><span class="ftile md disabled"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="l">Mute</span></span><span class="bf-cap">Disabled &middot; Primary &middot; Medium</span></div>
+          <div class="bf-cell"><span class="ftile md empty"><span class="l">Empty</span></span><span class="bf-cap">Empty &middot; Primary &middot; Medium</span></div>
+          <div class="bf-cell"><span class="ftile lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="l">Mute</span></span><span class="bf-cap">Rest &middot; Primary &middot; Large</span></div>
+          <div class="bf-cell"><span class="ftile lg secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="l">Mute</span></span><span class="bf-cap">Rest &middot; Secondary &middot; Large</span></div>
+        </div>
+        <div class="bf-stage">
+          <div class="bf-cell">
+            <span class="ftile-row">
+              <span class="ftile md" style="width:123px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="l">Mute</span></span>
+              <span class="ftile md" style="width:123px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="l">Video</span></span>
+              <span class="ftile md" style="width:123px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="l">Share</span></span>
+            </span>
+            <span class="bf-cap">Tile Btn Row &middot; Variant = Primary &middot; three tiles across 377dp</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="tg-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#tg-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Three orthogonal axes on the tile, fully published: 3 &times; 2 &times; 2 = 12 variants.</p>
+        <div class="btn-axis-cards">
+          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Disabled</span><span class="val">Empty</span></div></div>
+          <div class="btn-axis"><h4>Variant &mdash; 2 values</h4><div class="vals"><span class="val">Primary</span><span class="val">Secondary</span></div></div>
+          <div class="btn-axis"><h4>Size &mdash; 2 values</h4><div class="vals"><span class="val">Medium (Default)</span><span class="val">Large</span></div></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Component</th><th>Node</th><th>Axes</th><th>Variants</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Tile button</strong></td><td><code>84003-42205</code></td><td>State &times; Variant &times; Size</td><td>12</td></tr>
+              <tr><td><strong>Tile Btn Row</strong></td><td><code>105137-157147</code></td><td>Variant</td><td>2</td></tr>
+              <tr><td>Sheet &mdash; Calling</td><td><code>109286-459320</code></td><td>Property 1</td><td>1</td></tr>
+              <tr><td>Reactions</td><td><code>104921-42247</code></td><td>&mdash;</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>&ldquo;Empty&rdquo; is a State, not a Variant.</strong> Rest and Disabled describe interaction; Empty describes content &mdash; a tile with nothing in it. Putting a content condition on the interaction axis means there is no published answer for &ldquo;empty <em>and</em> disabled&rdquo;.
+        </div>
+        <div class="callout callout-warn">
+          <strong>A variant value contains parentheses.</strong> The Size axis publishes <code>Medium (Default)</code> rather than <code>Medium</code>. Anything matching variant values by string &mdash; code generation, Code Connect, a design linter &mdash; has to carry that punctuation.
+        </div>
+      </section>
+
+      <section class="spec-section" id="tg-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#tg-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Tile height is fixed per size; tile <em>width</em> is not authored at all &mdash; the row divides its available width by the number of tiles, which is where every fractional number below comes from.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Component</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Published width</th><th>Gap</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Tile button</strong> &middot; Medium</td><td>60dp</td><td>60dp</td><td>Fills its share of the row</td><td>Fills its share of the row</td><td>111.667dp</td><td>&mdash;</td></tr>
+              <tr><td><strong>Tile button</strong> &middot; Large</td><td>100dp</td><td>100dp</td><td>Fills its share of the row</td><td>Fills its share of the row</td><td>120dp</td><td>&mdash;</td></tr>
+              <tr><td><strong>Tile Btn Row</strong></td><td>60dp</td><td>100dp <em>with Large tiles</em></td><td>Fills container</td><td>Fills container</td><td>458.667dp</td><td>4dp</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+
+        <h3>Observed tile widths in the published sheet</h3>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Tiles per row</th><th>Row width</th><th>Tile width</th><th>Where</th></tr></thead>
+            <tbody>
+              <tr><td>2</td><td>377dp</td><td>186.5dp</td><td>Sheet &mdash; Calling, Large tiles</td></tr>
+              <tr><td>3</td><td>377dp</td><td>123dp</td><td>Sheet &mdash; Calling, Medium tiles</td></tr>
+              <tr><td>4</td><td>377dp</td><td>91.25dp</td><td>Sheet &mdash; Calling, bottom row</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Corner radius</h3>
+        <p>Two published sizes, so two columns. The radius does not change between them.</p>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>Medium</th><th>Large</th></tr></thead>
+          <tbody><tr><td>Tile</td><td>8dp <em>Radius/Default</em></td><td>8dp <em>Radius/Default</em></td></tr></tbody></table>
+        </div>
+
+        <div class="callout callout-info">
+          <strong>Fractional widths are the grid working correctly.</strong> 111.667, 186.5 and 91.25 are not authoring mistakes &mdash; they are 335, 377 and 377 divided by 3, 2 and 4 with a 4dp gap. Do not round them into the component; the row is the thing that decides, and it should keep deciding at runtime.
+        </div>
+      </section>
+
+      <section class="spec-section" id="tg-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#tg-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">One row per published size. The label sits under the glyph in both.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Medium (Default)</div>
+            <div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text);">Mute</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Height:</strong> 16dp</span><span><strong>Colour:</strong> Text/Primary</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Large</div>
+            <div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text);">Mute</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Height:</strong> 16dp</span><span><strong>Colour:</strong> Text/Primary</span></div>
+          </div>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Verify before you ship from this table.</strong> The tile label styles above are read from the published frame geometry rather than from a bound text style, because the Tile button set does not expose one. Treat them as observed, not as a contract, and confirm against the component before encoding them.
+        </div>
+      </section>
+
+      <section class="spec-section" id="tg-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#tg-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Tile grids are for a closed set of peer actions shown all at once &mdash; call controls, reactions, share targets. Every tile is equally weighted; if one action matters more than the others, a grid is the wrong container.</p>
+        <div class="callout callout-rule">
+          <strong>Never nest a tile outside a Tile Btn Row.</strong> The tile has no width of its own. Dropped into an ordinary stack it will collapse or stretch unpredictably &mdash; the row is what makes the geometry work.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Four tiles across a 377dp sheet is 91dp each.</strong> That clears a 44dp target comfortably in width but the tiles are only 60dp tall, and the label eats 16 of that. Watch the glyph-to-label ratio at four-up before adding a fifth.
+        </div>
+      </section>
+
+    </main>
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#tg-preview">Tile button</a>
+        <a href="#tg-variants">Variant Axes</a>
+        <a href="#tg-layout">Layout &amp; Spacing</a>
+        <a href="#tg-typography">Typography</a>
+        <a href="#tg-notes">When to Use It</a>
+      </nav>
+    </aside>
+  </div>
+  <footer class="docs-footer">Tile grid &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> nodes <code>84003-42205</code> &amp; <code>105137-157147</code> &middot; August 2026</footer>
 </div>
 </div>
 
