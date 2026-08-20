@@ -126,6 +126,83 @@
       letter-spacing: 0.2px;
     }
 
+    /* ── Devnotes switch (nav footer) ─────────────────────────────
+       Hides section footnotes and every callout box so the spec
+       reads clean for design-system consumers. */
+    .site-nav .nav-foot {
+      margin-top: auto;
+      padding: 12px 20px 0;
+      border-top: 1px solid var(--grey-92);
+    }
+    .site-nav .nav-foot ~ .build {
+      margin-top: 0;
+      border-top: none;
+      padding-top: 8px;
+    }
+    .devnotes-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 10px 5px 6px;
+      border: 1px solid var(--grey-86);
+      border-radius: 999px;
+      background: #fff;
+      font: 600 12px/1 inherit;
+      font-family: inherit;
+      color: var(--mc-text-secondary);
+      cursor: pointer;
+      transition: border-color 120ms ease, color 120ms ease;
+    }
+    .devnotes-toggle:hover {
+      border-color: var(--grey-74);
+      color: var(--mc-text-primary);
+    }
+    .devnotes-toggle:focus-visible {
+      outline: 2px solid var(--mc-brand-primary);
+      outline-offset: 2px;
+    }
+    .devnotes-toggle .dn-track {
+      position: relative;
+      width: 28px;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--grey-74);
+      transition: background 140ms ease;
+      flex: none;
+    }
+    .devnotes-toggle .dn-knob {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 140ms ease;
+    }
+    .devnotes-toggle[aria-checked="true"] .dn-track {
+      background: var(--mc-brand-primary);
+    }
+    .devnotes-toggle[aria-checked="true"] .dn-knob {
+      transform: translateX(12px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .devnotes-toggle .dn-track,
+      .devnotes-toggle .dn-knob { transition: none; }
+    }
+
+    /* Devnotes off: drop footnote lines and all callout boxes. */
+    html.devnotes-off .callout,
+    html.devnotes-off .lab-note,
+    html.devnotes-off .cardlab-note,
+    html.devnotes-off .btnlab-note,
+    html.devnotes-off .colab-note,
+    html.devnotes-off .chlab-note,
+    html.devnotes-off .divlab-note,
+    html.devnotes-off .bdg-note {
+      display: none !important;
+    }
+
     /* Mobile hamburger + backdrop */
     .site-nav-toggle {
       display: none;
@@ -2137,6 +2214,12 @@
         <a href="#messaging" data-link="messaging">Spec</a>
       </div>
     </nav>
+    <div class="nav-foot">
+      <button type="button" class="devnotes-toggle" id="devnotes-toggle" role="switch" aria-checked="true">
+        <span class="dn-track" aria-hidden="true"><span class="dn-knob"></span></span>
+        <span class="dn-label">Devnotes</span>
+      </button>
+    </div>
     <div class="build">v2.1.0 · April 2026</div>
   </div>
 </aside>
@@ -16562,6 +16645,99 @@ function switchTier(btn, tier) {
   applyState();
 })();
 </script>
+
+<style id="mc-liquid-glass">
+  /* ── Liquid Glass material for preview stages and lab controls ──────
+     Replaces the flat grey raised-surface fills so component previews sit
+     on a neutral, white-tinted glass: backdrop blur, a light rim around
+     the edge, and a soft drop shadow that lifts the container. Dark
+     (.dark) stages keep their intentional dark theming. */
+
+  .lab-stage,
+  .mini-lab .lab-stage,
+  .bf-stage,
+  .cardlab-stage,
+  .fel-stage,
+  .fchp-stage,
+  .flm-stage,
+  .fcf-stage,
+  .fob-stage,
+  .hs-stage,
+  .preview-canvas,
+  .l1l2-cell,
+  #page-l1l2-shifts .l1l2-cell,
+  .bdg-stage:not(.dark),
+  .btnlab-stage:not(.dark),
+  .colab-stage:not(.dark),
+  .chlab-stage:not(.dark),
+  .divlab-stage:not(.dark),
+  .usecase-stage:not(.dark),
+  .bdg-uc-stage:not(.dark),
+  .btn-usecase-stage:not(.dark),
+  .co-usecase-stage:not(.dark),
+  .ch-usecase-stage:not(.dark),
+  .div-usecase-stage:not(.dark),
+  .co-axis-cell:not(.empty),
+  .cardlab-controls,
+  .bdg-controls,
+  .btnlab-controls,
+  .colab-controls,
+  .chlab-controls,
+  .divlab-controls {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.68) 0%,
+      rgba(255, 255, 255, 0.42) 52%,
+      rgba(255, 255, 255, 0.60) 100%
+    );
+    -webkit-backdrop-filter: blur(22px) saturate(1.65);
+    backdrop-filter: blur(22px) saturate(1.65);
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.95),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.45),
+      0 0 0 0.5px rgba(96, 96, 128, 0.16),
+      0 2px 6px rgba(20, 20, 45, 0.05),
+      0 12px 32px rgba(20, 20, 45, 0.10);
+  }
+
+  /* Controls panels carry text and inputs — a slightly more opaque tint
+     keeps labels and checkboxes legible on the glass. */
+  .cardlab-controls,
+  .bdg-controls,
+  .btnlab-controls,
+  .colab-controls,
+  .chlab-controls,
+  .divlab-controls {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.80) 0%,
+      rgba(255, 255, 255, 0.58) 55%,
+      rgba(255, 255, 255, 0.72) 100%
+    );
+  }
+
+  /* Dark stages: keep the dark theme demo, but match the material's
+     rim light and raised shadow so the two modes feel like one system. */
+  .bdg-stage.dark,
+  .btnlab-stage.dark,
+  .colab-stage.dark,
+  .chlab-stage.dark,
+  .divlab-stage.dark,
+  .usecase-stage.dark,
+  .bdg-uc-stage.dark,
+  .btn-usecase-stage.dark,
+  .co-usecase-stage.dark,
+  .ch-usecase-stage.dark,
+  .div-usecase-stage.dark {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.10),
+      0 0 0 0.5px rgba(0, 0, 0, 0.35),
+      0 2px 6px rgba(0, 0, 0, 0.20),
+      0 12px 32px rgba(0, 0, 0, 0.28);
+  }
+</style>
 <script>
 // ── Site-nav accordions — WAI-ARIA APG Accordion pattern ──────────────
 // Enter / Space come free with a real button element; Tab order is DOM
@@ -16601,6 +16777,31 @@ function switchTier(btn, tier) {
   document.querySelectorAll('.site-nav a[data-link], .landing-card[data-link]')
     .forEach(a => a.addEventListener('click', () => setTimeout(syncToRoute, 60)));
   syncToRoute();
+})();
+
+// Devnotes switch: on = full spec with footnotes and callouts; off = the
+// clean consumer read. The choice persists per browser via localStorage
+// (guarded, so file:// or locked-down contexts degrade to session-only).
+(() => {
+  const KEY = 'mc-docs-devnotes';
+  const btn = document.getElementById('devnotes-toggle');
+  if (!btn) return;
+  const root = document.documentElement;
+
+  function apply(on) {
+    root.classList.toggle('devnotes-off', !on);
+    btn.setAttribute('aria-checked', String(on));
+  }
+
+  let on = true;
+  try { on = localStorage.getItem(KEY) !== 'off'; } catch (e) {}
+  apply(on);
+
+  btn.addEventListener('click', () => {
+    on = !on;
+    apply(on);
+    try { localStorage.setItem(KEY, on ? 'on' : 'off'); } catch (e) {}
+  });
 })();
 </script>
 </body>
