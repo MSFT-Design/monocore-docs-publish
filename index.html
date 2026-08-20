@@ -16858,6 +16858,18 @@ function switchTier(btn, tier) {
 (() => {
   const DASH = '\u2014';
 
+  // Canonical token scales (Spacing and Corner radius pages). Used to
+  // annotate bare dp values with their system token; values off the
+  // scale (5, 7, 72...) stay bare -- they are the published hardcodes.
+  const SP = {'0':'Size/None','2':'Size/Nudge/Small','4':'Size/XSmall','6':'Size/Nudge/Medium','8':'Size/Small','10':'Size/Nudge/Large','12':'Size/Medium','16':'Size/Large','20':'Size/XLarge','24':'Size/XXLarge','32':'Size/XXXLarge'};
+  const RAD = {'9999':'Radius/Rounded','24':'Radius/Dominant','16':'Radius/Prominent','12':'Radius/Strong','8':'Radius/Default','4':'Radius/Minimal','0':'Radius/None'};
+  function annot(src) {
+    if (src.indexOf('<em>') !== -1) return src;
+    const m = src.match(/^\s*(\d+(?:\.\d+)?)dp\b(.*)$/);
+    if (!m || !SP[m[1]]) return src;
+    return m[1] + 'dp <em>' + SP[m[1]] + '</em>' + m[2];
+  }
+
   // Split a padding cell's inner HTML into {lr, tb}, or null if the
   // cell is prose that cannot be split (it then spans both columns).
   function splitPad(src) {
@@ -16944,17 +16956,19 @@ function switchTier(btn, tier) {
             if (parts) {
               const lrTd = document.createElement('td');
               lrTd.className = 'col-pad';
-              lrTd.innerHTML = parts.lr;
+              lrTd.innerHTML = annot(parts.lr);
               const tbTd = document.createElement('td');
               tbTd.className = 'col-pad';
-              tbTd.innerHTML = parts.tb;
+              tbTd.innerHTML = annot(parts.tb);
               td.replaceWith(lrTd, tbTd);
             } else {
               td.colSpan = 2;
               td.classList.add('col-pad');
+              td.innerHTML = annot(td.innerHTML);
             }
           } else if (groups[i]) {
             td.classList.add('col-' + groups[i]);
+            if (groups[i] === 'pad') td.innerHTML = annot(td.innerHTML);
           }
         }
       }));
@@ -16993,9 +17007,30 @@ function switchTier(btn, tier) {
       return b;
     }
     if (hasPad) pill('Padding', 'ls-hide-pad', 'Show padding columns (left/right and top/bottom)');
-    if (hasDim) pill('Dimensions', 'ls-hide-dim', 'Show min/max width and height columns');
+    if (hasDim) {
+      const dp = pill('Dimensions', 'ls-hide-dim', 'Show min/max width and height columns');
+      dp.setAttribute('aria-pressed', 'false');  // dimensions start hidden
+      sec.classList.add('ls-hide-dim');
+    }
 
     firstWrap.parentNode.insertBefore(bar, firstWrap);
+  });
+
+  // Corner radius tables: annotate bare numeric cells with the radius
+  // token whose value they match. Cells carrying prose or an existing
+  // annotation are left verbatim.
+  document.querySelectorAll('h3').forEach(h3 => {
+    if (!/^\s*Corner radius/i.test(h3.textContent)) return;
+    let el = h3.nextElementSibling;
+    while (el && !/^H[23]$/.test(el.tagName)) {
+      if (el.classList && el.classList.contains('table-wrap')) {
+        el.querySelectorAll('tbody td').forEach(td => {
+          const m = td.innerHTML.trim().match(/^(\d+(?:\.\d+)?)\s*(?:dp)?$/);
+          if (m && RAD[m[1]]) td.innerHTML = m[1] + 'dp <em>' + RAD[m[1]] + '</em>';
+        });
+      }
+      el = el.nextElementSibling;
+    }
   });
 })();
 </script>
