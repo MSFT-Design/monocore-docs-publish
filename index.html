@@ -16804,5 +16804,200 @@ function switchTier(btn, tier) {
   });
 })();
 </script>
+<style id="mc-ls-colfilter">
+  /* ── Layout & Spacing column filters ─────────────────────────────
+     Two toggle pills per section: Padding (split into L/R and T/B
+     columns, each showing the bound variable and its value) and
+     Dimensions (the min/max width and height columns). */
+  .ls-colfilter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 4px 0 12px;
+  }
+  .ls-colfilter .lsf-cap {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mc-text-secondary);
+    margin-right: 2px;
+  }
+  .lsf-pill {
+    appearance: none;
+    border: 1px solid var(--c-border);
+    background: var(--mc-surface-floating);
+    color: var(--mc-text-secondary);
+    font-size: 12.5px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 6px 12px;
+    border-radius: var(--radius-rounded);
+    cursor: pointer;
+    transition: all 120ms ease;
+  }
+  .lsf-pill:focus-visible {
+    outline: 2px solid var(--mc-brand-primary);
+    outline-offset: 2px;
+  }
+  .lsf-pill[aria-pressed="true"] {
+    background: var(--c-accent);
+    color: var(--grey-100);
+    border-color: var(--c-accent);
+  }
+  .spec-section.ls-hide-pad .col-pad { display: none; }
+  .spec-section.ls-hide-dim .col-dim { display: none; }
+</style>
+<script>
+// Layout & Spacing column filters. Runs over every Layout & Spacing
+// section: classifies each table's columns, splits a single "Padding"
+// column into "Padding L/R" and "Padding T/B" (values follow the
+// tables' TB-by-LR convention, with bound variables kept per side),
+// and injects two toggle pills that show or hide each column group.
+(() => {
+  const DASH = '\u2014';
+
+  // Split a padding cell's inner HTML into {lr, tb}, or null if the
+  // cell is prose that cannot be split (it then spans both columns).
+  function splitPad(src) {
+    const norm = src.trim();
+    // "A x Bdp" with optional bound variables and trailing prose
+    let m = norm.match(/^([\d.]+)\s*\u00d7\s*([\d.]+)\s*dp(?:\s*<em>([^<]*)<\/em>)?\s*(.*)$/);
+    if (m) {
+      let vTB = '', vLR = '';
+      if (m[3]) {
+        const parts = m[3].split('\u00b7').map(s => s.trim());
+        if (parts.length === 2) { vTB = parts[0]; vLR = parts[1]; }
+        else {
+          const tok = m[3].trim();
+          if (/vertical/i.test(tok)) vTB = tok;
+          else if (/horizontal|side/i.test(tok)) vLR = tok;
+          else vTB = vLR = tok;
+        }
+      }
+      const tail = m[4] ? ' ' + m[4].trim() : '';
+      return {
+        tb: m[1] + 'dp' + (vTB ? ' <em>' + vTB + '</em>' : ''),
+        lr: m[2] + 'dp' + (vLR ? ' <em>' + vLR + '</em>' : '') + tail
+      };
+    }
+    // Uniform "Ndp" with optional bound variable
+    m = norm.match(/^([\d.]+)\s*dp(?:\s*<em>([^<]*)<\/em>)?$/);
+    if (m) {
+      const cell = m[1] + 'dp' + (m[2] ? ' <em>' + m[2] + '</em>' : '');
+      return { tb: cell, lr: cell };
+    }
+    // "Adp x <prose>" (asymmetric horizontal, e.g. lead/trail)
+    m = norm.match(/^([\d.]+)\s*dp\s*\u00d7\s*(.+)$/);
+    if (m) return { tb: m[1] + 'dp', lr: m[2] };
+    if (norm === DASH) return { tb: DASH, lr: DASH };
+    return null;
+  }
+
+  document.querySelectorAll('.spec-section').forEach(sec => {
+    const h2 = sec.querySelector('h2');
+    if (!h2 || !/Layout\s*&\s*Spacing/i.test(h2.textContent)) return;
+
+    let hasPad = false, hasDim = false;
+
+    sec.querySelectorAll('.table-wrap table').forEach(table => {
+      const headRow = table.tHead && table.tHead.rows[0];
+      if (!headRow) return;
+      const ths = [...headRow.cells];
+      const groups = ths.map(th => {
+        const t = th.textContent.trim();
+        if (/^(min|max)\s+(height|width)$/i.test(t)) return 'dim';
+        if (/padding/i.test(t) || /\binset\b/i.test(t)) return 'pad';
+        return null;
+      });
+      if (!groups.includes('pad') && !groups.includes('dim')) return;
+      const origCount = ths.length;
+
+      // Which columns split: a th titled exactly "Padding".
+      const isSplit = ths.map((th, i) =>
+        groups[i] === 'pad' && th.textContent.trim().toLowerCase() === 'padding');
+
+      // Header: transform right-to-left so indices stay valid.
+      for (let i = origCount - 1; i >= 0; i--) {
+        const th = headRow.cells[i];
+        if (isSplit[i]) {
+          const lrTh = document.createElement('th');
+          lrTh.className = 'col-pad';
+          lrTh.innerHTML = 'Padding L/R';
+          const tbTh = document.createElement('th');
+          tbTh.className = 'col-pad';
+          tbTh.innerHTML = 'Padding T/B';
+          th.replaceWith(lrTh, tbTh);
+        } else if (groups[i]) {
+          th.classList.add('col-' + groups[i]);
+        }
+      }
+
+      // Body rows.
+      [...table.tBodies].forEach(tb => [...tb.rows].forEach(row => {
+        if (row.cells.length !== origCount) return; // colspan row: leave as-is
+        for (let i = origCount - 1; i >= 0; i--) {
+          const td = row.cells[i];
+          if (isSplit[i]) {
+            const parts = splitPad(td.innerHTML);
+            if (parts) {
+              const lrTd = document.createElement('td');
+              lrTd.className = 'col-pad';
+              lrTd.innerHTML = parts.lr;
+              const tbTd = document.createElement('td');
+              tbTd.className = 'col-pad';
+              tbTd.innerHTML = parts.tb;
+              td.replaceWith(lrTd, tbTd);
+            } else {
+              td.colSpan = 2;
+              td.classList.add('col-pad');
+            }
+          } else if (groups[i]) {
+            td.classList.add('col-' + groups[i]);
+          }
+        }
+      }));
+
+      if (groups.includes('pad')) hasPad = true;
+      if (groups.includes('dim')) hasDim = true;
+    });
+
+    if (!hasPad && !hasDim) return;
+
+    // Pills bar before the section's first table.
+    const firstWrap = sec.querySelector('.table-wrap');
+    if (!firstWrap) return;
+    const bar = document.createElement('div');
+    bar.className = 'ls-colfilter';
+    bar.setAttribute('role', 'group');
+    bar.setAttribute('aria-label', 'Table column filters');
+    const cap = document.createElement('span');
+    cap.className = 'lsf-cap';
+    cap.textContent = 'Columns';
+    bar.appendChild(cap);
+
+    function pill(label, cls, ariaLabel) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'lsf-pill';
+      b.textContent = label;
+      b.setAttribute('aria-pressed', 'true');
+      b.setAttribute('aria-label', ariaLabel);
+      b.addEventListener('click', () => {
+        const on = b.getAttribute('aria-pressed') === 'true';
+        b.setAttribute('aria-pressed', String(!on));
+        sec.classList.toggle(cls, on);
+      });
+      bar.appendChild(b);
+      return b;
+    }
+    if (hasPad) pill('Padding', 'ls-hide-pad', 'Show padding columns (left/right and top/bottom)');
+    if (hasDim) pill('Dimensions', 'ls-hide-dim', 'Show min/max width and height columns');
+
+    firstWrap.parentNode.insertBefore(bar, firstWrap);
+  });
+})();
+</script>
 </body>
 </html>
