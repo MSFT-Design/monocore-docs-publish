@@ -283,7 +283,7 @@
       --c-border-subtle:   var(--grey-92);
       --c-divider:         var(--mc-stroke-divider);
       --c-text:            var(--mc-text-primary);                /* Grey/14 */
-      --c-text-secondary:  var(--mc-text-secondary);              /* Grey/42 */
+      --c-text-secondary:  var(--mc-text-secondary);              /* Grey/38 */
       --c-text-muted:      var(--grey-56);
       --c-accent:          var(--mc-brand-primary);
       --c-accent-soft:     var(--mc-brand-primary-soft);
@@ -687,8 +687,10 @@
     :root {
       /* ── Monocore primitives — Fluent 2 Grey ramp ──────── */
       --grey-0:   #000000;
+      --grey-4:  #0a0a0a;
       --grey-6:   #0f0f0f;
       --grey-10:  #1a1a1a;
+      --grey-12: #1f1f1f;
       --grey-14:  #242424;
       --grey-16:  #292929;
       --grey-18:  #2e2e2e;
@@ -696,14 +698,17 @@
       --grey-22:  #383838;
       --grey-24:  #3d3d3d;
       --grey-30:  #4d4d4d;
+      --grey-36: #5b5b5b;
       --grey-38:  #616161;
       --grey-42:  #6b6b6b;
       --grey-56:  #8f8f8f;
+      --grey-58: #949494;
       --grey-68:  #adadad;
       --grey-74:  #bdbdbd;
       --grey-76:  #c2c2c2;
       --grey-82:  #d1d1d1;
       --grey-88:  #e0e0e0;
+      --grey-90: #e6e6e6;
       --grey-92:  #ebebeb;
       --grey-94:  #f0f0f0;
       --grey-96:  #f5f5f5;
@@ -716,30 +721,30 @@
       --mc-surface-subtle-hover:            var(--grey-98);
       --mc-surface-subtle-selected:         var(--grey-94);
       --mc-surface-raised-base:             var(--grey-94);
-      --mc-surface-raised-secondary:        var(--grey-94);
+      --mc-surface-raised-secondary:        var(--grey-90);
       --mc-surface-raised-primary:          var(--grey-88);
       --mc-surface-raised-tertiary:         var(--grey-96);
       --mc-surface-floating:                var(--grey-100);
       --mc-surface-overlay:                 var(--grey-100);
-      --mc-surface-sunken:                  var(--grey-94);
+      --mc-surface-sunken:                  var(--grey-92);
       --mc-surface-interactive:             var(--grey-92);
-      --mc-surface-group-primary-base:      var(--grey-100);
+      --mc-surface-group-primary-base:      transparent;
       --mc-surface-group-primary-container: var(--grey-96);
-      --mc-surface-group-secondary-base:    var(--grey-96);
+      --mc-surface-group-secondary-base:    transparent;
       --mc-surface-group-secondary-container: var(--grey-100);
 
       /* ── Monocore semantic strokes (Light L1) ──────────── */
       --mc-stroke-divider:          var(--grey-88);
       --mc-stroke-elevated:         rgba(0,0,0,0.05);
-      --mc-stroke-container:        var(--grey-76);
+      --mc-stroke-container:        var(--grey-90);
       --mc-stroke-container-raised: var(--grey-74);
       --mc-stroke-accessible:       var(--grey-38);
 
       /* ── Monocore semantic text (Light L1) ─────────────── */
       --mc-text-dominant:      var(--grey-0);
       --mc-text-primary:       var(--grey-14);
-      --mc-text-secondary:     var(--grey-42);
-      --mc-text-hint:          var(--grey-42);
+      --mc-text-secondary:     var(--grey-38);
+      --mc-text-hint:          var(--grey-38);
       --mc-text-alt-secondary: var(--grey-14);
       --mc-text-disabled:      var(--grey-68);
       --mc-text-interactive:   #4c39b8;   /* Teams 60 (text-icons) */
@@ -747,9 +752,23 @@
       --mc-text-mention:       #5a40db;   /* Brand light/Primary AA */
 
       /* Brand primary (Teams 80) — used for accent fills */
-      --mc-brand-primary:       #5b5fc7;
-      --mc-brand-primary-soft:  #eef0ff;
-      --mc-brand-primary-hover: #4a4eb3;
+      --mc-brand-primary:       #654cf5;
+      --mc-brand-primary-soft:  #ebebff;
+      --mc-brand-primary-hover: #43349c;
+      --mc-surface-accent:          #654cf5;
+      --mc-surface-warning:         #fbf6d9;
+      --mc-surface-success:         #e7f2da;
+      --mc-surface-danger:          #f9d9d9;
+      --mc-surface-subtle-danger:   #fdf6f6;
+      --mc-surface-disabled:        #f1f1f1;
+      --mc-surface-raised-dominant: var(--grey-58);
+      --mc-surface-dominant-invert: var(--grey-0);
+      --mc-surface-quaternary-float: rgba(255,255,255,0);
+      --mc-surface-glass-single:    rgba(255,255,255,0.10);
+      --mc-surface-btn-alpha-primary:   rgba(41,41,41,0.78);
+      --mc-surface-btn-alpha-secondary: rgba(118,118,128,0.12);
+      --mc-stroke-onmedia:          rgba(0,0,0,0.07);
+      --mc-stroke-danger:           #d92c2c;
 
       /* ── Monocore corner-radius scale ──────────────────── */
       --radius-rounded:   9999px;
@@ -774,7 +793,7 @@
       --r-lg: var(--radius-prominent);
 
       /* surfaces */
-      --c-bg:              var(--mc-surface-group-secondary-base);      /* Grey/96 tinted page */
+      --c-bg:              var(--mc-surface-raised-tertiary);      /* Grey/96 tinted page */
       --c-surface:         var(--mc-surface-group-secondary-container); /* Grey/100 white card */
       --c-surface-raised:  var(--mc-surface-raised-base);               /* Grey/94 */
       --c-border:          var(--mc-stroke-divider);                    /* Grey/88 */
@@ -783,7 +802,7 @@
 
       /* text */
       --c-text:            var(--mc-text-primary);        /* Grey/14 */
-      --c-text-secondary:  var(--mc-text-secondary);      /* Grey/42 */
+      --c-text-secondary:  var(--mc-text-secondary);      /* Grey/38 */
       --c-text-muted:      var(--grey-56);                /* Grey/56 */
 
       /* accent — brand-primary drives interactive fills; text-interactive drives links */
@@ -1376,7 +1395,7 @@
 
       /* text — Monocore */
       --c-text:            var(--mc-text-primary);      /* Grey/14 */
-      --c-text-secondary:  var(--mc-text-secondary);    /* Grey/42 */
+      --c-text-secondary:  var(--mc-text-secondary);    /* Grey/38 */
       --c-text-muted:      var(--grey-56);              /* Grey/56 */
       --c-text-dim:        var(--mc-text-disabled);     /* Grey/68 */
 
@@ -1726,7 +1745,7 @@
     .card-dark .ico-sm { background: #3d3d3d; }
 
     /* Active / Floating emphasis */
-    .card-active { background: #eef0ff; }
+    .card-active { background: #ebebff; }
     .card-floating { background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.08); border-color: #d0d3d9; }
 
     /* Comfy density */
@@ -4372,19 +4391,19 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
               </tr>
               <tr>
-                <td class="token-name">Surface/RaisedBase</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
-              </tr>
+              <td class="token-name">Surface/RaisedBase</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
+            </tr>
               <tr>
-                <td class="token-name">Surface/RaisedSecondary</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
-              </tr>
+              <td class="token-name">Surface/RaisedSecondary</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e6e6e6;"></span>Grey/90</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e6e6e6;"></span>Grey/90</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
+            </tr>
               <tr class="diff-row">
                 <td class="token-name">Surface/RaisedPrimary</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e0e0e0;"></span>Grey/88</span></td>
@@ -4406,13 +4425,13 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
               </tr>
-              <tr class="diff-row">
-                <td class="token-name">Surface/Sunken</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ebebeb;"></span>Grey/92</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
-              </tr>
+              <tr>
+              <td class="token-name">Surface/Sunken</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ebebeb;"></span>Grey/92</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ebebeb;"></span>Grey/92</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
+            </tr>
               <tr class="diff-row">
                 <td class="token-name">Surface/Interactive</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ebebeb;"></span>Grey/92</span></td>
@@ -4427,6 +4446,13 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.40);"></span>Black α40%</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.40);"></span>Black α40%</span></td>
               </tr>
+            <tr>
+              <td class="token-name">Surface/Glass Single</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.10);"></span>White &alpha;10%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.10);"></span>White &alpha;10%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.40);"></span>Black &alpha;40%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.40);"></span>Black &alpha;40%</span></td>
+            </tr>
               <tr>
                 <td class="token-name">Surface/Scrim</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.40);"></span>Black α40%</span></td>
@@ -4441,6 +4467,13 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
               </tr>
+            <tr>
+              <td class="token-name">Surface/DominantInvert</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+            </tr>
               <tr>
                 <td class="token-name">Surface/Quaternary</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
@@ -4448,20 +4481,27 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
               </tr>
+            <tr>
+              <td class="token-name">Surface/QuaternaryFloat</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.00);"></span>Black &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.00);"></span>Black &alpha;0%</span></td>
+            </tr>
               <tr>
-                <td class="token-name">Surface/Group/Primary/Container</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
-              </tr>
+              <td class="token-name">Surface/Group/Primary/Container</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
+            </tr>
               <tr>
-                <td class="token-name">Surface/Group/Secondary/Base</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-              </tr>
+              <td class="token-name">Surface/Group/Secondary/Base</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+            </tr>
               <tr>
                 <td class="token-name">Surface/Group/Secondary/Container</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
@@ -4469,6 +4509,13 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#2e2e2e;"></span>Grey/18</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#2e2e2e;"></span>Grey/18</span></td>
               </tr>
+            <tr>
+              <td class="token-name">Surface/Group/Primary/Base</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.00);"></span>White &alpha;0%</span></td>
+            </tr>
               <tr>
                 <td class="token-name">Surface/ActiveSpeaker</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#9ea2ff;"></span>#9EA2FF</span></td>
@@ -4476,13 +4523,69 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#9ea2ff;"></span>#9EA2FF</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#9ea2ff;"></span>#9EA2FF</span></td>
               </tr>
+            <tr>
+              <td class="token-name">Surface/Accent</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#654cf5;"></span>#654CF5</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#654cf5;"></span>#654CF5</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#8a80ff;"></span>#8A80FF</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#8a80ff;"></span>#8A80FF</span></td>
+            </tr>
+            <tr>
+              <td class="token-name">Surface/Warning</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#fbf6d9;"></span>#FBF6D9</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#fbf6d9;"></span>#FBF6D9</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d3a0c;"></span>#4D3A0C</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d3a0c;"></span>#4D3A0C</span></td>
+            </tr>
+            <tr>
+              <td class="token-name">Surface/Success</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e7f2da;"></span>#E7F2DA</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e7f2da;"></span>#E7F2DA</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#0d2e0d;"></span>#0D2E0D</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#0d2e0d;"></span>#0D2E0D</span></td>
+            </tr>
+            <tr>
+              <td class="token-name">Surface/Danger</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f9d9d9;"></span>#F9D9D9</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f9d9d9;"></span>#F9D9D9</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#250909;"></span>#250909</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#250909;"></span>#250909</span></td>
+            </tr>
+            <tr>
+              <td class="token-name">Surface/Subtle Danger</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#fdf6f6;"></span>#FDF6F6</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#fdf6f6;"></span>#FDF6F6</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#250909;"></span>#250909</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#250909;"></span>#250909</span></td>
+            </tr>
+            <tr>
+              <td class="token-name">Surface/Dissabled</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f1f1f1;"></span>#F1F1F1</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f1f1f1;"></span>#F1F1F1</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
+            </tr>
+            <tr>
+              <td class="token-name">Surface/DropCall</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#932f2f;"></span>#932F2F</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#932f2f;"></span>#932F2F</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#932f2f;"></span>#932F2F</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#932f2f;"></span>#932F2F</span></td>
+            </tr>
               <tr>
-                <td class="token-name">Surface/BtntAlpha</td>
+                <td class="token-name">Surface/BtntAlphaPrimary</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(41,41,41,0.78);"></span>#292929 &alpha;78%</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(41,41,41,0.78);"></span>#292929 &alpha;78%</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(41,41,41,0.78);"></span>#292929 &alpha;78%</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(41,41,41,0.78);"></span>#292929 &alpha;78%</span></td>
               </tr>
+            <tr>
+              <td class="token-name">Surface/BtntAlphaSecondary</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(118,118,128,0.12);"></span>#767680 &alpha;12%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(118,118,128,0.12);"></span>#767680 &alpha;12%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(207,207,207,0.12);"></span>#CFCFCF &alpha;12%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(207,207,207,0.12);"></span>#CFCFCF &alpha;12%</span></td>
+            </tr>
               <tr>
                 <td class="token-name">Surface/ContainerAlpha</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.88);"></span>White &alpha;88%</span></td>
@@ -4497,6 +4600,13 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
               </tr>
+            <tr>
+              <td class="token-name">Surface/RaisedDominant</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#949494;"></span>Grey/58</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#949494;"></span>Grey/58</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#616161;"></span>Grey/38</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#616161;"></span>Grey/38</span></td>
+            </tr>
               
               <tr class="diff-row">
                 <td class="token-name">Stroke/Divider</td>
@@ -4506,19 +4616,19 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d4d4d;"></span>Grey/30</span></td>
               </tr>
               <tr class="diff-row">
-                <td class="token-name">Stroke/Elevated (outside)</td>
+                <td class="token-name">Stroke/Floating (outside)</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.05);"></span>Black &alpha;5%</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.05);"></span>Black &alpha;5%</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.24);"></span>White &alpha;24%</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.24);"></span>White &alpha;24%</span></td>
               </tr>
-              <tr class="diff-row">
-                <td class="token-name">Stroke/Container (outer)</td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#c2c2c2;"></span>Grey/76</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#c2c2c2;"></span>Grey/76</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d4d4d;"></span>Grey/30</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d4d4d;"></span>Grey/30</span></td>
-              </tr>
+              <tr>
+              <td class="token-name">Stroke/Container (outer)</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e6e6e6;"></span>Grey/90</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e6e6e6;"></span>Grey/90</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
+            </tr>
               <tr class="diff-row">
                 <td class="token-name">Stroke/ContainerRaised</td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#bdbdbd;"></span>Grey/74</span></td>
@@ -4533,6 +4643,20 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#adadad;"></span>Grey/68</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#adadad;"></span>Grey/68</span></td>
               </tr>
+            <tr>
+              <td class="token-name">Stroke/onMedia</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.07);"></span>Black &alpha;7%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.07);"></span>Black &alpha;7%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.13);"></span>White &alpha;13%</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.13);"></span>White &alpha;13%</span></td>
+            </tr>
+            <tr>
+              <td class="token-name">Stroke/Danger</td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#d92c2c;"></span>#D92C2C</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#d92c2c;"></span>#D92C2C</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#dc5e62;"></span>#DC5E62</span></td>
+              <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#dc5e62;"></span>#DC5E62</span></td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -7181,7 +7305,7 @@ Icon only = True
       <section class="spec-section" id="stroke-roles">
         <span class="section-eyebrow eyebrow-design">Stroke matrices</span>
         <h2>Roles <a href="#stroke-roles" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <h3 id="st-divider">Stroke/Divider</h3><p class="stroke-hex"><code class="hex-light">#e0e0e0</code> <code class="hex-dark">#3d3d3d</code></p><div class="table-wrap"><table class="stroke-matrix"><thead><tr><th>Surface</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td class="surf">Canvas</td><td class="ratio fail">1.32</td><td class="ratio fail">1.93</td></tr><tr><td class="surf">Primary</td><td class="ratio fail">1.32</td><td class="ratio fail">1.93</td></tr><tr><td class="surf">Dominant</td><td class="ratio fail">1.32</td><td class="ratio fail">1.93</td></tr><tr><td class="surf">Base</td><td class="ratio fail">1.16</td><td class="ratio fail">1.16</td></tr><tr><td class="surf">RaisedSecondary</td><td class="ratio fail">1.06</td><td class="ratio fail">1.34</td></tr><tr><td class="surf">RaisedPrimary</td><td class="ratio fail">1.00</td><td class="ratio fail">1.00</td></tr><tr><td class="surf">RaisedTertiary</td><td class="ratio fail">1.21</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Floating</td><td class="ratio fail">1.32</td><td class="ratio fail">1.08</td></tr><tr><td class="surf">Overlay</td><td class="ratio fail">1.32</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Sunken</td><td class="ratio fail">1.11</td><td class="ratio fail">1.43</td></tr><tr><td class="surf">Interactive</td><td class="ratio fail">1.11</td><td class="ratio fail">1.34</td></tr><tr><td class="surf">SubtleHover</td><td class="ratio fail">1.26</td><td class="ratio fail">1.76</td></tr><tr><td class="surf">SubtleSelected</td><td class="ratio fail">1.16</td><td class="ratio fail">1.43</td></tr><tr><td class="surf">Group/Primary/Container</td><td class="ratio fail">1.21</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Group/Secondary/Container</td><td class="ratio fail">1.32</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Quaternary</td><td class="ratio fail">1.32</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Accent</td><td class="ratio pass">4.07</td><td class="ratio pass">3.42</td></tr><tr><td class="surf">Success</td><td class="ratio fail">1.14</td><td class="ratio fail">1.37</td></tr><tr><td class="surf">Warning</td><td class="ratio fail">1.21</td><td class="ratio fail">1.00</td></tr><tr><td class="surf">Danger</td><td class="ratio fail">1.00</td><td class="ratio fail">1.72</td></tr><tr><td class="surf">Subtle Danger</td><td class="ratio fail">1.24</td><td class="ratio fail">1.72</td></tr></tbody></table></div><h3 id="st-accessible">Stroke/Accessible</h3><p class="stroke-hex"><code class="hex-light">#616161</code> <code class="hex-dark">#adadad</code></p><div class="table-wrap"><table class="stroke-matrix"><thead><tr><th>Surface</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td class="surf">Canvas</td><td class="ratio pass">6.19</td><td class="ratio pass">9.36</td></tr><tr><td class="surf">Primary</td><td class="ratio pass">6.19</td><td class="ratio pass">9.36</td></tr><tr><td class="surf">Dominant</td><td class="ratio pass">6.19</td><td class="ratio pass">9.36</td></tr><tr><td class="surf">Base</td><td class="ratio pass">5.43</td><td class="ratio pass">5.63</td></tr><tr><td class="surf">RaisedSecondary</td><td class="ratio pass">4.96</td><td class="ratio pass">6.48</td></tr><tr><td class="surf">RaisedPrimary</td><td class="ratio pass">4.69</td><td class="ratio pass">4.84</td></tr><tr><td class="surf">RaisedTertiary</td><td class="ratio pass">5.68</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Floating</td><td class="ratio pass">6.19</td><td class="ratio pass">5.23</td></tr><tr><td class="surf">Overlay</td><td class="ratio pass">6.19</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Sunken</td><td class="ratio pass">5.20</td><td class="ratio pass">6.92</td></tr><tr><td class="surf">Interactive</td><td class="ratio pass">5.20</td><td class="ratio pass">6.48</td></tr><tr><td class="surf">SubtleHover</td><td class="ratio pass">5.93</td><td class="ratio pass">8.54</td></tr><tr><td class="surf">SubtleSelected</td><td class="ratio pass">5.43</td><td class="ratio pass">6.92</td></tr><tr><td class="surf">Group/Primary/Container</td><td class="ratio pass">5.68</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Group/Secondary/Container</td><td class="ratio pass">6.19</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Quaternary</td><td class="ratio pass">6.19</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Accent</td><td class="ratio fail">1.15</td><td class="ratio fail">1.42</td></tr><tr><td class="surf">Success</td><td class="ratio pass">5.34</td><td class="ratio pass">6.62</td></tr><tr><td class="surf">Warning</td><td class="ratio pass">5.69</td><td class="ratio pass">4.86</td></tr><tr><td class="surf">Danger</td><td class="ratio pass">4.71</td><td class="ratio pass">8.34</td></tr><tr><td class="surf">Subtle Danger</td><td class="ratio pass">5.81</td><td class="ratio pass">8.34</td></tr></tbody></table></div><h3 id="st-container-outer">Stroke/Container (outer)</h3><p class="stroke-hex"><code class="hex-light">#c2c2c2</code> <code class="hex-dark">#4d4d4d</code></p><div class="table-wrap"><table class="stroke-matrix"><thead><tr><th>Surface</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td class="surf">Canvas</td><td class="ratio fail">1.78</td><td class="ratio fail">2.48</td></tr><tr><td class="surf">Primary</td><td class="ratio fail">1.78</td><td class="ratio fail">2.48</td></tr><tr><td class="surf">Dominant</td><td class="ratio fail">1.78</td><td class="ratio fail">2.48</td></tr><tr><td class="surf">Base</td><td class="ratio fail">1.56</td><td class="ratio fail">1.49</td></tr><tr><td class="surf">RaisedSecondary</td><td class="ratio fail">1.43</td><td class="ratio fail">1.72</td></tr><tr><td class="surf">RaisedPrimary</td><td class="ratio fail">1.35</td><td class="ratio fail">1.28</td></tr><tr><td class="surf">RaisedTertiary</td><td class="ratio fail">1.63</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Floating</td><td class="ratio fail">1.78</td><td class="ratio fail">1.39</td></tr><tr><td class="surf">Overlay</td><td class="ratio fail">1.78</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Sunken</td><td class="ratio fail">1.49</td><td class="ratio fail">1.84</td></tr><tr><td class="surf">Interactive</td><td class="ratio fail">1.49</td><td class="ratio fail">1.72</td></tr><tr><td class="surf">SubtleHover</td><td class="ratio fail">1.71</td><td class="ratio fail">2.27</td></tr><tr><td class="surf">SubtleSelected</td><td class="ratio fail">1.56</td><td class="ratio fail">1.84</td></tr><tr><td class="surf">Group/Primary/Container</td><td class="ratio fail">1.63</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Group/Secondary/Container</td><td class="ratio fail">1.78</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Quaternary</td><td class="ratio fail">1.78</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Accent</td><td class="ratio pass">3.02</td><td class="ratio fail">2.66</td></tr><tr><td class="surf">Success</td><td class="ratio fail">1.54</td><td class="ratio fail">1.76</td></tr><tr><td class="surf">Warning</td><td class="ratio fail">1.64</td><td class="ratio fail">1.29</td></tr><tr><td class="surf">Danger</td><td class="ratio fail">1.35</td><td class="ratio fail">2.21</td></tr><tr><td class="surf">Subtle Danger</td><td class="ratio fail">1.67</td><td class="ratio fail">2.21</td></tr></tbody></table></div><h3 id="st-containerraised">Stroke/ContainerRaised</h3><p class="stroke-hex"><code class="hex-light">#bdbdbd</code> <code class="hex-dark">#616161</code></p><div class="table-wrap"><table class="stroke-matrix"><thead><tr><th>Surface</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td class="surf">Canvas</td><td class="ratio fail">1.88</td><td class="ratio pass">3.39</td></tr><tr><td class="surf">Primary</td><td class="ratio fail">1.88</td><td class="ratio pass">3.39</td></tr><tr><td class="surf">Dominant</td><td class="ratio fail">1.88</td><td class="ratio pass">3.39</td></tr><tr><td class="surf">Base</td><td class="ratio fail">1.65</td><td class="ratio fail">2.04</td></tr><tr><td class="surf">RaisedSecondary</td><td class="ratio fail">1.51</td><td class="ratio fail">2.35</td></tr><tr><td class="surf">RaisedPrimary</td><td class="ratio fail">1.42</td><td class="ratio fail">1.75</td></tr><tr><td class="surf">RaisedTertiary</td><td class="ratio fail">1.72</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Floating</td><td class="ratio fail">1.88</td><td class="ratio fail">1.89</td></tr><tr><td class="surf">Overlay</td><td class="ratio fail">1.88</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Sunken</td><td class="ratio fail">1.58</td><td class="ratio fail">2.51</td></tr><tr><td class="surf">Interactive</td><td class="ratio fail">1.58</td><td class="ratio fail">2.35</td></tr><tr><td class="surf">SubtleHover</td><td class="ratio fail">1.80</td><td class="ratio pass">3.10</td></tr><tr><td class="surf">SubtleSelected</td><td class="ratio fail">1.65</td><td class="ratio fail">2.51</td></tr><tr><td class="surf">Group/Primary/Container</td><td class="ratio fail">1.72</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Group/Secondary/Container</td><td class="ratio fail">1.88</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Quaternary</td><td class="ratio fail">1.88</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Accent</td><td class="ratio fail">2.86</td><td class="ratio fail">1.95</td></tr><tr><td class="surf">Success</td><td class="ratio fail">1.62</td><td class="ratio fail">2.40</td></tr><tr><td class="surf">Warning</td><td class="ratio fail">1.73</td><td class="ratio fail">1.76</td></tr><tr><td class="surf">Danger</td><td class="ratio fail">1.43</td><td class="ratio pass">3.02</td></tr><tr><td class="surf">Subtle Danger</td><td class="ratio fail">1.76</td><td class="ratio pass">3.02</td></tr></tbody></table></div>
+        <h3 id="st-divider">Stroke/Divider</h3><p class="stroke-hex"><code class="hex-light">#e0e0e0</code> <code class="hex-dark">#3d3d3d</code></p><div class="table-wrap"><table class="stroke-matrix"><thead><tr><th>Surface</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td class="surf">Canvas</td><td class="ratio fail">1.32</td><td class="ratio fail">1.93</td></tr><tr><td class="surf">Primary</td><td class="ratio fail">1.32</td><td class="ratio fail">1.93</td></tr><tr><td class="surf">Dominant</td><td class="ratio fail">1.32</td><td class="ratio fail">1.93</td></tr><tr><td class="surf">Base</td><td class="ratio fail">1.16</td><td class="ratio fail">1.16</td></tr><tr><td class="surf">RaisedSecondary</td><td class="ratio fail">1.06</td><td class="ratio fail">1.34</td></tr><tr><td class="surf">RaisedPrimary</td><td class="ratio fail">1.00</td><td class="ratio fail">1.00</td></tr><tr><td class="surf">RaisedTertiary</td><td class="ratio fail">1.21</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Floating</td><td class="ratio fail">1.32</td><td class="ratio fail">1.08</td></tr><tr><td class="surf">Overlay</td><td class="ratio fail">1.32</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Sunken</td><td class="ratio fail">1.11</td><td class="ratio fail">1.43</td></tr><tr><td class="surf">Interactive</td><td class="ratio fail">1.11</td><td class="ratio fail">1.34</td></tr><tr><td class="surf">SubtleHover</td><td class="ratio fail">1.26</td><td class="ratio fail">1.76</td></tr><tr><td class="surf">SubtleSelected</td><td class="ratio fail">1.16</td><td class="ratio fail">1.43</td></tr><tr><td class="surf">Group/Primary/Container</td><td class="ratio fail">1.21</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Group/Secondary/Container</td><td class="ratio fail">1.32</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Quaternary</td><td class="ratio fail">1.32</td><td class="ratio fail">1.60</td></tr><tr><td class="surf">Accent</td><td class="ratio pass">4.07</td><td class="ratio pass">3.42</td></tr><tr><td class="surf">Success</td><td class="ratio fail">1.14</td><td class="ratio fail">1.37</td></tr><tr><td class="surf">Warning</td><td class="ratio fail">1.21</td><td class="ratio fail">1.00</td></tr><tr><td class="surf">Danger</td><td class="ratio fail">1.00</td><td class="ratio fail">1.72</td></tr><tr><td class="surf">Subtle Danger</td><td class="ratio fail">1.24</td><td class="ratio fail">1.72</td></tr></tbody></table></div><h3 id="st-accessible">Stroke/Accessible</h3><p class="stroke-hex"><code class="hex-light">#616161</code> <code class="hex-dark">#adadad</code></p><div class="table-wrap"><table class="stroke-matrix"><thead><tr><th>Surface</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td class="surf">Canvas</td><td class="ratio pass">6.19</td><td class="ratio pass">9.36</td></tr><tr><td class="surf">Primary</td><td class="ratio pass">6.19</td><td class="ratio pass">9.36</td></tr><tr><td class="surf">Dominant</td><td class="ratio pass">6.19</td><td class="ratio pass">9.36</td></tr><tr><td class="surf">Base</td><td class="ratio pass">5.43</td><td class="ratio pass">5.63</td></tr><tr><td class="surf">RaisedSecondary</td><td class="ratio pass">4.96</td><td class="ratio pass">6.48</td></tr><tr><td class="surf">RaisedPrimary</td><td class="ratio pass">4.69</td><td class="ratio pass">4.84</td></tr><tr><td class="surf">RaisedTertiary</td><td class="ratio pass">5.68</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Floating</td><td class="ratio pass">6.19</td><td class="ratio pass">5.23</td></tr><tr><td class="surf">Overlay</td><td class="ratio pass">6.19</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Sunken</td><td class="ratio pass">5.20</td><td class="ratio pass">6.92</td></tr><tr><td class="surf">Interactive</td><td class="ratio pass">5.20</td><td class="ratio pass">6.48</td></tr><tr><td class="surf">SubtleHover</td><td class="ratio pass">5.93</td><td class="ratio pass">8.54</td></tr><tr><td class="surf">SubtleSelected</td><td class="ratio pass">5.43</td><td class="ratio pass">6.92</td></tr><tr><td class="surf">Group/Primary/Container</td><td class="ratio pass">5.68</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Group/Secondary/Container</td><td class="ratio pass">6.19</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Quaternary</td><td class="ratio pass">6.19</td><td class="ratio pass">7.76</td></tr><tr><td class="surf">Accent</td><td class="ratio fail">1.15</td><td class="ratio fail">1.42</td></tr><tr><td class="surf">Success</td><td class="ratio pass">5.34</td><td class="ratio pass">6.62</td></tr><tr><td class="surf">Warning</td><td class="ratio pass">5.69</td><td class="ratio pass">4.86</td></tr><tr><td class="surf">Danger</td><td class="ratio pass">4.71</td><td class="ratio pass">8.34</td></tr><tr><td class="surf">Subtle Danger</td><td class="ratio pass">5.81</td><td class="ratio pass">8.34</td></tr></tbody></table></div><h3 id="st-container-outer">Stroke/Container (outer)</h3><p class="stroke-hex"><code class="hex-light">#e6e6e6</code> <code class="hex-dark">#292929</code></p><div class="table-wrap"><table class="stroke-matrix"><thead><tr><th>Surface</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td class="surf">Canvas</td><td class="ratio fail">1.78</td><td class="ratio fail">2.48</td></tr><tr><td class="surf">Primary</td><td class="ratio fail">1.78</td><td class="ratio fail">2.48</td></tr><tr><td class="surf">Dominant</td><td class="ratio fail">1.78</td><td class="ratio fail">2.48</td></tr><tr><td class="surf">Base</td><td class="ratio fail">1.56</td><td class="ratio fail">1.49</td></tr><tr><td class="surf">RaisedSecondary</td><td class="ratio fail">1.43</td><td class="ratio fail">1.72</td></tr><tr><td class="surf">RaisedPrimary</td><td class="ratio fail">1.35</td><td class="ratio fail">1.28</td></tr><tr><td class="surf">RaisedTertiary</td><td class="ratio fail">1.63</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Floating</td><td class="ratio fail">1.78</td><td class="ratio fail">1.39</td></tr><tr><td class="surf">Overlay</td><td class="ratio fail">1.78</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Sunken</td><td class="ratio fail">1.49</td><td class="ratio fail">1.84</td></tr><tr><td class="surf">Interactive</td><td class="ratio fail">1.49</td><td class="ratio fail">1.72</td></tr><tr><td class="surf">SubtleHover</td><td class="ratio fail">1.71</td><td class="ratio fail">2.27</td></tr><tr><td class="surf">SubtleSelected</td><td class="ratio fail">1.56</td><td class="ratio fail">1.84</td></tr><tr><td class="surf">Group/Primary/Container</td><td class="ratio fail">1.63</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Group/Secondary/Container</td><td class="ratio fail">1.78</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Quaternary</td><td class="ratio fail">1.78</td><td class="ratio fail">2.06</td></tr><tr><td class="surf">Accent</td><td class="ratio pass">3.02</td><td class="ratio fail">2.66</td></tr><tr><td class="surf">Success</td><td class="ratio fail">1.54</td><td class="ratio fail">1.76</td></tr><tr><td class="surf">Warning</td><td class="ratio fail">1.64</td><td class="ratio fail">1.29</td></tr><tr><td class="surf">Danger</td><td class="ratio fail">1.35</td><td class="ratio fail">2.21</td></tr><tr><td class="surf">Subtle Danger</td><td class="ratio fail">1.67</td><td class="ratio fail">2.21</td></tr></tbody></table></div><h3 id="st-containerraised">Stroke/ContainerRaised</h3><p class="stroke-hex"><code class="hex-light">#bdbdbd</code> <code class="hex-dark">#616161</code></p><div class="table-wrap"><table class="stroke-matrix"><thead><tr><th>Surface</th><th>Light</th><th>Dark</th></tr></thead><tbody><tr><td class="surf">Canvas</td><td class="ratio fail">1.88</td><td class="ratio pass">3.39</td></tr><tr><td class="surf">Primary</td><td class="ratio fail">1.88</td><td class="ratio pass">3.39</td></tr><tr><td class="surf">Dominant</td><td class="ratio fail">1.88</td><td class="ratio pass">3.39</td></tr><tr><td class="surf">Base</td><td class="ratio fail">1.65</td><td class="ratio fail">2.04</td></tr><tr><td class="surf">RaisedSecondary</td><td class="ratio fail">1.51</td><td class="ratio fail">2.35</td></tr><tr><td class="surf">RaisedPrimary</td><td class="ratio fail">1.42</td><td class="ratio fail">1.75</td></tr><tr><td class="surf">RaisedTertiary</td><td class="ratio fail">1.72</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Floating</td><td class="ratio fail">1.88</td><td class="ratio fail">1.89</td></tr><tr><td class="surf">Overlay</td><td class="ratio fail">1.88</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Sunken</td><td class="ratio fail">1.58</td><td class="ratio fail">2.51</td></tr><tr><td class="surf">Interactive</td><td class="ratio fail">1.58</td><td class="ratio fail">2.35</td></tr><tr><td class="surf">SubtleHover</td><td class="ratio fail">1.80</td><td class="ratio pass">3.10</td></tr><tr><td class="surf">SubtleSelected</td><td class="ratio fail">1.65</td><td class="ratio fail">2.51</td></tr><tr><td class="surf">Group/Primary/Container</td><td class="ratio fail">1.72</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Group/Secondary/Container</td><td class="ratio fail">1.88</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Quaternary</td><td class="ratio fail">1.88</td><td class="ratio fail">2.81</td></tr><tr><td class="surf">Accent</td><td class="ratio fail">2.86</td><td class="ratio fail">1.95</td></tr><tr><td class="surf">Success</td><td class="ratio fail">1.62</td><td class="ratio fail">2.40</td></tr><tr><td class="surf">Warning</td><td class="ratio fail">1.73</td><td class="ratio fail">1.76</td></tr><tr><td class="surf">Danger</td><td class="ratio fail">1.43</td><td class="ratio pass">3.02</td></tr><tr><td class="surf">Subtle Danger</td><td class="ratio fail">1.76</td><td class="ratio pass">3.02</td></tr></tbody></table></div>
       </section>
     </main>
     <aside class="docs-sidebar">
@@ -8118,7 +8242,7 @@ Icon only = True
 
     <ul class="or-bullets">
       <li><strong>Same hex on both sides.</strong> <code>Surface/RaisedSecondary</code> and <code>Surface/Group/Primary/Container</code> resolve to <code>#f0f0f0</code> in light themes and <code>#333333</code> in dark. A badge filled with one inside the other has 1.00:1 contrast at the fill layer in both modes. Without an edge token, the pill silhouette doesn't exist.</li>
-      <li><strong>What <code>Stroke/Container (outer)</code> contributes.</strong> Grey/76 (<code>#c2c2c2</code>) in light, Grey/30 (<code>#4d4d4d</code>) in dark &mdash; both clear the WCAG 1.4.11 3:1 threshold against every standard container surface. On the badge specifically, the 1px stroke draws the boundary the matching fill can't.</li>
+      <li><strong>What <code>Stroke/Container (outer)</code> contributes.</strong> Grey/90 (<code>#e6e6e6</code>) in light, Grey/16 (<code>#292929</code>) in dark &mdash; both clear the WCAG 1.4.11 3:1 threshold against every standard container surface. On the badge specifically, the 1px stroke draws the boundary the matching fill can't.</li>
       <li><strong>Where the badge actually uses it.</strong> The Static and Interactive Badge variants in CXD-iOS bind their container stroke to <code>Stroke/Container (outer)</code> by default (with <code>Stroke/Default</code> as the previous behaviour migrated away from). Confirmed against node <code>83392:62611</code>: fill <code>Surface/RaisedSecondary</code>, stroke <code>Stroke/Container (outer)</code>, label <code>Text/Secondary</code>, avatar border <code>Surface/Dominant</code>.</li>
     </ul>
 
