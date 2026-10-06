@@ -2136,6 +2136,7 @@
       <div class="nav-section">
         <a href="#overview" data-link="overview">Overview</a>
         <a href="#roadmap" data-link="roadmap">Roadmap</a>
+        <a href="#architecture" data-link="architecture">Architecture</a>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Semantic Surface System</div>
@@ -9177,6 +9178,247 @@ Icon only = True
 
   <footer class="docs-footer">
     Roadmap &middot; Monocore &middot; July 2026
+  </footer>
+
+</div>
+</div>
+
+<div class="page" id="page-architecture" data-page="architecture">
+
+<style>
+  .arch-figure { margin: 0 0 var(--sp-5); }
+  .arch-figure svg {
+    display: block; max-width: 100%; height: auto;
+    color: var(--mc-text-primary);
+    background: var(--mc-surface-group-secondary-container);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-prominent);
+    padding: var(--sp-4);
+  }
+  .arch-figure figcaption {
+    font-size: 13px; color: var(--mc-text-secondary); line-height: 1.55;
+    margin-top: var(--sp-3); max-width: 72ch;
+  }
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--sp-3);
+    margin-top: var(--sp-4);
+  }
+  .arch-card {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-strong);
+    padding: var(--sp-4);
+  }
+  .arch-card-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    color: var(--mc-text-secondary); margin-bottom: var(--sp-2);
+  }
+  .arch-card-title { font-size: 15px; font-weight: 600; color: var(--mc-text-primary); margin-bottom: var(--sp-2); }
+  .arch-card p { font-size: 13px; color: var(--mc-text-secondary); line-height: 1.55; margin: 0; }
+  .arch-card.is-accent { border-color: var(--mc-brand-primary); }
+  .arch-card.is-accent .arch-card-title { color: var(--mc-brand-primary); }
+  .arch-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: var(--sp-3); }
+  .arch-table th, .arch-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--c-border); vertical-align: top; }
+  .arch-table th { font-size: 11.5px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--mc-text-secondary); }
+  .arch-table td:first-child { font-weight: 600; color: var(--mc-text-primary); white-space: nowrap; }
+  .arch-table td { color: var(--mc-text-secondary); line-height: 1.5; }
+</style>
+
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Monocore</div>
+    <h1>Architecture</h1>
+    <p class="subtitle">How the Teams UI upgrade became Monocore: what feeds the design system, how it adapts per OS, and why one system ships under two code-library names.</p>
+    <div class="meta">
+      <span>3 inputs</span>
+      <span>2 platforms</span>
+      <span>2 code libraries</span>
+      <span>Updated October 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="arch-overview">
+        <span class="section-eyebrow eyebrow-design">System</span>
+        <h2>One design system, two names <a href="#arch-overview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The effort to upgrade the Teams Mobile component library, Teams UI, was first called the <em>visual refresh</em>. Along the way it grew past a refresh: new tokens, OS-native behaviour and adaptiveness were folded into the components. The resulting design system is <strong>Monocore</strong>. It is consumed by two code libraries that cannot share a name, which is the relationship this page exists to make unambiguous.</p>
+
+        <figure class="arch-figure">
+          <svg viewBox="0 0 960 560" role="img" aria-label="Teams UI plus new tokens and OS-native concepts become the Monocore design system, which ships to Teams under the Teams UI library name and to SharePoint under the Monocore library name, with per-platform iOS and Android adaptations.">
+            <defs>
+              <marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker>
+              <marker id="arch-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--mc-brand-primary)"/></marker>
+            </defs>
+
+            <text x="20" y="28" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">INPUTS</text>
+
+            <rect x="20" y="44" width="200" height="72" rx="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <text x="120" y="72" text-anchor="middle" font-size="14" font-weight="600">Teams UI</text>
+            <text x="120" y="92" text-anchor="middle" font-size="11.5" fill="var(--mc-text-secondary)">existing component library</text>
+            <text x="120" y="106" text-anchor="middle" font-size="11.5" fill="var(--mc-text-secondary)">+ existing tokens</text>
+
+            <rect x="20" y="140" width="200" height="104" rx="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <text x="120" y="164" text-anchor="middle" font-size="14" font-weight="600">Visual refresh tokens</text>
+            <line x1="36" y1="178" x2="204" y2="178" stroke="var(--c-border)"/>
+            <text x="36" y="198" font-size="11.5">• 1:1 remaps of Teams UI tokens</text>
+            <text x="36" y="216" font-size="11.5">• brand-new tokens</text>
+            <text x="48" y="232" font-size="11" fill="var(--mc-text-secondary)">(no Teams UI equivalent)</text>
+
+            <rect x="20" y="268" width="200" height="104" rx="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <text x="120" y="292" text-anchor="middle" font-size="14" font-weight="600">OS-native concepts</text>
+            <line x1="36" y1="306" x2="204" y2="306" stroke="var(--c-border)"/>
+            <text x="36" y="326" font-size="11.5">• native behaviour</text>
+            <text x="36" y="344" font-size="11.5">• adaptiveness</text>
+            <text x="36" y="362" font-size="11.5">• materials / translucency</text>
+
+            <line x1="220" y1="80"  x2="330" y2="180" stroke="currentColor" stroke-width="1.4" marker-end="url(#arch-arrow)"/>
+            <line x1="220" y1="192" x2="330" y2="200" stroke="currentColor" stroke-width="1.4" marker-end="url(#arch-arrow)"/>
+            <line x1="220" y1="320" x2="330" y2="222" stroke="currentColor" stroke-width="1.4" marker-end="url(#arch-arrow)"/>
+            <text x="262" y="110" font-size="11" fill="var(--mc-text-secondary)" transform="rotate(42 262 110)">upgraded</text>
+            <text x="246" y="186" font-size="11" fill="var(--mc-text-secondary)">added</text>
+            <text x="262" y="296" font-size="11" fill="var(--mc-text-secondary)" transform="rotate(-42 262 296)">added</text>
+
+            <text x="340" y="28" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">DESIGN SYSTEM</text>
+            <rect x="340" y="120" width="220" height="190" rx="10" fill="var(--mc-brand-primary-soft)" stroke="var(--mc-brand-primary)" stroke-width="2"/>
+            <text x="450" y="160" text-anchor="middle" font-size="18" font-weight="700" fill="var(--mc-brand-primary)">Monocore</text>
+            <text x="450" y="182" text-anchor="middle" font-size="12" fill="var(--mc-text-secondary)">design system (Figma)</text>
+            <line x1="360" y1="198" x2="540" y2="198" stroke="var(--mc-brand-primary)" stroke-opacity=".4"/>
+            <text x="450" y="222" text-anchor="middle" font-size="11.5">Teams UI components</text>
+            <text x="450" y="240" text-anchor="middle" font-size="11.5">+ refresh tokens</text>
+            <text x="450" y="258" text-anchor="middle" font-size="11.5">+ OS-native behaviour</text>
+            <text x="450" y="290" text-anchor="middle" font-size="11" fill="var(--mc-text-secondary)">one source of truth</text>
+
+            <rect x="340" y="330" width="104" height="58" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+            <text x="392" y="353" text-anchor="middle" font-size="12.5" font-weight="600">iOS 26</text>
+            <text x="392" y="370" text-anchor="middle" font-size="10.5" fill="var(--mc-text-secondary)">Liquid Glass, materials</text>
+            <rect x="456" y="330" width="104" height="58" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+            <text x="508" y="353" text-anchor="middle" font-size="12.5" font-weight="600">Android M3</text>
+            <text x="508" y="370" text-anchor="middle" font-size="10.5" fill="var(--mc-text-secondary)">asymmetric, not 1:1</text>
+            <line x1="450" y1="310" x2="450" y2="326" stroke="currentColor" stroke-width="1.2"/>
+            <line x1="392" y1="326" x2="508" y2="326" stroke="currentColor" stroke-width="1.2"/>
+            <line x1="392" y1="326" x2="392" y2="330" stroke="currentColor" stroke-width="1.2" marker-end="url(#arch-arrow)"/>
+            <line x1="508" y1="326" x2="508" y2="330" stroke="currentColor" stroke-width="1.2" marker-end="url(#arch-arrow)"/>
+            <text x="450" y="412" text-anchor="middle" font-size="11" fill="var(--mc-text-secondary)">adapts per OS — adaptiveness differs between iOS and Android</text>
+
+            <text x="640" y="28" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">CODE LIBRARIES</text>
+
+            <rect x="640" y="96" width="300" height="104" rx="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <text x="656" y="120" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">TEAMS MOBILE</text>
+            <text x="656" y="146" font-size="15" font-weight="600">Teams UI</text>
+            <text x="656" y="166" font-size="11.5" fill="var(--mc-text-secondary)">library name kept — can't rename</text>
+            <text x="656" y="182" font-size="11.5" fill="var(--mc-text-secondary)">in Teams code; receives Monocore updates</text>
+
+            <rect x="640" y="236" width="300" height="104" rx="8" fill="none" stroke="var(--mc-brand-primary)" stroke-width="1.6"/>
+            <text x="656" y="260" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">SHAREPOINT</text>
+            <text x="656" y="286" font-size="15" font-weight="600" fill="var(--mc-brand-primary)">Monocore</text>
+            <text x="656" y="306" font-size="11.5" fill="var(--mc-text-secondary)">new library — takes the design</text>
+            <text x="656" y="322" font-size="11.5" fill="var(--mc-text-secondary)">system's name</text>
+
+            <line x1="560" y1="190" x2="640" y2="152" stroke="currentColor" stroke-width="1.4" marker-end="url(#arch-arrow)"/>
+            <text x="600" y="158" text-anchor="middle" font-size="11" fill="var(--mc-text-secondary)" transform="rotate(-25 600 158)">ships as</text>
+            <line x1="560" y1="240" x2="640" y2="284" stroke="var(--mc-brand-primary)" stroke-width="1.6" marker-end="url(#arch-arrow-accent)"/>
+            <text x="600" y="278" text-anchor="middle" font-size="11" fill="var(--mc-brand-primary)" transform="rotate(29 600 278)">ships as</text>
+
+            <rect x="20" y="452" width="920" height="88" rx="8" fill="var(--mc-surface-raised-tertiary)" stroke="var(--c-border)"/>
+            <text x="40" y="478" font-size="13" font-weight="600">Why the same word means two things</text>
+            <text x="40" y="500" font-size="12.5">“Monocore” is the <tspan font-weight="600">design system</tspan> (the upgraded Teams UI with refresh tokens and OS-native behaviour) <tspan font-weight="600">and</tspan> the</text>
+            <text x="40" y="518" font-size="12.5">name of SharePoint's <tspan font-weight="600">code library</tspan>. Teams consumes the identical design system but keeps the legacy “Teams UI” library name.</text>
+          </svg>
+          <figcaption>Teams UI, the visual-refresh tokens and the OS-native concepts combine into one design system, Monocore. It is adapted per OS, then ships to two code libraries: Teams keeps the <em>Teams UI</em> name because it can't be renamed in the Teams codebase; SharePoint's new library is simply called <em>Monocore</em>.</figcaption>
+        </figure>
+      </section>
+
+      <section class="spec-section" id="arch-inputs">
+        <span class="section-eyebrow eyebrow-design">Inputs</span>
+        <h2>What feeds the system <a href="#arch-inputs" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Monocore is not a replacement library. It is Teams UI with two kinds of additions layered on. Keeping the three inputs distinct matters because each has a different migration cost.</p>
+
+        <div class="arch-grid">
+          <div class="arch-card">
+            <div class="arch-card-label">Base</div>
+            <div class="arch-card-title">Teams UI</div>
+            <p>The existing Teams Mobile component library and its token set. Every Monocore component descends from a Teams UI component; the library is <em>upgraded</em>, not forked.</p>
+          </div>
+          <div class="arch-card">
+            <div class="arch-card-label">Added</div>
+            <div class="arch-card-title">Visual refresh tokens</div>
+            <p>Two populations. Some map <strong>1:1</strong> onto existing Teams UI tokens and are a rename. Others are <strong>brand-new</strong> with no Teams UI equivalent — these are what make a straight token swap impossible and drive the per-component migration work.</p>
+          </div>
+          <div class="arch-card">
+            <div class="arch-card-label">Added</div>
+            <div class="arch-card-title">OS-native concepts</div>
+            <p>Native behaviour, adaptiveness, and materials. These are new <em>kinds</em> of thing for the design system, not new values — they change how a component behaves on a given OS, not just how it looks.</p>
+          </div>
+        </div>
+
+        <div class="callout callout-info" style="margin-top: var(--sp-4);"><strong>Token audit.</strong> The 1:1 vs brand-new split per token is tracked in <a href="#teams-migration" data-link="teams-migration">Teams Migration</a> and <a href="#token-audit" data-link="token-audit">Windows mapping</a>.</div>
+      </section>
+
+      <section class="spec-section" id="arch-platforms">
+        <span class="section-eyebrow eyebrow-design">Platforms</span>
+        <h2>Per-OS adaptation <a href="#arch-platforms" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The design system is a single source of truth, but it does not render identically on both platforms. Each OS has its own native idioms that get baked into components, and the two are not symmetric.</p>
+
+        <table class="arch-table">
+          <thead><tr><th>Platform</th><th>What gets baked in</th><th>Relationship to the other platform</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>iOS 26</td>
+              <td>Translucency and materials (Liquid Glass) applied to components such as the header. Scroll edge effects, native modality.</td>
+              <td>Reference implementation for the material model.</td>
+            </tr>
+            <tr>
+              <td>Android (M3)</td>
+              <td>Material 3 updates to shape, surface tint, and motion.</td>
+              <td><strong>Asymmetric</strong> — M3's updates do not map 1:1 onto iOS 26's. Where there is no equivalent, the component simplifies rather than imitates.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Adaptiveness differs per OS.</strong> How a component responds to size class, orientation and pointer input is specified separately for iOS and Android. Do not assume a behaviour carries across; check the platform's own spec page.</div>
+      </section>
+
+      <section class="spec-section" id="arch-naming">
+        <span class="section-eyebrow eyebrow-impl">Naming</span>
+        <h2>Two code libraries, one design system <a href="#arch-naming" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">This is the part that causes confusion, so it is stated plainly. The word <strong>Monocore</strong> does two jobs.</p>
+
+        <div class="arch-grid">
+          <div class="arch-card">
+            <div class="arch-card-label">Teams Mobile</div>
+            <div class="arch-card-title">Teams UI</div>
+            <p>The code library keeps its existing name because it cannot be renamed inside the Teams codebase. It receives every Monocore update. In Teams, “Monocore” <em>describes</em> the upgrade; it is not what the library is called.</p>
+          </div>
+          <div class="arch-card is-accent">
+            <div class="arch-card-label">SharePoint</div>
+            <div class="arch-card-title">Monocore</div>
+            <p>The SharePoint team consumes the same design system through a separate code library, and that library <em>is</em> called Monocore. Here the design-system name and the library name are the same word.</p>
+          </div>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top: var(--sp-4);"><strong>When someone says “Monocore”,</strong> they mean the design system unless they are a SharePoint engineer talking about an import. Both libraries build from the identical Figma source; neither is “more Monocore” than the other.</div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#arch-overview">One design system, two names</a>
+        <a href="#arch-inputs">What feeds the system</a>
+        <a href="#arch-platforms">Per-OS adaptation</a>
+        <a href="#arch-naming">Two code libraries</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Architecture &middot; Monocore &middot; October 2026
   </footer>
 
 </div>
@@ -16574,7 +16816,7 @@ function switchTier(btn, tier) {
   const backdrop = document.querySelector('.site-nav-backdrop');
 
   const VIEWS = { spec: null, guidance: 'view-guidance', architecture: 'view-architecture' };
-  const NO_TABS = new Set(['overview', 'roadmap']);
+  const NO_TABS = new Set(['overview', 'roadmap', 'architecture']);
 
   function parseHash(hash) {
     const parts = (hash || location.hash || '#overview').replace('#','').split('/').filter(Boolean);
