@@ -9246,10 +9246,10 @@ Icon only = True
       <section class="spec-section" id="arch-overview">
         <span class="section-eyebrow eyebrow-design">System</span>
         <h2>One design system, two names <a href="#arch-overview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The effort to upgrade the Teams Mobile component library, Teams UI, was first called the <em>visual refresh</em>. Along the way it grew past a refresh: new tokens, OS-native behaviour and adaptiveness were folded into the components. The resulting design system is <strong>Monocore</strong>. It is consumed by two code libraries that cannot share a name, which is the relationship this page exists to make unambiguous.</p>
+        <p class="section-intro">This page describes the relationship between Teams, SharePoint and Engage and a shared design system. This system is realized in separate code libraries but shares tokens and typography to enable smooth integrations within Teams as a host app.</p>
 
         <figure class="arch-figure">
-          <svg viewBox="0 0 960 560" role="img" aria-label="Teams UI plus new tokens and OS-native concepts become the Monocore design system, which ships to Teams under the Teams UI library name and to SharePoint under the Monocore library name, with per-platform iOS and Android adaptations.">
+          <svg viewBox="0 0 960 560" role="img" aria-label="Teams UI plus new tokens and OS-native concepts become the Monocore design system, adapted per OS for iOS and Android. It ships to Teams under the Teams UI library name, and to SharePoint and Engage through a shared library named Monocore.">
             <defs>
               <marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker>
               <marker id="arch-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--mc-brand-primary)"/></marker>
@@ -9310,14 +9310,14 @@ Icon only = True
             <rect x="640" y="96" width="300" height="104" rx="8" fill="none" stroke="currentColor" stroke-width="1.4"/>
             <text x="656" y="120" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">TEAMS MOBILE</text>
             <text x="656" y="146" font-size="15" font-weight="600">Teams UI</text>
-            <text x="656" y="166" font-size="11.5" fill="var(--mc-text-secondary)">library name kept — can't rename</text>
-            <text x="656" y="182" font-size="11.5" fill="var(--mc-text-secondary)">in Teams code; receives Monocore updates</text>
+            <text x="656" y="166" font-size="11.5" fill="var(--mc-text-secondary)">keeps its existing library name;</text>
+            <text x="656" y="182" font-size="11.5" fill="var(--mc-text-secondary)">receives the Monocore update</text>
 
             <rect x="640" y="236" width="300" height="104" rx="8" fill="none" stroke="var(--mc-brand-primary)" stroke-width="1.6"/>
-            <text x="656" y="260" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">SHAREPOINT</text>
+            <text x="656" y="260" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">SHAREPOINT · ENGAGE</text>
             <text x="656" y="286" font-size="15" font-weight="600" fill="var(--mc-brand-primary)">Monocore</text>
-            <text x="656" y="306" font-size="11.5" fill="var(--mc-text-secondary)">new library — takes the design</text>
-            <text x="656" y="322" font-size="11.5" fill="var(--mc-text-secondary)">system's name</text>
+            <text x="656" y="306" font-size="11.5" fill="var(--mc-text-secondary)">shared library — retains the</text>
+            <text x="656" y="322" font-size="11.5" fill="var(--mc-text-secondary)">design system's name</text>
 
             <line x1="560" y1="190" x2="640" y2="152" stroke="currentColor" stroke-width="1.4" marker-end="url(#arch-arrow)"/>
             <text x="600" y="158" text-anchor="middle" font-size="11" fill="var(--mc-text-secondary)" transform="rotate(-25 600 158)">ships as</text>
@@ -9327,10 +9327,30 @@ Icon only = True
             <rect x="20" y="452" width="920" height="88" rx="8" fill="var(--mc-surface-raised-tertiary)" stroke="var(--c-border)"/>
             <text x="40" y="478" font-size="13" font-weight="600">Why the same word means two things</text>
             <text x="40" y="500" font-size="12.5">“Monocore” is the <tspan font-weight="600">design system</tspan> (the upgraded Teams UI with refresh tokens and OS-native behaviour) <tspan font-weight="600">and</tspan> the</text>
-            <text x="40" y="518" font-size="12.5">name of SharePoint's <tspan font-weight="600">code library</tspan>. Teams consumes the identical design system but keeps the legacy “Teams UI” library name.</text>
+            <text x="40" y="518" font-size="12.5">name of the shared SharePoint &amp; Engage <tspan font-weight="600">code library</tspan>. Teams consumes the identical design system under its existing “Teams UI” library name.</text>
           </svg>
-          <figcaption>Teams UI, the visual-refresh tokens and the OS-native concepts combine into one design system, Monocore. It is adapted per OS, then ships to two code libraries: Teams keeps the <em>Teams UI</em> name because it can't be renamed in the Teams codebase; SharePoint's new library is simply called <em>Monocore</em>.</figcaption>
         </figure>
+      </section>
+
+      <section class="spec-section" id="arch-naming">
+        <span class="section-eyebrow eyebrow-impl">Naming</span>
+        <h2>Two code libraries, one design system <a href="#arch-naming" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">This is the part that causes confusion, so it is stated plainly. The word <strong>Monocore</strong> does two jobs.</p>
+
+        <div class="arch-grid">
+          <div class="arch-card">
+            <div class="arch-card-label">Teams Mobile</div>
+            <div class="arch-card-title">Teams UI</div>
+            <p>The code library keeps its existing name inside the Teams codebase. It receives new visual-refresh tokens and the OS-native concepts combine into a major update for the design system. In Teams, “Monocore” describes the upgrade.</p>
+          </div>
+          <div class="arch-card is-accent">
+            <div class="arch-card-label">SharePoint &amp; Engage</div>
+            <div class="arch-card-title">Monocore</div>
+            <p>The SharePoint and Engage team consumes the same design system through a separate and shared code library, which retains the name “Monocore” since no existing library exists.</p>
+          </div>
+        </div>
+
+        <div class="callout callout-warn" style="margin-top: var(--sp-4);"><strong>When someone says “Monocore”,</strong> they mean the design system unless they are a SharePoint or Engage engineer talking about an import. Both libraries build from the identical Figma source; neither is “more Monocore” than the other.</div>
       </section>
 
       <section class="spec-section" id="arch-inputs">
@@ -9383,36 +9403,15 @@ Icon only = True
         <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Adaptiveness differs per OS.</strong> How a component responds to size class, orientation and pointer input is specified separately for iOS and Android. Do not assume a behaviour carries across; check the platform's own spec page.</div>
       </section>
 
-      <section class="spec-section" id="arch-naming">
-        <span class="section-eyebrow eyebrow-impl">Naming</span>
-        <h2>Two code libraries, one design system <a href="#arch-naming" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">This is the part that causes confusion, so it is stated plainly. The word <strong>Monocore</strong> does two jobs.</p>
-
-        <div class="arch-grid">
-          <div class="arch-card">
-            <div class="arch-card-label">Teams Mobile</div>
-            <div class="arch-card-title">Teams UI</div>
-            <p>The code library keeps its existing name because it cannot be renamed inside the Teams codebase. It receives every Monocore update. In Teams, “Monocore” <em>describes</em> the upgrade; it is not what the library is called.</p>
-          </div>
-          <div class="arch-card is-accent">
-            <div class="arch-card-label">SharePoint</div>
-            <div class="arch-card-title">Monocore</div>
-            <p>The SharePoint team consumes the same design system through a separate code library, and that library <em>is</em> called Monocore. Here the design-system name and the library name are the same word.</p>
-          </div>
-        </div>
-
-        <div class="callout callout-warn" style="margin-top: var(--sp-4);"><strong>When someone says “Monocore”,</strong> they mean the design system unless they are a SharePoint engineer talking about an import. Both libraries build from the identical Figma source; neither is “more Monocore” than the other.</div>
-      </section>
-
     </main>
 
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
         <a href="#arch-overview">One design system, two names</a>
+        <a href="#arch-naming">Two code libraries</a>
         <a href="#arch-inputs">What feeds the system</a>
         <a href="#arch-platforms">Per-OS adaptation</a>
-        <a href="#arch-naming">Two code libraries</a>
       </nav>
     </aside>
   </div>
