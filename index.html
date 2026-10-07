@@ -9224,6 +9224,18 @@ Icon only = True
   .arch-table th { font-size: 11.5px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--mc-text-secondary); }
   .arch-table td:first-child { font-weight: 600; color: var(--mc-text-primary); white-space: nowrap; }
   .arch-table td { color: var(--mc-text-secondary); line-height: 1.5; }
+  .arch-devices { font-size: 13.5px; color: var(--mc-text-secondary); line-height: 1.55; margin: 0 0 var(--sp-4); }
+  .arch-devices strong { color: var(--mc-text-primary); }
+  .arch-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--sp-3); }
+  .arch-compare-col { background: var(--mc-surface-raised-tertiary); border: 1px solid var(--c-border); border-radius: var(--radius-strong); padding: var(--sp-4); }
+  .arch-compare-head { display: flex; flex-direction: column; gap: 2px; padding-bottom: var(--sp-3); margin-bottom: var(--sp-3); border-bottom: 1px solid var(--c-border); }
+  .arch-compare-platform { font-size: 15px; font-weight: 700; color: var(--mc-text-primary); }
+  .arch-compare-src { font-size: 11.5px; color: var(--mc-text-secondary); }
+  .arch-compare ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: var(--sp-3); }
+  .arch-compare li { font-size: 13px; color: var(--mc-text-secondary); line-height: 1.55; }
+  .arch-compare li strong { color: var(--mc-text-primary); }
+  .arch-compare li code { font-size: 12px; }
+  .arch-sources { font-size: 12px; color: var(--mc-text-secondary); line-height: 1.7; margin: var(--sp-4) 0 0; }
 </style>
 
 <div class="docs-shell">
@@ -9233,7 +9245,6 @@ Icon only = True
     <h1>Architecture</h1>
     <p class="subtitle">How the Teams UI upgrade became Monocore: what feeds the design system, how it adapts per OS, and why one system ships under two code-library names.</p>
     <div class="meta">
-      <span>3 inputs</span>
       <span>2 platforms</span>
       <span>2 code libraries</span>
       <span>Updated October 2026</span>
@@ -9373,54 +9384,58 @@ Icon only = True
         <div class="callout callout-warn" style="margin-top: var(--sp-4);"><strong>When someone says “Monocore”,</strong> they mean the design system unless they are a SharePoint or Engage engineer talking about an import. Both libraries build from the identical Figma source; neither is “more Monocore” than the other.</div>
       </section>
 
-      <section class="spec-section" id="arch-inputs">
-        <span class="section-eyebrow eyebrow-design">Inputs</span>
-        <h2>What feeds the system <a href="#arch-inputs" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Monocore is not a replacement library. It is Teams UI with two kinds of additions layered on. Keeping the three inputs distinct matters because each has a different migration cost.</p>
-
-        <div class="arch-grid">
-          <div class="arch-card">
-            <div class="arch-card-label">Base</div>
-            <div class="arch-card-title">Teams UI</div>
-            <p>The existing Teams Mobile component library and its token set. Every Monocore component descends from a Teams UI component; the library is <em>upgraded</em>, not forked.</p>
-          </div>
-          <div class="arch-card">
-            <div class="arch-card-label">Added</div>
-            <div class="arch-card-title">Visual refresh tokens</div>
-            <p>Two populations. Some map <strong>1:1</strong> onto existing Teams UI tokens and are a rename. Others are <strong>brand-new</strong> with no Teams UI equivalent — these are what make a straight token swap impossible and drive the per-component migration work.</p>
-          </div>
-          <div class="arch-card">
-            <div class="arch-card-label">Added</div>
-            <div class="arch-card-title">OS-native concepts</div>
-            <p>Native behaviour, adaptiveness, and materials. These are new <em>kinds</em> of thing for the design system, not new values — they change how a component behaves on a given OS, not just how it looks.</p>
-          </div>
-        </div>
-
-        <div class="callout callout-info" style="margin-top: var(--sp-4);"><strong>Token audit.</strong> The 1:1 vs brand-new split per token is tracked in <a href="#teams-migration" data-link="teams-migration">Teams Migration</a> and <a href="#token-audit" data-link="token-audit">Windows mapping</a>.</div>
-      </section>
-
       <section class="spec-section" id="arch-platforms">
         <span class="section-eyebrow eyebrow-design">Platforms</span>
         <h2>Per-OS adaptation <a href="#arch-platforms" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The design system is a single source of truth, but it does not render identically on both platforms. Each OS has its own native idioms that get baked into components, and the two are not symmetric.</p>
+        <p class="section-intro">The design system is a single source of truth, but it does not render identically on both platforms. Each OS has native idioms that get baked into components, and the two are not symmetric. The differences below are taken directly from Apple's Human Interface Guidelines and Google's Material 3 documentation.</p>
 
-        <table class="arch-table">
-          <thead><tr><th>Platform</th><th>What gets baked in</th><th>Relationship to the other platform</th></tr></thead>
-          <tbody>
-            <tr>
-              <td>iOS 26</td>
-              <td>Translucency and materials (Liquid Glass) applied to components such as the header. Scroll edge effects, native modality.</td>
-              <td>Reference implementation for the material model.</td>
-            </tr>
-            <tr>
-              <td>Android (M3)</td>
-              <td>Material 3 updates to shape, surface tint, and motion.</td>
-              <td><strong>Asymmetric</strong> — M3's updates do not map 1:1 onto iOS 26's. Where there is no equivalent, the component simplifies rather than imitates.</td>
-            </tr>
-          </tbody>
-        </table>
+        <p class="arch-devices"><strong>Devices.</strong> iOS covers iPhone and iPad (e.g. iPhone 17, iPad Pro); Android covers phones, foldables and tablets across many OEMs (e.g. Pixel 10, Galaxy Z Fold).</p>
 
-        <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Adaptiveness differs per OS.</strong> How a component responds to size class, orientation and pointer input is specified separately for iOS and Android. Do not assume a behaviour carries across; check the platform's own spec page.</div>
+        <div class="arch-compare">
+          <div class="arch-compare-col">
+            <div class="arch-compare-head">
+              <span class="arch-compare-platform">iOS 26</span>
+              <span class="arch-compare-src">Apple Human Interface Guidelines</span>
+            </div>
+            <ul>
+              <li><strong>Materials.</strong> Liquid Glass "forms a distinct functional layer for controls and navigation elements &mdash; like tab bars and sidebars &mdash; that floats above the content layer." It is reserved for that layer: "Don't use Liquid Glass in the content layer."</li>
+              <li><strong>Material variants.</strong> Two: <em>Regular</em> "blurs and adjusts the luminosity of background content to maintain legibility" and is what "most system components use"; <em>Clear</em> is "highly translucent" and only for "components that appear over visually rich backgrounds." Content-layer surfaces use the four standard materials: ultra-thin, thin, regular, thick.</li>
+              <li><strong>Elevation.</strong> Depth is expressed through translucency and blur, with "scroll edge effects" that blur and fade content as it passes beneath a bar.</li>
+              <li><strong>Typography.</strong> SF Pro is the system font. Default body size is 17&nbsp;pt, minimum 11&nbsp;pt. Eleven text styles (Large Title 34 &rarr; Caption 2 11) scale through Dynamic Type from xSmall to AX5; "avoid light font weights."</li>
+              <li><strong>Navigation.</strong> "A tab bar floats above content at the bottom of the screen" on a Liquid Glass background. On iPad it moves: "the system displays a tab bar near the top of the screen," convertible to a sidebar.</li>
+              <li><strong>Colour.</strong> Choose materials "based on semantic meaning," not apparent colour, because system settings (reduced transparency, increased contrast, a preferred Liquid Glass look) can change how they render. Use "vibrant colors on top of materials."</li>
+              <li><strong>Adaptivity.</strong> Size-class driven. Layout must "adapt seamlessly to appearance changes &mdash; like device orientation, Dark Mode, and Dynamic Type," and "reduce the number of columns when the font size increases."</li>
+            </ul>
+          </div>
+
+          <div class="arch-compare-col">
+            <div class="arch-compare-head">
+              <span class="arch-compare-platform">Android &middot; Material 3</span>
+              <span class="arch-compare-src">Material Design 3 documentation</span>
+            </div>
+            <ul>
+              <li><strong>Surfaces.</strong> No translucent navigation layer. Material 3 "represents elevation mainly using tonal color overlays," and "the overlay color comes from the primary color slot." Surfaces are opaque tonal steps, not glass.</li>
+              <li><strong>Surface roles.</strong> A single expanded colour system &mdash; "surface, surface-variant and background alongside on-surface, on-surface-variant" &mdash; built from "five key colors," each with "a tonal palette of 13 tones." There is no Regular / Clear split.</li>
+              <li><strong>Elevation.</strong> Tonal first, shadow second: "increasing tonal elevation uses a more prominent tone &mdash; in addition to shadows." Exposed as separate <code>tonalElevation</code> and <code>shadowElevation</code>.</li>
+              <li><strong>Typography.</strong> Roboto is the default. A 15-role scale &mdash; display, headline, title, body, label &times; large / medium / small &mdash; e.g. <code>bodyLarge</code> 16/24, <code>labelSmall</code> 11/16, in sp. "Display Small can be assigned different values depending upon the device context, such as a phone or a tablet."</li>
+              <li><strong>Navigation.</strong> A navigation bar holds "three to five destinations of equal importance" and is for "compact window sizes." It is anchored, not floating, and does not relocate on larger screens &mdash; larger windows use a rail or drawer instead.</li>
+              <li><strong>Colour.</strong> Dynamic colour is "the key part of Material You, in which an algorithm derives custom colors from a user's wallpaper." Available on Android 12+, with a static light/dark scheme as fallback.</li>
+              <li><strong>Adaptivity.</strong> Window-size-class driven, with fixed dp breakpoints: compact &lt;&nbsp;600, medium 600&ndash;840, expanded 840&ndash;1200, large 1200&ndash;1600, extra-large &ge;&nbsp;1600. "The window size class can change throughout the lifetime of your app."</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Why this is asymmetric.</strong> iOS organises depth around a translucent navigation layer; Material 3 organises it around opaque tonal steps. A Monocore component therefore cannot be a 1:1 port &mdash; the iOS header carries Liquid Glass, the Android header carries a tonal surface, and the shared tokens sit beneath both.</div>
+
+        <p class="arch-sources"><strong>Sources.</strong>
+          <a href="https://developer.apple.com/design/human-interface-guidelines/materials" target="_blank" rel="noopener">HIG &middot; Materials</a> &middot;
+          <a href="https://developer.apple.com/design/human-interface-guidelines/typography" target="_blank" rel="noopener">HIG &middot; Typography</a> &middot;
+          <a href="https://developer.apple.com/design/human-interface-guidelines/tab-bars" target="_blank" rel="noopener">HIG &middot; Tab bars</a> &middot;
+          <a href="https://developer.apple.com/design/human-interface-guidelines/designing-for-ios" target="_blank" rel="noopener">HIG &middot; Designing for iOS</a> &middot;
+          <a href="https://developer.android.com/develop/ui/compose/designsystems/material3" target="_blank" rel="noopener">M3 &middot; Material Design 3 in Compose</a> &middot;
+          <a href="https://developer.android.com/develop/ui/compose/components/navigation-bar" target="_blank" rel="noopener">M3 &middot; Navigation bar</a> &middot;
+          <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/use-window-size-classes" target="_blank" rel="noopener">M3 &middot; Window size classes</a>
+        </p>
       </section>
 
     </main>
@@ -9430,7 +9445,6 @@ Icon only = True
         <div class="toc-label">On this page</div>
         <a href="#arch-overview">One design system, two names</a>
         <a href="#arch-naming">Two code libraries</a>
-        <a href="#arch-inputs">What feeds the system</a>
         <a href="#arch-platforms">Per-OS adaptation</a>
       </nav>
     </aside>
