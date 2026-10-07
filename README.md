@@ -2,8 +2,9 @@
 
 Static documentation site for the Monocore design system.
 
-Single-file SPA with seven pages:
+Single-file SPA with eight pages:
 
+- Architecture
 - Cold Start Pipeline
 - Card — Component Spec
 - Card — Design Spec
