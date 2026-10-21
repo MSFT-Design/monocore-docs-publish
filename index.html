@@ -199,7 +199,8 @@
     html.devnotes-off .colab-note,
     html.devnotes-off .chlab-note,
     html.devnotes-off .divlab-note,
-    html.devnotes-off .bdg-note {
+    html.devnotes-off .bdg-note,
+    html.devnotes-off #ia-dev-notes {
       display: none !important;
     }
 
@@ -9497,6 +9498,8 @@ Icon only = True
   .ia-pill.l1 { color: var(--mc-brand-primary); border-color: var(--mc-brand-primary); }
   .ia-pill.l2 { color: var(--mc-text-primary); }
   .ia-pill.warn { color: var(--mc-text-secondary); border-style: dashed; }
+  .docs-toc a.toc-sub { padding-left: 24px; font-size: 12.5px; }
+  .ia-group-card { scroll-margin-top: var(--sp-8); }
   .ia-sources { font-size: 12px; color: var(--mc-text-secondary); line-height: 1.7; margin: var(--sp-4) 0 0; }
 </style>
 
@@ -9609,7 +9612,7 @@ Icon only = True
         <h2>Canvas inventory by Teams tab <a href="#ia-inventory" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <p class="section-intro">Grouped the way the Teams app is: the default app bar is Activity, Chat, Teams, Calendar, with Calls and Files behind More on mobile; search lives inside each tab's header; the profile ("Me") menu holds status, out-of-office, notifications and Settings. Level is where the canvas sits in that tree — <span class="ia-pill l1">L1</span> tab root inside a Shell, <span class="ia-pill l2">L2</span> pushed or modal inside a Sheet. "Uses" counts instances on the POR page ("none" = component exists but no board places it yet).</p>
 
-                <div class="ia-group-card">
+                <div class="ia-group-card" id="ia-tab-activity">
           <div class="ia-group-head"><span class="ia-group-title">Activity</span><span class="ia-group-sub">tab 1 · notification feed</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
@@ -9622,7 +9625,7 @@ Icon only = True
           </table>
           </div>
         </div>
-        <div class="ia-group-card">
+        <div class="ia-group-card" id="ia-tab-chat">
           <div class="ia-group-head"><span class="ia-group-title">Chat</span><span class="ia-group-sub">tab 2 · 1:1, group and meeting chats</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
@@ -9642,7 +9645,7 @@ Icon only = True
           </table>
           </div>
         </div>
-        <div class="ia-group-card">
+        <div class="ia-group-card" id="ia-tab-teams">
           <div class="ia-group-head"><span class="ia-group-title">Teams</span><span class="ia-group-sub">tab 3 · teams → channels → posts</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
@@ -9659,7 +9662,7 @@ Icon only = True
           </table>
           </div>
         </div>
-        <div class="ia-group-card">
+        <div class="ia-group-card" id="ia-tab-calendar">
           <div class="ia-group-head"><span class="ia-group-title">Calendar</span><span class="ia-group-sub">tab 4 · agenda, meetings and recaps</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
@@ -9673,7 +9676,7 @@ Icon only = True
           </table>
           </div>
         </div>
-        <div class="ia-group-card">
+        <div class="ia-group-card" id="ia-tab-more">
           <div class="ia-group-head"><span class="ia-group-title">More</span><span class="ia-group-sub">tab 5 · Calls, Files, apps and reorder</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
@@ -9688,7 +9691,7 @@ Icon only = True
           </table>
           </div>
         </div>
-        <div class="ia-group-card">
+        <div class="ia-group-card" id="ia-tab-search">
           <div class="ia-group-head"><span class="ia-group-title">Search</span><span class="ia-group-sub">from any tab header · three states of one flow</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
@@ -9703,7 +9706,7 @@ Icon only = True
           </table>
           </div>
         </div>
-        <div class="ia-group-card">
+        <div class="ia-group-card" id="ia-tab-me-menu">
           <div class="ia-group-head"><span class="ia-group-title">Me menu &amp; Settings</span><span class="ia-group-sub">profile picture · status, out of office, notifications, settings</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
@@ -9720,7 +9723,7 @@ Icon only = True
           </table>
           </div>
         </div>
-        <div class="ia-group-card">
+        <div class="ia-group-card" id="ia-tab-onboarding">
           <div class="ia-group-head"><span class="ia-group-title">Onboarding</span><span class="ia-group-sub">before the tab bar exists</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
@@ -9767,7 +9770,14 @@ Icon only = True
         <div class="toc-label">On this page</div>
         <a href="#ia-shell">Shell, Sheet and Canvas</a>
         <a href="#ia-inventory">Canvas inventory by tab</a>
-        <a href="#ia-dev-notes">Dev notes</a>
+        <a href="#ia-tab-activity" class="toc-sub">Activity</a>
+        <a href="#ia-tab-chat" class="toc-sub">Chat</a>
+        <a href="#ia-tab-teams" class="toc-sub">Teams</a>
+        <a href="#ia-tab-calendar" class="toc-sub">Calendar</a>
+        <a href="#ia-tab-more" class="toc-sub">More</a>
+        <a href="#ia-tab-search" class="toc-sub">Search</a>
+        <a href="#ia-tab-me-menu" class="toc-sub">Me menu &amp; Settings</a>
+        <a href="#ia-tab-onboarding" class="toc-sub">Onboarding</a>
       </nav>
     </aside>
   </div>
