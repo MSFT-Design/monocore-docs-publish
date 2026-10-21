@@ -202,6 +202,9 @@
     html.devnotes-off .bdg-note,
     html.devnotes-off .floating-tabs a[data-view="architecture"],
     html.devnotes-off #avatar-layout-schema,
+    html.devnotes-off #compose-layout-schema,
+    html.devnotes-off #chip-layout-schema,
+    html.devnotes-off #empty-list-layout-schema,
     html.devnotes-off #ia-dev-notes {
       display: none !important;
     }
@@ -9858,6 +9861,7 @@ Icon only = True
     padding: var(--sp-5) var(--sp-6);
   }
   .lay-preview img { display: block; height: auto; max-width: 100%; }
+  .lay-preview-stack { flex-direction: column; align-items: flex-start; }
   .lay-board + .lay-board { margin-top: var(--sp-10); }
   .lay-title .anchor-link { font-size: 20px; color: var(--c-text-muted); text-decoration: none; opacity: 0; margin-left: 6px; font-weight: 400; transition: opacity .15s; }
   .lay-title:hover .anchor-link { opacity: 1; }
@@ -9945,7 +9949,7 @@ Icon only = True
             <h2>Variants</h2>
             <div class="lay-block" data-figma="Slot block">
               <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Title goes here</div>
+                <div class="lay-block-title">Image</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
                 <img src="images/avatar/avatar-image-144.svg" width="144" height="144" alt="Avatar — Type=Image · Size=Xmassive [144dp]">
@@ -9954,7 +9958,7 @@ Icon only = True
             </div>
             <div class="lay-block" data-figma="Slot block">
               <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Title goes here</div>
+                <div class="lay-block-title">Icon brand</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
                 <img src="images/avatar/avatar-icon-brand-144.svg" width="144" height="144" alt="Avatar — Type=Icon brand · Size=Xmassive [144dp]">
@@ -10290,6 +10294,416 @@ Icon only = True
 
   <footer class="docs-footer">
     Avatar &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-compose-layout" data-page="compose-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Compose &middot; Layout</div>
+    <h1>Compose</h1>
+    <p class="subtitle">Rendered from the Compose keyboard documentation artboard on the Compose page of Monocore iOS. The artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>10 blocks</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="compose-layout-keyboard" data-figma-node="106947:228708">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Compose keyboard <a href="#compose-layout-keyboard" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="compose-layout-keyboard-variant" data-figma="Content block / Section primary">
+            <h2>Variant</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Typing</div>
+              </div>
+              <div class="lay-preview lay-preview-wide lay-preview-stack" data-figma="PASTE HERE">
+                <img src="images/compose/compose-typing-idle.svg" width="402" height="87" alt="Compose whole — Variant=Typing · State=Idle">
+                <img src="images/compose/compose-typing-engaged.svg" width="402" height="133" alt="Compose whole — Variant=Typing · State=Engaged">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Typing · State=Idle / Variant=Typing · State=Engaged</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Recording</div>
+              </div>
+              <div class="lay-preview lay-preview-wide lay-preview-stack" data-figma="PASTE HERE">
+                <img src="images/compose/compose-recording-idle.svg" width="403" height="87" alt="Compose whole — Variant=Recording · State=Idle">
+                <img src="images/compose/compose-recording-engaged.svg" width="402" height="87" alt="Compose whole — Variant=Recording · State=Engaged">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Recording · State=Idle / Variant=Recording · State=Engaged</div>
+            </div>
+          </div>
+          <div class="lay-section" id="compose-layout-keyboard-state" data-figma="Content block / Section primary">
+            <h2>State</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Typing Idle</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/compose/compose-state-typing-idle.svg" width="402" height="87" alt="Compose whole — Variant=Typing · State=Idle">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Typing · State=Idle</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Typing Engaged</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/compose/compose-state-typing-engaged.svg" width="402" height="133" alt="Compose whole — Variant=Typing · State=Engaged">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Typing · State=Engaged</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Recording Idle</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/compose/compose-state-recording-idle.svg" width="403" height="87" alt="Compose whole — Variant=Recording · State=Idle">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Recording · State=Idle</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Recording Engaged</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/compose/compose-state-recording-engaged.svg" width="402" height="87" alt="Compose whole — Variant=Recording · State=Engaged">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Recording · State=Engaged</div>
+            </div>
+          </div>
+          <div class="lay-section" id="compose-layout-keyboard-properties" data-figma="Content block / Section primary">
+            <h2>Properties</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Format</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/compose/compose-format.svg" width="402" height="133" alt="Compose whole — Variant=Typing · State=Idle · Format">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Typing · State=Idle · Format</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Format - wide</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/compose/compose-format-wide.svg" width="585" height="133" alt="Compose whole — Variant=Typing · State=Idle · Format · 585dp wide">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Typing · State=Idle · Format · 585dp wide</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Message props</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/compose/compose-message-props.svg" width="402" height="265" alt="Compose whole — Variant=Typing · State=Idle · Message props">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Typing · State=Idle · Message props</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Media well</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/compose/compose-media-well.svg" width="402" height="351" alt="Compose whole — Variant=Typing · State=Idle · Media well">
+              </div>
+              <div class="lay-props">Compose whole · Variant=Typing · State=Idle · Media well</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="compose-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#compose-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Export each instance in PASTE HERE as SVG (text kept as live text in the system font stack, photos embedded as JPEG data URIs). Nothing on this page is hand-authored except the header copy.</div>
+        <p class="section-intro">Figma page <em>Compose 🟢</em>; nodes: Compose keyboard <code>106947:228708</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Compose keyboard</div>
+        <a href="#compose-layout-keyboard-variant">Variant</a>
+        <a href="#compose-layout-keyboard-state">State</a>
+        <a href="#compose-layout-keyboard-properties">Properties</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Compose &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-chip-layout" data-page="chip-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Chip &middot; Layout</div>
+    <h1>Chip</h1>
+    <p class="subtitle">Rendered from the Chip documentation artboard on the Chip page of Monocore iOS. The artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>8 blocks</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chip-layout-chip" data-figma-node="115285:77637">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chip <a href="#chip-layout-chip" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chip-layout-chip-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Primary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-rest.svg" width="81" height="32" alt="Chip - current — Style=Primary · State=Rest">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Brand</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-brand-rest.svg" width="81" height="32" alt="Chip - current — Style=Brand · State=Rest">
+              </div>
+              <div class="lay-props">Chip - current · Style=Brand · State=Rest</div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-layout-chip-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-rest.svg" width="81" height="32" alt="Chip - current — Style=Primary · State=Rest">
+                <img src="images/chip/chip-brand-rest.svg" width="81" height="32" alt="Chip - current — Style=Brand · State=Rest">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Rest / Style=Brand · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-pressed.svg" width="81" height="32" alt="Chip - current — Style=Primary · State=Pressed">
+                <img src="images/chip/chip-brand-pressed.svg" width="81" height="32" alt="Chip - current — Style=Brand · State=Pressed">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Pressed / Style=Brand · State=Pressed</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-disabled.svg" width="81" height="32" alt="Chip - current — Style=Primary · State=Disabled">
+                <img src="images/chip/chip-brand-disabled.svg" width="81" height="32" alt="Chip - current — Style=Brand · State=Disabled">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Disabled / Style=Brand · State=Disabled</div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-layout-chip-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Min height = 32</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-pressed.svg" width="81" height="32" alt="Chip - current — Style=Primary · State=Pressed">
+                <img src="images/chip/chip-brand-rest.svg" width="81" height="32" alt="Chip - current — Style=Brand · State=Rest">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Pressed / Style=Brand · State=Rest</div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-layout-chip-padding" data-figma="Content block / Section primary">
+            <h2>Padding</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Top/Bottom 6, Leading/Trailing 12</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-pressed.svg" width="81" height="32" alt="Chip - current — Style=Primary · State=Pressed">
+                <img src="images/chip/chip-brand-rest.svg" width="81" height="32" alt="Chip - current — Style=Brand · State=Rest">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Pressed / Style=Brand · State=Rest</div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-layout-chip-long-text-example" data-figma="Content block / Section primary">
+            <h2>Long text example</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-long-text.svg" width="252" height="66" alt="Chip - current — Style=Primary · State=Rest · 250dp wide">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Rest · 250dp wide</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chip-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#chip-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Export each instance in PASTE HERE as SVG (text kept as live text in the system font stack, photos embedded as JPEG data URIs). Nothing on this page is hand-authored except the header copy.</div>
+        <p class="section-intro">Figma page <em>Chip</em>; nodes: Chip <code>115285:77637</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chip</div>
+        <a href="#chip-layout-chip-variants">Variants</a>
+        <a href="#chip-layout-chip-states">States</a>
+        <a href="#chip-layout-chip-size">Size</a>
+        <a href="#chip-layout-chip-padding">Padding</a>
+        <a href="#chip-layout-chip-long-text-example">Long text example</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Chip &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-empty-list-layout" data-page="empty-list-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Empty state &middot; Layout</div>
+    <h1>Empty state</h1>
+    <p class="subtitle">Rendered from the two documentation artboards on the Empty List View page of Monocore iOS: Empty state and Examples. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change.</p>
+    <div class="meta">
+      <span>2 Figma artboards</span>
+      <span>7 blocks</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="empty-list-layout-state" data-figma-node="106947:224790">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Empty state <a href="#empty-list-layout-state" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="empty-list-layout-state-configuration-options" data-figma="Content block / Section primary">
+            <h2>Configuration options</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Base</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/empty-state/empty-state-base.svg" width="402" height="635" alt="Empty state/Default — Base">
+              </div>
+              <div class="lay-props">Empty state/Default · Base</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Buttons</div>
+                <div class="lay-block-caption">All buttons can configured to show one or all 3 at the same time</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/empty-state/empty-state-buttons.svg" width="402" height="635" alt="Empty state/Default — Buttons">
+              </div>
+              <div class="lay-props">Empty state/Default · Buttons</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Custom body slot</div>
+                <div class="lay-block-caption">Empty state can contain a body slot</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/empty-state/empty-state-custom-body.svg" width="402" height="635" alt="Empty state/Default — Custom body slot">
+              </div>
+              <div class="lay-props">Empty state/Default · Custom body slot</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="empty-list-layout-examples" data-figma-node="108266:171243">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Examples <a href="#empty-list-layout-examples" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="empty-list-layout-examples-ui-layouts" data-figma="Content block / Section primary">
+            <h2>UI Layouts</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">On L1 Canvas</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/empty-state/empty-state-l1-canvas.svg" width="414" height="886" alt="Shell Template — Property 1=L2 · Empty state on L1 canvas">
+              </div>
+              <div class="lay-props">Shell Template · Property 1=L2 · Empty state on L1 canvas</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">On L2 canvas</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/empty-state/empty-state-l2-canvas.svg" width="414" height="886" alt="Shell Template — Property 1=L2 · Empty state on L2 canvas">
+              </div>
+              <div class="lay-props">Shell Template · Property 1=L2 · Empty state on L2 canvas</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">In a sheet</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/empty-state/empty-state-sheet.svg" width="402" height="874" alt="Sheet - Full Screen - iPhone — Size=Dominant">
+              </div>
+              <div class="lay-props">Sheet - Full Screen - iPhone · Size=Dominant</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">In a sheet with keyboard</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/empty-state/empty-state-sheet-keyboard.svg" width="402" height="874" alt="Sheet - Full Screen - iPhone — Size=Dominant · with keyboard">
+              </div>
+              <div class="lay-props">Sheet - Full Screen - iPhone · Size=Dominant · with keyboard</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="empty-list-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#empty-list-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Export each instance in PASTE HERE as SVG (text kept as live text in the system font stack, photos embedded as JPEG data URIs). Nothing on this page is hand-authored except the header copy.</div>
+        <p class="section-intro">Figma page <em>Empty List View 🟢</em>; nodes: Empty state <code>106947:224790</code>, Examples <code>108266:171243</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Empty state</div>
+        <a href="#empty-list-layout-state-configuration-options">Configuration options</a>
+        <div class="toc-group">Examples</div>
+        <a href="#empty-list-layout-examples-ui-layouts">UI Layouts</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Empty state &middot; Layout &middot; Monocore &middot; October 2026
   </footer>
 </div>
 </div>
