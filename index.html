@@ -200,6 +200,8 @@
     html.devnotes-off .chlab-note,
     html.devnotes-off .divlab-note,
     html.devnotes-off .bdg-note,
+    html.devnotes-off .floating-tabs a[data-view="architecture"],
+    html.devnotes-off #avatar-layout-schema,
     html.devnotes-off #ia-dev-notes {
       display: none !important;
     }
@@ -2159,6 +2161,7 @@
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Components</div>
+        <a href="#avatar/layout" data-link="avatar/layout" data-active-when="avatar">Avatar</a>
         <div class="nav-acc">
           <h3 class="nav-acc-header">
             <a href="#buttons" data-link="buttons" id="nav-acc-label-buttons">Button</a>
@@ -9794,6 +9797,155 @@ Icon only = True
 </div>
 </div>
 
+<div class="page" id="page-avatar" data-page="avatar">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Component</div>
+    <h1>Avatar</h1>
+    <p class="subtitle">Avatar, Avatar group and Avatar pie from Monocore iOS. The <strong>Layout</strong> tab mirrors the Figma artboard block for block; Spec, Guidance and Architecture follow.</p>
+    <div class="meta">
+      <span>Monocore iOS</span>
+      <span>Avatar &amp; Avatar group page</span>
+      <span>Updated October 2026</span>
+    </div>
+  </header>
+  <div class="empty-state">
+    <div class="empty-state-icon" aria-hidden="true">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6"/>
+      </svg>
+    </div>
+    <div class="empty-state-eyebrow">Avatar</div>
+    <h1 class="empty-state-title">Spec</h1>
+    <p class="empty-state-body">Tokens, sizes and anatomy are coming. Open the <a href="#avatar/layout" data-link="avatar/layout" data-active-when="avatar">Layout</a> tab for the artboard-driven view.</p>
+    <span class="empty-state-tag">Empty — content coming soon</span>
+  </div>
+</div>
+</div>
+
+<div class="page" id="page-avatar-layout" data-page="avatar-layout">
+
+<style>
+  /* ── Layout view: a 1:1 rendering of a Figma documentation artboard.
+       Each class names the Figma block it was parsed from, so the mapping is explicit:
+       .lay-page      ⟵ New component (vertical flow)
+       .lay-title     ⟵ Content block / Title Block=Page Title
+       .lay-section   ⟵ Content block / Title Block=Section primary
+       .lay-block     ⟵ Slot block (Spacer top/bottom, Block title)
+       .lay-block-head⟵ Content block / Title Block=Section primary light (Title + optional Caption)
+       .lay-preview   ⟵ PASTE HERE slot holding the component instance(s)                        */
+  .lay-page { display: flex; flex-direction: column; gap: var(--sp-6); }
+  .lay-title { font-size: 34px; font-weight: 700; letter-spacing: -0.3px; color: var(--mc-text-primary); margin: 0; }
+  .lay-section { display: flex; flex-direction: column; gap: var(--sp-4); }
+  .lay-section > h2 { font-size: 17px; font-weight: 700; color: var(--mc-text-primary); margin: 0; }
+  .lay-block {
+    background: var(--mc-surface-raised-tertiary);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-prominent);
+    padding: var(--sp-8) var(--sp-8) var(--sp-8);
+    display: flex; flex-direction: column; gap: var(--sp-6);
+  }
+  .lay-block-head { display: flex; flex-direction: column; gap: 6px; }
+  .lay-block-title { font-size: 20px; font-weight: 500; color: var(--mc-text-secondary); line-height: 1.3; }
+  .lay-block-caption { font-size: 13.5px; color: var(--mc-text-secondary); opacity: .8; }
+  .lay-preview {
+    background: var(--mc-surface-floating);
+    border: 1px solid var(--c-border);
+    border-radius: 999px;
+    min-height: 112px;
+    display: flex; align-items: center; justify-content: center; gap: var(--sp-6);
+    padding: var(--sp-4) var(--sp-6);
+  }
+  .lay-preview img { display: block; height: auto; }
+  .lay-props { font-size: 11.5px; color: var(--mc-text-secondary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; margin-top: -4px; }
+  @media (max-width: 720px) { .lay-block { padding: var(--sp-5); } .lay-title { font-size: 28px; } }
+</style>
+
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Avatar &middot; Layout</div>
+    <h1>Avatar Pie</h1>
+    <p class="subtitle">Rendered from the <em>Avatar Pie</em> artboard on the Avatar &amp; Avatar group page of Monocore iOS. The artboard is a vertical flow of titled blocks, each holding one component variant; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>Figma node 106947:247036</span>
+      <span>3 blocks</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section" id="avatar-layout-board">
+        <div class="lay-page" data-figma="New component">
+
+          <h1 class="lay-title" data-figma="Content block / Page Title">Avatar Pie</h1>
+
+          <div class="lay-section" id="avatar-layout-variant" data-figma="Content block / Section primary">
+            <h2>Variant</h2>
+
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">2 Avatars</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-pie-2-72.png" width="72" height="72" alt=".Avatar pie — Layout=2 avatars, Size=72">
+              </div>
+              <div class="lay-props">.Avatar pie · Layout=2 avatars · Size=72</div>
+            </div>
+
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">3 Avatars</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-pie-3-72.png" width="72" height="72" alt=".Avatar pie — Layout=3 avatars, Size=72">
+              </div>
+              <div class="lay-props">.Avatar pie · Layout=3 avatars · Size=72</div>
+            </div>
+          </div>
+
+          <div class="lay-section" id="avatar-layout-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default 32</div>
+                <div class="lay-block-caption">16, 20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-pie-2-32.png" width="32" height="32" alt=".Avatar pie — Layout=2 avatars, Size=32 (Default)">
+              </div>
+              <div class="lay-props">.Avatar pie · Layout=2 avatars · Size=32 (Default)</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="spec-section" id="avatar-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#avatar-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Walk the slot in order; emit <code>h2</code> for every Section primary block, a card for every Slot block, and export each instance in PASTE HERE at 2&times;. Nothing on this page is hand-authored except the header copy.</div>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#avatar-layout-variant">Variant</a>
+        <a href="#avatar-layout-size">Size</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Avatar &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
 <div class="page" id="page-buttons" data-page="buttons">
 <style>
   /* ── Button Lab (interactive playground) — mirrors the Card "cardlab" pattern ── */
@@ -17122,6 +17274,24 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 })();
 </script>
 
+<div class="page" id="page-view-layout" data-page="view-layout">
+<div class="docs-shell">
+  <div class="empty-state">
+    <div class="empty-state-icon" aria-hidden="true">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="5" rx="1"/>
+        <rect x="3" y="11" width="18" height="10" rx="1"/>
+        <path d="M7 16h10"/>
+      </svg>
+    </div>
+    <div class="empty-state-eyebrow" data-slot="topic">&nbsp;</div>
+    <h1 class="empty-state-title">Layout</h1>
+    <p class="empty-state-body" data-slot="body">The Figma documentation artboard, rendered block for block — this component's artboard hasn't been parsed yet.</p>
+    <span class="empty-state-tag">Empty — content coming soon</span>
+  </div>
+</div>
+</div>
+
 <div class="page" id="page-view-guidance" data-page="view-guidance">
 <div class="docs-shell">
   <div class="empty-state">
@@ -17160,6 +17330,7 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 
 <nav class="floating-tabs" aria-label="View" data-hidden="false">
+  <a href="#" class="ft-tab" data-view="layout">Layout</a>
   <a href="#" class="ft-tab" data-view="spec">Spec</a>
   <a href="#" class="ft-tab" data-view="guidance">Guidance</a>
   <a href="#" class="ft-tab" data-view="architecture">Architecture</a>
@@ -17185,7 +17356,7 @@ function switchTier(btn, tier) {
   const toggle = document.querySelector('.site-nav-toggle');
   const backdrop = document.querySelector('.site-nav-backdrop');
 
-  const VIEWS = { spec: null, guidance: 'view-guidance', architecture: 'view-architecture' };
+  const VIEWS = { layout: 'view-layout', spec: null, guidance: 'view-guidance', architecture: 'view-architecture' };
   const NO_TABS = new Set(['overview', 'roadmap', 'architecture', 'teams-ia']);
 
   function parseHash(hash) {
@@ -17246,6 +17417,7 @@ function switchTier(btn, tier) {
     const { topic, view } = parseHash(hash);
     show(topic, view);
   }
+  window.mcGoto = goto;
   function closeNav() {
     if (!nav) return;
     nav.classList.remove('open');
@@ -17527,6 +17699,9 @@ function switchTier(btn, tier) {
   function apply(on) {
     root.classList.toggle('devnotes-off', !on);
     btn.setAttribute('aria-checked', String(on));
+    if (!on && /\/architecture$/.test(location.hash) && window.mcGoto) {
+      window.mcGoto(location.hash.replace(/\/architecture$/, ''));
+    }
   }
 
   let on = true;
