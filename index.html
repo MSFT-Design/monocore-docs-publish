@@ -2137,6 +2137,7 @@
         <a href="#overview" data-link="overview">Overview</a>
         <a href="#roadmap" data-link="roadmap">Roadmap</a>
         <a href="#architecture" data-link="architecture">Architecture</a>
+        <a href="#ia" data-link="ia">Information architecture</a>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Semantic Surface System</div>
@@ -9450,6 +9451,238 @@ Icon only = True
 
   <footer class="docs-footer">
     Architecture &middot; Monocore &middot; October 2026
+  </footer>
+
+</div>
+</div>
+
+<div class="page" id="page-ia" data-page="ia">
+
+<style>
+  .ia-figure { margin: 0 0 var(--sp-5); }
+  .ia-figure svg {
+    display: block; max-width: 100%; height: auto;
+    color: var(--mc-text-primary);
+    background: var(--mc-surface-group-secondary-container);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-prominent);
+    padding: var(--sp-4);
+  }
+  .ia-figure figcaption { font-size: 13px; color: var(--mc-text-secondary); line-height: 1.55; margin-top: var(--sp-3); max-width: 72ch; }
+  .ia-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--sp-3); margin-top: var(--sp-4); }
+  .ia-card { background: var(--mc-surface-raised-tertiary); border: 1px solid var(--c-border); border-radius: var(--radius-strong); padding: var(--sp-4); }
+  .ia-card-label { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--mc-text-secondary); margin-bottom: var(--sp-2); }
+  .ia-card-title { font-size: 15px; font-weight: 600; color: var(--mc-text-primary); margin-bottom: var(--sp-2); }
+  .ia-card p { font-size: 13px; color: var(--mc-text-secondary); line-height: 1.55; margin: 0; }
+  .ia-card.is-accent { border-color: var(--mc-brand-primary); }
+  .ia-card.is-accent .ia-card-title { color: var(--mc-brand-primary); }
+  .ia-table-wrap { overflow-x: auto; margin-top: var(--sp-3); }
+  .ia-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
+  .ia-table th, .ia-table td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--c-border); vertical-align: top; }
+  .ia-table th { font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--mc-text-secondary); position: sticky; top: 0; background: var(--mc-surface-raised-tertiary); }
+  .ia-table td { color: var(--mc-text-secondary); line-height: 1.5; }
+  .ia-table td:first-child { font-weight: 600; color: var(--mc-text-primary); min-width: 160px; }
+  .ia-variants { font-weight: 400; font-size: 11.5px; color: var(--mc-text-secondary); margin-top: 3px; line-height: 1.45; }
+  .ia-table td:nth-child(2) { white-space: nowrap; }
+  .ia-table td code { font-size: 11.5px; }
+  .ia-table tr.ia-group td { background: var(--mc-surface-raised-tertiary); color: var(--mc-text-primary); font-weight: 700; font-size: 12px; letter-spacing: 0.4px; text-transform: uppercase; padding-top: 12px; padding-bottom: 8px; }
+  .ia-table tr.ia-group td span { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--mc-text-secondary); margin-left: 8px; }
+  .ia-pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--c-border); white-space: nowrap; }
+  .ia-pill.l1 { color: var(--mc-brand-primary); border-color: var(--mc-brand-primary); }
+  .ia-pill.l2 { color: var(--mc-text-primary); }
+  .ia-pill.warn { color: var(--mc-text-secondary); border-style: dashed; }
+  .ia-sources { font-size: 12px; color: var(--mc-text-secondary); line-height: 1.7; margin: var(--sp-4) 0 0; }
+</style>
+
+<div class="docs-shell">
+
+  <header class="docs-header">
+    <div class="eyebrow">Monocore</div>
+    <h1>Information architecture</h1>
+    <p class="subtitle">How a Teams mobile screen is assembled in Monocore iOS: a Shell or Sheet supplies the chrome, a Canvas supplies the content, and the Canvas inventory maps one-to-one onto the Teams app's tabs.</p>
+    <div class="meta">
+      <span>2 containers</span>
+      <span>28 canvases</span>
+      <span>Updated October 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="ia-shell">
+        <span class="section-eyebrow eyebrow-design">Containers</span>
+        <h2>Shell, Sheet and Canvas <a href="#ia-shell" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Every screen in the Teams POR file is built from the same three layers. A <strong>Canvas</strong> is a 402-wide, chrome-less screen body: no status bar, no header, no tab bar. The chrome comes from one of two containers. The <strong>Shell Template</strong> wraps the root view of each bottom tab. The <strong>Sheet - Full Screen</strong> wraps anything pushed or presented on top of a tab, and itself hosts a Shell so the header and keyboard behave the same way at every level.</p>
+
+        <figure class="ia-figure">
+          <svg viewBox="0 0 1080 620" role="img" aria-label="A Shell Template on the left and a Sheet - Full Screen on the right each expose a content slot. Canvas components in the middle are placed into those slots: tab-root canvases into the Shell, pushed and modal canvases into the Sheet, which in turn hosts a Shell.">
+            <!--
+              Grid: 3 columns x 300 wide, gutters 90.
+              Col 1 x=0..300 (Shell) | Col 2 x=390..690 (Canvas) | Col 3 x=780..1080 (Sheet)
+              Shell stack: Status bar 40..84, Header 94..138, Content slot 148..412, Tab bar 422..466
+              Sheet stack: Header slot 40..84, Content slot 94..412, Keyboard 422..466
+              Canvas boxes: L1 160..290, L2 320..450. Connectors horizontal at each box centre.
+            -->
+            <text x="0"   y="22" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">SHELL TEMPLATE · L1 TAB ROOT</text>
+            <text x="390" y="22" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">CANVAS · SCREEN CONTENT</text>
+            <text x="780" y="22" font-size="11" fill="var(--mc-text-secondary)" letter-spacing="1">SHEET · FULL SCREEN (L2+)</text>
+
+            <!-- ── Column 1: Shell Template ── -->
+            <rect x="0" y="32" width="300" height="444" rx="12" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="12" y="40" width="276" height="44" rx="6" fill="var(--mc-surface-raised-tertiary)" stroke="var(--c-border)"/>
+            <text x="150" y="67" text-anchor="middle" font-size="12.5" font-weight="600">Status bar</text>
+            <rect x="12" y="94" width="276" height="44" rx="6" fill="var(--mc-surface-raised-tertiary)" stroke="var(--c-border)"/>
+            <text x="150" y="121" text-anchor="middle" font-size="12.5" font-weight="600">Header · toolbar</text>
+            <rect x="12" y="148" width="276" height="264" rx="8" fill="var(--mc-brand-primary-soft)" stroke="var(--mc-brand-primary)" stroke-width="1.6" stroke-dasharray="6 4"/>
+            <text x="150" y="268" text-anchor="middle" font-size="13" font-weight="700" fill="var(--mc-brand-primary)">Content slot</text>
+            <text x="150" y="290" text-anchor="middle" font-size="11" fill="var(--mc-text-secondary)">← Canvas goes here</text>
+            <rect x="12" y="422" width="276" height="44" rx="6" fill="var(--mc-surface-raised-tertiary)" stroke="var(--c-border)"/>
+            <text x="150" y="449" text-anchor="middle" font-size="12.5" font-weight="600">Tab bar (5 tabs)</text>
+
+            <!-- ── Column 2: Canvas ── -->
+            <rect x="390" y="160" width="300" height="130" rx="8" fill="var(--mc-surface-raised-tertiary)" stroke="var(--mc-brand-primary)" stroke-width="1.6"/>
+            <text x="410" y="186" font-size="11" fill="var(--mc-text-secondary)" font-weight="600" letter-spacing=".6">TAB ROOT CANVASES</text>
+            <text x="410" y="210" font-size="12.5">Activity · Chatlist · Teams · Calendar</text>
+            <text x="410" y="230" font-size="12.5">Catchup · Recent Recaps · Mentions List</text>
+            <text x="410" y="250" font-size="12.5">Zero Query · AutoSuggest · SERP · Files</text>
+            <text x="410" y="276" font-size="11" fill="var(--mc-text-secondary)">13 canvases · Shell Template → Canvas</text>
+
+            <rect x="390" y="320" width="300" height="130" rx="8" fill="var(--mc-surface-raised-tertiary)" stroke="currentColor" stroke-width="1.4"/>
+            <text x="410" y="346" font-size="11" fill="var(--mc-text-secondary)" font-weight="600" letter-spacing=".6">PUSHED &amp; MODAL CANVASES</text>
+            <text x="410" y="370" font-size="12.5">Dashboard · Settings · More · Me menu</text>
+            <text x="410" y="390" font-size="12.5">RAC · Provide feedback · What's new</text>
+            <text x="410" y="410" font-size="12.5">Move to Dashboard · (6 not yet mounted)</text>
+            <text x="410" y="436" font-size="11" fill="var(--mc-text-secondary)">8 canvases · Sheet → Shell → Canvas</text>
+
+            <!-- Connectors: canvas → slots (horizontal at box centres y=225 and y=385) -->
+            <line x1="300" y1="225" x2="390" y2="225" stroke="var(--mc-brand-primary)" stroke-width="1.6"/>
+            <line x1="690" y1="385" x2="780" y2="385" stroke="currentColor" stroke-width="1.4"/>
+            <!-- Sheet hosts a Shell: dotted return line from Sheet content slot back to Shell content slot, drawn below the boxes -->
+            <line x1="930" y1="412" x2="930" y2="500" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+            <line x1="150" y1="412" x2="150" y2="500" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+            <line x1="150" y1="500" x2="930" y2="500" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+            <text x="540" y="494" text-anchor="middle" font-size="11" fill="var(--mc-text-secondary)">a Sheet's content slot hosts a Shell Template, so header and keyboard behave identically at every level</text>
+
+            <!-- ── Column 3: Sheet - Full Screen ── -->
+            <rect x="780" y="32" width="300" height="444" rx="12" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="792" y="40" width="276" height="44" rx="6" fill="var(--mc-surface-raised-tertiary)" stroke="var(--c-border)"/>
+            <text x="930" y="67" text-anchor="middle" font-size="12.5" font-weight="600">Header slot · Cancel / Title / Done</text>
+            <rect x="792" y="94" width="276" height="318" rx="8" fill="var(--mc-brand-primary-soft)" stroke="var(--mc-brand-primary)" stroke-width="1.6" stroke-dasharray="6 4"/>
+            <text x="930" y="240" text-anchor="middle" font-size="13" font-weight="700" fill="var(--mc-brand-primary)">Content slot</text>
+            <text x="930" y="262" text-anchor="middle" font-size="11" fill="var(--mc-text-secondary)">← Shell Template → Canvas</text>
+            <text x="930" y="282" text-anchor="middle" font-size="11" fill="var(--mc-text-secondary)">Size: Secondary · Dominant · Stacked · 2/3 · 1/3</text>
+            <rect x="792" y="422" width="276" height="44" rx="6" fill="none" stroke="var(--c-border)" stroke-dasharray="4 3"/>
+            <text x="930" y="449" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--mc-text-secondary)">Keyboard (optional)</text>
+
+            <!-- Footnote band -->
+            <rect x="0" y="530" width="1080" height="78" rx="8" fill="var(--mc-surface-raised-tertiary)" stroke="var(--c-border)"/>
+            <text x="20" y="556" font-size="13" font-weight="600">The rule</text>
+            <text x="20" y="578" font-size="12.5">A Canvas never carries chrome; a container never carries content. Canvas variants encode <tspan font-weight="600">view state</tspan> (Dashboard.Type, Settings.Page, Me menu.Level × Screen).</text>
+            <text x="20" y="596" font-size="12.5">The container it sits in encodes <tspan font-weight="600">navigation level</tspan>. iPad reuses the same canvases inside <tspan font-weight="600">Modal - Full Screen - iPad</tspan>.</text>
+          </svg>
+          <figcaption>Derived from the Teams POR page of Monocore-iOS: 28 Canvas components, ~150 instances, every one wrapped by either Shell Template (tab roots) or Sheet - Full Screen - iPhone → Shell Template (pushed and modal screens). The two iPad instances use Modal - Full Screen - iPad.</figcaption>
+        </figure>
+
+        <div class="ia-grid">
+          <div class="ia-card">
+            <div class="ia-card-label">Container</div>
+            <div class="ia-card-title">Shell Template</div>
+            <p>Status bar, header toolbar, content slot and the five-item tab bar. Wraps the root view of each tab and is also what a Sheet hosts, so a pushed screen's header is the same component as a tab's.</p>
+          </div>
+          <div class="ia-card">
+            <div class="ia-card-label">Container</div>
+            <div class="ia-card-title">Sheet - Full Screen - iPhone</div>
+            <p>Header slot, content slot and an optional keyboard. Six size variants (Secondary, Dominant, Stacked, 2/3, 1/3, 1/3 Secondary) cover pushed screens, modals and partial sheets.</p>
+          </div>
+          <div class="ia-card is-accent">
+            <div class="ia-card-label">Content</div>
+            <div class="ia-card-title">Canvas - …</div>
+            <p>One per screen. Built almost entirely from the list system: Grouped list → Generic List rows, Section Header, Description list, Accessories; conversation rows use Timer / Thread List-item; Calendar uses Agenda list.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="ia-inventory">
+        <span class="section-eyebrow eyebrow-design">Inventory</span>
+        <h2>Canvas inventory by Teams tab <a href="#ia-inventory" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Grouped the way the Teams app is: the default app bar is Activity, Chat, Teams, Calendar, with Calls and Files behind More on mobile; search lives inside each tab's header; the profile ("Me") menu holds status, out-of-office, notifications and Settings. Level is where the canvas sits in that tree — <span class="ia-pill l1">L1</span> tab root inside a Shell, <span class="ia-pill l2">L2</span> pushed or modal inside a Sheet. "Mounted" counts instances on the POR page.</p>
+
+        <div class="ia-table-wrap">
+        <table class="ia-table">
+          <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen it renders</th><th>Built from</th><th>Mounted</th></tr>
+          </thead>
+          <tbody>
+            <tr class="ia-group"><td colspan="5">Activity <span>tab 1 · notification feed</span></td></tr>
+            <tr><td>Canvas - Activity</td><td><span class="ia-pill l1">L1</span></td><td>Activity feed</td><td>Timer List-item ×9, Horizontal filter btn ×5</td><td>11</td></tr>
+
+            <tr class="ia-group"><td colspan="5">Chat <span>tab 2 · 1:1, group and meeting chats</span></td></tr>
+            <tr><td>Canvas - Chatlist</td><td><span class="ia-pill l1">L1</span></td><td>Chat list</td><td>Timer List-item ×25, Vertical filter btn ×5, Unread / Mention / Calendar badges</td><td>6</td></tr>
+            <tr><td>Canvas - Contextual Search<div class="ia-variants">Default · Variant2</div></td><td><span class="ia-pill l1">L1</span></td><td>In-tab search over chat</td><td>Filter bar, Horizontal filter btn ×3, Generic List ×2, History</td><td>2</td></tr>
+            <tr><td>Canvas - Mentions List<div class="ia-variants">Mentions · Threads</div></td><td><span class="ia-pill l1">L1</span></td><td>Mentions / Threads list</td><td>Thread List-item ×10, Unread ×5</td><td>5</td></tr>
+            <tr><td>Canvas - Catchup</td><td><span class="ia-pill l1">L1</span></td><td>Catch up (message summary)</td><td>Message - replies ×3, Liquid Glass Large/Small, Buttons</td><td>5</td></tr>
+            <tr><td>Canvas - Dashboard<div class="ia-variants">Type = 1:1 · Group · Meeting Chat · Threaded Channel · Post Reply Channel</div></td><td><span class="ia-pill l2">L2</span></td><td>Chat / channel details</td><td>Grouped list ×5, Generic List ×9, Section Header ×2, Buttons</td><td>16</td></tr>
+            <tr><td>Canvas - Move to Dashboard</td><td><span class="ia-pill l2">L2</span></td><td>Contextual menu → details</td><td>Grouped list ×5, Generic List ×9, Badge view</td><td>1</td></tr>
+            <tr><td>Canvas: Compose options</td><td><span class="ia-pill l2">L2</span></td><td>Compose "+" options sheet</td><td>Grouped list, Generic List ×14, Search toolbar, Liquid Glass Small</td><td><span class="ia-pill warn">unmounted</span></td></tr>
+            <tr><td>Canvas - Add People<div class="ia-variants">Default · Variant2</div></td><td><span class="ia-pill l2">L2</span></td><td>Add people to chat</td><td>Generic List ×3, Section Header ×2, Description list, Dismiss ×3</td><td><span class="ia-pill warn">unmounted</span></td></tr>
+
+            <tr class="ia-group"><td colspan="5">Teams <span>tab 3 · teams → channels → posts</span></td></tr>
+            <tr><td>Canvas - Teams</td><td><span class="ia-pill l1">L1</span></td><td>Teams &amp; channels list</td><td>Accordion ×6, Accordion Nested ×3, Notification badge ×9, More ×9</td><td>1</td></tr>
+            <tr><td>Canvas - Channel creation<div class="ia-variants">Default · Variant2</div></td><td><span class="ia-pill l2">L2</span></td><td>Create a channel</td><td>Text Field ×3, Grouped list ×2, Generic List ×3, Section Header ×2</td><td><span class="ia-pill warn">unmounted</span></td></tr>
+            <tr><td>Canvas - channel people roster</td><td><span class="ia-pill l2">L2</span></td><td>Channel members</td><td>Generic List ×9, Section Header ×3, Filter bar, Horizontal filter btn ×3</td><td><span class="ia-pill warn">unmounted</span></td></tr>
+            <tr><td>Canvas - Channel advanced settings</td><td><span class="ia-pill l2">L2</span></td><td>Channel settings</td><td>Grouped list ×3, Generic List ×7, Section Header ×3, Description list ×3</td><td><span class="ia-pill warn">unmounted</span></td></tr>
+            <tr><td>Canvas - Apps not available</td><td><span class="ia-pill l2">L2</span></td><td>Channel apps unavailable state</td><td>Grouped list, Generic List ×5, Description list, Button</td><td><span class="ia-pill warn">unmounted</span></td></tr>
+
+            <tr class="ia-group"><td colspan="5">Calendar <span>tab 4 · agenda, meetings and recaps</span></td></tr>
+            <tr><td>Canvas - Calendar<div class="ia-variants">Variant 1 · 2</div></td><td><span class="ia-pill l1">L1</span></td><td>Agenda / day view</td><td>Agenda list ×8, Agenda object ×8, RSVP Bars ×8, Date picker</td><td>4</td></tr>
+            <tr><td>Canvas - Recent Recaps<div class="ia-variants">Variant 1 · 2 · 3</div></td><td><span class="ia-pill l1">L1</span></td><td>Meeting recaps app</td><td>Generic List ×8, Radio ×8, Buttons ×8, Horizontal filter btn ×4</td><td>8</td></tr>
+
+            <tr class="ia-group"><td colspan="5">More <span>tab 5 · Calls, Files, apps and reorder</span></td></tr>
+            <tr><td>Canvas - More<div class="ia-variants">more menu · reorder</div></td><td><span class="ia-pill l2">L2</span></td><td>More menu / reorder apps</td><td>Grouped list ×2, Generic List ×13, Section Header ×2, app icons</td><td>19 (2 on iPad Modal)</td></tr>
+            <tr><td>Canvas - Files</td><td><span class="ia-pill l1">L1</span></td><td>Files</td><td>Generic List ×11, Section Header ×2, More ×9, file-type icons</td><td>2</td></tr>
+            <tr><td>Canvas - SERP [Deprecated]<div class="ia-variants">3</div></td><td><span class="ia-pill l1">L1</span></td><td>Files search results (old)</td><td>Generic List ×7, Section Header ×3, Filter bar</td><td>2 <span class="ia-pill warn">deprecated</span></td></tr>
+
+            <tr class="ia-group"><td colspan="5">Search <span>from any tab header · three states of one flow</span></td></tr>
+            <tr><td>Canvas - Zero Query</td><td><span class="ia-pill l1">L1</span></td><td>Search, empty query</td><td>Generic List ×8, Carousel / Avatars ×7, People ×4, History ×2</td><td>2</td></tr>
+            <tr><td>Canvas - AutoSuggest</td><td><span class="ia-pill l1">L1</span></td><td>Search, typing</td><td>Generic List ×5, Horizontal filter btn ×5, Contact Card ×2, Custom slot list ×2</td><td>2</td></tr>
+            <tr><td>Canvas - SERP</td><td><span class="ia-pill l1">L1</span></td><td>Search results</td><td>Filter bar ×2, Horizontal filter btn ×9, Custom slot list ×5, Copilot</td><td>2</td></tr>
+
+            <tr class="ia-group"><td colspan="5">Me menu &amp; Settings <span>profile picture · status, out of office, notifications, settings</span></td></tr>
+            <tr><td>Canvas - Me menu<div class="ia-variants">Level × Screen = L1 TFW · L1 TFL · L1 Archived · L2 Out of office · L2 Set status message · L2 Pause notifications</div></td><td><span class="ia-pill l2">L2</span></td><td>Me drawer and its L2 pages</td><td>Generic List ×9, Section Header, Checkmark ×2, Liquid Glass Large</td><td>7</td></tr>
+            <tr><td>Canvas - Settings<div class="ia-variants">Page = L1 · L2-Appearance · L2-Chats and channels · L2-Data and storage · L2-About</div></td><td><span class="ia-pill l2">L2</span></td><td>Settings and sub-pages</td><td>Grouped list ×4, Generic List ×18, Section Header ×2</td><td>7</td></tr>
+            <tr><td>Canvas - Provide feedback<div class="ia-variants">Level = L1 · L2</div></td><td><span class="ia-pill l2">L2</span></td><td>Help &amp; feedback</td><td>Button Full-width ×3, Section Header, Heart / Vote / Warning icons</td><td>2</td></tr>
+            <tr><td>Canvas - RAC<div class="ia-variants">State = Rest · Filled</div></td><td><span class="ia-pill l2">L2</span></td><td>Report a concern form</td><td>Chiclet, Radio, Multiline Text Field, Button Full-width</td><td>2</td></tr>
+            <tr><td>Canvas - What's new sheet</td><td><span class="ia-pill l2">L2</span></td><td>What's new</td><td>Empty state, Images and GIF, Button Full-width</td><td>3</td></tr>
+
+            <tr class="ia-group"><td colspan="5">Onboarding <span>before the tab bar exists</span></td></tr>
+            <tr><td>Canvas - FRE full screen<div class="ia-variants">Avatar · illustration</div></td><td><span class="ia-pill l1">L1</span></td><td>First-run experience</td><td>Empty state</td><td>2</td></tr>
+          </tbody>
+        </table>
+        </div>
+
+        <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Reading the table.</strong> Everything in the Chat, Teams, More and Me groups bottoms out in the same five list primitives (Grouped list, Generic List - Primary, Section Header, Description list, Accessories), so a Code Connect map of those five covers most of the app. The six "not mounted" canvases exist as components but no documentation board places them yet; the deprecated SERP is still what the Files search story shows.</div>
+
+        <p class="ia-sources"><strong>Sources.</strong> Canvas, container and instance data from the Teams POR page of Monocore-iOS (October 2026). Teams app structure from
+          <a href="https://support.microsoft.com/en-us/office/getting-to-know-microsoft-teams-free-0c73d8a6-bfaf-4afe-98f5-48b021156279" target="_blank" rel="noopener">Microsoft Support · Getting to know Microsoft Teams (Free)</a> (Chat, Communities, Meet, Activity tabs; search inside tabs; profile menu → Settings),
+          <a href="https://www.teachucomp.com/the-teams-interface-overview/" target="_blank" rel="noopener">TeachUcomp · The Teams interface overview</a> ("the buttons in the app bar are Activity, Chat, Teams, Calendar, Calls, and Files") and
+          <a href="https://www.gre.ac.uk/it-and-library/software/microsoft-365/teams/menus-and-navigation" target="_blank" rel="noopener">University of Greenwich · Teams menus and navigation</a> (mobile hamburger/profile menu: status, out of office, notifications, settings).
+        </p>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#ia-shell">Shell, Sheet and Canvas</a>
+        <a href="#ia-inventory">Canvas inventory by tab</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Information architecture &middot; Monocore &middot; October 2026
   </footer>
 
 </div>
@@ -16847,7 +17080,7 @@ function switchTier(btn, tier) {
   const backdrop = document.querySelector('.site-nav-backdrop');
 
   const VIEWS = { spec: null, guidance: 'view-guidance', architecture: 'view-architecture' };
-  const NO_TABS = new Set(['overview', 'roadmap', 'architecture']);
+  const NO_TABS = new Set(['overview', 'roadmap', 'architecture', 'ia']);
 
   function parseHash(hash) {
     const parts = (hash || location.hash || '#overview').replace('#','').split('/').filter(Boolean);
