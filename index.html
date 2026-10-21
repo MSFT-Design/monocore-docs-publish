@@ -9476,11 +9476,16 @@ Icon only = True
   .ia-card p { font-size: 13px; color: var(--mc-text-secondary); line-height: 1.55; margin: 0; }
   .ia-card.is-accent { border-color: var(--mc-brand-primary); }
   .ia-card.is-accent .ia-card-title { color: var(--mc-brand-primary); }
-  .ia-table-wrap { overflow-x: auto; margin: var(--sp-3) calc(-1 * var(--sp-10)) 0; }
-  .ia-table th:first-child, .ia-table td:first-child, .ia-table tr.ia-group td { padding-left: var(--sp-10); }
-  .ia-table th:last-child, .ia-table td:last-child { padding-right: var(--sp-10); }
-  @media (max-width: 720px) { .ia-table-wrap { margin-left: calc(-1 * var(--sp-4)); margin-right: calc(-1 * var(--sp-4)); } .ia-table th:first-child, .ia-table td:first-child, .ia-table tr.ia-group td { padding-left: var(--sp-4); } .ia-table th:last-child, .ia-table td:last-child { padding-right: var(--sp-4); } }
-  .ia-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
+  .ia-group-card { border: 1px solid var(--c-border); border-radius: var(--radius-strong); background: var(--mc-surface-raised-tertiary); margin-top: var(--sp-4); overflow: hidden; }
+  .ia-group-head { display: flex; align-items: baseline; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--c-border); }
+  .ia-group-title { font-size: 12px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--mc-text-primary); }
+  .ia-group-sub { font-size: 12px; color: var(--mc-text-secondary); }
+  .ia-table-wrap { overflow-x: auto; background: var(--c-surface); }
+  .ia-table th:first-child, .ia-table td:first-child { padding-left: 16px; }
+  .ia-table th:last-child, .ia-table td:last-child { padding-right: 16px; }
+  .ia-table tbody tr:last-child td { border-bottom: 0; }
+  .ia-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 480px; table-layout: fixed; }
+  .ia-table th:nth-child(1){width:30%} .ia-table th:nth-child(2){width:9%} .ia-table th:nth-child(3){width:22%} .ia-table th:nth-child(4){width:25%} .ia-table th:nth-child(5){width:14%}
   .ia-table th, .ia-table td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--c-border); vertical-align: top; }
   .ia-table th { font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--mc-text-secondary); position: sticky; top: 0; background: var(--mc-surface-raised-tertiary); }
   .ia-table td { color: var(--mc-text-secondary); line-height: 1.5; }
@@ -9488,9 +9493,6 @@ Icon only = True
   .ia-variants { font-weight: 400; font-size: 11.5px; color: var(--mc-text-secondary); margin-top: 3px; line-height: 1.45; }
   .ia-table td:nth-child(2) { white-space: nowrap; }
   .ia-table td code { font-size: 11.5px; }
-  .ia-table tr.ia-group td { background: var(--mc-surface-raised-tertiary); color: var(--mc-text-primary); font-weight: 700; font-size: 12px; letter-spacing: 0.4px; text-transform: uppercase; padding-top: 14px; padding-bottom: 10px; border-top: 24px solid var(--c-surface); }
-  .ia-table tr.ia-group td span { font-weight: 500; text-transform: none; letter-spacing: 0; color: var(--mc-text-secondary); margin-left: 8px; }
-  .ia-table tr.ia-group:first-child td { border-top: 0; }
   .ia-pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; border: 1px solid var(--c-border); white-space: nowrap; }
   .ia-pill.l1 { color: var(--mc-brand-primary); border-color: var(--mc-brand-primary); }
   .ia-pill.l2 { color: var(--mc-text-primary); }
@@ -9605,59 +9607,131 @@ Icon only = True
       <section class="spec-section" id="ia-inventory">
         <span class="section-eyebrow eyebrow-design">Inventory</span>
         <h2>Canvas inventory by Teams tab <a href="#ia-inventory" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Grouped the way the Teams app is: the default app bar is Activity, Chat, Teams, Calendar, with Calls and Files behind More on mobile; search lives inside each tab's header; the profile ("Me") menu holds status, out-of-office, notifications and Settings. Level is where the canvas sits in that tree — <span class="ia-pill l1">L1</span> tab root inside a Shell, <span class="ia-pill l2">L2</span> pushed or modal inside a Sheet. "Mounted" counts instances on the POR page.</p>
+        <p class="section-intro">Grouped the way the Teams app is: the default app bar is Activity, Chat, Teams, Calendar, with Calls and Files behind More on mobile; search lives inside each tab's header; the profile ("Me") menu holds status, out-of-office, notifications and Settings. Level is where the canvas sits in that tree — <span class="ia-pill l1">L1</span> tab root inside a Shell, <span class="ia-pill l2">L2</span> pushed or modal inside a Sheet. "Uses" counts instances on the POR page ("none" = component exists but no board places it yet).</p>
 
-        <div class="ia-table-wrap">
-        <table class="ia-table">
-          <thead>
-            <tr><th>Canvas · variants</th><th>Level</th><th>Screen it renders</th><th>Built from</th><th>Mounted</th></tr>
+                <div class="ia-group-card">
+          <div class="ia-group-head"><span class="ia-group-title">Activity</span><span class="ia-group-sub">tab 1 · notification feed</span></div>
+          <div class="ia-table-wrap">
+          <table class="ia-table">
+            <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen</th><th>Built from</th><th>Uses</th></tr>
           </thead>
-          <tbody>
-            <tr class="ia-group"><td colspan="5">Activity <span>tab 1 · notification feed</span></td></tr>
+            <tbody>
             <tr><td>Canvas - Activity</td><td><span class="ia-pill l1">L1</span></td><td>Activity feed</td><td>Timer List-item ×9, Horizontal filter btn ×5</td><td>11</td></tr>
-
-            <tr class="ia-group"><td colspan="5">Chat <span>tab 2 · 1:1, group and meeting chats</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="ia-group-card">
+          <div class="ia-group-head"><span class="ia-group-title">Chat</span><span class="ia-group-sub">tab 2 · 1:1, group and meeting chats</span></div>
+          <div class="ia-table-wrap">
+          <table class="ia-table">
+            <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen</th><th>Built from</th><th>Uses</th></tr>
+          </thead>
+            <tbody>
             <tr><td>Canvas - Chatlist</td><td><span class="ia-pill l1">L1</span></td><td>Chat list</td><td>Timer List-item ×25, Vertical filter btn ×5, Unread / Mention / Calendar badges</td><td>6</td></tr>
             <tr><td>Canvas - Contextual Search<div class="ia-variants">Default · Variant2</div></td><td><span class="ia-pill l1">L1</span></td><td>In-tab search over chat</td><td>Filter bar, Horizontal filter btn ×3, Generic List ×2, History</td><td>2</td></tr>
             <tr><td>Canvas - Mentions List<div class="ia-variants">Mentions · Threads</div></td><td><span class="ia-pill l1">L1</span></td><td>Mentions / Threads list</td><td>Thread List-item ×10, Unread ×5</td><td>5</td></tr>
             <tr><td>Canvas - Catchup</td><td><span class="ia-pill l1">L1</span></td><td>Catch up (message summary)</td><td>Message - replies ×3, Liquid Glass Large/Small, Buttons</td><td>5</td></tr>
             <tr><td>Canvas - Dashboard<div class="ia-variants">Type = 1:1 · Group · Meeting Chat · Threaded Channel · Post Reply Channel</div></td><td><span class="ia-pill l2">L2</span></td><td>Chat / channel details</td><td>Grouped list ×5, Generic List ×9, Section Header ×2, Buttons</td><td>16</td></tr>
             <tr><td>Canvas - Move to Dashboard</td><td><span class="ia-pill l2">L2</span></td><td>Contextual menu → details</td><td>Grouped list ×5, Generic List ×9, Badge view</td><td>1</td></tr>
-            <tr><td>Canvas: Compose options</td><td><span class="ia-pill l2">L2</span></td><td>Compose "+" options sheet</td><td>Grouped list, Generic List ×14, Search toolbar, Liquid Glass Small</td><td><span class="ia-pill warn">unmounted</span></td></tr>
-            <tr><td>Canvas - Add People<div class="ia-variants">Default · Variant2</div></td><td><span class="ia-pill l2">L2</span></td><td>Add people to chat</td><td>Generic List ×3, Section Header ×2, Description list, Dismiss ×3</td><td><span class="ia-pill warn">unmounted</span></td></tr>
-
-            <tr class="ia-group"><td colspan="5">Teams <span>tab 3 · teams → channels → posts</span></td></tr>
+            <tr><td>Canvas: Compose options</td><td><span class="ia-pill l2">L2</span></td><td>Compose "+" options sheet</td><td>Grouped list, Generic List ×14, Search toolbar, Liquid Glass Small</td><td><span class="ia-pill warn">none</span></td></tr>
+            <tr><td>Canvas - Add People<div class="ia-variants">Default · Variant2</div></td><td><span class="ia-pill l2">L2</span></td><td>Add people to chat</td><td>Generic List ×3, Section Header ×2, Description list, Dismiss ×3</td><td><span class="ia-pill warn">none</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="ia-group-card">
+          <div class="ia-group-head"><span class="ia-group-title">Teams</span><span class="ia-group-sub">tab 3 · teams → channels → posts</span></div>
+          <div class="ia-table-wrap">
+          <table class="ia-table">
+            <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen</th><th>Built from</th><th>Uses</th></tr>
+          </thead>
+            <tbody>
             <tr><td>Canvas - Teams</td><td><span class="ia-pill l1">L1</span></td><td>Teams &amp; channels list</td><td>Accordion ×6, Accordion Nested ×3, Notification badge ×9, More ×9</td><td>1</td></tr>
-            <tr><td>Canvas - Channel creation<div class="ia-variants">Default · Variant2</div></td><td><span class="ia-pill l2">L2</span></td><td>Create a channel</td><td>Text Field ×3, Grouped list ×2, Generic List ×3, Section Header ×2</td><td><span class="ia-pill warn">unmounted</span></td></tr>
-            <tr><td>Canvas - channel people roster</td><td><span class="ia-pill l2">L2</span></td><td>Channel members</td><td>Generic List ×9, Section Header ×3, Filter bar, Horizontal filter btn ×3</td><td><span class="ia-pill warn">unmounted</span></td></tr>
-            <tr><td>Canvas - Channel advanced settings</td><td><span class="ia-pill l2">L2</span></td><td>Channel settings</td><td>Grouped list ×3, Generic List ×7, Section Header ×3, Description list ×3</td><td><span class="ia-pill warn">unmounted</span></td></tr>
-            <tr><td>Canvas - Apps not available</td><td><span class="ia-pill l2">L2</span></td><td>Channel apps unavailable state</td><td>Grouped list, Generic List ×5, Description list, Button</td><td><span class="ia-pill warn">unmounted</span></td></tr>
-
-            <tr class="ia-group"><td colspan="5">Calendar <span>tab 4 · agenda, meetings and recaps</span></td></tr>
+            <tr><td>Canvas - Channel creation<div class="ia-variants">Default · Variant2</div></td><td><span class="ia-pill l2">L2</span></td><td>Create a channel</td><td>Text Field ×3, Grouped list ×2, Generic List ×3, Section Header ×2</td><td><span class="ia-pill warn">none</span></td></tr>
+            <tr><td>Canvas - channel people roster</td><td><span class="ia-pill l2">L2</span></td><td>Channel members</td><td>Generic List ×9, Section Header ×3, Filter bar, Horizontal filter btn ×3</td><td><span class="ia-pill warn">none</span></td></tr>
+            <tr><td>Canvas - Channel advanced settings</td><td><span class="ia-pill l2">L2</span></td><td>Channel settings</td><td>Grouped list ×3, Generic List ×7, Section Header ×3, Description list ×3</td><td><span class="ia-pill warn">none</span></td></tr>
+            <tr><td>Canvas - Apps not available</td><td><span class="ia-pill l2">L2</span></td><td>Channel apps unavailable state</td><td>Grouped list, Generic List ×5, Description list, Button</td><td><span class="ia-pill warn">none</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="ia-group-card">
+          <div class="ia-group-head"><span class="ia-group-title">Calendar</span><span class="ia-group-sub">tab 4 · agenda, meetings and recaps</span></div>
+          <div class="ia-table-wrap">
+          <table class="ia-table">
+            <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen</th><th>Built from</th><th>Uses</th></tr>
+          </thead>
+            <tbody>
             <tr><td>Canvas - Calendar<div class="ia-variants">Variant 1 · 2</div></td><td><span class="ia-pill l1">L1</span></td><td>Agenda / day view</td><td>Agenda list ×8, Agenda object ×8, RSVP Bars ×8, Date picker</td><td>4</td></tr>
             <tr><td>Canvas - Recent Recaps<div class="ia-variants">Variant 1 · 2 · 3</div></td><td><span class="ia-pill l1">L1</span></td><td>Meeting recaps app</td><td>Generic List ×8, Radio ×8, Buttons ×8, Horizontal filter btn ×4</td><td>8</td></tr>
-
-            <tr class="ia-group"><td colspan="5">More <span>tab 5 · Calls, Files, apps and reorder</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="ia-group-card">
+          <div class="ia-group-head"><span class="ia-group-title">More</span><span class="ia-group-sub">tab 5 · Calls, Files, apps and reorder</span></div>
+          <div class="ia-table-wrap">
+          <table class="ia-table">
+            <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen</th><th>Built from</th><th>Uses</th></tr>
+          </thead>
+            <tbody>
             <tr><td>Canvas - More<div class="ia-variants">more menu · reorder</div></td><td><span class="ia-pill l2">L2</span></td><td>More menu / reorder apps</td><td>Grouped list ×2, Generic List ×13, Section Header ×2, app icons</td><td>19 (2 on iPad Modal)</td></tr>
             <tr><td>Canvas - Files</td><td><span class="ia-pill l1">L1</span></td><td>Files</td><td>Generic List ×11, Section Header ×2, More ×9, file-type icons</td><td>2</td></tr>
             <tr><td>Canvas - SERP [Deprecated]<div class="ia-variants">3</div></td><td><span class="ia-pill l1">L1</span></td><td>Files search results (old)</td><td>Generic List ×7, Section Header ×3, Filter bar</td><td>2 <span class="ia-pill warn">deprecated</span></td></tr>
-
-            <tr class="ia-group"><td colspan="5">Search <span>from any tab header · three states of one flow</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="ia-group-card">
+          <div class="ia-group-head"><span class="ia-group-title">Search</span><span class="ia-group-sub">from any tab header · three states of one flow</span></div>
+          <div class="ia-table-wrap">
+          <table class="ia-table">
+            <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen</th><th>Built from</th><th>Uses</th></tr>
+          </thead>
+            <tbody>
             <tr><td>Canvas - Zero Query</td><td><span class="ia-pill l1">L1</span></td><td>Search, empty query</td><td>Generic List ×8, Carousel / Avatars ×7, People ×4, History ×2</td><td>2</td></tr>
             <tr><td>Canvas - AutoSuggest</td><td><span class="ia-pill l1">L1</span></td><td>Search, typing</td><td>Generic List ×5, Horizontal filter btn ×5, Contact Card ×2, Custom slot list ×2</td><td>2</td></tr>
             <tr><td>Canvas - SERP</td><td><span class="ia-pill l1">L1</span></td><td>Search results</td><td>Filter bar ×2, Horizontal filter btn ×9, Custom slot list ×5, Copilot</td><td>2</td></tr>
-
-            <tr class="ia-group"><td colspan="5">Me menu &amp; Settings <span>profile picture · status, out of office, notifications, settings</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="ia-group-card">
+          <div class="ia-group-head"><span class="ia-group-title">Me menu &amp; Settings</span><span class="ia-group-sub">profile picture · status, out of office, notifications, settings</span></div>
+          <div class="ia-table-wrap">
+          <table class="ia-table">
+            <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen</th><th>Built from</th><th>Uses</th></tr>
+          </thead>
+            <tbody>
             <tr><td>Canvas - Me menu<div class="ia-variants">Level × Screen = L1 TFW · L1 TFL · L1 Archived · L2 Out of office · L2 Set status message · L2 Pause notifications</div></td><td><span class="ia-pill l2">L2</span></td><td>Me drawer and its L2 pages</td><td>Generic List ×9, Section Header, Checkmark ×2, Liquid Glass Large</td><td>7</td></tr>
             <tr><td>Canvas - Settings<div class="ia-variants">Page = L1 · L2-Appearance · L2-Chats and channels · L2-Data and storage · L2-About</div></td><td><span class="ia-pill l2">L2</span></td><td>Settings and sub-pages</td><td>Grouped list ×4, Generic List ×18, Section Header ×2</td><td>7</td></tr>
             <tr><td>Canvas - Provide feedback<div class="ia-variants">Level = L1 · L2</div></td><td><span class="ia-pill l2">L2</span></td><td>Help &amp; feedback</td><td>Button Full-width ×3, Section Header, Heart / Vote / Warning icons</td><td>2</td></tr>
             <tr><td>Canvas - RAC<div class="ia-variants">State = Rest · Filled</div></td><td><span class="ia-pill l2">L2</span></td><td>Report a concern form</td><td>Chiclet, Radio, Multiline Text Field, Button Full-width</td><td>2</td></tr>
             <tr><td>Canvas - What's new sheet</td><td><span class="ia-pill l2">L2</span></td><td>What's new</td><td>Empty state, Images and GIF, Button Full-width</td><td>3</td></tr>
-
-            <tr class="ia-group"><td colspan="5">Onboarding <span>before the tab bar exists</span></td></tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="ia-group-card">
+          <div class="ia-group-head"><span class="ia-group-title">Onboarding</span><span class="ia-group-sub">before the tab bar exists</span></div>
+          <div class="ia-table-wrap">
+          <table class="ia-table">
+            <thead>
+            <tr><th>Canvas · variants</th><th>Level</th><th>Screen</th><th>Built from</th><th>Uses</th></tr>
+          </thead>
+            <tbody>
             <tr><td>Canvas - FRE full screen<div class="ia-variants">Avatar · illustration</div></td><td><span class="ia-pill l1">L1</span></td><td>First-run experience</td><td>Empty state</td><td>2</td></tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+          </div>
         </div>
 
         <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Reading the table.</strong> Everything in the Chat, Teams, More and Me groups bottoms out in the same five list primitives (Grouped list, Generic List - Primary, Section Header, Description list, Accessories), so a Code Connect map of those five covers most of the app. The six "not mounted" canvases exist as components but no documentation board places them yet; the deprecated SERP is still what the Files search story shows.</div>
