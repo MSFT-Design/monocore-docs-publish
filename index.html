@@ -2137,7 +2137,7 @@
         <a href="#overview" data-link="overview">Overview</a>
         <a href="#roadmap" data-link="roadmap">Roadmap</a>
         <a href="#architecture" data-link="architecture">Architecture</a>
-        <a href="#ia" data-link="ia">Information architecture</a>
+        <a href="#teams-ia" data-link="teams-ia">Teams IA</a>
       </div>
       <div class="nav-section">
         <div class="nav-section-label">Semantic Surface System</div>
@@ -9456,7 +9456,7 @@ Icon only = True
 </div>
 </div>
 
-<div class="page" id="page-ia" data-page="ia">
+<div class="page" id="page-teams-ia" data-page="teams-ia">
 
 <style>
   .ia-figure { margin: 0 0 var(--sp-5); }
@@ -9498,10 +9498,11 @@ Icon only = True
 
   <header class="docs-header">
     <div class="eyebrow">Monocore</div>
-    <h1>Information architecture</h1>
-    <p class="subtitle">How a Teams mobile screen is assembled in Monocore iOS: a Shell or Sheet supplies the chrome, a Canvas supplies the content, and the Canvas inventory maps one-to-one onto the Teams app's tabs.</p>
+    <h1>Teams information architecture</h1>
+    <p class="subtitle">How a Teams mobile screen is assembled in Monocore iOS: a Shell or Sheet supplies the chrome, a Canvas supplies the content, and the Canvas inventory maps one-to-one onto the Teams app's tabs. SharePoint and Engage get their own IA pages; the Shell and Sheet layer below is shared by every app on a device.</p>
     <div class="meta">
-      <span>2 containers</span>
+      <span>Teams</span>
+      <span>2 shared containers</span>
       <span>28 canvases</span>
       <span>Updated October 2026</span>
     </div>
@@ -9513,7 +9514,7 @@ Icon only = True
       <section class="spec-section" id="ia-shell">
         <span class="section-eyebrow eyebrow-design">Containers</span>
         <h2>Shell, Sheet and Canvas <a href="#ia-shell" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Every screen in the Teams POR file is built from the same three layers. A <strong>Canvas</strong> is a 402-wide, chrome-less screen body: no status bar, no header, no tab bar. The chrome comes from one of two containers. The <strong>Shell Template</strong> wraps the root view of each bottom tab. The <strong>Sheet - Full Screen</strong> wraps anything pushed or presented on top of a tab, and itself hosts a Shell so the header and keyboard behave the same way at every level.</p>
+        <p class="section-intro">The container layer is <strong>per device, not per app</strong>: Teams, SharePoint and Engage on iOS all mount their screens in the same Shell Template and Sheet, and only the Canvas layer is app-specific. Every screen in the Teams POR file is built from the same three layers. A <strong>Canvas</strong> is a 402-wide, chrome-less screen body: no status bar, no header, no tab bar. The chrome comes from one of two containers. The <strong>Shell Template</strong> wraps the root view of each bottom tab. The <strong>Sheet - Full Screen</strong> wraps anything pushed or presented on top of a tab, and itself hosts a Shell so the header and keyboard behave the same way at every level.</p>
 
         <figure class="ia-figure">
           <svg viewBox="0 0 1080 620" role="img" aria-label="A Shell Template on the left and a Sheet - Full Screen on the right each expose a content slot. Canvas components in the middle are placed into those slots: tab-root canvases into the Shell, pushed and modal canvases into the Sheet, which in turn hosts a Shell.">
@@ -9682,7 +9683,7 @@ Icon only = True
   </div>
 
   <footer class="docs-footer">
-    Information architecture &middot; Monocore &middot; October 2026
+    Teams IA &middot; Monocore &middot; October 2026
   </footer>
 
 </div>
@@ -17080,7 +17081,7 @@ function switchTier(btn, tier) {
   const backdrop = document.querySelector('.site-nav-backdrop');
 
   const VIEWS = { spec: null, guidance: 'view-guidance', architecture: 'view-architecture' };
-  const NO_TABS = new Set(['overview', 'roadmap', 'architecture', 'ia']);
+  const NO_TABS = new Set(['overview', 'roadmap', 'architecture', 'teams-ia']);
 
   function parseHash(hash) {
     const parts = (hash || location.hash || '#overview').replace('#','').split('/').filter(Boolean);
