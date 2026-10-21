@@ -9857,7 +9857,10 @@ Icon only = True
     display: flex; align-items: center; justify-content: center; gap: var(--sp-6);
     padding: var(--sp-4) var(--sp-6);
   }
-  .lay-preview img { display: block; height: auto; }
+  .lay-preview img { display: block; height: auto; max-width: 100%; }
+  .lay-board + .lay-board { margin-top: var(--sp-10); }
+  .lay-title .anchor-link { font-size: 20px; color: var(--c-text-muted); text-decoration: none; opacity: 0; margin-left: 6px; font-weight: 400; transition: opacity .15s; }
+  .lay-title:hover .anchor-link { opacity: 1; }
   .lay-props { font-size: 11.5px; color: var(--mc-text-secondary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; margin-top: -4px; }
   @media (max-width: 720px) { .lay-block { padding: var(--sp-5); } .lay-title { font-size: 28px; } }
 </style>
@@ -9865,77 +9868,422 @@ Icon only = True
 <div class="docs-shell">
   <header class="docs-header">
     <div class="eyebrow">Avatar &middot; Layout</div>
-    <h1>Avatar Pie</h1>
-    <p class="subtitle">Rendered from the <em>Avatar Pie</em> artboard on the Avatar &amp; Avatar group page of Monocore iOS. The artboard is a vertical flow of titled blocks, each holding one component variant; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <h1>Avatar</h1>
+    <p class="subtitle">Rendered from the seven documentation artboards on the Avatar &amp; Avatar group page of Monocore iOS: Avatar Pie, Avatar stack, Avatar, Avatar Pile, Avatar Carousel, Cutout and Presence. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change.</p>
     <div class="meta">
-      <span>Figma node 106947:247036</span>
-      <span>3 blocks</span>
+      <span>7 Figma artboards</span>
+      <span>32 blocks</span>
       <span>Read 21 Oct 2026</span>
     </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-      <section class="spec-section" id="avatar-layout-board">
+      <section class="spec-section lay-board" id="avatar-layout-pie" data-figma-node="106947:247036">
         <div class="lay-page" data-figma="New component">
-
-          <h1 class="lay-title" data-figma="Content block / Page Title">Avatar Pie</h1>
-
-          <div class="lay-section" id="avatar-layout-variant" data-figma="Content block / Section primary">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Avatar Pie <a href="#avatar-layout-pie" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="avatar-layout-pie-variant" data-figma="Content block / Section primary">
             <h2>Variant</h2>
-
             <div class="lay-block" data-figma="Slot block">
               <div class="lay-block-head" data-figma="Content block / Section primary light">
                 <div class="lay-block-title">2 Avatars</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-pie-2-72.png" width="72" height="72" alt=".Avatar pie — Layout=2 avatars, Size=72">
+                <img src="images/avatar/avatar-pie-2-72.png" width="72" height="72" alt=".Avatar pie — Layout=2 avatars · Size=72">
               </div>
               <div class="lay-props">.Avatar pie · Layout=2 avatars · Size=72</div>
             </div>
-
             <div class="lay-block" data-figma="Slot block">
               <div class="lay-block-head" data-figma="Content block / Section primary light">
                 <div class="lay-block-title">3 Avatars</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-pie-3-72.png" width="72" height="72" alt=".Avatar pie — Layout=3 avatars, Size=72">
+                <img src="images/avatar/avatar-pie-3-72.png" width="72" height="72" alt=".Avatar pie — Layout=3 avatars · Size=72">
               </div>
               <div class="lay-props">.Avatar pie · Layout=3 avatars · Size=72</div>
             </div>
           </div>
-
-          <div class="lay-section" id="avatar-layout-size" data-figma="Content block / Section primary">
+          <div class="lay-section" id="avatar-layout-pie-size" data-figma="Content block / Section primary">
             <h2>Size</h2>
-
             <div class="lay-block" data-figma="Slot block">
               <div class="lay-block-head" data-figma="Content block / Section primary light">
                 <div class="lay-block-title">Default 32</div>
                 <div class="lay-block-caption">16, 20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-pie-2-32.png" width="32" height="32" alt=".Avatar pie — Layout=2 avatars, Size=32 (Default)">
+                <img src="images/avatar/avatar-pie-2-32.png" width="32" height="32" alt=".Avatar pie — Layout=2 avatars · Size=32 (Default)">
               </div>
               <div class="lay-props">.Avatar pie · Layout=2 avatars · Size=32 (Default)</div>
             </div>
           </div>
+        </div>
+      </section>
 
+      <section class="spec-section lay-board" id="avatar-layout-stack" data-figma-node="107073:109566">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Avatar stack <a href="#avatar-layout-stack" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="avatar-layout-stack-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default 32</div>
+                <div class="lay-block-caption">16, 20, 32, 40, 52</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-stack-52.svg" width="280" height="60" alt="Avatar Stack — Size=52">
+              </div>
+              <div class="lay-props">Avatar Stack · Size=52</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="avatar-layout-avatar" data-figma-node="107073:109830">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Avatar <a href="#avatar-layout-avatar" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="avatar-layout-avatar-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Title goes here</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-image-144.svg" width="144" height="144" alt="Avatar — Type=Image · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=Image · Size=Xmassive [144dp]</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Title goes here</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-icon-brand-144.svg" width="144" height="144" alt="Avatar — Type=Icon brand · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=Icon brand · Size=Xmassive [144dp]</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Anonymous</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-anonymous-144.svg" width="144" height="144" alt="Avatar — Type=Anonymous · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=Anonymous · Size=Xmassive [144dp]</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Overflow</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-overflow-144.svg" width="144" height="144" alt="Avatar — Type=Overflow · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=Overflow · Size=Xmassive [144dp]</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Team Avatar</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-team-144.svg" width="144" height="144" alt="Avatar — Type=Team avatar · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=Team avatar · Size=Xmassive [144dp]</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Community</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-community-144.svg" width="144" height="144" alt="Avatar — Type=Community · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=Community · Size=Xmassive [144dp]</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">3p App</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-3p-app-144.svg" width="144" height="144" alt="Avatar — Type=3P app · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=3P app · Size=Xmassive [144dp]</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Icon Neutral</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-icon-neutral-144.svg" width="144" height="144" alt="Avatar — Type=Icon Neutral · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=Icon Neutral · Size=Xmassive [144dp]</div>
+            </div>
+          </div>
+          <div class="lay-section" id="avatar-layout-avatar-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Icon Neutral</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-icon-neutral-144.svg" width="144" height="144" alt="Avatar — Type=Icon Neutral · Size=Xmassive [144dp]">
+              </div>
+              <div class="lay-props">Avatar · Type=Icon Neutral · Size=Xmassive [144dp]</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="avatar-layout-pile" data-figma-node="107073:110239">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Avatar Pile <a href="#avatar-layout-pile" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="avatar-layout-pile-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">52</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-pile-52.svg" width="354" height="56" alt="Avatar Pile — Size=52">
+              </div>
+              <div class="lay-props">Avatar Pile · Size=52</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">40</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-pile-40.svg" width="280" height="40" alt="Avatar Pile — Size=40">
+              </div>
+              <div class="lay-props">Avatar Pile · Size=40</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">24</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-pile-34.svg" width="256" height="36" alt="Avatar Pile — Size=34">
+              </div>
+              <div class="lay-props">Avatar Pile · Size=34</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">20</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-pile-20.svg" width="140" height="20" alt="Avatar Pile — Size=20">
+              </div>
+              <div class="lay-props">Avatar Pile · Size=20</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="avatar-layout-carousel" data-figma-node="107073:111114">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Avatar Carousel <a href="#avatar-layout-carousel" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="avatar-layout-carousel-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-carousel-default.svg" width="690" height="106" alt="Avatar carousel — Default">
+              </div>
+              <div class="lay-props">Avatar carousel · Default</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Header</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <img src="images/avatar/avatar-carousel-header.svg" width="690" height="162" alt="Avatar carousel — Header">
+              </div>
+              <div class="lay-props">Avatar carousel · Header</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="avatar-layout-cutout" data-figma-node="107082:112120">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Cutout <a href="#avatar-layout-cutout" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="avatar-layout-cutout-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Icon</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/cutout-icon.svg" width="50" height="50" alt="Cutout — Type=Icon · Size=50">
+              </div>
+              <div class="lay-props">Cutout · Type=Icon · Size=50</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Emoji</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/cutout-emoji-50.png" width="50" height="50" alt="Cutout — Type=Emoji · Size=50">
+              </div>
+              <div class="lay-props">Cutout · Type=Emoji · Size=50</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Mention</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/cutout-mention.svg" width="50" height="50" alt="Cutout — Type=@mentions · Size=50">
+              </div>
+              <div class="lay-props">Cutout · Type=@mentions · Size=50</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="avatar-layout-presence" data-figma-node="107082:112524">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Presence <a href="#avatar-layout-presence" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="avatar-layout-presence-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Available</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-available.svg" width="35" height="35" alt="Presence — State=Available · Size=35 · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · State=Available · Size=35 · Out of Office=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Away</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-away.svg" width="35" height="35" alt="Presence — State=Away · Size=35 · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · State=Away · Size=35 · Out of Office=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Block</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-block.svg" width="35" height="35" alt="Presence — State=Block · Size=35 · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · State=Block · Size=35 · Out of Office=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Busy</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-busy.svg" width="35" height="35" alt="Presence — State=Busy · Size=35 · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · State=Busy · Size=35 · Out of Office=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">DND</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-dnd.svg" width="35" height="35" alt="Presence — State=DND · Size=35 · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · State=DND · Size=35 · Out of Office=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Offline</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-offline.svg" width="35" height="35" alt="Presence — State=Offline · Size=35 · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · State=Offline · Size=35 · Out of Office=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">OOF</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-oof.svg" width="35" height="35" alt="Presence — State=OOF · Size=35 · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · State=OOF · Size=35 · Out of Office=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Unknown</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-unknown.svg" width="35" height="35" alt="Presence — State=Unknown · Size=35 · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · State=Unknown · Size=35 · Out of Office=False</div>
+            </div>
+          </div>
+          <div class="lay-section" id="avatar-layout-presence-config" data-figma="Content block / Section primary">
+            <h2>Config</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Out of office - False</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-available.svg" width="35" height="35" alt="Presence — State=Available · Out of Office=False">
+                <img src="images/avatar/presence-away.svg" width="35" height="35" alt="Presence — State=Away · Out of Office=False">
+                <img src="images/avatar/presence-block.svg" width="35" height="35" alt="Presence — State=Block · Out of Office=False">
+                <img src="images/avatar/presence-busy.svg" width="35" height="35" alt="Presence — State=Busy · Out of Office=False">
+                <img src="images/avatar/presence-dnd.svg" width="35" height="35" alt="Presence — State=DND · Out of Office=False">
+                <img src="images/avatar/presence-offline.svg" width="35" height="35" alt="Presence — State=Offline · Out of Office=False">
+                <img src="images/avatar/presence-oof.svg" width="35" height="35" alt="Presence — State=OOF · Out of Office=False">
+                <img src="images/avatar/presence-unknown.svg" width="35" height="35" alt="Presence — State=Unknown · Out of Office=False">
+              </div>
+              <div class="lay-props">Presence · Available / Away / Block / Busy / DND / Offline / OOF / Unknown · Out of Office=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Out of office - True</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/avatar/presence-available-oof.svg" width="35" height="35" alt="Presence — State=Available · Out of Office=True">
+                <img src="images/avatar/presence-away-oof.svg" width="35" height="35" alt="Presence — State=Away · Out of Office=True">
+                <img src="images/avatar/presence-block-oof.svg" width="35" height="35" alt="Presence — State=Block · Out of Office=True">
+                <img src="images/avatar/presence-busy-oof.svg" width="35" height="35" alt="Presence — State=Busy · Out of Office=True">
+                <img src="images/avatar/presence-dnd-oof.svg" width="35" height="35" alt="Presence — State=DND · Out of Office=True">
+                <img src="images/avatar/presence-offline-oof.svg" width="35" height="35" alt="Presence — State=Offline · Out of Office=True">
+                <img src="images/avatar/presence-oof-oof.svg" width="35" height="35" alt="Presence — State=OOF · Out of Office=True">
+                <img src="images/avatar/presence-unknown-oof.svg" width="35" height="35" alt="Presence — State=Unknown · Out of Office=True">
+              </div>
+              <div class="lay-props">Presence · Available / Away / Block / Busy / DND / Offline / OOF / Unknown · Out of Office=True</div>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="spec-section" id="avatar-layout-schema">
         <span class="section-eyebrow eyebrow-impl">Dev notes</span>
         <h2>How this page is parsed from Figma <a href="#avatar-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance whose variant properties become the monospace line under the preview.</p>
-        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Walk the slot in order; emit <code>h2</code> for every Section primary block, a card for every Slot block, and export each instance in PASTE HERE at 2&times;. Nothing on this page is hand-authored except the header copy.</div>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot (the name may carry a suffix such as <code>PASTE HERE5</code>) holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Export each instance in PASTE HERE as SVG when it is pure vector (icons, Presence, Cutout, the icon Avatars) and as a 2&times; PNG, or an SVG with the photo embedded, when it contains an image fill. Nothing on this page is hand-authored except the header copy.</div>
+        <p class="section-intro">Figma nodes: Avatar Pie <code>106947:247036</code>, Avatar stack <code>107073:109566</code>, Avatar <code>107073:109830</code>, Avatar Pile <code>107073:110239</code>, Avatar Carousel <code>107073:111114</code>, Cutout <code>107082:112120</code>, Presence <code>107082:112524</code>.</p>
       </section>
     </main>
 
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#avatar-layout-variant">Variant</a>
-        <a href="#avatar-layout-size">Size</a>
+        <div class="toc-group">Avatar Pie</div>
+        <a href="#avatar-layout-pie-variant">Variant</a>
+        <a href="#avatar-layout-pie-size">Size</a>
+        <div class="toc-group">Avatar stack</div>
+        <a href="#avatar-layout-stack-size">Size</a>
+        <div class="toc-group">Avatar</div>
+        <a href="#avatar-layout-avatar-variants">Variants</a>
+        <a href="#avatar-layout-avatar-size">Size</a>
+        <div class="toc-group">Avatar Pile</div>
+        <a href="#avatar-layout-pile-size">Size</a>
+        <div class="toc-group">Avatar Carousel</div>
+        <a href="#avatar-layout-carousel-variants">Variants</a>
+        <div class="toc-group">Cutout</div>
+        <a href="#avatar-layout-cutout-variants">Variants</a>
+        <div class="toc-group">Presence</div>
+        <a href="#avatar-layout-presence-variants">Variants</a>
+        <a href="#avatar-layout-presence-config">Config</a>
       </nav>
     </aside>
   </div>
