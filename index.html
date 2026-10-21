@@ -9512,7 +9512,7 @@ Icon only = True
     <div class="meta">
       <span>Teams</span>
       <span>2 shared containers</span>
-      <span>28 canvases</span>
+      <span>33 canvases</span>
       <span>Updated October 2026</span>
     </div>
   </header>
@@ -9553,17 +9553,17 @@ Icon only = True
             <!-- ── Column 2: Canvas ── -->
             <rect x="390" y="160" width="300" height="130" rx="8" fill="var(--mc-surface-raised-tertiary)" stroke="var(--mc-brand-primary)" stroke-width="1.6"/>
             <text x="410" y="186" font-size="11" fill="var(--mc-text-secondary)" font-weight="600" letter-spacing=".6">TAB ROOT CANVASES</text>
-            <text x="410" y="210" font-size="12.5">Activity · Chatlist · Teams · Calendar</text>
+            <text x="410" y="210" font-size="12.5">Activity · Chatlist · Teams · Calendar · Meeting details</text>
             <text x="410" y="230" font-size="12.5">Catchup · Recent Recaps · Mentions List</text>
             <text x="410" y="250" font-size="12.5">Zero Query · AutoSuggest · SERP · Files</text>
-            <text x="410" y="276" font-size="11" fill="var(--mc-text-secondary)">13 canvases · Shell Template → Canvas</text>
+            <text x="410" y="276" font-size="11" fill="var(--mc-text-secondary)">14 canvases · Shell Template → Canvas</text>
 
             <rect x="390" y="320" width="300" height="130" rx="8" fill="var(--mc-surface-raised-tertiary)" stroke="currentColor" stroke-width="1.4"/>
             <text x="410" y="346" font-size="11" fill="var(--mc-text-secondary)" font-weight="600" letter-spacing=".6">PUSHED &amp; MODAL CANVASES</text>
             <text x="410" y="370" font-size="12.5">Dashboard · Settings · More · Me menu</text>
             <text x="410" y="390" font-size="12.5">RAC · Provide feedback · What's new</text>
-            <text x="410" y="410" font-size="12.5">Move to Dashboard · (6 not yet mounted)</text>
-            <text x="410" y="436" font-size="11" fill="var(--mc-text-secondary)">8 canvases · Sheet → Shell → Canvas</text>
+            <text x="410" y="410" font-size="12.5">New event modals ×5 · Move to Dashboard</text>
+            <text x="410" y="436" font-size="11" fill="var(--mc-text-secondary)">13 canvases · Sheet → Shell → Canvas · 6 not yet mounted</text>
 
             <!-- Connectors: canvas → slots (horizontal at box centres y=225 and y=385) -->
             <line x1="300" y1="225" x2="390" y2="225" stroke="var(--mc-brand-primary)" stroke-width="1.6"/>
@@ -9663,7 +9663,7 @@ Icon only = True
           </div>
         </div>
         <div class="ia-group-card" id="ia-tab-calendar">
-          <div class="ia-group-head"><span class="ia-group-title">Calendar</span><span class="ia-group-sub">tab 4 · agenda, meetings and recaps</span></div>
+          <div class="ia-group-head"><span class="ia-group-title">Calendar</span><span class="ia-group-sub">tab 4 · agenda, meeting details, new event and recaps</span></div>
           <div class="ia-table-wrap">
           <table class="ia-table">
             <thead>
@@ -9672,6 +9672,12 @@ Icon only = True
             <tbody>
             <tr><td>Canvas - Calendar<div class="ia-variants">Variant 1 · 2</div></td><td><span class="ia-pill l1">L1</span></td><td>Agenda / day view</td><td>Agenda list ×8, Agenda object ×8, RSVP Bars ×8, Date picker</td><td>4</td></tr>
             <tr><td>Canvas - Recent Recaps<div class="ia-variants">Variant 1 · 2 · 3</div></td><td><span class="ia-pill l1">L1</span></td><td>Meeting recaps app</td><td>Generic List ×8, Radio ×8, Buttons ×8, Horizontal filter btn ×4</td><td>8</td></tr>
+            <tr><td>Canvas - Calendar L2 Meeting details list</td><td><span class="ia-pill l2">L2</span></td><td>Meeting details (pushed)</td><td>Generic List ×11, Section Header ×3, Buttons ×2, Share / Call icons</td><td>2</td></tr>
+            <tr><td>Canvas - New event Modal</td><td><span class="ia-pill l2">L2</span></td><td>New event form</td><td>Text Field, Grouped list, Generic List ×11, Accessory - value ×9</td><td>1</td></tr>
+            <tr><td>Canvas - New event Modal - Select a channel</td><td><span class="ia-pill l2">L2</span></td><td>Share to a channel picker</td><td>Accordion ×5, Accordion Nested ×12</td><td>1</td></tr>
+            <tr><td>Canvas - New event Modal - Repeat</td><td><span class="ia-pill l2">L2</span></td><td>Repeat frequency picker</td><td>Section Header, Grouped list, Generic List ×6, Checkmark</td><td>1</td></tr>
+            <tr><td>Canvas - New event Modal - Show as</td><td><span class="ia-pill l2">L2</span></td><td>Show as picker</td><td>Grouped list, Generic List ×4, Checkmark</td><td>1</td></tr>
+            <tr><td>Canvas - New event Modal - Sensitivity</td><td><span class="ia-pill l2">L2</span></td><td>Sensitivity picker</td><td>Grouped list, Generic List ×10, Checkmark, Description list</td><td>1</td></tr>
             </tbody>
           </table>
           </div>
@@ -9686,7 +9692,6 @@ Icon only = True
             <tbody>
             <tr><td>Canvas - More<div class="ia-variants">more menu · reorder</div></td><td><span class="ia-pill l2">L2</span></td><td>More menu / reorder apps</td><td>Grouped list ×2, Generic List ×13, Section Header ×2, app icons</td><td>19 (2 on iPad Modal)</td></tr>
             <tr><td>Canvas - Files</td><td><span class="ia-pill l1">L1</span></td><td>Files</td><td>Generic List ×11, Section Header ×2, More ×9, file-type icons</td><td>2</td></tr>
-            <tr><td>Canvas - SERP [Deprecated]<div class="ia-variants">3</div></td><td><span class="ia-pill l1">L1</span></td><td>Files search results (old)</td><td>Generic List ×7, Section Header ×3, Filter bar</td><td>2 <span class="ia-pill warn">deprecated</span></td></tr>
             </tbody>
           </table>
           </div>
@@ -9737,7 +9742,7 @@ Icon only = True
           </div>
         </div>
 
-        <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Reading the table.</strong> Everything in the Chat, Teams, More and Me groups bottoms out in the same five list primitives (Grouped list, Generic List - Primary, Section Header, Description list, Accessories), so a Code Connect map of those five covers most of the app. The six "not mounted" canvases exist as components but no documentation board places them yet; the deprecated SERP is still what the Files search story shows.</div>
+        <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Reading the table.</strong> Everything in the Chat, Teams, More and Me groups bottoms out in the same five list primitives (Grouped list, Generic List - Primary, Section Header, Description list, Accessories), so a Code Connect map of those five covers most of the app. The six canvases marked "none" exist as components but no documentation board places them yet.</div>
 
       </section>
 
@@ -9748,7 +9753,7 @@ Icon only = True
           <div class="ia-card">
             <div class="ia-card-label">Data</div>
             <div class="ia-card-title">Where this comes from</div>
-            <p>Derived from the Teams POR page of Monocore-iOS: 28 Canvas components, ~150 instances, every one wrapped by either Shell Template (tab roots) or Sheet - Full Screen - iPhone &rarr; Shell Template (pushed and modal screens). The two iPad instances use Modal - Full Screen - iPad.</p>
+            <p>Derived from the Teams POR page of Monocore-iOS: 33 Canvas components, ~170 instances, every one wrapped by either Shell Template (tab roots) or Sheet - Full Screen - iPhone &rarr; Shell Template (pushed and modal screens). The two iPad instances use Modal - Full Screen - iPad.</p>
           </div>
           <div class="ia-card is-accent">
             <div class="ia-card-label">Rule</div>
@@ -9756,7 +9761,7 @@ Icon only = True
             <p>A Canvas never carries chrome; a container never carries content. Canvas variants encode <strong>view state</strong> (Dashboard.Type, Settings.Page, Me menu.Level &times; Screen). The container it sits in encodes <strong>navigation level</strong>. iPad reuses the same canvases inside Modal - Full Screen - iPad.</p>
           </div>
         </div>
-        <p class="ia-sources"><strong>Sources.</strong> Canvas, container and instance data from the Teams POR page of Monocore-iOS (October 2026). Teams app structure from
+        <p class="ia-sources"><strong>Sources.</strong> Canvas, container and instance data from the Teams POR page of Monocore-iOS (21 October 2026). Teams app structure from
           <a href="https://support.microsoft.com/en-us/office/getting-to-know-microsoft-teams-free-0c73d8a6-bfaf-4afe-98f5-48b021156279" target="_blank" rel="noopener">Microsoft Support &middot; Getting to know Microsoft Teams (Free)</a> (Chat, Communities, Meet, Activity tabs; search inside tabs; profile menu &rarr; Settings),
           <a href="https://www.teachucomp.com/the-teams-interface-overview/" target="_blank" rel="noopener">TeachUcomp &middot; The Teams interface overview</a> ("the buttons in the app bar are Activity, Chat, Teams, Calendar, Calls, and Files") and
           <a href="https://www.gre.ac.uk/it-and-library/software/microsoft-365/teams/menus-and-navigation" target="_blank" rel="noopener">University of Greenwich &middot; Teams menus and navigation</a> (mobile hamburger/profile menu: status, out of office, notifications, settings).
