@@ -9476,7 +9476,10 @@ Icon only = True
   .ia-card p { font-size: 13px; color: var(--mc-text-secondary); line-height: 1.55; margin: 0; }
   .ia-card.is-accent { border-color: var(--mc-brand-primary); }
   .ia-card.is-accent .ia-card-title { color: var(--mc-brand-primary); }
-  .ia-table-wrap { overflow-x: auto; margin-top: var(--sp-3); }
+  .ia-table-wrap { overflow-x: auto; margin: var(--sp-3) calc(-1 * var(--sp-10)) 0; }
+  .ia-table th:first-child, .ia-table td:first-child, .ia-table tr.ia-group td { padding-left: var(--sp-10); }
+  .ia-table th:last-child, .ia-table td:last-child { padding-right: var(--sp-10); }
+  @media (max-width: 720px) { .ia-table-wrap { margin-left: calc(-1 * var(--sp-4)); margin-right: calc(-1 * var(--sp-4)); } .ia-table th:first-child, .ia-table td:first-child, .ia-table tr.ia-group td { padding-left: var(--sp-4); } .ia-table th:last-child, .ia-table td:last-child { padding-right: var(--sp-4); } }
   .ia-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
   .ia-table th, .ia-table td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--c-border); vertical-align: top; }
   .ia-table th { font-size: 11px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--mc-text-secondary); position: sticky; top: 0; background: var(--mc-surface-raised-tertiary); }
