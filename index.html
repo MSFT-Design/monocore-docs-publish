@@ -9517,7 +9517,7 @@ Icon only = True
         <p class="section-intro">The container layer is <strong>per device, not per app</strong>: Teams, SharePoint and Engage on iOS all mount their screens in the same Shell Template and Sheet, and only the Canvas layer is app-specific. Every screen in the Teams POR file is built from the same three layers. A <strong>Canvas</strong> is a 402-wide, chrome-less screen body: no status bar, no header, no tab bar. The chrome comes from one of two containers. The <strong>Shell Template</strong> wraps the root view of each bottom tab. The <strong>Sheet - Full Screen</strong> wraps anything pushed or presented on top of a tab, and itself hosts a Shell so the header and keyboard behave the same way at every level.</p>
 
         <figure class="ia-figure">
-          <svg viewBox="0 0 1080 620" role="img" aria-label="A Shell Template on the left and a Sheet - Full Screen on the right each expose a content slot. Canvas components in the middle are placed into those slots: tab-root canvases into the Shell, pushed and modal canvases into the Sheet, which in turn hosts a Shell.">
+          <svg viewBox="0 0 1080 520" role="img" aria-label="A Shell Template on the left and a Sheet - Full Screen on the right each expose a content slot. Canvas components in the middle are placed into those slots: tab-root canvases into the Shell, pushed and modal canvases into the Sheet, which in turn hosts a Shell.">
             <!--
               Grid: 3 columns x 300 wide, gutters 90.
               Col 1 x=0..300 (Shell) | Col 2 x=390..690 (Canvas) | Col 3 x=780..1080 (Sheet)
@@ -9576,13 +9576,7 @@ Icon only = True
             <rect x="792" y="422" width="276" height="44" rx="6" fill="none" stroke="var(--c-border)" stroke-dasharray="4 3"/>
             <text x="930" y="449" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--mc-text-secondary)">Keyboard (optional)</text>
 
-            <!-- Footnote band -->
-            <rect x="0" y="530" width="1080" height="78" rx="8" fill="var(--mc-surface-raised-tertiary)" stroke="var(--c-border)"/>
-            <text x="20" y="556" font-size="13" font-weight="600">The rule</text>
-            <text x="20" y="578" font-size="12.5">A Canvas never carries chrome; a container never carries content. Canvas variants encode <tspan font-weight="600">view state</tspan> (Dashboard.Type, Settings.Page, Me menu.Level × Screen).</text>
-            <text x="20" y="596" font-size="12.5">The container it sits in encodes <tspan font-weight="600">navigation level</tspan>. iPad reuses the same canvases inside <tspan font-weight="600">Modal - Full Screen - iPad</tspan>.</text>
           </svg>
-          <figcaption>Derived from the Teams POR page of Monocore-iOS: 28 Canvas components, ~150 instances, every one wrapped by either Shell Template (tab roots) or Sheet - Full Screen - iPhone → Shell Template (pushed and modal screens). The two iPad instances use Modal - Full Screen - iPad.</figcaption>
         </figure>
 
         <div class="ia-grid">
@@ -9664,10 +9658,27 @@ Icon only = True
 
         <div class="callout callout-rule" style="margin-top: var(--sp-4);"><strong>Reading the table.</strong> Everything in the Chat, Teams, More and Me groups bottoms out in the same five list primitives (Grouped list, Generic List - Primary, Section Header, Description list, Accessories), so a Code Connect map of those five covers most of the app. The six "not mounted" canvases exist as components but no documentation board places them yet; the deprecated SERP is still what the Files search story shows.</div>
 
+      </section>
+
+      <section class="spec-section" id="ia-dev-notes">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>Dev notes <a href="#ia-dev-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="ia-grid">
+          <div class="ia-card">
+            <div class="ia-card-label">Data</div>
+            <div class="ia-card-title">Where this comes from</div>
+            <p>Derived from the Teams POR page of Monocore-iOS: 28 Canvas components, ~150 instances, every one wrapped by either Shell Template (tab roots) or Sheet - Full Screen - iPhone &rarr; Shell Template (pushed and modal screens). The two iPad instances use Modal - Full Screen - iPad.</p>
+          </div>
+          <div class="ia-card is-accent">
+            <div class="ia-card-label">Rule</div>
+            <div class="ia-card-title">The rule</div>
+            <p>A Canvas never carries chrome; a container never carries content. Canvas variants encode <strong>view state</strong> (Dashboard.Type, Settings.Page, Me menu.Level &times; Screen). The container it sits in encodes <strong>navigation level</strong>. iPad reuses the same canvases inside Modal - Full Screen - iPad.</p>
+          </div>
+        </div>
         <p class="ia-sources"><strong>Sources.</strong> Canvas, container and instance data from the Teams POR page of Monocore-iOS (October 2026). Teams app structure from
-          <a href="https://support.microsoft.com/en-us/office/getting-to-know-microsoft-teams-free-0c73d8a6-bfaf-4afe-98f5-48b021156279" target="_blank" rel="noopener">Microsoft Support · Getting to know Microsoft Teams (Free)</a> (Chat, Communities, Meet, Activity tabs; search inside tabs; profile menu → Settings),
-          <a href="https://www.teachucomp.com/the-teams-interface-overview/" target="_blank" rel="noopener">TeachUcomp · The Teams interface overview</a> ("the buttons in the app bar are Activity, Chat, Teams, Calendar, Calls, and Files") and
-          <a href="https://www.gre.ac.uk/it-and-library/software/microsoft-365/teams/menus-and-navigation" target="_blank" rel="noopener">University of Greenwich · Teams menus and navigation</a> (mobile hamburger/profile menu: status, out of office, notifications, settings).
+          <a href="https://support.microsoft.com/en-us/office/getting-to-know-microsoft-teams-free-0c73d8a6-bfaf-4afe-98f5-48b021156279" target="_blank" rel="noopener">Microsoft Support &middot; Getting to know Microsoft Teams (Free)</a> (Chat, Communities, Meet, Activity tabs; search inside tabs; profile menu &rarr; Settings),
+          <a href="https://www.teachucomp.com/the-teams-interface-overview/" target="_blank" rel="noopener">TeachUcomp &middot; The Teams interface overview</a> ("the buttons in the app bar are Activity, Chat, Teams, Calendar, Calls, and Files") and
+          <a href="https://www.gre.ac.uk/it-and-library/software/microsoft-365/teams/menus-and-navigation" target="_blank" rel="noopener">University of Greenwich &middot; Teams menus and navigation</a> (mobile hamburger/profile menu: status, out of office, notifications, settings).
         </p>
       </section>
 
@@ -9678,6 +9689,7 @@ Icon only = True
         <div class="toc-label">On this page</div>
         <a href="#ia-shell">Shell, Sheet and Canvas</a>
         <a href="#ia-inventory">Canvas inventory by tab</a>
+        <a href="#ia-dev-notes">Dev notes</a>
       </nav>
     </aside>
   </div>
