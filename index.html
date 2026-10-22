@@ -205,6 +205,15 @@
     html.devnotes-off #compose-layout-schema,
     html.devnotes-off #chip-layout-schema,
     html.devnotes-off #empty-list-layout-schema,
+    html.devnotes-off #badge-spec-layout-schema,
+    html.devnotes-off #fab-layout-schema,
+    html.devnotes-off #buttons-layout-schema,
+    html.devnotes-off #circular-button-layout-schema,
+    html.devnotes-off #jump-button-layout-schema,
+    html.devnotes-off #callout-layout-schema,
+    html.devnotes-off #card-spec-layout-schema,
+    html.devnotes-off #chiclet-layout-schema,
+    html.devnotes-off #content-card-layout-schema,
     html.devnotes-off #ia-dev-notes {
       display: none !important;
     }
@@ -9862,6 +9871,12 @@ Icon only = True
   }
   .lay-preview img { display: block; height: auto; max-width: 100%; }
   .lay-preview-stack { flex-direction: column; align-items: flex-start; }
+  .lay-ph { box-sizing: border-box; flex: none; max-width: 100%; border: 1.5px dashed var(--mc-stroke-container, var(--c-border)); border-radius: 8px;
+    background: repeating-linear-gradient(135deg, transparent 0 6px, color-mix(in srgb, var(--c-text-muted) 10%, transparent) 6px 7px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px 8px; overflow: hidden; text-align: center; }
+  .lay-ph-name { font-size: 11.5px; font-weight: 600; color: var(--mc-text-secondary); }
+  .lay-ph-props { font-size: 10.5px; color: var(--c-text-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lay-manifest { font-size: 12px; color: var(--mc-text-secondary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; padding-left: 18px; margin: 0; line-height: 1.6; }
   .lay-board + .lay-board { margin-top: var(--sp-10); }
   .lay-title .anchor-link { font-size: 20px; color: var(--c-text-muted); text-decoration: none; opacity: 0; margin-left: 6px; font-weight: 400; transition: opacity .15s; }
   .lay-title:hover .anchor-link { opacity: 1; }
@@ -10451,10 +10466,11 @@ Icon only = True
   <header class="docs-header">
     <div class="eyebrow">Chip &middot; Layout</div>
     <h1>Chip</h1>
-    <p class="subtitle">Rendered from the Chip documentation artboard on the Chip page of Monocore iOS. The artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <p class="subtitle">Rendered from the 2 documentation artboards on the <em>Buttons</em> and <em>Chip</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
     <div class="meta">
-      <span>1 Figma artboard</span>
-      <span>8 blocks</span>
+      <span>2 Figma artboards</span>
+      <span>15 blocks</span>
+      <span>12 previews pending</span>
       <span>Read 21 Oct 2026</span>
     </div>
   </header>
@@ -10548,9 +10564,95 @@ Icon only = True
             <h2>Long text example</h2>
             <div class="lay-block" data-figma="Slot block">
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-long-text.svg" width="252" height="66" alt="Chip - current — Style=Primary · State=Rest · 250dp wide">
+                <img src="images/chip/chip-long-text.svg" width="252" height="66" alt="Chip - current — Style=Primary · State=Rest">
               </div>
-              <div class="lay-props">Chip - current · Style=Primary · State=Rest · 250dp wide</div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Rest</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="chip-layout-chip-buttons" data-figma-node="107599:29389">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chip (Buttons page) <a href="#chip-layout-chip-buttons" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chip-layout-chip-buttons-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Primary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Brand · State=Rest · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29392;20995:3084;107599:29600" role="img" aria-label="Preview pending: Chip — Style=Brand · State=Rest"></div>
+              </div>
+              <div class="lay-props">Chip · Style=Brand · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Secondary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Subtle · State=Rest · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29393;20995:3084;107599:29609" role="img" aria-label="Preview pending: Chip — Style=Subtle · State=Rest"></div>
+              </div>
+              <div class="lay-props">Chip · Style=Subtle · State=Rest</div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-layout-chip-buttons-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Brand · State=Rest · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29395;20995:3084;107599:29627" role="img" aria-label="Preview pending: Chip — Style=Brand · State=Rest"></div>
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Subtle · State=Rest · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29395;20995:3084;107599:29635" role="img" aria-label="Preview pending: Chip — Style=Subtle · State=Rest"></div>
+              </div>
+              <div class="lay-props">Chip · Style=Brand · State=Rest / Style=Subtle · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Brand · State=Pressed · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29396;20995:3084;107599:29653" role="img" aria-label="Preview pending: Chip — Style=Brand · State=Pressed"></div>
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Subtle · State=Pressed · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29396;20995:3084;107599:29654" role="img" aria-label="Preview pending: Chip — Style=Subtle · State=Pressed"></div>
+              </div>
+              <div class="lay-props">Chip · Style=Brand · State=Pressed / Style=Subtle · State=Pressed</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Brand · State=Disabled · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29397;20995:3084;107599:29684" role="img" aria-label="Preview pending: Chip — Style=Brand · State=Disabled"></div>
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Subtle · State=Disabled · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29397;20995:3084;107599:29685" role="img" aria-label="Preview pending: Chip — Style=Subtle · State=Disabled"></div>
+              </div>
+              <div class="lay-props">Chip · Style=Brand · State=Disabled / Style=Subtle · State=Disabled</div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-layout-chip-buttons-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Min height = 32</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Brand · State=Pressed · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29399;20995:3084;107599:29715" role="img" aria-label="Preview pending: Chip — Style=Brand · State=Pressed"></div>
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Subtle · State=Rest · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29399;20995:3084;107599:29716" role="img" aria-label="Preview pending: Chip — Style=Subtle · State=Rest"></div>
+              </div>
+              <div class="lay-props">Chip · Style=Brand · State=Pressed / Style=Subtle · State=Rest</div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-layout-chip-buttons-padding" data-figma="Content block / Section primary">
+            <h2>Padding</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Top/Bottom 6, Leading/Trailing 12</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Brand · State=Pressed · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29758;20995:3084;107599:29753" role="img" aria-label="Preview pending: Chip — Style=Brand · State=Pressed"></div>
+                <div class="lay-ph" style="width:81px;height:32px" title="Chip — Style=Subtle · State=Rest · 81×32" data-figma-id="I107599:29389;20995:3166;107599:29758;20995:3084;107599:29754" role="img" aria-label="Preview pending: Chip — Style=Subtle · State=Rest"></div>
+              </div>
+              <div class="lay-props">Chip · Style=Brand · State=Pressed / Style=Subtle · State=Rest</div>
             </div>
           </div>
         </div>
@@ -10560,8 +10662,23 @@ Icon only = True
         <span class="section-eyebrow eyebrow-impl">Dev notes</span>
         <h2>How this page is parsed from Figma <a href="#chip-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
-        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Export each instance in PASTE HERE as SVG (text kept as live text in the system font stack, photos embedded as JPEG data URIs), or as a 2&times; PNG with alpha when the component uses a background-blur material that SVG cannot reproduce (Compose). Nothing on this page is hand-authored except the header copy.</div>
-        <p class="section-intro">Figma page <em>Chip</em>; nodes: Chip <code>115285:77637</code>.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Buttons</em> and <em>Chip</em>; nodes: Chip <code>115285:77637</code>, Chip (Buttons page) <code>107599:29389</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Primary · Chip · Style=Brand · State=Rest · 81×32</li>
+          <li>Secondary · Chip · Style=Subtle · State=Rest · 81×32</li>
+          <li>Rest · Chip · Style=Brand · State=Rest · 81×32</li>
+          <li>Rest · Chip · Style=Subtle · State=Rest · 81×32</li>
+          <li>Pressed · Chip · Style=Brand · State=Pressed · 81×32</li>
+          <li>Pressed · Chip · Style=Subtle · State=Pressed · 81×32</li>
+          <li>Disabled · Chip · Style=Brand · State=Disabled · 81×32</li>
+          <li>Disabled · Chip · Style=Subtle · State=Disabled · 81×32</li>
+          <li>Min height = 32 · Chip · Style=Brand · State=Pressed · 81×32</li>
+          <li>Min height = 32 · Chip · Style=Subtle · State=Rest · 81×32</li>
+          <li>Top/Bottom 6, Leading/Trailing 12 · Chip · Style=Brand · State=Pressed · 81×32</li>
+          <li>Top/Bottom 6, Leading/Trailing 12 · Chip · Style=Subtle · State=Rest · 81×32</li>
+        </ul>
       </section>
     </main>
 
@@ -10574,6 +10691,11 @@ Icon only = True
         <a href="#chip-layout-chip-size">Size</a>
         <a href="#chip-layout-chip-padding">Padding</a>
         <a href="#chip-layout-chip-long-text-example">Long text example</a>
+        <div class="toc-group">Chip (Buttons page)</div>
+        <a href="#chip-layout-chip-buttons-variants">Variants</a>
+        <a href="#chip-layout-chip-buttons-states">States</a>
+        <a href="#chip-layout-chip-buttons-size">Size</a>
+        <a href="#chip-layout-chip-buttons-padding">Padding</a>
       </nav>
     </aside>
   </div>
@@ -10707,6 +10829,1248 @@ Icon only = True
   </footer>
 </div>
 </div>
+
+<div class="page" id="page-badge-spec-layout" data-page="badge-spec-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Badge &middot; Layout</div>
+    <h1>Badge</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Badge view. (Label View) 🟡</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>7 blocks</span>
+      <span>13 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="badge-spec-layout-badge" data-figma-node="106947:247428">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Badge <a href="#badge-spec-layout-badge" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="badge-spec-layout-badge-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Static</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:71px;height:28px" title="Badge view — Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar · 71×28" data-figma-id="I106947:247428;20995:3166;106947:247401;20995:3084;106947:247578" role="img" aria-label="Preview pending: Badge view — Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar"></div>
+              </div>
+              <div class="lay-props">Badge view · Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Interactive</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:71px;height:28px" title="Badge view — Badge type=Interactive · Icon only=False · State=Rest · Size=Default · Left image=Avatar · 71×28" data-figma-id="I106947:247428;20995:3166;106947:247404;20995:3084;106947:247588" role="img" aria-label="Preview pending: Badge view — Badge type=Interactive · Icon only=False · State=Rest · Size=Default · Left image=Avatar"></div>
+              </div>
+              <div class="lay-props">Badge view · Badge type=Interactive · Icon only=False · State=Rest · Size=Default · Left image=Avatar</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Icon only</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:32px;height:28px" title="Badge view — Badge type=Static · Icon only=True · State=N/A · Size=Default · Left image=Icon · 32×28" data-figma-id="I106947:247428;20995:3166;106947:247775;20995:3084;106947:247792" role="img" aria-label="Preview pending: Badge view — Badge type=Static · Icon only=True · State=N/A · Size=Default · Left image=Icon"></div>
+              </div>
+              <div class="lay-props">Badge view · Badge type=Static · Icon only=True · State=N/A · Size=Default · Left image=Icon</div>
+            </div>
+          </div>
+          <div class="lay-section" id="badge-spec-layout-badge-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:71px;height:28px" title="Badge view — Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar · 71×28" data-figma-id="I106947:247428;20995:3166;106947:247411;20995:3084;106947:247605" role="img" aria-label="Preview pending: Badge view — Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar"></div>
+                <div class="lay-ph" style="width:32px;height:28px" title="Badge view — Badge type=Static · Icon only=True · State=N/A · Size=Default · Left image=Icon · 32×28" data-figma-id="I106947:247428;20995:3166;106947:247411;20995:3084;106947:247799" role="img" aria-label="Preview pending: Badge view — Badge type=Static · Icon only=True · State=N/A · Size=Default · Left image=Icon"></div>
+              </div>
+              <div class="lay-props">Badge view · Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar / Badge type=Static · Icon only=True · State=N/A · Size=Default · Left image=Icon</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Interactive only</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:71px;height:28px" title="Badge view — Badge type=Interactive · Icon only=False · State=Active · Size=Default · Left image=Avatar · 71×28" data-figma-id="I106947:247428;20995:3166;106947:247623;20995:3084;106947:247622" role="img" aria-label="Preview pending: Badge view — Badge type=Interactive · Icon only=False · State=Active · Size=Default · Left image=Avatar"></div>
+                <div class="lay-ph" style="width:32px;height:28px" title="Badge view — Badge type=Interactive · Icon only=True · State=Active · Size=Default · Left image=Icon · 32×28" data-figma-id="I106947:247428;20995:3166;106947:247623;20995:3084;106947:247813" role="img" aria-label="Preview pending: Badge view — Badge type=Interactive · Icon only=True · State=Active · Size=Default · Left image=Icon"></div>
+              </div>
+              <div class="lay-props">Badge view · Badge type=Interactive · Icon only=False · State=Active · Size=Default · Left image=Avatar / Badge type=Interactive · Icon only=True · State=Active · Size=Default · Left image=Icon</div>
+            </div>
+          </div>
+          <div class="lay-section" id="badge-spec-layout-badge-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:71px;height:28px" title="Badge view — Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar · 71×28" data-figma-id="I106947:247428;20995:3166;106947:247421;20995:3084;106947:247677" role="img" aria-label="Preview pending: Badge view — Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar"></div>
+                <div class="lay-ph" style="width:71px;height:28px" title="Badge view — Badge type=Interactive · Icon only=False · State=Rest · Size=Default · Left image=Avatar · 71×28" data-figma-id="I106947:247428;20995:3166;106947:247421;20995:3084;106947:247696" role="img" aria-label="Preview pending: Badge view — Badge type=Interactive · Icon only=False · State=Rest · Size=Default · Left image=Avatar"></div>
+                <div class="lay-ph" style="width:32px;height:28px" title="Badge view — Badge type=Interactive · Icon only=True · State=Rest · Size=Default · Left image=Icon · 32×28" data-figma-id="I106947:247428;20995:3166;106947:247421;20995:3084;106947:247818" role="img" aria-label="Preview pending: Badge view — Badge type=Interactive · Icon only=True · State=Rest · Size=Default · Left image=Icon"></div>
+              </div>
+              <div class="lay-props">Badge view · Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar / Badge type=Interactive · Icon only=False · State=Rest · Size=Default · Left image=Avatar / Badge type=Interactive · Icon only=True · State=Rest · Size=Default · Left image=Icon</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Small</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:51px;height:18px" title="Badge view — Badge type=Static · Icon only=False · State=N/A · Size=Small · Left image=Avatar · 51×18" data-figma-id="I106947:247428;20995:3166;106947:247424;20995:3084;106947:247742" role="img" aria-label="Preview pending: Badge view — Badge type=Static · Icon only=False · State=N/A · Size=Small · Left image=Avatar"></div>
+                <div class="lay-ph" style="width:51px;height:18px" title="Badge view — Badge type=Interactive · Icon only=False · State=Rest · Size=Small · Left image=Avatar · 51×18" data-figma-id="I106947:247428;20995:3166;106947:247424;20995:3084;106947:247743" role="img" aria-label="Preview pending: Badge view — Badge type=Interactive · Icon only=False · State=Rest · Size=Small · Left image=Avatar"></div>
+                <div class="lay-ph" style="width:18px;height:18px" title="Badge view — Badge type=Interactive · Icon only=True · State=Rest · Size=Small · Left image=Icon · 18×18" data-figma-id="I106947:247428;20995:3166;106947:247424;20995:3084;106947:247825" role="img" aria-label="Preview pending: Badge view — Badge type=Interactive · Icon only=True · State=Rest · Size=Small · Left image=Icon"></div>
+              </div>
+              <div class="lay-props">Badge view · Badge type=Static · Icon only=False · State=N/A · Size=Small · Left image=Avatar / Badge type=Interactive · Icon only=False · State=Rest · Size=Small · Left image=Avatar / Badge type=Interactive · Icon only=True · State=Rest · Size=Small · Left image=Icon</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="badge-spec-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#badge-spec-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Badge view. (Label View) 🟡</em>; nodes: Badge <code>106947:247428</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Static · Badge view · Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar · 71×28</li>
+          <li>Interactive · Badge view · Badge type=Interactive · Icon only=False · State=Rest · Size=Default · Left image=Avatar · 71×28</li>
+          <li>Icon only · Badge view · Badge type=Static · Icon only=True · State=N/A · Size=Default · Left image=Icon · 32×28</li>
+          <li>Rest · Badge view · Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar · 71×28</li>
+          <li>Rest · Badge view · Badge type=Static · Icon only=True · State=N/A · Size=Default · Left image=Icon · 32×28</li>
+          <li>Active - Interactive only · Badge view · Badge type=Interactive · Icon only=False · State=Active · Size=Default · Left image=Avatar · 71×28</li>
+          <li>Active - Interactive only · Badge view · Badge type=Interactive · Icon only=True · State=Active · Size=Default · Left image=Icon · 32×28</li>
+          <li>Default · Badge view · Badge type=Static · Icon only=False · State=N/A · Size=Default · Left image=Avatar · 71×28</li>
+          <li>Default · Badge view · Badge type=Interactive · Icon only=False · State=Rest · Size=Default · Left image=Avatar · 71×28</li>
+          <li>Default · Badge view · Badge type=Interactive · Icon only=True · State=Rest · Size=Default · Left image=Icon · 32×28</li>
+          <li>Small · Badge view · Badge type=Static · Icon only=False · State=N/A · Size=Small · Left image=Avatar · 51×18</li>
+          <li>Small · Badge view · Badge type=Interactive · Icon only=False · State=Rest · Size=Small · Left image=Avatar · 51×18</li>
+          <li>Small · Badge view · Badge type=Interactive · Icon only=True · State=Rest · Size=Small · Left image=Icon · 18×18</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Badge</div>
+        <a href="#badge-spec-layout-badge-variants">Variants</a>
+        <a href="#badge-spec-layout-badge-states">States</a>
+        <a href="#badge-spec-layout-badge-size">Size</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Badge &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-fab-layout" data-page="fab-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">FAB &middot; Layout</div>
+    <h1>FAB</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Buttons</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>2 blocks</span>
+      <span>2 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="fab-layout-fab" data-figma-node="106947:205181">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">FAB <a href="#fab-layout-fab" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="fab-layout-fab-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:56px;height:56px" title="FAB — Rest=Rest · 56×56" data-figma-id="I106947:205181;20995:3166;106947:205230;20995:3084;106947:205227" role="img" aria-label="Preview pending: FAB — Rest=Rest"></div>
+              </div>
+              <div class="lay-props">FAB · Rest=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:56px;height:56px" title="FAB — Rest=Rest · 56×56" data-figma-id="I106947:205181;20995:3166;106947:205237;20995:3084;106947:205236" role="img" aria-label="Preview pending: FAB — Rest=Rest"></div>
+              </div>
+              <div class="lay-props">FAB · Rest=Rest</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="fab-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#fab-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Buttons</em>; nodes: FAB <code>106947:205181</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Rest · FAB · Rest=Rest · 56×56</li>
+          <li>Active · FAB · Rest=Rest · 56×56</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">FAB</div>
+        <a href="#fab-layout-fab-states">States</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    FAB &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-buttons-layout" data-page="buttons-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Button &middot; Layout</div>
+    <h1>Button</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Buttons</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>11 blocks</span>
+      <span>17 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="buttons-layout-button" data-figma-node="106947:205248">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Button <a href="#buttons-layout-button" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="buttons-layout-button-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Accent</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Accent · Size=Large · State=Rest · 108×52" data-figma-id="I106947:205248;20995:3166;115461:151733;20995:3084;115461:151729" role="img" aria-label="Preview pending: Button — Style=Accent · Size=Large · State=Rest"></div>
+              </div>
+              <div class="lay-props">Button · Style=Accent · Size=Large · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Secondary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Outline accent · Size=Large · State=Rest · 108×52" data-figma-id="I106947:205248;20995:3166;115461:151780;20995:3084;115461:151777" role="img" aria-label="Preview pending: Button — Style=Outline accent · Size=Large · State=Rest"></div>
+              </div>
+              <div class="lay-props">Button · Style=Outline accent · Size=Large · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Tertiary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Subtle · Size=Large · State=Rest · 108×52" data-figma-id="I106947:205248;20995:3166;115461:151798;20995:3084;115461:151795" role="img" aria-label="Preview pending: Button — Style=Subtle · Size=Large · State=Rest"></div>
+              </div>
+              <div class="lay-props">Button · Style=Subtle · Size=Large · State=Rest</div>
+            </div>
+          </div>
+          <div class="lay-section" id="buttons-layout-button-width-variants" data-figma="Content block / Section primary">
+            <h2>Width Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Accent · Size=Large · State=Rest · 108×52" data-figma-id="I106947:205248;20995:3166;106947:205251;20995:3084;106947:205481" role="img" aria-label="Preview pending: Button — Style=Accent · Size=Large · State=Rest"></div>
+              </div>
+              <div class="lay-props">Button · Style=Accent · Size=Large · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Full width</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:393px;height:52px" title="Button Full-width — Style=Accent · State=Rest · 393×52" data-figma-id="I106947:205248;20995:3166;106947:205252;20995:3084;106947:205647" role="img" aria-label="Preview pending: Button Full-width — Style=Accent · State=Rest"><span class="lay-ph-name">Button Full-width</span><span class="lay-ph-props">Style=Accent · State=Rest</span></div>
+              </div>
+              <div class="lay-props">Button Full-width · Style=Accent · State=Rest</div>
+            </div>
+          </div>
+          <div class="lay-section" id="buttons-layout-button-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Accent · Size=Large · State=Rest · 108×52" data-figma-id="I106947:205248;20995:3166;106947:205599;20995:3084;106947:205589" role="img" aria-label="Preview pending: Button — Style=Accent · Size=Large · State=Rest"></div>
+              </div>
+              <div class="lay-props">Button · Style=Accent · Size=Large · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Accent · Size=Large · State=Pressed · 108×52" data-figma-id="I106947:205248;20995:3166;106947:205600;20995:3084;106947:205592" role="img" aria-label="Preview pending: Button — Style=Accent · Size=Large · State=Pressed"></div>
+              </div>
+              <div class="lay-props">Button · Style=Accent · Size=Large · State=Pressed</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Accent · Size=Large · State=Disabled · 108×52" data-figma-id="I106947:205248;20995:3166;106947:205601;20995:3084;106947:205595" role="img" aria-label="Preview pending: Button — Style=Accent · Size=Large · State=Disabled"></div>
+              </div>
+              <div class="lay-props">Button · Style=Accent · Size=Large · State=Disabled</div>
+            </div>
+          </div>
+          <div class="lay-section" id="buttons-layout-button-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Large</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Accent · Size=Large · State=Rest · 108×52" data-figma-id="I106947:205248;20995:3166;106947:205520;20995:3084;106947:205516" role="img" aria-label="Preview pending: Button — Style=Accent · Size=Large · State=Rest"></div>
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Outline accent · Size=Large · State=Rest · 108×52" data-figma-id="I106947:205248;20995:3166;106947:205520;20995:3084;106995:24009" role="img" aria-label="Preview pending: Button — Style=Outline accent · Size=Large · State=Rest"></div>
+                <div class="lay-ph" style="width:108px;height:52px" title="Button — Style=Subtle · Size=Large · State=Rest · 108×52" data-figma-id="I106947:205248;20995:3166;106947:205520;20995:3084;106995:24025" role="img" aria-label="Preview pending: Button — Style=Subtle · Size=Large · State=Rest"></div>
+              </div>
+              <div class="lay-props">Button · Style=Accent · Size=Large · State=Rest / Style=Outline accent · Size=Large · State=Rest / Style=Subtle · Size=Large · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Medium</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:96px;height:40px" title="Button — Style=Accent · Size=Medium · State=Rest · 96×40" data-figma-id="I106947:205248;20995:3166;106947:205541;20995:3084;106947:205540" role="img" aria-label="Preview pending: Button — Style=Accent · Size=Medium · State=Rest"></div>
+                <div class="lay-ph" style="width:96px;height:40px" title="Button — Style=Outline accent · Size=Medium · State=Rest · 96×40" data-figma-id="I106947:205248;20995:3166;106947:205541;20995:3084;106995:24040" role="img" aria-label="Preview pending: Button — Style=Outline accent · Size=Medium · State=Rest"></div>
+                <div class="lay-ph" style="width:96px;height:40px" title="Button — Style=Subtle · Size=Medium · State=Rest · 96×40" data-figma-id="I106947:205248;20995:3166;106947:205541;20995:3084;106995:24048" role="img" aria-label="Preview pending: Button — Style=Subtle · Size=Medium · State=Rest"></div>
+              </div>
+              <div class="lay-props">Button · Style=Accent · Size=Medium · State=Rest / Style=Outline accent · Size=Medium · State=Rest / Style=Subtle · Size=Medium · State=Rest</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Small</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:82px;height:28px" title="Button — Style=Accent · Size=Small · State=Rest · 82×28" data-figma-id="I106947:205248;20995:3166;106947:205558;20995:3084;106947:205557" role="img" aria-label="Preview pending: Button — Style=Accent · Size=Small · State=Rest"></div>
+                <div class="lay-ph" style="width:80px;height:28px" title="Button — Style=Outline accent · Size=Small · State=Rest · 80×28" data-figma-id="I106947:205248;20995:3166;106947:205558;20995:3084;106995:24099" role="img" aria-label="Preview pending: Button — Style=Outline accent · Size=Small · State=Rest"></div>
+                <div class="lay-ph" style="width:78px;height:28px" title="Button — Style=Subtle · Size=Small · State=Rest · 78×28" data-figma-id="I106947:205248;20995:3166;106947:205558;20995:3084;106995:24107" role="img" aria-label="Preview pending: Button — Style=Subtle · Size=Small · State=Rest"></div>
+              </div>
+              <div class="lay-props">Button · Style=Accent · Size=Small · State=Rest / Style=Outline accent · Size=Small · State=Rest / Style=Subtle · Size=Small · State=Rest</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="buttons-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#buttons-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Buttons</em>; nodes: Button <code>106947:205248</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Accent · Button · Style=Accent · Size=Large · State=Rest · 108×52</li>
+          <li>Secondary · Button · Style=Outline accent · Size=Large · State=Rest · 108×52</li>
+          <li>Tertiary · Button · Style=Subtle · Size=Large · State=Rest · 108×52</li>
+          <li>Default · Button · Style=Accent · Size=Large · State=Rest · 108×52</li>
+          <li>Full width · Button Full-width · Style=Accent · State=Rest · 393×52</li>
+          <li>Rest · Button · Style=Accent · Size=Large · State=Rest · 108×52</li>
+          <li>Pressed · Button · Style=Accent · Size=Large · State=Pressed · 108×52</li>
+          <li>Disabled · Button · Style=Accent · Size=Large · State=Disabled · 108×52</li>
+          <li>Large · Button · Style=Accent · Size=Large · State=Rest · 108×52</li>
+          <li>Large · Button · Style=Outline accent · Size=Large · State=Rest · 108×52</li>
+          <li>Large · Button · Style=Subtle · Size=Large · State=Rest · 108×52</li>
+          <li>Medium · Button · Style=Accent · Size=Medium · State=Rest · 96×40</li>
+          <li>Medium · Button · Style=Outline accent · Size=Medium · State=Rest · 96×40</li>
+          <li>Medium · Button · Style=Subtle · Size=Medium · State=Rest · 96×40</li>
+          <li>Small · Button · Style=Accent · Size=Small · State=Rest · 82×28</li>
+          <li>Small · Button · Style=Outline accent · Size=Small · State=Rest · 80×28</li>
+          <li>Small · Button · Style=Subtle · Size=Small · State=Rest · 78×28</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Button</div>
+        <a href="#buttons-layout-button-variants">Variants</a>
+        <a href="#buttons-layout-button-width-variants">Width Variants</a>
+        <a href="#buttons-layout-button-states">States</a>
+        <a href="#buttons-layout-button-size">Size</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Button &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-circular-button-layout" data-page="circular-button-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Circular button &middot; Layout</div>
+    <h1>Circular button</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Buttons</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>8 blocks</span>
+      <span>18 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="circular-button-layout-circular" data-figma-node="106947:205667">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Circular button <a href="#circular-button-layout-circular" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="circular-button-layout-circular-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Accent</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Accent · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205670;20995:3084;106947:205847" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Accent"></div>
+              </div>
+              <div class="lay-props">Circlular button · Size=Large · State=Rest · Priority=Accent</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Secondary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Secondary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205672;20995:3084;106947:205859" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Secondary"></div>
+              </div>
+              <div class="lay-props">Circlular button · Size=Large · State=Rest · Priority=Secondary</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Tertiary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Tertiary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205868;20995:3084;106947:205867" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Tertiary"></div>
+              </div>
+              <div class="lay-props">Circlular button · Size=Large · State=Rest · Priority=Tertiary</div>
+            </div>
+          </div>
+          <div class="lay-section" id="circular-button-layout-circular-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Accent · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205674;20995:3084;106947:205884" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Accent"></div>
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Secondary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205674;20995:3084;106947:205895" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Secondary"></div>
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Tertiary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205674;20995:3084;106947:205899" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Tertiary"></div>
+              </div>
+              <div class="lay-props">Circlular button · Size=Large · State=Rest · Priority=Accent / Size=Large · State=Rest · Priority=Secondary / Size=Large · State=Rest · Priority=Tertiary</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Pressed · Priority=Accent · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205675;20995:3084;106947:205889" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Pressed · Priority=Accent"></div>
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Pressed · Priority=Secondary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205675;20995:3084;106947:205924" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Pressed · Priority=Secondary"></div>
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Pressed · Priority=Tertiary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205675;20995:3084;106947:205925" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Pressed · Priority=Tertiary"></div>
+              </div>
+              <div class="lay-props">Circlular button · Size=Large · State=Pressed · Priority=Accent / Size=Large · State=Pressed · Priority=Secondary / Size=Large · State=Pressed · Priority=Tertiary</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Disable · Priority=Accent · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205676;20995:3084;106947:205936" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Disable · Priority=Accent"></div>
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Disable · Priority=Secondary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205676;20995:3084;106947:205937" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Disable · Priority=Secondary"></div>
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Disable · Priority=Tertiary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205676;20995:3084;106947:205938" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Disable · Priority=Tertiary"></div>
+              </div>
+              <div class="lay-props">Circlular button · Size=Large · State=Disable · Priority=Accent / Size=Large · State=Disable · Priority=Secondary / Size=Large · State=Disable · Priority=Tertiary</div>
+            </div>
+          </div>
+          <div class="lay-section" id="circular-button-layout-circular-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Large</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Accent · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205678;20995:3084;106947:205960" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Accent"></div>
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Secondary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205678;20995:3084;106947:205961" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Secondary"></div>
+                <div class="lay-ph" style="width:52px;height:52px" title="Circlular button — Size=Large · State=Rest · Priority=Tertiary · 52×52" data-figma-id="I106947:205667;20995:3166;106947:205678;20995:3084;106947:205962" role="img" aria-label="Preview pending: Circlular button — Size=Large · State=Rest · Priority=Tertiary"></div>
+              </div>
+              <div class="lay-props">Circlular button · Size=Large · State=Rest · Priority=Accent / Size=Large · State=Rest · Priority=Secondary / Size=Large · State=Rest · Priority=Tertiary</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Small</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:28px;height:28px" title="Circlular button — Size=Small · State=Rest · Priority=Accent · 28×28" data-figma-id="I106947:205667;20995:3166;106947:205679;20995:3084;106947:205975" role="img" aria-label="Preview pending: Circlular button — Size=Small · State=Rest · Priority=Accent"></div>
+                <div class="lay-ph" style="width:28px;height:28px" title="Circlular button — Size=Small · State=Rest · Priority=Secondary · 28×28" data-figma-id="I106947:205667;20995:3166;106947:205679;20995:3084;106947:205976" role="img" aria-label="Preview pending: Circlular button — Size=Small · State=Rest · Priority=Secondary"></div>
+                <div class="lay-ph" style="width:28px;height:28px" title="Circlular button — Size=Small · State=Rest · Priority=Tertiary · 28×28" data-figma-id="I106947:205667;20995:3166;106947:205679;20995:3084;106947:205977" role="img" aria-label="Preview pending: Circlular button — Size=Small · State=Rest · Priority=Tertiary"></div>
+              </div>
+              <div class="lay-props">Circlular button · Size=Small · State=Rest · Priority=Accent / Size=Small · State=Rest · Priority=Secondary / Size=Small · State=Rest · Priority=Tertiary</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="circular-button-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#circular-button-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Buttons</em>; nodes: Circular button <code>106947:205667</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Accent · Circlular button · Size=Large · State=Rest · Priority=Accent · 52×52</li>
+          <li>Secondary · Circlular button · Size=Large · State=Rest · Priority=Secondary · 52×52</li>
+          <li>Tertiary · Circlular button · Size=Large · State=Rest · Priority=Tertiary · 52×52</li>
+          <li>Rest · Circlular button · Size=Large · State=Rest · Priority=Accent · 52×52</li>
+          <li>Rest · Circlular button · Size=Large · State=Rest · Priority=Secondary · 52×52</li>
+          <li>Rest · Circlular button · Size=Large · State=Rest · Priority=Tertiary · 52×52</li>
+          <li>Pressed · Circlular button · Size=Large · State=Pressed · Priority=Accent · 52×52</li>
+          <li>Pressed · Circlular button · Size=Large · State=Pressed · Priority=Secondary · 52×52</li>
+          <li>Pressed · Circlular button · Size=Large · State=Pressed · Priority=Tertiary · 52×52</li>
+          <li>Disabled · Circlular button · Size=Large · State=Disable · Priority=Accent · 52×52</li>
+          <li>Disabled · Circlular button · Size=Large · State=Disable · Priority=Secondary · 52×52</li>
+          <li>Disabled · Circlular button · Size=Large · State=Disable · Priority=Tertiary · 52×52</li>
+          <li>Large · Circlular button · Size=Large · State=Rest · Priority=Accent · 52×52</li>
+          <li>Large · Circlular button · Size=Large · State=Rest · Priority=Secondary · 52×52</li>
+          <li>Large · Circlular button · Size=Large · State=Rest · Priority=Tertiary · 52×52</li>
+          <li>Small · Circlular button · Size=Small · State=Rest · Priority=Accent · 28×28</li>
+          <li>Small · Circlular button · Size=Small · State=Rest · Priority=Secondary · 28×28</li>
+          <li>Small · Circlular button · Size=Small · State=Rest · Priority=Tertiary · 28×28</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Circular button</div>
+        <a href="#circular-button-layout-circular-variants">Variants</a>
+        <a href="#circular-button-layout-circular-states">States</a>
+        <a href="#circular-button-layout-circular-size">Size</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Circular button &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-jump-button-layout" data-page="jump-button-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Jump button &middot; Layout</div>
+    <h1>Jump button</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Buttons</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>2 blocks</span>
+      <span>2 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="jump-button-layout-jump" data-figma-node="106947:205995">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Jump button <a href="#jump-button-layout-jump" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="jump-button-layout-jump-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default?</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:136px;height:28px" title="Jump Button — Size=Small (deprecated) · 136×28" data-figma-id="I106947:205995;20995:3166;106947:205999;20995:3084;106947:206205" role="img" aria-label="Preview pending: Jump Button — Size=Small (deprecated)"></div>
+              </div>
+              <div class="lay-props">Jump Button · Size=Small (deprecated)</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Large</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:141px;height:44px" title="Jump Button — Size=Large · 141×44" data-figma-id="I106947:205995;20995:3166;106947:205998;20995:3084;106947:206181" role="img" aria-label="Preview pending: Jump Button — Size=Large"><span class="lay-ph-name">Jump Button</span><span class="lay-ph-props">Size=Large</span></div>
+              </div>
+              <div class="lay-props">Jump Button · Size=Large</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="jump-button-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#jump-button-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Buttons</em>; nodes: Jump button <code>106947:205995</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Default? · Jump Button · Size=Small (deprecated) · 136×28</li>
+          <li>Large · Jump Button · Size=Large · 141×44</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Jump button</div>
+        <a href="#jump-button-layout-jump-size">Size</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Jump button &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-callout-layout" data-page="callout-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Call Out (Tooltip) &middot; Layout</div>
+    <h1>Call Out (Tooltip)</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Call Out (Tooltip)</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 blocks</span>
+      <span>1 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="callout-layout-callout" data-figma-node="106947:247366">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Callout (tooltip) <a href="#callout-layout-callout" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="callout-layout-callout-variant" data-figma="Content block / Section primary">
+            <h2>Variant</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:248px;height:63px" title="Call Out — Tip location=Bottom left · 248×63" data-figma-id="I106947:247366;20995:3166;106947:247392;20995:3084;106947:247389" role="img" aria-label="Preview pending: Call Out — Tip location=Bottom left"><span class="lay-ph-name">Call Out</span><span class="lay-ph-props">Tip location=Bottom left</span></div>
+              </div>
+              <div class="lay-props">Call Out · Tip location=Bottom left</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="callout-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#callout-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Call Out (Tooltip)</em>; nodes: Callout (tooltip) <code>106947:247366</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Default · Call Out · Tip location=Bottom left · 248×63</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Callout (tooltip)</div>
+        <a href="#callout-layout-callout-variant">Variant</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Call Out (Tooltip) &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-card-spec-layout" data-page="card-spec-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Card &middot; Layout</div>
+    <h1>Card</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Card</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>10 blocks</span>
+      <span>14 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="card-spec-layout-card" data-figma-node="106947:206801">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Card <a href="#card-spec-layout-card" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="card-spec-layout-card-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Dominant</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:337px" title="Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy · 343×337" data-figma-id="I106947:206801;20995:3166;106947:208865;20995:3084;106947:208862" role="img" aria-label="Preview pending: Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Primary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:221px" title="Card — Thumbnail Type=Primary (img 128) · Emphasis=Default · Density=Comfy · 343×221" data-figma-id="I106947:206801;20995:3166;106947:208924;20995:3084;106947:208923" role="img" aria-label="Preview pending: Card — Thumbnail Type=Primary (img 128) · Emphasis=Default · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Primary (img 128) · Emphasis=Default · Density=Comfy</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Primary (img 128) · Emphasis=Default · Density=Comfy</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Secondary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:175px" title="Card — Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy · 343×175" data-figma-id="I106947:206801;20995:3166;106947:209029;20995:3084;106947:209028" role="img" aria-label="Preview pending: Card — Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Tertiary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:185px" title="Card — Thumbnail Type=None · Emphasis=Default · Density=Comfy · 343×185" data-figma-id="I106947:206801;20995:3166;106947:209134;20995:3084;106947:209133" role="img" aria-label="Preview pending: Card — Thumbnail Type=None · Emphasis=Default · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=None · Emphasis=Default · Density=Comfy</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=None · Emphasis=Default · Density=Comfy</div>
+            </div>
+          </div>
+          <div class="lay-section" id="card-spec-layout-card-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Emphasis</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:337px" title="Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy · 343×337" data-figma-id="I106947:206801;20995:3166;115461:154647;20995:3084;115461:154636" role="img" aria-label="Preview pending: Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:337px" title="Card — Thumbnail Type=Dominant · Emphasis=Active · Density=Comfy · 343×337" data-figma-id="I106947:206801;20995:3166;115461:154648;20995:3084;115461:154639" role="img" aria-label="Preview pending: Card — Thumbnail Type=Dominant · Emphasis=Active · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Dominant · Emphasis=Active · Density=Comfy</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Dominant · Emphasis=Active · Density=Comfy</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Floating</div>
+              </div>
+              <div class="lay-preview lay-preview-stack" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:337px" title="Card — Thumbnail Type=Dominant · Emphasis=Floating · Density=Comfy · 343×337" data-figma-id="I106947:206801;20995:3166;115461:154649;20995:3084;115461:154642" role="img" aria-label="Preview pending: Card — Thumbnail Type=Dominant · Emphasis=Floating · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Dominant · Emphasis=Floating · Density=Comfy</span></div>
+                <div class="lay-ph" style="width:343px;height:175px" title="Card — Thumbnail Type=Secondary (img 72) · Emphasis=Floating · Density=Comfy · 343×175" data-figma-id="I106947:206801;20995:3166;115461:154649;20995:3084;115461:154643" role="img" aria-label="Preview pending: Card — Thumbnail Type=Secondary (img 72) · Emphasis=Floating · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Secondary (img 72) · Emphasis=Floating · Density=Comfy</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Dominant · Emphasis=Floating · Density=Comfy / Thumbnail Type=Secondary (img 72) · Emphasis=Floating · Density=Comfy</div>
+            </div>
+          </div>
+          <div class="lay-section" id="card-spec-layout-card-density" data-figma="Content block / Section primary">
+            <h2>Density</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Comfy</div>
+              </div>
+              <div class="lay-preview lay-preview-stack" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:337px" title="Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy · 343×337" data-figma-id="I106947:206801;20995:3166;115461:154867;20995:3084;115461:154854" role="img" aria-label="Preview pending: Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy</span></div>
+                <div class="lay-ph" style="width:343px;height:175px" title="Card — Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy · 343×175" data-figma-id="I106947:206801;20995:3166;115461:154867;20995:3084;115461:154855" role="img" aria-label="Preview pending: Card — Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy / Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Compact</div>
+              </div>
+              <div class="lay-preview lay-preview-stack" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:313px" title="Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Compact · 343×313" data-figma-id="I106947:206801;20995:3166;115461:154868;20995:3084;115461:154858" role="img" aria-label="Preview pending: Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Compact"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Dominant · Emphasis=Default · Density=Compact</span></div>
+                <div class="lay-ph" style="width:343px;height:151px" title="Card — Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Compact · 343×151" data-figma-id="I106947:206801;20995:3166;115461:154868;20995:3084;115461:154859" role="img" aria-label="Preview pending: Card — Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Compact"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Compact</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Compact / Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Compact</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Cardless</div>
+              </div>
+              <div class="lay-preview lay-preview-stack" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:343px;height:313px" title="Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Cardless · 343×313" data-figma-id="I106947:206801;20995:3166;115461:154869;20995:3084;115461:154862" role="img" aria-label="Preview pending: Card — Thumbnail Type=Dominant · Emphasis=Default · Density=Cardless"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Dominant · Emphasis=Default · Density=Cardless</span></div>
+                <div class="lay-ph" style="width:343px;height:151px" title="Card — Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Cardless · 343×151" data-figma-id="I106947:206801;20995:3166;115461:154869;20995:3084;115461:154863" role="img" aria-label="Preview pending: Card — Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Cardless"><span class="lay-ph-name">Card</span><span class="lay-ph-props">Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Cardless</span></div>
+              </div>
+              <div class="lay-props">Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Cardless / Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Cardless</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="card-spec-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#card-spec-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Card</em>; nodes: Card <code>106947:206801</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Dominant · Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy · 343×337</li>
+          <li>Primary · Card · Thumbnail Type=Primary (img 128) · Emphasis=Default · Density=Comfy · 343×221</li>
+          <li>Secondary · Card · Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy · 343×175</li>
+          <li>Tertiary · Card · Thumbnail Type=None · Emphasis=Default · Density=Comfy · 343×185</li>
+          <li>Emphasis · Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy · 343×337</li>
+          <li>Active · Card · Thumbnail Type=Dominant · Emphasis=Active · Density=Comfy · 343×337</li>
+          <li>Floating · Card · Thumbnail Type=Dominant · Emphasis=Floating · Density=Comfy · 343×337</li>
+          <li>Floating · Card · Thumbnail Type=Secondary (img 72) · Emphasis=Floating · Density=Comfy · 343×175</li>
+          <li>Comfy · Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Comfy · 343×337</li>
+          <li>Comfy · Card · Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Comfy · 343×175</li>
+          <li>Compact · Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Compact · 343×313</li>
+          <li>Compact · Card · Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Compact · 343×151</li>
+          <li>Cardless · Card · Thumbnail Type=Dominant · Emphasis=Default · Density=Cardless · 343×313</li>
+          <li>Cardless · Card · Thumbnail Type=Secondary (img 72) · Emphasis=Default · Density=Cardless · 343×151</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Card</div>
+        <a href="#card-spec-layout-card-variants">Variants</a>
+        <a href="#card-spec-layout-card-states">States</a>
+        <a href="#card-spec-layout-card-density">Density</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Card &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-layout" data-page="chiclet-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Chiclet &middot; Layout</div>
+    <h1>Chiclet</h1>
+    <p class="subtitle">Rendered from the 2 documentation artboards on the <em>Chiclet</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>2 Figma artboards</span>
+      <span>11 blocks</span>
+      <span>11 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chiclet-layout-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-layout-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-layout-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Base</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;height:49px" title="Chiclet — Layout=Base · Image=False · 402×49" data-figma-id="I106947:213123;20995:3166;106947:247983;20995:3084;106947:247980" role="img" aria-label="Preview pending: Chiclet — Layout=Base · Image=False"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Layout=Base · Image=False</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base · Image=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Base with actions</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;height:93px" title="Chiclet — Layout=Base + actions · Image=False · 402×93" data-figma-id="I106947:213123;20995:3166;106947:248227;20995:3084;106947:248226" role="img" aria-label="Preview pending: Chiclet — Layout=Base + actions · Image=False"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Layout=Base + actions · Image=False</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base + actions · Image=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Reply</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;height:60px" title="Chiclet — Layout=Reply · Image=False · 402×60" data-figma-id="I106947:213123;20995:3166;106947:248018;20995:3084;106947:248017" role="img" aria-label="Preview pending: Chiclet — Layout=Reply · Image=False"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Layout=Reply · Image=False</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Layout=Reply · Image=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">File</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;height:309.57px" title="Frame 2147233651 — Frame 2147233651 · 402×309.57" data-figma-id="I106947:213123;20995:3166;106947:248078;20995:3084;108721:344355" role="img" aria-label="Preview pending: Frame 2147233651 — Frame 2147233651"><span class="lay-ph-name">Frame 2147233651</span><span class="lay-ph-props">Frame 2147233651</span></div>
+              </div>
+              <div class="lay-props">Frame 2147233651 · Frame 2147233651</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">File</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;height:49px" title="Chiclet — Layout=Base · Image=False · 402×49" data-figma-id="I106947:213123;20995:3166;106947:248180;20995:3084;106947:248179" role="img" aria-label="Preview pending: Chiclet — Layout=Base · Image=False"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Layout=Base · Image=False</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base · Image=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Live meeting</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:185px;height:54px" title="Chiclet/Live meeting (Dominant)/False — Chiclet/Live meeting (Dominant)/False · 185×54" data-figma-id="I106947:213123;20995:3166;106947:248143;20995:3084;106947:248842" role="img" aria-label="Preview pending: Chiclet/Live meeting (Dominant)/False — Chiclet/Live meeting (Dominant)/False"><span class="lay-ph-name">Chiclet/Live meeting (Dominant)/False</span><span class="lay-ph-props">Chiclet/Live meeting (Dominant)/False</span></div>
+              </div>
+              <div class="lay-props">Chiclet/Live meeting (Dominant)/False · Chiclet/Live meeting (Dominant)/False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Video</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:265px;height:160px" title="Chiclet — Layout=Video · Image=True · 265×160" data-figma-id="I106947:213123;20995:3166;106947:248282;20995:3084;106947:248281" role="img" aria-label="Preview pending: Chiclet — Layout=Video · Image=True"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Layout=Video · Image=True</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Layout=Video · Image=True</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="chiclet-layout-record" data-figma-node="106947:248312">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Record chiclet <a href="#chiclet-layout-record" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-layout-record-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Primary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:297px;height:48px" title="Chiclet — Style=Primary · Recording=False · 297×48" data-figma-id="I106947:248312;20995:3166;106947:248525;20995:3084;106947:248519" role="img" aria-label="Preview pending: Chiclet — Style=Primary · Recording=False"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Style=Primary · Recording=False</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Style=Primary · Recording=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Subtle</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:297px;height:48px" title="Chiclet — Style=Subtle · Recording=False · 297×48" data-figma-id="I106947:248312;20995:3166;106947:248628;20995:3084;106947:248627" role="img" aria-label="Preview pending: Chiclet — Style=Subtle · Recording=False"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Style=Subtle · Recording=False</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Style=Subtle · Recording=False</div>
+            </div>
+          </div>
+          <div class="lay-section" id="chiclet-layout-record-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Primary recording</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:297px;height:48px" title="Chiclet — Style=Primary · Recording=True · 297×48" data-figma-id="I106947:248312;20995:3166;106947:248604;20995:3084;106947:248603" role="img" aria-label="Preview pending: Chiclet — Style=Primary · Recording=True"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Style=Primary · Recording=True</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Style=Primary · Recording=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Subtle recording</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:297px;height:48px" title="Chiclet — Style=Subtle · Recording=True · 297×48" data-figma-id="I106947:248312;20995:3166;106947:248686;20995:3084;106947:248685" role="img" aria-label="Preview pending: Chiclet — Style=Subtle · Recording=True"><span class="lay-ph-name">Chiclet</span><span class="lay-ph-props">Style=Subtle · Recording=True</span></div>
+              </div>
+              <div class="lay-props">Chiclet · Style=Subtle · Recording=True</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#chiclet-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Chiclet</em>; nodes: Chiclet <code>106947:213123</code>, Record chiclet <code>106947:248312</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Base · Chiclet · Layout=Base · Image=False · 402×49</li>
+          <li>Base with actions · Chiclet · Layout=Base + actions · Image=False · 402×93</li>
+          <li>Reply · Chiclet · Layout=Reply · Image=False · 402×60</li>
+          <li>File · Frame 2147233651 · Frame 2147233651 · 402×309.57</li>
+          <li>File · Chiclet · Layout=Base · Image=False · 402×49</li>
+          <li>Live meeting · Chiclet/Live meeting (Dominant)/False · Chiclet/Live meeting (Dominant)/False · 185×54</li>
+          <li>Video · Chiclet · Layout=Video · Image=True · 265×160</li>
+          <li>Primary · Chiclet · Style=Primary · Recording=False · 297×48</li>
+          <li>Subtle · Chiclet · Style=Subtle · Recording=False · 297×48</li>
+          <li>Primary recording · Chiclet · Style=Primary · Recording=True · 297×48</li>
+          <li>Subtle recording · Chiclet · Style=Subtle · Recording=True · 297×48</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-layout-chiclet-variants">Variants</a>
+        <div class="toc-group">Record chiclet</div>
+        <a href="#chiclet-layout-record-variants">Variants</a>
+        <a href="#chiclet-layout-record-states">States</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Chiclet &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-content-card-layout" data-page="content-card-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Content Card &middot; Layout</div>
+    <h1>Content Card</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Content Card</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>11 blocks</span>
+      <span>27 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="content-card-layout-content-card" data-figma-node="106947:213408">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Content card <a href="#content-card-layout-content-card" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="content-card-layout-content-card-priority-variants" data-figma="Content block / Section primary">
+            <h2>Priority Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Primary</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;height:88px" title="Content Card — Style=Primary · Image=True · Avatar=False · 402×88" data-figma-id="I106947:213408;20995:3166;106947:248917;20995:3084;106947:248914" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=True · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=True · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=True · Avatar=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Secondary</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;height:72px" title="Content Card — Style=Secondary · Image=True · Avatar=False · 402×72" data-figma-id="I106947:213408;20995:3166;106947:248938;20995:3084;106947:248937" role="img" aria-label="Preview pending: Content Card — Style=Secondary · Image=True · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Secondary · Image=True · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Secondary · Image=True · Avatar=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Tertiary</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;height:72px" title="Content Card — Style=Tertiary · Image=False · Avatar=False · 402×72" data-figma-id="I106947:213408;20995:3166;106947:248966;20995:3084;106947:248965" role="img" aria-label="Preview pending: Content Card — Style=Tertiary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Tertiary · Image=False · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Tertiary · Image=False · Avatar=False</div>
+            </div>
+          </div>
+          <div class="lay-section" id="content-card-layout-content-card-config-variants" data-figma="Content block / Section primary">
+            <h2>Config Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Image</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:266.67px;height:88px" title="Content Card — Style=Primary · Image=True · Avatar=False · 266.67×88" data-figma-id="I106947:213408;20995:3166;106947:249095;20995:3084;106947:249091" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=True · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=True · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Secondary · Image=True · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:249095;20995:3084;106947:249235" role="img" aria-label="Preview pending: Content Card — Style=Secondary · Image=True · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Secondary · Image=True · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Tertiary · Image=True · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:249095;20995:3084;106947:249254" role="img" aria-label="Preview pending: Content Card — Style=Tertiary · Image=True · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Tertiary · Image=True · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=True · Avatar=False / Style=Secondary · Image=True · Avatar=False / Style=Tertiary · Image=True · Avatar=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Avatar</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:266.67px;height:88px" title="Content Card — Style=Primary · Image=False · Avatar=True · 266.67×88" data-figma-id="I106947:213408;20995:3166;106947:249277;20995:3084;106947:249274" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=True"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=True</span></div>
+                <div class="lay-ph" style="width:266.67px;height:88px" title="Content Card — Style=Primary · Image=False · Avatar=True · 266.67×88" data-figma-id="I106947:213408;20995:3166;106947:249277;20995:3084;106947:249275" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=True"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=True</span></div>
+                <div class="lay-ph" style="width:266.67px;height:88px" title="Content Card — Style=Primary · Image=False · Avatar=True · 266.67×88" data-figma-id="I106947:213408;20995:3166;106947:249277;20995:3084;106947:249276" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=True"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=True</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=False · Avatar=True / Style=Primary · Image=False · Avatar=True / Style=Primary · Image=False · Avatar=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Header</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:266.67px;height:100px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×100" data-figma-id="I106947:213408;20995:3166;106947:249637;20995:3084;106947:249634" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:100px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×100" data-figma-id="I106947:213408;20995:3166;106947:249637;20995:3084;106947:249635" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:100px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×100" data-figma-id="I106947:213408;20995:3166;106947:249637;20995:3084;106947:249636" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Footer</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:266.67px;height:100px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×100" data-figma-id="I106947:213408;20995:3166;106947:250425;20995:3084;106947:250422" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:100px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×100" data-figma-id="I106947:213408;20995:3166;106947:250425;20995:3084;106947:250423" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:100px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×100" data-figma-id="I106947:213408;20995:3166;106947:250425;20995:3084;106947:250424" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Content</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:266.67px;height:100px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×100" data-figma-id="I106947:213408;20995:3166;106947:250344;20995:3084;106947:250341" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:250344;20995:3084;106947:250342" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:250344;20995:3084;106947:250343" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False</div>
+            </div>
+          </div>
+          <div class="lay-section" id="content-card-layout-content-card-interaction-variants" data-figma="Content block / Section primary">
+            <h2>Interaction Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Icon button</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:250222;20995:3084;106947:250219" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:250222;20995:3084;106947:250220" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:250222;20995:3084;106947:250221" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Button</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:250141;20995:3084;106947:250138" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:250141;20995:3084;106947:250139" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:250141;20995:3084;106947:250140" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Checkmark</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:249808;20995:3084;106947:249805" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:249808;20995:3084;106947:249806" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+                <div class="lay-ph" style="width:266.67px;height:72px" title="Content Card — Style=Primary · Image=False · Avatar=False · 266.67×72" data-figma-id="I106947:213408;20995:3166;106947:249808;20995:3084;106947:249807" role="img" aria-label="Preview pending: Content Card — Style=Primary · Image=False · Avatar=False"><span class="lay-ph-name">Content Card</span><span class="lay-ph-props">Style=Primary · Image=False · Avatar=False</span></div>
+              </div>
+              <div class="lay-props">Content Card · Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False / Style=Primary · Image=False · Avatar=False</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="content-card-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#content-card-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Content Card</em>; nodes: Content card <code>106947:213408</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Primary · Content Card · Style=Primary · Image=True · Avatar=False · 402×88</li>
+          <li>Secondary · Content Card · Style=Secondary · Image=True · Avatar=False · 402×72</li>
+          <li>Tertiary · Content Card · Style=Tertiary · Image=False · Avatar=False · 402×72</li>
+          <li>Image · Content Card · Style=Primary · Image=True · Avatar=False · 266.67×88</li>
+          <li>Image · Content Card · Style=Secondary · Image=True · Avatar=False · 266.67×72</li>
+          <li>Image · Content Card · Style=Tertiary · Image=True · Avatar=False · 266.67×72</li>
+          <li>Avatar · Content Card · Style=Primary · Image=False · Avatar=True · 266.67×88</li>
+          <li>Avatar · Content Card · Style=Primary · Image=False · Avatar=True · 266.67×88</li>
+          <li>Avatar · Content Card · Style=Primary · Image=False · Avatar=True · 266.67×88</li>
+          <li>Header · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×100</li>
+          <li>Header · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×100</li>
+          <li>Header · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×100</li>
+          <li>Footer · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×100</li>
+          <li>Footer · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×100</li>
+          <li>Footer · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×100</li>
+          <li>Content · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×100</li>
+          <li>Content · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Content · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Icon button · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Icon button · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Icon button · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Button · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Button · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Button · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Checkmark · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Checkmark · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+          <li>Checkmark · Content Card · Style=Primary · Image=False · Avatar=False · 266.67×72</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Content card</div>
+        <a href="#content-card-layout-content-card-priority-variants">Priority Variants</a>
+        <a href="#content-card-layout-content-card-config-variants">Config Variants</a>
+        <a href="#content-card-layout-content-card-interaction-variants">Interaction Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Content Card &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
 
 <div class="page" id="page-buttons" data-page="buttons">
 <style>
