@@ -9530,6 +9530,9 @@ Icon only = True
   .ia-group-head { display: flex; align-items: baseline; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--c-border); }
   .ia-group-title { font-size: 12px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--mc-text-primary); }
   .ia-group-sub { font-size: 12px; color: var(--mc-text-secondary); }
+  .ia-intro-list { font-size: 14px; color: var(--c-text-secondary); line-height: 1.7; margin: 0 0 var(--sp-6); padding-left: 20px; }
+  .ia-intro-list li + li { margin-top: 4px; }
+  .ia-intro-list strong { color: var(--c-text-secondary); font-weight: 600; }
   .ia-table-wrap { overflow-x: auto; background: var(--c-surface); }
   .ia-table th:first-child, .ia-table td:first-child { padding-left: 16px; }
   .ia-table th:last-child, .ia-table td:last-child { padding-right: 16px; }
@@ -9662,7 +9665,7 @@ Icon only = True
         <span class="section-eyebrow eyebrow-design">Inventory</span>
         <h2>Canvas inventory by Teams tab <a href="#ia-inventory" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <p class="section-intro">Canvases are grouped by the Teams tab that hosts them.</p>
-        <ul>
+        <ul class="ia-intro-list">
           <li><strong>Default app bar:</strong> Activity, Chat, Teams, Calendar. Calls and Files sit behind More on mobile.</li>
           <li><strong>Search</strong> lives inside each tab's header.</li>
           <li><strong>Me menu</strong> holds status, out-of-office, notifications and Settings.</li>
