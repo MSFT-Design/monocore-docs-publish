@@ -232,6 +232,12 @@
     html.devnotes-off #player-controls-layout-schema,
     html.devnotes-off #toggle-layout-schema,
     html.devnotes-off #search-bar-layout-schema,
+    html.devnotes-off #synthetic-card-layout-schema,
+    html.devnotes-off #segmented-control-layout-schema,
+    html.devnotes-off #drawer-layout-schema,
+    html.devnotes-off #tile-grid-layout-schema,
+    html.devnotes-off #tab-bar-layout-schema,
+    html.devnotes-off #feedback-layout-schema,
     html.devnotes-off #ia-dev-notes {
       display: none !important;
     }
@@ -2230,7 +2236,9 @@
         <a href="#compose" data-link="compose">Compose</a>
         <a href="#content-card" data-link="content-card">Content Card</a>
         <a href="#divider" data-link="divider">Divider</a>
+        <a href="#drawer" data-link="drawer">Drawer (Sheet / Modal)</a>
         <a href="#empty-list" data-link="empty-list">Empty List View</a>
+        <a href="#feedback" data-link="feedback">Feedback</a>
         <div class="nav-acc">
           <h3 class="nav-acc-header">
             <a href="#filter" data-link="filter" id="nav-acc-label-filter">Filter</a>
@@ -2263,7 +2271,10 @@
         <a href="#menu" data-link="menu">Menu</a>
         <a href="#player-controls" data-link="player-controls">Player controls</a>
         <a href="#search-bar" data-link="search-bar">Search bar</a>
+        <a href="#segmented-control" data-link="segmented-control">Segmented control</a>
         <a href="#slider" data-link="slider">Slider</a>
+        <a href="#synthetic-card" data-link="synthetic-card">Synthetic card</a>
+        <a href="#tab-bar" data-link="tab-bar">Tab bar</a>
         <a href="#tile-grid" data-link="tile-grid">Tile grid</a>
         <a href="#toggle" data-link="toggle">Toggle</a>
         <a href="#toolbar" data-link="toolbar">Toolbar</a>
@@ -14448,11 +14459,11 @@ Icon only = True
   <header class="docs-header">
     <div class="eyebrow">Menu &middot; Layout</div>
     <h1>Menu</h1>
-    <p class="subtitle">Rendered from the documentation artboard on the <em>Menu popover</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <p class="subtitle">Rendered from the 2 documentation artboards on the <em>Menu popover</em> and <em>↳Menu Sheet</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
     <div class="meta">
-      <span>1 Figma artboard</span>
-      <span>1 blocks</span>
-      <span>1 previews pending</span>
+      <span>2 Figma artboards</span>
+      <span>3 blocks</span>
+      <span>3 previews pending</span>
       <span>Read 21 Oct 2026</span>
     </div>
   </header>
@@ -14469,9 +14480,36 @@ Icon only = True
                 <div class="lay-block-title">Default</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <div class="lay-ph" style="width:300px;height:260px" title="Menu - iPhone/Default — Menu - iPhone/Default · 300×260" data-figma-id="I106947:228688;20995:3166;107757:226238;20995:3084;108606:244384" role="img" aria-label="Preview pending: Menu - iPhone/Default — Menu - iPhone/Default"><span class="lay-ph-name">Menu - iPhone/Default</span><span class="lay-ph-props">Menu - iPhone/Default</span></div>
+                <div class="lay-ph" style="width:300px;aspect-ratio:300 / 260" title="Menu - iPhone/Default — Menu - iPhone/Default · 300×260" data-figma-id="I106947:228688;20995:3166;107757:226238;20995:3084;108606:244384" role="img" aria-label="Preview pending: Menu - iPhone/Default — Menu - iPhone/Default"><span class="lay-ph-name">Menu - iPhone/Default</span><span class="lay-ph-props">Menu - iPhone/Default</span></div>
               </div>
               <div class="lay-props">Menu - iPhone/Default · Menu - iPhone/Default</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="menu-layout-sheet" data-figma-node="106947:228847">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Menu sheet <a href="#menu-layout-sheet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="menu-layout-sheet-config" data-figma="Content block / Section primary">
+            <h2>Config</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Title</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 874" title="Menu sheet — Menu sheet · 402×874" data-figma-id="I106947:228847;20995:3166;108848:368755;20995:3084;108979:434881" role="img" aria-label="Preview pending: Menu sheet — Menu sheet"><span class="lay-ph-name">Menu sheet</span><span class="lay-ph-props">Menu sheet</span></div>
+              </div>
+              <div class="lay-props">Menu sheet · Menu sheet</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">No title</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 874" title="Menu sheet — Menu sheet · 402×874" data-figma-id="I106947:228847;20995:3166;108979:435584;20995:3084;108979:435583" role="img" aria-label="Preview pending: Menu sheet — Menu sheet"><span class="lay-ph-name">Menu sheet</span><span class="lay-ph-props">Menu sheet</span></div>
+              </div>
+              <div class="lay-props">Menu sheet · Menu sheet</div>
             </div>
           </div>
         </div>
@@ -14482,10 +14520,12 @@ Icon only = True
         <h2>How this page is parsed from Figma <a href="#menu-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
         <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
-        <p class="section-intro">Figma page <em>Menu popover</em>; nodes: Menu - popup <code>106947:228688</code>.</p>
+        <p class="section-intro">Figma page <em>Menu popover</em> and <em>↳Menu Sheet</em>; nodes: Menu - popup <code>106947:228688</code>, Menu sheet <code>106947:228847</code>.</p>
         <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
         <ul class="lay-manifest">
           <li>Default · Menu - iPhone/Default · Menu - iPhone/Default · 300×260</li>
+          <li>Title · Menu sheet · Menu sheet · 402×874</li>
+          <li>No title · Menu sheet · Menu sheet · 402×874</li>
         </ul>
       </section>
     </main>
@@ -14495,6 +14535,8 @@ Icon only = True
         <div class="toc-label">On this page</div>
         <div class="toc-group">Menu - popup</div>
         <a href="#menu-layout-menu-variants">Variants</a>
+        <div class="toc-group">Menu sheet</div>
+        <a href="#menu-layout-sheet-config">Config</a>
       </nav>
     </aside>
   </div>
@@ -14569,29 +14611,66 @@ Icon only = True
   <header class="docs-header">
     <div class="eyebrow">Toggle &middot; Layout</div>
     <h1>Toggle</h1>
-    <p class="subtitle">Rendered from the documentation artboard on the <em>Radio</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <p class="subtitle">Rendered from the 2 documentation artboards on the <em>Radio</em> and <em>Toggle 🟢</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
     <div class="meta">
-      <span>1 Figma artboard</span>
-      <span>5 blocks</span>
-      <span>8 previews pending</span>
+      <span>2 Figma artboards</span>
+      <span>8 blocks</span>
+      <span>12 previews pending</span>
       <span>Read 21 Oct 2026</span>
     </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-      <section class="spec-section lay-board" id="toggle-layout-toggle" data-figma-node="106995:85259">
+      <section class="spec-section lay-board" id="toggle-layout-switch" data-figma-node="106947:213906">
         <div class="lay-page" data-figma="New component">
-          <h1 class="lay-title" data-figma="Content block / Page Title">Toggle <a href="#toggle-layout-toggle" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
-          <div class="lay-section" id="toggle-layout-toggle-variants" data-figma="Content block / Section primary">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Toggle <a href="#toggle-layout-switch" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="toggle-layout-switch-states" data-figma="Content block / Section primary">
+            <h2>States</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">On</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:64px;aspect-ratio:64 / 28" title="Toggle - Switch — State=Idle · Is On=True · Is Enabled=True · 64×28" data-figma-id="I106947:213906;20995:3166;106995:85207;20995:3084;106995:85204" role="img" aria-label="Preview pending: Toggle - Switch — State=Idle · Is On=True · Is Enabled=True"></div>
+              </div>
+              <div class="lay-props">Toggle - Switch · State=Idle · Is On=True · Is Enabled=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Off</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:64px;aspect-ratio:64 / 28" title="Toggle - Switch — State=Idle · Is On=False · Is Enabled=True · 64×28" data-figma-id="I106947:213906;20995:3166;106995:85211;20995:3084;106995:85210" role="img" aria-label="Preview pending: Toggle - Switch — State=Idle · Is On=False · Is Enabled=True"></div>
+              </div>
+              <div class="lay-props">Toggle - Switch · State=Idle · Is On=False · Is Enabled=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Dissbled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:64px;aspect-ratio:64 / 28" title="Toggle - Switch — State=Idle · Is On=True · Is Enabled=False · 64×28" data-figma-id="I106947:213906;20995:3166;106995:85234;20995:3084;106995:85233" role="img" aria-label="Preview pending: Toggle - Switch — State=Idle · Is On=True · Is Enabled=False"></div>
+                <div class="lay-ph" style="width:64px;aspect-ratio:64 / 28" title="Toggle - Switch — State=Idle · Is On=False · Is Enabled=False · 64×28" data-figma-id="I106947:213906;20995:3166;106995:85234;20995:3084;106995:85246" role="img" aria-label="Preview pending: Toggle - Switch — State=Idle · Is On=False · Is Enabled=False"></div>
+              </div>
+              <div class="lay-props">Toggle - Switch · State=Idle · Is On=True · Is Enabled=False / State=Idle · Is On=False · Is Enabled=False</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="toggle-layout-radio" data-figma-node="106995:85259">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Radio <a href="#toggle-layout-radio" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="toggle-layout-radio-variants" data-figma="Content block / Section primary">
             <h2>Variants</h2>
             <div class="lay-block" data-figma="Slot block">
               <div class="lay-block-head" data-figma="Content block / Section primary light">
                 <div class="lay-block-title">Default</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <div class="lay-ph" style="width:24px;height:24px" title="Radio — State=Rest · Checked=True · Floating=False · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85353;20995:3084;106995:85351" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=True · Floating=False"></div>
-                <div class="lay-ph" style="width:24px;height:24px" title="Radio — State=Rest · Checked=False · Floating=False · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85353;20995:3084;106995:85352" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=False · Floating=False"></div>
+                <div class="lay-ph" style="width:24px;aspect-ratio:24 / 24" title="Radio — State=Rest · Checked=True · Floating=False · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85353;20995:3084;106995:85351" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=True · Floating=False"></div>
+                <div class="lay-ph" style="width:24px;aspect-ratio:24 / 24" title="Radio — State=Rest · Checked=False · Floating=False · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85353;20995:3084;106995:85352" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=False · Floating=False"></div>
               </div>
               <div class="lay-props">Radio · State=Rest · Checked=True · Floating=False / State=Rest · Checked=False · Floating=False</div>
             </div>
@@ -14600,20 +14679,20 @@ Icon only = True
                 <div class="lay-block-title">Floating</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <div class="lay-ph" style="width:24px;height:24px" title="Radio — State=Rest · Checked=True · Floating=True · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85380;20995:3084;106995:85378" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=True · Floating=True"></div>
-                <div class="lay-ph" style="width:24px;height:24px" title="Radio — State=Rest · Checked=False · Floating=True · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85380;20995:3084;106995:85379" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=False · Floating=True"></div>
+                <div class="lay-ph" style="width:24px;aspect-ratio:24 / 24" title="Radio — State=Rest · Checked=True · Floating=True · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85380;20995:3084;106995:85378" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=True · Floating=True"></div>
+                <div class="lay-ph" style="width:24px;aspect-ratio:24 / 24" title="Radio — State=Rest · Checked=False · Floating=True · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85380;20995:3084;106995:85379" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=False · Floating=True"></div>
               </div>
               <div class="lay-props">Radio · State=Rest · Checked=True · Floating=True / State=Rest · Checked=False · Floating=True</div>
             </div>
           </div>
-          <div class="lay-section" id="toggle-layout-toggle-states" data-figma="Content block / Section primary">
+          <div class="lay-section" id="toggle-layout-radio-states" data-figma="Content block / Section primary">
             <h2>States</h2>
             <div class="lay-block" data-figma="Slot block">
               <div class="lay-block-head" data-figma="Content block / Section primary light">
                 <div class="lay-block-title">On</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <div class="lay-ph" style="width:24px;height:24px" title="Radio — State=Rest · Checked=True · Floating=False · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85262;20995:3084;106995:85322" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=True · Floating=False"></div>
+                <div class="lay-ph" style="width:24px;aspect-ratio:24 / 24" title="Radio — State=Rest · Checked=True · Floating=False · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85262;20995:3084;106995:85322" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=True · Floating=False"></div>
               </div>
               <div class="lay-props">Radio · State=Rest · Checked=True · Floating=False</div>
             </div>
@@ -14622,7 +14701,7 @@ Icon only = True
                 <div class="lay-block-title">Off</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <div class="lay-ph" style="width:24px;height:24px" title="Radio — State=Rest · Checked=False · Floating=False · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85263;20995:3084;106995:85327" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=False · Floating=False"></div>
+                <div class="lay-ph" style="width:24px;aspect-ratio:24 / 24" title="Radio — State=Rest · Checked=False · Floating=False · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85263;20995:3084;106995:85327" role="img" aria-label="Preview pending: Radio — State=Rest · Checked=False · Floating=False"></div>
               </div>
               <div class="lay-props">Radio · State=Rest · Checked=False · Floating=False</div>
             </div>
@@ -14631,8 +14710,8 @@ Icon only = True
                 <div class="lay-block-title">Dissbled</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <div class="lay-ph" style="width:24px;height:24px" title="Radio — State=Disable · Checked=True · Floating=True · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85264;20995:3084;106995:85333" role="img" aria-label="Preview pending: Radio — State=Disable · Checked=True · Floating=True"></div>
-                <div class="lay-ph" style="width:24px;height:24px" title="Radio — State=Disable · Checked=False · Floating=True · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85264;20995:3084;106995:85344" role="img" aria-label="Preview pending: Radio — State=Disable · Checked=False · Floating=True"></div>
+                <div class="lay-ph" style="width:24px;aspect-ratio:24 / 24" title="Radio — State=Disable · Checked=True · Floating=True · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85264;20995:3084;106995:85333" role="img" aria-label="Preview pending: Radio — State=Disable · Checked=True · Floating=True"></div>
+                <div class="lay-ph" style="width:24px;aspect-ratio:24 / 24" title="Radio — State=Disable · Checked=False · Floating=True · 24×24" data-figma-id="I106995:85259;20995:3166;106995:85264;20995:3084;106995:85344" role="img" aria-label="Preview pending: Radio — State=Disable · Checked=False · Floating=True"></div>
               </div>
               <div class="lay-props">Radio · State=Disable · Checked=True · Floating=True / State=Disable · Checked=False · Floating=True</div>
             </div>
@@ -14645,9 +14724,13 @@ Icon only = True
         <h2>How this page is parsed from Figma <a href="#toggle-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
         <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
-        <p class="section-intro">Figma page <em>Radio</em>; nodes: Toggle <code>106995:85259</code>.</p>
+        <p class="section-intro">Figma page <em>Radio</em> and <em>Toggle 🟢</em>; nodes: Toggle <code>106947:213906</code>, Radio <code>106995:85259</code>.</p>
         <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
         <ul class="lay-manifest">
+          <li>On · Toggle - Switch · State=Idle · Is On=True · Is Enabled=True · 64×28</li>
+          <li>Off · Toggle - Switch · State=Idle · Is On=False · Is Enabled=True · 64×28</li>
+          <li>Dissbled · Toggle - Switch · State=Idle · Is On=True · Is Enabled=False · 64×28</li>
+          <li>Dissbled · Toggle - Switch · State=Idle · Is On=False · Is Enabled=False · 64×28</li>
           <li>Default · Radio · State=Rest · Checked=True · Floating=False · 24×24</li>
           <li>Default · Radio · State=Rest · Checked=False · Floating=False · 24×24</li>
           <li>Floating · Radio · State=Rest · Checked=True · Floating=True · 24×24</li>
@@ -14664,8 +14747,10 @@ Icon only = True
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
         <div class="toc-group">Toggle</div>
-        <a href="#toggle-layout-toggle-variants">Variants</a>
-        <a href="#toggle-layout-toggle-states">States</a>
+        <a href="#toggle-layout-switch-states">States</a>
+        <div class="toc-group">Radio</div>
+        <a href="#toggle-layout-radio-variants">Variants</a>
+        <a href="#toggle-layout-radio-states">States</a>
       </nav>
     </aside>
   </div>
@@ -14764,6 +14849,727 @@ Icon only = True
 
   <footer class="docs-footer">
     Search bar &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+
+<div class="page" id="page-synthetic-card" data-page="synthetic-card">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Synthetic card</h1>
+    <p class="subtitle">AI-generated summary card.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">Synthetic card is shipped in the Monocore iOS library. The Layout tab already renders its documentation artboards from the <em>Synthetic Card</em> page; the Spec / Guidance / Architecture pages follow the same structure as the Card and Button pages and will be written from a fresh pull of the published component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Synthetic card &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-segmented-control" data-page="segmented-control">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Segmented control</h1>
+    <p class="subtitle">Pill segmented control on a Liquid Glass backplate.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">Segmented control is shipped in the Monocore iOS library. The Layout tab already renders its documentation artboards from the <em>Segmented control</em> page; the Spec / Guidance / Architecture pages follow the same structure as the Card and Button pages and will be written from a fresh pull of the published component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Segmented control &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-drawer" data-page="drawer">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Drawer (Sheet / Modal)</h1>
+    <p class="subtitle">Sheet heights on iPhone (1/3, 2/3, Secondary, Dominant, Full) and iPad modal configurations.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">Drawer (Sheet / Modal) is shipped in the Monocore iOS library. The Layout tab already renders its documentation artboards from the <em>Sheet / Modal (Drawer)</em> page; the Spec / Guidance / Architecture pages follow the same structure as the Card and Button pages and will be written from a fresh pull of the published component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Drawer (Sheet / Modal) &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-tab-bar" data-page="tab-bar">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Tab bar</h1>
+    <p class="subtitle">iPhone tab bar — 2 to 5 tabs, separate primary button, minimized.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">Tab bar is shipped in the Monocore iOS library. The Layout tab already renders its documentation artboards from the <em>Tabbars</em> page; the Spec / Guidance / Architecture pages follow the same structure as the Card and Button pages and will be written from a fresh pull of the published component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Tab bar &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-feedback" data-page="feedback">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Components</div>
+    <h1>Feedback</h1>
+    <p class="subtitle">Thumbs, Yes/No and icons-only feedback rows.</p>
+    <div class="meta"><span>Shipped in Monocore iOS</span><span>Spec page in progress</span></div>
+  </header>
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section">
+        <span class="section-eyebrow eyebrow-design">Status</span>
+        <h2>Documentation coming soon</h2>
+        <p class="section-intro">Feedback is shipped in the Monocore iOS library. The Layout tab already renders its documentation artboards from the <em>Feedback</em> page; the Spec / Guidance / Architecture pages follow the same structure as the Card and Button pages and will be written from a fresh pull of the published component set.</p>
+      </section>
+    </main>
+  </div>
+  <footer class="docs-footer">Feedback &middot; Placeholder &middot; Source: Monocore iOS library</footer>
+</div>
+</div>
+
+<div class="page" id="page-synthetic-card-layout" data-page="synthetic-card-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Synthetic card &middot; Layout</div>
+    <h1>Synthetic card</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Synthetic Card</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 blocks</span>
+      <span>1 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="synthetic-card-layout-card" data-figma-node="106947:212439">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Synthetic card <a href="#synthetic-card-layout-card" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="synthetic-card-layout-card-variant" data-figma="Content block / Section primary">
+            <h2>Variant</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:357px;aspect-ratio:357 / 410" title="Syntheric Card — Syntheric Card · 357×410" data-figma-id="I106947:212439;20995:3166;106947:212663;20995:3084;106947:212660" role="img" aria-label="Preview pending: Syntheric Card — Syntheric Card"><span class="lay-ph-name">Syntheric Card</span><span class="lay-ph-props">Syntheric Card</span></div>
+              </div>
+              <div class="lay-props">Syntheric Card · Syntheric Card</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="synthetic-card-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#synthetic-card-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Synthetic Card</em>; nodes: Synthetic card <code>106947:212439</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Default · Syntheric Card · Syntheric Card · 357×410</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Synthetic card</div>
+        <a href="#synthetic-card-layout-card-variant">Variant</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Synthetic card &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-segmented-control-layout" data-page="segmented-control-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Segmented control &middot; Layout</div>
+    <h1>Segmented control</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Segmented control</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 blocks</span>
+      <span>1 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="segmented-control-layout-control" data-figma-node="106947:224922">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Segmented control <a href="#segmented-control-layout-control" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="segmented-control-layout-control-pills" data-figma="Content block / Section primary">
+            <h2>Pills</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Segmented control - LG backplate</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 40" title="Segmented control — Segmented control · 402×40" data-figma-id="I106947:224922;20995:3166;108466:110474;20995:3084;108710:313474" role="img" aria-label="Preview pending: Segmented control — Segmented control"><span class="lay-ph-name">Segmented control</span><span class="lay-ph-props">Segmented control</span></div>
+              </div>
+              <div class="lay-props">Segmented control · Segmented control</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="segmented-control-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#segmented-control-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Segmented control</em>; nodes: Segmented control <code>106947:224922</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Segmented control - LG backplate · Segmented control · Segmented control · 402×40</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Segmented control</div>
+        <a href="#segmented-control-layout-control-pills">Pills</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Segmented control &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-drawer-layout" data-page="drawer-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Drawer (Sheet / Modal) &middot; Layout</div>
+    <h1>Drawer (Sheet / Modal)</h1>
+    <p class="subtitle">Rendered from the 2 documentation artboards on the <em>Sheet / Modal (Drawer)</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>2 Figma artboards</span>
+      <span>10 blocks</span>
+      <span>10 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="drawer-layout-iphone" data-figma-node="107757:224558">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">iPhone — Height <a href="#drawer-layout-iphone" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="drawer-layout-iphone-configs" data-figma="Content block / Section primary">
+            <h2>Configs</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Secondary - Default</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 874" title="Sheet - Full Screen - iPhone — Size=Secondary (Default) · 402×874" data-figma-id="I107757:224558;20995:3166;108510:240383;20995:3084;108510:240382" role="img" aria-label="Preview pending: Sheet - Full Screen - iPhone — Size=Secondary (Default)"><span class="lay-ph-name">Sheet - Full Screen - iPhone</span><span class="lay-ph-props">Size=Secondary (Default)</span></div>
+              </div>
+              <div class="lay-props">Sheet - Full Screen - iPhone · Size=Secondary (Default)</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">1/3</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 874" title="Sheet - Full Screen - iPhone — Size=1/3 - Secondary · 402×874" data-figma-id="I107757:224558;20995:3166;107757:224561;20995:3084;107757:224565" role="img" aria-label="Preview pending: Sheet - Full Screen - iPhone — Size=1/3 - Secondary"><span class="lay-ph-name">Sheet - Full Screen - iPhone</span><span class="lay-ph-props">Size=1/3 - Secondary</span></div>
+              </div>
+              <div class="lay-props">Sheet - Full Screen - iPhone · Size=1/3 - Secondary</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Quaternary - popup: iOS 26 system</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:300px;aspect-ratio:300 / 260" title="Menu - iPhone/Default — Menu - iPhone/Default · 300×260" data-figma-id="I107757:224558;20995:3166;108510:240884;20995:3084;108606:244303" role="img" aria-label="Preview pending: Menu - iPhone/Default — Menu - iPhone/Default"><span class="lay-ph-name">Menu - iPhone/Default</span><span class="lay-ph-props">Menu - iPhone/Default</span></div>
+              </div>
+              <div class="lay-props">Menu - iPhone/Default · Menu - iPhone/Default</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">2/3</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 874" title="Sheet - Full Screen - iPhone — Size=2/3 · 402×874" data-figma-id="I107757:224558;20995:3166;108510:240432;20995:3084;108510:240431" role="img" aria-label="Preview pending: Sheet - Full Screen - iPhone — Size=2/3"><span class="lay-ph-name">Sheet - Full Screen - iPhone</span><span class="lay-ph-props">Size=2/3</span></div>
+              </div>
+              <div class="lay-props">Sheet - Full Screen - iPhone · Size=2/3</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Dominant</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 874" title="Sheet - Full Screen - iPhone — Size=Dominant · 402×874" data-figma-id="I107757:224558;20995:3166;107757:224562;20995:3084;107757:224567" role="img" aria-label="Preview pending: Sheet - Full Screen - iPhone — Size=Dominant"><span class="lay-ph-name">Sheet - Full Screen - iPhone</span><span class="lay-ph-props">Size=Dominant</span></div>
+              </div>
+              <div class="lay-props">Sheet - Full Screen - iPhone · Size=Dominant</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Full</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 874" title="Sheet - Full Screen - iPhone — Size=Stacked · 402×874" data-figma-id="I107757:224558;20995:3166;107757:224563;20995:3084;107757:224569" role="img" aria-label="Preview pending: Sheet - Full Screen - iPhone — Size=Stacked"><span class="lay-ph-name">Sheet - Full Screen - iPhone</span><span class="lay-ph-props">Size=Stacked</span></div>
+              </div>
+              <div class="lay-props">Sheet - Full Screen - iPhone · Size=Stacked</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section lay-board" id="drawer-layout-ipad" data-figma-node="107757:223784">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">iPad configs <a href="#drawer-layout-ipad" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="drawer-layout-ipad-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Secondary</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:1200px;aspect-ratio:1200 / 1200" title="Modal - Full Screen - iPad — Size=Secondary · 1200×1200" data-figma-id="I107757:223784;20995:3166;107757:223787;20995:3084;107757:223945" role="img" aria-label="Preview pending: Modal - Full Screen - iPad — Size=Secondary"><span class="lay-ph-name">Modal - Full Screen - iPad</span><span class="lay-ph-props">Size=Secondary</span></div>
+              </div>
+              <div class="lay-props">Modal - Full Screen - iPad · Size=Secondary</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Dominant</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:1200px;aspect-ratio:1200 / 1200" title="Modal - Full Screen - iPad — Size=Dominant · 1200×1200" data-figma-id="I107757:223784;20995:3166;107757:223788;20995:3084;107757:223984" role="img" aria-label="Preview pending: Modal - Full Screen - iPad — Size=Dominant"><span class="lay-ph-name">Modal - Full Screen - iPad</span><span class="lay-ph-props">Size=Dominant</span></div>
+              </div>
+              <div class="lay-props">Modal - Full Screen - iPad · Size=Dominant</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Stacked</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:1200px;aspect-ratio:1200 / 1200" title="Modal - Full Screen - iPad — Size=Stacked · 1200×1200" data-figma-id="I107757:223784;20995:3166;107757:223789;20995:3084;107757:224023" role="img" aria-label="Preview pending: Modal - Full Screen - iPad — Size=Stacked"><span class="lay-ph-name">Modal - Full Screen - iPad</span><span class="lay-ph-props">Size=Stacked</span></div>
+              </div>
+              <div class="lay-props">Modal - Full Screen - iPad · Size=Stacked</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Anchored popover</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:375px;aspect-ratio:375 / 400" title="Modal - Full Screen - iPad — Size=Anchored · 375×400" data-figma-id="I107757:223784;20995:3166;107757:224126;20995:3084;111595:281864" role="img" aria-label="Preview pending: Modal - Full Screen - iPad — Size=Anchored"><span class="lay-ph-name">Modal - Full Screen - iPad</span><span class="lay-ph-props">Size=Anchored</span></div>
+              </div>
+              <div class="lay-props">Modal - Full Screen - iPad · Size=Anchored</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="drawer-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#drawer-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Sheet / Modal (Drawer)</em>; nodes: iPhone — Height <code>107757:224558</code>, iPad configs <code>107757:223784</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Secondary - Default · Sheet - Full Screen - iPhone · Size=Secondary (Default) · 402×874</li>
+          <li>1/3 · Sheet - Full Screen - iPhone · Size=1/3 - Secondary · 402×874</li>
+          <li>Quaternary - popup: iOS 26 system · Menu - iPhone/Default · Menu - iPhone/Default · 300×260</li>
+          <li>2/3 · Sheet - Full Screen - iPhone · Size=2/3 · 402×874</li>
+          <li>Dominant · Sheet - Full Screen - iPhone · Size=Dominant · 402×874</li>
+          <li>Full · Sheet - Full Screen - iPhone · Size=Stacked · 402×874</li>
+          <li>Secondary · Modal - Full Screen - iPad · Size=Secondary · 1200×1200</li>
+          <li>Dominant · Modal - Full Screen - iPad · Size=Dominant · 1200×1200</li>
+          <li>Stacked · Modal - Full Screen - iPad · Size=Stacked · 1200×1200</li>
+          <li>Anchored popover · Modal - Full Screen - iPad · Size=Anchored · 375×400</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">iPhone — Height</div>
+        <a href="#drawer-layout-iphone-configs">Configs</a>
+        <div class="toc-group">iPad configs</div>
+        <a href="#drawer-layout-ipad-variants">Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Drawer (Sheet / Modal) &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-tile-grid-layout" data-page="tile-grid-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Tile grid &middot; Layout</div>
+    <h1>Tile grid</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Tile Grid 🟢</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>4 blocks</span>
+      <span>4 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="tile-grid-layout-tiles" data-figma-node="106947:226021">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Tile Grid <a href="#tile-grid-layout-tiles" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="tile-grid-layout-tiles-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Primary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:111.67px;aspect-ratio:111.67 / 60" title="Tile button — State=Rest · Variant=Primary · Size=Medium (Default) · 111.67×60" data-figma-id="I106947:226021;20995:3166;108979:440730;20995:3084;108979:441695" role="img" aria-label="Preview pending: Tile button — State=Rest · Variant=Primary · Size=Medium (Default)"></div>
+              </div>
+              <div class="lay-props">Tile button · State=Rest · Variant=Primary · Size=Medium (Default)</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Secondary</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:111.67px;aspect-ratio:111.67 / 60" title="Tile button — State=Rest · Variant=Secondary · Size=Medium (Default) · 111.67×60" data-figma-id="I106947:226021;20995:3166;108979:441703;20995:3084;108979:441702" role="img" aria-label="Preview pending: Tile button — State=Rest · Variant=Secondary · Size=Medium (Default)"></div>
+              </div>
+              <div class="lay-props">Tile button · State=Rest · Variant=Secondary · Size=Medium (Default)</div>
+            </div>
+          </div>
+          <div class="lay-section" id="tile-grid-layout-tiles-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Medium (default)</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:111.67px;aspect-ratio:111.67 / 60" title="Tile button — State=Rest · Variant=Secondary · Size=Medium (Default) · 111.67×60" data-figma-id="I106947:226021;20995:3166;108979:441745;20995:3084;108979:441744" role="img" aria-label="Preview pending: Tile button — State=Rest · Variant=Secondary · Size=Medium (Default)"></div>
+              </div>
+              <div class="lay-props">Tile button · State=Rest · Variant=Secondary · Size=Medium (Default)</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Large</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:120px;aspect-ratio:120 / 100" title="Tile button — State=Rest · Variant=Secondary · Size=Large · 120×100" data-figma-id="I106947:226021;20995:3166;108979:441724;20995:3084;108979:441723" role="img" aria-label="Preview pending: Tile button — State=Rest · Variant=Secondary · Size=Large"><span class="lay-ph-name">Tile button</span><span class="lay-ph-props">State=Rest · Variant=Secondary · Size=Large</span></div>
+              </div>
+              <div class="lay-props">Tile button · State=Rest · Variant=Secondary · Size=Large</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="tile-grid-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#tile-grid-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Tile Grid 🟢</em>; nodes: Tile Grid <code>106947:226021</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Primary · Tile button · State=Rest · Variant=Primary · Size=Medium (Default) · 111.67×60</li>
+          <li>Secondary · Tile button · State=Rest · Variant=Secondary · Size=Medium (Default) · 111.67×60</li>
+          <li>Medium (default) · Tile button · State=Rest · Variant=Secondary · Size=Medium (Default) · 111.67×60</li>
+          <li>Large · Tile button · State=Rest · Variant=Secondary · Size=Large · 120×100</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Tile Grid</div>
+        <a href="#tile-grid-layout-tiles-variants">Variants</a>
+        <a href="#tile-grid-layout-tiles-size">Size</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Tile grid &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-tab-bar-layout" data-page="tab-bar-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Tab bar &middot; Layout</div>
+    <h1>Tab bar</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Tabbars 🟢</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>7 blocks</span>
+      <span>7 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="tab-bar-layout-tabbar" data-figma-node="106947:228767">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Tab bar <a href="#tab-bar-layout-tabbar" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="tab-bar-layout-tabbar-tab-variants" data-figma="Content block / Section primary">
+            <h2>Tab Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">No labels</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 95" title="Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=5 · 402×95" data-figma-id="I106947:228767;20995:3166;107836:96656;20995:3084;107836:96655" role="img" aria-label="Preview pending: Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=5"><span class="lay-ph-name">Tab Bar - iPhone</span><span class="lay-ph-props">Separate Primary=False · Minimized=False · Tabs=5</span></div>
+              </div>
+              <div class="lay-props">Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=5</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">4 + Primary btn</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 95" title="Tab Bar - iPhone — Separate Primary=True · Minimized=False · Tabs=5 · 402×95" data-figma-id="I106947:228767;20995:3166;107836:96868;20995:3084;107836:96867" role="img" aria-label="Preview pending: Tab Bar - iPhone — Separate Primary=True · Minimized=False · Tabs=5"><span class="lay-ph-name">Tab Bar - iPhone</span><span class="lay-ph-props">Separate Primary=True · Minimized=False · Tabs=5</span></div>
+              </div>
+              <div class="lay-props">Tab Bar - iPhone · Separate Primary=True · Minimized=False · Tabs=5</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Minimized</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 95" title="Tab Bar - iPhone — Separate Primary=True · Minimized=True · Tabs=5 · 402×95" data-figma-id="I106947:228767;20995:3166;107836:96773;20995:3084;107836:96772" role="img" aria-label="Preview pending: Tab Bar - iPhone — Separate Primary=True · Minimized=True · Tabs=5"><span class="lay-ph-name">Tab Bar - iPhone</span><span class="lay-ph-props">Separate Primary=True · Minimized=True · Tabs=5</span></div>
+              </div>
+              <div class="lay-props">Tab Bar - iPhone · Separate Primary=True · Minimized=True · Tabs=5</div>
+            </div>
+          </div>
+          <div class="lay-section" id="tab-bar-layout-tabbar-tabs-count" data-figma="Content block / Section primary">
+            <h2>Tabs count</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">2</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 95" title="Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=2 · 402×95" data-figma-id="I106947:228767;20995:3166;107757:229744;20995:3084;107757:229741" role="img" aria-label="Preview pending: Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=2"><span class="lay-ph-name">Tab Bar - iPhone</span><span class="lay-ph-props">Separate Primary=False · Minimized=False · Tabs=2</span></div>
+              </div>
+              <div class="lay-props">Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=2</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">3</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 95" title="Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=3 · 402×95" data-figma-id="I106947:228767;20995:3166;107836:96399;20995:3084;107836:96398" role="img" aria-label="Preview pending: Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=3"><span class="lay-ph-name">Tab Bar - iPhone</span><span class="lay-ph-props">Separate Primary=False · Minimized=False · Tabs=3</span></div>
+              </div>
+              <div class="lay-props">Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=3</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">4</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 95" title="Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=4 · 402×95" data-figma-id="I106947:228767;20995:3166;107836:96470;20995:3084;107836:96469" role="img" aria-label="Preview pending: Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=4"><span class="lay-ph-name">Tab Bar - iPhone</span><span class="lay-ph-props">Separate Primary=False · Minimized=False · Tabs=4</span></div>
+              </div>
+              <div class="lay-props">Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=4</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">5</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 95" title="Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=5 · 402×95" data-figma-id="I106947:228767;20995:3166;107836:96555;20995:3084;107836:96554" role="img" aria-label="Preview pending: Tab Bar - iPhone — Separate Primary=False · Minimized=False · Tabs=5"><span class="lay-ph-name">Tab Bar - iPhone</span><span class="lay-ph-props">Separate Primary=False · Minimized=False · Tabs=5</span></div>
+              </div>
+              <div class="lay-props">Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=5</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="tab-bar-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#tab-bar-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Tabbars 🟢</em>; nodes: Tab bar <code>106947:228767</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>No labels · Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=5 · 402×95</li>
+          <li>4 + Primary btn · Tab Bar - iPhone · Separate Primary=True · Minimized=False · Tabs=5 · 402×95</li>
+          <li>Minimized · Tab Bar - iPhone · Separate Primary=True · Minimized=True · Tabs=5 · 402×95</li>
+          <li>2 · Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=2 · 402×95</li>
+          <li>3 · Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=3 · 402×95</li>
+          <li>4 · Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=4 · 402×95</li>
+          <li>5 · Tab Bar - iPhone · Separate Primary=False · Minimized=False · Tabs=5 · 402×95</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Tab bar</div>
+        <a href="#tab-bar-layout-tabbar-tab-variants">Tab Variants</a>
+        <a href="#tab-bar-layout-tabbar-tabs-count">Tabs count</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Tab bar &middot; Layout &middot; Monocore &middot; October 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-feedback-layout" data-page="feedback-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Feedback &middot; Layout</div>
+    <h1>Feedback</h1>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Feedback 🟢</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change. Previews are placeholders at the Figma size of each instance until the assets are exported.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>5 blocks</span>
+      <span>5 previews pending</span>
+      <span>Read 21 Oct 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="feedback-layout-feedback" data-figma-node="106947:226147">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Feedback <a href="#feedback-layout-feedback" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="feedback-layout-feedback-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Thumbs</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 44" title="Feedback View — Type=Thumbs · Size=Default · 402×44" data-figma-id="I106947:226147;20995:3166;108721:319975;20995:3084;108721:319972" role="img" aria-label="Preview pending: Feedback View — Type=Thumbs · Size=Default"><span class="lay-ph-name">Feedback View</span><span class="lay-ph-props">Type=Thumbs · Size=Default</span></div>
+              </div>
+              <div class="lay-props">Feedback View · Type=Thumbs · Size=Default</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Thumbs</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 42" title="Feedback View — Type=Yes/No · Size=Default · 402×42" data-figma-id="I106947:226147;20995:3166;108721:319985;20995:3084;108721:319984" role="img" aria-label="Preview pending: Feedback View — Type=Yes/No · Size=Default"><span class="lay-ph-name">Feedback View</span><span class="lay-ph-props">Type=Yes/No · Size=Default</span></div>
+              </div>
+              <div class="lay-props">Feedback View · Type=Yes/No · Size=Default</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Thumbs only</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 44" title="Feedback View — Type=Icons only · Size=Default · 402×44" data-figma-id="I106947:226147;20995:3166;108721:320006;20995:3084;108721:320005" role="img" aria-label="Preview pending: Feedback View — Type=Icons only · Size=Default"><span class="lay-ph-name">Feedback View</span><span class="lay-ph-props">Type=Icons only · Size=Default</span></div>
+              </div>
+              <div class="lay-props">Feedback View · Type=Icons only · Size=Default</div>
+            </div>
+          </div>
+          <div class="lay-section" id="feedback-layout-feedback-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Default</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 44" title="Feedback View — Type=Thumbs · Size=Default · 402×44" data-figma-id="I106947:226147;20995:3166;108721:320066;20995:3084;108721:320062" role="img" aria-label="Preview pending: Feedback View — Type=Thumbs · Size=Default"><span class="lay-ph-name">Feedback View</span><span class="lay-ph-props">Type=Thumbs · Size=Default</span></div>
+              </div>
+              <div class="lay-props">Feedback View · Type=Thumbs · Size=Default</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Large</div>
+              </div>
+              <div class="lay-preview lay-preview-wide" data-figma="PASTE HERE">
+                <div class="lay-ph" style="width:402px;aspect-ratio:402 / 46" title="Feedback View — Type=Thumbs · Size=Large · 402×46" data-figma-id="I106947:226147;20995:3166;108721:320105;20995:3084;108721:320104" role="img" aria-label="Preview pending: Feedback View — Type=Thumbs · Size=Large"><span class="lay-ph-name">Feedback View</span><span class="lay-ph-props">Type=Thumbs · Size=Large</span></div>
+              </div>
+              <div class="lay-props">Feedback View · Type=Thumbs · Size=Large</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="feedback-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#feedback-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
+        <p class="section-intro">Figma page <em>Feedback 🟢</em>; nodes: Feedback <code>106947:226147</code>.</p>
+        <p class="section-intro">Assets still to export (block · component · variant · size in dp):</p>
+        <ul class="lay-manifest">
+          <li>Thumbs · Feedback View · Type=Thumbs · Size=Default · 402×44</li>
+          <li>Thumbs · Feedback View · Type=Yes/No · Size=Default · 402×42</li>
+          <li>Thumbs only · Feedback View · Type=Icons only · Size=Default · 402×44</li>
+          <li>Default · Feedback View · Type=Thumbs · Size=Default · 402×44</li>
+          <li>Large · Feedback View · Type=Thumbs · Size=Large · 402×46</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Feedback</div>
+        <a href="#feedback-layout-feedback-variants">Variants</a>
+        <a href="#feedback-layout-feedback-size">Size</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Feedback &middot; Layout &middot; Monocore &middot; October 2026
   </footer>
 </div>
 </div>
