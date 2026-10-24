@@ -9855,29 +9855,234 @@ Icon only = True
 </div>
 
 <div class="page" id="page-avatar" data-page="avatar">
+<style>
+  .av-types { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: var(--sp-5); margin: var(--sp-4) 0; }
+  .av-types .bf-cell img { width: 96px; height: 96px; }
+  .av-scale { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--sp-6); padding: var(--sp-6) var(--sp-5); background: var(--mc-surface-raised-base); border: 1px solid var(--c-border); border-radius: var(--radius-strong); margin: var(--sp-4) 0; }
+  .av-scale .dot { border-radius: 999px; background: linear-gradient(135deg, #dcdbff, #8a80ff); display: block; margin: 0 auto; }
+  .av-scale .bf-cap { max-width: 72px; }
+  .av-scale .bf-cell.odd .bf-cap { color: var(--mc-text-interactive); }
+</style>
 <div class="docs-shell">
+
   <header class="docs-header">
-    <div class="eyebrow">Component</div>
-    <h1>Avatar</h1>
-    <p class="subtitle">Avatar, Avatar group and Avatar pie from Monocore iOS. The <strong>Layout</strong> tab mirrors the Figma artboard block for block; Spec, Guidance and Architecture follow.</p>
+    <div class="eyebrow">Components</div>
+    <h1>Avatar &mdash; Spec</h1>
+    <p class="subtitle">A circle that stands for a person, a team, an app or a count. Nine types across thirteen sizes, with four booleans (Presence, Badge, Cutout, Overlap) that attach to it at the sizes where they fit. The size axis grew in two generations and still reads that way.</p>
     <div class="meta">
-      <span>Monocore iOS</span>
-      <span>Avatar &amp; Avatar group page</span>
-      <span>Updated October 2026</span>
+      <span>105 variants</span>
+      <span>2 axes + 4 booleans</span>
+      <span>16&ndash;144dp</span>
+      <span>Figma: Monocore-iOS &middot; node <code>83353-26404</code></span>
     </div>
   </header>
-  <div class="empty-state">
-    <div class="empty-state-icon" aria-hidden="true">
-      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="8" r="4"/>
-        <path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6"/>
-      </svg>
-    </div>
-    <div class="empty-state-eyebrow">Avatar</div>
-    <h1 class="empty-state-title">Spec</h1>
-    <p class="empty-state-body">Tokens, sizes and anatomy are coming. Open the <a href="#avatar/layout" data-link="avatar/layout" data-active-when="avatar">Layout</a> tab for the artboard-driven view.</p>
-    <span class="empty-state-tag">Empty — content coming soon</span>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+
+      <section class="spec-section" id="avatar-types">
+        <span class="section-eyebrow eyebrow-design">Variant</span>
+        <h2>Types <a href="#avatar-types" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The eight types on the documentation artboard, exported at Xmassive [144dp]. A ninth, <code>Channel Team</code>, is published in the component set but not shown on the artboard.</p>
+        <div class="av-types">
+          <div class="bf-cell"><img src="images/avatar/avatar-image-144@2x.png" width="96" height="96" alt="Avatar, Type=Image"><span class="bf-cap">Image</span></div>
+          <div class="bf-cell"><img src="images/avatar/avatar-icon-brand-144@2x.png" width="96" height="96" alt="Avatar, Type=Icon brand"><span class="bf-cap">Icon brand</span></div>
+          <div class="bf-cell"><img src="images/avatar/avatar-anonymous-144@2x.png" width="96" height="96" alt="Avatar, Type=Anonymous"><span class="bf-cap">Anonymous</span></div>
+          <div class="bf-cell"><img src="images/avatar/avatar-overflow-144@2x.png" width="96" height="96" alt="Avatar, Type=Overflow"><span class="bf-cap">Overflow</span></div>
+          <div class="bf-cell"><img src="images/avatar/avatar-team-144@2x.png" width="96" height="96" alt="Avatar, Type=Team avatar"><span class="bf-cap">Team avatar</span></div>
+          <div class="bf-cell"><img src="images/avatar/avatar-community-144@2x.png" width="96" height="96" alt="Avatar, Type=Community"><span class="bf-cap">Community</span></div>
+          <div class="bf-cell"><img src="images/avatar/avatar-3p-app-144@2x.png" width="96" height="96" alt="Avatar, Type=3P app"><span class="bf-cap">3P app</span></div>
+          <div class="bf-cell"><img src="images/avatar/avatar-icon-neutral-144@2x.png" width="96" height="96" alt="Avatar, Type=Icon Neutral"><span class="bf-cap">Icon Neutral</span></div>
+        </div>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Type</th><th>Container</th><th>Content</th><th>Shape</th><th>Sizes published</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Image</strong> <em>(default)</em></td><td>Photo fill</td><td>&mdash;</td><td>Circle</td><td>All 13</td></tr>
+              <tr><td><strong>Channel Team</strong></td><td>Photo fill</td><td>&mdash;</td><td>Rounded square, radius &asymp; 25% of size (5 / 10 / 36dp at 16 / 40 / 144)</td><td>All 13</td></tr>
+              <tr><td><strong>Anonymous</strong></td><td>Surface/RaisedSecondary</td><td>Person glyph, Icon/Secondary</td><td>Circle</td><td>12 &mdash; no 24</td></tr>
+              <tr><td><strong>Overflow</strong></td><td>Surface/Primary + stroke Surface/RaisedPrimary</td><td>&ldquo;+N&rdquo; text, Text/Secondary</td><td>Circle</td><td>12 &mdash; no 24</td></tr>
+              <tr><td><strong>Icon brand</strong></td><td>Brand/Accent Tertiary</td><td>Glyph, Brand/Accent Primary</td><td>Circle</td><td>11 &mdash; no 16, no 24</td></tr>
+              <tr><td><strong>Icon Neutral</strong></td><td>Surface/RaisedSecondary</td><td>Glyph, Brand/Accent Primary</td><td>Circle</td><td>11 &mdash; no 16, no 24</td></tr>
+              <tr><td><strong>Community</strong></td><td>Surface/RaisedPrimary</td><td>People Team glyph (Filled), Icon/Secondary</td><td>Circle</td><td>11 &mdash; no 16, no 24</td></tr>
+              <tr><td><strong>Team avatar</strong></td><td>Image fill</td><td>&mdash;</td><td>Circle</td><td>11 &mdash; no 16, no 24</td></tr>
+              <tr><td><strong>3P app</strong></td><td>Image fill</td><td>&mdash;</td><td>Circle</td><td>11 &mdash; no 16, no 24</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns.</p>
+        <div class="callout callout-constraint">
+          <strong>Icon Neutral is not neutral.</strong> Its container is the neutral Surface/RaisedSecondary, but the glyph binds Brand/Accent&nbsp;Primary &mdash; the same purple as Icon brand. The two types differ only in container colour. Either the name or the glyph token is wrong.
+        </div>
+      </section>
+
+      <section class="spec-section" id="avatar-variants">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Variant Axes <a href="#avatar-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Two variant properties produce the 105 published variants; the four booleans are component properties layered on top, not variants.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Property</th><th>Type</th><th>Values</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr><td><code>Type</code></td><td>Variant</td><td>Image, Icon brand, Anonymous, Overflow, Team avatar, Community, 3P app, Icon Neutral, Channel Team</td><td>Image</td></tr>
+              <tr><td><code>Size</code></td><td>Variant</td><td>Micro [16dp], Mini [20dp], 24, Small [32dp], 36, Medium [40dp], Large [44dp], Big [52dp], Huge [64dp], 72, 96, 120, Xmassive [144dp]</td><td>Micro [16dp]</td></tr>
+              <tr><td><code>Presence</code></td><td>Boolean</td><td>Shows the presence dot (32&ndash;96dp only)</td><td>Off</td></tr>
+              <tr><td><code>Badge</code></td><td>Boolean</td><td>Shows the notification badge (32&ndash;96dp only)</td><td>Off</td></tr>
+              <tr><td><code>Cutout</code></td><td>Boolean</td><td>Shows the cutout slot for an icon, emoji or mention (32&ndash;96dp only)</td><td>Off</td></tr>
+              <tr><td><code>Overlap</code></td><td>Boolean</td><td>Shows the overlap ring used in stacks and piles (16&ndash;64dp only)</td><td>Off</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-warn">
+          <strong>Two naming generations on one axis.</strong> Eight sizes carry a name and a bracketed dp value (<code>Medium [40dp]</code>); five carry a bare number (<code>36</code>, <code>72</code>, <code>96</code>, <code>120</code>, <code>24</code>). <code>24</code> is also last in the option list rather than in size order, so it sorts after Xmassive in every property panel. Rename the five to the bracketed form and reorder the options.
+        </div>
+      </section>
+
+      <section class="spec-section" id="avatar-layout">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Layout &amp; Spacing <a href="#avatar-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Every size is square. The attachments scale in steps rather than proportionally, so the table lists them per size. Glyph sizes are read from the Icon brand, Anonymous, Community and Icon Neutral types.</p>
+        <div class="av-scale">
+          <div class="bf-cell"><span class="dot" style="width:16px;height:16px"></span><span class="bf-cap">Micro 16</span></div>
+          <div class="bf-cell"><span class="dot" style="width:20px;height:20px"></span><span class="bf-cap">Mini 20</span></div>
+          <div class="bf-cell odd"><span class="dot" style="width:24px;height:24px"></span><span class="bf-cap">24</span></div>
+          <div class="bf-cell"><span class="dot" style="width:32px;height:32px"></span><span class="bf-cap">Small 32</span></div>
+          <div class="bf-cell odd"><span class="dot" style="width:36px;height:36px"></span><span class="bf-cap">36</span></div>
+          <div class="bf-cell"><span class="dot" style="width:40px;height:40px"></span><span class="bf-cap">Medium 40</span></div>
+          <div class="bf-cell"><span class="dot" style="width:44px;height:44px"></span><span class="bf-cap">Large 44</span></div>
+          <div class="bf-cell"><span class="dot" style="width:52px;height:52px"></span><span class="bf-cap">Big 52</span></div>
+          <div class="bf-cell"><span class="dot" style="width:64px;height:64px"></span><span class="bf-cap">Huge 64</span></div>
+          <div class="bf-cell odd"><span class="dot" style="width:72px;height:72px"></span><span class="bf-cap">72</span></div>
+          <div class="bf-cell odd"><span class="dot" style="width:96px;height:96px"></span><span class="bf-cap">96</span></div>
+          <div class="bf-cell odd"><span class="dot" style="width:120px;height:120px"></span><span class="bf-cap">120</span></div>
+          <div class="bf-cell"><span class="dot" style="width:144px;height:144px"></span><span class="bf-cap">Xmassive 144</span></div>
+        </div>
+        <p class="bf-cap" style="text-align:left;max-width:none;">Sizes named with a bare number in Figma are shown in purple.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Size</th><th>Container</th><th>Glyph</th><th>Presence dot</th><th>Notification badge</th><th>Cutout slot</th><th>Overlap ring</th><th>Overflow stroke</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Micro [16dp]</strong></td><td>16</td><td>12</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>18</td><td>0.5</td></tr>
+              <tr><td><strong>Mini [20dp]</strong></td><td>20</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>23</td><td>0.625</td></tr>
+              <tr><td><strong>24</strong></td><td>24</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>23 <em>&#9888;</em></td><td>0.625</td></tr>
+              <tr><td><strong>Small [32dp]</strong></td><td>32</td><td>&mdash;</td><td>14</td><td>21.4 &times; 13.2</td><td>16</td><td>36</td><td>1</td></tr>
+              <tr><td><strong>36</strong></td><td>36</td><td>&mdash;</td><td>14</td><td>23.6 &times; 16.8</td><td>17 <em>&#9888;</em></td><td>&mdash;</td><td>1.0625</td></tr>
+              <tr><td><strong>Medium [40dp]</strong></td><td>40</td><td>24</td><td>14</td><td>26.8 &times; 18.4</td><td>20</td><td>44</td><td>1.25</td></tr>
+              <tr><td><strong>Large [44dp]</strong></td><td>44</td><td>&mdash;</td><td>16</td><td>26.8 &times; 18.4</td><td>20</td><td>44 <em>&#9888;</em></td><td>1.25</td></tr>
+              <tr><td><strong>Big [52dp]</strong></td><td>52</td><td>&mdash;</td><td>16</td><td>29 &times; 20</td><td>28</td><td>60</td><td>1.625</td></tr>
+              <tr><td><strong>Huge [64dp]</strong></td><td>64</td><td>&mdash;</td><td>16</td><td>29 &times; 20</td><td>28</td><td>71</td><td>1.625</td></tr>
+              <tr><td><strong>72</strong></td><td>72</td><td>&mdash;</td><td>18</td><td>33.4 &times; 23.2</td><td>40</td><td>&mdash;</td><td>2.5</td></tr>
+              <tr><td><strong>96</strong></td><td>96</td><td>&mdash;</td><td>24</td><td>40.8 &times; 28.4</td><td>50</td><td>&mdash;</td><td>3</td></tr>
+              <tr><td><strong>120</strong></td><td>120</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>3.75</td></tr>
+              <tr><td><strong>Xmassive [144dp]</strong></td><td>144</td><td>58</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>4.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-scroll-hint">All values in dp. Scroll the table sideways for the full set of columns.</p>
+
+        <h3>Corner radius</h3>
+        <div class="table-wrap">
+          <table><thead><tr><th>Element</th><th>Radius</th></tr></thead>
+          <tbody>
+            <tr><td>Container, every type except Channel Team</td><td><code>rounded</code> token &mdash; fully circular</td></tr>
+            <tr><td>Container, Channel Team</td><td>&asymp; 25% of size: 5 at 16, 10 at 40, 36 at 144 &mdash; hard-coded per variant, no token</td></tr>
+            <tr><td>Cutout slot</td><td><code>rounded</code> at every size except 36, which hard-codes 65.38</td></tr>
+          </tbody></table>
+        </div>
+
+        <div class="callout callout-warn">
+          <strong>The overlap ring is hand-drawn per size.</strong> Mini [20dp] and 24 share a 23dp ring, Large [44dp]&rsquo;s ring is the same 44dp as its container (so it does not show), and the ring binds Surface/Dominant everywhere except 40 and 44, where it binds Surface/RaisedPrimary. A ring that is container&nbsp;+&nbsp;2&times;stroke, bound to one token, would replace seven hand-set values.
+        </div>
+        <div class="callout callout-constraint">
+          <strong>The attachments only exist from 32 to 96.</strong> Presence, Badge and Cutout have no layer at 16, 20, 24, 120 or 144, and Overlap has none above 64. Toggling the boolean at those sizes does nothing, with no warning in the property panel. Either publish the layers or restrict the booleans to the sizes that support them.
+        </div>
+      </section>
+
+      <section class="spec-section" id="avatar-typography">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Typography <a href="#avatar-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Only the Overflow type carries text. There is no Initials type in the set.</p>
+        <div class="typo-sample">
+          <div class="typo-row">
+            <div class="typo-size">Overflow &middot; Medium [40dp]</div>
+            <div class="typo-preview"><span style="font-size:16px; font-weight:400; line-height:16px; color:var(--grey-38);">+20</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> none &mdash; raw SF Pro Text</span><span><strong>Size:</strong> 16dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 16dp</span><span><strong>Tracking:</strong> 0</span><span><strong>Colour:</strong> Text/Secondary</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Overflow &middot; Micro [16dp]</div>
+            <div class="typo-preview"><span style="font-size:6px; font-weight:400; line-height:8px; color:var(--grey-38);">+20</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> none</span><span><strong>Size:</strong> 6dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 8dp</span><span><strong>Colour:</strong> Text/Secondary</span></div>
+          </div>
+          <div class="typo-row">
+            <div class="typo-size">Overflow &middot; Xmassive [144dp]</div>
+            <div class="typo-preview"><span style="font-size:40px; font-weight:400; line-height:40px; color:var(--grey-38);">+20</span></div>
+            <div class="typo-meta"><span><strong>Token:</strong> none</span><span><strong>Size:</strong> 57.6dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 57.6dp</span><span><strong>Colour:</strong> Text/Secondary</span></div>
+          </div>
+        </div>
+        <div class="callout callout-constraint">
+          <strong>Overflow text is scaled, not styled.</strong> The &ldquo;+N&rdquo; label is 40% of the container at every size (6 / 16 / 57.6dp) with no text style attached, so it sits outside the iOS type ramp and the 6dp Micro label is below any legible floor. Give it the nearest ramp style per size and drop the text from sizes under 24.
+        </div>
+      </section>
+
+      <section class="spec-section" id="avatar-color">
+        <span class="section-eyebrow eyebrow-design">Reference</span>
+        <h2>Colour <a href="#avatar-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Values are the Light mode resolution of each token as published in the component set.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Type</th><th>Element</th><th>Token</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Icon brand</td><td>Container fill</td><td>Brand/Accent Tertiary</td><td><span class="btn-swatch" style="background:#e8ebfa;"></span>#e8ebfa</td></tr>
+              <tr><td>Icon brand</td><td>Glyph</td><td>Brand/Accent Primary</td><td><span class="btn-swatch" style="background:#5b5fc7;"></span>#5b5fc7</td></tr>
+              <tr><td>Icon Neutral</td><td>Container fill</td><td>Surface/RaisedSecondary</td><td><span class="btn-swatch" style="background:#e6e6e6;"></span>#e6e6e6</td></tr>
+              <tr><td>Icon Neutral</td><td>Glyph</td><td>Brand/Accent Primary</td><td><span class="btn-swatch" style="background:#5b5fc7;"></span>#5b5fc7</td></tr>
+              <tr><td>Anonymous</td><td>Container fill</td><td>Surface/RaisedSecondary</td><td><span class="btn-swatch" style="background:#e6e6e6;"></span>#e6e6e6</td></tr>
+              <tr><td>Anonymous</td><td>Person glyph</td><td>Icon/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Community</td><td>Container fill</td><td>Surface/RaisedPrimary</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Community</td><td>People Team glyph</td><td>Icon/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>Overflow</td><td>Container fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Overflow</td><td>Container stroke</td><td>Surface/RaisedPrimary</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
+              <tr><td>Overflow</td><td>&ldquo;+N&rdquo; text</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+              <tr><td>All</td><td>Overlap ring</td><td>Surface/Dominant <em>(Surface/RaisedPrimary at 40 and 44)</em></td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>All</td><td>Cutout slot</td><td>Surface/Dominant <em>(Text/On Accent at 36)</em></td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
+              <tr><td>Image, Channel Team, Team avatar, 3P app</td><td>Container</td><td>Image fill &mdash; no token</td><td>&mdash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-info">
+          <strong>Brand/Accent Primary resolves to #5b5fc7 here.</strong> Elsewhere in this library the same token resolves to #654cf5 (see <a href="#fab" data-link="fab">FAB</a> and <a href="#buttons" data-link="buttons">Button</a>). The Avatar set is bound to a different collection mode than the button family; worth a check before the glyph colour is treated as the Monocore accent.
+        </div>
+      </section>
+
+      <section class="spec-section" id="avatar-notes">
+        <span class="section-eyebrow eyebrow-impl">Notes</span>
+        <h2>When to Use It <a href="#avatar-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p>Image for a person with a photo, Anonymous when there is none; Team avatar and Channel Team for a group, with Channel Team the only rounded-square shape in the set; Community and 3P app for their namesakes; Icon brand and Icon Neutral for a system entity rather than an identity; Overflow for the &ldquo;+N&rdquo; tail of a stack or pile. Groups, stacks, piles and the Presence, Cutout and Badge attachments are documented on the <a href="#avatar/layout" data-link="avatar/layout" data-active-when="avatar">Layout</a> tab, artboard by artboard.</p>
+        <div class="callout callout-rule">
+          <strong>Pick the size from the ramp, not the number.</strong> The named sizes (16, 20, 32, 40, 44, 52, 64, 144) are the intended ramp; the bare-number sizes (24, 36, 72, 96, 120) were added for specific surfaces and carry fewer types and fewer attachments. Reach for them only when the surface they were made for calls for it.
+        </div>
+        <div class="callout callout-warn">
+          <strong>Presence needs 32dp.</strong> Below Small there is no presence layer, so a 16, 20 or 24dp avatar can never show status. Lists that need status must use Small or above.
+        </div>
+      </section>
+
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <a href="#avatar-types">Types</a>
+        <a href="#avatar-variants">Variant Axes</a>
+        <a href="#avatar-layout">Layout &amp; Spacing</a>
+        <a href="#avatar-typography">Typography</a>
+        <a href="#avatar-color">Colour</a>
+        <a href="#avatar-notes">When to Use It</a>
+      </nav>
+    </aside>
   </div>
+
+  <footer class="docs-footer">Avatar &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83353-26404</code> &middot; October 2026</footer>
+</div>
 </div>
 </div>
 
@@ -10012,7 +10217,7 @@ Icon only = True
                 <div class="lay-block-title">Image</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-image-144.svg" width="144" height="144" alt="Avatar — Type=Image · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-image-144@2x.png" width="144" height="144" alt="Avatar — Type=Image · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:109960;20995:3084;107073:110120">
               </div>
               <div class="lay-props">Avatar · Type=Image · Size=Xmassive [144dp]</div>
             </div>
@@ -10021,7 +10226,7 @@ Icon only = True
                 <div class="lay-block-title">Icon brand</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-icon-brand-144.svg" width="144" height="144" alt="Avatar — Type=Icon brand · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-icon-brand-144@2x.png" width="144" height="144" alt="Avatar — Type=Icon brand · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:110110;20995:3084;107073:110130">
               </div>
               <div class="lay-props">Avatar · Type=Icon brand · Size=Xmassive [144dp]</div>
             </div>
@@ -10030,7 +10235,7 @@ Icon only = True
                 <div class="lay-block-title">Anonymous</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-anonymous-144.svg" width="144" height="144" alt="Avatar — Type=Anonymous · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-anonymous-144@2x.png" width="144" height="144" alt="Avatar — Type=Anonymous · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:110136;20995:3084;107073:110135">
               </div>
               <div class="lay-props">Avatar · Type=Anonymous · Size=Xmassive [144dp]</div>
             </div>
@@ -10039,7 +10244,7 @@ Icon only = True
                 <div class="lay-block-title">Overflow</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-overflow-144.svg" width="144" height="144" alt="Avatar — Type=Overflow · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-overflow-144@2x.png" width="144" height="144" alt="Avatar — Type=Overflow · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:110153;20995:3084;107073:110152">
               </div>
               <div class="lay-props">Avatar · Type=Overflow · Size=Xmassive [144dp]</div>
             </div>
@@ -10048,7 +10253,7 @@ Icon only = True
                 <div class="lay-block-title">Team Avatar</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-team-144.svg" width="144" height="144" alt="Avatar — Type=Team avatar · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-team-144@2x.png" width="144" height="144" alt="Avatar — Type=Team avatar · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:110167;20995:3084;107073:110166">
               </div>
               <div class="lay-props">Avatar · Type=Team avatar · Size=Xmassive [144dp]</div>
             </div>
@@ -10057,7 +10262,7 @@ Icon only = True
                 <div class="lay-block-title">Community</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-community-144.svg" width="144" height="144" alt="Avatar — Type=Community · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-community-144@2x.png" width="144" height="144" alt="Avatar — Type=Community · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:110179;20995:3084;107073:110178">
               </div>
               <div class="lay-props">Avatar · Type=Community · Size=Xmassive [144dp]</div>
             </div>
@@ -10066,7 +10271,7 @@ Icon only = True
                 <div class="lay-block-title">3p App</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-3p-app-144.svg" width="144" height="144" alt="Avatar — Type=3P app · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-3p-app-144@2x.png" width="144" height="144" alt="Avatar — Type=3P app · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:110192;20995:3084;107073:110191">
               </div>
               <div class="lay-props">Avatar · Type=3P app · Size=Xmassive [144dp]</div>
             </div>
@@ -10075,7 +10280,7 @@ Icon only = True
                 <div class="lay-block-title">Icon Neutral</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-icon-neutral-144.svg" width="144" height="144" alt="Avatar — Type=Icon Neutral · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-icon-neutral-144@2x.png" width="144" height="144" alt="Avatar — Type=Icon Neutral · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:110205;20995:3084;107073:110204">
               </div>
               <div class="lay-props">Avatar · Type=Icon Neutral · Size=Xmassive [144dp]</div>
             </div>
@@ -10087,7 +10292,7 @@ Icon only = True
                 <div class="lay-block-title">Icon Neutral</div>
               </div>
               <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/avatar/avatar-icon-neutral-144.svg" width="144" height="144" alt="Avatar — Type=Icon Neutral · Size=Xmassive [144dp]">
+                <img src="images/avatar/avatar-icon-neutral-144@2x.png" width="144" height="144" alt="Avatar — Type=Icon Neutral · Size=Xmassive [144dp]" data-figma-id="I107073:109830;20995:3166;107073:110226;20995:3084;107073:110223">
               </div>
               <div class="lay-props">Avatar · Type=Icon Neutral · Size=Xmassive [144dp]</div>
             </div>
