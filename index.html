@@ -9759,6 +9759,12 @@ Icon only = True
   .lay-board + .lay-board { margin-top: var(--sp-10); }
   .lay-title .anchor-link { font-size: 20px; color: var(--c-text-muted); text-decoration: none; opacity: 0; margin-left: 6px; font-weight: 400; transition: opacity .15s; }
   .lay-title:hover .anchor-link { opacity: 1; }
+  .lay-spec { display: flex; flex-direction: column; gap: 6px; }
+  .lay-spec-title { font-size: 11.5px; font-weight: 600; color: var(--mc-text-secondary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .lay-spec .table-wrap { margin: 0; background: var(--mc-surface-floating); }
+  .lay-spec td:first-child { white-space: nowrap; font-weight: 500; width: 160px; }
+  .lay-spec td:nth-child(2) { white-space: nowrap; }
+  .lay-spec td em { color: var(--c-text-muted); font-style: normal; }
   .lay-props { font-size: 11.5px; color: var(--mc-text-secondary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; margin-top: -4px; }
   @media (max-width: 720px) { .lay-block { padding: var(--sp-5); } .lay-title { font-size: 28px; } }
 </style>
@@ -10325,10 +10331,10 @@ Icon only = True
   <header class="docs-header">
     <div class="eyebrow">Chip &middot; Layout</div>
     <h1>Chip</h1>
-    <p class="subtitle">Rendered from the 2 documentation artboards on the <em>Buttons</em> and <em>Chip</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change.</p>
+    <p class="subtitle">Rendered from the documentation artboard on the <em>Chip</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboards change.</p>
     <div class="meta">
-      <span>2 Figma artboards</span>
-      <span>17 blocks</span>
+      <span>1 Figma artboard</span>
+      <span>9 blocks</span>
       <span>Read 31 Oct 2026</span>
     </div>
   </header>
@@ -10439,104 +10445,12 @@ Icon only = True
         </div>
       </section>
 
-      <section class="spec-section lay-board" id="chip-layout-chip-buttons" data-figma-node="107599:29389">
-        <div class="lay-page" data-figma="New component">
-          <h1 class="lay-title" data-figma="Content block / Page Title">Chip (Buttons page) <a href="#chip-layout-chip-buttons" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
-          <div class="lay-section" id="chip-layout-chip-buttons-variant-brand" data-figma="Content block / Section primary">
-            <h2>Variant - Brand</h2>
-            <div class="lay-block" data-figma="Slot block">
-              <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Rest</div>
-              </div>
-              <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-buttons-brand-rest@2x.png" width="81" height="32" alt="Chip — Style=Brand · State=Rest" data-figma-id="I107599:29389;20995:3166;116224:2228;20995:3084;116224:2099">
-              </div>
-              <div class="lay-props">Chip · Style=Brand · State=Rest</div>
-            </div>
-            <div class="lay-block" data-figma="Slot block">
-              <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Pressed</div>
-              </div>
-              <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-buttons-brand-pressed@2x.png" width="81" height="32" alt="Chip — Style=Brand · State=Pressed" data-figma-id="I107599:29389;20995:3166;116224:2236;20995:3084;116224:2123">
-              </div>
-              <div class="lay-props">Chip · Style=Brand · State=Pressed</div>
-            </div>
-            <div class="lay-block" data-figma="Slot block">
-              <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Disabled</div>
-              </div>
-              <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-buttons-brand-disabled@2x.png" width="81" height="32" alt="Chip — Style=Brand · State=Disabled" data-figma-id="I107599:29389;20995:3166;116224:2244;20995:3084;116224:2147">
-              </div>
-              <div class="lay-props">Chip · Style=Brand · State=Disabled</div>
-            </div>
-          </div>
-          <div class="lay-section" id="chip-layout-chip-buttons-variant-subtle" data-figma="Content block / Section primary">
-            <h2>Variant - Subtle</h2>
-            <div class="lay-block" data-figma="Slot block">
-              <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Rest</div>
-              </div>
-              <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-buttons-subtle-rest@2x.png" width="81" height="32" alt="Chip — Style=Subtle · State=Rest" data-figma-id="I107599:29389;20995:3166;116224:2253;20995:3084;116224:2178">
-              </div>
-              <div class="lay-props">Chip · Style=Subtle · State=Rest</div>
-            </div>
-            <div class="lay-block" data-figma="Slot block">
-              <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Pressed</div>
-              </div>
-              <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-buttons-subtle-pressed@2x.png" width="81" height="32" alt="Chip — Style=Subtle · State=Pressed" data-figma-id="I107599:29389;20995:3166;116224:2261;20995:3084;116224:2202">
-              </div>
-              <div class="lay-props">Chip · Style=Subtle · State=Pressed</div>
-            </div>
-            <div class="lay-block" data-figma="Slot block">
-              <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Disabled</div>
-              </div>
-              <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-buttons-subtle-disabled@2x.png" width="81" height="32" alt="Chip — Style=Subtle · State=Disabled" data-figma-id="I107599:29389;20995:3166;116224:2269;20995:3084;116224:2226">
-              </div>
-              <div class="lay-props">Chip · Style=Subtle · State=Disabled</div>
-            </div>
-          </div>
-          <div class="lay-section" id="chip-layout-chip-buttons-size" data-figma="Content block / Section primary">
-            <h2>Size</h2>
-            <div class="lay-block" data-figma="Slot block">
-              <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Min height = 32</div>
-              </div>
-              <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-buttons-size-min-height-32-1@2x.png" width="81" height="32" alt="Chip — Style=Brand · State=Pressed" data-figma-id="I107599:29389;20995:3166;107599:29399;20995:3084;107599:29715">
-                <img src="images/chip/chip-buttons-size-min-height-32-2@2x.png" width="81" height="32" alt="Chip — Style=Subtle · State=Rest" data-figma-id="I107599:29389;20995:3166;107599:29399;20995:3084;107599:29716">
-              </div>
-              <div class="lay-props">Chip · Style=Brand · State=Pressed / Style=Subtle · State=Rest</div>
-            </div>
-          </div>
-          <div class="lay-section" id="chip-layout-chip-buttons-padding" data-figma="Content block / Section primary">
-            <h2>Padding</h2>
-            <div class="lay-block" data-figma="Slot block">
-              <div class="lay-block-head" data-figma="Content block / Section primary light">
-                <div class="lay-block-title">Top/Bottom 6, Leading/Trailing 12</div>
-              </div>
-              <div class="lay-preview" data-figma="PASTE HERE">
-                <img src="images/chip/chip-buttons-padding-top-bottom-6-leading-trailing-12-1@2x.png" width="81" height="32" alt="Chip — Style=Brand · State=Pressed" data-figma-id="I107599:29389;20995:3166;107599:29758;20995:3084;107599:29753">
-                <img src="images/chip/chip-buttons-padding-top-bottom-6-leading-trailing-12-2@2x.png" width="81" height="32" alt="Chip — Style=Subtle · State=Rest" data-figma-id="I107599:29389;20995:3166;107599:29758;20995:3084;107599:29754">
-              </div>
-              <div class="lay-props">Chip · Style=Brand · State=Pressed / Style=Subtle · State=Rest</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section class="spec-section" id="chip-layout-schema">
         <span class="section-eyebrow eyebrow-impl">Dev notes</span>
         <h2>How this page is parsed from Figma <a href="#chip-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <p class="section-intro">Each artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
         <div class="callout callout-rule"><strong>Regeneration rule.</strong> Take the artboards on the page in canvas order (left to right). For each one, walk its slot in order; emit an <code>h1</code> for the page title, an <code>h2</code> for every Section primary block, and a card for every Slot block. Each placeholder carries the instance's node id in <code>data-figma-id</code> and its size, so the export pass replaces it with an <code>&lt;img&gt;</code> (SVG for pure vector, 2&times; PNG with alpha when the component uses a photo or a blur material) without re-parsing the artboard.</div>
-        <p class="section-intro">Figma page <em>Buttons</em> and <em>Chip</em>; nodes: Chip <code>115285:77637</code>, Chip (Buttons page) <code>107599:29389</code>.</p>
+        <p class="section-intro">Figma page <em>Chip</em>; nodes: Chip <code>115285:77637</code>.</p>
       </section>
     </main>
 
@@ -10549,11 +10463,6 @@ Icon only = True
         <a href="#chip-layout-chip-size">Size</a>
         <a href="#chip-layout-chip-padding">Padding</a>
         <a href="#chip-layout-chip-long-text-example">Long text example</a>
-        <div class="toc-group">Chip (Buttons page)</div>
-        <a href="#chip-layout-chip-buttons-variant-brand">Variant - Brand</a>
-        <a href="#chip-layout-chip-buttons-variant-subtle">Variant - Subtle</a>
-        <a href="#chip-layout-chip-buttons-size">Size</a>
-        <a href="#chip-layout-chip-buttons-padding">Padding</a>
       </nav>
     </aside>
   </div>
@@ -20623,158 +20532,395 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 
 <div class="page" id="page-chip" data-page="chip">
 <div class="docs-shell">
-
   <header class="docs-header">
-    <div class="eyebrow">Button Family</div>
+    <div class="eyebrow">Chip &middot; Spec</div>
     <h1>Chip</h1>
-    <p class="subtitle">A small, rounded, selectable label with a leading icon. Two styles, three states &mdash; and a pair of style names that describe the opposite of what they do.</p>
-    <div class="meta"><span>6 variants</span><span>2 axes</span><span>Radius 12dp</span><span>Figma: Monocore-iOS &middot; node <code>105757-36293</code></span></div>
+    <p class="subtitle">The Layout artboard from the <em>Chip</em> page of Monocore iOS, annotated for engineering: under every preview, a table of the tokens bound to that instance in Figma (background, text, icon, stroke, corner radius, padding) with the raw value each token resolves to, plus the size of the chip and its icon.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>9 blocks</span>
+      <span>Light mode values</span>
+      <span>Read 31 Oct 2026</span>
+    </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-
-      <section class="spec-section" id="chp-preview">
-        <span class="section-eyebrow eyebrow-design">Variant</span>
-        <h2>All Six Variants <a href="#chp-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="bf-stage">
-          <div class="bf-cell"><span class="fchip "><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Brand &middot; Rest</span></div>
-          <div class="bf-cell"><span class="fchip brand-pressed"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Brand &middot; Pressed</span></div>
-          <div class="bf-cell"><span class="fchip brand-disabled"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Brand &middot; Disabled</span></div>
-          <div class="bf-cell"><span class="fchip subtle"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Subtle &middot; Rest</span></div>
-          <div class="bf-cell"><span class="fchip subtle subtle-pressed"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Subtle &middot; Pressed</span></div>
-          <div class="bf-cell"><span class="fchip subtle subtle-disabled"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chip</span></span></span><span class="bf-cap">Subtle &middot; Disabled</span></div>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chp-variants">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Variant Axes <a href="#chp-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Two axes, fully published: 2 &times; 3 = 6 variants.</p>
-        <div class="div-axis-cards">
-          <div class="div-axis"><h4>Style &mdash; 2 values</h4><div class="vals"><span class="val">Brand</span><span class="val">Subtle</span></div></div>
-          <div class="div-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Disabled</span></div></div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Left icon</td><td>Boolean + swap</td><td>On</td><td>20&times;20 box / 16&times;16 glyph</td></tr>
-              <tr><td>Show label</td><td>Boolean</td><td>On</td><td>Off yields an icon-only chip &mdash; supply an accessible name</td></tr>
-              <tr><td>Right icon</td><td>Boolean + swap</td><td>Off</td><td>Same box size as the left icon</td></tr>
-              <tr><td>Label</td><td>Text</td><td><code>Chip</code></td><td>Capped at 200dp inside a 250dp chip</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="callout callout-constraint">
-          <strong>The style names are inverted.</strong> <code>Brand</code> is the grey one &mdash; Surface/RaisedTertiary fill, Text/Primary label, no brand colour anywhere. <code>Subtle</code> is the one that uses Text/Interactive purple. Anyone picking a style by name will pick the wrong one.
-        </div>
-      </section>
-
-      <section class="spec-section" id="chp-layout">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Layout &amp; Spacing <a href="#chp-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The chip has no Size axis, but its minimum height changes between styles &mdash; and not deliberately.</p>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Style</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Icon box</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Brand</strong></td><td>28dp <em>on the root</em></td><td>Hugs content</td><td>48dp</td><td>250dp</td><td>6 &times; 12dp</td><td>8dp</td><td>20&times;20</td></tr>
-              <tr><td><strong>Subtle</strong></td><td>32dp <em>on Content</em></td><td>Hugs content</td><td>48dp</td><td>250dp</td><td>6 &times; 12dp</td><td>8dp</td><td>20&times;20</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Label text is separately capped at 200dp.</p>
-
-        <h3>Corner radius</h3>
-        <p>Chip publishes no Size axis, so there is a single column. It is constant across both styles and all three states.</p>
-        <div class="table-wrap">
-          <table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
-          <tbody><tr><td>Container</td><td>12dp <em>Radius/Strong</em></td></tr></tbody></table>
-        </div>
-
-        <div class="callout callout-constraint">
-          <strong>Minimum height is set on two different layers.</strong> Brand puts <code>min-height: 28</code> on the chip root; Subtle puts <code>min-height: 32</code> on the inner Content frame. Two styles of the same component therefore have different minimum heights, declared in different places &mdash; a 4dp difference that shows immediately when Brand and Subtle chips sit in the same row.
-        </div>
-      </section>
-
-      <section class="spec-section" id="chp-typography">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Typography <a href="#chp-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Chip publishes no Size axis, so the rows are named for the style that carries each colour.</p>
-        <div class="typo-sample">
-          <div class="typo-row">
-            <div class="typo-size">Brand &middot; Rest</div>
-            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Chip</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Colour:</strong> Text/Primary</span></div>
+      <section class="spec-section lay-board" id="chip-spec-chip" data-figma-node="115285:77637">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chip <a href="#chip-spec-chip" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chip-spec-chip-variant-primary" data-figma="Content block / Section primary">
+            <h2>Variant - Primary</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-rest@2x.png" width="81" height="32" alt="Chip - current — Style=Primary · State=Rest" data-figma-id="I115285:77637;20995:3166;116224:382;20995:3084;116224:253">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Rest</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;116224:382;20995:3084;116224:253">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><code>Surface/RaisedSecondary</code></td><td><span class="btn-swatch" style="background:#E6E6E6;"></span>#E6E6E6</td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · 1px inside</td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-pressed@2x.png" width="81" height="32" alt="Chip - current — Style=Primary · State=Pressed" data-figma-id="I115285:77637;20995:3166;116224:390;20995:3084;116224:277">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Pressed</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;116224:390;20995:3084;116224:277">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><code>Surface/Subtle</code></td><td><span class="btn-swatch" style="background:#000000;"></span>#000000 @ 0% <em>fully transparent</em></td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · weight 0 <em>bound but not drawn</em></td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-primary-disabled@2x.png" width="81" height="32" alt="Chip - current — Style=Primary · State=Disabled" data-figma-id="I115285:77637;20995:3166;116224:398;20995:3084;116224:301">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Disabled</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;116224:398;20995:3084;116224:301">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><code>Surface/RaisedDissabled</code></td><td><span class="btn-swatch" style="background:#F0F0F0;"></span>#F0F0F0</td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · weight 0 <em>bound but not drawn</em></td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Disabled</code></td><td><span class="btn-swatch" style="background:#ACACAC;"></span>#ACACAC</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Disabled</code></td><td><span class="btn-swatch" style="background:#ACACAC;"></span>#ACACAC</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="typo-row">
-            <div class="typo-size">Subtle &middot; Rest</div>
-            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--mc-text-interactive);">Chip</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span><span><strong>Colour:</strong> Text/Interactive</span></div>
+          <div class="lay-section" id="chip-spec-chip-variant-brand" data-figma="Content block / Section primary">
+            <h2>Variant - Brand</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-brand-rest@2x.png" width="81" height="32" alt="Chip - current — Style=Brand · State=Rest" data-figma-id="I115285:77637;20995:3166;116224:407;20995:3084;116224:332">
+              </div>
+              <div class="lay-props">Chip - current · Style=Brand · State=Rest</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;116224:407;20995:3084;116224:332">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><em>&mdash;</em></td><td>transparent <em>no fill</em></td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · 1px inside</td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-brand-pressed@2x.png" width="81" height="32" alt="Chip - current — Style=Brand · State=Pressed" data-figma-id="I115285:77637;20995:3166;116224:415;20995:3084;116224:356">
+              </div>
+              <div class="lay-props">Chip - current · Style=Brand · State=Pressed</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;116224:415;20995:3084;116224:356">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><em>&mdash;</em></td><td>transparent <em>no fill</em></td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · 1px inside</td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Brand/Accent Secondary</code></td><td><span class="btn-swatch" style="background:#AAB1FA;"></span>#AAB1FA</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Brand/Accent Secondary</code></td><td><span class="btn-swatch" style="background:#AAB1FA;"></span>#AAB1FA</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-brand-disabled@2x.png" width="81" height="32" alt="Chip - current — Style=Brand · State=Disabled" data-figma-id="I115285:77637;20995:3166;116224:423;20995:3084;116224:380">
+              </div>
+              <div class="lay-props">Chip - current · Style=Brand · State=Disabled</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;116224:423;20995:3084;116224:380">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><em>&mdash;</em></td><td>transparent <em>no fill</em></td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · 1px inside</td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Disabled</code></td><td><span class="btn-swatch" style="background:#ACACAC;"></span>#ACACAC</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Disabled</code></td><td><span class="btn-swatch" style="background:#ACACAC;"></span>#ACACAC</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="typo-row">
-            <div class="typo-size">Both &middot; Disabled</div>
-            <div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--mc-text-disabled);">Chip</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Colour:</strong> Text/Disabled</span></div>
+          <div class="lay-section" id="chip-spec-chip-size" data-figma="Content block / Section primary">
+            <h2>Size</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Min height = 32</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-size-min-height-32-1@2x.png" width="81" height="32" alt="Chip - current — Style=Primary · State=Pressed" data-figma-id="I115285:77637;20995:3166;115285:77626;20995:3084;115285:77624">
+                <img src="images/chip/chip-size-min-height-32-2@2x.png" width="81" height="32" alt="Chip - current — Style=Brand · State=Rest" data-figma-id="I115285:77637;20995:3166;115285:77626;20995:3084;115285:77625">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Pressed / Style=Brand · State=Rest</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;115285:77626;20995:3084;115285:77624">
+                <div class="lay-spec-title">Chip - current · Style=Primary · State=Pressed</div>
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><code>Surface/Subtle</code></td><td><span class="btn-swatch" style="background:#000000;"></span>#000000 @ 0% <em>fully transparent</em></td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · weight 0 <em>bound but not drawn</em></td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;115285:77626;20995:3084;115285:77625">
+                <div class="lay-spec-title">Chip - current · Style=Brand · State=Rest</div>
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><em>&mdash;</em></td><td>transparent <em>no fill</em></td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · 1px inside</td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-spec-chip-padding" data-figma="Content block / Section primary">
+            <h2>Padding</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Top/Bottom 6, Leading/Trailing 12</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-padding-top-bottom-6-leading-trailing-12-1@2x.png" width="81" height="32" alt="Chip - current — Style=Primary · State=Pressed" data-figma-id="I115285:77637;20995:3166;115285:77631;20995:3084;115285:77629">
+                <img src="images/chip/chip-padding-top-bottom-6-leading-trailing-12-2@2x.png" width="81" height="32" alt="Chip - current — Style=Brand · State=Rest" data-figma-id="I115285:77637;20995:3166;115285:77631;20995:3084;115285:77630">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Pressed / Style=Brand · State=Rest</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;115285:77631;20995:3084;115285:77629">
+                <div class="lay-spec-title">Chip - current · Style=Primary · State=Pressed</div>
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><code>Surface/Subtle</code></td><td><span class="btn-swatch" style="background:#000000;"></span>#000000 @ 0% <em>fully transparent</em></td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · weight 0 <em>bound but not drawn</em></td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;115285:77631;20995:3084;115285:77630">
+                <div class="lay-spec-title">Chip - current · Style=Brand · State=Rest</div>
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>81 × 32 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><em>&mdash;</em></td><td>transparent <em>no fill</em></td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · 1px inside</td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="lay-section" id="chip-spec-chip-long-text-example" data-figma="Content block / Section primary">
+            <h2>Long text example</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title"></div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chip/chip-long-text-example-@2x.png" width="250" height="66" alt="Chip - current — Style=Primary · State=Rest" data-figma-id="I115285:77637;20995:3166;115285:77636;20995:3084;115402:144036">
+              </div>
+              <div class="lay-props">Chip - current · Style=Primary · State=Rest</div>
+              <div class="lay-spec" data-figma-id="I115285:77637;20995:3166;115285:77636;20995:3084;115402:144036">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Size</td><td><em>&mdash;</em></td><td>250 × 66 <em>min height 32</em></td></tr>
+                    <tr><td>Background</td><td><code>Surface/RaisedSecondary</code></td><td><span class="btn-swatch" style="background:#E6E6E6;"></span>#E6E6E6</td></tr>
+                    <tr><td>Stroke</td><td><code>Divider/Primary</code></td><td><span class="btn-swatch" style="background:#E1E1E1;"></span>#E1E1E1 · 1px inside</td></tr>
+                    <tr><td>Corner radius</td><td><code>strong</code></td><td>12</td></tr>
+                    <tr><td>Text</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Type</td><td><code>iOS/Button 2</code></td><td>SF Pro Text Medium · 13 / 18</td></tr>
+                    <tr><td>Icon</td><td><code>Placeholder · Size=20</code></td><td>20 × 20 (glyph 16 × 16)</td></tr>
+                    <tr><td>Icon colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Padding · Top</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Bottom</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Padding · Leading</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Padding · Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Gap (icon → label)</td><td><code>Size/Nudge/vertical/small</code></td><td>8</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="spec-section" id="chp-color">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Colour by Style &times; State <a href="#chp-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Style</th><th>State</th><th>Fill</th><th>Stroke</th><th>Label</th></tr></thead>
-            <tbody>
-              <tr><td rowspan="3"><strong>Brand</strong></td><td>Rest</td><td>Surface/RaisedTertiary <span class="btn-swatch" style="background:#f5f5f5;"></span></td><td>1dp Stroke/Container</td><td>Text/Primary</td></tr>
-              <tr><td>Pressed</td><td>Surface/SubtleSelected <span class="btn-swatch" style="background:#f0f0f0;"></span></td><td>&mdash; <em>border removed</em></td><td>Text/Secondary</td></tr>
-              <tr><td>Disabled</td><td>Surface/RaisedBase <span class="btn-swatch" style="background:#f0f0f0;"></span></td><td>&mdash; <em>border removed</em></td><td>Text/Disabled</td></tr>
-              <tr><td rowspan="3"><strong>Subtle</strong></td><td>Rest</td><td>None</td><td>1dp Stroke/Container</td><td>Text/Interactive <span class="btn-swatch" style="background:#4c39b8;"></span></td></tr>
-              <tr><td>Pressed</td><td>None</td><td>1dp Stroke/Container</td><td>Brand/Accent Secondary <span class="btn-swatch" style="background:#aba8ff;"></span></td></tr>
-              <tr><td>Disabled</td><td>None</td><td>1dp Stroke/Container</td><td>Text/Disabled</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-warn">
-          <strong>Brand loses its outline when pressed.</strong> Rest carries a 1dp Stroke/Container border; Pressed and Disabled set it to zero. The chip visibly changes shape on press &mdash; it shrinks by 2dp &mdash; rather than just changing tone. Subtle keeps its border in all three states, which is the behaviour Brand should copy.
-        </div>
-
-        <div class="callout callout-warn">
-          <strong>Brand Pressed and Brand Disabled are the same fill.</strong> Surface/SubtleSelected and Surface/RaisedBase both resolve to #f0f0f0, so a pressed chip and a disabled chip are distinguishable only by their label colour.
-        </div>
+      <section class="spec-section" id="chip-spec-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How the annotations are read from Figma <a href="#chip-spec-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The page mirrors the Layout view one-to-one (same artboard, same sections, same blocks). For each component instance in a block, the bound variables are read from the instance itself: <code>fills</code> and <code>strokes</code> on the root give background and stroke, <code>cornerRadius</code> gives the radius, the <code>Content</code> frame gives padding and gap, the <code>Label</code> text gives the text colour and text style, and the <code>Icon</code> instance gives the icon size and glyph colour. Each token is resolved for that instance (<code>resolveForConsumer</code>), so the raw value is what the instance actually renders in the file's current mode.</p>
+        <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is still bound on the instance but not drawn. A background listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent.</div>
+        <p class="section-intro">Figma page <em>Chip</em>; node: Chip <code>115285:77637</code>.</p>
       </section>
-
-      <section class="spec-section" id="chp-notes">
-        <span class="section-eyebrow eyebrow-impl">Notes</span>
-        <h2>When to Use It <a href="#chp-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p>Chips are for selectable, removable, or filterable labels &mdash; a chosen recipient, an applied filter, a suggested topic. They are not small buttons; if the thing performs an action rather than representing a selection, use <a href="#buttons" data-link="buttons">Button &middot; Small</a>.</p>
-        <div class="callout callout-rule">
-          <strong>Radius 12, not a pill.</strong> The chip is deliberately a rounded rectangle rather than fully rounded, which is what separates it visually from Button &middot; Small and from Pill button. Do not round it to 999 to &ldquo;match&rdquo; &mdash; the difference is the signal.
-        </div>
-        <div class="callout callout-warn">
-          <strong>The chip is 28&ndash;32dp tall.</strong> Under a 44dp target at both styles, and chips almost always appear in horizontally-scrolling rows where mis-taps are costly. Extend the hit area; do not rely on the visual box.
-        </div>
-      </section>
-
     </main>
 
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#chp-preview">All Six Variants</a>
-        <a href="#chp-variants">Variant Axes</a>
-        <a href="#chp-layout">Layout &amp; Spacing</a>
-        <a href="#chp-typography">Typography</a>
-        <a href="#chp-color">Colour</a>
-        <a href="#chp-notes">When to Use It</a>
+        <div class="toc-group">Chip</div>
+        <a href="#chip-spec-chip-variant-primary">Variant - Primary</a>
+        <a href="#chip-spec-chip-variant-brand">Variant - Brand</a>
+        <a href="#chip-spec-chip-size">Size</a>
+        <a href="#chip-spec-chip-padding">Padding</a>
+        <a href="#chip-spec-chip-long-text-example">Long text example</a>
       </nav>
     </aside>
   </div>
 
-  <footer class="docs-footer">Chip &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>105757-36293</code> &middot; August 2026</footer>
+  <footer class="docs-footer">
+    Chip &middot; Spec &middot; Monocore &middot; October 2026
+  </footer>
 </div>
 </div>
 
@@ -22577,10 +22723,15 @@ function switchTier(btn, tier) {
   const VIEWS = { layout: 'view-layout', spec: null, guidance: 'view-guidance', architecture: 'view-architecture' };
   const NO_TABS = new Set(['overview', 'roadmap', 'architecture', 'teams-ia']);
 
+  // Default view: Layout when the topic has a Layout page, otherwise Spec.
+  function defaultView(topic) {
+    if (NO_TABS.has(topic)) return 'spec';
+    return document.querySelector('.page[data-page="' + topic + '-layout"]') ? 'layout' : 'spec';
+  }
   function parseHash(hash) {
     const parts = (hash || location.hash || '#overview').replace('#','').split('/').filter(Boolean);
     const topic = parts[0] || 'overview';
-    const view  = parts[1] && VIEWS.hasOwnProperty(parts[1]) ? parts[1] : 'spec';
+    const view  = parts[1] && VIEWS.hasOwnProperty(parts[1]) ? parts[1] : defaultView(topic);
     return { topic, view };
   }
 
@@ -22663,7 +22814,7 @@ function switchTier(btn, tier) {
     const { topic } = parseHash(location.hash);
     if (NO_TABS.has(topic)) return;
     const view = t.dataset.view;
-    const hash = view === 'spec' ? '#' + topic : '#' + topic + '/' + view;
+    const hash = view === defaultView(topic) ? '#' + topic : '#' + topic + '/' + view;
     goto(hash);
     setTimeout(updateActiveSection, 50);
   }));
