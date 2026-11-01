@@ -3520,6 +3520,212 @@
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Card</em>; nodes: Card <code>106947:206801</code>.</p>
       </section>
+
+      <section class="spec-section" id="card-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Card <a href="#card-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Every control below maps 1:1 to a property in the Figma component. Flip <strong>Highlight slots</strong> to see exactly where consumer content gets injected — the dashed regions are the slots, everything else is owned by the component.</p>
+
+        <div class="cardlab">
+          <div class="cardlab-controls">
+            <div class="cardlab-group">
+              <div class="cardlab-group-label">Thumbnail Type</div>
+              <div class="cardlab-pills" data-axis="thumb">
+                <button class="cardlab-pill on" data-val="dominant">Dominant</button>
+                <button class="cardlab-pill" data-val="primary">Primary (128)</button>
+                <button class="cardlab-pill" data-val="secondary">Secondary (72)</button>
+                <button class="cardlab-pill" data-val="none">None</button>
+              </div>
+            </div>
+            <div class="cardlab-group">
+              <div class="cardlab-group-label">Emphasis</div>
+              <div class="cardlab-pills" data-axis="emphasis">
+                <button class="cardlab-pill on" data-val="default">Default</button>
+                <button class="cardlab-pill" data-val="active">Active</button>
+                <button class="cardlab-pill" data-val="floating">Floating</button>
+              </div>
+            </div>
+            <div class="cardlab-group">
+              <div class="cardlab-group-label">Density</div>
+              <div class="cardlab-pills" data-axis="density">
+                <button class="cardlab-pill on" data-val="comfy">Comfy</button>
+                <button class="cardlab-pill" data-val="compact">Compact</button>
+                <button class="cardlab-pill" data-val="cardless">Cardless</button>
+              </div>
+            </div>
+            <div class="cardlab-group">
+              <div class="cardlab-group-label">Content regions</div>
+              <label class="cardlab-check"><input type="checkbox" id="cl-thumb" checked> Title Thumbnail</label>
+              <label class="cardlab-check"><input type="checkbox" id="cl-caption" checked> Caption</label>
+              <label class="cardlab-check"><input type="checkbox" id="cl-details" checked> Detail Lines</label>
+              <label class="cardlab-check"><input type="checkbox" id="cl-slotabove"> Slot Above Divider</label>
+              <label class="cardlab-check"><input type="checkbox" id="cl-divider" checked> Divider</label>
+              <label class="cardlab-check"><input type="checkbox" id="cl-slotbelow"> Slot Below Divider</label>
+              <label class="cardlab-check"><input type="checkbox" id="cl-footer" checked> Card Footer</label>
+            </div>
+            <div class="cardlab-group">
+              <div class="cardlab-group-label">Inspect</div>
+              <label class="cardlab-check"><input type="checkbox" id="cl-showslots"> <strong>Highlight slots</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="cardlab-stage">
+              <div class="fcard" id="fcard">
+                <div class="fc-primary" id="fc-primary">
+                  <div class="fc-banner" id="fc-media" data-slot-name="Leading Media">
+                    <svg width="40" height="40" viewBox="0 0 20 20" fill="currentColor"><path d="M16 6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V6ZM6 5h8a1 1 0 0 1 1 1v7.29l-2.65-2.64a1.5 1.5 0 0 0-2.12 0L5.5 15.38A1 1 0 0 1 5 14.5V6a1 1 0 0 1 1-1Zm1.5 2a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+                  </div>
+                  <div class="fc-secondary">
+                    <div class="fc-titleblock">
+                      <div class="fc-thumb" id="fc-thumb" data-slot-name="Title Thumbnail">
+                        <svg width="24" height="24" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM7 6a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1.99 5A2 2 0 0 0 3 13c0 1.69.83 2.97 2.14 3.8C6.42 17.61 8.15 18 10 18s3.58-.39 4.87-1.2C16.17 15.97 17 14.69 17 13a2 2 0 0 0-2-2H5.01ZM4 13c0-.55.45-1 1.01-1H15a1 1 0 0 1 1 1c0 1.31-.62 2.28-1.67 2.95-1.07.68-2.6 1.05-4.33 1.05-1.74 0-3.26-.37-4.33-1.05C4.62 15.28 4 14.31 4 13Z"/></svg>
+                      </div>
+                      <div class="fc-textcol">
+                        <div class="fc-title">Nova Insight</div>
+                        <div class="fc-caption" id="fc-caption">SharePoint site &middot; Updated 2h ago</div>
+                      </div>
+                    </div>
+                    <div class="fc-details" id="fc-details">
+                      <div class="fc-detailrow">
+                        <span data-slot-name="Detail 1 Icon" style="display:inline-flex;"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M17 5.5A2.5 2.5 0 0 0 14.5 3h-9A2.5 2.5 0 0 0 3 5.5v9A2.5 2.5 0 0 0 5.5 17h9a2.5 2.5 0 0 0 2.5-2.5v-9Zm-13 2h12v7a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 4 14.5v-7ZM5.5 4h9A1.5 1.5 0 0 1 16 5.5v1H4v-1A1.5 1.5 0 0 1 5.5 4Z"/></svg></span>
+                        <span>Last modified April 12</span>
+                      </div>
+                      <div class="fc-detailrow">
+                        <span data-slot-name="Detail 2 Icon" style="display:inline-flex;"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM7 6a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm-1.99 5A2 2 0 0 0 3 13c0 1.69.83 2.97 2.14 3.8C6.42 17.61 8.15 18 10 18s3.58-.39 4.87-1.2C16.17 15.97 17 14.69 17 13a2 2 0 0 0-2-2H5.01ZM4 13c0-.55.45-1 1.01-1H15a1 1 0 0 1 1 1c0 1.31-.62 2.28-1.67 2.95-1.07.68-2.6 1.05-4.33 1.05-1.74 0-3.26-.37-4.33-1.05C4.62 15.28 4 14.31 4 13Z"/></svg></span>
+                        <span>Shared by Amara Okafor</span>
+                      </div>
+                    </div>
+                    <div class="fc-slotabove" id="fc-slotabove" data-slot-name="Slot Above Divider">Custom content</div>
+                  </div>
+                </div>
+                <div class="fc-divider" id="fc-divider"></div>
+                <div class="fc-slotbelow" id="fc-slotbelow" data-slot-name="Slot Below Divider">Custom content</div>
+                <div class="fc-footer" id="fc-footer">
+                  <div class="fc-actions">
+                    <button class="fc-btn primary">
+                      <span data-slot-name="Button Slot" style="display:inline-flex;"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M6 4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3.5a.5.5 0 0 0-1 0V14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h3.5a.5.5 0 0 0 0-1H6Zm5-.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.7l-4.15 4.15a.5.5 0 0 1-.7-.71L14.29 4H11.5a.5.5 0 0 1-.5-.5Z"/></svg></span>
+                      Open
+                    </button>
+                    <button class="fc-btn">
+                      <span data-slot-name="Button Slot" style="display:inline-flex;"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M11.77 3.74a3.54 3.54 0 0 1 5 5.01l-6.46 6.47a2.24 2.24 0 0 1-3.17-3.17L13.26 5.94a.5.5 0 0 1 .7.7L7.85 12.76a1.24 1.24 0 0 0 1.75 1.75l6.47-6.47a2.54 2.54 0 0 0-3.59-3.59l-6.47 6.47a3.84 3.84 0 1 0 5.43 5.43l5.11-5.12a.5.5 0 0 1 .71.71l-5.12 5.11a4.84 4.84 0 1 1-6.84-6.84l6.47-6.47Z"/></svg></span>
+                      Attach
+                    </button>
+                  </div>
+                  <button class="fc-overflow" data-slot-name="Footer Slot" aria-label="More options">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M6.25 10a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm5 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm3.75 1.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5Z"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <p class="cardlab-note" id="cardlab-note">Thumbnail Type = Dominant &middot; Emphasis = Default &middot; Density = Comfy</p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="card-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#card-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Common configurations showing how axes and slots combine for real use cases. Flip the toggle to preview every example on the dark theme.</p>
+
+        <div class="usecase-stage" id="uc-stage">
+        <div class="usecase-grid">
+
+          <div class="usecase-item">
+            <span class="uc-label">Meeting Recap</span>
+            <div class="card card-md">
+              <div class="thumb thumb-dom" style="height:90px;">Recording Thumbnail</div>
+              <div class="tblock"><span class="t1">Weekly Design Sync</span><span class="t2">April 8 &middot; 45 min</span><span class="t3"><span class="ico"></span>Building 25, Room A</span><span class="t3"><span class="ico"></span>6 attendees</span></div>
+              <div class="div"></div>
+              <button class="btn btn-full">View recap</button>
+            </div>
+            <span class="uc-config">Dominant &middot; Single CTA &middot; Detail Lines on</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Room Suggestion</span>
+            <div class="card card-md">
+              <div class="hrow">
+                <div class="thumb thumb-pri" style="width:100px;height:100px;">Room Photo</div>
+                <div class="tblock"><span class="t1">Conference Room B</span><span class="t2">Capacity: 8</span><span class="t3"><span class="ico"></span>Floor 3, East Wing</span></div>
+              </div>
+              <div class="div"></div>
+              <div class="btn-row"><button class="btn btn-fill">Invite</button></div>
+            </div>
+            <span class="uc-config">Primary (img 128) &middot; Button Group</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Meeting &mdash; Live</span>
+            <div class="card card-md">
+              <div class="thumb thumb-dom" style="height:70px; background:#1a1a2e; color:#e0e0e0;">
+                <span style="display:flex;align-items:center;gap:6px;"><span style="width:6px;height:6px;border-radius:50%;background:#ff4444;"></span>Live &middot; 12:45</span>
+              </div>
+              <div class="tblock"><span class="t1">Sprint Planning</span><span class="t2">Started 12 min ago</span></div>
+              <div class="div"></div>
+              <div class="btn-row"><button class="btn btn-fill">Join</button><button class="btn-of">&hellip;</button></div>
+            </div>
+            <span class="uc-config">Dominant &middot; Button Group + Overflow</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Pre-join Device</span>
+            <div class="card card-md">
+              <div class="hrow">
+                <div class="ico-sm">&#128187;</div>
+                <div class="tblock"><span class="t1">Add this device</span><span class="t2">Surface Hub &mdash; Conference Room A is available for pairing</span></div>
+              </div>
+            </div>
+            <span class="uc-config">None &middot; Icon media &middot; No footer</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">App Proposal</span>
+            <div class="card card-md">
+              <div class="hrow">
+                <div class="ico-sm">&#128293;</div>
+                <div class="tblock"><span class="t1">Polly</span><span class="t2">Quick polls, surveys, and Q&amp;A for your team</span></div>
+              </div>
+              <div class="div"></div>
+              <div class="btn-row"><button class="btn">View details</button><button class="btn btn-fill">Add</button></div>
+            </div>
+            <span class="uc-config">None &middot; Icon media &middot; Button Group</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Reminder</span>
+            <div class="card card-md">
+              <div class="tblock"><span class="t1">Set a reminder</span><span class="t2">Tomorrow at 9:00 AM</span></div>
+              <div class="div"></div>
+              <button class="btn btn-full">Set reminder</button>
+            </div>
+            <span class="uc-config">None &middot; Single CTA &middot; No media</span>
+          </div>
+
+        </div>
+        </div>
+      </section>
+      <section class="spec-section" id="card-examples">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Assembled Patterns <a href="#card-examples" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The spec page ships four assembled examples, each built purely by configuring axes and filling slots — no detaching, no overrides.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Example</th><th>Configuration</th><th>Slots used</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Site card</strong></td><td>None &middot; Default &middot; Comfy</td><td>Title Thumbnail = site avatar (64) &middot; Slot Above Divider = activity list (SharePoint + trending + Word rows) &middot; Footer = 3 buttons + More Horizontal</td></tr>
+              <tr><td><strong>People card</strong></td><td>None &middot; Default &middot; Comfy</td><td>Title Thumbnail = Person (64) &middot; Slot Above Divider = 2-up File Card grid with thumbnails &middot; Caption = "8 updates &middot; See all"</td></tr>
+              <tr><td><strong>Trending file</strong></td><td>Secondary (img 72) &middot; Default &middot; Compact</td><td>Leading Media = file preview &middot; Slot Above Divider = avatar + metadata row with Open glyph</td></tr>
+              <tr><td><strong>File activity</strong></td><td>None &middot; Default &middot; Comfy</td><td>Slot Above Divider = 3 activity rows (Data Trending, Word) &middot; Slot Below Divider = visible &middot; Divider = visible</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -3531,6 +3737,10 @@
         <a href="#card-spec-spec-card-variant-secondary">Variant - Secondary</a>
         <a href="#card-spec-spec-card-variant-tertiary">Variant - Tertiary</a>
         <a href="#card-spec-spec-card-density">Density</a>
+        <div class="toc-group">More</div>
+        <a href="#card-playground">Build a Card</a>
+        <a href="#card-usage">Usage Examples</a>
+        <a href="#card-examples">Assembled Patterns</a>
       </nav>
     </aside>
   </div>
@@ -3539,6 +3749,91 @@
     Card &middot; Spec &middot; Monocore &middot; November 2026
   </footer>
 </div>
+<script>
+(() => {
+  const state = { thumb: 'dominant', emphasis: 'default', density: 'comfy' };
+  const card = document.getElementById('fcard');
+  if (!card) return;
+
+  const els = {
+    media: document.getElementById('fc-media'),
+    thumb: document.getElementById('fc-thumb'),
+    caption: document.getElementById('fc-caption'),
+    details: document.getElementById('fc-details'),
+    slotabove: document.getElementById('fc-slotabove'),
+    divider: document.getElementById('fc-divider'),
+    slotbelow: document.getElementById('fc-slotbelow'),
+    footer: document.getElementById('fc-footer'),
+    note: document.getElementById('cardlab-note'),
+  };
+
+  function render() {
+    // Emphasis + density classes
+    card.classList.toggle('emphasis-active', state.emphasis === 'active');
+    card.classList.toggle('emphasis-floating', state.emphasis === 'floating');
+    card.classList.toggle('density-compact', state.density === 'compact');
+    card.classList.toggle('density-cardless', state.density === 'cardless');
+
+    // Thumbnail Type → media shape + layout
+    const t = state.thumb;
+    els.media.style.display = t === 'none' ? 'none' : 'flex';
+    els.media.className = t === 'dominant' ? 'fc-banner'
+                        : t === 'primary' ? 'fc-media-128'
+                        : 'fc-media-72';
+    card.classList.toggle('layout-side', t === 'secondary' || t === 'primary');
+
+    // Content toggles
+    els.thumb.style.display = document.getElementById('cl-thumb').checked ? 'flex' : 'none';
+    els.caption.style.display = document.getElementById('cl-caption').checked ? 'block' : 'none';
+    els.details.style.display = document.getElementById('cl-details').checked ? 'flex' : 'none';
+    els.slotabove.style.display = document.getElementById('cl-slotabove').checked ? 'flex' : 'none';
+    els.divider.style.display = document.getElementById('cl-divider').checked ? 'block' : 'none';
+    els.slotbelow.style.display = document.getElementById('cl-slotbelow').checked ? 'flex' : 'none';
+    els.footer.style.display = document.getElementById('cl-footer').checked ? 'flex' : 'none';
+
+    // Slot highlighting
+    card.classList.toggle('show-slots', document.getElementById('cl-showslots').checked);
+
+    // Guard: the missing variant
+    const missing = (t === 'none' && state.emphasis === 'floating' && state.density === 'cardless');
+    const labels = { dominant:'Dominant', primary:'Primary (img 128)', secondary:'Secondary (img 72)', none:'None' };
+    els.note.innerHTML = missing
+      ? '<strong style="color:#c62828;">This combination does not exist in the component set</strong> — None + Floating + Cardless has no chrome left to float.'
+      : 'Thumbnail Type = ' + labels[t] +
+        ' &middot; Emphasis = ' + state.emphasis.charAt(0).toUpperCase() + state.emphasis.slice(1) +
+        ' &middot; Density = ' + state.density.charAt(0).toUpperCase() + state.density.slice(1);
+    card.style.opacity = missing ? '0.35' : '1';
+  }
+
+  document.querySelectorAll('.cardlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.cardlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.cardlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('.cardlab-controls input[type="checkbox"]').forEach(cb =>
+    cb.addEventListener('change', render));
+  render();
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const btn = document.getElementById('uc-theme-toggle');
+  const stage = document.getElementById('uc-stage');
+  if (!btn || !stage) return;
+  btn.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    btn.classList.toggle('on', dark);
+    btn.setAttribute('aria-pressed', String(dark));
+    stage.querySelectorAll('.card').forEach(c => c.classList.toggle('card-dark', dark));
+  });
+})();
+</script>
 </div>
 
 <div class="page" id="page-card-spec-guidance" data-page="card-spec-guidance">
@@ -4158,6 +4453,86 @@
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Badge view. (Label View)</em>; nodes: Badge <code>106947:247428</code>.</p>
       </section>
+
+      <section class="spec-section" id="badge-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Badge <a href="#badge-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Only twenty of the seventy-two expressible combinations are published. The preview tells you when you have picked one that does not exist.</p>
+
+        <div class="fbdg-scope">
+        <div class="bdg-lab">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Badge type</div>
+              <div class="btnlab-pills" data-axis="type">
+                <button class="btnlab-pill on" data-val="static">Static</button>
+                <button class="btnlab-pill" data-val="interactive">Interactive</button>
+              </div>
+            </div>
+            <div class="btnlab-group" id="bdg-stategroup" style="display:none;">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="active">Active</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Size</div>
+              <div class="btnlab-pills" data-axis="size">
+                <button class="btnlab-pill on" data-val="default">Default</button>
+                <button class="btnlab-pill" data-val="small">Small</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Left image</div>
+              <div class="btnlab-pills" data-axis="left">
+                <button class="btnlab-pill on" data-val="avatar">Avatar</button>
+                <button class="btnlab-pill" data-val="icon">Icon</button>
+                <button class="btnlab-pill" data-val="none">None</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" id="bdg-iconly"> Icon only <em>(requires Left image = Icon)</em></label>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="bdg-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="bdg-stage" id="bdg-stage"><div id="bdg-mount"></div></div>
+            <p class="bdg-note" id="bdg-note"></p>
+          </div>
+        </div>
+        </div>
+      </section>
+      <section class="spec-section" id="badge-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#badge-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="bdg-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Where each type earns its keep. Flip the toggle to check every example on the dark theme.</p>
+
+        <div class="bdg-uc-stage fbdg-scope" id="bdg-uc-stage">
+        <div class="usecase-grid" id="bdg-uc-grid"></div>
+        </div>
+      </section>
+      <section class="spec-section" id="badge-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#badge-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Both sizes are under a 44dp target.</strong> Default is 28dp and Small is 18dp. Interactive badges must have their hit area extended by the host; the visual pill is never the target.</li>
+          <li><strong>Icon-only badges carry no accessible name.</strong> Turning Icon only on removes the label and with it everything announceable. Supply a name explicitly on every icon-only instance.</li>
+          <li><strong>Selected state must be announced.</strong> Active is a fill change and a font-size change &mdash; neither reaches a screen reader. Expose the selected state programmatically.</li>
+          <li><strong>Small type is set solid and clipped.</strong> Caption 2 at 11dp on an 11dp line height inside an 18dp box will truncate rather than reflow at large text sizes. Do not put load-bearing information in a Small badge.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -4168,6 +4543,10 @@
         <a href="#badge-spec-spec-badge-variant-interactive">Variant - Interactive</a>
         <a href="#badge-spec-spec-badge-variant-icon-only">Variant - Icon only</a>
         <a href="#badge-spec-spec-badge-size">Size</a>
+        <div class="toc-group">More</div>
+        <a href="#badge-playground">Build a Badge</a>
+        <a href="#badge-usage">Usage Examples</a>
+        <a href="#badge-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -4176,6 +4555,111 @@
     Badge &middot; Spec &middot; Monocore &middot; November 2026
   </footer>
 </div>
+<script>
+// ── Badge Lab ──
+(() => {
+  const mount = document.getElementById('bdg-mount');
+  if (!mount) return;
+  const stage = document.getElementById('bdg-stage');
+  const note = document.getElementById('bdg-note');
+  const stateGroup = document.getElementById('bdg-stategroup');
+  const state = { type: 'static', state: 'rest', size: 'default', left: 'avatar' };
+  const cb = id => document.getElementById(id).checked;
+
+  const ICO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="8" r="5.5"/><path d="M8 5.5v3"/></svg>';
+
+  function markup(o) {
+    const cls = ['fbdg'];
+    if (o.size === 'small') cls.push('sz-small');
+    if (o.type === 'interactive') cls.push(o.state === 'active' ? 'ty-active' : 'ty-rest');
+    if (o.iconly) cls.push('iconly');
+    cls.push('li-' + o.left);
+    let inner = '';
+    if (o.iconly) {
+      inner = '<span class="ic">' + ICO + '</span>';
+    } else {
+      if (o.left === 'avatar') inner += '<span class="av"></span>';
+      if (o.left === 'icon') inner += '<span class="ic">' + ICO + '</span>';
+      inner += '<span class="txt">Label</span>';
+    }
+    return '<span class="' + cls.join(' ') + '">' + inner + '</span>';
+  }
+
+  function published(o) {
+    if (o.iconly && o.left !== 'icon') return false;
+    if (o.type === 'interactive' && o.state === 'active' && o.size === 'small') return false;
+    return true;
+  }
+
+  function render() {
+    const iconly = cb('bdg-iconly');
+    const o = { type: state.type, state: state.state, size: state.size, left: state.left, iconly };
+    stateGroup.style.display = state.type === 'interactive' ? '' : 'none';
+    const ok = published(o);
+    mount.innerHTML = markup(o);
+    const el = mount.querySelector('.fbdg');
+    if (el) el.style.opacity = ok ? '1' : '0.35';
+    stage.classList.toggle('dark', cb('bdg-dark'));
+
+    const stateName = state.type === 'static' ? 'N/A' : (state.state === 'active' ? 'Active' : 'Rest');
+    if (!ok) {
+      note.innerHTML = '<strong style="color:var(--c-red);">Not published</strong> &middot; ' +
+        (iconly && o.left !== 'icon'
+          ? 'Icon only is only published with Left image = Icon.'
+          : 'Active is published at Default only &mdash; there is no Active at Small.');
+    } else {
+      note.innerHTML = '<code>Badge view</code> &middot; Type = ' + (state.type === 'static' ? 'Static' : 'Interactive') +
+        ' &middot; State = ' + stateName +
+        ' &middot; Size = ' + (state.size === 'small' ? 'Small' : 'Default') +
+        ' &middot; Left image = ' + state.left.charAt(0).toUpperCase() + state.left.slice(1) +
+        (iconly ? ' &middot; Icon only' : '');
+    }
+  }
+
+  document.querySelectorAll('#page-badge-spec .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-badge-spec .bdg-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+
+  const grid = document.getElementById('bdg-uc-grid');
+  if (grid) {
+    const cases = [
+      ['Metadata tag', {type:'static', size:'default', left:'avatar'}, 'Static &middot; Default &middot; Avatar'],
+      ['Compact list tag', {type:'static', size:'small', left:'icon'}, 'Static &middot; Small &middot; Icon'],
+      ['Tappable filter', {type:'interactive', state:'rest', size:'default', left:'icon'}, 'Interactive &middot; Rest &middot; Default'],
+      ['Selected filter', {type:'interactive', state:'active', size:'default', left:'icon'}, 'Interactive &middot; Active &middot; Default'],
+      ['Icon-only marker', {type:'static', size:'default', left:'icon', iconly:true}, 'Static &middot; Icon only'],
+      ['Label with no image', {type:'interactive', state:'rest', size:'default', left:'none'}, 'Interactive &middot; Rest &middot; None']
+    ];
+    grid.innerHTML = cases.map(c =>
+      '<div class="usecase-item"><span class="uc-label">' + c[0] + '</span>' +
+      '<div style="padding:var(--sp-3) 0;">' + markup(c[1]) + '</div>' +
+      '<span class="uc-config">' + c[2] + '</span></div>').join('');
+  }
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('bdg-uc-theme-toggle');
+  const stage = document.getElementById('bdg-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
 </div>
 
 <div class="page" id="page-badge-spec-architecture" data-page="badge-spec-architecture">
@@ -20250,6 +20734,169 @@ Icon only = True
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Buttons</em>; nodes: Button <code>106947:205248</code>.</p>
       </section>
+
+      <section class="spec-section" id="btn-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Button <a href="#btn-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Every combination below exists in the published set. Switching on <strong>Full-width</strong> swaps to the separate <code>Button Full-width</code> component, which publishes Style &times; State only &mdash; the Size axis is locked to Large.</p>
+
+        <div class="fbtn-scope">
+        <div class="btnlab">
+          <div class="btnlab-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Style</div>
+              <div class="btnlab-pills" data-axis="style">
+                <button class="btnlab-pill on" data-val="accent">Accent</button>
+                <button class="btnlab-pill" data-val="outline">Outline accent</button>
+                <button class="btnlab-pill" data-val="subtle">Subtle</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Size</div>
+              <div class="btnlab-pills" data-axis="size" id="btnlab-size">
+                <button class="btnlab-pill on" data-val="large">Large</button>
+                <button class="btnlab-pill" data-val="medium">Medium</button>
+                <button class="btnlab-pill" data-val="small">Small</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="pressed">Pressed</button>
+                <button class="btnlab-pill" data-val="disabled">Disabled</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" id="bl-lefticon" checked> Left icon</label>
+              <label class="btnlab-check"><input type="checkbox" id="bl-label" checked> Show label</label>
+              <label class="btnlab-check"><input type="checkbox" id="bl-righticon"> Right icon</label>
+              <label class="btnlab-check"><input type="checkbox" id="bl-fullwidth"> Full-width</label>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="bl-showslots"> <strong>Highlight slots</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="bl-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="btnlab-stage" id="btnlab-stage">
+              <div class="fbtn-phone" id="fbtn-phone">
+                <button class="fbtn style-accent size-large state-rest" id="fbtn" type="button">
+                  <span class="fbtn-ico" id="fbtn-left" data-slot-name="Slot">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4.5v11M4.5 10h11"/></svg>
+                  </span>
+                  <span id="fbtn-label">Button</span>
+                  <span class="fbtn-ico" id="fbtn-right" data-slot-name="Icon" style="display:none;">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 5l5 5-5 5"/></svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <p class="btnlab-note" id="btnlab-note"></p>
+          </div>
+        </div>
+        </div>
+      </section>
+      <section class="spec-section" id="btn-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#btn-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="btn-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">How the styles pair up in real surfaces. Flip the toggle to check every example on the dark theme.</p>
+
+        <div class="btn-usecase-stage fbtn-scope" id="btn-uc-stage">
+        <div class="usecase-grid">
+
+          <div class="usecase-item">
+            <span class="uc-label">Primary action, full bleed</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Join meeting</strong>Sprint Planning starts in 2 minutes.</div>
+              <button class="fbtn style-accent size-large state-rest is-fullwidth" type="button">Join now</button>
+            </div>
+            <span class="uc-config">Button Full-width &middot; Accent &middot; Rest</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Paired actions</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Add Polly?</strong>Quick polls, surveys and Q&amp;A for your team.</div>
+              <div class="btn-uc-row end">
+                <button class="fbtn style-subtle size-medium state-rest" type="button">Not now</button>
+                <button class="fbtn style-accent size-medium state-rest" type="button">Add</button>
+              </div>
+            </div>
+            <span class="uc-config">Accent + Subtle &middot; Medium &middot; dismiss on the left</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Neutral action row</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Design review notes</strong>Shared by Priya &middot; 3 files</div>
+              <div class="btn-uc-row">
+                <button class="fbtn style-outline size-medium state-rest" type="button">
+                  <span class="fbtn-ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5V15a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4.5M10 3.5v9m0 0 3-3m-3 3-3-3"/></svg></span>
+                  Download
+                </button>
+                <button class="fbtn style-outline size-medium state-rest" type="button">Share</button>
+              </div>
+            </div>
+            <span class="uc-config">Outline accent &middot; Medium &middot; equal weight</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Inline, low emphasis</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>12 more replies</strong>Last reply 4 minutes ago.</div>
+              <div class="btn-uc-row">
+                <button class="fbtn style-subtle size-small state-rest" type="button">Show thread</button>
+                <button class="fbtn style-subtle size-small state-rest" type="button">Mute</button>
+              </div>
+            </div>
+            <span class="uc-config">Subtle &middot; Small &middot; text-weight actions</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Blocked action</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Recording unavailable</strong>You need organiser permission to start a recording.</div>
+              <button class="fbtn style-accent size-large state-disabled is-fullwidth" type="button" disabled>Start recording</button>
+            </div>
+            <span class="uc-config">Full-width &middot; Accent &middot; Disabled</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Compact chip row</span>
+            <div class="btn-uc-surface">
+              <div class="btn-uc-copy"><strong>Suggested replies</strong>Tap to send.</div>
+              <div class="btn-uc-row">
+                <button class="fbtn style-outline size-small state-rest" type="button">Sounds good</button>
+                <button class="fbtn style-outline size-small state-rest" type="button">On my way</button>
+              </div>
+            </div>
+            <span class="uc-config">Outline accent &middot; Small &middot; the only stroked variants</span>
+          </div>
+
+        </div>
+        </div>
+      </section>
+      <section class="spec-section" id="btn-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#btn-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The published component carries a documentation link to the Teams Mobile A11y guidance; the notes below are the parts that bind at spec time.</p>
+        <ul>
+          <li><strong>Target size.</strong> Only Large (52dp) clears a 44dp minimum on its own. Medium (40dp) and Small (28dp) need the host surface to extend the hit area &mdash; the visual box is not the target.</li>
+          <li><strong>Icon-only buttons.</strong> Turning <em>Show label</em> off removes the accessible name with it. Supply one explicitly; never ship an icon-only Button without it.</li>
+          <li><strong>Disabled contrast.</strong> Text/Disabled on Surface/Disabled is deliberately below the text contrast floor, which is permitted for disabled controls &mdash; but it means disabled state must never be the only signal that an action is unavailable.</li>
+          <li><strong>Press feedback.</strong> See the Accent Pressed note above: until that binding is fixed, Accent buttons need a non-colour press affordance.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -20261,6 +20908,10 @@ Icon only = True
         <a href="#buttons-spec-button-variant-subtle">Variant - Subtle</a>
         <a href="#buttons-spec-button-width-variants">Width Variants</a>
         <a href="#buttons-spec-button-size">Size</a>
+        <div class="toc-group">More</div>
+        <a href="#btn-playground">Build a Button</a>
+        <a href="#btn-usage">Usage Examples</a>
+        <a href="#btn-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -20269,6 +20920,76 @@ Icon only = True
     Button &middot; Spec &middot; Monocore &middot; November 2026
   </footer>
 </div>
+<script>
+// ── Button Lab ──
+(() => {
+  const btn = document.getElementById('fbtn');
+  if (!btn) return;
+  const state = { style: 'accent', size: 'large', state: 'rest' };
+  const stage = document.getElementById('btnlab-stage');
+  const sizeGroup = document.getElementById('btnlab-size');
+  const note = document.getElementById('btnlab-note');
+  const left = document.getElementById('fbtn-left');
+  const right = document.getElementById('fbtn-right');
+  const label = document.getElementById('fbtn-label');
+
+  const cb = id => document.getElementById(id).checked;
+  const STYLE_NAME = { accent: 'Accent', outline: 'Outline accent', subtle: 'Subtle' };
+  const CAP = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+  function render() {
+    const full = cb('bl-fullwidth');
+    const size = full ? 'large' : state.size;
+
+    sizeGroup.classList.toggle('locked', full);
+
+    btn.className = 'fbtn style-' + state.style + ' size-' + size + ' state-' + state.state
+                  + (full ? ' is-fullwidth' : '')
+                  + (cb('bl-showslots') ? ' show-slots' : '');
+
+    left.style.display  = cb('bl-lefticon') ? 'inline-flex' : 'none';
+    right.style.display = cb('bl-righticon') ? 'inline-flex' : 'none';
+    label.style.display = cb('bl-label') ? 'inline' : 'none';
+    btn.disabled = state.state === 'disabled';
+
+    stage.classList.toggle('dark', cb('bl-dark'));
+
+    const component = full ? 'Button Full-width' : 'Button';
+    const nodeId = full ? '83865-65664' : '83361-7413';
+    note.innerHTML = '<code>' + component + '</code> &middot; Style = ' + STYLE_NAME[state.style]
+                   + ' &middot; Size = ' + CAP(size) + (full ? ' <em>(locked)</em>' : '')
+                   + ' &middot; State = ' + CAP(state.state)
+                   + ' &middot; node <code>' + nodeId + '</code>';
+  }
+
+  document.querySelectorAll('#page-buttons .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-buttons .btnlab-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('btn-uc-theme-toggle');
+  const stage = document.getElementById('btn-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
 </div>
 
 <div class="page" id="page-buttons-architecture" data-page="buttons-architecture">
@@ -20599,6 +21320,130 @@ Icon only = True
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Call Out (Tooltip)</em>; nodes: Callout (tooltip) <code>106947:247366</code>.</p>
       </section>
+
+      <section class="spec-section" id="co-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Call Out <a href="#co-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The dashed square is the anchor, not part of the component. Tip location names the edge the tip sits on &mdash; so <code>Bottom left</code> puts the tip on the call out's bottom edge, which means the call out floats <em>above</em> what it points at.</p>
+
+        <div class="colab">
+          <div class="colab-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Tip location</div>
+              <div class="btnlab-pills" data-axis="tip">
+                <button class="btnlab-pill on" data-val="bottom-left">Bottom left</button>
+                <button class="btnlab-pill" data-val="bottom-center">Bottom center</button>
+                <button class="btnlab-pill" data-val="bottom-right">Bottom right</button>
+                <button class="btnlab-pill" data-val="top-left">Top left</button>
+                <button class="btnlab-pill" data-val="top-center">Top center</button>
+                <button class="btnlab-pill" data-val="top-right">Top right</button>
+                <button class="btnlab-pill" data-val="left-center">Left center</button>
+                <button class="btnlab-pill" data-val="right-center">Right center</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content length</div>
+              <div class="btnlab-pills" data-axis="len">
+                <button class="btnlab-pill" data-val="short">Short</button>
+                <button class="btnlab-pill on" data-val="long">At max width</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="cl2-bounds"> <strong>Outline container</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="cl2-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="colab-stage" id="colab-stage">
+              <div class="co-field">
+                <div class="co-anchor">Anchor</div>
+                <div class="fco tip-bottom align-left" id="fco">
+                  <div class="fco-container"><div class="fco-text" id="fco-text">This tooltip hugs contents. The maximum allowed width is 248.</div></div>
+                  <span class="fco-tip horizontal" id="fco-tip"><svg viewBox="0 0 62 7" fill="currentColor" aria-hidden="true"><path d="M24 0 29.2 6.1a2.6 2.6 0 0 0 3.6 0L38 0Z"/></svg></span>
+                </div>
+              </div>
+            </div>
+            <p class="colab-note" id="colab-note"></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="co-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#co-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="co-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Which variant to reach for, by where the anchor sits on screen.</p>
+
+        <div class="co-usecase-stage" id="co-uc-stage">
+        <div class="usecase-grid">
+
+          <div class="usecase-item">
+            <span class="uc-label">Anchor near the top edge</span>
+            <div class="co-uc-frame">
+              <div class="co-anchor" style="top:34px; left:60px; transform:none;">Btn</div>
+              <div class="fco tip-top align-left" style="top:82px; left:60px;">
+                <span class="fco-tip horizontal" style="transform:scaleY(-1);"><svg viewBox="0 0 62 7" fill="currentColor"><path d="M24 0 29.2 6.1a2.6 2.6 0 0 0 3.6 0L38 0Z"/></svg></span>
+                <div class="fco-container"><div class="fco-text">Pin this chat to keep it at the top.</div></div>
+              </div>
+            </div>
+            <span class="uc-config">Top left &middot; body drops below the anchor</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Anchor near the bottom edge</span>
+            <div class="co-uc-frame">
+              <div class="fco tip-bottom align-center" style="bottom:70px; left:50%; transform:translateX(-50%);">
+                <div class="fco-container"><div class="fco-text">Tap and hold to react.</div></div>
+                <span class="fco-tip horizontal"><svg viewBox="0 0 62 7" fill="currentColor"><path d="M24 0 29.2 6.1a2.6 2.6 0 0 0 3.6 0L38 0Z"/></svg></span>
+              </div>
+              <div class="co-anchor" style="bottom:22px; left:50%; transform:translateX(-50%); top:auto;">Btn</div>
+            </div>
+            <span class="uc-config">Bottom center &middot; body rises above the anchor</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Anchor in a leading rail</span>
+            <div class="co-uc-frame">
+              <div class="co-anchor" style="top:50%; left:24px; transform:translateY(-50%);">Nav</div>
+              <div class="fco tip-left" style="top:50%; left:76px; transform:translateY(-50%);">
+                <span class="fco-tip vertical"><svg viewBox="0 0 7 14" fill="currentColor"><path d="M7 0v14L1 8.4a2 2 0 0 1 0-2.8L7 0Z"/></svg></span>
+                <div class="fco-container"><div class="fco-text">Your saved items live here.</div></div>
+              </div>
+            </div>
+            <span class="uc-config">Left center &middot; the only side option is centred</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Anchor in a trailing action bar</span>
+            <div class="co-uc-frame">
+              <div class="fco tip-right" style="top:50%; right:76px; transform:translateY(-50%);">
+                <div class="fco-container"><div class="fco-text">Start a recording from here.</div></div>
+                <span class="fco-tip vertical" style="transform:scaleX(-1);"><svg viewBox="0 0 7 14" fill="currentColor"><path d="M7 0v14L1 8.4a2 2 0 0 1 0-2.8L7 0Z"/></svg></span>
+              </div>
+              <div class="co-anchor" style="top:50%; right:24px; left:auto; transform:translateY(-50%);">Rec</div>
+            </div>
+            <span class="uc-config">Right center &middot; body sits to the left of the anchor</span>
+          </div>
+
+        </div>
+        </div>
+      </section>
+      <section class="spec-section" id="co-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#co-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Never put an action in a call out.</strong> The component has no interactive slot and no dismiss control &mdash; anything essential inside it is unreachable by keyboard or switch control. It is for hints, not decisions.</li>
+          <li><strong>Announce it when it appears.</strong> A call out that fades in unannounced is invisible to a screen reader user. Tie it to its anchor and announce it politely on show.</li>
+          <li><strong>Don't rely on hover or a timeout.</strong> On touch there is no hover, and an auto-dismissing hint punishes anyone reading slowly. Give the user a way to dismiss it and don't gate anything behind having read it.</li>
+          <li><strong>248dp is a hard ceiling.</strong> Long strings wrap rather than widen, and at large accessibility text sizes a two-line hint becomes five. Keep the copy short enough to survive that.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -20606,6 +21451,10 @@ Icon only = True
         <div class="toc-label">On this page</div>
         <div class="toc-group">Callout (tooltip)</div>
         <a href="#callout-spec-callout-variant">Variant</a>
+        <div class="toc-group">More</div>
+        <a href="#co-playground">Build a Call Out</a>
+        <a href="#co-usage">Usage Examples</a>
+        <a href="#co-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -20614,6 +21463,82 @@ Icon only = True
     Call Out (Tooltip) &middot; Spec &middot; Monocore &middot; November 2026
   </footer>
 </div>
+<script>
+// ── Call Out Lab ──
+(() => {
+  const co = document.getElementById('fco');
+  if (!co) return;
+  const state = { tip: 'bottom-left', len: 'long' };
+  const stage = document.getElementById('colab-stage');
+  const note = document.getElementById('colab-note');
+  const text = document.getElementById('fco-text');
+  const tip = document.getElementById('fco-tip');
+  const cb = id => document.getElementById(id).checked;
+
+  const H_TIP = '<svg viewBox="0 0 62 7" fill="currentColor" aria-hidden="true"><path d="M24 0 29.2 6.1a2.6 2.6 0 0 0 3.6 0L38 0Z"/></svg>';
+  const V_TIP = '<svg viewBox="0 0 7 14" fill="currentColor" aria-hidden="true"><path d="M7 0v14L1 8.4a2 2 0 0 1 0-2.8L7 0Z"/></svg>';
+  const COPY = {
+    short: 'Pin this chat.',
+    long: 'This tooltip hugs contents. The maximum allowed width is 248.'
+  };
+  const LABEL = {
+    'bottom-left':'Bottom left', 'bottom-center':'Bottom center', 'bottom-right':'Bottom right',
+    'top-left':'Top left', 'top-center':'Top center', 'top-right':'Top right',
+    'left-center':'Left center', 'right-center':'Right center'
+  };
+
+  function render() {
+    const [side, align] = state.tip.split('-');
+    const vertical = (side === 'left' || side === 'right');
+
+    co.className = 'fco tip-' + side + (vertical ? '' : ' align-' + align) + (cb('cl2-bounds') ? ' show-bounds' : '');
+    tip.className = 'fco-tip ' + (vertical ? 'vertical' : 'horizontal');
+    tip.innerHTML = vertical ? V_TIP : H_TIP;
+
+    // DOM order carries the tip: body-then-tip for bottom/right, tip-then-body for top/left
+    const container = co.querySelector('.fco-container');
+    const tipFirst = (side === 'top' || side === 'left');
+    if (tipFirst && co.firstElementChild !== tip) co.insertBefore(tip, container);
+    if (!tipFirst && co.firstElementChild !== container) co.insertBefore(container, tip);
+
+    text.textContent = COPY[state.len];
+    stage.classList.toggle('dark', cb('cl2-dark'));
+
+    const minH = state.tip === 'top-left' ? '44dp' : '56dp';
+    note.innerHTML = '<code>Call Out</code> &middot; Tip location = ' + LABEL[state.tip]
+      + ' &middot; tip ' + (vertical ? '7&times;14' : '62&times;7')
+      + ' &middot; min-height ' + minH
+      + ' &middot; node <code>83507-103793</code>';
+  }
+
+  document.querySelectorAll('#page-callout .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-callout .colab-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('co-uc-theme-toggle');
+  const stage = document.getElementById('co-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
 </div>
 
 <div class="page" id="page-callout-architecture" data-page="callout-architecture">
@@ -21299,6 +22224,80 @@ Order per variant
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Chiclet</em>; nodes: Chiclet <code>106947:213123</code>, Record chiclet <code>106947:248312</code>.</p>
       </section>
+
+      <section class="spec-section" id="ch-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Chiclet <a href="#ch-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Layout and Image are <em>not</em> a full grid &mdash; only seven of the twelve combinations are published. The preview tells you when you have picked one that does not exist.</p>
+
+        <div class="fch-scope fbtn-scope">
+        <div class="chlab">
+          <div class="chlab-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Layout</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="base-actions">Base + actions</button>
+                <button class="btnlab-pill" data-val="base">Base</button>
+                <button class="btnlab-pill" data-val="reply">Reply</button>
+                <button class="btnlab-pill" data-val="forward">Forward</button>
+                <button class="btnlab-pill" data-val="file">File Chiclet</button>
+                <button class="btnlab-pill" data-val="video">Video</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Image</div>
+              <div class="btnlab-pills" data-axis="image">
+                <button class="btnlab-pill on" data-val="false">False</button>
+                <button class="btnlab-pill" data-val="true">True</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Instance properties</div>
+              <label class="btnlab-check"><input type="checkbox" id="ch-compose"> On compose box <em>(shows Dismiss)</em></label>
+              <label class="btnlab-check"><input type="checkbox" id="ch-mediaslot"> Media slot <em>(Reply / Forward)</em></label>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="ch-showslots"> <strong>Highlight slots</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="ch-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="chlab-stage" id="chlab-stage">
+              <div id="fch-mount"></div>
+            </div>
+            <p class="chlab-note" id="chlab-note"></p>
+          </div>
+        </div>
+        </div>
+      </section>
+      <section class="spec-section" id="ch-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#ch-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="ch-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Each layout in the context it was designed for.</p>
+
+        <div class="ch-usecase-stage fch-scope fbtn-scope" id="ch-uc-stage">
+        <div class="usecase-grid" id="ch-uc-grid"></div>
+        </div>
+      </section>
+      <section class="spec-section" id="ch-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#ch-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The card is one target, the icons are others.</strong> Base and File chiclets carry a trailing slot, and File carries two. Nesting interactive glyphs inside an interactive card needs explicit, separate accessible names &mdash; otherwise a screen reader announces one blob with three actions.</li>
+          <li><strong>Attribution is 11dp on 11dp line height.</strong> Caption 2 is the smallest type in the system and it is set solid, with no leading. It will clip at large accessibility text sizes; treat the attribution as content that must reflow, not as a fixed-height row.</li>
+          <li><strong>The quote bar is decorative.</strong> On Reply and Forward it carries no accessible meaning &mdash; the relationship must be in the announced text (&ldquo;replying to Charlotte D.&rdquo;), not in a 4dp grey rule.</li>
+          <li><strong>Overlay buttons sit on arbitrary media.</strong> The scrim (78% opaque #292929) is what makes the glyph legible, not the image behind it. Never drop the scrim to let more of the thumbnail through.</li>
+          <li><strong>Dismiss only appears on the compose box.</strong> When a chiclet is dismissible, the control is 20dp &mdash; well under a 44dp target. The host must extend the hit area.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -21309,6 +22308,10 @@ Order per variant
         <div class="toc-group">Record chiclet</div>
         <a href="#chiclet-spec-record-variant-primary">Variant - Primary</a>
         <a href="#chiclet-spec-record-variant-subtle">Variant - Subtle</a>
+        <div class="toc-group">More</div>
+        <a href="#ch-playground">Build a Chiclet</a>
+        <a href="#ch-usage">Usage Examples</a>
+        <a href="#ch-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -21317,6 +22320,163 @@ Order per variant
     Chiclet &middot; Spec &middot; Monocore &middot; November 2026
   </footer>
 </div>
+<script>
+// ── Chiclet Lab ──
+(() => {
+  const mount = document.getElementById('fch-mount');
+  if (!mount) return;
+  const stage = document.getElementById('chlab-stage');
+  const note = document.getElementById('chlab-note');
+  const state = { layout: 'base-actions', image: 'false' };
+  const cb = id => document.getElementById(id).checked;
+
+  const ICO = {
+    doc:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/></svg>',
+    chev:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+    more:  '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg>',
+    spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h9M4 11h9M4 16h6"/><path d="M17.5 13.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg>',
+    quote: '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 4h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 5.6 8H3zm6 0h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 11.6 8H9z"/></svg>',
+    fwd:   '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3l4 4-4 4"/><path d="M13 7H6a3 3 0 0 0-3 3v3"/></svg>',
+    ppt:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h5a2.5 2.5 0 0 1 0 5H8zm0 0v9"/></svg>',
+    x:     '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"/></svg>',
+    play:  '<svg viewBox="0 0 28 28" fill="currentColor"><path d="M9 5.5v17l14-8.5z"/></svg>'
+  };
+  const ico = (glyph, size, cls, slot) =>
+    '<span class="fch-ico s' + size + (cls ? ' ' + cls : '') + '"' + (slot ? ' data-slot-name="' + slot + '"' : '') + '>' + glyph + '</span>';
+
+  const smallBtn = label =>
+    '<button class="fbtn style-outline size-small state-rest" type="button">' + label + '</button>';
+
+  const PUBLISHED = {
+    'base-actions': ['false'], 'base': ['false'], 'reply': ['false'],
+    'forward': ['false'], 'file': ['false', 'true'], 'video': ['true']
+  };
+  const NAME = {
+    'base-actions': 'Base + actions', 'base': 'Base', 'reply': 'Reply',
+    'forward': 'Forward', 'file': 'File Chiclet', 'video': 'Video'
+  };
+  const NODE = {
+    'base-actions|false': '104572-6296', 'base|false': '104574-6585', 'reply|false': '83310-17384',
+    'forward|false': '106931-55076', 'file|false': '104572-6040', 'file|true': '104574-6462',
+    'video|true': '104574-6515'
+  };
+
+  function markup(layout, image, opts) {
+    const o = opts || {};
+    const dismiss = o.compose ? '<span class="fch-dismiss">' + ICO.x + '</span>' : '';
+    const textBlock = (cap, msg, secondary) =>
+      '<div class="fch-body"><div class="fch-header"><span class="fch-cap">' + cap + '</span></div>' +
+      '<div class="fch-msg' + (secondary ? ' secondary' : '') + '">' + msg + '</div></div>';
+
+    if (layout === 'base' || layout === 'base-actions') {
+      const footer = layout === 'base-actions'
+        ? '<div class="fch-footer"><div class="fch-actiongroup">' + smallBtn('Accept') + smallBtn('Decline') + '</div>' + ico(ICO.more, 24, 'muted') + '</div>'
+        : '';
+      return '<div class="fch lay-' + layout + '">' + dismiss +
+        '<div class="fch-row">' + ico(ICO.doc, 16, 'muted', 'Slot') +
+        textBlock('Design review', 'Weekly sync notes') +
+        ico(ICO.chev, 24, 'muted', 'Slot2') + '</div>' + footer + '</div>';
+    }
+    if (layout === 'reply' || layout === 'forward') {
+      const glyph = layout === 'reply' ? ICO.quote : ICO.fwd;
+      const who = layout === 'reply' ? 'Charlotte D. 9:00 AM' : 'Kat L. 2025-03-28, 9:00';
+      const thumb = o.mediaslot ? '<div class="fch-mediathumb" data-slot-name="Media slot"></div>' : '';
+      return '<div class="fch lay-' + layout + '">' + dismiss +
+        '<span class="fch-quotebar"></span>' +
+        '<div class="fch-body"><div class="fch-header">' + ico(glyph, 16, 'muted') +
+        '<span class="fch-cap">' + who + '</span></div>' +
+        '<div class="fch-msg secondary">Hello</div></div>' + thumb + '</div>';
+    }
+    if (layout === 'file' && image === 'false') {
+      return '<div class="fch lay-file">' + dismiss +
+        '<div class="fch-row">' + ico(ICO.ppt, 24, '', 'Slot') +
+        '<div class="fch-body"><span class="fch-filename">Accessibility.pptx</span><span class="fch-meta">36 MB</span></div>' +
+        '<span class="fch-trail" data-slot-name="Slot3">' + ico(ICO.spark, 24, 'muted') + ico(ICO.more, 24, 'muted') + '</span></div></div>';
+    }
+    if (layout === 'file' && image === 'true') {
+      return '<div class="fch lay-file-image on-media">' + dismiss +
+        '<div class="fch-media file">Image<span class="fch-overlay-btn sz-default fch-overlay-tr">' + ICO.x + '</span></div>' +
+        '<div class="fch-row" style="padding:12px;">' + ico(ICO.ppt, 24, '', 'Slot') +
+        '<div class="fch-body"><span class="fch-filename compact">Accessibility 101.pptx</span><span class="fch-meta">36 MB</span></div>' +
+        '<span class="fch-trail" data-slot-name="Slot3">' + ico(ICO.spark, 24, 'muted') + ico(ICO.more, 24, 'muted') + '</span></div></div>';
+    }
+    if (layout === 'video' && image === 'true') {
+      return '<div class="fch lay-video on-media">' + dismiss +
+        '<div class="fch-media video" data-slot-name="Media">Media' +
+        '<span class="fch-overlay-btn sz-large fch-overlay-c">' + ICO.play + '</span></div></div>';
+    }
+    return '';
+  }
+
+  function render() {
+    const ok = (PUBLISHED[state.layout] || []).includes(state.image);
+    const opts = { compose: cb('ch-compose'), mediaslot: cb('ch-mediaslot') };
+    const fallbackImage = PUBLISHED[state.layout][0];
+
+    mount.innerHTML = markup(state.layout, ok ? state.image : fallbackImage, opts);
+    const card = mount.querySelector('.fch');
+    if (card && cb('ch-showslots')) card.classList.add('show-slots');
+    if (card) card.style.opacity = ok ? '1' : '0.35';
+
+    stage.classList.toggle('dark', cb('ch-dark'));
+
+    if (!ok) {
+      note.innerHTML = '<strong style="color:var(--c-red);">' + NAME[state.layout] + ' + Image=' +
+        (state.image === 'true' ? 'True' : 'False') + ' is not published</strong> — showing Image=' +
+        (fallbackImage === 'true' ? 'True' : 'False') + ' instead.';
+    } else {
+      note.innerHTML = '<code>Chiclet</code> &middot; Layout = ' + NAME[state.layout] +
+        ' &middot; Image = ' + (state.image === 'true' ? 'True' : 'False') +
+        ' &middot; node <code>' + NODE[state.layout + '|' + state.image] + '</code>';
+    }
+  }
+
+  document.querySelectorAll('#page-chiclet .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-chiclet .chlab-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+
+  // ── Usage examples, built from the same markup function ──
+  const grid = document.getElementById('ch-uc-grid');
+  if (grid) {
+    const cases = [
+      ['Quoted reply in a thread', 'reply', 'false', {}, 'Reply · quote bar + attribution'],
+      ['Forwarded message', 'forward', 'false', { mediaslot: true }, 'Forward · Media slot on'],
+      ['File attachment', 'file', 'false', {}, 'File Chiclet · Image = False'],
+      ['File with preview', 'file', 'true', {}, 'File Chiclet · Image = True'],
+      ['Invite with actions', 'base-actions', 'false', {}, 'Base + actions · Chiclet Footer'],
+      ['Video attachment', 'video', 'true', {}, 'Video · Image = True']
+    ];
+    grid.innerHTML = cases.map(c =>
+      '<div class="usecase-item"><span class="uc-label">' + c[0] + '</span>' +
+      markup(c[1], c[2], c[3]) +
+      '<span class="uc-config">' + c[4] + '</span></div>'
+    ).join('');
+  }
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('ch-uc-theme-toggle');
+  const stage = document.getElementById('ch-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
 </div>
 
 <div class="page" id="page-chiclet-architecture" data-page="chiclet-architecture">
@@ -22765,6 +23925,64 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Content Card</em>; nodes: Content card <code>106947:213408</code>.</p>
       </section>
+
+      <section class="spec-section" id="cc-preview">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Content Card <a href="#cc-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Primary floats on Shadow 16; Secondary sits flat behind a 1dp stroke; Tertiary thins the stroke to 0.5dp. The interior is the same row in all three.</p>
+        <div class="bf-stage">
+          <div class="bf-cell">
+            <div class="fcc st-primary"><div class="fcc-row"><div class="fcc-media"></div><div class="fcc-center"><span class="fcc-title">Text</span><span class="fcc-caption">Caption</span></div></div></div>
+            <span class="bf-cap">Primary &middot; Image = True &middot; 88dp published</span>
+          </div>
+          <div class="bf-cell">
+            <div class="fcc st-primary"><div class="fcc-row"><div class="fcc-av"></div><div class="fcc-center"><span class="fcc-title">Text</span><span class="fcc-caption">Caption</span></div></div></div>
+            <span class="bf-cap">Primary &middot; Avatar = True &middot; 88dp</span>
+          </div>
+        </div>
+        <div class="bf-stage">
+          <div class="bf-cell">
+            <div class="fcc st-secondary"><div class="fcc-row" style="min-height:48px;"><div class="fcc-media" style="width:44px;height:44px;"></div><div class="fcc-center"><span class="fcc-title">Title</span><span class="fcc-caption">Subtitle</span></div><span class="fcc-right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+            <span class="bf-cap">Secondary &middot; Image = True &middot; 72dp &middot; right accessory on</span>
+          </div>
+          <div class="bf-cell">
+            <div class="fcc st-tertiary"><div class="fcc-row" style="min-height:48px;"><div class="fcc-center"><span class="fcc-title">Title</span><span class="fcc-caption">Subtitle</span></div></div></div>
+            <span class="bf-cap">Tertiary &middot; Image = False &middot; 0.5dp stroke</span>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="cc-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#cc-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Content Card is a <em>reference to one thing</em> with at most one action zone.</p>
+        <div class="usecase-grid">
+          <div class="usecase-item"><span class="uc-label">Link preview in a message</span>
+            <div class="fcc st-primary" style="width:100%;"><div class="fcc-row"><div class="fcc-media"></div><div class="fcc-center"><span class="fcc-title">Quarterly review deck</span><span class="fcc-caption">contoso.sharepoint.com</span></div></div></div>
+            <span class="uc-config">Primary &middot; Image = True &mdash; floats on Shadow 16 inside the bubble</span></div>
+          <div class="usecase-item"><span class="uc-label">Suggested contact</span>
+            <div class="fcc st-primary" style="width:100%;"><div class="fcc-row"><div class="fcc-av"></div><div class="fcc-center"><span class="fcc-title">Priya Raman</span><span class="fcc-caption">Design &middot; Available</span></div></div></div>
+            <span class="uc-config">Primary &middot; Avatar = True</span></div>
+          <div class="usecase-item"><span class="uc-label">File row in an empty state</span>
+            <div class="fcc st-secondary" style="width:100%;"><div class="fcc-row" style="min-height:48px;"><div class="fcc-media" style="width:44px;height:44px;"></div><div class="fcc-center"><span class="fcc-title" style="font-size:15px;line-height:20px;">Getting started.pdf</span><span class="fcc-caption">2 MB</span></div><span class="fcc-right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></div></div>
+            <span class="uc-config">Secondary &middot; right accessory on &mdash; flat, for lists</span></div>
+          <div class="usecase-item"><span class="uc-label">Dense stack row</span>
+            <div class="fcc st-tertiary" style="width:100%;"><div class="fcc-row" style="min-height:48px;"><div class="fcc-center"><span class="fcc-title" style="font-size:15px;line-height:20px;">Meeting notes</span><span class="fcc-caption">Edited yesterday</span></div></div></div>
+            <span class="uc-config">Tertiary &middot; 0.5dp stroke &mdash; the near-invisible container</span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>If it needs more than one region, it is a Card.</strong> Multiple content areas, dividers or a button group belong to the <a href="#card-spec" data-link="card-spec">Card</a>; a quoted or forwarded message is a <a href="#chiclet" data-link="chiclet">Chiclet</a>.
+        </div>
+      </section>
+      <section class="spec-section" id="cc-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#cc-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The card is one target; the right accessory is another.</strong> A chevron that navigates and a card that opens must be separately named, or announced as one combined action &mdash; never two unlabeled taps.</li>
+          <li><strong>Both selection affordances can be on at once.</strong> L-Checkbox and Radio are independent booleans on the same leading slot; only one should ever be enabled, chosen by the list's selection model.</li>
+          <li><strong>Titles truncate on one line.</strong> The ellipsis is visual only &mdash; keep the full title in the accessible name.</li>
+          <li><strong>Media is decorative by default.</strong> A 64dp thumbnail rarely adds information the title lacks; expose it as decorative unless it is the content (a photo message).</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -22774,6 +23992,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#content-card-spec-content-card-priority-variants">Priority Variants</a>
         <a href="#content-card-spec-content-card-config-variants">Config Variants</a>
         <a href="#content-card-spec-content-card-interaction-variants">Interaction Variants</a>
+        <div class="toc-group">More</div>
+        <a href="#cc-preview">Build a Content Card</a>
+        <a href="#cc-usage">Usage Examples</a>
+        <a href="#cc-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -23078,6 +24300,164 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Divider</em>; nodes: Divider line <code>106947:213964</code>.</p>
       </section>
+
+      <section class="spec-section" id="div-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Divider <a href="#div-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The dashed frame is the host surface, not part of the component &mdash; it is there so the padding inset is visible. Switch to Section Divider to see the composed form.</p>
+
+        <div class="fbtn-scope">
+        <div class="divlab">
+          <div class="divlab-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Component</div>
+              <div class="btnlab-pills" data-axis="component">
+                <button class="btnlab-pill on" data-val="divider">Divider</button>
+                <button class="btnlab-pill" data-val="section">Section Divider</button>
+              </div>
+            </div>
+            <div class="btnlab-group" id="divlab-padgroup">
+              <div class="btnlab-group-label">Padding</div>
+              <div class="btnlab-pills" data-axis="pad">
+                <button class="btnlab-pill on" data-val="none">None</button>
+                <button class="btnlab-pill" data-val="12-leading">12-leading</button>
+                <button class="btnlab-pill" data-val="16-leading">16-leading</button>
+                <button class="btnlab-pill" data-val="12-trailing">12-trailing</button>
+                <button class="btnlab-pill" data-val="16-trailing">16-trailing</button>
+              </div>
+            </div>
+            <div class="btnlab-group" id="divlab-orientgroup" style="display:none;">
+              <div class="btnlab-group-label">Orientation</div>
+              <div class="btnlab-pills" data-axis="orient">
+                <button class="btnlab-pill on" data-val="horizontal">Horizontal</button>
+                <button class="btnlab-pill" data-val="vertical">Vertical</button>
+              </div>
+            </div>
+            <div class="btnlab-group" id="divlab-centregroup" style="display:none;">
+              <div class="btnlab-group-label">Centre content</div>
+              <div class="btnlab-pills" data-axis="centre">
+                <button class="btnlab-pill on" data-val="button">Button</button>
+                <button class="btnlab-pill" data-val="icon">Icon</button>
+                <button class="btnlab-pill" data-val="text">Text</button>
+                <button class="btnlab-pill" data-val="none">None</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Inspect</div>
+              <label class="btnlab-check"><input type="checkbox" id="dl-bounds" checked> <strong>Show host bounds</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="dl-pad"> <strong>Highlight padding</strong></label>
+              <label class="btnlab-check"><input type="checkbox" id="dl-dark"> <strong>Dark theme</strong></label>
+            </div>
+          </div>
+
+          <div>
+            <div class="divlab-stage" id="divlab-stage">
+              <div class="fdiv-host show-bounds" id="fdiv-host">
+                <div class="fdiv-row">Notifications</div>
+                <div class="fdiv pad-none" id="fdiv" data-pad="">
+                  <div class="fdiv-stroke"></div>
+                </div>
+                <div class="fdiv-row">Sounds &amp; haptics</div>
+              </div>
+              <div class="fsdiv" id="fsdiv" style="display:none;">
+                <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                <button class="fbtn style-accent size-small state-rest" id="fsdiv-btn" type="button">
+                  <span class="fbtn-ico"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4.5v11M4.5 10h11"/></svg></span>
+                  Button
+                </button>
+                <span class="fsdiv-icon" id="fsdiv-icon" style="display:none;"><svg viewBox="0 0 12 12" fill="currentColor"><path d="M6 8.2 1.9 4.1a.7.7 0 0 1 1-1L6 6.2l3.1-3.1a.7.7 0 1 1 1 1L6 8.2Z"/></svg></span>
+                <span class="fsdiv-text" id="fsdiv-text" style="display:none;">Some text</span>
+                <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+              </div>
+            </div>
+            <p class="divlab-note" id="divlab-note"></p>
+          </div>
+        </div>
+        </div>
+      </section>
+      <section class="spec-section" id="div-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples
+          <a href="#div-usage" class="anchor-link" aria-label="Link to this section">#</a>
+          <button class="uc-theme-toggle" id="div-uc-theme-toggle" type="button" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.1 12.44a6.5 6.5 0 0 1-7.55-7.55.5.5 0 0 0-.64-.57 6.5 6.5 0 1 0 8.76 8.76.5.5 0 0 0-.57-.64Zm-6.53-6.7a7.5 7.5 0 0 0 7.7 7.69A5.5 5.5 0 1 1 8.57 5.73Z"/></svg>
+            Dark theme
+          </button>
+        </h2>
+        <p class="section-intro">Where each padding variant earns its keep.</p>
+
+        <div class="div-usecase-stage fbtn-scope" id="div-uc-stage">
+        <div class="usecase-grid">
+
+          <div class="usecase-item">
+            <span class="uc-label">Full-bleed group</span>
+            <div class="div-uc-surface">
+              <div class="div-uc-row"><strong>General</strong></div>
+              <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+              <div class="div-uc-row">Notifications</div>
+              <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+              <div class="div-uc-row">Sounds &amp; haptics</div>
+            </div>
+            <span class="uc-config">Padding = None &middot; separating peers in one group</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">List with leading avatars</span>
+            <div class="div-uc-surface">
+              <div class="div-uc-row"><strong>Priya Raman</strong> &middot; Sent the deck</div>
+              <div class="fdiv pad-16-leading"><div class="fdiv-stroke"></div></div>
+              <div class="div-uc-row"><strong>Marco Silva</strong> &middot; Added a comment</div>
+              <div class="fdiv pad-16-leading"><div class="fdiv-stroke"></div></div>
+              <div class="div-uc-row"><strong>Dana Cole</strong> &middot; Shared a file</div>
+            </div>
+            <span class="uc-config">Padding = 16-leading &middot; rule starts under the text, not the avatar</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Section break with action</span>
+            <div class="div-uc-surface">
+              <div class="div-uc-row">Yesterday's messages</div>
+              <div class="div-uc-inset">
+                <div class="fsdiv" style="width:100%;">
+                  <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                  <button class="fbtn style-accent size-small state-rest" type="button">Jump to latest</button>
+                  <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                </div>
+              </div>
+              <div class="div-uc-row">Today's messages</div>
+            </div>
+            <span class="uc-config">Section Divider &middot; Horizontal &middot; Button</span>
+          </div>
+
+          <div class="usecase-item">
+            <span class="uc-label">Labelled break</span>
+            <div class="div-uc-surface">
+              <div class="div-uc-row">Older items</div>
+              <div class="div-uc-inset">
+                <div class="fsdiv" style="width:100%;">
+                  <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                  <span class="fsdiv-text">Unread</span>
+                  <div class="fdiv pad-none"><div class="fdiv-stroke"></div></div>
+                </div>
+              </div>
+              <div class="div-uc-row">New items</div>
+            </div>
+            <span class="uc-config">Section Divider &middot; Text on, Button off</span>
+          </div>
+
+        </div>
+        </div>
+      </section>
+      <section class="spec-section" id="div-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#div-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>A plain Divider is decorative.</strong> It carries no information a screen reader needs; expose it as decorative rather than as a separator with a role, so it does not add noise to a long list.</li>
+          <li><strong>Section Divider is not decorative.</strong> Its centre content &mdash; a label like &ldquo;Unread&rdquo;, or a button &mdash; is real content and must be reachable. Do not hide the whole component.</li>
+          <li><strong>The rule fails text contrast by design.</strong> Stroke/Divider (#e0e0e0) against a white surface is a non-text boundary, which is permitted &mdash; but it means a divider can never be the only cue that two things are different. Grouping, spacing and headings carry the meaning.</li>
+          <li><strong>Do not scale the rule with text size.</strong> At 0.5dp the divider is already at the edge of visibility on low-density displays; it should hold its weight while type grows around it.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -23085,6 +24465,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="toc-label">On this page</div>
         <div class="toc-group">Divider line</div>
         <a href="#divider-spec-divider-size-padding-insets">Size - padding insets</a>
+        <div class="toc-group">More</div>
+        <a href="#div-playground">Build a Divider</a>
+        <a href="#div-usage">Usage Examples</a>
+        <a href="#div-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -23093,6 +24477,91 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
     Divider &middot; Spec &middot; Monocore &middot; November 2026
   </footer>
 </div>
+<script>
+// ── Divider Lab ──
+(() => {
+  const host = document.getElementById('fdiv-host');
+  if (!host) return;
+  const state = { component: 'divider', pad: 'none', orient: 'horizontal', centre: 'button' };
+  const div = document.getElementById('fdiv');
+  const sec = document.getElementById('fsdiv');
+  const stage = document.getElementById('divlab-stage');
+  const note = document.getElementById('divlab-note');
+  const padGroup = document.getElementById('divlab-padgroup');
+  const orientGroup = document.getElementById('divlab-orientgroup');
+  const centreGroup = document.getElementById('divlab-centregroup');
+  const cb = id => document.getElementById(id).checked;
+  const PAD_LABEL = { 'none':'None', '12-leading':'12-leading', '16-leading':'16-leading', '12-trailing':'12-trailing', '16-trailing':'16-trailing' };
+
+  function render() {
+    const isSection = state.component === 'section';
+    host.style.display = isSection ? 'none' : 'flex';
+    sec.style.display  = isSection ? 'flex' : 'none';
+    padGroup.style.display    = isSection ? 'none' : '';
+    orientGroup.style.display = isSection ? '' : 'none';
+    centreGroup.style.display = isSection ? '' : 'none';
+
+    // Divider
+    div.className = 'fdiv pad-' + state.pad + (cb('dl-pad') ? ' show-pad' : '');
+    div.setAttribute('data-pad', state.pad === 'none' ? '' : state.pad.split('-')[0]);
+    host.classList.toggle('show-bounds', cb('dl-bounds'));
+
+    // Section Divider
+    sec.classList.toggle('vertical', state.orient === 'vertical');
+    const rules = sec.querySelectorAll('.fdiv, .fsdiv-vline');
+    rules.forEach(r => r.remove());
+    const mk = () => {
+      if (state.orient === 'vertical') {
+        const l = document.createElement('div'); l.className = 'fsdiv-vline'; return l;
+      }
+      const d = document.createElement('div'); d.className = 'fdiv pad-none';
+      d.innerHTML = '<div class="fdiv-stroke"></div>'; return d;
+    };
+    sec.insertBefore(mk(), sec.firstChild);
+    sec.appendChild(mk());
+    document.getElementById('fsdiv-btn').style.display  = state.centre === 'button' ? 'inline-flex' : 'none';
+    document.getElementById('fsdiv-icon').style.display = state.centre === 'icon' ? 'inline-flex' : 'none';
+    document.getElementById('fsdiv-text').style.display = state.centre === 'text' ? 'inline' : 'none';
+
+    stage.classList.toggle('dark', cb('dl-dark'));
+
+    note.innerHTML = isSection
+      ? '<code>Section Divider</code> &middot; Orientation = ' + (state.orient === 'vertical' ? 'Vertical' : 'Horizontal')
+        + ' &middot; Centre = ' + (state.centre === 'none' ? 'none' : state.centre.charAt(0).toUpperCase() + state.centre.slice(1))
+        + ' &middot; rule ' + (state.orient === 'vertical' ? '1dp' : '0.5dp')
+        + ' &middot; node <code>83796-188604</code>'
+      : '<code>Divider</code> &middot; Padding = ' + PAD_LABEL[state.pad]
+        + ' &middot; 0.5dp Stroke/Divider &middot; node <code>105360-136054</code>';
+  }
+
+  document.querySelectorAll('#page-divider .btnlab-pills').forEach(group => {
+    group.addEventListener('click', e => {
+      const pill = e.target.closest('.btnlab-pill');
+      if (!pill) return;
+      group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+      pill.classList.add('on');
+      state[group.dataset.axis] = pill.dataset.val;
+      render();
+    });
+  });
+  document.querySelectorAll('#page-divider .divlab-controls input[type="checkbox"]').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+})();
+
+// ── Usage examples: dark theme toggle ──
+(() => {
+  const toggle = document.getElementById('div-uc-theme-toggle');
+  const stage = document.getElementById('div-uc-stage');
+  if (!toggle || !stage) return;
+  toggle.addEventListener('click', () => {
+    const dark = !stage.classList.contains('dark');
+    stage.classList.toggle('dark', dark);
+    toggle.classList.toggle('on', dark);
+    toggle.setAttribute('aria-pressed', String(dark));
+  });
+})();
+</script>
 </div>
 
 <div class="page" id="page-divider-architecture" data-page="divider-architecture">
@@ -23681,6 +25150,75 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Empty List View</em>; nodes: Empty state <code>106947:224790</code>, Examples <code>108266:171243</code>.</p>
       </section>
+
+      <section class="spec-section" id="el-playground">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build an Empty State <a href="#el-playground" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">There is no variant axis to pick &mdash; the whole configuration surface is booleans. Toggle them to see what each reveals.</p>
+
+        <div class="fel-lab">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" id="el-title" checked> Title block</label>
+              <label class="btnlab-check"><input type="checkbox" id="el-link"> Body link</label>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Footer</div>
+              <label class="btnlab-check"><input type="checkbox" id="el-footer" checked> Footer</label>
+              <label class="btnlab-check"><input type="checkbox" id="el-b1" checked> Primary button</label>
+              <label class="btnlab-check"><input type="checkbox" id="el-b2"> Secondary button</label>
+              <label class="btnlab-check"><input type="checkbox" id="el-b3"> Tertiary button</label>
+            </div>
+          </div>
+          <div>
+            <div class="fel-stage">
+              <div class="fel">
+                <div class="fel-main">
+                  <div class="fel-media"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></div>
+                  <div class="fel-title" id="fel-title">Title 1</div>
+                  <div class="fel-desc">Content in this container can apply <span class="lnk">text styling</span> and emphasis when applicable.</div>
+                  <div class="fel-link" id="fel-link" style="display:none;">Community guidelines</div>
+                </div>
+                <div class="fel-footer" id="fel-footer">
+                  <button class="fel-btn b1" id="fel-b1" type="button">Button</button>
+                  <button class="fel-btn b2" id="fel-b2" type="button" style="display:none;">Button</button>
+                  <button class="fel-btn b3" id="fel-b3" type="button" style="display:none;">Button</button>
+                </div>
+              </div>
+            </div>
+            <p class="bdg-note" id="fel-note"></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="el-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#el-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The published examples place the component in three hosts, and its footer behaves differently in each.</p>
+        <div class="table-wrap wide">
+          <table>
+            <thead><tr><th>Host</th><th>Published as</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Full screen</td><td>Screen Template &rarr; Canvas slot, 402&times;794 above the tab bar</td><td>Footer sits above the Bottom sticky control</td></tr>
+              <tr><td>Full-screen sheet</td><td>Sheet &rarr; Content Slot, 402&times;718 under the drawer toolbar</td><td>Title centres in the reduced height automatically</td></tr>
+              <tr><td>Half sheet with keyboard</td><td>Sheet at 480dp with the keyboard raised</td><td>Main content compresses to 326dp &mdash; media, title and body still fit; the footer is the first thing to collide</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-rule">
+          <strong>The component owns the message, the host owns the height.</strong> Because Main content centres in the remainder, the empty state survives any host taller than roughly 400dp. Below that &mdash; a half sheet with a keyboard &mdash; drop the footer booleans rather than letting the buttons push the title off-canvas.
+        </div>
+      </section>
+      <section class="spec-section" id="el-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#el-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The illustration is decorative.</strong> The Media slot's default artwork carries no information the title does not; expose it as decorative so it is not announced.</li>
+          <li><strong>Reading order is the layout order.</strong> Title, description, link, then actions &mdash; keep the DOM/accessibility order matching the visual stack, especially when the custom title slot replaces the text title.</li>
+          <li><strong>The deprecated description colour is the contrast risk.</strong> #6e6e6e on white is 4.9:1 &mdash; passing, but with no headroom, and it is not a live token so a theme change will not correct it.</li>
+          <li><strong>One primary action.</strong> Three stacked full-width buttons force a screen-reader user through three equally-weighted choices on a screen whose entire message is &ldquo;there is nothing here yet&rdquo;. Prefer one, at most two.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -23690,6 +25228,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#empty-list-spec-state-configuration-options">Configuration options</a>
         <div class="toc-group">Examples</div>
         <a href="#empty-list-spec-examples-ui-layouts">UI Layouts</a>
+        <div class="toc-group">More</div>
+        <a href="#el-playground">Build an Empty State</a>
+        <a href="#el-usage">Usage Examples</a>
+        <a href="#el-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -23698,6 +25240,29 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
     Empty List View &middot; Spec &middot; Monocore &middot; November 2026
   </footer>
 </div>
+<script>
+// ── Empty state lab ──
+(() => {
+  const note = document.getElementById('fel-note');
+  if (!note) return;
+  const cb = id => document.getElementById(id).checked;
+  function render() {
+    document.getElementById('fel-title').style.display = cb('el-title') ? '' : 'none';
+    document.getElementById('fel-link').style.display = cb('el-link') ? '' : 'none';
+    const footer = cb('el-footer');
+    document.getElementById('fel-footer').style.display = footer ? '' : 'none';
+    document.getElementById('fel-b1').style.display = footer && cb('el-b1') ? '' : 'none';
+    document.getElementById('fel-b2').style.display = footer && cb('el-b2') ? '' : 'none';
+    document.getElementById('fel-b3').style.display = footer && cb('el-b3') ? '' : 'none';
+    const n = footer ? ['el-b1','el-b2','el-b3'].filter(cb).length : 0;
+    note.innerHTML = '<code>Empty state/Default</code> &middot; node <code>106886-26560</code>' +
+      (n > 1 ? ' &middot; <strong style="color:var(--c-orange);">' + n + ' stacked actions &mdash; prefer one</strong>' : '');
+  }
+  document.querySelectorAll('#page-empty-list .bdg-controls input').forEach(c =>
+    c.addEventListener('change', render));
+  render();
+})();
+</script>
 </div>
 
 <div class="page" id="page-filter" data-page="filter">
@@ -24687,6 +26252,37 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Filter</em>; nodes: Horizontal filter button <code>116204:95563</code>, Vertical filter button <code>108979:438444</code>.</p>
       </section>
+
+      <section class="spec-section" id="flt-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#flt-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">Both published examples put the pills in a horizontally-scrolling row directly under a search field or header.</p>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell">
+            <span class="ffl-row"><span class="ffl pri on"><span class="c"><span class="l">Label</span></span></span> <span class="ffl sec off"><span class="c"><span class="l">People</span></span></span> <span class="ffl sec off"><span class="c"><span class="l">Files</span></span></span> <span class="ffl sec off"><span class="c"><span class="l">Channels</span></span></span></span>
+            <span class="bf-cap">Search &mdash; one applied filter (Primary, Active) beside unapplied Secondary pills</span>
+          </div>
+        </div>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell">
+            <span class="ffl-row"><span class="ffl sec off"><span class="c"><span class="l">Unread</span></span></span> <span class="ffl sec on"><span class="c"><span class="l">Mentions</span></span></span> <span class="ffl dng on"><span class="c"><span class="l">Blocked</span></span></span></span>
+            <span class="bf-cap">Chat &mdash; a Secondary filter applied alongside a Danger filter</span>
+          </div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Filters live in a scrolling row, not a wrap.</strong> Both published examples keep every pill on one line and scroll horizontally. Wrapping to a second line turns a filter bar into a tag cloud and loses the reading order that makes the applied filter findable.
+        </div>
+      </section>
+      <section class="spec-section" id="flt-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#flt-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Active must be announced, not just drawn.</strong> The pill is a toggle. Expose its applied state programmatically &mdash; a screen reader user has no access to the fill colour or the Semibold weight.</li>
+          <li><strong>32dp is under a 44dp target.</strong> Filter pills sit in a tight scrolling row, so undersized targets compound. Extend the hit area vertically; do not grow the pill.</li>
+          <li><strong>Do not trust the 30% disabled state for contrast.</strong> Because Dissabled is opacity applied to the whole pill, the label fades with it. Disabled controls are exempt from contrast minimums, but this also means disabled state must never be the only signal that a filter is unavailable.</li>
+          <li><strong>Danger is not conveyed by colour alone anywhere else.</strong> The Danger semantic differs from Secondary only in hue. If a destructive filter matters, pair it with an icon or wording &mdash; red on its own is not sufficient.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -24699,6 +26295,9 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="toc-group">Vertical filter button</div>
         <a href="#filter-spec-vertical-variant-primary">Variant - Primary</a>
         <a href="#filter-spec-vertical-variant-secondary">Variant - Secondary</a>
+        <div class="toc-group">More</div>
+        <a href="#flt-usage">Usage Examples</a>
+        <a href="#flt-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -28231,6 +29830,64 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>List</em>; nodes: List types <code>106947:222146</code>, Generic List <code>107060:96388</code>.</p>
       </section>
+
+      <section class="spec-section" id="gl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Generic List <a href="#gl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="generic-list">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Layout</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="read">Read</button>
+                <button class="btnlab-pill" data-val="unread">Unread</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=sub]" checked> Sublabel</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=meta]" checked> Metadata</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=trail]" checked> Trailing media</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".flr-divider"> Bottom divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="flr lab-target layout-read state-rest py16"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Generic List</code> &middot; the lab renders Size = Default; Small is published but re-verify its geometry before implementing.</p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="gl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#gl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The row in its two most common configurations.</p>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="flr lab-target layout-unread state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Design crit notes</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-selected py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Sprint planning</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py16"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Roadmap review</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Generic List is the family template.</strong> Timed list adds a timestamp, Accordion adds a chevron, Nested Accordion adds an inset, Grouped list adds a container. Fix a defect here first &mdash; the siblings inherit it.
+        </div>
+      </section>
+      <section class="spec-section" id="gl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#gl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The row is one target; the trailing accessory is another.</strong> Both need separate accessible names, or the accessory folds into the row's single action.</li>
+          <li><strong>Unread must be announced, not just bolded.</strong> The weight change and the 8dp dot are both visual-only; expose unread state programmatically.</li>
+          <li><strong>Selected is colour-only.</strong> Surface/SubtleSelected against white is a 4%% luminance shift &mdash; announce selection, never rely on the tint.</li>
+          <li><strong>Rows meet the 44dp floor only at Default.</strong> Verify the small/compact forms against the host's hit-area extension.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -28242,6 +29899,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#generic-list-spec-generic-variants">Variants</a>
         <a href="#generic-list-spec-generic-variants">Variants</a>
         <a href="#generic-list-spec-generic-size">Size</a>
+        <div class="toc-group">More</div>
+        <a href="#gl-play">Build a Generic List</a>
+        <a href="#gl-usage">Usage Examples</a>
+        <a href="#gl-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -28488,6 +30149,64 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>List</em>; nodes: Timed activity list <code>107060:91215</code>.</p>
       </section>
+
+      <section class="spec-section" id="tl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Timed list <a href="#tl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="timed-list">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Layout</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="read">Read</button>
+                <button class="btnlab-pill" data-val="unread">Unread</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=sub]" checked> Sublabel</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=meta]" checked> Metadata</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=trail]" checked> Accessory slot</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".flr-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="flr lab-target layout-unread state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span><span class="flr-time" data-part="time">Today</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Activity List-item with Timer</code> &middot; Layout &times; State &middot; node <code>104714-3536</code></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="tl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#tl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="flr lab-target layout-unread state-rest py12 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Priya Raman</span><span class="flr-time" data-part="time">9:41</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-unread state-rest py12 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Design crit</span><span class="flr-time" data-part="time">Yesterday</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Marco Silva</span><span class="flr-time" data-part="time">Tuesday</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>The timestamp answers &ldquo;when&rdquo;, the accessory answers &ldquo;what next&rdquo;.</strong> Keep the timestamp relative and short &mdash; it shares the first line with the label and steals truncation space from it.
+        </div>
+      </section>
+      <section class="spec-section" id="tl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#tl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The row is one target; the trailing accessory is another.</strong> Both need separate accessible names, or the accessory folds into the row's single action.</li>
+          <li><strong>Unread must be announced, not just bolded.</strong> The weight change and the 8dp dot are both visual-only; expose unread state programmatically.</li>
+          <li><strong>Selected is colour-only.</strong> Surface/SubtleSelected against white is a 4%% luminance shift &mdash; announce selection, never rely on the tint.</li>
+          <li><strong>Rows meet the 44dp floor only at Default.</strong> Verify the small/compact forms against the host's hit-area extension.</li>
+        </ul>
+        <p>Also announce the timestamp as part of the row's name (&ldquo;Priya Raman, 9:41, unread&rdquo;) &mdash; a trailing text node read separately loses its subject.</p>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -28496,6 +30215,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="toc-group">Timed activity list</div>
         <a href="#timed-list-spec-timed-variants">Variants</a>
         <a href="#timed-list-spec-timed-variants">Variants</a>
+        <div class="toc-group">More</div>
+        <a href="#tl-play">Build a Timed list</a>
+        <a href="#tl-usage">Usage Examples</a>
+        <a href="#tl-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -28859,6 +30582,62 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>List</em>; nodes: Accordion List <code>107060:97321</code>.</p>
       </section>
+
+      <section class="spec-section" id="al-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build an Accordion list <a href="#al-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="accordion-list">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Layout</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="expanded">Expanded</button>
+                <button class="btnlab-pill" data-val="collapsed">Collapsed</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=sub]" checked> Sublabel</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=meta]" checked> Metadata</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=trail]" checked> Right accessory</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".flr-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="flr lab-target layout-expanded state-rest py12"><div class="flr-pad"><span class="flr-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Accordion</code> &middot; Layout &times; State &middot; node <code>104715-1603</code></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="al-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#al-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="flr lab-target layout-expanded state-rest py12 show-divider"><div class="flr-pad"><span class="flr-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Pinned channels</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-collapsed state-rest py12"><div class="flr-pad"><span class="flr-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Archived</span></div><span class="flr-sub" data-part="sub">Sublabel</span><span class="flr-meta" data-part="meta">Metadata</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Layout is state, not structure.</strong> Expanded vs Collapsed only rotates the chevron &mdash; the children it discloses are the host's rows, not part of this component. Pair it with <a href="#nested-accordion" data-link="nested-accordion">Nested Accordion</a> rows for the inset children.
+        </div>
+      </section>
+      <section class="spec-section" id="al-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#al-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Expose expanded state.</strong> The chevron rotation is visual-only; the row needs <code>aria-expanded</code> semantics (or the platform equivalent) and its children grouped under it.</li>
+          <li><strong>The whole row is the toggle.</strong> The 12dp chevron is far below any target minimum &mdash; never make it the only tappable region.</li>
+          <li><strong>Do not nest a second action in a toggle row.</strong> The right accessory inside a disclosure row creates two behaviours on one surface; if the accessory acts, give it a separate, named target.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -28868,6 +30647,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#accordion-list-spec-accordion-variant-expanded">Variant - Expanded</a>
         <a href="#accordion-list-spec-accordion-variant-collapsed">Variant - Collapsed</a>
         <a href="#accordion-list-spec-accordion-size">Size</a>
+        <div class="toc-group">More</div>
+        <a href="#al-play">Build an Accordion list</a>
+        <a href="#al-usage">Usage Examples</a>
+        <a href="#al-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -29141,6 +30924,64 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>List</em>; nodes: Accordion Nested <code>107060:98533</code>.</p>
       </section>
+
+      <section class="spec-section" id="na-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Nested Accordion <a href="#na-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="nested-accordion">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Read</div>
+              <div class="btnlab-pills" data-axis="layout">
+                <button class="btnlab-pill on" data-val="read">Read</button>
+                <button class="btnlab-pill" data-val="unread">Unread</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Size (inset)</div>
+              <div class="btnlab-pills" data-axis="inset">
+                <button class="btnlab-pill on" data-val="72">72 inset</button>
+                <button class="btnlab-pill" data-val="56">56 &ndash; inset</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=sub]" checked> Sublabel</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".flr-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="flr lab-target layout-read state-rest py12 inset-72"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Accordion Nested</code> &middot; Read &times; State &times; Size &middot; node <code>104725-57501</code></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="na-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#na-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="flr lab-target layout-expanded state-rest py12"><div class="flr-pad"><span class="flr-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Design team</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-unread state-rest py12 inset-72"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">crit-feedback</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py12 inset-72"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">show-and-tell</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+      </section>
+      <section class="spec-section" id="na-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#na-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Nesting must be structural, not visual.</strong> The inset communicates hierarchy to sighted users only; expose the parent&ndash;child relationship as a group with a level, or a screen reader hears a flat list.</li>
+          <li><strong>Unread carries the same duty as the flat rows.</strong> Bold + dot is visual-only; announce it.</li>
+          <li><strong>Deep nesting compounds the inset.</strong> At 72dp per level a phone runs out of line length by the second level; the published set stops at one, and so should the product.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -29150,6 +30991,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#nested-accordion-spec-nested-variant-read">Variant - Read</a>
         <a href="#nested-accordion-spec-nested-variant-unread">Variant - Unread</a>
         <a href="#nested-accordion-spec-nested-size">Size</a>
+        <div class="toc-group">More</div>
+        <a href="#na-play">Build a Nested Accordion</a>
+        <a href="#na-usage">Usage Examples</a>
+        <a href="#na-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -29429,6 +31274,60 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>List</em>; nodes: Section Header - Centered <code>107061:99535</code>.</p>
       </section>
+
+      <section class="spec-section" id="shc-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Section header <a href="#shc-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="section-header-centered">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Title</div>
+              <div class="btnlab-pills" data-axis="title">
+                <button class="btnlab-pill on" data-val="primary">Primary</button>
+                <button class="btnlab-pill" data-val="subtle">Subtle</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsh-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fsh center lab-target title-primary state-rest"><div class="fsh-row"><div class="fsh-left"><span class="fsh-title">Title</span></div></div><span class="fsh-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Section Header - Center aligned</code> &middot; node <code>104575-21068</code></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="shc-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#shc-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="fsh center title-primary state-rest show-divider"><div class="fsh-row"><div class="fsh-left"><span class="fsh-title">Yesterday</span></div></div><span class="fsh-divider"></span></div>
+          <div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Sprint retro</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Roadmap sync</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Centred headers are date breaks, not section controls.</strong> They separate time-ordered content (&ldquo;Yesterday&rdquo;, &ldquo;Last week&rdquo;). Anything that filters, expands or carries a &ldquo;See all&rdquo; belongs to the <a href="#section-header-left" data-link="section-header-left">left-aligned header</a>.
+        </div>
+      </section>
+      <section class="spec-section" id="shc-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#shc-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Expose it as a heading.</strong> A section header that is announced as plain text gives a screen-reader user no way to jump between sections.</li>
+          <li><strong>Primary vs Subtle is colour-only.</strong> Same size, same weight &mdash; the emphasis distinction does not survive greyscale and must not carry meaning on its own.</li>
+          <li><strong>If it is not interactive, do not publish states for it.</strong> Hover and Selected imply a tap target; a header that does nothing when tapped should stay at Rest.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -29438,6 +31337,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#section-header-centered-spec-centered-variant-primary">Variant - Primary</a>
         <a href="#section-header-centered-spec-centered-variant-subtle">Variant - Subtle</a>
         <a href="#section-header-centered-spec-centered-divider">Divider</a>
+        <div class="toc-group">More</div>
+        <a href="#shc-play">Build a Section header</a>
+        <a href="#shc-usage">Usage Examples</a>
+        <a href="#shc-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -29821,6 +31724,69 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>List</em>; nodes: Section Header <code>107063:100023</code>.</p>
       </section>
+
+      <section class="spec-section" id="shl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Section header <a href="#shl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="section-header-left">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Title</div>
+              <div class="btnlab-pills" data-axis="title">
+                <button class="btnlab-pill on" data-val="primary">Primary</button>
+                <button class="btnlab-pill" data-val="subtle">Subtle</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Size</div>
+              <div class="btnlab-pills" data-axis="size">
+                <button class="btnlab-pill on" data-val="default">Default</button>
+                <button class="btnlab-pill" data-val="large">Large</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsh-chev" checked> Accordion chevron</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsh-seeall" checked> Accessory value</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsh-divider"> Show divider</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fsh lab-target title-primary state-rest size-default"><div class="fsh-row"><div class="fsh-left" style="padding-left:32px;"><span class="fsh-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="fsh-title">Title</span></div><span class="fsh-acc"><span class="fsh-seeall">See all</span></span></div><span class="fsh-divider"></span></div>
+            </div>
+            <p class="lab-note"><code>Section Header - Left aligned</code> &middot; node <code>104575-20989</code></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="shl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#shl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; align-items:stretch; gap:0;">
+          <div class="fsh title-primary state-rest size-default show-divider"><div class="fsh-row"><div class="fsh-left" style="padding-left:32px;"><span class="fsh-chev"><svg viewBox="0 0 8 5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l3 3 3-3"/></svg></span><span class="fsh-title">Pinned</span></div><span class="fsh-acc"><span class="fsh-seeall">See all</span></span></div><span class="fsh-divider"></span></div>
+          <div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Design crit</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py12"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Standup notes</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>The custom-header slot swaps the title for controls.</strong> Its published default is two Horizontal filter pills &mdash; the pattern for a section whose header <em>is</em> its filter bar. Do not combine it with the text title; the slot replaces, never accompanies.
+        </div>
+      </section>
+      <section class="spec-section" id="shl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#shl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Heading first, control second.</strong> Expose the title as a heading; if the accordion boolean is on, the toggle needs expanded/collapsed semantics on top of it.</li>
+          <li><strong>&ldquo;See all&rdquo; is a separate target.</strong> It sits inside the header row but acts independently &mdash; name it and size its hit area; the 20dp text line is not enough.</li>
+          <li><strong>Large is Display type.</strong> SF Pro Display below 20dp degrades; the 22dp Title 2 is at the safe edge &mdash; do not scale it down for tight layouts, switch to Default instead.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -29830,6 +31796,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#section-header-left-spec-left-variant-primary">Variant - Primary</a>
         <a href="#section-header-left-spec-left-variant-subtle">Variant - Subtle</a>
         <a href="#section-header-left-spec-left-divider">Divider</a>
+        <div class="toc-group">More</div>
+        <a href="#shl-play">Build a Section header</a>
+        <a href="#shl-usage">Usage Examples</a>
+        <a href="#shl-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -30247,6 +32217,53 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>List</em>; nodes: Carousel <code>107067:100547</code>.</p>
       </section>
+
+      <section class="spec-section" id="car-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Carousel item <a href="#car-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="carousel">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">State</div>
+              <div class="btnlab-pills" data-axis="state">
+                <button class="btnlab-pill on" data-val="rest">Rest</button>
+                <button class="btnlab-pill" data-val="hover">Hover</button>
+                <button class="btnlab-pill" data-val="selected">Selected</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fcar lab-target state-rest"><span class="fcar-av"></span><span class="fcar-label">Label</span></div>
+            </div>
+            <p class="lab-note"><code>Carousel / Avatars</code> &middot; Layout = Persona &middot; node <code>104575-20258</code></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="car-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#car-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage">
+          <div class="fcar-row">
+            <div class="fcar state-selected"><span class="fcar-av"></span><span class="fcar-label">Priya</span></div>
+            <div class="fcar state-rest"><span class="fcar-av"></span><span class="fcar-label">Marco</span></div>
+            <div class="fcar state-rest"><span class="fcar-av"></span><span class="fcar-label">Dana</span></div>
+            <div class="fcar state-rest"><span class="fcar-av"></span><span class="fcar-label">Kat Larsson</span></div>
+          </div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>The carousel is for people, the grid is for actions.</strong> A horizontally scrolling strip suits an unbounded set (contacts, members). A bounded set of equally weighted actions is a <a href="#tile-grid" data-link="tile-grid">Tile grid</a>.
+        </div>
+      </section>
+      <section class="spec-section" id="car-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#car-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Horizontal scrolling must be reachable.</strong> Every item needs to be in the accessibility order even when scrolled out of view; announce the strip as a list with a count.</li>
+          <li><strong>Labels truncate at 84dp.</strong> &ldquo;Kat Larsson&rdquo; barely fits at 11dp; the full name belongs in the accessible name, not just the clipped caption.</li>
+          <li><strong>Selection is colour-only</strong> &mdash; the #f0f0f0 tint is the entire selected affordance. Announce it.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -30257,6 +32274,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <a href="#carousel-spec-carousel-variant-list-with-header">Variant - List with header</a>
         <a href="#carousel-spec-carousel-variant-avatar-item">Variant - Avatar item</a>
         <a href="#carousel-spec-carousel-carousel-slots">Carousel slots</a>
+        <div class="toc-group">More</div>
+        <a href="#car-play">Build a Carousel item</a>
+        <a href="#car-usage">Usage Examples</a>
+        <a href="#car-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -30428,6 +32449,54 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>List</em>; nodes: Group list <code>107067:100899</code>.</p>
       </section>
+
+      <section class="spec-section" id="grl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Grouped list <a href="#grl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="grouped-list">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Style</div>
+              <div class="btnlab-pills" data-axis="style">
+                <button class="btnlab-pill on" data-val="primary">Primary</button>
+                <button class="btnlab-pill" data-val="secondary">Secondary</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=third]" checked> 3rd list</label>
+              <label class="btnlab-check"><input type="checkbox" data-toggle="[data-part=more]" checked> More list slots</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fgl lab-target style-primary"><div class="fgl-group"><div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><span data-part="third"><div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div></span><span data-part="more"><div class="flr lab-target layout-read state-rest py16"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Label</span></div><span class="flr-sub" data-part="sub">Sublabel</span></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div></span></div></div>
+            </div>
+            <p class="lab-note"><code>Grouped list</code> &middot; Style axis &middot; node <code>105366-158698</code></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="grl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#grl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage">
+          <div class="fgl"><div class="fgl-group">
+            <div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Notifications</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py16 show-divider"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Appearance</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div><div class="flr lab-target layout-read state-rest py16"><div class="flr-pad"><span class="flr-dot"></span><span class="flr-av"></span></div><div class="flr-copy"><div class="flr-first"><span class="flr-label">Privacy</span></div></div><span class="flr-trail" data-part="trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8.5v4l2.5 1.8"/></svg></span><span class="flr-divider"></span></div>
+          </div></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Settings screens, not feeds.</strong> The inset group is the iOS settings idiom &mdash; a bounded set of related rows. Unbounded, time-ordered content belongs in a flat <a href="#generic-list" data-link="generic-list">Generic List</a> with section headers.
+        </div>
+      </section>
+      <section class="spec-section" id="grl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#grl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>The group is a semantic container.</strong> Announce it as a group so row position (&ldquo;2 of 3&rdquo;) is scoped to the section, not the whole screen.</li>
+          <li><strong>#f5f5f5 on white is decoration.</strong> The container fill does not meet any contrast threshold and must not be the only grouping cue &mdash; the heading above the group carries the meaning.</li>
+          <li><strong>Everything row-level applies unchanged</strong> &mdash; see <a href="#generic-list" data-link="generic-list">Generic List &middot; Accessibility</a>.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -30435,6 +32504,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="toc-label">On this page</div>
         <div class="toc-group">Group list</div>
         <a href="#grouped-list-spec-grouped-variants">Variants</a>
+        <div class="toc-group">More</div>
+        <a href="#grl-play">Build a Grouped list</a>
+        <a href="#grl-usage">Usage Examples</a>
+        <a href="#grl-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -30724,6 +32797,54 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
         <p class="section-intro">Figma page <em>Slider</em>; nodes: Slider <code>108584:243041</code>.</p>
       </section>
+
+      <section class="spec-section" id="sl-play">
+        <span class="section-eyebrow eyebrow-design">Interactive</span>
+        <h2>Build a Slider <a href="#sl-play" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="mini-lab" data-lab="slider">
+          <div class="bdg-controls">
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Track</div>
+              <div class="btnlab-pills" data-axis="track">
+                <button class="btnlab-pill on" data-val="segmented">Segmented</button>
+                <button class="btnlab-pill" data-val="continuous">Continuous</button>
+              </div>
+            </div>
+            <div class="btnlab-group">
+              <div class="btnlab-group-label">Content</div>
+              <label class="btnlab-check"><input type="checkbox" data-toggle=".fsl-thumb-wrap" checked> Current indicator</label>
+            </div>
+          </div>
+          <div>
+            <div class="lab-stage">
+<div class="fsl lab-target track-segmented segmented show-thumb"><span class="fsl-filled"><i></i><i></i><i></i><span class="fsl-thumb-wrap fsl-thumb"></span></span><span class="fsl-empty"><i></i><i></i><i></i></span></div>
+            </div>
+            <p class="lab-note"><code>Bar</code> &middot; Segment + Current indicator booleans &middot; doc node <code>108584-243041</code></p>
+          </div>
+        </div>
+      </section>
+      <section class="spec-section" id="sl-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#sl-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <div class="bf-stage" style="flex-direction:column; gap:var(--sp-6);">
+          <div class="bf-cell"><div class="fsl segmented show-thumb"><span class="fsl-filled"><i></i><i></i><i></i><span class="fsl-thumb"></span></span><span class="fsl-empty"><i></i><i></i><i></i></span></div><span class="bf-cap">Segmented &middot; chaptered recording</span></div>
+          <div class="bf-cell"><div class="fsl continuous show-thumb"><span class="fsl-filled"><i></i><span class="fsl-thumb"></span></span><span class="fsl-empty"><i></i></span></div><span class="bf-cap">Continuous &middot; simple playback</span></div>
+          <div class="bf-cell"><div class="fsl continuous"><span class="fsl-filled"><i></i></span><span class="fsl-empty"><i></i></span></div><span class="bf-cap">Indicator off &mdash; read-only progress</span></div>
+        </div>
+        <div class="callout callout-rule">
+          <strong>Thumb on means scrubbable; thumb off means read-only.</strong> The Current indicator boolean is the affordance contract &mdash; never show a thumb on a bar the user cannot drag.
+        </div>
+      </section>
+      <section class="spec-section" id="sl-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#sl-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>A 4dp track needs a 44dp gesture zone.</strong> The visible bar is nowhere near a touch target; the host must extend the draggable region far beyond it.</li>
+          <li><strong>Expose it as an adjustable element</strong> with value, minimum and maximum &mdash; a scrub bar that is announced as an image is unusable.</li>
+          <li><strong>Black-on-grey passes; the thumb is the risk.</strong> A white 16dp thumb over the white portion of a card relies entirely on Shadow 04 for visibility &mdash; keep the shadow.</li>
+          <li><strong>Segment boundaries are information.</strong> If chapters matter, announce them (&ldquo;chapter 2 of 3&rdquo;); the 2dp gaps are invisible to a screen reader.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
@@ -30732,6 +32853,10 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
         <div class="toc-group">Slider</div>
         <a href="#slider-spec-slider-variant">Variant</a>
         <a href="#slider-spec-slider-config-indicator">Config - indicator</a>
+        <div class="toc-group">More</div>
+        <a href="#sl-play">Build a Slider</a>
+        <a href="#sl-usage">Usage Examples</a>
+        <a href="#sl-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
@@ -30740,6 +32865,41 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
     Slider &middot; Spec &middot; Monocore &middot; November 2026
   </footer>
 </div>
+<script>
+// ── Shared mini-lab engine: pills swap axis-classes on .lab-target; checkboxes toggle parts ──
+(() => {
+  document.querySelectorAll('.mini-lab').forEach(labEl => {
+    const target = labEl.querySelector('.lab-target');
+    if (!target) return;
+    labEl.querySelectorAll('.btnlab-pills').forEach(group => {
+      group.addEventListener('click', e => {
+        const pill = e.target.closest('.btnlab-pill');
+        if (!pill) return;
+        group.querySelectorAll('.btnlab-pill').forEach(p => p.classList.remove('on'));
+        pill.classList.add('on');
+        const axis = group.dataset.axis;
+        [...target.classList].filter(c => c.indexOf(axis + '-') === 0).forEach(c => target.classList.remove(c));
+        target.classList.add(axis + '-' + pill.dataset.val);
+        // convenience aliases used by CSS
+        if (axis === 'inset') { target.classList.remove('inset-72','inset-56'); target.classList.add('inset-' + pill.dataset.val); }
+        if (axis === 'track') { target.classList.remove('segmented','continuous'); target.classList.add(pill.dataset.val); }
+        if (axis === 'size' && labEl.dataset.lab === 'generic-list') { /* lab renders Default only */ }
+      });
+    });
+    labEl.querySelectorAll('input[data-toggle]').forEach(cb => {
+      const apply = () => {
+        const sel = cb.dataset.toggle;
+        const els = sel === '.fsl-thumb-wrap' ? [target] : target.querySelectorAll(sel);
+        if (sel === '.fsl-thumb-wrap') { target.classList.toggle('show-thumb', cb.checked); return; }
+        if (sel === '.flr-divider' || sel === '.fsh-divider') { target.classList.toggle('show-divider', cb.checked); return; }
+        els.forEach(el => { el.style.display = cb.checked ? '' : 'none'; });
+      };
+      cb.addEventListener('change', apply);
+      apply();
+    });
+  });
+})();
+</script>
 </div>
 
 <div class="page" id="page-view-layout" data-page="view-layout">
