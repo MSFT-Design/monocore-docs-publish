@@ -275,6 +275,20 @@
     html.devnotes-off #tile-grid-spec-schema,
     html.devnotes-off #tab-bar-spec-schema,
     html.devnotes-off #feedback-spec-schema,
+    html.devnotes-off #filter-vertical-layout-schema,
+    html.devnotes-off #filter-vertical-spec-schema,
+    html.devnotes-off #chiclet-base-layout-schema,
+    html.devnotes-off #chiclet-base-spec-schema,
+    html.devnotes-off #chiclet-base-actions-layout-schema,
+    html.devnotes-off #chiclet-base-actions-spec-schema,
+    html.devnotes-off #chiclet-reply-layout-schema,
+    html.devnotes-off #chiclet-reply-spec-schema,
+    html.devnotes-off #chiclet-file-layout-schema,
+    html.devnotes-off #chiclet-file-spec-schema,
+    html.devnotes-off #chiclet-video-layout-schema,
+    html.devnotes-off #chiclet-video-spec-schema,
+    html.devnotes-off #chiclet-live-meeting-layout-schema,
+    html.devnotes-off #chiclet-live-meeting-spec-schema,
     html.devnotes-off #ia-dev-notes {
       display: none !important;
     }
@@ -26308,194 +26322,166 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 </div>
 
-<div class="page" id="page-filter-vertical" data-page="filter-vertical">
+<div class="page" id="page-filter-vertical-layout" data-page="filter-vertical-layout">
 <div class="docs-shell">
   <header class="docs-header">
-    <div class="eyebrow"><a href="#filter" data-link="filter" style="color:inherit;">Filter</a> &middot; Orientation</div>
+    <div class="eyebrow">Vertical filter btn &middot; Layout</div>
     <h1>Vertical filter btn</h1>
-    <p class="subtitle">The stacked form: a 24dp glyph over an 11dp label in a 61 &times; 51 rounded rectangle. Same Semantic / State / Active vocabulary as the <a href="#filter" data-link="filter">horizontal pill</a> &mdash; but a different shape, a different type ramp, and one fewer semantic.</p>
-    <div class="meta"><span>12 variants</span><span>3 axes</span><span>61 &times; 51dp</span><span>Figma: Monocore-iOS &middot; node <code>105935-54688</code></span></div>
+    <p class="subtitle">Rendered from the <em>Vertical filter button</em> documentation artboard on the <em>Filter</em> page of Monocore iOS. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>12 blocks</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-
-      <section class="spec-section" id="fv-preview">
-        <span class="section-eyebrow eyebrow-design">Variant</span>
-        <h2>Semantic &times; Active <a href="#fv-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="bf-stage ffl-scope">
-          <div class="bf-cell"><span class="ffl-row"><span class="fflv pri on"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span> <span class="fflv sec on"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span></span><span class="bf-cap">Active = True &middot; Primary, Secondary</span></div>
-        </div>
-        <div class="bf-stage ffl-scope">
-          <div class="bf-cell"><span class="ffl-row"><span class="fflv pri off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span></span><span class="bf-cap">Active = False &middot; Primary, Secondary</span></div>
-        </div>
-        <div class="bf-stage ffl-scope">
-          <div class="bf-cell"><span class="ffl-row"><span class="fflv pri on st-pressed"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span> <span class="fflv pri on st-disabled"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span> <span class="fflv pri off st-disabled-flat"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Label</span></span></span></span><span class="bf-cap">Primary &middot; Active Pressed, Active Dissabled (30%), Inactive Dissabled</span></div>
-        </div>
-      </section>
-
-      <section class="spec-section" id="fv-variants">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Variant Axes <a href="#fv-variants" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Three axes, fully published: 2 &times; 3 &times; 2 = 12 variants.</p>
-        <div class="btn-axis-cards">
-          <div class="btn-axis"><h4>Semantic &mdash; 2 values</h4><div class="vals"><span class="val">Primary</span><span class="val">Secondary</span></div></div>
-          <div class="btn-axis"><h4>State &mdash; 3 values</h4><div class="vals"><span class="val">Rest</span><span class="val">Pressed</span><span class="val">Dissabled</span></div></div>
-          <div class="btn-axis"><h4>Active &mdash; 2 values</h4><div class="vals"><span class="val">True</span><span class="val">False</span></div></div>
-        </div>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Pill label</td><td>Text</td><td><code>Label</code></td><td>Single line, never wraps &mdash; and only 61dp of width to do it in</td></tr>
-              <tr><td>Label</td><td>Boolean</td><td>On</td><td>Off leaves a 24dp glyph alone in a 61&times;51 box</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="callout callout-constraint">
-          <strong>No Danger semantic.</strong> The horizontal filter publishes Primary, Secondary and Danger; the vertical one stops at Secondary. A destructive filter is expressible in a row and not in a grid, with no published guidance for the vertical case.
-        </div>
-        <div class="callout callout-warn">
-          <strong>No icon booleans.</strong> Horizontal makes both icons optional and off by default; vertical always draws its glyph and offers no swap property on the set. The icon is the component here &mdash; the label is the optional part.
-        </div>
-      </section>
-
-      <section class="spec-section" id="fv-layout">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Layout &amp; Spacing <a href="#fv-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Unlike the horizontal pill, this one is pinned in both dimensions &mdash; 61 &times; 51 in every variant.</p>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Variant</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Icon box</th></tr></thead>
-            <tbody>
-              <tr><td><strong>All 12</strong></td><td>51dp</td><td>51dp</td><td>61dp</td><td>61dp</td><td>8 &times; 16dp</td><td>0dp</td><td>24&times;24</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Padding is Size/Small vertical, Size/Large horizontal.</p>
-
-        <h3>Corner radius</h3>
-        <p>No Size axis, so a single column &mdash; and this is where it visibly parts company with the horizontal pill.</p>
-        <div class="table-wrap">
-          <table><thead><tr><th>Element</th><th>All sizes</th></tr></thead>
-          <tbody>
-            <tr><td>Vertical filter btn</td><td>16dp <em>Radius/Prominent</em></td></tr>
-            <tr><td><em>Horizontal filter, for comparison</em></td><td><em>9999 &mdash; fully rounded</em></td></tr>
-          </tbody></table>
-        </div>
-
-        <div class="callout callout-warn">
-          <strong>Icon and label sit at a 0dp gap.</strong> The Content stack sets Size/None between the 24dp glyph and the 11dp label. They do not collide today because both have generous line boxes, but there is no spacing token holding them apart &mdash; any change to either box closes the gap.
-        </div>
-        <div class="callout callout-info">
-          <strong>61dp of width, 16dp of padding.</strong> That leaves 29dp for the label at 11dp type &mdash; roughly five or six characters before it overflows the clipped container. This component is built for one-word filters.
-        </div>
-      </section>
-
-      <section class="spec-section" id="fv-typography">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Typography <a href="#fv-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">No Size axis, so the row is keyed by Active &mdash; except that, unlike the horizontal pill, Active does not change anything about the type.</p>
-        <div class="typo-sample">
-          <div class="typo-row">
-            <div class="typo-size">Active = True</div>
-            <div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text);">Label</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span></div>
+      <section class="spec-section lay-board" id="filter-vertical-layout-vertical" data-figma-node="108979:438444">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Vertical filter button <a href="#filter-vertical-layout-vertical" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="filter-vertical-layout-vertical-variant-primary" data-figma="Content block / Section primary">
+            <h2>Variant - Primary</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-active-rest@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Rest · Active=True" data-figma-id="I108979:438444;20995:3166;108979:438447;20995:3084;108979:440014">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Rest · Active=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-active-pressed@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Pressed · Active=True" data-figma-id="I108979:438444;20995:3166;108979:438454;20995:3084;108979:440101">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Pressed · Active=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-active-disabled@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Dissabled · Active=True" data-figma-id="I108979:438444;20995:3166;116204:96363;20995:3084;116204:96362">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Dissabled · Active=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-inactive-rest@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Rest · Active=False" data-figma-id="I108979:438444;20995:3166;115067:176744;20995:3084;115067:176743">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Rest · Active=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-inactive-pressed@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Pressed · Active=False" data-figma-id="I108979:438444;20995:3166;108979:438455;20995:3084;108979:440122">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Pressed · Active=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-inactive-disabled@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Dissabled · Active=False" data-figma-id="I108979:438444;20995:3166;116204:96394;20995:3084;116204:96393">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Dissabled · Active=False</div>
+            </div>
           </div>
-          <div class="typo-row">
-            <div class="typo-size">Active = False</div>
-            <div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text);">Label</span></div>
-            <div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span></div>
-          </div>
-        </div>
-        <div class="callout callout-constraint">
-          <strong>Active is colour-only here.</strong> The horizontal filter switches Medium&nbsp;&rarr;&nbsp;Semibold between inactive and active, so its selected state survives greyscale. The vertical filter keeps Caption&nbsp;2 Regular in both, which means the only difference between an applied and an unapplied filter is hue. That fails the same test the horizontal one passes.
-        </div>
-        <div class="callout callout-warn">
-          <strong>11dp on an 11dp line height.</strong> Caption 2 is the smallest type in the system and it is set solid, inside a container with <code>overflow: clip</code>. At large accessibility text sizes the label will be cut off rather than reflowed.
-        </div>
-      </section>
-
-      <section class="spec-section" id="fv-color">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Colour by Semantic &times; State <a href="#fv-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Semantic</th><th>Active</th><th>State</th><th>Fill</th><th>Stroke</th><th>Label</th></tr></thead>
-            <tbody>
-              <tr><td rowspan="6"><strong>Primary</strong></td><td rowspan="3">True</td><td>Rest</td><td>Brand/Accent Primary <span class="btn-swatch" style="background:#654cf5;"></span></td><td>&mdash;</td><td>Text/On Accent</td></tr>
-              <tr><td>Pressed</td><td>Brand/Accent Primary &mdash; <em>content at 60%</em></td><td>&mdash;</td><td>Text/On Accent</td></tr>
-              <tr><td>Dissabled</td><td>Brand/Accent Primary at <strong>30%</strong></td><td>&mdash;</td><td>Text/On Accent</td></tr>
-              <tr><td rowspan="3">False</td><td>Rest</td><td>Surface/Group/Primary/Container <span class="btn-swatch" style="background:#f5f5f5;"></span></td><td>&mdash;</td><td>Text/Primary</td></tr>
-              <tr><td>Pressed</td><td>Surface/SubtleSelected &mdash; <em>content at 60%</em></td><td>&mdash;</td><td>Text/Primary</td></tr>
-              <tr><td>Dissabled</td><td>Surface/SubtleSelected <span class="btn-swatch" style="background:#f0f0f0;"></span></td><td>&mdash;</td><td>Text/Disabled</td></tr>
-              <tr><td rowspan="6"><strong>Secondary</strong></td><td rowspan="3">True</td><td>Rest</td><td>Brand/Accent Tertiary <span class="btn-swatch" style="background:#ebebff;"></span></td><td>1dp Brand/Accent Secondary</td><td>Text/Interactive</td></tr>
-              <tr><td>Pressed</td><td>Brand/Accent Tertiary &mdash; <em>content at 60%</em></td><td>1dp Brand/Accent Secondary</td><td>Text/Interactive</td></tr>
-              <tr><td>Dissabled</td><td>Brand/Accent Tertiary at <strong>30%</strong></td><td>1dp Brand/Accent Secondary</td><td>Brand/Accent Secondary</td></tr>
-              <tr><td rowspan="3">False</td><td>Rest</td><td>None</td><td>1dp Stroke/Container <span class="btn-swatch" style="background:#e6e6e6;"></span></td><td>Text/Primary</td></tr>
-              <tr><td>Pressed</td><td>Surface/SubtleSelected &mdash; <em>content at 60%</em></td><td>1dp Stroke/Container</td><td>Text/Primary</td></tr>
-              <tr><td>Dissabled</td><td>Surface/Dominant <span class="btn-swatch" style="background:#ffffff;"></span></td><td>1dp Stroke/Container</td><td>Text/Disabled</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-constraint">
-          <strong>Pressed is applied to a different layer than in the horizontal filter.</strong> Here the 60% opacity sits on the inner <code>Content</code> frame, so the fill stays solid and only the glyph and label fade. In the horizontal pill the same 60% sits on the root, fading the fill too. Two components, one state name, two visibly different results.
-        </div>
-
-        <div class="callout callout-warn">
-          <strong>Inactive Dissabled fills with white.</strong> <code>Secondary / Active=False / Dissabled</code> binds Surface/Dominant &mdash; pure white &mdash; where every other disabled variant uses a grey. On a white canvas the control becomes a bordered outline with no fill distinction at all.
-        </div>
-
-        <div class="callout callout-warn">
-          <strong>Secondary Active Dissabled changes its label token.</strong> Every other disabled variant uses Text/Disabled; this one uses Brand/Accent Secondary and then drops the whole control to 30%. The result is a washed-out lavender label rather than the system's disabled grey.
-        </div>
-      </section>
-
-      <section class="spec-section" id="fv-usage">
-        <span class="section-eyebrow eyebrow-impl">Examples</span>
-        <h2>Usage Examples <a href="#fv-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The published examples put the vertical filter in a chat header &mdash; a row of icon-over-label toggles above a message list.</p>
-        <div class="bf-stage ffl-scope">
-          <div class="bf-cell">
-            <span class="ffl-row"><span class="fflv pri on"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Unread</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chats</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Teams</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Files</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Apps</span></span></span></span>
-            <span class="bf-cap">Chat header &mdash; one applied filter beside four unapplied</span>
+          <div class="lay-section" id="filter-vertical-layout-vertical-variant-secondary" data-figma="Content block / Section primary">
+            <h2>Variant - Secondary</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-active-rest@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Rest · Active=True" data-figma-id="I108979:438444;20995:3166;108979:438448;20995:3084;108979:440025">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Rest · Active=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-active-pressed@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Pressed · Active=True" data-figma-id="I108979:438444;20995:3166;116204:96305;20995:3084;116204:96304">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Pressed · Active=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-active-disabled@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Dissabled · Active=True" data-figma-id="I108979:438444;20995:3166;108979:438456;20995:3084;108979:440200">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Dissabled · Active=True</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-inactive-rest@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Rest · Active=False" data-figma-id="I108979:438444;20995:3166;115067:176763;20995:3084;115067:176762">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Rest · Active=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-inactive-pressed@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Pressed · Active=False" data-figma-id="I108979:438444;20995:3166;116204:96334;20995:3084;116204:96333">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Pressed · Active=False</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-inactive-disabled@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Dissabled · Active=False" data-figma-id="I108979:438444;20995:3166;108979:438457;20995:3084;108979:440221">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Dissabled · Active=False</div>
+            </div>
           </div>
         </div>
-        <div class="callout callout-rule">
-          <strong>Vertical is for a grid, horizontal is for a row.</strong> At 61 &times; 51 the vertical button is nearly square and reads as a tile; five of them fill a phone width. If your filters have labels longer than one short word, or you need more than about five, the <a href="#filter" data-link="filter">horizontal pill</a> is the right component.
-        </div>
       </section>
 
-      <section class="spec-section" id="fv-a11y">
-        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
-        <h2>Accessibility <a href="#fv-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <ul>
-          <li><strong>Active is conveyed by colour alone.</strong> Unlike the horizontal filter, there is no weight change between applied and unapplied. Until that is fixed at the source, the applied state must be exposed programmatically and should carry a non-colour cue in product.</li>
-          <li><strong>51dp tall, 61dp wide &mdash; the one filter that clears 44dp.</strong> Both dimensions pass, which makes this the better choice where mis-taps are costly.</li>
-          <li><strong>The label clips rather than wraps.</strong> <code>overflow: clip</code> plus a solid 11dp line height means large text settings truncate silently. Treat the label as decorative reinforcement and put the real name in the accessible name.</li>
-          <li><strong>The glyph is the only content in an icon-only instance.</strong> Turning Label off leaves nothing announceable &mdash; supply an accessible name explicitly.</li>
-        </ul>
+      <section class="spec-section" id="filter-vertical-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#filter-vertical-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview.</p>
+        <p class="section-intro">Figma page <em>Filter</em>; node: Vertical filter button <code>108979:438444</code>.</p>
       </section>
-
     </main>
+
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#fv-preview">Semantic &times; Active</a>
-        <a href="#fv-variants">Variant Axes</a>
-        <a href="#fv-layout">Layout &amp; Spacing</a>
-        <a href="#fv-typography">Typography</a>
-        <a href="#fv-color">Colour</a>
-        <a href="#fv-usage">Usage Examples</a>
-        <a href="#fv-a11y">Accessibility</a>
+        <div class="toc-group">Vertical filter button</div>
+        <a href="#filter-vertical-layout-vertical-variant-primary">Variant - Primary</a>
+        <a href="#filter-vertical-layout-vertical-variant-secondary">Variant - Secondary</a>
       </nav>
     </aside>
   </div>
-  <footer class="docs-footer">Filter &middot; Vertical &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>105935-54688</code> &middot; August 2026</footer>
+
+  <footer class="docs-footer">
+    Vertical filter btn &middot; Layout &middot; Monocore &middot; November 2026
+  </footer>
 </div>
 </div>
 
+<div class="page" id="page-filter-vertical" data-page="filter-vertical">
 <style>
   /* Per-layout Chiclet pages — preview plates */
   .fchp-stage {
@@ -26511,357 +26497,892 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
   .fchp-plate { display: flex; align-items: center; justify-content: center; }
   .fchp-cap { font-size: 12px; color: var(--grey-56); text-align: center; }
 </style>
-
-<div class="page" id="page-chiclet-base" data-page="chiclet-base">
 <div class="docs-shell">
-
   <header class="docs-header">
-    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
-    <h1>Base</h1>
-    <p class="subtitle">The plainest Chiclet: a leading icon, two lines of text and a trailing affordance. Everything else in the family is this row with something added.</p>
-    <div class="meta"><span>Layout = Base</span><span>Image = False</span><span>1 variant</span><span>Figma: Monocore-iOS &middot; node <code>104574-6585</code></span></div>
+    <div class="eyebrow">Vertical filter btn &middot; Spec</div>
+    <h1>Vertical filter btn</h1>
+    <p class="subtitle">The Layout artboard from the <em>Filter</em> page of Monocore iOS, annotated for engineering: under every preview, a table of the tokens bound to that instance in Figma (background, stroke, corner radius, text, icons and other subcomponents, padding and gap) with the raw value each token resolves to, plus the size of the component and its parts.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>12 blocks</span>
+      <span>Light mode values</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-
-      <section class="spec-section" id="chiclet-base-preview">
-        <span class="section-eyebrow eyebrow-design">Variant</span>
-        <h2>Preview <a href="#chiclet-base-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="fchp-stage fch-scope fbtn-scope">
-          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-base"><div class="fch-row"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/></svg></span><div class="fch-body"><div class="fch-header"><span class="fch-cap">Design review</span></div><div class="fch-msg">Weekly sync notes</div></div><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></div></div></div><span class="fchp-cap">Layout = Base &middot; Image = False</span></div>
+      <section class="spec-section lay-board" id="filter-vertical-spec-vertical" data-figma-node="108979:438444">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Vertical filter button <a href="#filter-vertical-spec-vertical" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="filter-vertical-spec-vertical-variant-primary" data-figma="Content block / Section primary">
+            <h2>Variant - Primary</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-active-rest@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Rest · Active=True" data-figma-id="I108979:438444;20995:3166;108979:438447;20995:3084;108979:440014">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Rest · Active=True</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;108979:438447;20995:3084;108979:440014">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Brand/Accent Primary</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/On Accent</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/On Accent</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-active-pressed@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Pressed · Active=True" data-figma-id="I108979:438444;20995:3166;108979:438454;20995:3084;108979:440101">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Pressed · Active=True</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;108979:438454;20995:3084;108979:440101">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Brand/Accent Primary</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Opacity</td><td><em>&mdash;</em></td><td>0.6</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/On Accent</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/On Accent</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-active-disabled@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Dissabled · Active=True" data-figma-id="I108979:438444;20995:3166;116204:96363;20995:3084;116204:96362">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Dissabled · Active=True</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;116204:96363;20995:3084;116204:96362">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Brand/Accent Primary</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Opacity</td><td><em>&mdash;</em></td><td>0.3</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/On Accent</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/On Accent</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-inactive-rest@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Rest · Active=False" data-figma-id="I108979:438444;20995:3166;115067:176744;20995:3084;115067:176743">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Rest · Active=False</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;115067:176744;20995:3084;115067:176743">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Surface/RaisedTertiary</code></td><td><span class="btn-swatch" style="background:#F5F5F5;"></span>#F5F5F5</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/Dominant</code></td><td><span class="btn-swatch" style="background:#000000;"></span>#000000</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-inactive-pressed@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Pressed · Active=False" data-figma-id="I108979:438444;20995:3166;108979:438455;20995:3084;108979:440122">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Pressed · Active=False</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;108979:438455;20995:3084;108979:440122">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Surface/SubtleSelected</code></td><td><span class="btn-swatch" style="background:#F0F0F0;"></span>#F0F0F0</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Opacity</td><td><em>&mdash;</em></td><td>0.6</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-primary-inactive-disabled@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Primary · State=Dissabled · Active=False" data-figma-id="I108979:438444;20995:3166;116204:96394;20995:3084;116204:96393">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Primary · State=Dissabled · Active=False</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;116204:96394;20995:3084;116204:96393">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Surface/SubtleSelected</code></td><td><span class="btn-swatch" style="background:#F0F0F0;"></span>#F0F0F0</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/Disabled</code></td><td><span class="btn-swatch" style="background:#ADADAD;"></span>#ADADAD</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/Disabled</code></td><td><span class="btn-swatch" style="background:#ADADAD;"></span>#ADADAD</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="lay-section" id="filter-vertical-spec-vertical-variant-secondary" data-figma="Content block / Section primary">
+            <h2>Variant - Secondary</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-active-rest@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Rest · Active=True" data-figma-id="I108979:438444;20995:3166;108979:438448;20995:3084;108979:440025">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Rest · Active=True</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;108979:438448;20995:3084;108979:440025">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Brand/Accent Tertiary</code></td><td><span class="btn-swatch" style="background:#E8EBFA;"></span>#E8EBFA</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Stroke</td><td><code>Brand/Accent Secondary</code></td><td><span class="btn-swatch" style="background:#AAB1FA;"></span>#AAB1FA <em>1px inside</em></td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-active-pressed@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Pressed · Active=True" data-figma-id="I108979:438444;20995:3166;116204:96305;20995:3084;116204:96304">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Pressed · Active=True</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;116204:96305;20995:3084;116204:96304">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Brand/Accent Tertiary</code></td><td><span class="btn-swatch" style="background:#E8EBFA;"></span>#E8EBFA</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Stroke</td><td><code>Brand/Accent Secondary</code></td><td><span class="btn-swatch" style="background:#AAB1FA;"></span>#AAB1FA <em>1px inside</em></td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Opacity</td><td><em>&mdash;</em></td><td>0.6</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/Interactive</code></td><td><span class="btn-swatch" style="background:#5B5FC7;"></span>#5B5FC7</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Active - Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-active-disabled@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Dissabled · Active=True" data-figma-id="I108979:438444;20995:3166;108979:438456;20995:3084;108979:440200">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Dissabled · Active=True</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;108979:438456;20995:3084;108979:440200">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Brand/Accent Tertiary</code></td><td><span class="btn-swatch" style="background:#E8EBFA;"></span>#E8EBFA</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Stroke</td><td><code>Brand/Accent Secondary</code></td><td><span class="btn-swatch" style="background:#AAB1FA;"></span>#AAB1FA <em>1px inside</em></td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Opacity</td><td><em>&mdash;</em></td><td>0.3</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Brand/Accent Secondary</code></td><td><span class="btn-swatch" style="background:#AAB1FA;"></span>#AAB1FA</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Brand/Accent Secondary</code></td><td><span class="btn-swatch" style="background:#AAB1FA;"></span>#AAB1FA</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Rest</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-inactive-rest@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Rest · Active=False" data-figma-id="I108979:438444;20995:3166;115067:176763;20995:3084;115067:176762">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Rest · Active=False</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;115067:176763;20995:3084;115067:176762">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Surface/RaisedTertiary</code></td><td><span class="btn-swatch" style="background:#F5F5F5;"></span>#F5F5F5</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/Dominant</code></td><td><span class="btn-swatch" style="background:#000000;"></span>#000000</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Pressed</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-inactive-pressed@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Pressed · Active=False" data-figma-id="I108979:438444;20995:3166;116204:96334;20995:3084;116204:96333">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Pressed · Active=False</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;116204:96334;20995:3084;116204:96333">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Surface/SubtleSelected</code></td><td><span class="btn-swatch" style="background:#F0F0F0;"></span>#F0F0F0</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Opacity</td><td><em>&mdash;</em></td><td>0.6</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Inactive - Disabled</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/filter/vertical-filter-btn-secondary-inactive-disabled@2x.png" width="61" height="59" alt="Vertical filter btn — Semantic=Secondary · State=Dissabled · Active=False" data-figma-id="I108979:438444;20995:3166;108979:438457;20995:3084;108979:440221">
+              </div>
+              <div class="lay-props">Vertical filter btn · Semantic=Secondary · State=Dissabled · Active=False</div>
+              <div class="lay-spec" data-figma-id="I108979:438444;20995:3166;108979:438457;20995:3084;108979:440221">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Vertical filter btn</td><td>Size</td><td><em>&mdash;</em></td><td>61 × 59</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Background</td><td><code>Surface/SubtleSelected</code></td><td><span class="btn-swatch" style="background:#F0F0F0;"></span>#F0F0F0</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Top</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Trailing</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Vertical filter btn</td><td>Padding · Leading</td><td><code>Size/large</code></td><td>16</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/xsmall</code></td><td>4</td></tr>
+                    <tr><td>Label</td><td>Text colour</td><td><code>Text/Disabled</code></td><td><span class="btn-swatch" style="background:#ADADAD;"></span>#ADADAD</td></tr>
+                    <tr><td>Label</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>.base icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24</td></tr>
+                    <tr><td>.base icon</td><td>Colour</td><td><code>Icon/Disabled</code></td><td><span class="btn-swatch" style="background:#ADADAD;"></span>#ADADAD</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="spec-section" id="chiclet-base-layout">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Layout &amp; Spacing <a href="#chiclet-base-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Base</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>8 &times; 12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Leading icon slot</td><td>16&times;16dp</td><td>Swap target &mdash; a generic placeholder by default</td></tr>
-              <tr><td>Trailing slot</td><td>24&times;24dp</td><td>Swap target &mdash; chevron, overflow or nothing</td></tr>
-              <tr><td>Text block gap</td><td>2dp</td><td>Size/Nudge/small &mdash; header to body</td></tr>
-              <tr><td>Row gap</td><td>8dp</td><td>Size/Small &mdash; icon to text to trailing slot</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Corner radius</h3>
-        <p>Chiclet publishes no Size axis, so there is a single column.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
-            <tbody>
-              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section class="spec-section" id="filter-vertical-spec-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How the annotations are read from Figma <a href="#filter-vertical-spec-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The page mirrors the Layout view one-to-one (same artboard, same sections, same blocks). For each component instance in a block, the bound variables are read from the instance itself: <code>fills</code> and <code>strokes</code> on the root give background and stroke, <code>cornerRadius</code> the radius, auto-layout frames give padding and gap, every visible text layer gives its colour and text style, and nested instances (icons, avatars, badges, and anything 160&nbsp;px or smaller) give their size and colour. Each token is resolved for that instance (<code>resolveForConsumer</code>), so the raw value is what the instance actually renders in the file's current mode.</p>
+        <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
+        <p class="section-intro">Figma page <em>Filter</em>; node: Vertical filter button <code>108979:438444</code>.</p>
       </section>
 
-      <section class="spec-section" id="chiclet-base-typography">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Typography <a href="#chiclet-base-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
-        <div class="typo-sample">
-          <div class="typo-row"><div class="typo-size">Header</div><div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Design review</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Tracking:</strong> +0.06</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
-          <div class="typo-row"><div class="typo-size">Body</div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Weekly sync notes</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Tracking:</strong> &minus;0.08</span><span><strong>Colour:</strong> Text/Primary</span></div></div>
+<section class="spec-section" id="fv-usage">
+        <span class="section-eyebrow eyebrow-impl">Examples</span>
+        <h2>Usage Examples <a href="#fv-usage" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The published examples put the vertical filter in a chat header &mdash; a row of icon-over-label toggles above a message list.</p>
+        <div class="bf-stage ffl-scope">
+          <div class="bf-cell">
+            <span class="ffl-row"><span class="fflv pri on"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Unread</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Chats</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Teams</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Files</span></span></span> <span class="fflv sec off"><span class="c"><span class="ic"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h14l-5.5 6.5v5l-3 1.5v-6.5z"/></svg></span><span class="l">Apps</span></span></span></span>
+            <span class="bf-cap">Chat header &mdash; one applied filter beside four unapplied</span>
+          </div>
         </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-base-color">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Colour <a href="#chiclet-base-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
-            <tbody>
-              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
-              <tr><td>Border</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
-              <tr><td>Header text</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
-              <tr><td>Body text</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-base-notes">
-        <span class="section-eyebrow eyebrow-impl">Notes</span>
-        <h2>When to Use It <a href="#chiclet-base-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p>Use Base when the chiclet is a <em>reference</em> the user can open, and there is nothing to decide. The trailing slot carries the affordance &mdash; a chevron for navigation, an overflow glyph for a menu, or nothing at all if the whole card is the target.</p>
         <div class="callout callout-rule">
-          <strong>If the user has to choose, use <a href="#chiclet-base-actions" data-link="chiclet-base-actions">Base + actions</a>.</strong> Base has no action row, and stacking buttons underneath it by hand defeats the point of publishing the two as separate variants.
+          <strong>Vertical is for a grid, horizontal is for a row.</strong> At 61 &times; 51 the vertical button is nearly square and reads as a tile; five of them fill a phone width. If your filters have labels longer than one short word, or you need more than about five, the <a href="#filter" data-link="filter">horizontal pill</a> is the right component.
         </div>
       </section>
-
+<section class="spec-section" id="fv-a11y">
+        <span class="section-eyebrow eyebrow-impl">Accessibility</span>
+        <h2>Accessibility <a href="#fv-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <ul>
+          <li><strong>Active is conveyed by colour alone.</strong> Unlike the horizontal filter, there is no weight change between applied and unapplied. Until that is fixed at the source, the applied state must be exposed programmatically and should carry a non-colour cue in product.</li>
+          <li><strong>51dp tall, 61dp wide &mdash; the one filter that clears 44dp.</strong> Both dimensions pass, which makes this the better choice where mis-taps are costly.</li>
+          <li><strong>The label clips rather than wraps.</strong> <code>overflow: clip</code> plus a solid 11dp line height means large text settings truncate silently. Treat the label as decorative reinforcement and put the real name in the accessible name.</li>
+          <li><strong>The glyph is the only content in an icon-only instance.</strong> Turning Label off leaves nothing announceable &mdash; supply an accessible name explicitly.</li>
+        </ul>
+      </section>
     </main>
 
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#chiclet-base-preview">Preview</a>
-        <a href="#chiclet-base-layout">Layout &amp; Spacing</a>
-        <a href="#chiclet-base-typography">Typography</a>
-        <a href="#chiclet-base-color">Colour</a>
-        <a href="#chiclet-base-notes">When to Use It</a>
+        <div class="toc-group">Vertical filter button</div>
+        <a href="#filter-vertical-spec-vertical-variant-primary">Variant - Primary</a>
+        <a href="#filter-vertical-spec-vertical-variant-secondary">Variant - Secondary</a>
+        <div class="toc-group">More</div>
+        <a href="#fv-usage">Usage Examples</a>
+        <a href="#fv-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
 
-  <footer class="docs-footer">Chiclet &middot; Base &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104574-6585</code> &middot; August 2026</footer>
+  <footer class="docs-footer">
+    Vertical filter btn &middot; Spec &middot; Monocore &middot; November 2026
+  </footer>
+</div>
+
+</div>
+
+<div class="page" id="page-chiclet-base-layout" data-page="chiclet-base-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Base &middot; Layout</div>
+    <h1>Base</h1>
+    <p class="subtitle">Rendered from the <em>Chiclet</em> documentation artboard on the <em>Chiclet</em> page of Monocore iOS. Only the block for this variant is shown. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chiclet-base-layout-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-base-layout-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-base-layout-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Base</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-1@2x.png" width="402" height="49" alt="Chiclet — Layout=Base · Image=False" data-figma-id="I106947:213123;20995:3166;106947:247983;20995:3084;106947:247980">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base · Image=False</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#chiclet-base-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview. This page is a filtered view of the <em>Chiclet</em> artboard: it keeps only the block titled <em>Base</em>.</p>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-base-layout-chiclet-variants">Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Base &middot; Layout &middot; Monocore &middot; November 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-base" data-page="chiclet-base">
+
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Base &middot; Spec</div>
+    <h1>Base</h1>
+    <p class="subtitle">The Layout artboard from the <em>Chiclet</em> page of Monocore iOS, annotated for engineering: under every preview, a table of the tokens bound to that instance in Figma (background, stroke, corner radius, text, icons and other subcomponents, padding and gap) with the raw value each token resolves to, plus the size of the component and its parts. Only the block for this variant is shown.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Light mode values</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chiclet-base-spec-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-base-spec-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-base-spec-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Base</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-1@2x.png" width="402" height="49" alt="Chiclet — Layout=Base · Image=False" data-figma-id="I106947:213123;20995:3166;106947:247983;20995:3084;106947:247980">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base · Image=False</div>
+              <div class="lay-spec" data-figma-id="I106947:213123;20995:3166;106947:247983;20995:3084;106947:247980">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Chiclet</td><td>Size</td><td><em>&mdash;</em></td><td>402 × 49</td></tr>
+                    <tr><td>Chiclet</td><td>Background</td><td><code>Surface/Primary</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Chiclet</td><td>Stroke</td><td><code>Stroke/Divider</code></td><td><span class="btn-swatch" style="background:#E0E0E0;"></span>#E0E0E0 <em>1px inside</em></td></tr>
+                    <tr><td>Chiclet</td><td>Corner radius</td><td><em>&mdash;</em></td><td>16</td></tr>
+                    <tr><td>Chiclet</td><td>Padding · Top/Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Chiclet</td><td>Padding · Leading/Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Chiclet</td><td>Gap</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Content container</td><td>Gap</td><td><em>&mdash;</em></td><td>8</td></tr>
+                    <tr><td>Container</td><td>Gap</td><td><em>&mdash;</em></td><td>8</td></tr>
+                    <tr><td>Message</td><td>Text colour</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Message</td><td>Type</td><td><code>iOS/Body 2</code></td><td>SF Pro Text Regular · 15 / 20</td></tr>
+                    <tr><td>Avatar name/Group chat</td><td>Text colour</td><td><code>Text/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Avatar name/Group chat</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>Placeholder</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>Placeholder · Size=24 · Theme=Regular</em></td></tr>
+                    <tr><td>Placeholder</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Placeholder</td><td>Size</td><td><em>&mdash;</em></td><td>16 × 16 <em>Placeholder · Size=16 · Theme=Regular</em></td></tr>
+                    <tr><td>Placeholder</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-spec-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How the annotations are read from Figma <a href="#chiclet-base-spec-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The page mirrors the Layout view one-to-one (same artboard, same sections, same blocks). For each component instance in a block, the bound variables are read from the instance itself: <code>fills</code> and <code>strokes</code> on the root give background and stroke, <code>cornerRadius</code> the radius, auto-layout frames give padding and gap, every visible text layer gives its colour and text style, and nested instances (icons, avatars, badges, and anything 160&nbsp;px or smaller) give their size and colour. Each token is resolved for that instance (<code>resolveForConsumer</code>), so the raw value is what the instance actually renders in the file's current mode.</p>
+        <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-base-spec-chiclet-variants">Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Base &middot; Spec &middot; Monocore &middot; November 2026
+  </footer>
+</div>
+
+</div>
+
+<div class="page" id="page-chiclet-base-actions-layout" data-page="chiclet-base-actions-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Base + actions &middot; Layout</div>
+    <h1>Base + actions</h1>
+    <p class="subtitle">Rendered from the <em>Chiclet</em> documentation artboard on the <em>Chiclet</em> page of Monocore iOS. Only the block for this variant is shown. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chiclet-base-actions-layout-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-base-actions-layout-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-base-actions-layout-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Base with actions</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-2@2x.png" width="402" height="93" alt="Chiclet — Layout=Base + actions · Image=False" data-figma-id="I106947:213123;20995:3166;106947:248227;20995:3084;106947:248226">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base + actions · Image=False</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-base-actions-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#chiclet-base-actions-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview. This page is a filtered view of the <em>Chiclet</em> artboard: it keeps only the block titled <em>Base with actions</em>.</p>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-base-actions-layout-chiclet-variants">Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Base + actions &middot; Layout &middot; Monocore &middot; November 2026
+  </footer>
 </div>
 </div>
 
 <div class="page" id="page-chiclet-base-actions" data-page="chiclet-base-actions">
-<div class="docs-shell">
 
+<div class="docs-shell">
   <header class="docs-header">
-    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <div class="eyebrow">Base + actions &middot; Spec</div>
     <h1>Base + actions</h1>
-    <p class="subtitle">Base with a 28dp action row underneath. This is the set default &mdash; the variant you get when you drop an unconfigured Chiclet onto the canvas.</p>
-    <div class="meta"><span>Layout = Base + actions</span><span>Image = False</span><span>1 variant</span><span>Set default</span><span>Figma: Monocore-iOS &middot; node <code>104572-6296</code></span></div>
+    <p class="subtitle">The Layout artboard from the <em>Chiclet</em> page of Monocore iOS, annotated for engineering: under every preview, a table of the tokens bound to that instance in Figma (background, stroke, corner radius, text, icons and other subcomponents, padding and gap) with the raw value each token resolves to, plus the size of the component and its parts. Only the block for this variant is shown.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Light mode values</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-
-      <section class="spec-section" id="chiclet-base-actions-preview">
-        <span class="section-eyebrow eyebrow-design">Variant</span>
-        <h2>Preview <a href="#chiclet-base-actions-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="fchp-stage fch-scope fbtn-scope">
-          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-base-actions"><div class="fch-row"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 2h5l3 3v9H4z"/><path d="M9 2v3h3"/></svg></span><div class="fch-body"><div class="fch-header"><span class="fch-cap">Design review</span></div><div class="fch-msg">Weekly sync notes</div></div><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span></div><div class="fch-footer"><div class="fch-actiongroup"><button class="fbtn style-outline size-small state-rest" type="button">Accept</button><button class="fbtn style-outline size-small state-rest" type="button">Decline</button></div><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg></span></div></div></div><span class="fchp-cap">Layout = Base + actions &middot; Image = False</span></div>
+      <section class="spec-section lay-board" id="chiclet-base-actions-spec-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-base-actions-spec-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-base-actions-spec-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Base with actions</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-2@2x.png" width="402" height="93" alt="Chiclet — Layout=Base + actions · Image=False" data-figma-id="I106947:213123;20995:3166;106947:248227;20995:3084;106947:248226">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base + actions · Image=False</div>
+              <div class="lay-spec" data-figma-id="I106947:213123;20995:3166;106947:248227;20995:3084;106947:248226">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Chiclet</td><td>Size</td><td><em>&mdash;</em></td><td>402 × 93</td></tr>
+                    <tr><td>Chiclet</td><td>Background</td><td><code>Surface/Primary</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Chiclet</td><td>Stroke</td><td><code>Stroke/Divider</code></td><td><span class="btn-swatch" style="background:#E0E0E0;"></span>#E0E0E0 <em>1px inside</em></td></tr>
+                    <tr><td>Chiclet</td><td>Corner radius</td><td><em>&mdash;</em></td><td>16</td></tr>
+                    <tr><td>Chiclet</td><td>Padding</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Chiclet</td><td>Gap</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>ActionGroup</td><td>Gap</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Content container</td><td>Padding · Top/Bottom</td><td><em>&mdash;</em></td><td>0</td></tr>
+                    <tr><td>Content container</td><td>Padding · Leading/Trailing</td><td><em>&mdash;</em></td><td>4</td></tr>
+                    <tr><td>Content container</td><td>Gap</td><td><em>&mdash;</em></td><td>8</td></tr>
+                    <tr><td>Container</td><td>Gap</td><td><em>&mdash;</em></td><td>8</td></tr>
+                    <tr><td>Message</td><td>Text colour</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Message</td><td>Type</td><td><code>iOS/Body 2</code></td><td>SF Pro Text Regular · 15 / 20</td></tr>
+                    <tr><td>Avatar name/Group chat</td><td>Text colour</td><td><code>Text/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Avatar name/Group chat</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>More Horizontal</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>More Horizontal · Size=24 · Theme=Regular</em></td></tr>
+                    <tr><td>More Horizontal</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>SecondaryButton</td><td>Size</td><td><em>&mdash;</em></td><td>80 × 28 <em>Button · Style=Outline accent · Size=Small · State=Rest</em></td></tr>
+                    <tr><td>SecondaryButton</td><td>Colour</td><td><code>Surface/RaisedTertiary</code></td><td><span class="btn-swatch" style="background:#F5F5F5;"></span>#F5F5F5</td></tr>
+                    <tr><td>SecondaryButton</td><td>Stroke</td><td><code>Stroke/ContainerRaised</code></td><td><span class="btn-swatch" style="background:#BDBDBD;"></span>#BDBDBD <em>0.5px</em></td></tr>
+                    <tr><td>SecondaryButton</td><td>Corner radius</td><td><em>&mdash;</em></td><td>200</td></tr>
+                    <tr><td>PrimaryButton</td><td>Size</td><td><em>&mdash;</em></td><td>80 × 28 <em>Button · Style=Outline accent · Size=Small · State=Rest</em></td></tr>
+                    <tr><td>PrimaryButton</td><td>Colour</td><td><code>Surface/RaisedTertiary</code></td><td><span class="btn-swatch" style="background:#F5F5F5;"></span>#F5F5F5</td></tr>
+                    <tr><td>PrimaryButton</td><td>Stroke</td><td><code>Stroke/ContainerRaised</code></td><td><span class="btn-swatch" style="background:#BDBDBD;"></span>#BDBDBD <em>0.5px</em></td></tr>
+                    <tr><td>PrimaryButton</td><td>Corner radius</td><td><em>&mdash;</em></td><td>200</td></tr>
+                    <tr><td>Placeholder</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>Placeholder · Size=24 · Theme=Regular</em></td></tr>
+                    <tr><td>Placeholder</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Placeholder</td><td>Size</td><td><em>&mdash;</em></td><td>16 × 16 <em>Placeholder · Size=16 · Theme=Regular</em></td></tr>
+                    <tr><td>Placeholder</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="spec-section" id="chiclet-base-actions-layout">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Layout &amp; Spacing <a href="#chiclet-base-actions-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Base + actions</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Leading icon slot</td><td>16&times;16dp</td><td>Same as Base</td></tr>
-              <tr><td>Trailing slot</td><td>24&times;24dp</td><td>Same as Base</td></tr>
-              <tr><td>Chiclet Footer</td><td>Full width &times; 28dp</td><td>A nested <a href="#chiclet-footer" data-link="chiclet-footer">Chiclet Footer</a> instance, Pattern = Group</td></tr>
-              <tr><td>Footer buttons</td><td>2 &times; 28dp</td><td>Button &middot; Outline accent &middot; Small &mdash; never Accent</td></tr>
-              <tr><td>Overflow glyph</td><td>24&times;24dp</td><td>More Horizontal, trailing edge of the footer</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Corner radius</h3>
-        <p>Chiclet publishes no Size axis, so there is a single column.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
-            <tbody>
-              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
-              <tr><td>Footer buttons</td><td>Pill (200) &mdash; inherited from Button</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section class="spec-section" id="chiclet-base-actions-spec-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How the annotations are read from Figma <a href="#chiclet-base-actions-spec-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The page mirrors the Layout view one-to-one (same artboard, same sections, same blocks). For each component instance in a block, the bound variables are read from the instance itself: <code>fills</code> and <code>strokes</code> on the root give background and stroke, <code>cornerRadius</code> the radius, auto-layout frames give padding and gap, every visible text layer gives its colour and text style, and nested instances (icons, avatars, badges, and anything 160&nbsp;px or smaller) give their size and colour. Each token is resolved for that instance (<code>resolveForConsumer</code>), so the raw value is what the instance actually renders in the file's current mode.</p>
+        <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
       </section>
-
-      <section class="spec-section" id="chiclet-base-actions-typography">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Typography <a href="#chiclet-base-actions-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
-        <div class="typo-sample">
-          <div class="typo-row"><div class="typo-size">Header</div><div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Design review</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
-          <div class="typo-row"><div class="typo-size">Body</div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Weekly sync notes</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Colour:</strong> Text/Primary</span></div></div>
-          <div class="typo-row"><div class="typo-size">Footer button label</div><div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Accept</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span></div></div>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-base-actions-color">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Colour <a href="#chiclet-base-actions-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
-            <tbody>
-              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
-              <tr><td>Border</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
-              <tr><td>Header text</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
-              <tr><td>Body text</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
-              <tr><td>Footer button fill</td><td>Surface/RaisedTertiary</td><td><span class="btn-swatch" style="background:#f5f5f5;"></span>#f5f5f5</td></tr>
-              <tr><td>Footer button stroke</td><td>Stroke/ContainerRaised</td><td><span class="btn-swatch" style="background:#bdbdbd;"></span>#bdbdbd &mdash; 0.5dp</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-base-actions-notes">
-        <span class="section-eyebrow eyebrow-impl">Notes</span>
-        <h2>When to Use It <a href="#chiclet-base-actions-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p>Use this when the chiclet asks for a decision &mdash; accept or decline, add or dismiss. Two actions is the published maximum in Group pattern; a single full-width action is <a href="#chiclet-footer" data-link="chiclet-footer">Chiclet Footer</a>'s Single pattern.</p>
-        <div class="callout callout-info">
-          <strong>Outline accent, never Accent.</strong> The footer sits inside a card inside a message. A filled accent button at that depth competes with the message's own primary action &mdash; if a chiclet action needs to be the loudest thing on screen, the chiclet is the wrong container.
-        </div>
-      </section>
-
     </main>
 
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#chiclet-base-actions-preview">Preview</a>
-        <a href="#chiclet-base-actions-layout">Layout &amp; Spacing</a>
-        <a href="#chiclet-base-actions-typography">Typography</a>
-        <a href="#chiclet-base-actions-color">Colour</a>
-        <a href="#chiclet-base-actions-notes">When to Use It</a>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-base-actions-spec-chiclet-variants">Variants</a>
       </nav>
     </aside>
   </div>
 
-  <footer class="docs-footer">Chiclet &middot; Base + actions &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104572-6296</code> &middot; August 2026</footer>
+  <footer class="docs-footer">
+    Base + actions &middot; Spec &middot; Monocore &middot; November 2026
+  </footer>
+</div>
+
+</div>
+
+<div class="page" id="page-chiclet-reply-layout" data-page="chiclet-reply-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Reply &middot; Layout</div>
+    <h1>Reply</h1>
+    <p class="subtitle">Rendered from the <em>Chiclet</em> documentation artboard on the <em>Chiclet</em> page of Monocore iOS. Only the block for this variant is shown. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chiclet-reply-layout-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-reply-layout-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-reply-layout-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Reply</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-3@2x.png" width="402" height="60" alt="Chiclet — Layout=Reply · Image=False" data-figma-id="I106947:213123;20995:3166;106947:248018;20995:3084;106947:248017">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Reply · Image=False</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-reply-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#chiclet-reply-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview. This page is a filtered view of the <em>Chiclet</em> artboard: it keeps only the block titled <em>Reply</em>.</p>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-reply-layout-chiclet-variants">Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Reply &middot; Layout &middot; Monocore &middot; November 2026
+  </footer>
 </div>
 </div>
 
 <div class="page" id="page-chiclet-reply" data-page="chiclet-reply">
-<div class="docs-shell">
 
+<div class="docs-shell">
   <header class="docs-header">
-    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <div class="eyebrow">Reply &middot; Spec</div>
     <h1>Reply</h1>
-    <p class="subtitle">A quoted message the user is replying to. The quote bar and the attribution line are what distinguish it from Base; the body drops a step in the text ramp.</p>
-    <div class="meta"><span>Layout = Reply</span><span>Image = False</span><span>1 variant</span><span>Figma: Monocore-iOS &middot; node <code>83310-17384</code></span></div>
+    <p class="subtitle">The Layout artboard from the <em>Chiclet</em> page of Monocore iOS, annotated for engineering: under every preview, a table of the tokens bound to that instance in Figma (background, stroke, corner radius, text, icons and other subcomponents, padding and gap) with the raw value each token resolves to, plus the size of the component and its parts. Only the block for this variant is shown.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Light mode values</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-
-      <section class="spec-section" id="chiclet-reply-preview">
-        <span class="section-eyebrow eyebrow-design">Variant</span>
-        <h2>Preview <a href="#chiclet-reply-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="fchp-stage fch-scope fbtn-scope">
-          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-reply"><span class="fch-quotebar"></span><div class="fch-body"><div class="fch-header"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 4h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 5.6 8H3zm6 0h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 11.6 8H9z"/></svg></span><span class="fch-cap">Charlotte D. 9:00 AM</span></div><div class="fch-msg secondary">Hello</div></div></div></div><span class="fchp-cap">Media slot off &mdash; the default</span></div>
-          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-reply"><span class="fch-quotebar"></span><div class="fch-body"><div class="fch-header"><span class="fch-ico s16 muted"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 4h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 5.6 8H3zm6 0h4v4a3 3 0 0 1-3 3V9.6A1.6 1.6 0 0 0 11.6 8H9z"/></svg></span><span class="fch-cap">Charlotte D. 9:00 AM</span></div><div class="fch-msg secondary">Hello</div></div><div class="fch-mediathumb"></div></div></div><span class="fchp-cap">Media slot on &mdash; 40&times;40 thumbnail</span></div>
+      <section class="spec-section lay-board" id="chiclet-reply-spec-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-reply-spec-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-reply-spec-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Reply</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-3@2x.png" width="402" height="60" alt="Chiclet — Layout=Reply · Image=False" data-figma-id="I106947:213123;20995:3166;106947:248018;20995:3084;106947:248017">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Reply · Image=False</div>
+              <div class="lay-spec" data-figma-id="I106947:213123;20995:3166;106947:248018;20995:3084;106947:248017">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Chiclet</td><td>Size</td><td><em>&mdash;</em></td><td>402 × 60</td></tr>
+                    <tr><td>Chiclet</td><td>Background</td><td><code>Surface/Primary</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Chiclet</td><td>Stroke</td><td><code>Stroke/Divider</code></td><td><span class="btn-swatch" style="background:#E0E0E0;"></span>#E0E0E0 <em>1px inside</em></td></tr>
+                    <tr><td>Chiclet</td><td>Corner radius</td><td><em>&mdash;</em></td><td>16</td></tr>
+                    <tr><td>Chiclet</td><td>Padding · Top/Bottom</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Chiclet</td><td>Padding · Leading/Trailing</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Chiclet</td><td>Gap</td><td><code>Size/Nudge/medium</code></td><td>6</td></tr>
+                    <tr><td>Content container</td><td>Gap</td><td><code>Size/Combined/2ng + 4rg</code></td><td>6</td></tr>
+                    <tr><td>Container</td><td>Gap</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>quote bar</td><td>Fill</td><td><code>Icon/Disabled</code></td><td><span class="btn-swatch" style="background:#ADADAD;"></span>#ADADAD</td></tr>
+                    <tr><td>quote bar</td><td>Corner radius</td><td><em>&mdash;</em></td><td>4</td></tr>
+                    <tr><td>Message</td><td>Text colour</td><td><code>Text/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Message</td><td>Type</td><td><code>iOS/Body 2</code></td><td>SF Pro Text Regular · 15 / 20</td></tr>
+                    <tr><td>Avatar name/Group chat</td><td>Text colour</td><td><code>Text/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Avatar name/Group chat</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>Text Quote</td><td>Size</td><td><em>&mdash;</em></td><td>16 × 16 <em>Text Quote · Size=16 · Theme=Filled</em></td></tr>
+                    <tr><td>Text Quote</td><td>Colour</td><td><code>Icon/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="spec-section" id="chiclet-reply-layout">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Layout &amp; Spacing <a href="#chiclet-reply-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Reply</strong></td><td>Row</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12 &times; 8dp</td><td>6dp</td><td>Stroke/Divider</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Quote bar</td><td>4dp wide, stretches to content height</td><td>Radius 4 &middot; fill Icon/Disabled &middot; decorative</td></tr>
-              <tr><td>Attribution glyph</td><td>16&times;16dp</td><td>Text Quote &mdash; fixed, not a swap target</td></tr>
-              <tr><td>Media slot</td><td>40&times;40dp, radius 4</td><td>Optional &mdash; revealed by a boolean, not the Image axis</td></tr>
-              <tr><td>Header gap</td><td>2dp</td><td>Size/Nudge/small &mdash; glyph to attribution</td></tr>
-              <tr><td>Row gap</td><td>6dp</td><td>Size/Nudge/medium &mdash; narrower than Base</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Corner radius</h3>
-        <p>Chiclet publishes no Size axis, so there is a single column.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
-            <tbody>
-              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
-              <tr><td>Quote bar</td><td>4dp <em>Radius/Minimal</em></td></tr>
-              <tr><td>Media thumbnail</td><td>4dp <em>Radius/Minimal</em></td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section class="spec-section" id="chiclet-reply-spec-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How the annotations are read from Figma <a href="#chiclet-reply-spec-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The page mirrors the Layout view one-to-one (same artboard, same sections, same blocks). For each component instance in a block, the bound variables are read from the instance itself: <code>fills</code> and <code>strokes</code> on the root give background and stroke, <code>cornerRadius</code> the radius, auto-layout frames give padding and gap, every visible text layer gives its colour and text style, and nested instances (icons, avatars, badges, and anything 160&nbsp;px or smaller) give their size and colour. Each token is resolved for that instance (<code>resolveForConsumer</code>), so the raw value is what the instance actually renders in the file's current mode.</p>
+        <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
       </section>
-
-      <section class="spec-section" id="chiclet-reply-typography">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Typography <a href="#chiclet-reply-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
-        <div class="typo-sample">
-          <div class="typo-row"><div class="typo-size">Attribution</div><div class="typo-preview"><span style="font-size:11px; font-weight:400; line-height:11px; letter-spacing:0.06px; color:var(--c-text-secondary);">Charlotte D. 9:00 AM</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 2</span><span><strong>Size:</strong> 11dp</span><span><strong>Height:</strong> 11dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
-          <div class="typo-row"><div class="typo-size">Message</div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text-secondary);">Hello</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Height:</strong> 20dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-reply-color">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Colour <a href="#chiclet-reply-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
-            <tbody>
-              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
-              <tr><td>Border</td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
-              <tr><td>Quote bar</td><td>Icon/Disabled</td><td><span class="btn-swatch" style="background:#adadad;"></span>#adadad</td></tr>
-              <tr><td>Attribution</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
-              <tr><td>Message</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-reply-notes">
-        <span class="section-eyebrow eyebrow-impl">Notes</span>
-        <h2>When to Use It <a href="#chiclet-reply-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p>Use Reply above a compose box, or inline in a thread, to show what the user is responding to. The whole card is a reference &mdash; it should navigate to the quoted message, not open a menu.</p>
-        <div class="callout callout-warn">
-          <strong>The quote bar carries no accessible meaning.</strong> A 4dp grey rule is invisible to a screen reader. The relationship has to be in the announced text &mdash; &ldquo;replying to Charlotte D.&rdquo; &mdash; not in the geometry.
-        </div>
-        <div class="callout callout-info">
-          <strong>Body text is Text/Secondary here, not Text/Primary.</strong> That is deliberate: a quoted message is someone else's content, and the step down in the ramp is what stops it competing with the message it sits inside.
-        </div>
-      </section>
-
     </main>
 
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#chiclet-reply-preview">Preview</a>
-        <a href="#chiclet-reply-layout">Layout &amp; Spacing</a>
-        <a href="#chiclet-reply-typography">Typography</a>
-        <a href="#chiclet-reply-color">Colour</a>
-        <a href="#chiclet-reply-notes">When to Use It</a>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-reply-spec-chiclet-variants">Variants</a>
       </nav>
     </aside>
   </div>
 
-  <footer class="docs-footer">Chiclet &middot; Reply &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>83310-17384</code> &middot; August 2026</footer>
+  <footer class="docs-footer">
+    Reply &middot; Spec &middot; Monocore &middot; November 2026
+  </footer>
 </div>
+
 </div>
 
 <div class="page" id="page-chiclet-forward" data-page="chiclet-forward">
@@ -26981,244 +27502,384 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </div>
 </div>
 
-<div class="page" id="page-chiclet-file" data-page="chiclet-file">
+<div class="page" id="page-chiclet-file-layout" data-page="chiclet-file-layout">
 <div class="docs-shell">
-
   <header class="docs-header">
-    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <div class="eyebrow">File Chiclet &middot; Layout</div>
     <h1>File Chiclet</h1>
-    <p class="subtitle">An attachment. The only layout that publishes both Image values, and the only one where the same content is set in two different type styles depending on which you pick.</p>
-    <div class="meta"><span>Layout = File Chiclet</span><span>Image = False &amp; True</span><span>2 variants</span><span>Figma: Monocore-iOS &middot; node <code>104572-6040 &amp; 104574-6462</code></span></div>
+    <p class="subtitle">Rendered from the <em>Chiclet</em> documentation artboard on the <em>Chiclet</em> page of Monocore iOS. Only the blocks for this variant are shown. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>2 blocks</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-
-      <section class="spec-section" id="chiclet-file-preview">
-        <span class="section-eyebrow eyebrow-design">Variant</span>
-        <h2>Preview <a href="#chiclet-file-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="fchp-stage fch-scope fbtn-scope">
-          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-file"><div class="fch-row"><span class="fch-ico s24"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h5a2.5 2.5 0 0 1 0 5H8zm0 0v9"/></svg></span><div class="fch-body"><span class="fch-filename">Accessibility.pptx</span><span class="fch-meta">36 MB</span></div><span class="fch-trail"><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h9M4 11h9M4 16h6"/><path d="M17.5 13.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg></span><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg></span></span></div></div></div><span class="fchp-cap">Image = False &middot; node 104572-6040</span></div>
-          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-file-image on-media"><div class="fch-media file">Image<span class="fch-overlay-btn sz-default fch-overlay-tr"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"/></svg></span></div><div class="fch-row" style="padding:12px;"><span class="fch-ico s24"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h5a2.5 2.5 0 0 1 0 5H8zm0 0v9"/></svg></span><div class="fch-body"><span class="fch-filename compact">Accessibility 101.pptx</span><span class="fch-meta">36 MB</span></div><span class="fch-trail"><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6h9M4 11h9M4 16h6"/><path d="M17.5 13.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z"/></svg></span><span class="fch-ico s24 muted"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.75"/><circle cx="12" cy="12" r="1.75"/><circle cx="19" cy="12" r="1.75"/></svg></span></span></div></div></div><span class="fchp-cap">Image = True &middot; node 104574-6462</span></div>
+      <section class="spec-section lay-board" id="chiclet-file-layout-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-file-layout-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-file-layout-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">File</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/frame-2147233651-4@2x.png" width="402" height="310" alt="Frame 2147233651" data-figma-id="I106947:213123;20995:3166;106947:248078;20995:3084;108721:344355">
+              </div>
+              <div class="lay-props">Frame 2147233651</div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">File</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-1@2x.png" width="402" height="49" alt="Chiclet — Layout=Base · Image=False" data-figma-id="I106947:213123;20995:3166;106947:248180;20995:3084;106947:248179">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base · Image=False</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="spec-section" id="chiclet-file-layout">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Layout &amp; Spacing <a href="#chiclet-file-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
-            <tbody>
-              <tr><td><strong>File Chiclet</strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>12dp</td><td>8dp</td><td>Stroke/Divider</td></tr>
-              <tr><td><strong>File Chiclet <em>(Image)</em></strong></td><td>Column</td><td>Hugs content</td><td>Hugs content</td><td>70dp</td><td>487dp</td><td>0 &mdash; media flush, inner row 12dp</td><td>8dp</td><td>Stroke/onMedia</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Leading filetype icon</td><td>24&times;24dp</td><td>A real filetype glyph &mdash; PowerPoint by default, not a generic icon</td></tr>
-              <tr><td>Trailing pair</td><td>2 &times; 24dp, gap 8</td><td>Recap (AI) + overflow, published as one slot</td></tr>
-              <tr><td>Media plate</td><td>Full width &times; 171.568dp</td><td>Image = True only &mdash; the fraction is as published</td></tr>
-              <tr><td>Overlay btn</td><td>24&times;24dp, 8dp inset</td><td>Top-right of the media plate, Dismiss glyph</td></tr>
-              <tr><td>Text block gap</td><td>2dp</td><td>Size/Nudge/small &mdash; filename to size</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Corner radius</h3>
-        <p>Chiclet publishes no Size axis, so there is a single column.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
-            <tbody>
-              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
-              <tr><td>Media plate</td><td>Clipped by the 16dp card radius</td></tr>
-              <tr><td>Overlay btn</td><td>999 &mdash; fully rounded</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section class="spec-section" id="chiclet-file-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#chiclet-file-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview. This page is a filtered view of the <em>Chiclet</em> artboard: it keeps only the block titled <em>File</em>.</p>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
       </section>
-
-      <section class="spec-section" id="chiclet-file-typography">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Typography <a href="#chiclet-file-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
-        <div class="typo-sample">
-          <div class="typo-row"><div class="typo-size">Filename <em>(Image = False)</em></div><div class="typo-preview"><span style="font-size:15px; font-weight:400; line-height:20px; letter-spacing:-0.08px; color:var(--c-text);">Accessibility.pptx</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Body 2</span><span><strong>Size:</strong> 15dp</span><span><strong>Weight:</strong> 400 Regular</span><span><strong>Height:</strong> 20dp</span></div></div>
-          <div class="typo-row"><div class="typo-size">Filename <em>(Image = True)</em></div><div class="typo-preview"><span style="font-size:13px; font-weight:500; line-height:18px; letter-spacing:-0.08px; color:var(--c-text);">Accessibility 101.pptx</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Button 2</span><span><strong>Size:</strong> 13dp</span><span><strong>Weight:</strong> 500 Medium</span><span><strong>Height:</strong> 18dp</span></div></div>
-          <div class="typo-row"><div class="typo-size">File size</div><div class="typo-preview"><span style="font-size:12px; font-weight:400; line-height:16px; color:var(--c-text-secondary);">36 MB</span></div><div class="typo-meta"><span><strong>Token:</strong> iOS/Caption 1</span><span><strong>Size:</strong> 12dp</span><span><strong>Height:</strong> 16dp</span><span><strong>Colour:</strong> Text/Secondary</span></div></div>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-file-color">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Colour <a href="#chiclet-file-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
-            <tbody>
-              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
-              <tr><td>Border <em>(Image = False)</em></td><td>Stroke/Divider</td><td><span class="btn-swatch" style="background:#e0e0e0;"></span>#e0e0e0</td></tr>
-              <tr><td>Border <em>(Image = True)</em></td><td>Stroke/onMedia</td><td>rgba(0,0,0,0.07)</td></tr>
-              <tr><td>Filename</td><td>Text/Primary</td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
-              <tr><td>File size</td><td>Text/Secondary</td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
-              <tr><td>Media plate</td><td>Brand/Accent Tertiary</td><td><span class="btn-swatch" style="background:#ebebff;"></span>#ebebff</td></tr>
-              <tr><td>Overlay btn scrim</td><td>Surface/BtntAlphaPrimary</td><td><span class="btn-swatch" style="background:#292929;"></span>#292929 at 78%</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-file-notes">
-        <span class="section-eyebrow eyebrow-impl">Notes</span>
-        <h2>When to Use It <a href="#chiclet-file-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p>Use Image = False for documents and anything without a meaningful thumbnail; Image = True when a preview genuinely helps the user identify the file &mdash; a deck, an image, a PDF's first page.</p>
-        <div class="callout callout-constraint">
-          <strong>The filename changes type style between the two variants.</strong> Image = False sets it in Body 2 (15dp Regular); Image = True sets the same string in Button 2 (13dp Medium). The two previews above are the evidence. Same content, same component, two ramps &mdash; raise it against the set rather than normalising it in code.
-        </div>
-        <div class="callout callout-warn">
-          <strong>The dismiss control is 24dp.</strong> It is the smallest control in the Chiclet family and the one that destroys the user's attachment. Extend the hit area or use the Large <a href="#overlay-btn" data-link="overlay-btn">Overlay btn</a>.
-        </div>
-      </section>
-
     </main>
 
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#chiclet-file-preview">Preview</a>
-        <a href="#chiclet-file-layout">Layout &amp; Spacing</a>
-        <a href="#chiclet-file-typography">Typography</a>
-        <a href="#chiclet-file-color">Colour</a>
-        <a href="#chiclet-file-notes">When to Use It</a>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-file-layout-chiclet-variants">Variants</a>
       </nav>
     </aside>
   </div>
 
-  <footer class="docs-footer">Chiclet &middot; File Chiclet &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104572-6040 &amp; 104574-6462</code> &middot; August 2026</footer>
+  <footer class="docs-footer">
+    File Chiclet &middot; Layout &middot; Monocore &middot; November 2026
+  </footer>
+</div>
+</div>
+
+<div class="page" id="page-chiclet-file" data-page="chiclet-file">
+
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">File Chiclet &middot; Spec</div>
+    <h1>File Chiclet</h1>
+    <p class="subtitle">The Layout artboard from the <em>Chiclet</em> page of Monocore iOS, annotated for engineering: under every preview, a table of the tokens bound to that instance in Figma (background, stroke, corner radius, text, icons and other subcomponents, padding and gap) with the raw value each token resolves to, plus the size of the component and its parts. Only the blocks for this variant are shown.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>2 blocks</span>
+      <span>Light mode values</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chiclet-file-spec-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-file-spec-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-file-spec-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">File</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/frame-2147233651-4@2x.png" width="402" height="310" alt="Frame 2147233651" data-figma-id="I106947:213123;20995:3166;106947:248078;20995:3084;108721:344355">
+              </div>
+              <div class="lay-props">Frame 2147233651</div>
+              <div class="lay-spec" data-figma-id="I106947:213123;20995:3166;106947:248078;20995:3084;108721:344355">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Frame 2147233651</td><td>Size</td><td><em>&mdash;</em></td><td>402 × 309.57</td></tr>
+                    <tr><td>Frame 2147233651</td><td>Gap</td><td><em>&mdash;</em></td><td>16</td></tr>
+                    <tr><td>Content container</td><td>Gap</td><td><em>&mdash;</em></td><td>8</td></tr>
+                    <tr><td>Frame 2147233650</td><td>Padding</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Frame 2147233650</td><td>Gap</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Image</td><td>Fill</td><td><code>Brand/Accent Tertiary</code></td><td><span class="btn-swatch" style="background:#E8EBFA;"></span>#E8EBFA</td></tr>
+                    <tr><td>Message</td><td>Text colour</td><td><code>Text/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Message</td><td>Type</td><td><code>iOS/Caption 1</code></td><td>SF Pro Text Regular · 12 / 16</td></tr>
+                    <tr><td>More Horizontal</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>More Horizontal · Size=24 · Theme=Regular</em></td></tr>
+                    <tr><td>More Horizontal</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Text Bullet List Square Sparkle</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>Text Bullet List Square Sparkle · Size=24 · Theme=Regular</em></td></tr>
+                    <tr><td>Text Bullet List Square Sparkle</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>PowerPoint</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>PowerPoint · Size=24</em></td></tr>
+                    <tr><td>PowerPoint</td><td>Colour</td><td><em>&mdash;</em></td><td>gradient linear</td></tr>
+                    <tr><td>More Horizontal</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>More Horizontal · Size=24 · Theme=Regular</em></td></tr>
+                    <tr><td>More Horizontal</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Text Bullet List Square Sparkle</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>Text Bullet List Square Sparkle · Size=24 · Theme=Regular</em></td></tr>
+                    <tr><td>Text Bullet List Square Sparkle</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>PowerPoint</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>PowerPoint · Size=24</em></td></tr>
+                    <tr><td>PowerPoint</td><td>Colour</td><td><em>&mdash;</em></td><td>gradient linear</td></tr>
+                    <tr><td>Overlay btn</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>Overlay btn · Overlay=True · Size=Default</em></td></tr>
+                    <tr><td>Overlay btn</td><td>Colour</td><td><code>Surface/BtntAlphaPrimary</code></td><td><span class="btn-swatch" style="background:#292929;"></span>#292929 @ 78%</td></tr>
+                    <tr><td>Overlay btn</td><td>Corner radius</td><td><em>&mdash;</em></td><td>999</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">File</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-1@2x.png" width="402" height="49" alt="Chiclet — Layout=Base · Image=False" data-figma-id="I106947:213123;20995:3166;106947:248180;20995:3084;106947:248179">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Base · Image=False</div>
+              <div class="lay-spec" data-figma-id="I106947:213123;20995:3166;106947:248180;20995:3084;106947:248179">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Chiclet</td><td>Size</td><td><em>&mdash;</em></td><td>402 × 49</td></tr>
+                    <tr><td>Chiclet</td><td>Background</td><td><code>Surface/Primary</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Chiclet</td><td>Stroke</td><td><code>Stroke/Divider</code></td><td><span class="btn-swatch" style="background:#E0E0E0;"></span>#E0E0E0 <em>1px inside</em></td></tr>
+                    <tr><td>Chiclet</td><td>Corner radius</td><td><em>&mdash;</em></td><td>16</td></tr>
+                    <tr><td>Chiclet</td><td>Padding · Top/Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Chiclet</td><td>Padding · Leading/Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Chiclet</td><td>Gap</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Content container</td><td>Gap</td><td><em>&mdash;</em></td><td>8</td></tr>
+                    <tr><td>Container</td><td>Gap</td><td><em>&mdash;</em></td><td>8</td></tr>
+                    <tr><td>Message</td><td>Text colour</td><td><code>Text/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Message</td><td>Type</td><td><code>iOS/Body 2</code></td><td>SF Pro Text Regular · 15 / 20</td></tr>
+                    <tr><td>Avatar name/Group chat</td><td>Text colour</td><td><code>Text/Secondary</code></td><td><span class="btn-swatch" style="background:#616161;"></span>#616161</td></tr>
+                    <tr><td>Avatar name/Group chat</td><td>Type</td><td><code>iOS/Caption 2</code></td><td>SF Pro Text Regular · 11 / 11</td></tr>
+                    <tr><td>Placeholder</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>Placeholder · Size=24 · Theme=Regular</em></td></tr>
+                    <tr><td>Placeholder</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    <tr><td>Placeholder</td><td>Size</td><td><em>&mdash;</em></td><td>16 × 16 <em>Placeholder · Size=16 · Theme=Regular</em></td></tr>
+                    <tr><td>Placeholder</td><td>Colour</td><td><code>Icon/Primary</code></td><td><span class="btn-swatch" style="background:#242424;"></span>#242424</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-file-spec-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How the annotations are read from Figma <a href="#chiclet-file-spec-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The page mirrors the Layout view one-to-one (same artboard, same sections, same blocks). For each component instance in a block, the bound variables are read from the instance itself: <code>fills</code> and <code>strokes</code> on the root give background and stroke, <code>cornerRadius</code> the radius, auto-layout frames give padding and gap, every visible text layer gives its colour and text style, and nested instances (icons, avatars, badges, and anything 160&nbsp;px or smaller) give their size and colour. Each token is resolved for that instance (<code>resolveForConsumer</code>), so the raw value is what the instance actually renders in the file's current mode.</p>
+        <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-file-spec-chiclet-variants">Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    File Chiclet &middot; Spec &middot; Monocore &middot; November 2026
+  </footer>
+</div>
+
+</div>
+
+<div class="page" id="page-chiclet-video-layout" data-page="chiclet-video-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Video &middot; Layout</div>
+    <h1>Video</h1>
+    <p class="subtitle">Rendered from the <em>Chiclet</em> documentation artboard on the <em>Chiclet</em> page of Monocore iOS. Only the block for this variant is shown. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chiclet-video-layout-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-video-layout-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-video-layout-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Video</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-6@2x.png" width="265" height="160" alt="Chiclet — Layout=Video · Image=True" data-figma-id="I106947:213123;20995:3166;106947:248282;20995:3084;106947:248281">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Video · Image=True</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-video-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#chiclet-video-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview. This page is a filtered view of the <em>Chiclet</em> artboard: it keeps only the block titled <em>Video</em>.</p>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-video-layout-chiclet-variants">Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Video &middot; Layout &middot; Monocore &middot; November 2026
+  </footer>
 </div>
 </div>
 
 <div class="page" id="page-chiclet-video" data-page="chiclet-video">
-<div class="docs-shell">
 
+<div class="docs-shell">
   <header class="docs-header">
-    <div class="eyebrow"><a href="#chiclet" data-link="chiclet" style="color:inherit;">Chiclet</a> &middot; Layout</div>
+    <div class="eyebrow">Video &middot; Spec</div>
     <h1>Video</h1>
-    <p class="subtitle">A media plate with one control and no text at all. The only layout that publishes no Image = False counterpart &mdash; which is also its biggest gap.</p>
-    <div class="meta"><span>Layout = Video</span><span>Image = True only</span><span>1 variant</span><span>Figma: Monocore-iOS &middot; node <code>104574-6515</code></span></div>
+    <p class="subtitle">The Layout artboard from the <em>Chiclet</em> page of Monocore iOS, annotated for engineering: under every preview, a table of the tokens bound to that instance in Figma (background, stroke, corner radius, text, icons and other subcomponents, padding and gap) with the raw value each token resolves to, plus the size of the component and its parts. Only the block for this variant is shown.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Light mode values</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-
-      <section class="spec-section" id="chiclet-video-preview">
-        <span class="section-eyebrow eyebrow-design">Variant</span>
-        <h2>Preview <a href="#chiclet-video-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="fchp-stage fch-scope fbtn-scope">
-          <div class="fchp-cell"><div class="fchp-plate"><div class="fch lay-video on-media"><div class="fch-media video">Media<span class="fch-overlay-btn sz-large fch-overlay-c"><svg viewBox="0 0 28 28" fill="currentColor"><path d="M9 5.5v17l14-8.5z"/></svg></span></div></div></div><span class="fchp-cap">Layout = Video &middot; Image = True</span></div>
+      <section class="spec-section lay-board" id="chiclet-video-spec-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-video-spec-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-video-spec-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Video</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-6@2x.png" width="265" height="160" alt="Chiclet — Layout=Video · Image=True" data-figma-id="I106947:213123;20995:3166;106947:248282;20995:3084;106947:248281">
+              </div>
+              <div class="lay-props">Chiclet · Layout=Video · Image=True</div>
+              <div class="lay-spec" data-figma-id="I106947:213123;20995:3166;106947:248282;20995:3084;106947:248281">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Chiclet</td><td>Size</td><td><em>&mdash;</em></td><td>265 × 160</td></tr>
+                    <tr><td>Chiclet</td><td>Background</td><td><code>Surface/Primary</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Chiclet</td><td>Stroke</td><td><code>Stroke/onMedia</code></td><td><span class="btn-swatch" style="background:#000000;"></span>#000000 @ 7% <em>1px inside</em></td></tr>
+                    <tr><td>Chiclet</td><td>Corner radius</td><td><em>&mdash;</em></td><td>16</td></tr>
+                    <tr><td>Content container</td><td>Gap</td><td><em>&mdash;</em></td><td>8</td></tr>
+                    <tr><td>Overlay btn</td><td>Size</td><td><em>&mdash;</em></td><td>48 × 48 <em>Overlay btn · Overlay=True · Size=Large</em></td></tr>
+                    <tr><td>Overlay btn</td><td>Colour</td><td><code>Surface/BtntAlphaPrimary</code></td><td><span class="btn-swatch" style="background:#292929;"></span>#292929 @ 78%</td></tr>
+                    <tr><td>Overlay btn</td><td>Corner radius</td><td><em>&mdash;</em></td><td>999</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="spec-section" id="chiclet-video-layout">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Layout &amp; Spacing <a href="#chiclet-video-layout" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The shell is shared with every other Chiclet layout; only the padding, direction and border differ.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Layout</th><th>Direction</th><th>Min height</th><th>Max height</th><th>Min width</th><th>Max width</th><th>Padding</th><th>Gap</th><th>Border</th></tr></thead>
-            <tbody>
-              <tr><td><strong>Video</strong></td><td>Column</td><td>160dp</td><td>160dp</td><td>265dp</td><td>265dp</td><td>0 &mdash; media fills the card</td><td>0</td><td>Stroke/onMedia</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="table-scroll-hint">Scroll the table sideways for the full set of columns. Published width is 265dp.</p>
-
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Size</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Media plate</td><td>265 &times; 160dp</td><td>Fixed in both dimensions &mdash; the only Chiclet layout that is</td></tr>
-              <tr><td>Overlay btn</td><td>48&times;48dp, centred</td><td>Size = Large, 10dp padding</td></tr>
-              <tr><td>Play glyph</td><td>28&times;28dp</td><td>Inside the Overlay btn slot</td></tr>
-              <tr><td>Text</td><td>None</td><td>No title, body or attribution is published</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3>Corner radius</h3>
-        <p>Chiclet publishes no Size axis, so there is a single column.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Element</th><th>All sizes</th></tr></thead>
-            <tbody>
-              <tr><td>Card shell</td><td>16dp <em>Radius/Prominent</em></td></tr>
-              <tr><td>Overlay btn</td><td>999 &mdash; fully rounded</td></tr>
-            </tbody>
-          </table>
-        </div>
+      <section class="spec-section" id="chiclet-video-spec-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How the annotations are read from Figma <a href="#chiclet-video-spec-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The page mirrors the Layout view one-to-one (same artboard, same sections, same blocks). For each component instance in a block, the bound variables are read from the instance itself: <code>fills</code> and <code>strokes</code> on the root give background and stroke, <code>cornerRadius</code> the radius, auto-layout frames give padding and gap, every visible text layer gives its colour and text style, and nested instances (icons, avatars, badges, and anything 160&nbsp;px or smaller) give their size and colour. Each token is resolved for that instance (<code>resolveForConsumer</code>), so the raw value is what the instance actually renders in the file's current mode.</p>
+        <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
       </section>
-
-      <section class="spec-section" id="chiclet-video-typography">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Typography <a href="#chiclet-video-typography" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Rows are named for the element that carries the style &mdash; this layout publishes no Size axis to key them by.</p>
-        <div class="typo-sample">
-          <div class="typo-row"><div class="typo-size">&mdash;</div><div class="typo-preview"><span style="font-size:13px; color:var(--c-text-muted); font-style:italic;">No text published</span></div><div class="typo-meta"><span>The Video layout has no title, body or attribution. Any caption beside a video in product belongs to the host, not the chiclet.</span></div></div>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-video-color">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Colour <a href="#chiclet-video-color" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="table-wrap wide">
-          <table>
-            <thead><tr><th>Element</th><th>Token</th><th>Value</th></tr></thead>
-            <tbody>
-              <tr><td>Card fill</td><td>Surface/Primary</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
-              <tr><td>Border</td><td>Stroke/onMedia</td><td>rgba(0,0,0,0.07)</td></tr>
-              <tr><td>Overlay btn scrim</td><td>Surface/BtntAlphaPrimary</td><td><span class="btn-swatch" style="background:#292929;"></span>#292929 at 78%</td></tr>
-              <tr><td>Play glyph</td><td>Icon/On Accent</td><td><span class="btn-swatch" style="background:#ffffff;"></span>#ffffff</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="spec-section" id="chiclet-video-notes">
-        <span class="section-eyebrow eyebrow-impl">Notes</span>
-        <h2>When to Use It <a href="#chiclet-video-notes" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p>Use Video for an inline video attachment where the thumbnail is the content. Tapping the card plays; the Overlay btn is the affordance, not a separate target.</p>
-        <div class="callout callout-constraint">
-          <strong>There is no <code>Video / Image = False</code>.</strong> A video whose thumbnail is still loading, or has failed to load, has no published state. Every client hits that case, so every client invents its own answer &mdash; the gap is worth closing at the source.
-        </div>
-        <div class="callout callout-rule">
-          <strong>The scrim is what makes the glyph legible.</strong> Video thumbnails are arbitrary; a white play triangle on an unknown frame has no guaranteed contrast. The 78% scrim supplies it &mdash; never reduce it to show more of the frame.
-        </div>
-      </section>
-
     </main>
 
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#chiclet-video-preview">Preview</a>
-        <a href="#chiclet-video-layout">Layout &amp; Spacing</a>
-        <a href="#chiclet-video-typography">Typography</a>
-        <a href="#chiclet-video-color">Colour</a>
-        <a href="#chiclet-video-notes">When to Use It</a>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-video-spec-chiclet-variants">Variants</a>
       </nav>
     </aside>
   </div>
 
-  <footer class="docs-footer">Chiclet &middot; Video &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>104574-6515</code> &middot; August 2026</footer>
+  <footer class="docs-footer">
+    Video &middot; Spec &middot; Monocore &middot; November 2026
+  </footer>
+</div>
+
+</div>
+
+<div class="page" id="page-chiclet-live-meeting-layout" data-page="chiclet-live-meeting-layout">
+<div class="docs-shell">
+  <header class="docs-header">
+    <div class="eyebrow">Chiclet — Live meeting &middot; Layout</div>
+    <h1>Chiclet &mdash; Live meeting</h1>
+    <p class="subtitle">Rendered from the <em>Chiclet</em> documentation artboard on the <em>Chiclet</em> page of Monocore iOS. Only the block for this variant is shown. Each artboard is a vertical flow of titled blocks holding one or more component variants; this page keeps that order and naming so it can be regenerated when the artboard changes.</p>
+    <div class="meta">
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Read 1 Nov 2026</span>
+    </div>
+  </header>
+
+  <div class="docs-layout">
+    <main class="docs-main">
+      <section class="spec-section lay-board" id="chiclet-live-meeting-layout-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-live-meeting-layout-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-live-meeting-layout-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Live meeting</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-live-meeting-dominant-false-5@2x.png" width="185" height="54" alt="Chiclet/Live meeting (Dominant)/False" data-figma-id="I106947:213123;20995:3166;106947:248143;20995:3084;106947:248842">
+              </div>
+              <div class="lay-props">Chiclet/Live meeting (Dominant)/False</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-section" id="chiclet-live-meeting-layout-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How this page is parsed from Figma <a href="#chiclet-live-meeting-layout-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The artboard is an instance of <code>New component</code>: a <code>Content block</code> with <code>Title Block=Page Title</code>, then a vertical <code>Slot</code>. Inside the slot, a <code>Content block</code> with <code>Title Block=Section primary</code> starts a section, and each <code>Slot block</code> is one example: its <code>Content block</code> (<code>Section primary light</code>) carries the title and an optional caption, and its <code>PASTE HERE</code> slot holds the component instance(s) whose variant properties become the monospace line under the preview. This page is a filtered view of the <em>Chiclet</em> artboard: it keeps only the block titled <em>Live meeting</em>.</p>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
+      </section>
+    </main>
+
+    <aside class="docs-sidebar">
+      <nav class="docs-toc" aria-label="On this page">
+        <div class="toc-label">On this page</div>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-live-meeting-layout-chiclet-variants">Variants</a>
+      </nav>
+    </aside>
+  </div>
+
+  <footer class="docs-footer">
+    Chiclet — Live meeting &middot; Layout &middot; Monocore &middot; November 2026
+  </footer>
 </div>
 </div>
 
@@ -27264,111 +27925,68 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
 </style>
 <div class="docs-shell">
   <header class="docs-header">
-    <div class="eyebrow">Chiclet Family</div>
+    <div class="eyebrow">Chiclet — Live meeting &middot; Spec</div>
     <h1>Chiclet &mdash; Live meeting</h1>
-    <p class="subtitle">The second component published under the name &ldquo;Chiclet&rdquo;: a 297&times;48 bar that sits in a conversation while a call or recording is running. Unrelated to the message Chiclet beyond the name.</p>
+    <p class="subtitle">The Layout artboard from the <em>Chiclet</em> page of Monocore iOS, annotated for engineering: under every preview, a table of the tokens bound to that instance in Figma (background, stroke, corner radius, text, icons and other subcomponents, padding and gap) with the raw value each token resolves to, plus the size of the component and its parts. Only the block for this variant is shown.</p>
     <div class="meta">
-      <span>4 variants</span>
-      <span>2 axes</span>
-      <span>297 &times; 48dp</span>
-      <span>Figma: Monocore-iOS &middot; node <code>106838-39902</code></span>
+      <span>1 Figma artboard</span>
+      <span>1 block</span>
+      <span>Light mode values</span>
+      <span>Read 1 Nov 2026</span>
     </div>
   </header>
 
   <div class="docs-layout">
     <main class="docs-main">
-
-      <section class="spec-section" id="lm-preview">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>All Four Variants <a href="#lm-preview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">Style controls the shell; Recording swaps the interior from a playback scrubber to a live level meter and floods the container with Brand/Accent Dominant.</p>
-
-        <div class="flm-stage">
-          <div>
-            <div class="flm style-primary">
-              <div class="flm-container">
-                <span class="flm-circle"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M5 3.5v9l8-4.5z"/></svg></span>
-                <div class="flm-content">
-                  <div class="flm-progress"><span class="bar"></span><span class="handle"></span></div>
-                  <span class="flm-time">01:45</span>
+      <section class="spec-section lay-board" id="chiclet-live-meeting-spec-chiclet" data-figma-node="106947:213123">
+        <div class="lay-page" data-figma="New component">
+          <h1 class="lay-title" data-figma="Content block / Page Title">Chiclet <a href="#chiclet-live-meeting-spec-chiclet" class="anchor-link" aria-label="Link to this artboard">#</a></h1>
+          <div class="lay-section" id="chiclet-live-meeting-spec-chiclet-variants" data-figma="Content block / Section primary">
+            <h2>Variants</h2>
+            <div class="lay-block" data-figma="Slot block">
+              <div class="lay-block-head" data-figma="Content block / Section primary light">
+                <div class="lay-block-title">Live meeting</div>
+              </div>
+              <div class="lay-preview" data-figma="PASTE HERE">
+                <img src="images/chiclet/chiclet-live-meeting-dominant-false-5@2x.png" width="185" height="54" alt="Chiclet/Live meeting (Dominant)/False" data-figma-id="I106947:213123;20995:3166;106947:248143;20995:3084;106947:248842">
+              </div>
+              <div class="lay-props">Chiclet/Live meeting (Dominant)/False</div>
+              <div class="lay-spec" data-figma-id="I106947:213123;20995:3166;106947:248143;20995:3084;106947:248842">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Element</th><th>Property</th><th>Token</th><th>Value</th></tr></thead>
+                    <tbody>
+                    <tr><td>Chiclet/Live meeting (Dominant)/False</td><td>Size</td><td><em>&mdash;</em></td><td>185 × 54</td></tr>
+                    <tr><td>Chiclet/Live meeting (Dominant)/False</td><td>Corner radius</td><td><code>prominent</code></td><td>16</td></tr>
+                    <tr><td>Container</td><td>Fill</td><td><code>Brand/Accent Dominant</code></td><td><span class="btn-swatch" style="background:#383966;"></span>#383966</td></tr>
+                    <tr><td>Container</td><td>Padding · Top/Bottom</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Container</td><td>Padding · Leading/Trailing</td><td><code>Size/medium</code></td><td>12</td></tr>
+                    <tr><td>Container</td><td>Gap</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Content</td><td>Gap</td><td><code>Size/small</code></td><td>8</td></tr>
+                    <tr><td>Subtitle</td><td>Text colour</td><td><code>Text/On Accent</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Subtitle</td><td>Type</td><td><code>iOS/Caption 1</code></td><td>SF Pro Text Regular · 12 / 16</td></tr>
+                    <tr><td>Title</td><td>Text colour</td><td><code>Text/On Accent</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    <tr><td>Title</td><td>Type</td><td><code>iOS/Body 2</code></td><td>SF Pro Text Regular · 15 / 20</td></tr>
+                    <tr><td>Left icon</td><td>Size</td><td><em>&mdash;</em></td><td>24 × 24 <em>Calendar · Direction=LTR · Size=24 · Theme=Filled</em></td></tr>
+                    <tr><td>Left icon</td><td>Colour</td><td><code>Icon/On Global</code></td><td><span class="btn-swatch" style="background:#FFFFFF;"></span>#FFFFFF</td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-            <p class="flm-caption">Style = Primary &middot; Recording = False</p>
-          </div>
-          <div>
-            <div class="flm style-primary rec">
-              <div class="flm-container">
-                <span class="flm-circle"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="5"/></svg></span>
-                <div class="flm-content">
-                  <span class="flm-reclabel">Recording</span>
-                  <span class="flm-audio"><i style="height:20px"></i><i style="height:10px"></i><i style="height:5px"></i><i style="height:5px"></i><i style="height:5px"></i><i style="height:10px"></i></span>
-                  <span class="flm-time">01:45</span>
-                </div>
-              </div>
-            </div>
-            <p class="flm-caption">Style = Primary &middot; Recording = True</p>
-          </div>
-          <div>
-            <div class="flm style-subtle">
-              <div class="flm-container">
-                <span class="flm-circle"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M5 3.5v9l8-4.5z"/></svg></span>
-                <div class="flm-content">
-                  <div class="flm-progress"><span class="bar"></span><span class="handle"></span></div>
-                  <span class="flm-time">01:45</span>
-                </div>
-              </div>
-            </div>
-            <p class="flm-caption">Style = Subtle &middot; Recording = False</p>
-          </div>
-          <div>
-            <div class="flm style-subtle rec">
-              <div class="flm-container">
-                <span class="flm-circle"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="5"/></svg></span>
-                <div class="flm-content">
-                  <span class="flm-reclabel">Recording</span>
-                  <span class="flm-audio"><i style="height:20px"></i><i style="height:10px"></i><i style="height:5px"></i><i style="height:5px"></i><i style="height:5px"></i><i style="height:10px"></i></span>
-                  <span class="flm-time">01:45</span>
-                </div>
-              </div>
-            </div>
-            <p class="flm-caption">Style = Subtle &middot; Recording = True &mdash; note the square corners</p>
           </div>
         </div>
       </section>
 
-      <section class="spec-section" id="lm-spec">
-        <span class="section-eyebrow eyebrow-design">Reference</span>
-        <h2>Values <a href="#lm-spec" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Property</th><th>Value</th><th>Token</th></tr></thead>
-            <tbody>
-              <tr><td>Size</td><td>297 &times; 48dp <em>(max 487, min 70)</em></td><td>&mdash;</td></tr>
-              <tr><td>Corner radius</td><td>24dp &mdash; <strong>Primary only</strong></td><td>Radius/Dominant</td></tr>
-              <tr><td>Shell fill &mdash; Primary, not recording</td><td>#ffffff + 0.5dp stroke</td><td>Surface/Primary &middot; Stroke/Container</td></tr>
-              <tr><td>Shell fill &mdash; Subtle</td><td>Transparent</td><td>Surface/Subtle</td></tr>
-              <tr><td>Container fill &mdash; recording</td><td><span class="btn-swatch" style="background:#43349c;"></span>#43349c</td><td>Brand/Accent Dominant</td></tr>
-              <tr><td>Container padding</td><td>10dp</td><td>Size/Nudge/large</td></tr>
-              <tr><td>Container gap</td><td>8dp</td><td>Size/Small</td></tr>
-              <tr><td>Circular button</td><td>28&times;28dp, fully rounded, 16dp icon</td><td>Brand/Accent Primary</td></tr>
-              <tr><td>Timecode</td><td>12/16dp Regular</td><td>iOS/Caption 1</td></tr>
-              <tr><td>&ldquo;Recording&rdquo; label</td><td>15/20dp Regular, 72dp wide</td><td>iOS/Body 2 &middot; Text/On Accent</td></tr>
-              <tr><td>Level meter</td><td>6 bars, 2.5dp wide, gap 2.5, radius 2</td><td>Brand/Accent Secondary</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="callout callout-constraint">
-          <strong>The Subtle variants have no corner radius and no clipping.</strong> Radius/Dominant and <code>overflow: clip</code> are set only on the two Primary variants. In <code>Subtle / Recording = True</code> that leaves the Accent Dominant container rendering as a hard-edged rectangle where every sibling is a 24dp pill. It is the most visible defect in the Chiclet family.
-        </div>
-
-        <div class="callout callout-warn">
-          <strong>The level meter is decorative geometry, not data.</strong> Six fixed-height bars are baked into the component. Anything that animates with real audio has to be built by the host &mdash; do not read the published heights as a default waveform.
-        </div>
+      <section class="spec-section" id="chiclet-live-meeting-spec-schema">
+        <span class="section-eyebrow eyebrow-impl">Dev notes</span>
+        <h2>How the annotations are read from Figma <a href="#chiclet-live-meeting-spec-schema" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <p class="section-intro">The page mirrors the Layout view one-to-one (same artboard, same sections, same blocks). For each component instance in a block, the bound variables are read from the instance itself: <code>fills</code> and <code>strokes</code> on the root give background and stroke, <code>cornerRadius</code> the radius, auto-layout frames give padding and gap, every visible text layer gives its colour and text style, and nested instances (icons, avatars, badges, and anything 160&nbsp;px or smaller) give their size and colour. Each token is resolved for that instance (<code>resolveForConsumer</code>), so the raw value is what the instance actually renders in the file's current mode.</p>
+        <div class="callout callout-rule"><strong>Reading the table.</strong> <em>Element</em> is the Figma layer the row describes (the component itself first, then its layers, texts and parts). <em>Token</em> is the Figma variable name; <em>Value</em> is its resolved raw value. A stroke listed as <em>weight 0</em> is bound on the layer but not drawn. A colour listed at <em>@ 0%</em> is a bound colour with zero alpha, i.e. transparent. A dash means the property is set directly with no variable bound.</div>
+        <p class="section-intro">Figma page <em>Chiclet</em>; node: Chiclet <code>106947:213123</code>.</p>
       </section>
 
-      <section class="spec-section" id="lm-a11y">
+<section class="spec-section" id="lm-a11y">
         <span class="section-eyebrow eyebrow-impl">Accessibility</span>
         <h2>Accessibility <a href="#lm-a11y" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <ul>
@@ -27377,19 +27995,24 @@ Image=True  (column &middot; padding 0 &middot; border Stroke/onMedia)
           <li><strong>Timecode changes constantly.</strong> Do not put it in an assertive live region &mdash; a per-second announcement makes the rest of the screen unusable.</li>
         </ul>
       </section>
-
     </main>
+
     <aside class="docs-sidebar">
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
-        <a href="#lm-preview">All Four Variants</a>
-        <a href="#lm-spec">Values</a>
+        <div class="toc-group">Chiclet</div>
+        <a href="#chiclet-live-meeting-spec-chiclet-variants">Variants</a>
+        <div class="toc-group">More</div>
         <a href="#lm-a11y">Accessibility</a>
       </nav>
     </aside>
   </div>
-  <footer class="docs-footer">Chiclet &middot; Live meeting &middot; Source: Monocore-iOS <code>alxBFZw33jyKUiuLXQ9oth</code> node <code>106838-39902</code> &middot; August 2026</footer>
+
+  <footer class="docs-footer">
+    Chiclet — Live meeting &middot; Spec &middot; Monocore &middot; November 2026
+  </footer>
 </div>
+
 </div>
 
 <div class="page" id="page-chiclet-footer" data-page="chiclet-footer">
