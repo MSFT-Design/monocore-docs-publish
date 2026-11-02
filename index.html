@@ -845,7 +845,7 @@
       --mc-brand-primary:       #654cf5;
       --mc-brand-primary-soft:  #ebebff;
       --mc-brand-primary-hover: #43349c;
-      --mc-surface-accent:          #654cf5;
+      --mc-surface-accent:          #5b5fc7;
       --mc-surface-warning:         #fbf6d9;
       --mc-surface-success:         #e7f2da;
       --mc-surface-danger:          #f9d9d9;
@@ -910,10 +910,10 @@
       --surface-raised-fill: #f1f1f1;
       --text-primary: #212121;
       --text-secondary: #6e6e6e;
-      --text-interactive: #654cf5;
-      --button-stroke-outline: #aba8ff;
-      --brand-accent-dominant: #43349c;   /* Brand/Accent Dominant — Call Out surface */
-      --brand-accent-tertiary: #ebebff;   /* Brand/Accent Tertiary — Chiclet media plate */
+      --text-interactive: #5b5fc7;
+      --button-stroke-outline: #aab1fa;
+      --brand-accent-dominant: #383966;   /* Brand/Accent Dominant — Call Out surface */
+      --brand-accent-tertiary: #e8ebfa;   /* Brand/Accent Tertiary — Chiclet media plate */
       --radius-card: 12px;
       --radius-inner: 4px;
       --radius-button: 5px;
@@ -1510,8 +1510,8 @@
       --card-raised: #f1f1f1;
       --card-text: #212121;
       --card-text-secondary: #6e6e6e;
-      --card-interactive: #654cf5;
-      --card-btn-stroke: #aba8ff;
+      --card-interactive: #5b5fc7;
+      --card-btn-stroke: #aab1fa;
       --card-radius: 12px;
       --card-radius-inner: 4px;
       --card-radius-btn: 5px;
@@ -4078,7 +4078,7 @@
     --bd-raised-1:   var(--grey-88);                /* Surface/RaisedPrimary  #e0e0e0 */
     --bd-raised-3:   var(--mc-surface-raised-tertiary); /* Surface/RaisedTertiary #f5f5f5 */
     --bd-stroke:     #e6e6e6;                       /* Stroke/Container */
-    --bd-accent:     var(--text-interactive);       /* Surface/Accent #654cf5 */
+    --bd-accent:     var(--text-interactive);       /* Surface/Accent #5b5fc7 */
     --bd-text-2:     var(--grey-38);                /* Text/Secondary */
     --bd-text-int:   var(--mc-text-interactive);    /* Text/Interactive */
     --bd-text-on:    var(--grey-100);               /* Text/On Accent */
@@ -5664,7 +5664,7 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
               </tr>
               <tr>
                 <td class="token-name">Surface/Primary</td>
@@ -5902,7 +5902,7 @@ Icon only = True
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
               </tr>
             <tr>
               <td class="token-name">Surface/RaisedDominant</td>
@@ -6043,7 +6043,7 @@ Icon only = True
         <p class="section-intro">The system reduces every surface decision to two choices: pick the role, set the parent's mode. Everything else resolves automatically.</p>
 
         <ol class="step-list">
-          <li><strong>Pick the semantic role</strong> that describes intent (<code>Surface/RaisedBase</code>, <code>Surface/Floating</code>, etc.).</li>
+          <li><strong>Pick the semantic role</strong> that describes intent (<code>Surface/RaisedDissabled</code>, <code>Surface/Floating</code>, etc.).</li>
           <li><strong>Bind the variable</strong> to a fill or stroke.</li>
           <li><strong>Set the parent frame's mode</strong> (Light L1, Light L2, Dark L1, Dark L2).</li>
           <li><strong>The variable resolves</strong> to the correct tonal value automatically.</li>
@@ -6100,10 +6100,10 @@ Icon only = True
         </div>
 
         <h3>Headline: the system mostly passes</h3>
-        <p>The core pairings &mdash; <code>Text/Primary</code> and <code>Text/Dominant</code> on every Surface/Canvas, Surface/Primary, Surface/RaisedBase, Surface/Floating, Surface/Overlay, Surface/Sunken, and the Container family &mdash; clear AA Normal in every mode. The weak spots cluster in three places: <strong>secondary text on raised dark surfaces</strong>, <strong>brand-blue link text on raised surfaces</strong>, and <strong>colored semantic text (Danger, Success, Warning)</strong>.</p>
+        <p>The core pairings &mdash; <code>Text/Primary</code> and <code>Text/Dominant</code> on every Surface/Canvas, Surface/Primary, Surface/RaisedDissabled, Surface/Floating, Surface/Overlay, Surface/Sunken, and the Container family &mdash; clear AA Normal in every mode. The weak spots cluster in three places: <strong>secondary text on raised dark surfaces</strong>, <strong>brand-blue link text on raised surfaces</strong>, and <strong>colored semantic text (Danger, Success, Warning)</strong>.</p>
 
         <div class="callout callout-rule" style="margin-top: var(--sp-3);">
-          <strong>Surface/Accent is single-purpose.</strong> The brand-blue accent surface (<code>#654cf5</code> light, <code>#8a80ff</code> dark) is only contrast-safe with <code>Text/On Accent</code> (white in light, black in dark). All other text roles fail AA on Accent &mdash; including the brand-blue link colors themselves. If you need accent-colored fill <em>and</em> a non-white text label, switch to a Subtle accent surface and standard Primary text.
+          <strong>Surface/Accent is single-purpose.</strong> The brand-blue accent surface (<code>#5b5fc7</code> light, <code>#7f85f5</code> dark) is only contrast-safe with <code>Text/On Accent</code> (white in light, black in dark). All other text roles fail AA on Accent &mdash; including the brand-blue link colors themselves. If you need accent-colored fill <em>and</em> a non-white text label, switch to a Subtle accent surface and standard Primary text.
         </div>
 
         <h3>Pairings that pass AA Large only (3:1) &mdash; not AA Normal</h3>
@@ -6113,19 +6113,19 @@ Icon only = True
           <table>
             <thead><tr><th>Mode</th><th>Surface</th><th>Text role</th><th>Ratio</th></tr></thead>
             <tbody>
-              <tr><td>Light L1</td><td><code>Surface/RaisedPrimary</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code></td><td>4.04</td></tr>
-              <tr><td>Light L1</td><td><code>Surface/Interactive</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code></td><td>4.47 &mdash; just under</td></tr>
-              <tr><td>Light L1/L2</td><td><code>Surface/RaisedPrimary</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>4.07</td></tr>
-              <tr><td>Light L2</td><td><code>Surface/Interactive</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>4.07</td></tr>
+              <tr><td>Light L1</td><td><code>Surface/RaisedPrimary</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code></td><td>4.69</td></tr>
+              <tr><td>Light L1</td><td><code>Surface/Interactive</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code></td><td>5.20</td></tr>
+              <tr><td>Light L1/L2</td><td><code>Surface/RaisedPrimary</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>4.07&ndash;4.99</td></tr>
+              <tr><td>Light L2</td><td><code>Surface/Interactive</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>4.99</td></tr>
               <tr><td>Light L1/L2</td><td>most semantic surfaces</td><td><code>Text/Danger</code></td><td>3.66&ndash;4.44</td></tr>
-              <tr><td>Dark L1</td><td><code>Surface/Floating</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code>, <code>Text/Alt Secondary</code></td><td>3.63</td></tr>
+              <tr><td>Dark L1</td><td><code>Surface/Floating</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code>, <code>Text/Alt Secondary</code></td><td>3.63&ndash;5.23</td></tr>
               <tr><td>Dark L1</td><td><code>Surface/Floating</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>3.67</td></tr>
-              <tr><td>Dark L1</td><td><code>Surface/RaisedBase</code>, <code>RaisedSecondary</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code>, <code>Text/Alt Secondary</code></td><td>3.91</td></tr>
-              <tr><td>Dark L1</td><td><code>Surface/RaisedBase</code>, <code>RaisedSecondary</code>, <code>Containers/*</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>3.96</td></tr>
-              <tr><td>Dark L1</td><td><code>Surface/RaisedPrimary</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code>, <code>Text/Interactive</code></td><td>3.36&ndash;3.40</td></tr>
-              <tr><td>Dark L1/L2</td><td><code>Surface/Floating</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>3.40&ndash;3.67</td></tr>
-              <tr><td>Dark L1</td><td><code>Surface/Warning</code></td><td><code>Text/Secondary</code>, <code>Text/Interactive</code>, <code>Text/Danger</code>, <code>Text/Success</code></td><td>3.02&ndash;3.88</td></tr>
-              <tr><td>Dark L2</td><td><code>Surface/Floating</code></td><td><code>Text/Danger</code>, <code>Text/Success</code></td><td>3.01&ndash;3.86</td></tr>
+              <tr><td>Dark L1</td><td><code>Surface/RaisedSecondary</code>, <code>RaisedDissabled</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code>, <code>Text/Alt Secondary</code></td><td>3.91&ndash;6.48</td></tr>
+              <tr><td>Dark L1</td><td><code>Surface/RaisedSecondary</code>, <code>RaisedDissabled</code>, <code>Containers/*</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>3.96&ndash;4.56</td></tr>
+              <tr><td>Dark L1</td><td><code>Surface/RaisedPrimary</code></td><td><code>Text/Secondary</code>, <code>Text/Hint</code>, <code>Text/Interactive</code></td><td>3.40&ndash;4.84</td></tr>
+              <tr><td>Dark L1/L2</td><td><code>Surface/Floating</code></td><td><code>Text/Interactive</code>, <code>Text/Link</code></td><td>3.42&ndash;5.37</td></tr>
+              <tr><td>Dark L1</td><td><code>Surface/Warning</code></td><td><code>Text/Secondary</code>, <code>Text/Interactive</code>, <code>Text/Danger</code>, <code>Text/Success</code></td><td>3.41&ndash;4.86</td></tr>
+              <tr><td>Dark L2</td><td><code>Surface/Floating</code></td><td><code>Text/Danger</code>, <code>Text/Success</code></td><td>3.86&ndash;4.51</td></tr>
             </tbody>
           </table>
         </div>
@@ -6133,15 +6133,15 @@ Icon only = True
         <h3>System-level watchlist</h3>
 
         <div class="callout callout-warn">
-          <strong>Text/Danger sits at the threshold everywhere.</strong> Light <code>#d92c2c</code> lands between 3.50 and 4.44 on virtually every neutral surface &mdash; never quite reaching AA Normal. Use Danger text only for short labels, icons, or large-text contexts. For destructive copy in body text, pair <code>Surface/Danger</code> with <code>Text/Primary</code> (passes AA on the tinted background), not <code>Text/Danger</code> on a neutral surface.
+          <strong>Text/Danger sits at the threshold everywhere.</strong> Light <code>#c01515</code> lands between 4.74 and 6.25 on virtually every neutral surface &mdash; never quite reaching AA Normal. Use Danger text only for short labels, icons, or large-text contexts. For destructive copy in body text, pair <code>Surface/Danger</code> with <code>Text/Primary</code> (passes AA on the tinted background), not <code>Text/Danger</code> on a neutral surface.
         </div>
 
         <div class="callout callout-warn" style="margin-top: var(--sp-3);">
-          <strong>Brand-blue links struggle on raised dark surfaces.</strong> <code>Text/Interactive</code> (and <code>Text/Link</code>) at <code>#8a80ff</code> drops to 3.40 on <code>Surface/Floating</code> in Dark L2 and 3.36 on <code>Surface/RaisedPrimary</code> in Dark L1. Inline links inside floating menus and elevated cards should either be set as large-text (button-style) or paired with an underline + bold treatment to satisfy non-color accessibility requirements.
+          <strong>Brand-blue links struggle on raised dark surfaces.</strong> <code>Text/Interactive</code> (and <code>Text/Link</code>) at <code>#8a80ff</code> drops to 3.42 on <code>Surface/Floating</code> in Dark L2 and, at <code>#7f85f5</code>, to 3.40 on <code>Surface/RaisedPrimary</code> in Dark L1. Inline links inside floating menus and elevated cards should either be set as large-text (button-style) or paired with an underline + bold treatment to satisfy non-color accessibility requirements.
         </div>
 
         <div class="callout callout-warn" style="margin-top: var(--sp-3);">
-          <strong>Secondary text on Dark L1 raised surfaces is borderline.</strong> <code>Text/Secondary</code> at <code>#8f8f8f</code> on <code>Surface/Floating</code> (3.63), <code>Surface/RaisedBase</code> (3.91), and <code>Surface/RaisedPrimary</code> (3.36) all fail AA Normal. For body-weight metadata or helper copy inside dark floating UI, prefer <code>Text/Primary</code> instead and rely on size or weight for hierarchy.
+          <strong>Secondary text on Dark L1 raised surfaces is borderline.</strong> <code>Text/Secondary</code> at <code>#adadad</code> on <code>Surface/Floating</code> (5.23), <code>Surface/RaisedSecondary</code> (6.48), and <code>Surface/RaisedPrimary</code> (4.84) all clear AA Normal. For body-weight metadata or helper copy inside dark floating UI, prefer <code>Text/Primary</code> instead and rely on size or weight for hierarchy.
         </div>
 
         <div class="callout callout-warn" style="margin-top: var(--sp-3);">
@@ -6209,7 +6209,7 @@ Icon only = True
           <div class="axis-card">
             <div class="axis-label">Axis 1 — The "what"</div>
             <h4>Semantic Surface Roles</h4>
-            <p>Stable, purpose-named tokens like <code>Surface/RaisedBase</code> or <code>Surface/Floating</code>. The role never changes regardless of theme or environment.</p>
+            <p>Stable, purpose-named tokens like <code>Surface/RaisedSecondary</code> or <code>Surface/Floating</code>. The role never changes regardless of theme or environment.</p>
           </div>
           <div class="axis-card">
             <div class="axis-label">Axis 2 — The "where"</div>
@@ -6239,8 +6239,8 @@ Icon only = True
               <tr><td><code>Surface/Subtle</code></td><td>Transparent subtle grouping and interaction overlays</td></tr>
               <tr><td><code>Surface/SubtleHover</code></td><td>Hovered subtle regions</td></tr>
               <tr><td><code>Surface/SubtleSelected</code></td><td>Selected subtle regions (peers with SubtleHover)</td></tr>
-              <tr><td><code>Surface/RaisedBase</code></td><td>Standard contained <strong>screen</strong> surface. Same value as <code>Surface/RaisedSecondary</code> in every mode &mdash; use Base when this color appears at the screen level alongside other elements sharing the same background that aren't part of a grouped container list.</td></tr>
-              <tr><td><code>Surface/RaisedSecondary</code></td><td>Same value as <code>Surface/RaisedBase</code>, reserved for <strong>component</strong> surfaces &mdash; chips, badges, pill-style controls, and other small contained UI.</td></tr>
+              <tr><td><code>Surface/RaisedDissabled</code></td><td>Disabled state of buttons and other raised controls (Grey/94 light, Grey/20 dark). Formerly <code>Surface/RaisedDissabled</code>; every other use of that role now binds <code>Surface/RaisedSecondary</code>.</td></tr>
+              <tr><td><code>Surface/RaisedSecondary</code></td><td>Contained <strong>component</strong> surfaces (Grey/90 light, Grey/16 dark) &mdash; chips, badges, pill-style controls, and other small contained UI.</td></tr>
               <tr><td><code>Surface/RaisedPrimary</code></td><td>Standard raised contained surface &mdash; cards, panels, sheets at default elevation</td></tr>
               <tr><td><code>Surface/Floating</code></td><td>Floating temporary UI surfaces (menus, popovers, reaction pickers)</td></tr>
               <tr><td><code>Surface/Overlay</code></td><td>Blocking modal and sheet surfaces</td></tr>
@@ -6253,7 +6253,7 @@ Icon only = True
         </div>
 
         <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Base and RaisedSecondary share a color, not a role.</strong> Both resolve to the same value in every mode (Grey/94 in light, Grey/20 in dark). The distinction is semantic: <code>Surface/RaisedBase</code> names the <em>screen-level</em> surface &mdash; the background a screen presents when its content sits alongside other non-grouped elements on the same fill. <code>Surface/RaisedSecondary</code> names the <em>component-level</em> surface &mdash; chips, badges, and small contained UI. Picking the right token lets either side change independently in the future.
+          <strong>Base and RaisedSecondary share a color, not a role.</strong> Both resolve to the same value in every mode (Grey/94 in light, Grey/20 in dark). The distinction is semantic: <code>Surface/RaisedDissabled</code> names the <em>screen-level</em> surface &mdash; the background a screen presents when its content sits alongside other non-grouped elements on the same fill. <code>Surface/RaisedSecondary</code> names the <em>component-level</em> surface &mdash; chips, badges, and small contained UI. Picking the right token lets either side change independently in the future.
         </div>
 
         <p style="margin-top: var(--sp-4); font-weight:600; color: var(--c-text); font-size: 13px;">5 canonical stroke roles</p>
@@ -6272,16 +6272,16 @@ Icon only = True
                 <td>Row dividers, section breaks, horizontal rules inside a container</td>
               </tr>
               <tr>
-                <td><code>Stroke/Elevated (outside)</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#d1d1d1;"></span>Grey/82</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d4d4d;"></span>Grey/30</span></td>
+                <td><code>Stroke/Floating</code></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.05);"></span>Black α5%</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.24);"></span>White α24%</span></td>
                 <td>Mid-weight, holds against varied backdrops</td>
                 <td>Floating + Overlay surface edges</td>
               </tr>
               <tr>
-                <td><code>Stroke/Container (outer)</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#c2c2c2;"></span>Grey/76</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#4d4d4d;"></span>Grey/30</span></td>
+                <td><code>Stroke/Container</code></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#e6e6e6;"></span>Grey/90</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#292929;"></span>Grey/16</span></td>
                 <td>Balanced container border, readable on any common surface</td>
                 <td>Card edges on Canvas, Base, Sunken, RaisedSecondary, RaisedPrimary</td>
               </tr>
@@ -6304,8 +6304,7 @@ Icon only = True
         </div>
 
         <div class="callout callout-info" style="margin-top: var(--sp-3); font-size: 12.5px;">
-          <strong>Container vs Divider:</strong> Container reads distinctly darker than Divider in light mode (Grey/76 vs Grey/88) and slightly lighter in dark (Grey/30 vs Grey/24) &mdash; restores a visible Container > Divider hierarchy in both themes. Semantically: Divider is the separator <em>inside</em> a container (rows, sections), Container is the border <em>around</em> the container.
-        </div>
+          <strong>Container vs Divider:</strong> Container (Grey/90 light, Grey/16 dark) sits next to Divider (Grey/88 light, Grey/24 dark) &mdash; one step lighter in light mode, two steps darker in dark mode &mdash; and <code>Stroke/ContainerRaised</code> (Grey/74 / Grey/38) carries the stronger edge where a border has to hold against raised surfaces. Semantically: Divider is the separator <em>inside</em> a container (rows, sections), Container is the border <em>around</em> the container. </div>
 
         <p style="margin-top: var(--sp-4); font-weight:600; color: var(--c-text); font-size: 13px;">4 container roles</p>
         <p style="margin-top: var(--sp-1); margin-bottom: var(--sp-3);">Paired tokens for grouped-list patterns. The <strong>Primary</strong> pair is the subtle/recessed treatment &mdash; in light mode the Container reads slightly darker than its Base (card sinks into the page), in dark mode the Container reads slightly lighter (card lifts off the page). The <strong>Secondary</strong> pair is the iOS <code>systemGroupedBackground</code> / <code>secondarySystemGroupedBackground</code> contrast pattern &mdash; a tinted page with a clearly lifted white card on top.</p>
@@ -6316,28 +6315,28 @@ Icon only = True
             </thead>
             <tbody>
               <tr>
-                <td><code>Surface/Group/Primary/Base</code></td>
+                <td><code>Surface/InsetGroup/Canvas/Base</code></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#000000;"></span>Grey/0</span></td>
+                <td>Page behind the inset-group pattern on a canvas screen: Grey/100 in light, Grey/0 in dark &mdash; the same values as <code>Surface/Canvas</code>.</td>
+              </tr>
+              <tr>
+                <td><code>Surface/InsetGroup/Canvas/Container</code></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td>Page behind the subtle/recessed container pattern. White in light mode, soft dark grey in dark mode.</td>
+                <td>Card on top of Canvas/Base. Grey/96 on Grey/100 in light (slightly recessed), Grey/10 on Grey/0 in dark (slightly lifted). Same step as <code>Surface/RaisedTertiary</code>.</td>
               </tr>
               <tr>
-                <td><code>Surface/Group/Primary/Container</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#333333;"></span>Grey/20</span></td>
-                <td>Card on top of Primary/Base. In light mode reads as slightly recessed (Grey/94 on Grey/100); in dark mode reads as slightly lifted (Grey/20 on Grey/10). Subtle hierarchy.</td>
-              </tr>
-              <tr>
-                <td><code>Surface/Group/Secondary/Base</code></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f0f0f0;"></span>Grey/94</span></td>
+                <td><code>Surface/InsetGroup/Modal/Base</code></td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#1a1a1a;"></span>Grey/10</span></td>
-                <td>Tinted page for the iOS-style grouped list. Light tint of Grey/94 in light mode, soft dark Grey/10 in dark mode.</td>
+                <td>Tinted page for the iOS-style grouped list inside a sheet or modal: Grey/96 in light, Grey/10 in dark &mdash; the same values as <code>Surface/Overlay</code>.</td>
               </tr>
               <tr>
-                <td><code>Surface/Group/Secondary/Container</code></td>
+                <td><code>Surface/InsetGroup/Modal/Container</code></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#ffffff;"></span>Grey/100</span></td>
-                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#2e2e2e;"></span>Grey/18</span></td>
-                <td>Lifted card on top of Secondary/Base. White in light mode (the iOS <code>secondarySystemGroupedBackground</code> equivalent), Grey/18 in dark mode (one step lifted off Base Grey/10).</td>
+                <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#242424;"></span>Grey/14</span></td>
+                <td>Lifted card on top of Modal/Base: Grey/100 in light (the iOS <code>secondarySystemGroupedBackground</code> equivalent), Grey/14 in dark, one step above the Grey/10 Base.</td>
               </tr>
             </tbody>
           </table>
@@ -6387,15 +6386,11 @@ Icon only = True
               <tr>
                 <td><code>Surface/RaisedTertiary</code></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch" style="background:#f5f5f5;"></span>Grey/96 (<code>#F5F5F5</code>) / Grey/10 (<code>#1A1A1A</code>)</span></td>
-                <td>The lightest raised surface, for large containers such as grouped lists or tile buttons. Synced with <code>Surface/Group/Primary/Container</code> &mdash; both roles represent the same tonal step at different structural positions.</td>
+                <td>The lightest raised surface, for large containers such as grouped lists or tile buttons. Synced with <code>Surface/InsetGroup/Canvas/Container</code> &mdash; both roles represent the same tonal step at different structural positions.</td>
               </tr>
               
             </tbody>
           </table>
-        </div>
-
-        <div class="callout callout-info" style="margin-top: var(--sp-3);">
-          <strong>Note on Surface/Group/*/Base tokens.</strong> <code>Surface/Group/Primary/Base</code> and <code>Surface/Group/Secondary/Base</code> currently resolve to fully transparent (<code>#ffffff @ &alpha;0</code>). They exist as structural placeholders inside the Group container pattern &mdash; the visible surface is the <code>/Container</code> child, and the <code>/Base</code> role is a hook for future tinted-page treatments. Treat them as no-op backgrounds today.
         </div>
 
         <h3>Axis 2 — Environment Levels</h3>
@@ -6419,7 +6414,7 @@ Icon only = True
         </div>
 
         <div class="callout callout-rule" style="margin-top: var(--sp-3);">
-          <strong>Overlay content must be set to L2.</strong> When a frame sits inside a <code>Surface/Overlay</code> &mdash; modal sheets, drawer content, the body of an alert &mdash; its mode must be set to Dark L2 (or Light L2). Overlay in dark mode resolves to the same value as Canvas L2 (<code>#1a1a1a</code>); leaving the modal content on Dark L1 causes nested surfaces to lose contrast against the Overlay, and <code>Surface/Group/Primary/Base</code> becomes mathematically invisible (1.00:1 ratio). See the <a href="#l1l2-shifts" data-link="l1l2-shifts" style="font-weight: 500;">Elevation page</a> for the full diagram and the math.
+          <strong>Overlay content must be set to L2.</strong> When a frame sits inside a <code>Surface/Overlay</code> &mdash; modal sheets, drawer content, the body of an alert &mdash; its mode must be set to Dark L2 (or Light L2). Overlay in dark mode resolves to the same value as Canvas L2 (<code>#1a1a1a</code>); leaving the modal content on Dark L1 causes nested surfaces to lose contrast against the Overlay, and <code>Surface/InsetGroup/Canvas/Base</code> (pure black on Dark L1) loses its relationship to the Grey/10 Overlay. See the <a href="#l1l2-shifts" data-link="l1l2-shifts" style="font-weight: 500;">Elevation page</a> for the full diagram and the math.
         </div>
       </section>
 
@@ -6486,7 +6481,7 @@ Icon only = True
       <section class="spec-section" id="layers">
         <span class="section-eyebrow eyebrow-impl">Implementation</span>
         <h2>Layered Architecture <a href="#layers" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The system is built in three layers: Layer 1 holds raw primitive values; Layer 2 holds purpose-named semantic tokens (<code>Theme (Light - dark)</code>) with two modes &mdash; Light and Dark; Layer 3 is a Figma <em>extension</em> of Theme (<code>Modal (Light - dark)</code>) that inherits every variable and overrides only the ~30 tokens that need to shift when content sits inside a modal, sheet, or overlay context.</p>
+        <p class="section-intro">The system is built in three layers: Layer 1 holds raw primitive values; Layer 2 holds purpose-named semantic tokens (<code>Theme (Light - dark)</code>) with two modes &mdash; Light and Dark; Layer 3 is a Figma <em>extension</em> of Theme (<code>Modal (Light - dark)</code>) that inherits every variable and overrides only the 28 tokens that need to shift when content sits inside a modal, sheet, or overlay context.</p>
 
         <div class="layer-stack">
           <div class="layer-card layer-1">
@@ -6510,7 +6505,7 @@ Icon only = True
             <h4>Theme (Light - dark) collection · 2 modes · 247 variables total</h4>
             <p>Purpose-named tokens that alias primitives differently per Light / Dark mode. This is the base layer designers and components bind to. Every semantic token holds a <code>VARIABLE_ALIAS</code> reference to a primitive. The core Surface + Text + Icon + Stroke families total 72 roles; the remaining 175 variables cover Brand/Accent tiers, Component tokens, Presence, iOS Fills, and os26 material effects:</p>
             <ul style="margin: var(--sp-2) 0 0 var(--sp-5); font-size: 13px; color: var(--c-text-secondary); line-height: 1.7;">
-              <li><strong>Surface</strong> &mdash; 34 roles (Canvas / Group Primary/Secondary / RaisedBase / RaisedPrimary / RaisedSecondary / RaisedTertiary / Floating / Overlay / Sunken / Interactive / status surfaces / Accent / DropCall / ActiveSpeaker / BtntAlpha / ContainerAlpha / Glass / Scrim)</li>
+              <li><strong>Surface</strong> &mdash; 37 roles (Canvas / InsetGroup Canvas/Modal / RaisedDissabled / RaisedPrimary / RaisedSecondary / RaisedTertiary / Floating / Overlay / Sunken / Interactive / status surfaces / Accent / DropCall / ActiveSpeaker / BtntAlpha / ContainerAlpha / Glass / Scrim)</li>
               <li><strong>Text</strong> &mdash; 18 roles (Dominant / Primary / Secondary / Hint / Disabled / On Global / On Accent / Interactive / Link / Assistive / Carret / Mention / Danger / Success / Warning / Alt Secondary / Highlighted Background / Highlighted Foreground)</li>
               <li><strong>Icon</strong> &mdash; 14 roles (Dominant / Primary / Secondary / Hint / Disabled / On Global / On Accent / Interactive / Danger / Success / Warning / Alt Secondary / Mention / Saved)</li>
               <li><strong>Stroke</strong> &mdash; 6 roles (Divider / Accessible / Elevated (outside) / Container (outer) / ContainerRaised / onMedia (outer))</li>
@@ -6522,8 +6517,8 @@ Icon only = True
           <div class="layer-card layer-2">
             <span class="layer-tag">Layer 3 — Modal Extension</span>
             <h4>Modal (Light - dark) collection · Figma extension of Theme</h4>
-            <p>An <em>extended</em> collection created via Figma's Extend action. Modal inherits every variable from Theme automatically &mdash; 217 tokens fall through unchanged. Only 30 tokens carry explicit overrides for the elevated context (Overlay, Sheets, Drawers, Modals). Bind a modal frame to Modal to get all Theme values <em>plus</em> the elevated overrides.</p>
-            <span class="count">30 overrides · 217 inherited from Theme</span>
+            <p>An <em>extended</em> collection created via Figma's Extend action. Modal inherits every variable from Theme automatically &mdash; 231 tokens fall through unchanged. Only 28 tokens carry explicit overrides for the elevated context (Overlay, Sheets, Drawers, Modals). Bind a modal frame to Modal to get all Theme values <em>plus</em> the elevated overrides.</p>
+            <span class="count">28 overrides · 231 inherited from Theme</span>
           </div>
         </div>
 
@@ -6532,7 +6527,7 @@ Icon only = True
           <span class="arrow">↓ VARIABLE_ALIAS</span>
           <span class="node node-accent">Theme (247 × Light + Dark)</span>
           <span class="arrow">↓ Extend</span>
-          <span class="node node-accent">Modal (30 overrides + inherits Theme)</span>
+          <span class="node node-accent">Modal (28 overrides + inherits Theme)</span>
           <span class="arrow">↓ Mode on parent frame</span>
           <span class="node node-output">Rendered surface</span>
         </div>
@@ -6544,7 +6539,7 @@ Icon only = True
         <h2>Why This Works <a href="#why" class="anchor-link" aria-label="Link to this section">#</a></h2>
 
         <h3>For the design system</h3>
-        <p>Semantic names plus mode-aware aliases mean a component built today on <code>Surface/RaisedBase</code> keeps rendering correctly even when the underlying greys are refined, themes are added (high-contrast, glass), or new environment levels are introduced as future modes.</p>
+        <p>Semantic names plus mode-aware aliases mean a component built today on <code>Surface/RaisedDissabled</code> keeps rendering correctly even when the underlying greys are refined, themes are added (high-contrast, glass), or new environment levels are introduced as future modes.</p>
         <div class="callout callout-rule">
           <strong>Components encode purpose, not pixels.</strong>
         </div>
@@ -7111,7 +7106,7 @@ Icon only = True
 </tr></thead><tbody>
 <tr class="tm-row-fixed"><td><span class="tm-token">Divider/Primary</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E1E1E1;"></span>#E1E1E1</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></div></td><td><span class="tm-use">128 bindings: Divider component 14, Content Card and Card edges 15, Skeleton shapes 26, Segmented control tab edges 10, Text field indicator (underline) 15, Pill bar / Token field strokes</span></td><td><span class="tm-token">Stroke/Divider (separators, skeleton)</span><br><span class="tm-token">Stroke/Container (card and chip edges)</span><br><span class="tm-token">Stroke/Accessible (text-field underline)</span></td><td><span class="tm-status tm-status-split">Split</span></td><td>Monocore binds Stroke/Divider on separators (311 bindings: Avatar pie 131, Card 59, Message 24) and Stroke/Container on card/chip/badge edges (103). The docs assign input outlines to Stroke/Accessible; note the Monocore Text Field still carries the old Divider/Primary on its underline (see Gaps).</td></tr>
 <tr class="tm-row-migration"><td><span class="tm-token">Surface/Border</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E1E1E1;"></span>#E1E1E1</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#292929;"></span>#292929</span></div></td><td><span class="tm-use">3 bindings: Chiclet image edge</span></td><td><span class="tm-token">Stroke/onMedia</span></td><td><span class="tm-status tm-status-migration">1:1</span></td><td>Monocore Chiclet and Name tag use the alpha stroke Stroke/onMedia on image edges (23). A legacy Surface/Border variable still exists in Monocore; do not target it.</td></tr>
-<tr class="tm-row-unused"><td><span class="tm-token">Surface/Border Dominant</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#303030;"></span>#303030</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#E1E1E1;"></span>#E1E1E1</span></div></td><td><span class="tm-use">Not bound in components</span></td><td><span class="tm-token">Stroke/ContainerRaised</span></td><td><span class="tm-status tm-status-unused">Unused</span></td><td>Docs map it to Stroke/Container (outer). By value it is the strong edge; Monocore uses ContainerRaised (#BDBDBD / #616161) on outline buttons and circular buttons (31). Use Container for card edges, ContainerRaised for outline buttons.</td></tr>
+<tr class="tm-row-unused"><td><span class="tm-token">Surface/Border Dominant</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#303030;"></span>#303030</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#E1E1E1;"></span>#E1E1E1</span></div></td><td><span class="tm-use">Not bound in components</span></td><td><span class="tm-token">Stroke/ContainerRaised</span></td><td><span class="tm-status tm-status-unused">Unused</span></td><td>Docs map it to Stroke/Container. By value it is the strong edge; Monocore uses ContainerRaised (#BDBDBD / #616161) on outline buttons and circular buttons (31). Use Container for card edges, ContainerRaised for outline buttons.</td></tr>
 <tr class="tm-row-migration"><td><span class="tm-token">Neutral/Stroke/Transparent/Rest (Mode collection)</span></td><td><span class="tm-use">91 bindings: Avatar pie segment strokes</span></td><td><span class="tm-token">Stroke/Divider</span></td><td><span class="tm-status tm-status-migration">1:1</span></td><td>Monocore Avatar pie binds Stroke/Divider (131). Matches docs section B.</td></tr>
 <tr class="tm-row-migration"><td><span class="tm-token">Neutral/Stroke/on Brand/1/Rest, Neutral/Stroke/1/Rest</span></td><td><span class="tm-use">41 bindings: Avatar pie divider, card custom slot divider</span></td><td><span class="tm-token">Stroke/Divider</span></td><td><span class="tm-status tm-status-migration">1:1</span></td><td>Docs section B.</td></tr>
 <tr class="tm-row-fixed"><td><span class="tm-token">Component tokens/Button/Button Stroke outline</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#AAB1FA;"></span>#AAB1FA</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#333357;"></span>#333357</span></div></td><td><span class="tm-use">1 binding: Button Full-width outline</span></td><td><span class="tm-token">Stroke/ContainerRaised (neutral outline) or Brand/Accent Secondary (accent outline)</span></td><td><span class="tm-status tm-status-split">Split</span></td><td>Monocore’s Button Style=Outline accent binds Surface/RaisedSecondary fill with Text/Primary label and ContainerRaised stroke (13); Split Button keeps the accent-tinted Brand/Accent Secondary stroke (33). Pick by whether the button family is neutral or accent.</td></tr>
@@ -7162,7 +7157,7 @@ Icon only = True
 <section class="spec-section" id="brand">
 <span class="section-eyebrow eyebrow-design">Reference</span>
 <h2>Brand accents and component tokens <a href="#brand" class="anchor-link" aria-label="Link to this section">#</a></h2>
-<p class="section-intro">The Brand/* names survive, but two values changed meaning: Brand/Accent Global went from the dark shade (#383966) to the vivid Fable purple (#654CF5), and Brand/Accent Tertiary’s dark value went from a dark tint (#2F2F4A) to a light one (#9299F7). Every “Component tokens/” entry folds into a Brand or Surface semantic; none survive as component tokens.</p>
+<p class="section-intro">The Brand/* names survive, but two values changed meaning: Brand/Accent Global went from the dark shade (#383966) to the vivid Fable purple (#654CF5), and Brand/Accent Tertiary keeps its values (#E8EBFA / #2F2F4A). Every “Component tokens/” entry folds into a Brand or Surface semantic; none survive as component tokens.</p>
 <div class="tm-mig-wrap"><div class="tm-mig-scroll"><table class="tm-mig-table tm-cols-5"><thead><tr>
 <th>Old token (L / D)</th>
 <th>Observed use in Teams 2 iOS</th>
@@ -7174,7 +7169,7 @@ Icon only = True
 <tr class="tm-row-stays"><td><span class="tm-token">Brand/Accent Global (#383966 / #3D3E78 → #654CF5 / #5B5FC7)</span></td><td><span class="tm-use">7: accent Button State=Pressed, FAB, Chat header, Toast pushdown</span></td><td><span class="tm-token">Brand/Accent Global (pressed accent)</span></td><td><span class="tm-status tm-status-stays">Stays</span><div class="tm-ld tm-muted">value changes</div></td><td>Monocore Button Style=Accent State=Pressed still binds Accent Global (4), but it now resolves lighter/more vivid, not darker. Check pressed-state contrast on migrated buttons.</td></tr>
 <tr class="tm-row-fixed"><td><span class="tm-token">Brand/Accent Secondary (#AAB1FA / #333357 → #ABA8FF / #333357)</span></td><td><span class="tm-use">82: Split Button and outline Button strokes 68, outline labels 13</span></td><td><span class="tm-token">Brand/Accent Secondary (accent-outline strokes)</span><br><span class="tm-token">Stroke/ContainerRaised (neutral outline Button)</span></td><td><span class="tm-status tm-status-split">Split</span></td><td>Monocore keeps Accent Secondary on Split Button strokes (33) and selected filter edges (12), but the standard Outline button moved to a neutral ContainerRaised stroke with Text/Primary label.</td></tr>
 <tr class="tm-row-fixed"><td><span class="tm-token">Brand/Accent Dominant</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#383966;"></span>#383966</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#C5CBFA;"></span>#C5CBFA</span></div></td><td><span class="tm-use">21: Call Out container and tip 16, Search text cursor 3, Circular button pressed 2</span></td><td><span class="tm-token">Brand/Accent Dominant (callouts, pressed circular button)</span><br><span class="tm-token">Brand/Accent Primary (text cursor)</span></td><td><span class="tm-status tm-status-split">Split</span></td><td>Monocore Call Out binds Accent Dominant (16); the cursor in Compose/Search is Accent Primary (21).</td></tr>
-<tr class="tm-row-migration"><td><span class="tm-token">Brand/Accent Tertiary (#E8EBFA / #2F2F4A → #E8EBFA / #9299F7)</span></td><td><span class="tm-use">5: Pill button Semantic=Secondary fill, Swipe action secondary</span></td><td><span class="tm-token">Brand/Accent Tertiary</span></td><td><span class="tm-status tm-status-migration">1:1</span><div class="tm-ld tm-muted">dark value flips</div></td><td>Same components in Monocore (filter buttons Semantic=Secondary 6; also Avatar Icon-brand background 11, Section header filter 12). The dark mode value is now light, so anything that placed dark text on it in dark mode needs re-checking.</td></tr>
+<tr class="tm-row-migration"><td><span class="tm-token">Brand/Accent Tertiary (#E8EBFA / #2F2F4A, unchanged)</span></td><td><span class="tm-use">5: Pill button Semantic=Secondary fill, Swipe action secondary</span></td><td><span class="tm-token">Brand/Accent Tertiary</span></td><td><span class="tm-status tm-status-migration">1:1</span><div class="tm-ld tm-muted">same values</div></td><td>Same components in Monocore (filter buttons Semantic=Secondary 6; also Avatar Icon-brand background 11, Section header filter 12). Values are identical, so no re-checking is needed.</td></tr>
 <tr class="tm-row-migration"><td><span class="tm-token">Component tokens/Filter/Filter-bg-secondary - 4</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#E8EBFA;"></span>#E8EBFA</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#2F2F4A;"></span>#2F2F4A</span></div></td><td><span class="tm-use">13: Card custom content fill</span></td><td><span class="tm-token">Brand/Accent Tertiary</span></td><td><span class="tm-status tm-status-migration">1:1</span><div class="tm-ld tm-muted">by value</div></td><td>Identical light value and the same “selected filter / tinted container” role.</td></tr>
 <tr class="tm-row-unused"><td><span class="tm-token">Component tokens/Filter/Filter Fg Secondary disabled 3</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#AAB1FA;"></span>#AAB1FA</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#3D3E78;"></span>#3D3E78</span></div></td><td><span class="tm-use">Not bound</span></td><td><span class="tm-token">Brand/Accent Secondary</span></td><td><span class="tm-status tm-status-unused">Unused</span></td><td>By value.</td></tr>
 <tr class="tm-row-fixed"><td><span class="tm-token">Component tokens/Contextual command bar/Background Active</span><div class="tm-ld"><span class="tm-swatch-row"><span class="tm-swatch" style="background:#AAB1FA;"></span>#AAB1FA</span> <span class="tm-sep">/</span> <span class="tm-swatch-row"><span class="tm-swatch" style="background:#9299F7;"></span>#9299F7</span></div></td><td><span class="tm-use">16: Card custom content stroke 13, CCB button State=Active</span></td><td><span class="tm-token">Brand/Accent Secondary (stroke)</span><br><span class="tm-token">Brand/Accent Tertiary (fill)</span></td><td><span class="tm-status tm-status-split">Split</span></td><td>Monocore’s selected filter chip is Tertiary fill + Secondary stroke; the CMD bar active state in Monocore has no tinted fill (Surface/Subtle).</td></tr>
@@ -7364,7 +7359,7 @@ Icon only = True
       <section class="spec-section" id="text-branded">
         <span class="section-eyebrow eyebrow-impl">Text roles &middot; branded</span>
         <h2>Text &mdash; branded roles <a href="#text-branded" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p>Text colored by the active brand theme. Two alias groups sit within this family: <strong>Interactive / Link / Assistive</strong> alias the Teams ramp primitives directly (<code>Global colors/Brand/Teams 60 (text-icons)</code> = <code>#4c39b8</code> light, <code>Teams 100 (dPrimary - text)</code> = <code>#8a80ff</code> dark). <strong>Carret / Mention</strong> alias the older AA-compliant Brand stops (<code>Brand light/Primary AA</code> = <code>#5a40db</code> light, <code>Brand dark/Shade 20</code> = <code>#aba8ff</code> dark), which sit one Grey step lighter than the Teams-role aliases. Both alias chains resolve to values on the same Teams ramp, but the two groupings give designers finer control over emphasis. <code>Highlighted Background</code> uses brand tints and is exempt.</p>
+        <p>Text colored by the active brand theme. All six roles alias <code>Brand/Accent Primary</code>, which resolves to <code>Global colors/Brand light/Primary</code> = <code>#5b5fc7</code> in light and <code>Brand dark/Primary</code> = <code>#7f85f5</code> in dark. In the Modal context <strong>Interactive</strong>, <strong>Link</strong> and <strong>Assistive</strong> carry overrides onto the older Teams-ramp stops (<code>#5a40db</code> light, <code>#8a80ff</code> dark), so inline links inside sheets and modals sit one step away from the L1 accent.<code>Highlighted Background</code> uses brand tints and is exempt.</p>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Role</th><th>Light</th><th>Dark</th><th>Purpose</th></tr></thead>
@@ -8278,8 +8273,8 @@ Icon only = True
         </div>
         <ul style="margin-top: var(--sp-2); padding-left: var(--sp-3); font-size: 13.5px;">
           <li><strong><code>Stroke/Accessible</code></strong> &mdash; the AA-grade stroke. Used for focus rings, form field borders, and any boundary that must convey UI state. <em>Required</em> to meet 3:1 on every surface it can land on.</li>
-          <li><strong><code>Stroke/Container (outer)</code>, <code>Stroke/ContainerRaised</code></strong> &mdash; container edges. They define where a card or grouped region begins, but the contrast is also doing layout work, not state communication. Authoring with a target of 3:1 where reachable is preferred but not strictly required. Often paired with elevation or fill differentiation to reinforce boundaries.</li>
-          <li><strong><code>Stroke/Divider</code>, <code>Stroke/Elevated (outside)</code>, <code>Stroke/onMedia (outer)</code></strong> &mdash; decorative. Row dividers, hairline separators, and floating-surface edges that don't carry state information. Intentionally below 3:1 so they read as quiet visual organization. Not required to meet WCAG 1.4.11.</li>
+          <li><strong><code>Stroke/Container</code>, <code>Stroke/ContainerRaised</code></strong> &mdash; container edges. They define where a card or grouped region begins, but the contrast is also doing layout work, not state communication. Authoring with a target of 3:1 where reachable is preferred but not strictly required. Often paired with elevation or fill differentiation to reinforce boundaries.</li>
+          <li><strong><code>Stroke/Divider</code>, <code>Stroke/Floating</code>, <code>Stroke/onMedia (outer)</code></strong> &mdash; decorative. Row dividers, hairline separators, and floating-surface edges that don't carry state information. Intentionally below 3:1 so they read as quiet visual organization. Not required to meet WCAG 1.4.11.</li>
         </ul>
         <div class="callout callout-warn">
           <strong>How to use this page.</strong> Look at the <code>Stroke/Accessible</code> matrix first &mdash; it should be all green; any red there is a real bug. For the other roles, red cells are expected; the matrix exists so designers can predict how a stroke will read against a specific surface, not to flag failures.
@@ -8288,14 +8283,14 @@ Icon only = True
 
       <section class="spec-section" id="stroke-image-note">
         <span class="section-eyebrow eyebrow-impl">Note</span>
-        <h2>Alpha strokes (Stroke/Elevated &amp; Stroke/onMedia) <a href="#stroke-image-note" class="anchor-link" aria-label="Link to this section">#</a></h2>
+        <h2>Alpha strokes (Stroke/Floating &amp; Stroke/onMedia) <a href="#stroke-image-note" class="anchor-link" aria-label="Link to this section">#</a></h2>
         <p>Two strokes in the system now resolve to alpha values rather than solid greys &mdash; their effective color depends on whatever surface or image sits beneath them, so they cannot be evaluated with the foreground/background formula used in the matrix above. Treat both as decorative.</p>
         <div class="table-wrap" style="margin-top: var(--sp-3);">
           <table>
             <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th>Used for</th></tr></thead>
             <tbody>
               <tr>
-                <td><code>Stroke/Elevated (outside)</code></td>
+                <td><code>Stroke/Floating</code></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(0,0,0,0.05);"></span>Black &alpha;5%</span></td>
                 <td><span class="ss-swatch-row"><span class="ss-swatch checker" style="background:rgba(255,255,255,0.24);"></span>White &alpha;24%</span></td>
                 <td>The outside edge of floating and overlay surfaces &mdash; menus, popovers, sheets, callouts. Sits proud of the host surface as a hairline halo, not as a solid border.</td>
@@ -8315,7 +8310,7 @@ Icon only = True
       <nav class="docs-toc" aria-label="On this page">
         <div class="toc-label">On this page</div>
         <a href="#stroke-overview">Method</a>
-        <a href="#stroke-image-note">Alpha strokes (Stroke/Elevated &amp; Stroke/onMedia)</a>
+        <a href="#stroke-image-note">Alpha strokes (Stroke/Floating &amp; Stroke/onMedia)</a>
       </nav>
     </aside>
   </div>
@@ -8519,10 +8514,10 @@ Icon only = True
 <header class="docs-header">
     <div class="eyebrow">Surface System</div>
     <h1>Elevation</h1>
-    <p class="subtitle">Elevation is expressed by <strong>two Figma variable collections</strong>: <code>Theme (Light - dark)</code> holds the base semantic values, and <code>Modal (Light - dark)</code> is a formal Figma <em>extension</em> of Theme that overrides selected values for elevated contexts &mdash; sheets, drawers, popovers, modal flows. Each collection carries just two modes: <code>Light</code> and <code>Dark</code>. When a designer binds a modal frame to the Modal extension, every non-overridden token still resolves through Theme (so brand changes cascade automatically), while the 29 elevated tokens resolve to their Modal-specific values. This page lists which tokens are overridden and why.</p>
+    <p class="subtitle">Elevation is expressed by <strong>two Figma variable collections</strong>: <code>Theme (Light - dark)</code> holds the base semantic values, and <code>Modal (Light - dark)</code> is a formal Figma <em>extension</em> of Theme that overrides selected values for elevated contexts &mdash; sheets, drawers, popovers, modal flows. Each collection carries just two modes: <code>Light</code> and <code>Dark</code>. When a designer binds a modal frame to the Modal extension, every non-overridden token still resolves through Theme (so brand changes cascade automatically), while the 28 elevated tokens resolve to their Modal-specific values. This page lists which tokens are overridden and why.</p>
     <div class="meta">
-      <span>29 roles overridden in Modal</span>
-      <span>247 roles total in Theme</span>
+      <span>28 roles overridden in Modal</span>
+      <span>259 roles total in Theme</span>
       <span>Modal is a Figma extension of Theme</span>
     </div>
   </header>
@@ -8535,7 +8530,7 @@ Icon only = True
         <div class="table-wrap">
           <table>
             <thead><tr><th>Category</th><th>Modal overrides</th><th>Total in Theme</th></tr></thead>
-            <tbody><tr><td>Surfaces</td><td>9</td><td>34</td></tr><tr><td>Text</td><td>7</td><td>18</td></tr><tr><td>Icons</td><td>4</td><td>14</td></tr><tr><td>Brand/Accent</td><td>4</td><td>4</td></tr><tr><td>Strokes</td><td>2</td><td>6</td></tr><tr><td>Other</td><td>3</td><td>—</td></tr>            </tbody>
+            <tbody><tr><td>Surfaces</td><td>8</td><td>37</td></tr><tr><td>Text</td><td>7</td><td>19</td></tr><tr><td>Icons</td><td>4</td><td>15</td></tr><tr><td>Brand/Accent</td><td>5</td><td>5</td></tr><tr><td>Strokes</td><td>2</td><td>7</td></tr><tr><td>Other</td><td>2</td><td>—</td></tr>            </tbody>
           </table>
         </div>
       </section>
@@ -8551,39 +8546,9 @@ Icon only = True
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ffffff;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ffffff</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#000000;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#000000</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ffffff;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#ffffff</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ffffff;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#ffffff</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#1a1a1a;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#1a1a1a</div></div>
   </div>
-  <p class="l1l2-rat">In an Overlay, the canvas <em>is</em> white/pale — even in dark mode. Modal keeps Canvas white so dark-mode modals read as the same neutral base as the elevated overlay.</p>
-</div>
-<div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Surface/Sunken</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ebebeb;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ebebeb</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#242424</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ebebeb;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#ebebeb</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#242424</div></div>
-  </div>
-  <p class="l1l2-rat">Same values as Theme — recessed tier holds its position relative to Modal's Container fill.</p>
-</div>
-<div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Surface/Interactive</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ebebeb;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ebebeb</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#292929;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#292929</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e0e0e0;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#e0e0e0</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#333333;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#333333</div></div>
-  </div>
-  <p class="l1l2-rat">Interactive surface bumps one Grey step warmer/lighter in Modal to preserve tappable feel above the elevated container.</p>
-</div>
-<div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Surface/RaisedSecondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e6e6e6;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#e6e6e6</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#292929;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#292929</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e6e6e6;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#e6e6e6</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#333333;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#333333</div></div>
-  </div>
-  <p class="l1l2-rat">Dark shifts Grey/16 → Grey/20 so the chip lifts one step higher than the elevated Container beneath it.</p>
+  <p class="l1l2-rat">Inside an Overlay the canvas is the overlay plane itself: Modal Dark aliases <code>Surface/Overlay</code> (Grey/10) instead of pure black, so nested content reads as sitting on the sheet rather than on the screen. Light stays white.</p>
 </div>
 <div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Surface/Floating</span> <span class="l1l2-diffaxis">Modal override</span></div>
@@ -8596,16 +8561,6 @@ Icon only = True
   <p class="l1l2-rat">Floating in an elevated context needs to sit one Grey step above the Overlay canvas — Grey/22 → Grey/24.</p>
 </div>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Surface/Quaternary</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ffffff;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ffffff</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#1a1a1a;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#1a1a1a</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ffffff;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#ffffff</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#292929;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#292929</div></div>
-  </div>
-  <p class="l1l2-rat">Bottom tab bar surface — lifts to Grey/16 in Modal so the chrome reads as a distinct tier over an elevated canvas.</p>
-</div>
-<div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Surface/Glass Single</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
     <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0.1);"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ffffff@0.10</div></div>
@@ -8616,36 +8571,76 @@ Icon only = True
   <p class="l1l2-rat">Modal drops the light Glass alpha from 10% → 4% for a subtler frosted effect on the elevated canvas.</p>
 </div>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Surface/Group/Primary/Base</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-head"><span class="l1l2-name">Surface/Interactive</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0.0);"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ffffff@0.00</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0.0);"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#ffffff@0.00</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0.0);"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#ffffff@0.00</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0.0);"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#ffffff@0.00</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ebebeb;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ebebeb</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#292929;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#292929</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e0e0e0;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#e0e0e0</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#333333;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#333333</div></div>
   </div>
-  <p class="l1l2-rat">Transparent placeholder in both collections — reserved for future tinted-page treatments.</p>
+  <p class="l1l2-rat">Interactive surface bumps one Grey step warmer/lighter in Modal to preserve tappable feel above the elevated container.</p>
+</div>
+<div class="l1l2-row">
+  <div class="l1l2-head"><span class="l1l2-name">Surface/Quaternary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-swatches">
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ffffff;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ffffff</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#1a1a1a;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#1a1a1a</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ffffff;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#ffffff</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#292929;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#292929</div></div>
+  </div>
+  <p class="l1l2-rat">Bottom tab bar surface — lifts to Grey/16 in Modal so the chrome reads as a distinct tier over an elevated canvas.</p>
+</div>
+<div class="l1l2-row">
+  <div class="l1l2-head"><span class="l1l2-name">Surface/RaisedSecondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-swatches">
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e6e6e6;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#e6e6e6</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#292929;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#292929</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e6e6e6;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#e6e6e6</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#333333;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#333333</div></div>
+  </div>
+  <p class="l1l2-rat">Dark shifts Grey/16 → Grey/20 so the chip lifts one step higher than the elevated Container beneath it.</p>
+</div>
+<div class="l1l2-row">
+  <div class="l1l2-head"><span class="l1l2-name">Surface/RaisedTertiary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-swatches">
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#f5f5f5;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#f5f5f5</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#1a1a1a;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#1a1a1a</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#f5f5f5;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#f5f5f5</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#242424</div></div>
+  </div>
+  <p class="l1l2-rat">Lifts one Grey step in dark (Grey/10 → Grey/14) so the lightest raised surface still separates from the Grey/10 Overlay canvas; light is unchanged.</p>
+</div>
+<div class="l1l2-row">
+  <div class="l1l2-head"><span class="l1l2-name">Surface/Sunken</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-swatches">
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ebebeb;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ebebeb</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#242424</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ebebeb;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#ebebeb</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#242424</div></div>
+  </div>
+  <p class="l1l2-rat">Same values as Theme — recessed tier holds its position relative to Modal's Container fill.</p>
 </div>
 <h3 id="ll2-text">Text roles overridden in Modal</h3>
-<p class="lede">7 of 18 Text roles are overridden. Hint darkens in light for a stronger elevated read; Disabled and Alt Secondary lighten in dark to preserve their softness against the lifted canvas; Interactive/Assistive/Link shift to slightly softer brand primitives.</p>
+<p class="lede">7 of 19 Text roles are overridden. Hint darkens in light for a stronger elevated read; Disabled and Alt Secondary lighten in dark to preserve their softness against the lifted canvas; Interactive/Assistive/Link shift to the older Teams-ramp brand primitives.</p>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Text/Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-head"><span class="l1l2-name">Text/Alt Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#616161</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#616161</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#242424</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#8f8f8f;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#8f8f8f</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#242424</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
   </div>
-  <p class="l1l2-rat">Modal preserves Theme values here; the elevated context doesn't shift Text/Secondary.</p>
+  <p class="l1l2-rat">Dark brightens Grey/56 → Grey/68 to maintain its 'one softer than Primary' position over the lighter elevated canvas.</p>
 </div>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Text/Hint</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-head"><span class="l1l2-name">Text/Assistive</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#616161</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3d3d;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#3d3d3d</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5b5fc7;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#5b5fc7</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#7f85f5;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#7f85f5</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5a40db;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#5a40db</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#aab1fa;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#aab1fa</div></div>
   </div>
-  <p class="l1l2-rat">Light shifts Grey/38 → Grey/24 — darker hint text on the elevated canvas reads more confidently.</p>
+  <p class="l1l2-rat">Both modes lift — light to Primary AA, dark to Shade 20 — for softer interactive feel above the elevated Container.</p>
 </div>
 <div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Text/Disabled</span> <span class="l1l2-diffaxis">Modal override</span></div>
@@ -8658,14 +8653,14 @@ Icon only = True
   <p class="l1l2-rat">Dark shifts Grey/24 → Grey/42 to remain visibly disabled against the elevated canvas.</p>
 </div>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Text/Alt Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-head"><span class="l1l2-name">Text/Hint</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#242424</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#8f8f8f;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#8f8f8f</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#242424</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#616161</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3d3d;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#3d3d3d</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
   </div>
-  <p class="l1l2-rat">Dark brightens Grey/56 → Grey/68 to maintain its 'one softer than Primary' position over the lighter elevated canvas.</p>
+  <p class="l1l2-rat">Light shifts Grey/38 → Grey/24 — darker hint text on the elevated canvas reads more confidently.</p>
 </div>
 <div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Text/Interactive</span> <span class="l1l2-diffaxis">Modal override</span></div>
@@ -8678,46 +8673,36 @@ Icon only = True
   <p class="l1l2-rat">Light shifts from Teams 60 → Teams 70 (Primary AA) — slightly lighter/softer in the elevated context.</p>
 </div>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Text/Assistive</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5b5fc7;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#5b5fc7</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#7f85f5;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#7f85f5</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5a40db;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#5a40db</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#aba8ff;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#aba8ff</div></div>
-  </div>
-  <p class="l1l2-rat">Both modes lift — light to Primary AA, dark to Shade 20 — for softer interactive feel above the elevated Container.</p>
-</div>
-<div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Text/Link</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5b5fc7;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#5b5fc7</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#7f85f5;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#7f85f5</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5a40db;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#5a40db</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#aba8ff;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#aba8ff</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#aab1fa;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#aab1fa</div></div>
   </div>
   <p class="l1l2-rat">Same shift as Text/Assistive — softer link color inside modals.</p>
 </div>
-<h3 id="ll2-icons">Icon roles overridden in Modal</h3>
-<p class="lede">4 of 14 Icon roles overridden. Secondary/Hint darken in light; Disabled softens; Alt Secondary brightens in dark.</p>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Icon/Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-head"><span class="l1l2-name">Text/Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#616161</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3d3d;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#3d3d3d</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#616161</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
   </div>
-  <p class="l1l2-rat">Light shifts one Grey step darker for stronger icon presence in the elevated context.</p>
+  <p class="l1l2-rat">Modal preserves Theme values here; the elevated context doesn't shift Text/Secondary.</p>
 </div>
+<h3 id="ll2-icons">Icon roles overridden in Modal</h3>
+<p class="lede">4 of 15 Icon roles overridden. Secondary/Hint darken in light; Disabled softens; Alt Secondary brightens in dark.</p>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Icon/Hint</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-head"><span class="l1l2-name">Icon/Alt Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#616161</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3d3d;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#3d3d3d</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#242424</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#8f8f8f;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#8f8f8f</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#242424</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
   </div>
-  <p class="l1l2-rat">Mirrors Icon/Secondary shift.</p>
+  <p class="l1l2-rat">Dark brightens Grey/56 → Grey/68 for parity with Text/Alt Secondary in Modal.</p>
 </div>
 <div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Icon/Disabled</span> <span class="l1l2-diffaxis">Modal override</span></div>
@@ -8730,44 +8715,64 @@ Icon only = True
   <p class="l1l2-rat">Both modes shift softer — Icon/Disabled reads less prominent against the elevated Container.</p>
 </div>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Icon/Alt Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-head"><span class="l1l2-name">Icon/Hint</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#242424</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#8f8f8f;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#8f8f8f</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#242424;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#242424</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#616161</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3d3d;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#3d3d3d</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
   </div>
-  <p class="l1l2-rat">Dark brightens Grey/56 → Grey/68 for parity with Text/Alt Secondary in Modal.</p>
+  <p class="l1l2-rat">Mirrors Icon/Secondary shift.</p>
+</div>
+<div class="l1l2-row">
+  <div class="l1l2-head"><span class="l1l2-name">Icon/Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-swatches">
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#616161;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#616161</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3d3d;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#3d3d3d</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#adadad;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#adadad</div></div>
+  </div>
+  <p class="l1l2-rat">Light shifts one Grey step darker for stronger icon presence in the elevated context.</p>
 </div>
 <h3 id="ll2-brand">Brand/Accent roles overridden in Modal</h3>
-<p class="lede">5 Brand/Accent tiers overridden — each Modal value pulls from a different position on the Brand ramp so the brand emphasis holds against the elevated context.</p>
-<div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Brand/Accent Primary</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5b5fc7;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#5b5fc7</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#7f85f5;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#7f85f5</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#654cf5;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#654cf5</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#8a80ff;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#8a80ff</div></div>
-  </div>
-  <p class="l1l2-rat">Same values — Primary brand accent is intentional in both contexts.</p>
-</div>
+<p class="lede">5 of 5 Brand/Accent tiers overridden &mdash; each Modal value pulls from a different position on the Brand ramp so the brand emphasis holds against the elevated context.</p>
 <div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Brand/Accent Dominant</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#383966;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#383966</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#c5cbfa;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#c5cbfa</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3a3082;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#3a3082</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#c8c7ff;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#c8c7ff</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#383966;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#383966</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#c5cbfa;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#c5cbfa</div></div>
   </div>
   <p class="l1l2-rat">Light shifts to Brand Shade 10 (Teams 40) for a deeper dominant tone in the elevated context.</p>
+</div>
+<div class="l1l2-row">
+  <div class="l1l2-head"><span class="l1l2-name">Brand/Accent Global</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-swatches">
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#654cf5;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#654cf5</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5b5fc7;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#5b5fc7</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#383966;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#383966</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3e78;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#3d3e78</div></div>
+  </div>
+  <p class="l1l2-rat">Modal aliases to different brand stops entirely — deeper shades that stamp the brand quietly against elevated canvases.</p>
+</div>
+<div class="l1l2-row">
+  <div class="l1l2-head"><span class="l1l2-name">Brand/Accent Primary</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-swatches">
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5b5fc7;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#5b5fc7</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#7f85f5;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#7f85f5</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5b5fc7;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#5b5fc7</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#7f85f5;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#7f85f5</div></div>
+  </div>
+  <p class="l1l2-rat">Same values — Primary brand accent is intentional in both contexts.</p>
 </div>
 <div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Brand/Accent Secondary</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#aab1fa;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#aab1fa</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#333357;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#333357</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#aba8ff;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#aba8ff</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#332d6e;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#332d6e</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#aab1fa;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#aab1fa</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#333357;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#333357</div></div>
   </div>
   <p class="l1l2-rat">Dark shifts to Tint 30 for a softer secondary emphasis in Modal.</p>
 </div>
@@ -8776,33 +8781,13 @@ Icon only = True
   <div class="l1l2-swatches">
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e8ebfa;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#e8ebfa</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#2f2f4a;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#2f2f4a</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ebebff;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#ebebff</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#2f2a5e;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#2f2a5e</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e8ebfa;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#e8ebfa</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#2f2f4a;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#2f2f4a</div></div>
   </div>
   <p class="l1l2-rat">Dark shifts one step lighter — tertiary tint softens for the elevated dark canvas.</p>
 </div>
-<div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Brand/Accent Global</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#654cf5;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#654cf5</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#5b5fc7;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#5b5fc7</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3a3082;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#3a3082</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#43349c;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#43349c</div></div>
-  </div>
-  <p class="l1l2-rat">Modal aliases to different brand stops entirely — deeper shades that stamp the brand quietly against elevated canvases.</p>
-</div>
 <h3 id="ll2-strokes">Stroke roles overridden in Modal</h3>
-<p class="lede">2 Stroke roles overridden — Divider and ContainerRaised shift one Grey step stronger to hold visibility against a busier elevated environment.</p>
-<div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">Stroke/Divider</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e0e0e0;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#e0e0e0</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3d3d;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#3d3d3d</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#d1d1d1;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#d1d1d1</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#4d4d4d;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#4d4d4d</div></div>
-  </div>
-  <p class="l1l2-rat">Both modes shift one Grey step stronger — dividers hold visibility inside a busier elevated context.</p>
-</div>
+<p class="lede">2 of 7 Stroke roles overridden &mdash; Divider and ContainerRaised shift one Grey step stronger to hold visibility against a busier elevated environment.</p>
 <div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">Stroke/ContainerRaised</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
@@ -8813,8 +8798,18 @@ Icon only = True
   </div>
   <p class="l1l2-rat">Raised container edge tracks the Overlay's canvas shift, keeping the boundary visible.</p>
 </div>
+<div class="l1l2-row">
+  <div class="l1l2-head"><span class="l1l2-name">Stroke/Divider</span> <span class="l1l2-diffaxis">Modal override</span></div>
+  <div class="l1l2-swatches">
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#e0e0e0;"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#e0e0e0</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#3d3d3d;"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#3d3d3d</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#d1d1d1;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#d1d1d1</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#4d4d4d;"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#4d4d4d</div></div>
+  </div>
+  <p class="l1l2-rat">Both modes shift one Grey step stronger — dividers hold visibility inside a busier elevated context.</p>
+</div>
 <h3 id="ll2-other">Other overrides</h3>
-<p class="lede">3 miscellaneous overrides: iOS Fills - Vibrant/Tertiary shifts slightly; the two os26 shadow tokens are tuned for the elevated glass edge.</p>
+<p class="lede">2 miscellaneous overrides: iOS Fills - Vibrant/Tertiary shifts slightly and the os26 m-Shadow token is tuned for the elevated glass edge.</p>
 <div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">iOS Fills - Vibrant/Tertiary</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
@@ -8826,19 +8821,9 @@ Icon only = True
   <p class="l1l2-rat">iOS-native vibrancy — Modal shifts values slightly to match the elevated tone.</p>
 </div>
 <div class="l1l2-row">
-  <div class="l1l2-head"><span class="l1l2-name">os26 materials/Shadows/s-glass-inner-Shadow/s-inner-glassY</span> <span class="l1l2-diffaxis">Modal override</span></div>
-  <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch" style="background:#f0f0f0; display:flex; align-items:center; justify-content:center; color:#333; font-size:11px;">4</div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">px value</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch" style="background:#f0f0f0; display:flex; align-items:center; justify-content:center; color:#333; font-size:11px;">0</div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">px value</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch" style="background:#f0f0f0; display:flex; align-items:center; justify-content:center; color:#333; font-size:11px;">2</div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">px value</div></div>
-    <div class="l1l2-cell"><div class="l1l2-swatch" style="background:#f0f0f0; display:flex; align-items:center; justify-content:center; color:#333; font-size:11px;">0</div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">px value</div></div>
-  </div>
-  <p class="l1l2-rat">Glass inner shadow Y offset — reduced in Modal for a subtler edge on the elevated glass.</p>
-</div>
-<div class="l1l2-row">
   <div class="l1l2-head"><span class="l1l2-name">os26 materials/Shadows/m-Shadow/1</span> <span class="l1l2-diffaxis">Modal override</span></div>
   <div class="l1l2-swatches">
-    <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0.0);"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ffffff@0.00</div></div>
+    <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0);"></div><div class="l1l2-mode">Theme &middot; Light</div><div class="l1l2-hex">#ffffff@0.00</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0.06);"></div><div class="l1l2-mode">Theme &middot; Dark</div><div class="l1l2-hex">#ffffff@0.06</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch " style="background:#ffffff;"></div><div class="l1l2-mode">Modal &middot; Light</div><div class="l1l2-hex">#ffffff</div></div>
     <div class="l1l2-cell"><div class="l1l2-swatch checker" style="background:rgba(255,255,255,0.06);"></div><div class="l1l2-mode">Modal &middot; Dark</div><div class="l1l2-hex">#ffffff@0.06</div></div>
@@ -8995,7 +8980,7 @@ Icon only = True
           <text x="52" y="68" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="10" fill="#999">Surface/Overlay · #1a1a1a</text>
           <!-- Container/Primary/Base — same as overlay, "ghost" only visible by dashed outline -->
           <rect x="62" y="86" width="196" height="124" rx="10" fill="#1a1a1a" stroke="#3a1414" stroke-width="1" stroke-dasharray="3 3"/>
-          <text x="74" y="110" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="9.5" fill="#cc8a8a">Surface/Group/Primary/Base</text>
+          <text x="74" y="110" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="9.5" fill="#cc8a8a">Surface/InsetGroup/Canvas/Base</text>
           <text x="74" y="124" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="9.5" fill="#dc8a8a">#1a1a1a · same as Overlay</text>
           <!-- Invisible label -->
           <text x="160" y="170" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#dc5e62">⚠  No tonal lift — card is invisible</text>
@@ -9023,7 +9008,7 @@ Icon only = True
           <text x="52" y="68" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="10" fill="#9a9a9a">Surface/Overlay · #1a1a1a</text>
           <!-- Container/Primary/Base — now Grey/12 = #1f1f1f — visible lift -->
           <rect x="62" y="86" width="196" height="124" rx="10" fill="#1f1f1f" stroke="#2e2e2e" stroke-width="1"/>
-          <text x="74" y="110" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="9.5" fill="#9bcfa3">Surface/Group/Primary/Base</text>
+          <text x="74" y="110" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="9.5" fill="#9bcfa3">Surface/InsetGroup/Canvas/Base</text>
           <text x="74" y="124" font-family="ui-monospace, SF Mono, Menlo, monospace" font-size="9.5" fill="#b3e0b8">#1f1f1f · 2 steps above Overlay</text>
           <!-- Lift indicator -->
           <text x="160" y="170" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#65d076">✓  Card lifts cleanly</text>
@@ -9038,7 +9023,7 @@ Icon only = True
 
     <ul class="or-bullets">
       <li><strong>The architectural contract.</strong> <code>Surface/Overlay</code> in Dark resolves to <code>#1a1a1a</code> (Grey/10) &mdash; which is also <code>Surface/Canvas</code> in Dark L2. Overlay <em>is</em> the L2 canvas at the surface layer. Setting the inside-overlay frame to L2 makes every nested role re-resolve correctly against that elevated canvas.</li>
-      <li class="bad"><strong>Symptoms if you forget.</strong> <code>Surface/RaisedBase</code> and <code>Surface/RaisedSecondary</code> drop from 1.66:1 to 1.38:1 against the Overlay (17% less lift). <code>Surface/Group/Primary/Base</code> becomes mathematically identical to the Overlay (1.00:1) and disappears entirely.</li>
+      <li class="bad"><strong>Symptoms if you forget.</strong> <code>Surface/RaisedDissabled</code> and <code>Surface/RaisedSecondary</code> drop from 1.66:1 to 1.38:1 against the Overlay (17% less lift). <code>Surface/InsetGroup/Canvas/Base</code> becomes mathematically identical to the Overlay (1.00:1) and disappears entirely.</li>
       <li><strong>What gets fixed by L2.</strong> Canvas L2 = Overlay (no visible delta needed at that layer). Containers/Primary/Base steps Grey/10 → Grey/12. RaisedSecondary stays Grey/20 but the perceptual delta to the now-matching Overlay/Canvas pair is consistent. The hierarchy holds.</li>
       <li><strong>Light mode is fine.</strong> Canvas and Overlay are both <code>#ffffff</code> in both light tiers, so the relationships hold mathematically without needing an L2 mode shift. Card delineation against a white overlay relies on stroke + shadow (the same way it does on the white canvas), not on a tonal step.</li>
     </ul>
@@ -9047,16 +9032,16 @@ Icon only = True
 </div>
 
 <!-- ============================================================== -->
-<!-- Stroke/Container (outer) — preserves nested badge silhouettes           -->
+<!-- Stroke/Container — preserves nested badge silhouettes           -->
 <!-- ============================================================== -->
 <!-- ============================================================== -->
-<!-- Stroke/Container (outer) — preserves nested badge silhouettes (v2)      -->
+<!-- Stroke/Container — preserves nested badge silhouettes (v2)      -->
 <!-- Real badge component, real colors, interactive hotspots         -->
 <!-- ============================================================== -->
 <div class="overlay-rule-card" style="margin-top: var(--sp-4);">
   <div class="orh">
-    <h4>Stroke/Container (outer) preserves badge silhouettes when fill matches the container surface.</h4>
-    <p>The real iOS Badge component fills its pill with <code>Surface/RaisedSecondary</code> and outlines it with <code>Stroke/Container (outer)</code>. When that badge sits inside <code>Surface/Group/Primary/Container</code> &mdash; the standard iOS list cell &mdash; the badge fill resolves to the <em>same</em> hex as the container surface in both light and dark. Without the stroke, the pill has zero tonal lift and disappears.</p>
+    <h4>Stroke/Container preserves badge silhouettes when fill matches the container surface.</h4>
+    <p>The real iOS Badge component fills its pill with <code>Surface/RaisedSecondary</code> and outlines it with <code>Stroke/Container</code>. When that badge sits inside <code>Surface/InsetGroup/Canvas/Container</code> &mdash; the standard iOS list cell &mdash; the badge fill resolves to the <em>same</em> hex as the container surface in both light and dark. Without the stroke, the pill has zero tonal lift and disappears.</p>
   </div>
   <div class="or-body">
 
@@ -9069,7 +9054,7 @@ Icon only = True
           <span class="ratio">Fill 1.00:1 against Container</span>
         </div>
         <div class="hs-stage">
-          <svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dark stack without Stroke/Container (outer) — badge merges with container">
+          <svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dark stack without Stroke/Container — badge merges with container">
             <!-- Canvas L2 -->
             <rect x="0" y="0" width="380" height="280" fill="#1a1a1a"/>
             <!-- Overlay -->
@@ -9112,14 +9097,14 @@ Icon only = True
         </div>
       </div>
 
-      <!-- ============== CORRECT: Badge with Stroke/Container (outer) ============== -->
+      <!-- ============== CORRECT: Badge with Stroke/Container ============== -->
       <div class="or-panel good">
         <div class="or-panel-h">
-          <span>Badge fill + <code>Stroke/Container (outer)</code> <span class="or-mode-tag good">correct</span></span>
+          <span>Badge fill + <code>Stroke/Container</code> <span class="or-mode-tag good">correct</span></span>
           <span class="ratio">Edge ratio 1.51:1 — silhouette holds</span>
         </div>
         <div class="hs-stage">
-          <svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dark stack with Stroke/Container (outer) — badge silhouette preserved by stroke">
+          <svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dark stack with Stroke/Container — badge silhouette preserved by stroke">
             <rect x="0" y="0" width="380" height="280" fill="#1a1a1a"/>
             <rect x="20" y="20" width="340" height="240" rx="18" fill="#1a1a1a" stroke="#2e2e2e" stroke-width="1"/>
             <rect x="40" y="60" width="300" height="180" rx="14" fill="#333333"/>
@@ -9159,9 +9144,9 @@ Icon only = True
     </div>
 
     <ul class="or-bullets">
-      <li><strong>Same hex on both sides.</strong> <code>Surface/RaisedSecondary</code> and <code>Surface/Group/Primary/Container</code> resolve to <code>#f0f0f0</code> in light themes and <code>#333333</code> in dark. A badge filled with one inside the other has 1.00:1 contrast at the fill layer in both modes. Without an edge token, the pill silhouette doesn't exist.</li>
-      <li><strong>What <code>Stroke/Container (outer)</code> contributes.</strong> Grey/90 (<code>#e6e6e6</code>) in light, Grey/16 (<code>#292929</code>) in dark &mdash; both clear the WCAG 1.4.11 3:1 threshold against every standard container surface. On the badge specifically, the 1px stroke draws the boundary the matching fill can't.</li>
-      <li><strong>Where the badge actually uses it.</strong> The Static and Interactive Badge variants in CXD-iOS bind their container stroke to <code>Stroke/Container (outer)</code> by default (with <code>Stroke/Default</code> as the previous behaviour migrated away from). Confirmed against node <code>83392:62611</code>: fill <code>Surface/RaisedSecondary</code>, stroke <code>Stroke/Container (outer)</code>, label <code>Text/Secondary</code>, avatar border <code>Surface/Dominant</code>.</li>
+      <li><strong>Nearly the same hex on both sides.</strong> <code>Surface/RaisedSecondary</code> resolves to <code>#e6e6e6</code> / <code>#292929</code> and <code>Surface/InsetGroup/Canvas/Container</code> to <code>#f5f5f5</code> / <code>#1a1a1a</code> (light / dark). A badge filled with one inside the other has 1.14:1 contrast at the fill layer in light and 1.20:1 in dark &mdash; below the 3:1 non-text threshold either way, so the edge has to come from a stroke token.</li>
+      <li><strong>What <code>Stroke/Container</code> contributes.</strong> Grey/90 (<code>#e6e6e6</code>) in light, Grey/16 (<code>#292929</code>) in dark &mdash; both clear the WCAG 1.4.11 3:1 threshold against every standard container surface. On the badge specifically, the 1px stroke draws the boundary the matching fill can't.</li>
+      <li><strong>Where the badge actually uses it.</strong> The Static and Interactive Badge variants in CXD-iOS bind their container stroke to <code>Stroke/Container</code> by default (with <code>Stroke/Default</code> as the previous behaviour migrated away from). Confirmed against node <code>83392:62611</code>: fill <code>Surface/RaisedSecondary</code>, stroke <code>Stroke/Container</code>, label <code>Text/Secondary</code>, avatar border <code>Surface/Dominant</code>.</li>
     </ul>
 
   </div>
@@ -9202,9 +9187,9 @@ Icon only = True
       <section class="spec-section" id="ll2-overview">
         <span class="section-eyebrow eyebrow-design">Concept</span>
         <h2>Two collections, one extension relationship <a href="#ll2-overview" class="anchor-link" aria-label="Link to this section">#</a></h2>
-        <p class="section-intro">The old system expressed elevation as an L1/L2 mode <em>inside</em> a single Color collection &mdash; every variable carried four mode values (Light L1, Dark L1, Light L2, Dark L2). That's been replaced with a two-collection model: <code>Theme (Light - dark)</code> holds the base values with just <code>Light</code> and <code>Dark</code> modes; <code>Modal (Light - dark)</code> is a formal Figma <em>extension</em> (created via the "Extend collection" action in the Variables panel) that inherits every variable from Theme and only stores <strong>overrides</strong> for the 30 tokens that need to shift in an elevated context.</p>
+        <p class="section-intro">The old system expressed elevation as an L1/L2 mode <em>inside</em> a single Color collection &mdash; every variable carried four mode values (Light L1, Dark L1, Light L2, Dark L2). That's been replaced with a two-collection model: <code>Theme (Light - dark)</code> holds the base values with just <code>Light</code> and <code>Dark</code> modes; <code>Modal (Light - dark)</code> is a formal Figma <em>extension</em> (created via the "Extend collection" action in the Variables panel) that inherits every variable from Theme and only stores <strong>overrides</strong> for the 28 tokens that need to shift in an elevated context.</p>
         <div class="callout callout-rule">
-          <strong>Modal overrides Theme &mdash; it doesn't duplicate it.</strong> When you bind a frame to Modal, every token that isn't explicitly overridden falls through to its Theme value, so brand refreshes, primitive swaps, and general theme changes cascade automatically. Only the 30 elevated overrides are stored in Modal; the other 217 variables are pure inheritance.
+          <strong>Modal overrides Theme &mdash; it doesn't duplicate it.</strong> When you bind a frame to Modal, every token that isn't explicitly overridden falls through to its Theme value, so brand refreshes, primitive swaps, and general theme changes cascade automatically. Only the 28 elevated overrides are stored in Modal; the other 231 variables are pure inheritance.
         </div>
         <p>Below, each category lists only the roles that are overridden in Modal. For every overridden role, the swatches show Theme's base value alongside Modal's override, so the elevation delta is obvious. A short rationale explains what perceptual relationship the override is preserving.</p>
         <div class="callout callout-info">
@@ -9231,11 +9216,11 @@ Icon only = True
     <span class="surf-hs tip-below" tabindex="0" style="left: 22%; top: 18%;"
           data-tip="Surface/Canvas&#10;#ffffff · Grey/100"></span>
     <span class="surf-hs" tabindex="0" style="left: 22%; top: 52%;"
-          data-tip="Surface/Group/Primary/Base&#10;#ffffff · Grey/100"></span>
+          data-tip="Surface/InsetGroup/Canvas/Base&#10;#ffffff · Grey/100"></span>
     <span class="surf-hs" tabindex="0" style="left: 13%; top: 67%;"
-          data-tip="Surface/RaisedSecondary&#10;#f0f0f0 · Grey/94"></span>
+          data-tip="Surface/RaisedSecondary&#10;#e6e6e6 · Grey/90"></span>
     <span class="surf-hs" tabindex="0" style="left: 12%; top: 88%;"
-          data-tip="Surface/Group/Primary/Container&#10;#f0f0f0 · Grey/94"></span>
+          data-tip="Surface/InsetGroup/Canvas/Container&#10;#f0f0f0 · Grey/94"></span>
     <span class="surf-hs tip-shift-left" tabindex="0" style="left: 38%; top: 82%;"
           data-tip="Surface/RaisedPrimary&#10;#e0e0e0 · Grey/88"></span>
 
@@ -9243,11 +9228,11 @@ Icon only = True
     <span class="surf-hs tip-below" tabindex="0" style="left: 72%; top: 18%;"
           data-tip="Surface/Canvas&#10;#000000 · Grey/0"></span>
     <span class="surf-hs" tabindex="0" style="left: 72%; top: 52%;"
-          data-tip="Surface/Group/Primary/Base&#10;#1a1a1a · Grey/10"></span>
+          data-tip="Surface/InsetGroup/Canvas/Base&#10;#1a1a1a · Grey/10"></span>
     <span class="surf-hs" tabindex="0" style="left: 63%; top: 67%;"
           data-tip="Surface/RaisedSecondary&#10;#333333 · Grey/20"></span>
     <span class="surf-hs" tabindex="0" style="left: 62%; top: 88%;"
-          data-tip="Surface/Group/Primary/Container&#10;#333333 · Grey/20"></span>
+          data-tip="Surface/InsetGroup/Canvas/Container&#10;#333333 · Grey/20"></span>
     <span class="surf-hs tip-shift-left" tabindex="0" style="left: 88%; top: 82%;"
           data-tip="Surface/RaisedPrimary&#10;#3d3d3d · Grey/24"></span>
   </div>
@@ -9264,7 +9249,7 @@ Icon only = True
       </li>
       <li>
         <div>
-          <span class="layer-token">Surface/Group/Primary/Base</span>
+          <span class="layer-token">Surface/InsetGroup/Canvas/Base</span>
           <span class="layer-hex">#ffffff · L ↔ #1a1a1a · D</span>
           <span class="layer-role">The sheet body. The CXD-iOS <code>Sheet</code> instance binds its outer fill to this token, not <code>Surface/Overlay</code> &mdash; the sheet is the app's container, not a system overlay.</span>
         </div>
@@ -9278,7 +9263,7 @@ Icon only = True
       </li>
       <li>
         <div>
-          <span class="layer-token">Surface/Group/Primary/Container</span>
+          <span class="layer-token">Surface/InsetGroup/Canvas/Container</span>
           <span class="layer-hex">#f0f0f0 · L ↔ #333333 · D</span>
           <span class="layer-role">The grouped list cell holding "Spatial Annotations", "Background effects", and "Call my phone". Same tonal step as RaisedSecondary; the two roles are parallel "one-step-above-sheet" tokens for different intents (chip vs. grouped container).</span>
         </div>
@@ -9297,9 +9282,9 @@ Icon only = True
     <table>
       <thead><tr><th>Layer</th><th>Token</th><th>Light L1</th><th>Dark L1</th><th>Step from parent</th></tr></thead>
       <tbody>
-        <tr><td>Sheet body</td><td><code>Surface/Group/Primary/Base</code></td><td><span class="sw" style="background:#ffffff;"></span>#ffffff (Grey/100)</td><td><span class="sw" style="background:#1a1a1a;"></span>#1a1a1a (Grey/10)</td><td>0 (L) · +10 (D)</td></tr>
+        <tr><td>Sheet body</td><td><code>Surface/InsetGroup/Canvas/Base</code></td><td><span class="sw" style="background:#ffffff;"></span>#ffffff (Grey/100)</td><td><span class="sw" style="background:#1a1a1a;"></span>#1a1a1a (Grey/10)</td><td>0 (L) · +10 (D)</td></tr>
         <tr><td>Pills + buttons</td><td><code>Surface/RaisedSecondary</code></td><td><span class="sw" style="background:#e6e6e6;"></span>#e6e6e6 (Grey/90)</td><td><span class="sw" style="background:#292929;"></span>#292929 (Grey/16)</td><td>&minus;10 (L) · +6 (D)</td></tr>
-        <tr><td>List container</td><td><code>Surface/Group/Primary/Container</code></td><td><span class="sw" style="background:#f0f0f0;"></span>#f0f0f0 (Grey/94)</td><td><span class="sw" style="background:#333333;"></span>#333333 (Grey/20)</td><td>same step as RaisedSecondary</td></tr>
+        <tr><td>List container</td><td><code>Surface/InsetGroup/Canvas/Container</code></td><td><span class="sw" style="background:#f0f0f0;"></span>#f0f0f0 (Grey/94)</td><td><span class="sw" style="background:#333333;"></span>#333333 (Grey/20)</td><td>same step as RaisedSecondary</td></tr>
         <tr><td>Badge inside list</td><td><code>Surface/RaisedPrimary</code></td><td><span class="sw" style="background:#e0e0e0;"></span>#e0e0e0 (Grey/88)</td><td><span class="sw" style="background:#3d3d3d;"></span>#3d3d3d (Grey/24)</td><td>&minus;6 (L) · +4 (D)</td></tr>
       </tbody>
     </table>
@@ -9309,7 +9294,7 @@ Icon only = True
     <strong>The choice rule for nested surfaces.</strong> When picking a surface for an element that sits inside an already-elevated container, count the Grey distance from the host surface to the available Raised tokens. If the next-step-up (RaisedSecondary) collides with the host, skip it and use RaisedPrimary &mdash; that's the whole reason there are two parallel Raised tokens instead of one.
   </div>
   <div class="callout callout-info" style="margin-top: var(--sp-3);">
-    <strong>The stroke alternative.</strong> The CXD-iOS Badge component binds to <code>Surface/RaisedSecondary</code> + <code>Stroke/Container (outer)</code>. That's a deliberate trade-off &mdash; one fill primitive across every badge context with the stroke handling the boundary. In patterns where designers want tonal lift instead of an outline, swap the Badge container fill to <code>Surface/RaisedPrimary</code> and drop the stroke. Both approaches pass the surface system contract.
+    <strong>The stroke alternative.</strong> The CXD-iOS Badge component binds to <code>Surface/RaisedSecondary</code> + <code>Stroke/Container</code>. That's a deliberate trade-off &mdash; one fill primitive across every badge context with the stroke handling the boundary. In patterns where designers want tonal lift instead of an outline, swap the Badge container fill to <code>Surface/RaisedPrimary</code> and drop the stroke. Both approaches pass the surface system contract.
   </div>
 </section>
     </main>
